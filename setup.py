@@ -22,7 +22,7 @@ setup(
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/sunfounder/piarm',
+    url='https://github.com/sunfounder/pidog',
 
     # Author details
     author='SunFounder',
