@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-from public_functions import *
+from math import pi, sin, cos
+import numpy as np
 
 
-def cal_walk(mode:'angle or coord'='angle'):
+def cal_walk():
     
     stride = 40
     raise_feet = 30
@@ -47,7 +48,7 @@ def cal_walk(mode:'angle or coord'='angle'):
             x3_s = h_center -1/3*stride
             x4_s = h_center + stride 
 
-            print('start, ', end='')
+            # print('start, ', end='')
 
         elif t>0 and t<faai:    #迈出腿4
             sigma=2*pi*t/(faai)
@@ -56,7 +57,7 @@ def cal_walk(mode:'angle or coord'='angle'):
 
             if t== 0:
                 x4_st = x4_s
-                print('x4_st',x4_st)
+                # print('x4_st',x4_st)
             if t< 0.25/2:
                 xep=2*stride*((2*sigma-sin(2*sigma))/(2*pi))
                 x4_s = x4_st-xep
@@ -74,7 +75,7 @@ def cal_walk(mode:'angle or coord'='angle'):
             # x4_s += -x_up_inc
             # x4_s = x4_st-xep
 
-            print('leg 4, ', end='')
+            # print('leg 4, ', end='')
 
         
         elif t>=faai and t<2*faai:    #迈出腿2
@@ -87,7 +88,7 @@ def cal_walk(mode:'angle or coord'='angle'):
 
             if t== 0:
                 x2_st = x2_s
-                print('x2_st',x2_st)
+                # print('x2_st',x2_st)
             # if t< 0.25/2:
             #     xep=2*stride*((2*sigma-sin(2*sigma))/(2*pi))
             #     x2_s = x2_st-xep
@@ -104,7 +105,7 @@ def cal_walk(mode:'angle or coord'='angle'):
             x3_s += x_dn_inc 
             x4_s += x_dn_inc
 
-            print('leg 2, ', end='')
+            # print('leg 2, ', end='')
 
 
         elif t>=2*faai and t<3*faai:    #迈出腿3
@@ -116,7 +117,7 @@ def cal_walk(mode:'angle or coord'='angle'):
 
             if t== 0:
                 x3_st = x3_s
-                print('x3_st',x3_st)
+                # print('x3_st',x3_st)
             if t< 0.25/2:
                 xep=2*stride*((2*sigma-sin(2*sigma))/(2*pi))
                 x3_s = x3_st-xep
@@ -134,7 +135,7 @@ def cal_walk(mode:'angle or coord'='angle'):
             # x3_s = x3_st-xep
             x4_s += x_dn_inc
 
-            print('leg 3, ', end='')
+            # print('leg 3, ', end='')
 
         elif t>=3*faai and t<4*faai:    #迈出腿1
             t=t-faai*3
@@ -144,7 +145,7 @@ def cal_walk(mode:'angle or coord'='angle'):
 
             if t== 0:
                 x1_st = x1_s
-                print('x1_st',x1_st)
+                # print('x1_st',x1_st)
             # if t< 0.25/2:
             #     xep=2*stride*((2*sigma-sin(2*sigma))/(2*pi))
             #     x1_s = x1_st-xep
@@ -162,12 +163,12 @@ def cal_walk(mode:'angle or coord'='angle'):
             x3_s += x_dn_inc 
             x4_s += x_dn_inc 
 
-            print('leg 1, ', end='')
+            # print('leg 1, ', end='')
 
         else:
             return [[x1_s,y1_s],[x2_s,y2_s],[x3_s,y3_s],[x4_s,y4_s]]
 
-        print([x1_s,y1_s],[x2_s,y2_s],[x3_s,y3_s],[x4_s,y4_s])
+        # print([x1_s,y1_s],[x2_s,y2_s],[x3_s,y3_s],[x4_s,y4_s])
         return [[x1_s,y1_s],[x2_s,y2_s],[x3_s,y3_s],[x4_s,y4_s]]
         # return [[x2_s,y2_s],[x1_s,y1_s],[x4_s,y4_s],[x3_s,y3_s]]
 
@@ -175,39 +176,8 @@ def cal_walk(mode:'angle or coord'='angle'):
     date =[]
     for t in np.arange(0.0,0.961,step_t):
         t = round(t,2)
-        print('t',t)
+        # print('t',t)
         result = cal_w(t)
-        if mode == 'angle':
-            date.append(angle_calculation(result))  
-        else :
-            date.append(result)
+        date.append(result)
     return date
 
-
-def main():
-
-    forward_datas = cal_walk()
-    datas_len = len(forward_datas)
-    # print('forward_datas:',forward_datas)
-    print('datas_len:',datas_len)
-
-    print('offset:',feet.offset)
-
-    while True:
-
-        for angles in forward_datas:
-            key = readchar.readkey()
-            if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
-                import sys
-                print('')
-                sys.exit(0)
-            tt = time()
-            
-            feet_simple_move(angles, delay=0.01)  # 0.005 ~ 0.05
-            # feet.servo_move2(angles,100 )
-            print('\r time: %s    '%(time()-tt),end='')
-            # sleep(0.005)
-        # sleep(0.5)
-
-if __name__ == '__main__':
-    main()
