@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-from re import S
 from pidog import Pidog
 from time import sleep
 

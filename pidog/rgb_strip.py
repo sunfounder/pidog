@@ -19,7 +19,7 @@ class RGB_Strip():
         'pink':  [255,192,203]
     }
 
-# constants
+# region constants
     CONFIGURE_CMD_PAGE = 0XFD
     FRAME1_PAGE = 0x00
     FRAME2_PAGE = 0x01
@@ -83,7 +83,9 @@ class RGB_Strip():
 	0x00, 0x00, 0x00, 0x00, #C16-A ~ C16-P 
     ]
 
-# init
+# endregion constants
+
+# region init
     def __init__(self, addr):
 
         self.light_num = 11
@@ -119,6 +121,8 @@ class RGB_Strip():
         self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FRAME2_PAGE)
         self.write_Ndata(0X00, 0XFF, 0X10)  #Clear LED CTL Registers (Frame1Page)
         self.write_Ndata(0x20, 0x00, 0X80)
+
+# endregion init
 
 # i2c communicate
     def write_cmd(self, reg, cmd):

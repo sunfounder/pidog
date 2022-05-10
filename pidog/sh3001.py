@@ -3,6 +3,14 @@ import time
 from robot_hat import I2C, fileDB
 # from filedb import fileDB
 
+
+# Sensitivity 
+# 2g: 1G = 16384
+# 4g: 1G = 8192
+# 8g: 1G = 4096
+# 16g:  1G = 2048
+
+
 # region: General function
 def bytes_toint(msb, lsb):
     '''
@@ -457,7 +465,7 @@ class Sh3001(I2C):
                 return False
 
         self.sh3001_module_reset()
-        self.sh3001_acc_config(self.SH3001_ODR_500HZ,self.SH3001_ACC_RANGE_16G,self.SH3001_ACC_ODRX025,self.SH3001_ACC_FILTER_EN)
+        self.sh3001_acc_config(self.SH3001_ODR_500HZ,self.SH3001_ACC_RANGE_2G,self.SH3001_ACC_ODRX025,self.SH3001_ACC_FILTER_EN)
         self.sh3001_gyro_config(self.SH3001_ODR_500HZ,self.SH3001_GYRO_RANGE_2000,self.SH3001_GYRO_RANGE_2000, self.SH3001_GYRO_RANGE_2000\
         ,self.SH3001_GYRO_ODRX00,self.SH3001_GYRO_FILTER_EN)
         self.sh3001_temp_config(self.SH3001_TEMP_ODR_63, self.SH3001_TEMP_EN)
@@ -538,22 +546,26 @@ class Sh3001(I2C):
 
     # return accData,gyroData
     def _sh3001_getimudata(self):
-        gyroData = [0,0,0]
-        accData = [0,0,0]
-        regData = [0 for i in range(12)]
-        regData = self.sh3001_read(self.SH3001_ACC_XL,regData)
- 
-        accData[0] = bytes_toint(regData[1],regData[0])
-        accData[1] = bytes_toint(regData[3],regData[2])
-        accData[2] = bytes_toint(regData[5],regData[4])
-        # accData = [(accData[i] - self.acc_cal[i]) for i in range(len(accData))]
+        try:
+            gyroData = [0,0,0]
+            accData = [0,0,0]
+            regData = [0 for i in range(12)]
+            regData = self.sh3001_read(self.SH3001_ACC_XL,regData)
+    
+            accData[0] = bytes_toint(regData[1],regData[0])
+            accData[1] = bytes_toint(regData[3],regData[2])
+            accData[2] = bytes_toint(regData[5],regData[4])
+            # accData = [(accData[i] - self.acc_cal[i]) for i in range(len(accData))]
 
-        gyroData[0] = bytes_toint(regData[7],regData[6])
-        gyroData[1] = bytes_toint(regData[9],regData[8])
-        gyroData[2] = bytes_toint(regData[11],regData[10])
-        # gyroData = [gyroData[i] - self.gyro_offset[i] for i in range(len(gyroData))]
+            gyroData[0] = bytes_toint(regData[7],regData[6])
+            gyroData[1] = bytes_toint(regData[9],regData[8])
+            gyroData[2] = bytes_toint(regData[11],regData[10])
+            # gyroData = [gyroData[i] - self.gyro_offset[i] for i in range(len(gyroData))]
 
-        return accData,gyroData
+            return accData,gyroData
+        except Exception as e:
+            print("_sh3001_getimudata")
+            return False
 
     def sh3001_getimudata(self,aram,axis):
         accData,gyroData = self._sh3001_getimudata()

@@ -42,6 +42,8 @@ tail_offset = 0.0
 mode = 'move'  # move/calibrate 
 servo_num = '1' 
 
+OFFSET_STEP = 0.1
+
 def get_real_values():
     global feet_angles, head_angles, tail_angle
     global feet_offset, head_offset, tail_offset
@@ -77,7 +79,7 @@ def keyboard_control():
     global feet_angles, head_angles, tail_angle
     global feet_offset, head_offset, tail_offset
     global mode, servo_num
-    inc = 1
+    inc = OFFSET_STEP
     get_real_values()
     show_info()
     my_dog.feet_move([feet_angles], True, 80)
@@ -107,9 +109,9 @@ def keyboard_control():
         elif key in 'ws':
             # set increment
             if key == 'w':
-                inc = 1
+                inc = OFFSET_STEP
             elif key == 's':
-                inc = -1
+                inc = -OFFSET_STEP
             # control feet 
             if servo_num in ('12345678'):
                 index = int(servo_num)-1
