@@ -16,7 +16,7 @@ from .touch_sw import TouchSW
                      9,
                    0, '-'
                      |
-              2,1 --[ ] -- 3,4
+              2,1 --[ ]-- 3,4
                     [ ]
               6,5 --[ ]-- 7,8
                      |
@@ -47,14 +47,23 @@ config_file = '%s/.config/pidog/pidog.conf'%UserHome
 
 class Pidog():
 
-# structure constants
-    leg = 43
+    # structure constants
+    leg = 37.6
     foot = 70
-    b = 105
-    width = 105
-    length = 95
+    BODY_LENGTH = 105
+    BODY_WIDTH = 95
+    BODY_STRUCT = np.mat([
+        [-BODY_WIDTH / 2, -BODY_LENGTH / 2,  0],
+        [ BODY_WIDTH / 2, -BODY_LENGTH / 2,  0],
+        [-BODY_WIDTH / 2,  BODY_LENGTH / 2,  0],
+        [ BODY_WIDTH / 2,  BODY_LENGTH / 2,  0]]).T
+    # PID Constants
 
-# init
+    KP = 0.033
+    KI = 0.0
+    KD = 0.0
+
+    # init
     def __init__(self, feet_pins, head_pins, tail_pin,
             feet_init_angles=None, head_init_angles=None, tail_init_angle=None):
 
@@ -62,8 +71,15 @@ class Pidog():
         from .actions_dictionary import ActionDict
         self.actions_dict = ActionDict()
         
-        self.pos = np.mat([0.0,  0.0,  85]).T  # 目标位置向量
+        self.body_height = 80
+        self.pose = np.mat([0.0,  0.0,  self.body_height]).T  # 目标位置向量
         self.rpy = np.array([0.0,  0.0,  0.0]) * pi / 180 # 欧拉角，化为弧度值
+        self.footpoint_struc = np.mat([
+            [-self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2,  0],
+            [ self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2,  0],
+            [-self.BODY_WIDTH / 2,  self.BODY_LENGTH / 2,  0],
+            [ self.BODY_WIDTH / 2,  self.BODY_LENGTH / 2,  0]
+        ]).T
         self.pitch = 0
         self.roll = 0
     
@@ -126,8 +142,14 @@ class Pidog():
         self.threads_manage_t =  threading.Thread(target=self.threads_manage)
         self.threads_manage_t.setDaemon(False)
         self.threads_manage_t.start()
-
         
+        self.roll_last_error = 0
+        self.roll_error_integral = 0
+        self.pitch_last_error = 0
+        self.pitch_error_integral = 0
+
+        self.target_rpy = [0, 0, 0]
+
 # action related: feet,head,tail,imu,rgb_strip
 
     def close_all_thread(self):
@@ -168,7 +190,7 @@ class Pidog():
                         self.sensory_processes.terminate()
                     break
             except Exception as e:
-                print('threads_manage Exception：%s'%e)
+                print('threads_manage Exception: %s'%e)
             sleep(0.02)
 
 
@@ -250,7 +272,7 @@ class Pidog():
     #             _steps = self.feet_actions_coords_buffer[0]
     #             print('_feet_action_thread:',_steps)
     #             for i, step in enumerate(_steps) :
-    #                 self.pos = np.mat([step[0], 0.0,  step[1]]).T  # 目标位置向量
+    #                 self.pose = np.mat([step[0], 0.0,  step[1]]).T  # 目标位置向量
     #                 coord = self.pose2coords(self.roll, self.pitch)
     #                 # print(i, coord)
 
@@ -263,7 +285,7 @@ class Pidog():
     #             sleep(0.1)
     #             pass
     #         except Exception as e:
-    #             print('_feet_action_thread Exception：%s'%e)
+    #             print('_feet_action_thread Exception: %s'%e)
     #             self.exit_flag = True
     #             break
 
@@ -283,7 +305,7 @@ class Pidog():
                 sleep(0.1)
                 pass
             except Exception as e:
-                print('_head_action_thread Exception：%s'%e)
+                print('_head_action_thread Exception: %s'%e)
                 self.exit_flag = True
                 break
                 
@@ -301,7 +323,7 @@ class Pidog():
                 sleep(0.1)
                 pass
             except Exception as e:
-                print('_tail_action_thread Exception：%s'%e)
+                print('_tail_action_thread Exception: %s'%e)
                 self.exit_flag = True   
                 break
 
@@ -314,7 +336,7 @@ class Pidog():
                     break
                 self.rgb_strip.show()
             except Exception as e:
-                print('_rgb_strip_thread Exception：%s'%e)
+                print('_rgb_strip_thread Exception: %s'%e)
                 self.exit_flag = True
                 break
                 
@@ -379,7 +401,7 @@ class Pidog():
                 sleep(0.05)
             except Exception as e:
                 print(data)
-                print('_imu_thread Exception：%s'%e)
+                print('_imu_thread Exception: %s'%e)
                 self.exit_flag = True
                 break
 
@@ -546,67 +568,151 @@ class Pidog():
 
 # calculate angles and coords
 
+    def set_pose(self, x=None, y=None, z=None):
+        if x != None:
+            self.pose[0,0] = float(x)
+        if y != None:
+            self.pose[1,0] = float(y)
+        if z != None:
+            self.pose[2,0] = float(z)
+            self.body_height = float(z)
+
+    def set_rpy(self, roll=None, pitch=None, yaw=None, pid=False):
+        if roll is None:
+            roll = self.rpy[0]
+        if pitch is None:
+            pitch = self.rpy[1]
+        if yaw is None:
+            yaw = self.rpy[2]
+        
+        if pid:
+            roll_error =  self.target_rpy[0] - self.roll
+            pitch_error = self.target_rpy[1] - self.pitch
+
+            roll_offset = self.KP * roll_error + self.KI * self.roll_error_integral + self.KD * (roll_error - self.roll_last_error)
+            pitch_offset = self.KP * pitch_error + self.KI * self.pitch_error_integral + self.KD * (pitch_error - self.pitch_last_error)
+
+            self.roll_error_integral += roll_error
+            self.pitch_error_integral += pitch_error
+            self.roll_last_error = roll_error
+            self.pitch_last_error = pitch_error
+
+            roll_offset = roll_offset / 180. * pi
+            pitch_offset = pitch_offset / 180. * pi
+
+            self.rpy[0] += roll_offset
+            self.rpy[1] += pitch_offset
+        else:
+            self.rpy[0] = roll / 180. * pi
+            self.rpy[1] = pitch / 180. * pi
+            self.rpy[2] = yaw / 180. * pi
+
+    def set_feet(self, feet_list):
+        self.footpoint_struc = np.mat([
+            [-self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2 + feet_list[0][0], self.body_height - feet_list[0][1]],
+            [ self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2 + feet_list[1][0], self.body_height - feet_list[1][1]],
+            [-self.BODY_WIDTH / 2,  self.BODY_LENGTH / 2 + feet_list[2][0], self.body_height - feet_list[2][1]],
+            [ self.BODY_WIDTH / 2,  self.BODY_LENGTH / 2 + feet_list[3][0], self.body_height - feet_list[3][1]]
+        ]).T
+
     # pose and Euler Angle algorithm
-    def pose2coords(self,roll,pitch):
+    def pose2coords(self):
+        roll = self.rpy[0]
+        pitch = self.rpy[1]
+        yaw = self.rpy[2]
 
-        self.rpy = np.array([float(roll),  float(pitch),  0.0]) * pi / 180
-        self.R = self.rpy[0]
-        self.P = self.rpy[1]
-        self.Y = self.rpy[2]
-
-        # self.R = roll
-        # self.P = pitch
-        self.rotx = np.mat([[ 1,       0,            0          ],
-                 [ 0,       cos(self.R), -sin(self.R)],
-                 [ 0,       sin(self.R),  cos(self.R)]])
-        self.roty = np.mat([[ cos(self.P),  0,      -sin(self.P)],
-                 [ 0,            1,       0          ],
-                 [ sin(self.P),  0,       cos(self.P)]])
-        self.rotz = np.mat([[ cos(self.Y), -sin(self.Y),  0     ],
-                 [ sin(self.Y),  cos(self.Y),  0     ],
-                 [ 0,            0,            1     ]])
-        self.rot_mat = self.rotx * self.roty * self.rotz
-        self.body_struc = np.mat([[ self.length / 2,  self.b / 2,  0],
-                       [ self.length / 2, -self.b / 2,  0],
-                       [-self.length / 2,  self.b / 2,  0],
-                       [-self.length / 2, -self.b / 2,  0]]).T
-        self.footpoint_struc = np.mat([[ self.length / 2,  self.width / 2,  0],
-                            [ self.length / 2, -self.width / 2,  0],
-                            [-self.length / 2,  self.width / 2,  0],
-                            [-self.length / 2, -self.width / 2,  0]]).T
-        self.AB = np.mat(np.zeros((3, 4)))
+        rotx = np.mat([
+            [cos(roll), 0, -sin(roll)],
+            [         0, 1,           0],
+            [sin(roll), 0,  cos(roll)]])
+        roty = np.mat([
+            [1,         0,          0],
+            [0, cos(-pitch), -sin(-pitch)],
+            [0, sin(-pitch),  cos(-pitch)]])
+        rotz = np.mat([
+            [ cos(yaw), -sin(yaw), 0],
+            [ sin(yaw),  cos(yaw), 0],
+            [        0,         0, 1]])
+        rot_mat = rotx * roty * rotz
+        AB = np.mat(np.zeros((3, 4)))
         for i in range(4):
-            self.AB[:, i] = - self.pos - self.rot_mat * self.body_struc[:, i] + self.footpoint_struc[:, i]
+            AB[:, i] = - self.pose - rot_mat * self.BODY_STRUCT[:, i] + self.footpoint_struc[:, i]
         
-        # print((self.footpoint_struc - self.AB).T)
-
-        self.body_coor_list = []
+        body_coor_list = []
         for i in range(4):
-            self.body_coor_list.append([(self.footpoint_struc - self.AB).T[i,0],(self.footpoint_struc - self.AB).T[i,1],(self.footpoint_struc - self.AB).T[i,2]])
+            body_coor_list.append([(self.footpoint_struc - AB).T[i,0],(self.footpoint_struc - AB).T[i,1],(self.footpoint_struc - AB).T[i,2]])
 
-        self.foot_coor_list = []
+        foot_coor_list = []
         for i in range(4):
-            self.foot_coor_list.append([self.footpoint_struc.T[i,0],self.footpoint_struc.T[i,1],self.footpoint_struc.T[i,2]])
+            foot_coor_list.append([self.footpoint_struc.T[i,0],self.footpoint_struc.T[i,1],self.footpoint_struc.T[i,2]])
         
-        print("body_coor_list:",self.body_coor_list)
-        print("foot_coor_list:",self.foot_coor_list)
-        return self.foot_coor_list
+        return {"foot":foot_coor_list, "body":body_coor_list}
 
+    def pose2feet_angle(self):
+        data = self.pose2coords()
+        foot_coor_list = data["foot"]
+        body_coor_list = data["body"]
+        coords = []
+        angles = []
+
+        # print(f"foot_coor_list: {foot_coor_list}")
+        # print(f"body_coor_list: {body_coor_list}")
+        for i in range(4):
+            coords.append([foot_coor_list[i][1]-body_coor_list[i][1], body_coor_list[i][2] - foot_coor_list[i][2]])
+
+        # print(f"coords after rpy: {coords}")
+        angles = []
+        
+        for i, coord in enumerate(coords):
+            
+            leg_angle, foot_angle= self.fieldcoord2polar(coord) 
+            # The left and right sides are opposite
+            leg_angle = leg_angle
+            foot_angle = foot_angle-90
+            if i % 2 != 0:
+                leg_angle = -leg_angle
+                foot_angle = -foot_angle
+            angles += [leg_angle, foot_angle]
+
+        return angles
+
+    # Pose calculated coord is Field coord, acoord refer to field, not refer to robot
+    def fieldcoord2polar(self, coord):
+        y, z = coord
+        u = sqrt(pow(y,2) + pow(z,2))
+        cos_angle1 = (self.foot**2 + self.leg**2 - u**2) / (2 * self.foot * self.leg)
+        cos_angle1 = min(max(cos_angle1, -1), 1)
+        beta = acos(cos_angle1)
+
+        angle1 = atan2(y, z)
+        cos_angle2 = (self.leg**2 + u**2 - self.foot**2)/(2*self.leg*u)
+        cos_angle2 = min(max(cos_angle2, -1), 1)
+        angle2 = acos(cos_angle2)
+        alpha = angle2 + angle1 + self.rpy[1]
+  
+        alpha = alpha / pi * 180 
+        beta = beta / pi * 180 
+
+        return alpha, beta
     
     def coord2polar(self, coord):
-        x, z = coord
-        # print('x,z:',x,z)
-        u = sqrt(pow(x,2) + pow(z,2))
+        y, z = coord
+        # print('y,z:',y,z)
+        u = sqrt(pow(y,2) + pow(z,2))
         # print('u: %s' % u)
         cos_angle1 = (self.foot**2 + self.leg**2 - u**2) / (2 * self.foot * self.leg)
+        cos_angle1 = min(max(cos_angle1, -1), 1)
         beta = acos(cos_angle1)
+
         # print('beta: %s' % beta)
 
-        angle1 = atan2(x, z)
+        angle1 = atan2(y, z)
         # print("angle1:",angle1)
-        angle2 = acos((self.leg**2 + u**2 - self.foot**2)/(2*self.leg*u))
+        cos_angle2 = (self.leg**2 + u**2 - self.foot**2)/(2*self.leg*u)
+        cos_angle2 = min(max(cos_angle2, -1), 1)
+        angle2 = acos(cos_angle2)
         alpha = angle2 + angle1
-
+  
         alpha = alpha / pi * 180 
         beta = beta / pi * 180 
 
@@ -643,17 +749,6 @@ class Pidog():
 
         return translate_list        
 
-
-    def pose2feet_angle(self):
-        coords = []
-        angles = []
-
-        for i in range(4):
-            coords.append([self.foot_coor_list[i][0]-self.body_coor_list[i][0], self.body_coor_list[i][2] - self.foot_coor_list[i][2]])
-
-        angles = self.feet_angle_calculation(coords)
-
-        return angles
 
 # limit
     def limit(self,min,max,x):
