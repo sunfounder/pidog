@@ -42,7 +42,8 @@ tail_offset = 0.0
 mode = 'move'  # move/calibrate 
 servo_num = '1' 
 
-OFFSET_STEP = 0.1
+OFFSET_STEP = 0.2
+MOVE_STEP = 1
 
 def get_real_values():
     global feet_angles, head_angles, tail_angle
@@ -79,7 +80,7 @@ def keyboard_control():
     global feet_angles, head_angles, tail_angle
     global feet_offset, head_offset, tail_offset
     global mode, servo_num
-    inc = OFFSET_STEP
+    inc = 1  # 1 or -1
     get_real_values()
     show_info()
     my_dog.feet_move([feet_angles], True, 80)
@@ -109,21 +110,23 @@ def keyboard_control():
         elif key in 'ws':
             # set increment
             if key == 'w':
-                inc = OFFSET_STEP
+                inc = 1
             elif key == 's':
-                inc = -OFFSET_STEP
+                inc = -1
             # control feet 
             if servo_num in ('12345678'):
                 index = int(servo_num)-1
-                feet_angles[index] += inc
+                
                 # move
-                if mode == 'move':               
+                if mode == 'move':    
+                    feet_angles[index] += inc*MOVE_STEP
                     if feet_angles[index] > 90:
                         feet_angles[index] = 90
                     elif feet_angles[index] < -90:
                         feet_angles[index] = -90
                 # offset
                 elif mode == 'calibrate':
+                    feet_angles[index] += inc*OFFSET_STEP
                     feet_offset[index] = feet_angles[index] + my_dog.feet.offset[index]
                     if feet_offset[index] > 20:
                         feet_offset[index] = 20
@@ -141,14 +144,15 @@ def keyboard_control():
                 elif servo_num == '-':
                     index = 2  
                 # move             
-                head_angles[index] += inc
                 if mode == 'move':
+                    head_angles[index] += inc*MOVE_STEP
                     if head_angles[index] > 35:
                         head_angles[index] = 35
                     elif head_angles[index] < -60:
                         head_angles[index] = -60         
                 # offset
                 elif mode == 'calibrate': 
+                    head_angles[index] += inc*OFFSET_STEP
                     head_offset[index] = my_dog.head.offset[index] + head_angles[index]
                     if head_offset[index] > 20:
                         head_offset[index] = 20
@@ -159,21 +163,23 @@ def keyboard_control():
                 my_dog.head_move([head_angles], True, 80)  
             # control tail
             elif servo_num == '=':
-                tail_angle[0] += inc
                 # move
                 if mode == 'move':
+                    tail_angle[0] += inc*MOVE_STEP
                     if tail_angle[0] > 90:
                         tail_angle[0] = 90
                     elif tail_angle[0] < -90:
                         tail_angle[0] = -90       
-                # offset  
-                tail_offset[0] = my_dog.tail.offset[0] + tail_angle[0]
-                if tail_offset[0] > 20:
-                    tail_offset[0] = 20
-                    tail_angle[0] = 20 - my_dog.tail.offset[0]
-                elif tail_offset[0] < -20:
-                    tail_offset[0] = -20  
-                    tail_angle[0] = - 20 - my_dog.tail.offset[0]
+                # offset 
+                elif mode == 'calibrate': 
+                    tail_angle[0] += inc*OFFSET_STEP
+                    tail_offset[0] = my_dog.tail.offset[0] + tail_angle[0]
+                    if tail_offset[0] > 20:
+                        tail_offset[0] = 20
+                        tail_angle[0] = 20 - my_dog.tail.offset[0]
+                    elif tail_offset[0] < -20:
+                        tail_offset[0] = -20  
+                        tail_angle[0] = - 20 - my_dog.tail.offset[0]
                 my_dog.tail_move([tail_angle], True, 80)  
             # show_info
             show_info()    

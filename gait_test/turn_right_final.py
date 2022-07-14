@@ -21,9 +21,9 @@ def cal_turn_right(mode:'angle or coord'='angle'):
     f_center = -35
     h_center = 5
 
-    fl_center = -28
-    hl_center = 15
-    fr_center = -25
+    fl_center = -15
+    hl_center = 5
+    fr_center = -15
     hr_center = -10
 
     xl_up_inc = step_t*2*stride_L/(Ts*faai)
@@ -72,9 +72,9 @@ def cal_turn_right(mode:'angle or coord'='angle'):
                 x4_s = x4_st-xep
 
             #输出y
-            y1_s = stand -2
-            y2_s = stand +1
-            y3_s = stand +1
+            y1_s = stand -3
+            y2_s = stand +2
+            y3_s = stand +2
             y4_s = stand - zep
             #输出x
 
@@ -162,7 +162,7 @@ def cal_turn_right(mode:'angle or coord'='angle'):
 
             #输出y
             y1_s = stand - zep
-            y2_s = stand +1
+            y2_s = stand +2
             y3_s = stand +2
             y4_s = stand -2
             #输出x
@@ -194,6 +194,13 @@ def cal_turn_right(mode:'angle or coord'='angle'):
     return date
 
 
+def pause():
+    key = readchar.readkey()
+    if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
+        import sys
+        print('')
+        sys.exit(0)
+
 def main():
 
     forward_datas = cal_turn_right()
@@ -204,19 +211,11 @@ def main():
     print('offset:',feet.offset)
 
     while True:
-        # key = readchar.readkey()
-        # if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
-        #     import sys
-        #     print('')
-        #     sys.exit(0)
+        # pause()
         for angles in forward_datas:
-            # key = readchar.readkey()
-            # if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
-            #     import sys
-            #     print('')
-            #     sys.exit(0)
+            # pause()
+
             tt = time()
-            
             feet_simple_move(angles, delay=0.01)  # 0.005 ~ 0.05
             # feet.servo_move2(angles,100 )
             print('\r time: %s    '%(time()-tt),end='')

@@ -4,7 +4,7 @@ from public_functions import *
 
 def cal_walk(mode:'angle or coord'='angle'):
     
-    stride = 40
+    stride = 50
     raise_feet = 30
     stand = 80
 
@@ -14,7 +14,7 @@ def cal_walk(mode:'angle or coord'='angle'):
     Ts=0.96
     step_t = 0.02
 
-    f_center = -35
+    f_center = -25
     h_center = 5
     f_stand = stand 
     h_stand = stand 
@@ -62,9 +62,9 @@ def cal_walk(mode:'angle or coord'='angle'):
                 x4_s = x4_st-xep
 
             #输出y
-            y1_s = f_stand -1
-            y2_s = f_stand +1
-            y3_s = h_stand -1
+            y1_s = f_stand #-1
+            y2_s = f_stand #+1
+            y3_s = h_stand #-1
             y4_s = h_stand - zep
             #输出x
 
@@ -93,10 +93,14 @@ def cal_walk(mode:'angle or coord'='angle'):
             #     x2_s = x2_st-xep
 
             #输出y
-            y1_s = f_stand + 3
+            # y1_s = f_stand + 3
+            # y2_s = f_stand - zep
+            # y3_s = h_stand - 5*t/0.24
+            # y4_s = h_stand + 2
+            y1_s = f_stand #+ 1
             y2_s = f_stand - zep
-            y3_s = h_stand - 5*t/0.24
-            y4_s = h_stand + 2
+            y3_s = h_stand #- 1
+            y4_s = h_stand #+ 1
             #输出x
             x1_s += x_dn_inc
             # x2_s += -x_up_inc
@@ -123,10 +127,10 @@ def cal_walk(mode:'angle or coord'='angle'):
 
 
             #输出y
-            y1_s = f_stand +1
-            y2_s = f_stand -1
+            y1_s = f_stand #+1
+            y2_s = f_stand #-1
             y3_s = h_stand - zep
-            y4_s = h_stand -1
+            y4_s = h_stand #-1
             #输出x
             x1_s += x_dn_inc
             x2_s += x_dn_inc
@@ -151,10 +155,14 @@ def cal_walk(mode:'angle or coord'='angle'):
 
 
             #输出y
+            # y1_s = f_stand - zep
+            # y2_s = f_stand +3
+            # y3_s = h_stand +2
+            # y4_s = h_stand -5*t/0.24
             y1_s = f_stand - zep
-            y2_s = f_stand +3
-            y3_s = h_stand +2
-            y4_s = h_stand -5*t/0.24
+            y2_s = f_stand #+1
+            y3_s = h_stand #+1
+            y4_s = h_stand #-1
             #输出x
             # x1_s += -x_up_inc
             x1_s = x1_st-xep
@@ -183,6 +191,12 @@ def cal_walk(mode:'angle or coord'='angle'):
             date.append(result)
     return date
 
+def pause():
+    key = readchar.readkey()
+    if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
+        import sys
+        print('')
+        sys.exit(0)
 
 def main():
 
@@ -196,16 +210,14 @@ def main():
     while True:
 
         for angles in forward_datas:
-            key = readchar.readkey()
-            if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
-                import sys
-                print('')
-                sys.exit(0)
-            tt = time()
-            
+
+            # pause()
+
+            # tt = time()
             feet_simple_move(angles, delay=0.01)  # 0.005 ~ 0.05
             # feet.servo_move2(angles,100 )
-            print('\r time: %s    '%(time()-tt),end='')
+            # print('\r time: %s    '%(time()-tt),end='')
+
             # sleep(0.005)
         # sleep(0.5)
 

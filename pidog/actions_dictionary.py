@@ -6,6 +6,7 @@ from .backward_cal import cal_backward
 from .turn_left_cal import cal_turn_left
 from .turn_right_cal import cal_turn_right
 from .trot_cal import cal_trot
+from .walk import Walk
 from math import pi, sin, cos
 import numpy as np
 
@@ -69,6 +70,66 @@ class ActionDict(dict):
             data.append(Pidog.feet_angle_calculation(coord))
         return data,'feet'
 
+# forward
+    @property
+    def forward(self):
+        data = []
+        forward = Walk(fb=Walk.FORWARD, lr=Walk.STRAIGHT)
+        coords =  forward.get_coords()
+        for coord in coords:
+            data.append(Pidog.feet_angle_calculation(coord))
+        return data,'feet'  
+
+# backward
+    @property
+    def backward(self): 
+        data = []
+        backward = Walk(fb=Walk.BACKWARD, lr=Walk.STRAIGHT)
+        coords =  backward.get_coords()
+        for coord in coords:
+            data.append(Pidog.feet_angle_calculation(coord))
+        return data,'feet'
+
+# forward_left
+    @property
+    def forward_left(self):
+        data = []
+        forward_left = Walk(fb=Walk.FORWARD, lr=Walk.LEFT)
+        coords =  forward_left.get_coords()
+        for coord in coords:
+            data.append(Pidog.feet_angle_calculation(coord))
+        return data,'feet'
+
+# forward_right
+    @property
+    def forward_right(self):
+        data = []
+        forward_right = Walk(fb=Walk.FORWARD, lr=Walk.RIGHT)
+        coords =  forward_right.get_coords()
+        for coord in coords:
+            data.append(Pidog.feet_angle_calculation(coord))
+        return data,'feet'
+
+ # backward_left
+    @property              
+    def backward_left(self):
+        data = []
+        backward_left = Walk(fb=Walk.BACKWARD, lr=Walk.LEFT)
+        coords =  backward_left.get_coords()
+        for coord in coords:
+            data.append(Pidog.feet_angle_calculation(coord))
+        return data,'feet'
+
+# backward_right
+    @property
+    def backward_right(self):
+        data = []
+        backward_right = Walk(fb=Walk.BACKWARD, lr=Walk.RIGHT)
+        coords =  backward_right.get_coords()
+        for coord in coords:
+            data.append(Pidog.feet_angle_calculation(coord))
+        return data,'feet'
+        
 # 小跑 trot
     @property
     def trot(self):

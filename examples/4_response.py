@@ -7,7 +7,7 @@ from math import sin
 my_dog = Pidog(feet_pins=[1, 2, 3, 4, 5, 6, 7, 8], 
                 head_pins=[9, 10, 11], 
                 tail_pin=[12], 
-                feet_init_angles=[45, 0, -45, 0, 45, 0, -45, 0]
+                # feet_init_angles=[45, 0, -45, 0, 45, 0, -45, 0]
                 )
 sleep(0.1)
 
@@ -58,7 +58,7 @@ def alert():
             my_dog.head_move([[0, 0, 0]], immediately=True, speed=90)
             my_dog.tail_move([[0]], immediately=True, speed=90)
             my_dog.rgb_strip.set_mode('boom', font_color='red', brightness=0.8, delay=0.001)       
-            my_dog.do_action('move_back', step_count=1, speed=95)
+            my_dog.do_action('backward', step_count=1, speed=95)
             delay(0.01)        
             lean_forward()
             while len(my_dog.feet_actions_buffer) > 0:
@@ -68,7 +68,7 @@ def alert():
         else:
             my_dog.rgb_strip.set_mode('breath', font_color='pink', brightness=0.8, delay=0.08)
         # relax
-        if my_dog.touch_sw.is_slide() is not 'N':
+        if my_dog.touch_sw.is_slide() != 'N':
             if len(my_dog.head_actions_buffer) < 2:
                 head_nod(1)
                 my_dog.do_action('tail_wagging', step_count=8, speed=100)

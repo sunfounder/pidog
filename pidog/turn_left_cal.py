@@ -75,10 +75,10 @@ def cal_turn_left():
 
 
             #输出y
-            y1_s = stand +2
-            y2_s = stand -2
+            y1_s = stand #+2
+            y2_s = stand #-2
             y3_s = stand - zep
-            y4_s = stand -2
+            y4_s = stand #-2
             #输出x
             x1_s += xl_dn_inc
             x2_s += xr_dn_inc
@@ -105,9 +105,9 @@ def cal_turn_left():
 
             #输出y
             y1_s = stand - zep
-            y2_s = stand +2
-            y3_s = stand +2
-            y4_s = stand -3
+            y2_s = stand #+2
+            y3_s = stand #+2
+            y4_s = stand #-3
             #输出x
             # x1_s += -x_up_inc
             x1_s = x1_st-xep
@@ -132,9 +132,9 @@ def cal_turn_left():
                 x4_s = x4_st-xep
 
             #输出y
-            y1_s = stand -3
-            y2_s = stand +2
-            y3_s = stand +2
+            y1_s = stand #-3
+            y2_s = stand #+2
+            y3_s = stand #+2
             y4_s = stand - zep
             #输出x
 
@@ -161,10 +161,10 @@ def cal_turn_left():
             #     x2_s = x2_st-xep
 
             #输出y
-            y1_s = stand + 2
+            y1_s = stand #+ 2
             y2_s = stand - zep
-            y3_s = stand - 3
-            y4_s = stand + 2
+            y3_s = stand #- 3
+            y4_s = stand #+ 2
             #输出x
             x1_s += xl_dn_inc
             # x2_s += -x_up_inc

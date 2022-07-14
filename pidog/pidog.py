@@ -48,10 +48,10 @@ config_file = '%s/.config/pidog/pidog.conf'%UserHome
 class Pidog():
 
     # structure constants
-    leg = 37.6
-    foot = 70
-    BODY_LENGTH = 105
-    BODY_WIDTH = 95
+    leg = 42
+    foot = 76
+    BODY_LENGTH = 117
+    BODY_WIDTH = 98
     BODY_STRUCT = np.mat([
         [-BODY_WIDTH / 2, -BODY_LENGTH / 2,  0],
         [ BODY_WIDTH / 2, -BODY_LENGTH / 2,  0],
@@ -135,8 +135,8 @@ class Pidog():
         self.ears = Sound_direction()
         self.sound_direction = -1
 
-        # self.action_threads_start()
-        # self.sensory_processes_start()
+        self.action_threads_start()
+        self.sensory_processes_start()
         self.exit_flag = False
         self.sensory_processes = None
         self.threads_manage_t =  threading.Thread(target=self.threads_manage)
@@ -250,7 +250,7 @@ class Pidog():
             try:
                 if self.exit_flag == True:
                     break
-                self.feet.servo_move2(self.feet_actions_buffer[0],self.feet_speed)
+                self.feet.servo_move(self.feet_actions_buffer[0],self.feet_speed)
                 self.feet_current_angle = list.copy(self.feet_actions_buffer[0])
                 self.feet_actions_buffer.pop(0)
 
@@ -357,7 +357,7 @@ class Pidog():
                 self.exit_flag = True
                 break
             
-            self.accData, self.gyroData = data
+            self.accData, self.gyroData = data 
             _ax += self.accData[0]
             _ay += self.accData[1]
             _az += self.accData[2]

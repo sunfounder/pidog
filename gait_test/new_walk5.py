@@ -34,10 +34,19 @@ class Walk():
     FOOT_ORDER = [1, 0, 4, 0, 2, 0, 3, 0]
     FOOT_STEP_HEIGHT = 40   # the height of the stepping foot
     FOOT_STEP_WIDTH  = 100   # the width of the stepping foot
-    Y_OFFSET = -15            # the body y offset
+    
+    Y_FORWARD_OFFSET = -20           # the body y offset
+    Y_FORWARD_OFFSET_2 = -5
+    Y_FORWARD_STEER_OFFSET = -20
+    Y_FORWARD_STEER_OFFSET_2 = -2
+
+    
+    Y_BACKWARD_OFFSET = -15
+    Y_BACKWARD_OFFSET_2 = 5
+    Y_BACKWARD_STEER_OFFSET = -14
     FOOT_STAND_OFFSET = 5  # the foot center offset
     Z_ORIGIN = 80
-
+ 
     TURNING_RATE = 0.2
     FOOT_STAND_OFFSET_DIRS = [-1, -1, 1, 1]
     FOOT_STEP_SCALES_LEFT =   [TURNING_RATE, 1, TURNING_RATE, 1]
@@ -57,22 +66,33 @@ class Walk():
 
         if self.fb == self.FORWARD:
             if self.lr == self.STRAIGHT:
-                self.y_offset = 0 + self.Y_OFFSET
+                self.y_offset = 0 + self.Y_FORWARD_OFFSET
+                self.y_offset_2 = 0 + self.Y_FORWARD_OFFSET_2
             else:
-                self.y_offset = 0 + self.Y_OFFSET
+                self.y_offset = 0 + self.Y_FORWARD_STEER_OFFSET
+                self.y_offset_2 = 0 + self.Y_FORWARD_STEER_OFFSET_2
         elif self.fb == self.BACKWARD:
             if self.lr == self.STRAIGHT:
-                self.y_offset =  -7 + self.Y_OFFSET
+                self.y_offset = 0 + self.Y_BACKWARD_OFFSET
+                self.y_offset_2 = 0 + self.Y_BACKWARD_OFFSET_2
             else:
-                self.y_offset =  0 + self.Y_OFFSET
+                self.y_offset =  0 + self.Y_BACKWARD_STEER_OFFSET
+                self.y_offset_2 = 0 + self.Y_BACKWARD_OFFSET_2
         else:
-            self.y_offset = self.Y_OFFSET
+            self.y_offset = self.Y_FORWARD_OFFSET
+            self.y_offset_2 = 0 + self.Y_FORWARD_OFFSET_2
+
         self.foot_step_width = [ self.FOOT_STEP_WIDTH * self.FOOT_STEP_SCALES[self.lr+1][i] for i in range(4) ]
         self.section_length = [ self.foot_step_width[i] / (self.SECTIONS-1) for i in range(4) ]
         self.step_down_length = [ self.section_length[i] / self.STEPS for i in range(4) ]
         self.foot_offset = [ self.FOOT_STAND_OFFSET * self.FOOT_STAND_OFFSET_DIRS[i] for i in range(4) ]
-        self.foot_origin = [ self.foot_step_width[i] / 2 + self.y_offset + (self.foot_offset[i] * self.FOOT_STEP_SCALES[self.lr+1][i]) for i in range(4) ]
-
+        # self.foot_origin = [ self.foot_step_width[i] / 2 + self.y_offset + (self.foot_offset[i] * self.FOOT_STEP_SCALES[self.lr+1][i]) for i in range(4) ]
+        self.foot_origin = [
+            self.foot_step_width[0] / 2 + self.y_offset + (self.foot_offset[0] * self.FOOT_STEP_SCALES[self.lr+1][0]) + self.FOOT_ORIGINAL_Y_TABLE[0],
+            self.foot_step_width[1] / 2 + self.y_offset + (self.foot_offset[1] * self.FOOT_STEP_SCALES[self.lr+1][1]) + self.FOOT_ORIGINAL_Y_TABLE[1],
+            self.foot_step_width[2] / 2 + self.y_offset_2 + (self.foot_offset[2] * self.FOOT_STEP_SCALES[self.lr+1][2]) + self.FOOT_ORIGINAL_Y_TABLE[2],
+            self.foot_step_width[3] / 2 + self.y_offset_2 + (self.foot_offset[3] * self.FOOT_STEP_SCALES[self.lr+1][3]) + self.FOOT_ORIGINAL_Y_TABLE[3]
+        ]
     # Cosine
     def step_y_func(self, foot, step):
         """
@@ -103,6 +123,7 @@ class Walk():
         lr: left(1), middle(0) or right(-1)
         """
         origin_foot_coord = [ [self.foot_origin[i] - self.FOOT_ORIGINAL_Y_TABLE[i] * 2 * self.section_length[i], self.Z_ORIGIN] for i in range(4) ]
+        origin_foot_coord_temp = list.copy(origin_foot_coord)
         foot_coords = []
         for section in range(self.SECTIONS):
             for step in range(self.STEPS):
@@ -122,6 +143,10 @@ class Walk():
                     foot_coord.append([y, z])
                 origin_foot_coord = foot_coord
                 foot_coords.append(foot_coord)
+
+        # add the last foot coord
+        foot_coords.append(origin_foot_coord_temp)
+
         return foot_coords
 
 def test():
@@ -144,7 +169,8 @@ def test():
     forward_right = Walk(fb=Walk.FORWARD, lr=Walk.RIGHT)
     backward_left = Walk(fb=Walk.BACKWARD, lr=Walk.LEFT)
     backward_right = Walk(fb=Walk.BACKWARD, lr=Walk.RIGHT)
-    foot_coords = forward.get_coords()
+
+    foot_coords = forward_left.get_coords()
 
     # try:
     while True:
@@ -158,7 +184,7 @@ def test():
             dog.feet_simple_move(angles)
             pause() 
             # delay(0.04)
-                
+        # delay(1)       
     # finally:
     #     dog.close()
 

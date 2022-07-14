@@ -21,10 +21,10 @@ def cal_turn_left(mode:'angle or coord'='angle'):
     f_center = -35
     h_center = 5
 
-    fl_center = -25
+    fl_center = -15
     hl_center = -10
-    fr_center = -28
-    hr_center = 15
+    fr_center = -15
+    hr_center = 5
 
     xl_up_inc = step_t*2*stride_L/(Ts*faai)
     xl_dn_inc = step_t*2*stride_L/(Ts-Ts*faai)
@@ -192,6 +192,12 @@ def cal_turn_left(mode:'angle or coord'='angle'):
             data.append(result)
     return data
 
+def pause():
+    key = readchar.readkey()
+    if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
+        import sys
+        print('')
+        sys.exit(0)
 
 def main():
 
@@ -203,17 +209,9 @@ def main():
     print('offset:',feet.offset)
 
     while True:
-        key = readchar.readkey()
-        if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
-            import sys
-            print('')
-            sys.exit(0)
+        # pause()
         for angles in forward_datas:
-            # key = readchar.readkey()
-            # if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
-            #     import sys
-            #     print('')
-            #     sys.exit(0)
+            # pause()
             tt = time()
             
             feet_simple_move(angles, delay=0.01)  # 0.005 ~ 0.05

@@ -82,7 +82,9 @@ def face_track():
            
         
         print('direction: %s |number: %s | ex,ey: %s, %s | yrp: %s, %s, %s '
-            %(direction, people, ex, ey, round(yaw,2), round(roll,2), round(pitch,2))
+            %(direction, people, ex, ey, round(yaw,2), round(roll,2), round(pitch,2)),
+            end='\r',
+            flush=True,
         )
         my_dog.head_move_adjust([yaw,0,pitch],pitch_init=-40,immediately=True,speed=100)
         sleep(0.05)

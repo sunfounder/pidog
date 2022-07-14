@@ -6,7 +6,7 @@ from time import sleep
 my_dog = Pidog(feet_pins=[1,2,3,4,5,6,7,8],
                 head_pins=[9,10,11],
                 tail_pin=[12],
-                feet_init_angles=[45,0,-45,0,45,0,-45,0]
+                # feet_init_angles=[45,0,-45,0,45,0,-45,0]
                 )
 sleep(0.5) 
  
