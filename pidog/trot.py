@@ -1,12 +1,12 @@
 
 """
 A full MOVE divided into 8 SECTIONs. like below:
-foot| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
-====|===|===|===|===|===|===|===|===
- 1  |^^^|___|___|___|___|___|___|___
- 2  |___|___|___|___|^^^|___|___|___
- 3  |___|___|___|___|___|___|^^^|___
- 4  |___|___|^^^|___|___|___|___|___
+foot| 0 | 1 |
+====|===|===|
+ 1  |^^^|___|
+ 2  |___|^^^|
+ 3  |___|^^^|
+ 4  |^^^|___|
 
 4 feet move in this order: 1, 4, 2, 3
 there will be a break after every foot move 
@@ -20,7 +20,7 @@ import readchar
 from time import sleep as delay
 from math import cos, pi
 
-class Walk():
+class Trot():
 
     FORWARD = 1
     BACKWARD = -1
@@ -28,13 +28,12 @@ class Walk():
     STRAIGHT = 0
     RIGHT = 1
 
-    SECTION_COUNT = 8
-    STEP_COUNT = 14
-    TOTAL_STEPS = SECTION_COUNT * STEP_COUNT
-    FOOT_RAISE_ORDER = [1, 0, 4, 0, 2, 0, 3, 0]
-    FOOT_STEP_HEIGHT = 40  # the height of the stepping foot
+    SECTION_COUNT = 2
+    STEP_COUNT = 16
+    FOOT_RAISE_ORDER = [[1, 4], [2, 3]]
+    FOOT_STEP_HEIGHT = 20  # the height of the stepping foot
     FOOT_STEP_WIDTH  = 100 # the width of the stepping foot
-    CENTER_OF_GRAVITY = -10       # the body y offset
+    CENTER_OF_GRAVITY = -17       # the body y offset
     FOOT_STAND_OFFSET = 5  # the foot center offset
     Z_ORIGIN = 80
 
@@ -43,12 +42,12 @@ class Walk():
     FOOT_STEP_SCALES_LEFT =   [TURNING_RATE, 1, TURNING_RATE, 1]
     FOOT_STEP_SCALES_MIDDLE = [1, 1, 1, 1]
     FOOT_STEP_SCALES_RIGHT =  [1, TURNING_RATE, 1, TURNING_RATE]
-    FOOT_ORIGINAL_Y_TABLE = [0, 4, 6, 2]
+    FOOT_ORIGINAL_Y_TABLE = [0, 1, 1, 0]
     FOOT_STEP_SCALES = [FOOT_STEP_SCALES_LEFT, FOOT_STEP_SCALES_MIDDLE, FOOT_STEP_SCALES_RIGHT]
 
     def __init__(self, fb, lr):
         """
-            Walk init
+            Trot init
             fb: FORWARD(1) or BACKWARD(-1)
             lr: LEFT(1), STRAIGHT(0) or RIGHT(-1)
         """
@@ -100,13 +99,13 @@ class Walk():
         for section in range(self.SECTION_COUNT):
             for step in range(self.STEP_COUNT):
                 if self.fb == 1:
-                    raise_foot = self.FOOT_RAISE_ORDER[section]
+                    raise_feet = self.FOOT_RAISE_ORDER[section]
                 else:
-                    raise_foot = self.FOOT_RAISE_ORDER[self.SECTION_COUNT - section - 1]
+                    raise_feet = self.FOOT_RAISE_ORDER[self.SECTION_COUNT - section - 1]
                 foot_coord = []
 
                 for i in range(4):
-                    if raise_foot != 0 and i == raise_foot-1:
+                    if i + 1 in raise_feet:
                         y = self.step_y_func(i, step)
                         z = self.step_z_func(step)
                     else:
@@ -131,21 +130,25 @@ def test():
             print('')
             sys.exit(0)
     
-    forward = Walk(fb=Walk.FORWARD, lr=Walk.STRAIGHT)
-    backward = Walk(fb=Walk.BACKWARD, lr=Walk.STRAIGHT)
-    forward_left = Walk(fb=Walk.FORWARD, lr=Walk.LEFT)
-    forward_right = Walk(fb=Walk.FORWARD, lr=Walk.RIGHT)
-    backward_left = Walk(fb=Walk.BACKWARD, lr=Walk.LEFT)
-    backward_right = Walk(fb=Walk.BACKWARD, lr=Walk.RIGHT)
+    forward = Trot(fb=Trot.FORWARD, lr=Trot.STRAIGHT)
+    backward = Trot(fb=Trot.BACKWARD, lr=Trot.STRAIGHT)
+    forward_left = Trot(fb=Trot.FORWARD, lr=Trot.LEFT)
+    forward_right = Trot(fb=Trot.FORWARD, lr=Trot.RIGHT)
+    backward_left = Trot(fb=Trot.BACKWARD, lr=Trot.LEFT)
+    backward_right = Trot(fb=Trot.BACKWARD, lr=Trot.RIGHT)
     foot_coords = forward.get_coords()
 
     # try:
     while True:
         for foot_coord in foot_coords:
+            # print(foot_coord)
+            # dog.set_rpy(**rpy)
+            # dog.set_pose(**pos)
+            # dog.set_rpy(0, 0, 0, True)
             dog.set_feet(foot_coord)
             angles = dog.pose2feet_angle()
             dog.feet_simple_move(angles)
-            # pause()
+            # pause() 
             delay(0.001)
                 
     # finally:

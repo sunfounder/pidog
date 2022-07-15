@@ -1,15 +1,8 @@
 #!/usr/bin/env python3
-from datetime import date
 from .pidog import Pidog
-from .walk_cal import cal_walk
-from .backward_cal import cal_backward
-from .turn_left_cal import cal_turn_left
-from .turn_right_cal import cal_turn_right
-from .trot_cal import cal_trot
 from .walk import Walk
-from math import pi, sin, cos
-import numpy as np
-
+from .trot import Trot
+from math import sin
 
 # ActionDict: - > angles_dict
 class ActionDict(dict):
@@ -31,7 +24,7 @@ class ActionDict(dict):
         if offset in range(-60,60):
             self.barycenter = offset
 
-# 站 stand
+    # 站 stand
     @property
     def stand(self):
         x = self.barycenter 
@@ -39,14 +32,14 @@ class ActionDict(dict):
         return [
             Pidog.feet_angle_calculation([[x,y],[x,y],[x+20,y-5],[x+20,y-5]])            
         ],'feet'
-# 坐 sit
+    # 坐 sit
     @property
     def sit(self):
         return [     
             [30, 60, -30, -60, 80, -45, -80, 45],
             # [-20, 60, 20, -60, -80, -45, -80, 45]
         ],'feet'
-# 趴 lie
+    # 趴 lie
     @property
     def lie(self):
         return [
@@ -61,16 +54,7 @@ class ActionDict(dict):
             [-60,60,60,-60,45,-45,-45,45], 
         ],'feet'
 
-# 漫步 walk
-    @property
-    def walk(self):
-        data = []
-        coords = cal_walk()
-        for coord in coords:
-            data.append(Pidog.feet_angle_calculation(coord))
-        return data,'feet'
-
-# forward
+    # forward
     @property
     def forward(self):
         data = []
@@ -80,7 +64,7 @@ class ActionDict(dict):
             data.append(Pidog.feet_angle_calculation(coord))
         return data,'feet'  
 
-# backward
+    # backward
     @property
     def backward(self): 
         data = []
@@ -90,7 +74,7 @@ class ActionDict(dict):
             data.append(Pidog.feet_angle_calculation(coord))
         return data,'feet'
 
-# forward_left
+    # forward_left
     @property
     def forward_left(self):
         data = []
@@ -100,7 +84,7 @@ class ActionDict(dict):
             data.append(Pidog.feet_angle_calculation(coord))
         return data,'feet'
 
-# forward_right
+    # forward_right
     @property
     def forward_right(self):
         data = []
@@ -110,7 +94,7 @@ class ActionDict(dict):
             data.append(Pidog.feet_angle_calculation(coord))
         return data,'feet'
 
- # backward_left
+    # backward_left
     @property              
     def backward_left(self):
         data = []
@@ -120,7 +104,7 @@ class ActionDict(dict):
             data.append(Pidog.feet_angle_calculation(coord))
         return data,'feet'
 
-# backward_right
+    # backward_right
     @property
     def backward_right(self):
         data = []
@@ -130,51 +114,23 @@ class ActionDict(dict):
             data.append(Pidog.feet_angle_calculation(coord))
         return data,'feet'
         
-# 小跑 trot
+    # 小跑 trot
     @property
     def trot(self):
         data = []
-        coords = cal_trot()
+        trot = Trot(Trot.FORWARD, Trot.STRAIGHT)
+        coords = trot.get_coords()
         for coord in coords:
             data.append(Pidog.feet_angle_calculation(coord))
         return data,'feet'   
 
-# 后退 backward
-    @property
-    def backward(self):
-        data = []
-        coords = cal_backward()
-        for coord in coords:
-            data.append(Pidog.feet_angle_calculation(coord))
-        return data,'feet'
-
-# 左转 turn_left
-    @property
-    def turn_left(self):
-        data = []
-        coords = cal_turn_left()
-        for coord in coords:
-            data.append(Pidog.feet_angle_calculation(coord))
-        return data,'feet'
-
-# 右转 turn_right
-    @property
-    def turn_right(self):
-        data = []
-        coords = cal_turn_right()
-        for coord in coords:
-            data.append(Pidog.feet_angle_calculation(coord))
-        return data,'feet'
-
-
-
-# 伸懒腰 stretch
+    # 伸懒腰 stretch
     @property 
     def stretch(self):
         return[
             [-80, 70, 80, -70, -20, 64, 20, -64],
         ],'feet'
-# 俯卧撑 pushup
+    # 俯卧撑 pushup
     @property 
     def pushup(self):
         return[
@@ -183,7 +139,7 @@ class ActionDict(dict):
             [45, 25, -45, -25, 80, 70, -80, -70],
             [45, 25, -45, -25, 80, 70, -80, -70]
         ],'feet'    
-# 打瞌睡 doze_off
+    # 打瞌睡 doze_off
     @property 
     def doze_off(self):
         start = -30
@@ -224,7 +180,7 @@ class ActionDict(dict):
             angs.append([y,r,p]) 
         
         return angs,'head'
-# 摇头
+    # 摇头
     @property
     def shake_head(self):
         amplitude = 60
@@ -235,7 +191,7 @@ class ActionDict(dict):
             angs.append([y1,0,0]) 
         return angs,'head'
 
-# 左歪头
+    # 左歪头
     @property
     def tilting_head_left(self):
         yaw = 0
@@ -244,7 +200,7 @@ class ActionDict(dict):
         return[
             [yaw,roll,pitch]
         ],'head'
-# 右歪头
+    # 右歪头
     @property
     def tilting_head_right(self):
         yaw = 0
@@ -253,7 +209,7 @@ class ActionDict(dict):
         return[
             [yaw,roll,pitch]
         ],'head'
-# 左右歪头
+    # 左右歪头
     @property
     def tilting_head(self):
         yaw = 0
@@ -261,17 +217,9 @@ class ActionDict(dict):
         pitch = 20
         return [[yaw,roll,pitch]]*20 \
                 + [[yaw,-roll,pitch]]*20 \
-        ,'head'     
-# 晕 
+        ,'head'
 
-# 仰头吠叫 head_bark
-    # @property
-    # def head_bark(self):
-    #     return [[0, 0, -20],
-    #             [0, 0, 10],
-    #             [0, 0, 10]
-    #     ],'head'
-
+    # 仰头吠叫 head_bark
     @property
     def head_bark(self):
         return [[0, 0, -40],
@@ -279,7 +227,7 @@ class ActionDict(dict):
                 [0, 0, -10]
         ],'head'
 
-# 摇尾巴 tail_wagging
+    # 摇尾巴 tail_wagging
     @property
     def tail_wagging(self):
         amplitude=50
@@ -289,7 +237,7 @@ class ActionDict(dict):
             angs.append([amplitude*a])
         return angs,'tail'     
 
-# head_up_down
+    # head_up_down
     @property
     def head_up_down(self):
         # amplitude = 20
@@ -308,7 +256,7 @@ class ActionDict(dict):
             [0,0,-10]
         ],'head'
 
-# half_sit
+    # half_sit
     @property
     def half_sit(self):
         return[
