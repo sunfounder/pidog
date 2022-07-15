@@ -10,7 +10,7 @@ servo corresponding keys refer to the following chart:
                      9,
                    0, '-'
                      |
-              2,1 --[ ] -- 3,4
+              2,1 --[ ]-- 3,4
                     [ ]
               6,5 --[ ]-- 7,8
                      |
@@ -42,7 +42,7 @@ tail_offset = 0.0
 mode = 'move'  # move/calibrate 
 servo_num = '1' 
 
-OFFSET_STEP = 0.2
+OFFSET_STEP = (180 / 2000) * (20000 / 4095) # 舵机实际精度
 MOVE_STEP = 1
 
 def get_real_values():
@@ -134,7 +134,7 @@ def keyboard_control():
                     elif feet_offset[index] < -20:
                         feet_offset[index] = -20
                         feet_angles[index] = -20 - my_dog.feet.offset[index]
-                my_dog.feet_move([feet_angles], True, 80)  
+                my_dog.feet_simple_move(feet_angles)  
             # control head 
             elif servo_num in ('90-'):
                 if servo_num == '9':
