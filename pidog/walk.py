@@ -28,22 +28,21 @@ class Walk():
     STRAIGHT = 0
     RIGHT = 1
 
-    SECTION_COUNT = 8
-    STEP_COUNT = 4
-    TOTAL_STEPS = SECTION_COUNT * STEP_COUNT
-    FOOT_RAISE_ORDER = [1, 0, 4, 0, 2, 0, 3, 0]
+    SECTIONS = 8
+    STEPS = 10
+    TOTAL_STEPS = SECTIONS * STEPS
+    FOOT_ORDER = [1, 0, 4, 0, 2, 0, 3, 0]
     FOOT_STEP_HEIGHT = 40   # the height of the stepping foot
-    FOOT_STEP_WIDTH  = 80  # the width of the stepping foot
-    CENTER_OF_GRAVITY = -17 # the body y offset
-    FOOT_STAND_OFFSET = 5   # the foot center offset
+    FOOT_STEP_WIDTH  = 80   # the width of the stepping foot
+    Y_OFFSET = -17            # the body y offset
+    FOOT_POSITION_OFFSETS = [-5, -5, 15, 15]  # the foot center offset
     Z_ORIGIN = 80
 
-    TURNING_RATE = 0.5
-    FOOT_STAND_OFFSET_DIRS = [-1, -1, 1, 1]
+    TURNING_RATE = 0.2
     FOOT_STEP_SCALES_LEFT =   [TURNING_RATE, 1, TURNING_RATE, 1]
     FOOT_STEP_SCALES_MIDDLE = [1, 1, 1, 1]
     FOOT_STEP_SCALES_RIGHT =  [1, TURNING_RATE, 1, TURNING_RATE]
-    FOOT_ORIGINAL_Y_TABLE = [0, 4, 6, 2]
+    FOOT_ORIGINAL_Y_TABLE = [0, 2, 3, 1]
     FOOT_STEP_SCALES = [FOOT_STEP_SCALES_LEFT, FOOT_STEP_SCALES_MIDDLE, FOOT_STEP_SCALES_RIGHT]
 
     def __init__(self, fb, lr):
@@ -57,21 +56,20 @@ class Walk():
 
         if self.fb == self.FORWARD:
             if self.lr == self.STRAIGHT:
-                self.y_offset =  0 + self.CENTER_OF_GRAVITY
+                self.y_offset = 0 + self.Y_OFFSET
             else:
-                self.y_offset =  5 + self.CENTER_OF_GRAVITY
+                self.y_offset = 0 + self.Y_OFFSET
         elif self.fb == self.BACKWARD:
             if self.lr == self.STRAIGHT:
-                self.y_offset =  8 + self.CENTER_OF_GRAVITY
+                self.y_offset =  -7 + self.Y_OFFSET
             else:
-                self.y_offset =  1 + self.CENTER_OF_GRAVITY
+                self.y_offset =  0 + self.Y_OFFSET
         else:
-            self.y_offset = self.CENTER_OF_GRAVITY
+            self.y_offset = self.Y_OFFSET
         self.foot_step_width = [ self.FOOT_STEP_WIDTH * self.FOOT_STEP_SCALES[self.lr+1][i] for i in range(4) ]
-        self.section_length = [ self.foot_step_width[i] / (self.SECTION_COUNT-1) for i in range(4) ]
-        self.step_down_length = [ self.section_length[i] / self.STEP_COUNT for i in range(4) ]
-        self.foot_offset = [ self.FOOT_STAND_OFFSET * self.FOOT_STAND_OFFSET_DIRS[i] for i in range(4) ]
-        self.foot_origin = [ self.foot_step_width[i] / 2 + self.y_offset + (self.foot_offset[i] * self.FOOT_STEP_SCALES[self.lr+1][i]) for i in range(4) ]
+        self.section_length = [ self.foot_step_width[i] / (self.SECTIONS-1) for i in range(4) ]
+        self.step_down_length = [ self.section_length[i] / self.STEPS for i in range(4) ]
+        self.foot_origin = [ self.foot_step_width[i] / 2 + self.y_offset + (self.FOOT_POSITION_OFFSETS[i] * self.FOOT_STEP_SCALES[self.lr+1][i]) for i in range(4) ]
 
     # Cosine
     def step_y_func(self, foot, step):
@@ -80,14 +78,21 @@ class Walk():
         foot: current foot
         step: current step
         """
-        theta = step * pi / (self.STEP_COUNT-1)
+        theta = step * pi / (self.STEPS-1)
         temp = (self.foot_step_width[foot] * (cos(theta) - self.fb) / 2 * self.fb)
         y = self.foot_origin[foot] + temp
         return y
 
     # Linear
+    # def step_z_func(self, step):
+    #     return self.Z_ORIGIN - (self.FOOT_STEP_HEIGHT * step / (self.STEPS-1))
+
+
     def step_z_func(self, step):
-        return self.Z_ORIGIN - (self.FOOT_STEP_HEIGHT * step / (self.STEP_COUNT-1))
+        theta = step * pi / (self.STEPS-1)
+        z_temp = self.FOOT_STEP_HEIGHT*(1-cos(theta))/2
+        return self.Z_ORIGIN - z_temp
+
 
     def get_coords(self):
         """
@@ -95,14 +100,14 @@ class Walk():
         fb: forward(1) or backward(-1)
         lr: left(1), middle(0) or right(-1)
         """
-        origin_foot_coord = [ [self.foot_origin[i] - self.FOOT_ORIGINAL_Y_TABLE[i] * self.section_length[i], self.Z_ORIGIN] for i in range(4) ]
+        origin_foot_coord = [ [self.foot_origin[i] - self.FOOT_ORIGINAL_Y_TABLE[i] * 2 * self.section_length[i], self.Z_ORIGIN] for i in range(4) ]
         foot_coords = []
-        for section in range(self.SECTION_COUNT):
-            for step in range(self.STEP_COUNT):
+        for section in range(self.SECTIONS):
+            for step in range(self.STEPS):
                 if self.fb == 1:
-                    raise_foot = self.FOOT_RAISE_ORDER[section]
+                    raise_foot = self.FOOT_ORDER[section]
                 else:
-                    raise_foot = self.FOOT_RAISE_ORDER[self.SECTION_COUNT - section - 1]
+                    raise_foot = self.FOOT_ORDER[self.SECTIONS - section - 1]
                 foot_coord = []
 
                 for i in range(4):
@@ -142,11 +147,15 @@ def test():
     # try:
     while True:
         for foot_coord in foot_coords:
+            print(foot_coord)
+            # dog.set_rpy(**rpy)
+            # dog.set_pose(**pos)
+            # dog.set_rpy(0, 0, 0, True)
             dog.set_feet(foot_coord)
             angles = dog.pose2feet_angle()
             dog.feet_simple_move(angles)
-            # pause()
-            delay(0.001)
+            pause() 
+            # delay(0.04)
                 
     # finally:
     #     dog.close()

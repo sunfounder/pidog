@@ -25,5 +25,6 @@ while True:
     for coord in data:
         print(coord)
         # robot.servo_move(coord, speed=100)
+        # robot.servo_move2(coord, speed=100)
         robot.servo_write_all(coord)
         time.sleep(0.1)
