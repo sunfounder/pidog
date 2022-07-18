@@ -28,7 +28,7 @@ class ActionDict(dict):
     @property
     def stand(self):
         x = self.barycenter 
-        y = 105
+        y = 80
         return [
             Pidog.feet_angle_calculation([[x,y],[x,y],[x+20,y-5],[x+20,y-5]])            
         ],'feet'

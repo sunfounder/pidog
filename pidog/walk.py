@@ -29,13 +29,13 @@ class Walk():
     RIGHT = 1
 
     SECTION_COUNT = 8
-    STEP_COUNT = 14
+    STEP_COUNT = 4
     TOTAL_STEPS = SECTION_COUNT * STEP_COUNT
     FOOT_RAISE_ORDER = [1, 0, 4, 0, 2, 0, 3, 0]
-    FOOT_STEP_HEIGHT = 40  # the height of the stepping foot
-    FOOT_STEP_WIDTH  = 100 # the width of the stepping foot
-    CENTER_OF_GRAVITY = -10       # the body y offset
-    FOOT_STAND_OFFSET = 5  # the foot center offset
+    FOOT_STEP_HEIGHT = 40   # the height of the stepping foot
+    FOOT_STEP_WIDTH  = 80  # the width of the stepping foot
+    CENTER_OF_GRAVITY = -17 # the body y offset
+    FOOT_STAND_OFFSET = 5   # the foot center offset
     Z_ORIGIN = 80
 
     TURNING_RATE = 0.5
@@ -59,7 +59,7 @@ class Walk():
             if self.lr == self.STRAIGHT:
                 self.y_offset =  0 + self.CENTER_OF_GRAVITY
             else:
-                self.y_offset = -2 + self.CENTER_OF_GRAVITY
+                self.y_offset =  5 + self.CENTER_OF_GRAVITY
         elif self.fb == self.BACKWARD:
             if self.lr == self.STRAIGHT:
                 self.y_offset =  8 + self.CENTER_OF_GRAVITY

@@ -59,12 +59,12 @@ def show_info():
     print("\033[H\033[J", end='')  # clear terminal windows
     print(manual)
     if mode == 'calibrate':
-        print('[ Calibrate Mode ] servo_num：%s'%servo_num)   
+        print('[ Calibrate Mode ] servo_num: %s'%servo_num)   
         print('feet_offset: %s'%feet_offset)
         print('head_offset: %s'%head_offset)
         print('tail_offset: %s'%tail_offset)    
     else:
-        print('[  Control Mode  ] servo_num：%s'%servo_num)  
+        print('[  Control Mode  ] servo_num: %s'%servo_num)  
         print('feet_angles: %s'%feet_angles)
         print('head_angles: %s'%head_angles)
         print('tail_angle: %s'%tail_angle)

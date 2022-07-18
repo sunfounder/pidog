@@ -16,10 +16,12 @@ actions = [
     ['lie', 0, 90],
     ['lie_with_hands_out', 0,  90],
     ['trot', 0, 99],
-    ['walk', 0, 99],
-    ['backward', 0, 90],
-    ['turn_left', 0, 90],
-    ['turn_right', 0, 90],
+    ['forward', 0, 99],
+    ['backward', 0, 99],
+    ['forward_left', 0, 99],
+    ['forward_right', 0, 99],
+    ['backward_left', 0, 99],
+    ['backward_right', 0, 99],
     ['doze_off', -30, 90],
     ['stretch', 30, 90],
     ['pushup', -30, 90],
@@ -92,7 +94,6 @@ def action_demonstration():
         sleep(0.05)
 
 if __name__ == "__main__":
-    
     action_demonstration()
 
 

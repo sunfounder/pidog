@@ -29,7 +29,7 @@ class Trot():
     RIGHT = 1
 
     SECTION_COUNT = 2
-    STEP_COUNT = 16
+    STEP_COUNT = 10
     FOOT_RAISE_ORDER = [[1, 4], [2, 3]]
     FOOT_STEP_HEIGHT = 20  # the height of the stepping foot
     FOOT_STEP_WIDTH  = 100 # the width of the stepping foot

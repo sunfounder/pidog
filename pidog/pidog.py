@@ -150,7 +150,7 @@ class Pidog():
 
         self.target_rpy = [0, 0, 0]
 
-# action related: feet,head,tail,imu,rgb_strip
+    # action related: feet,head,tail,imu,rgb_strip
 
     def close_all_thread(self):
         self.exit_flag = True
@@ -194,7 +194,7 @@ class Pidog():
             sleep(0.02)
 
 
-    def feet_simple_move(self,angles_list, speed=90):
+    def feet_simple_move(self, angles_list, speed=90):
 
         tt = time()
 
@@ -250,7 +250,7 @@ class Pidog():
             try:
                 if self.exit_flag == True:
                     break
-                self.feet.servo_move(self.feet_actions_buffer[0],self.feet_speed)
+                self.feet.servo_move(self.feet_actions_buffer[0], self.feet_speed)
                 self.feet_current_angle = list.copy(self.feet_actions_buffer[0])
                 self.feet_actions_buffer.pop(0)
 
