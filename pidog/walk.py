@@ -16,8 +16,6 @@ every SECTION devide into 4 STEPs
 
 #!/usr/bin/env python3
 
-import readchar
-from time import sleep as delay
 from math import cos, pi
 
 class Walk():
@@ -32,13 +30,13 @@ class Walk():
     STEPS = 10
     TOTAL_STEPS = SECTIONS * STEPS
     FOOT_ORDER = [1, 0, 4, 0, 2, 0, 3, 0]
-    FOOT_STEP_HEIGHT = 40   # the height of the stepping foot
+    FOOT_STEP_HEIGHT = 20   # the height of the stepping foot
     FOOT_STEP_WIDTH  = 80   # the width of the stepping foot
-    Y_OFFSET = -17            # the body y offset
-    FOOT_POSITION_OFFSETS = [-5, -5, 15, 15]  # the foot center offset
+    Y_OFFSET = -15          # the body y offset
+    FOOT_POSITION_OFFSETS = [-10, -10, 20, 20]  # the foot center offset
     Z_ORIGIN = 80
 
-    TURNING_RATE = 0.2
+    TURNING_RATE = 0.3
     FOOT_STEP_SCALES_LEFT =   [TURNING_RATE, 1, TURNING_RATE, 1]
     FOOT_STEP_SCALES_MIDDLE = [1, 1, 1, 1]
     FOOT_STEP_SCALES_RIGHT =  [1, TURNING_RATE, 1, TURNING_RATE]
@@ -61,7 +59,7 @@ class Walk():
                 self.y_offset = 0 + self.Y_OFFSET
         elif self.fb == self.BACKWARD:
             if self.lr == self.STRAIGHT:
-                self.y_offset =  -7 + self.Y_OFFSET
+                self.y_offset =  0 + self.Y_OFFSET
             else:
                 self.y_offset =  0 + self.Y_OFFSET
         else:
@@ -121,44 +119,3 @@ class Walk():
                 origin_foot_coord = foot_coord
                 foot_coords.append(foot_coord)
         return foot_coords
-
-def test():
-
-    from pidog import Pidog
-    dog = Pidog(feet_pins=[1, 2, 3, 4, 5, 6, 7, 8],
-        head_pins=[9, 10, 11], tail_pin=[12],
-    )
-
-    def pause():
-        key = readchar.readkey()
-        if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
-            import sys
-            print('')
-            sys.exit(0)
-    
-    forward = Walk(fb=Walk.FORWARD, lr=Walk.STRAIGHT)
-    backward = Walk(fb=Walk.BACKWARD, lr=Walk.STRAIGHT)
-    forward_left = Walk(fb=Walk.FORWARD, lr=Walk.LEFT)
-    forward_right = Walk(fb=Walk.FORWARD, lr=Walk.RIGHT)
-    backward_left = Walk(fb=Walk.BACKWARD, lr=Walk.LEFT)
-    backward_right = Walk(fb=Walk.BACKWARD, lr=Walk.RIGHT)
-    foot_coords = forward.get_coords()
-
-    # try:
-    while True:
-        for foot_coord in foot_coords:
-            print(foot_coord)
-            # dog.set_rpy(**rpy)
-            # dog.set_pose(**pos)
-            # dog.set_rpy(0, 0, 0, True)
-            dog.set_feet(foot_coord)
-            angles = dog.pose2feet_angle()
-            dog.feet_simple_move(angles)
-            pause() 
-            # delay(0.04)
-                
-    # finally:
-    #     dog.close()
-
-if __name__ == '__main__':
-    test()

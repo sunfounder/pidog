@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from .pidog import Pidog
 from .walk import Walk
+from .turn_left import cal_turn_left
+from .turn_right import cal_turn_right
 from .trot import Trot
 from math import sin
 
@@ -74,42 +76,20 @@ class ActionDict(dict):
             data.append(Pidog.feet_angle_calculation(coord))
         return data,'feet'
 
-    # forward_left
+    # turn_left
     @property
-    def forward_left(self):
+    def turn_left(self):
         data = []
-        forward_left = Walk(fb=Walk.FORWARD, lr=Walk.LEFT)
-        coords =  forward_left.get_coords()
+        coords = cal_turn_left()
         for coord in coords:
             data.append(Pidog.feet_angle_calculation(coord))
         return data,'feet'
 
-    # forward_right
+    # turn_left
     @property
-    def forward_right(self):
+    def turn_right(self):
         data = []
-        forward_right = Walk(fb=Walk.FORWARD, lr=Walk.RIGHT)
-        coords =  forward_right.get_coords()
-        for coord in coords:
-            data.append(Pidog.feet_angle_calculation(coord))
-        return data,'feet'
-
-    # backward_left
-    @property              
-    def backward_left(self):
-        data = []
-        backward_left = Walk(fb=Walk.BACKWARD, lr=Walk.LEFT)
-        coords =  backward_left.get_coords()
-        for coord in coords:
-            data.append(Pidog.feet_angle_calculation(coord))
-        return data,'feet'
-
-    # backward_right
-    @property
-    def backward_right(self):
-        data = []
-        backward_right = Walk(fb=Walk.BACKWARD, lr=Walk.RIGHT)
-        coords =  backward_right.get_coords()
+        coords = cal_turn_right()
         for coord in coords:
             data.append(Pidog.feet_angle_calculation(coord))
         return data,'feet'
