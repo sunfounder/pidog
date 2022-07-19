@@ -150,6 +150,9 @@ class Pidog():
 
         self.target_rpy = [0, 0, 0]
 
+        self.rgb_fail_count = 0
+        self.imu_fail_count = 0
+
     # action related: feet,head,tail,imu,rgb_strip
 
     def close_all_thread(self):
@@ -250,7 +253,7 @@ class Pidog():
             try:
                 if self.exit_flag == True:
                     break
-                self.feet.servo_move(self.feet_actions_buffer[0], self.feet_speed)
+                self.feet.servo_move2(self.feet_actions_buffer[0], self.feet_speed)
                 self.feet_current_angle = list.copy(self.feet_actions_buffer[0])
                 self.feet_actions_buffer.pop(0)
 
@@ -335,10 +338,13 @@ class Pidog():
                 if self.exit_flag == True:
                     break
                 self.rgb_strip.show()
+                self.rgb_fail_count = 0
             except Exception as e:
                 print('_rgb_strip_thread Exception: %s'%e)
-                self.exit_flag = True
-                break
+                self.rgb_fail_count += 1
+                if self.rgb_fail_count > 10:
+                    self.exit_flag = True
+                    break
                 
 
     # IMU
@@ -382,8 +388,10 @@ class Pidog():
                 data = self.imu._sh3001_getimudata()
                 if data == False:
                     print('_imu_thread imu data error')
-                    self.exit_flag = True
-                    break
+                    self.imu_fail_count += 1
+                    if self.imu_fail_count > 10:
+                        self.exit_flag = True
+                        break
                 self.accData, self.gyroData = data
                 self.accData[0] += self.imu_acc_offset[0]
                 self.accData[1] += self.imu_acc_offset[1]
@@ -398,12 +406,15 @@ class Pidog():
                 self.pitch = atan(ay/sqrt(ax*ax+az*az))*57.2957795
                 self.roll = atan(az/sqrt(ax*ax+ay*ay))*57.2957795
 
+                self.imu_fail_count = 0
                 sleep(0.05)
             except Exception as e:
                 print(data)
                 print('_imu_thread Exception: %s'%e)
-                self.exit_flag = True
-                break
+                self.imu_fail_count += 1
+                if self.imu_fail_count > 10:
+                    self.exit_flag = True
+                    break
 
     # clear actions buff
     def feet_stop(self):
