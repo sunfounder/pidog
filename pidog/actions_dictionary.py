@@ -204,7 +204,8 @@ class ActionDict(dict):
     def head_bark(self):
         return [[0, 0, -40],
                 [0, 0, -10],
-                [0, 0, -10]
+                [0, 0, -10],
+                [0, 0, -40],
         ],'head'
 
     # 摇尾巴 tail_wagging

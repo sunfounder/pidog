@@ -160,7 +160,7 @@ def keyboard_control():
                     elif head_offset[index] < -20:
                         head_offset[index] = -20  
                         head_angles[index] = -20 - my_dog.head.offset[index]
-                my_dog.head_move([head_angles], True, 80)  
+                my_dog.head_move_raw([head_angles], True, 80)  
             # control tail
             elif servo_num == '=':
                 # move

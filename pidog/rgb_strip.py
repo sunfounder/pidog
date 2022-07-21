@@ -9,7 +9,7 @@ import math
 class RGB_Strip():
 
 # color define
-    colors_dict = {
+    COLORS = {
         'white': [255,255,255],
         'black': [  0,  0,  0],
         'red':   [255,  0,  0],
@@ -91,7 +91,7 @@ class RGB_Strip():
         self.light_num = 11
 
         self.style = 'breath', 
-        self.font_color = 'white', 
+        self.front_color = 'white', 
         self.back_color = 'black',
         self.brightness = 1, 
         self.delay = 0.1
@@ -180,11 +180,11 @@ class RGB_Strip():
         self.display(data)
 
 
-    def increase(self,direction='low',font_color='white',back_color='black',delay=0.1):
-        background = self.colors_dict[back_color]* self.light_num
+    def increase(self,direction='low',front_color='white',back_color='black',delay=0.1):
+        background = self.colorConvertor(back_color)* self.light_num
         data=[]
         for i in range(self.light_num):
-            data[i] = self.colors_dict[font_color]
+            data[i] = self.colorConvertor(front_color)
         self.display(data)
 
 
@@ -259,12 +259,6 @@ class RGB_Strip():
                 time.sleep(delay)
             time.sleep(delay*260)
 
-
-    # 
-
-
-   
-    
     # def breath_once(self,color='pink',delay=0.1,hold=0.1,a=5,sig = 2):
     #     u = 5
     #     color = [i*self.brightness for i in color]
@@ -308,30 +302,40 @@ class RGB_Strip():
 
     def mode(self, frame, i):
         if self.style == 'breath':
-            return self.breath_once(color=self.font_color, frame=frame, i=i)
+            return self.breath_once(color=self.front_color, frame=frame, i=i)
         elif self.style == 'boom':
-            return self.boom(color=self.font_color, frame=frame, i=i)
+            return self.boom(color=self.front_color, frame=frame, i=i)
         elif self.style == 'bark':
-            return self.bark(color=self.font_color, frame=frame, i=i)
-        
+            return self.bark(color=self.front_color, frame=frame, i=i)
 
-    
 
-    def set_mode(self, style='breath', font_color='white', back_color='black',brightness=1, delay=0.01):
-        color = self.colors_dict[font_color]
+    def set_mode(self, style='breath', front_color='white', back_color='black',brightness=1, delay=0.01):
         try: 
-            font_color = self.colors_dict[font_color]
-            back_color = self.colors_dict[back_color]
+            front_color = self.colorConvertor(front_color)
+            back_color = self.colorConvertor(back_color)
         except KeyError:
             raise KeyError('Without this color !')
         except Exception as e:
             print(e)    
 
         self.style = style 
-        self.font_color = font_color
+        self.front_color = front_color
         self.back_color = back_color
         self.brightness = brightness
         self.delay = delay
+
+    def colorConvertor(self, color):
+        if (isinstance(color, str)):
+            if color.lower() in self.COLORS:
+                return self.COLORS[color.lower()]
+            elif color.startswith('#'):
+                return [int(color[i:i+2], 16) for i in range(1, len(color), 2)]
+        elif (isinstance(color, list)):
+            return color
+        elif (isinstance(color, tuple)):
+            return list(color)
+        elif (isinstance(color, int)):
+            return [color >> 16, color >> 8 & 0xff, color & 0xff]
 
          
     def show(self):
@@ -345,9 +349,11 @@ class RGB_Strip():
                 self.display(datas)
                 time.sleep(self.delay)
 
+    def close(self):
+        self.front_color = [0, 0, 0]
+        self.back_color = [0, 0, 0]
+        self.brightness = 0
 
-
-    
 
 if __name__=='__main__':
     strip = RGB_Strip(0X74)

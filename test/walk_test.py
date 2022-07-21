@@ -28,13 +28,12 @@ class Walk():
     STRAIGHT = 0
     RIGHT = 1
 
-    SECTIONS = 8
-    STEPS = 10
-    TOTAL_STEPS = SECTIONS * STEPS
+    SECTION_COUNT = 8
+    STEP_COUNT = 6
     FOOT_ORDER = [1, 0, 4, 0, 2, 0, 3, 0]
-    FOOT_STEP_HEIGHT = 20   # the height of the stepping foot
-    FOOT_STEP_WIDTH  = 80   # the width of the stepping foot
-    Y_OFFSET = -15          # the body y offset
+    FOOT_STEP_HEIGHT = 20    # the height of the stepping foot
+    FOOT_STEP_WIDTH  = 80    # the width of the stepping foot
+    CENTER_OF_GRAVIRTY = -15 # the center of gravity of the robot
     FOOT_POSITION_OFFSETS = [-10, -10, 20, 20]  # the foot center offset
     Z_ORIGIN = 80
 
@@ -56,19 +55,19 @@ class Walk():
 
         if self.fb == self.FORWARD:
             if self.lr == self.STRAIGHT:
-                self.y_offset = 0 + self.Y_OFFSET
+                self.y_offset = 0 + self.CENTER_OF_GRAVIRTY
             else:
-                self.y_offset = 0 + self.Y_OFFSET
+                self.y_offset = 0 + self.CENTER_OF_GRAVIRTY
         elif self.fb == self.BACKWARD:
             if self.lr == self.STRAIGHT:
-                self.y_offset =  0 + self.Y_OFFSET
+                self.y_offset =  0 + self.CENTER_OF_GRAVIRTY
             else:
-                self.y_offset =  0 + self.Y_OFFSET
+                self.y_offset =  0 + self.CENTER_OF_GRAVIRTY
         else:
-            self.y_offset = self.Y_OFFSET
+            self.y_offset = self.CENTER_OF_GRAVIRTY
         self.foot_step_width = [ self.FOOT_STEP_WIDTH * self.FOOT_STEP_SCALES[self.lr+1][i] for i in range(4) ]
-        self.section_length = [ self.foot_step_width[i] / (self.SECTIONS-1) for i in range(4) ]
-        self.step_down_length = [ self.section_length[i] / self.STEPS for i in range(4) ]
+        self.section_length = [ self.foot_step_width[i] / (self.SECTION_COUNT-1) for i in range(4) ]
+        self.step_down_length = [ self.section_length[i] / self.STEP_COUNT for i in range(4) ]
         self.foot_origin = [ self.foot_step_width[i] / 2 + self.y_offset + (self.FOOT_POSITION_OFFSETS[i] * self.FOOT_STEP_SCALES[self.lr+1][i]) for i in range(4) ]
 
     # Cosine
@@ -78,21 +77,14 @@ class Walk():
         foot: current foot
         step: current step
         """
-        theta = step * pi / (self.STEPS-1)
+        theta = step * pi / (self.STEP_COUNT-1)
         temp = (self.foot_step_width[foot] * (cos(theta) - self.fb) / 2 * self.fb)
         y = self.foot_origin[foot] + temp
         return y
 
     # Linear
-    # def step_z_func(self, step):
-    #     return self.Z_ORIGIN - (self.FOOT_STEP_HEIGHT * step / (self.STEPS-1))
-
-
     def step_z_func(self, step):
-        theta = step * pi / (self.STEPS-1)
-        z_temp = self.FOOT_STEP_HEIGHT*(1-cos(theta))/2
-        return self.Z_ORIGIN - z_temp
-
+        return self.Z_ORIGIN - (self.FOOT_STEP_HEIGHT * step / (self.STEP_COUNT-1))
 
     def get_coords(self):
         """
@@ -102,12 +94,12 @@ class Walk():
         """
         origin_foot_coord = [ [self.foot_origin[i] - self.FOOT_ORIGINAL_Y_TABLE[i] * 2 * self.section_length[i], self.Z_ORIGIN] for i in range(4) ]
         foot_coords = []
-        for section in range(self.SECTIONS):
-            for step in range(self.STEPS):
+        for section in range(self.SECTION_COUNT):
+            for step in range(self.STEP_COUNT):
                 if self.fb == 1:
                     raise_foot = self.FOOT_ORDER[section]
                 else:
-                    raise_foot = self.FOOT_ORDER[self.SECTIONS - section - 1]
+                    raise_foot = self.FOOT_ORDER[self.SECTION_COUNT - section - 1]
                 foot_coord = []
 
                 for i in range(4):
@@ -142,7 +134,7 @@ def test():
     forward_right = Walk(fb=Walk.FORWARD, lr=Walk.RIGHT)
     backward_left = Walk(fb=Walk.BACKWARD, lr=Walk.LEFT)
     backward_right = Walk(fb=Walk.BACKWARD, lr=Walk.RIGHT)
-    foot_coords = forward_right.get_coords()
+    foot_coords = forward.get_coords()
 
     # try:
     while True:
@@ -153,7 +145,7 @@ def test():
             # dog.set_rpy(0, 0, 0, True)
             dog.set_feet(foot_coord)
             angles = dog.pose2feet_angle()
-            dog.feet.servo_move2(angles, speed=100)
+            dog.feet.servo_move2(angles, speed=98)
             # dog.feet_simple_move(angles)
             # pause() 
             delay(0.001)

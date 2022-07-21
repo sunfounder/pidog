@@ -20,11 +20,11 @@ actions = [
     ['backward', 0, 98],
     ['turn_left', 0, 98],
     ['turn_right', 0, 98],
-    ['doze_off', -30, 40],
+    ['doze_off', -30, 90],
     ['stretch', 30, 20],
     ['pushup', -30, 50],
-    ['shake_head', 0, 60],
-    ['tilting_head', 0, 40],
+    ['shake_head', 0, 90],
+    ['tilting_head', 0, 60],
     ['tail_wagging', 0, 100],
 ]
 
@@ -53,7 +53,7 @@ def work():
             my_dog.body_stop()  
             if temp != None and actions[temp][0] in ('pushup'):
                 my_dog.do_action('lie', wait=False, speed=90)          
-            my_dog.head_move([[0, 0, head_pitch_adjust]], immediately=True ,speed=60)
+            my_dog.head_move_raw([[0, 0, head_pitch_adjust]], immediately=True ,speed=60)
             temp = index 
         my_dog.do_action(name, wait=False, speed=speed)
 

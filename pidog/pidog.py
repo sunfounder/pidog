@@ -31,7 +31,7 @@ from .touch_sw import TouchSW
         right hind leg, right hind foot,
 
     head order: 9~11
-        yaw,roll,pitch
+        yaw, roll, pitch
     
     tail order: 12
 
@@ -179,6 +179,13 @@ class Pidog():
             sys.exit(0)
         signal.signal(signal.SIGINT, handler)
 
+        self.feet_thread.join()
+        self.head_thread.join()
+        self.tail_thread.join()
+        self.threads_manage_t.join()
+        self.rgb_strip_thread.join()
+        self.imu_thread.join()
+
         sys.exit(0)  
 
 
@@ -295,12 +302,11 @@ class Pidog():
 
     # head
     def _head_action_thread(self):
-        # print('_head_action_thread start')
         while True:
             try:
                 if self.exit_flag == True:
                     break
-                self.head.servo_move(self.head_actions_buffer[0],self.head_speed)
+                self.head.servo_move2(self.head_actions_buffer[0],self.head_speed)
                 self.head_current_angle = list.copy(self.head_actions_buffer[0])
                 self.head_actions_buffer.pop(0)
 
@@ -314,12 +320,9 @@ class Pidog():
                 
     # tail
     def _tail_action_thread(self):
-        # print('_tail_action_thread start')
-        while True:        
+        while not self.exit_flag:  
             try:
-                if self.exit_flag == True:
-                    break
-                self.tail.servo_move(self.tail_actions_buffer[0],self.tail_speed)
+                self.tail.servo_move2(self.tail_actions_buffer[0],self.tail_speed)
                 self.tail_current_angle = list.copy(self.tail_actions_buffer[0])
                 self.tail_actions_buffer.pop(0)
             except IndexError:
@@ -332,11 +335,8 @@ class Pidog():
 
     # rgb strip
     def _rgb_strip_thread(self):
-        # print('_rgb_strip_thread start')
-        while True:
+        while not self.exit_flag:
             try:
-                if self.exit_flag == True:
-                    break
                 self.rgb_strip.show()
                 self.rgb_fail_count = 0
             except Exception as e:
@@ -349,9 +349,6 @@ class Pidog():
 
     # IMU
     def _imu_thread(self):
-        # print('_imu_thread start')
-        # x_last = time()
-
         # imu calibrate
         _ax = 0; _ay = 0; _az = 0
         _gx = 0; _gy = 0; _gz = 0
@@ -382,9 +379,6 @@ class Pidog():
 
         while not self.exit_flag:
             try:
-                
-                # print(time() - x_last)
-                # x_last = time()
                 data = self.imu._sh3001_getimudata()
                 if data == False:
                     print('_imu_thread imu data error')
@@ -439,16 +433,13 @@ class Pidog():
         sleep(0.5)
 
     # move  
-    def feet_move(self,target_angles,immediately=True,speed=50):
+    def feet_move(self, target_angles, immediately=True, speed=50):
         if immediately == True:
             self.feet_stop() 
         self.feet_speed = speed   
         self.feet_actions_buffer += target_angles
 
-    def head_move_adjust(self,target_yrp, roll_init=0, pitch_init=0, immediately=True,speed=50): 
-        if immediately == True:
-            self.head_stop() 
-        self.head_speed = speed
+    def head_rpy_to_angle(self, target_yrp, roll_init=0, pitch_init=0):
         yaw, roll, pitch = target_yrp
         signed = -1 if yaw < 0 else 1
         ratio = abs(yaw) / 90
@@ -456,15 +447,22 @@ class Pidog():
         roll_servo = -(signed * (roll * (1-ratio)  + pitch * ratio) + roll_init)
         yaw_servo = yaw
         print(target_yrp, '|',  yaw_servo, roll_servo, pitch_servo )
-        self.head_actions_buffer += [[yaw_servo, roll_servo, pitch_servo]]
+        return [yaw_servo, roll_servo, pitch_servo]
 
-    def head_move(self,target_angles,immediately=True,speed=50): 
+    def head_move(self, target_yrps, roll_init=0, pitch_init=0, immediately=True, speed=50): 
+        if immediately == True:
+            self.head_stop() 
+        self.head_speed = speed
+        angles = [self.head_rpy_to_angle(target_yrp, roll_init, pitch_init) for target_yrp in target_yrps]
+        self.head_actions_buffer += angles
+
+    def head_move_raw(self, target_angles, immediately=True, speed=50): 
         if immediately == True:
             self.head_stop() 
         self.head_speed = speed
         self.head_actions_buffer += target_angles
 
-    def tail_move(self,target_angles,immediately=True,speed=50):
+    def tail_move(self, target_angles, immediately=True, speed=50):
         if immediately == True:
             self.tail_stop() 
         self.tail_speed = speed   
@@ -475,9 +473,9 @@ class Pidog():
         ultrasonic_thread = threading.Thread(name='ultrasonic_thread',
                                     target=self._ultrasonic_thread,
                                     args=(distance_addr,lock,))
-        ear_thread = threading.Thread(name='ear_thread',
-                                    target=self._ear_thread,
-                                    args=(sound_direction_addr,)) 
+        # ear_thread = threading.Thread(name='ear_thread',
+        #                             target=self._ear_thread,
+        #                             args=(sound_direction_addr,)) 
         # touch_thread = threading.Thread(name='touch_thread',
         #                             target=self._touch_thread,
         #                             args=(touch_addr,))
@@ -492,11 +490,9 @@ class Pidog():
                                         target=self.sensory_processes_work,
                                         args=(self.distance,self.sound_direction,self.touch,self.sensory_lock))
         self.sensory_processes.start()
-        # print('[process]sensory_processes start : [%s]'%self.sensory_processes.pid)
 
     # ultrasonic
     def _ultrasonic_thread(self,distance_addr,lock):
-        # print("_ultrasonic_thread strat")    
         echo = Pin('D0')
         trig = Pin('D1')
         ultrasonic = Ultrasonic(trig,echo)
@@ -504,13 +500,13 @@ class Pidog():
             try:
                 with lock:
                     val = round(float(ultrasonic.read()),2)
-                    # print('val',val)
                     distance_addr.value = val 
-                sleep(1)
+                # sleep(1)
             except:
                 sleep(0.1)
                 print('ultrasonic_thread  except')
                 break
+
     # ear (sound direction )
     def _ear_thread(self,sound_direction_addr):
         print('_ear_thread start')
@@ -536,7 +532,7 @@ class Pidog():
         try:
             self.body_stop()
             self.feet_move(self.actions_dict['lie'][0],speed)
-            self.head_move([[0,0,0]],speed)
+            self.head_move_raw([[0,0,0]],speed)
             self.tail_move([[0,0,0]],speed)
             while len(self.feet_actions_buffer) > 0 or len(self.head_actions_buffer) > 0:
                 sleep(0.01)
@@ -544,20 +540,12 @@ class Pidog():
                     break
         except Exception as e:
             print('stop_and_lie error:%s'%e)
-            
-            
-
 
 # speak
     def speak(self, style, format='mp3'): 
-        
-        # _ = os.popen('pulseaudio --kill')
-        # utils.run_command('pulseaudio --kill')
-        status, result = utils.run_command('sudo killall pulseaudio')
+        status, _ = utils.run_command('sudo killall pulseaudio')
         if status == 0:
             print('kill pulseaudio')
-
-        # Music().sound_effect_play('/home/pi/pidog/sounds/'+str(style)+'.'+format)
         Music().sound_effect_threading('/home/pi/pidog/sounds/'+str(style)+'.'+format)
         
 
