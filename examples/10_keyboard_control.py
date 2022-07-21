@@ -3,7 +3,7 @@ from time import sleep
 from pidog import Pidog
 import readchar 
 
-my_dog = Pidog(feet_pins=[1, 2, 3, 4, 5, 6, 7, 8], 
+my_dog = Pidog(feet_pins=[1, 2, 3, 4, 5, 6, 7, 8],
                 head_pins=[9, 10, 11], 
                 tail_pin=[12], 
                 )
@@ -33,10 +33,7 @@ def main():
         else:
             print('key:',key)
             continue
-        sleep(0.001)  
-    
-
-
+        sleep(0.001)
 
 if __name__ == "__main__":
     try:

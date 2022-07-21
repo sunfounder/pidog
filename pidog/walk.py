@@ -91,6 +91,7 @@ class Walk():
         lr: left(1), middle(0) or right(-1)
         """
         origin_foot_coord = [ [self.foot_origin[i] - self.FOOT_ORIGINAL_Y_TABLE[i] * 2 * self.section_length[i], self.Z_ORIGIN] for i in range(4) ]
+        foot_coord = list.copy(origin_foot_coord)
         foot_coords = []
         for section in range(self.SECTION_COUNT):
             for step in range(self.STEP_COUNT):
@@ -98,17 +99,15 @@ class Walk():
                     raise_foot = self.FOOT_ORDER[section]
                 else:
                     raise_foot = self.FOOT_ORDER[self.SECTION_COUNT - section - 1]
-                foot_coord = []
 
                 for i in range(4):
                     if raise_foot != 0 and i == raise_foot-1:
                         y = self.step_y_func(i, step)
                         z = self.step_z_func(step)
                     else:
-                        y = origin_foot_coord[i][0] + self.step_down_length[i] * self.fb
+                        y = foot_coord[i][0] + self.step_down_length[i] * self.fb
                         z = self.Z_ORIGIN
-                    foot_coord.append([y, z])
-                origin_foot_coord = foot_coord
-                foot_coords.append(foot_coord)
+                    foot_coord[i] = [y, z]
+                foot_coords.append(list.copy(foot_coord))
         foot_coords.append(origin_foot_coord)
         return foot_coords

@@ -2,13 +2,13 @@
 from pidog import Pidog
 from time import sleep
 
+my_pidog = Pidog(feet_pins=[1,2,3,4,5,6,7,8],
+        head_pins=[9,10,11],tail_pin=[12],
+        feet_init_angles=[45,0,-45,0,45,0,-45,0],
+        head_init_angles=[0,0,0],
+        tail_init_angle=[0])
 
 def main():
-    my_pidog = Pidog(feet_pins=[1,2,3,4,5,6,7,8],
-            head_pins=[9,10,11],tail_pin=[12],
-            feet_init_angles=[45,0,-45,0,45,0,-45,0],
-            head_init_angles=[0,0,0],
-            tail_init_angle=[0])
     sleep(0.1)
 
     def delay(time):
@@ -36,4 +36,7 @@ def main():
         delay(0.5)
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    finally:
+        my_pidog.close()

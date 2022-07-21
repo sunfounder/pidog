@@ -28,11 +28,32 @@ actions = [
     ['tail_wagging', 0, 100],
 ]
 
+sound_effects = [
+    "5x_barks",
+    "barking",
+    "confused_002",
+    "howling",
+    "single_bark_001",
+    "summon",
+    "woohoo",
+    "angry",
+    "confused_001",
+    "confused_003",
+    "pant",
+    "single_bark_002",
+    "warn",
+    "wuhu",
+]
+
+
 index = None
 exit_flag = False
 
 def show_info():
-    print("\033[H\033[J",end='')  # clear terminal windows
+    print("\033[H\033[J", end='')  # clear terminal windows
+    print("\n  Function Demonstration\n")
+    print("===============================")
+    print("Actions:                   Sound Effect:")
     for i, action in enumerate(actions):
         print('   %s. %s'%(i+1, action[0]))
     print('   ESC: Quit \n')
@@ -76,7 +97,7 @@ def action_demonstration():
         try:
             x = input()
             if int(x) > len(actions):
-                print('out of range')
+                print('Out of range')
                 continue
             index = int(x) - 1
             show_info()
