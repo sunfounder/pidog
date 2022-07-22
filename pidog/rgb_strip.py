@@ -10,13 +10,15 @@ class RGB_Strip():
 
 # color define
     COLORS = {
-        'white': [255,255,255],
-        'black': [  0,  0,  0],
-        'red':   [255,  0,  0],
-        'green': [  0,255,  0],
-        'blue':  [  0,  0,255],
-        'yellow':[255,255,  0],
-        'pink':  [255,192,203]
+        'white':   [255, 255, 255],
+        'black':   [  0,   0,   0],
+        'red':     [255,   0,   0],
+        'yellow':  [255, 255,   0],
+        'green':   [  0, 255,   0],
+        'blue':    [  0,   0, 255],
+        'cyan':    [  0, 255, 255],
+        'magenta': [255,   0, 255],
+        'pink':    [255, 192, 203]
     }
 
 # region constants
