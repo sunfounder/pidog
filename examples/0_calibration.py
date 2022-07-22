@@ -5,23 +5,20 @@ import readchar
 ''' https://github.com/magmax/python-readchar '''
 
 manual = '''
-Use the following keys to select the servo to be controlled, 
-servo corresponding keys refer to the following chart:
-                     9,
-                   0, '-'
-                     |
-              2,1 --[ ]-- 3,4
-                    [ ]
-              6,5 --[ ]-- 7,8
-                     |
-                    '='
-                    / 
+                      ↺{c9}[9]\033[0m
+                ↕{c11}[-]\033[0m ┌─┐ ↔{c10}[0]\033[0m
+                     │ │
+              {c2}[2]\033[0m{c1}[1]\033[0m┌└─┘┐{c3}[3]\033[0m{c4}[4]\033[0m
+                    │   │
+                    │   │
+              {c6}[6]\033[0m{c5}[5]\033[0m└─┬─┘{c7}[7]\033[0m{c8}[8]\033[0m
+                     {c12}[=]\033[0m
+                      / 
     1 ~ 8 : Leg servos      W: increase angle
-    9 : Head yaw            S: decreases angle 
-    0 : Head roll            
-    - : Head pitch          SPACE: confirm calibration
-    = : Tail                Ctrl+C: Quit
-
+    9 : Head yaw ↺          S: decreases angle 
+    0 : Head roll ↔          
+    - : Head pitch ↕       
+    = : Tail                
 '''
 
 my_dog = Pidog(feet_pins=[1, 2, 3, 4, 5, 6, 7, 8],
@@ -55,12 +52,38 @@ def get_real_values():
     tail_offset = list.copy(my_dog.tail.offset) 
 
 def show_info():
+    selected_servo_colors = {
+        "c1": '\033[97m',
+        "c2": '\033[97m',
+        "c3": '\033[97m',
+        "c4": '\033[97m',
+        "c5": '\033[97m',
+        "c6": '\033[97m',
+        "c7": '\033[97m',
+        "c8": '\033[97m',
+        "c9": '\033[97m',
+        "c10": '\033[97m',
+        "c11": '\033[97m',
+        "c12": '\033[97m',
+    }
+    if servo_num in "123456789":
+        cnum = int(servo_num)
+    elif servo_num == "0":
+        cnum = 10
+    elif servo_num == "-":
+        cnum = 11
+    elif servo_num == "=":
+        cnum = 12
+    selected_servo_colors[f"c{cnum}"] = '\033[1m\033[104m'
     print("\033[H\033[J", end='')  # clear terminal windows
-    print(manual)
+    print("\033[104m\033[1m                         Calibration                         \033[0m")
+    print("\033[90m  Press coresponding key to select servo,\n  [W] and [S] to adjust the servo\033[0m")
+    print(manual.format(**selected_servo_colors))
+    print(f"\033[100m\033[1m   Ctrl+C: Quit    Space: Save                               \033[0m")
     print('Current Servo: %s'%servo_num)   
-    print('feet_offset: %s'%[round(val, 2)for val in feet_offset])
-    print('head_offset: %s'%[round(val, 2)for val in head_offset])
-    print('tail_offset: %s'%[round(val, 2)for val in tail_offset])
+    print('feet_offset: [{c1}{0}\033[0m, {c2}{1}\033[0m, {c3}{2}\033[0m, {c4}{3}\033[0m, {c5}{4}\033[0m, {c6}{5}\033[0m, {c7}{6}\033[0m, {c8}{7}\033[0m]'.format(*[round(val, 2)for val in feet_offset], **selected_servo_colors))
+    print('head_offset: [{c9}{0}\033[0m, {c10}{1}\033[0m, {c11}{2}\033[0m]'.format(*[round(val, 2)for val in head_offset], **selected_servo_colors))
+    print('tail_offset: [{c12}{0}\033[0m]'.format(round(tail_offset[0], 2), **selected_servo_colors))
 
 def keyboard_control():
     global feet_angles, head_angles, tail_angle
@@ -145,7 +168,7 @@ def keyboard_control():
                     sleep(0.5)
                     get_real_values()
                     show_info()  
-                    print('offset saved') 
+                    print('Offset saved') 
                     break
                 elif key == 'n':
                     show_info()
