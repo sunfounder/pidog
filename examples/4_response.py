@@ -50,7 +50,7 @@ def alert():
     my_dog.do_action('stand', step_count=1, speed=90)
     my_dog.rgb_strip.set_mode('breath', front_color='pink', brightness=0.8, delay=0.08)
     while True:
-        print(f'distance.value: {round(my_dog.distance.value, 2)} cm , touch {my_dog.touch_sw.is_slide()}') 
+        print(f'distance.value: {round(my_dog.distance.value, 2)} cm, touch {my_dog.touch_sw.is_slide()}') 
         # alert
         if my_dog.distance.value < 15 and my_dog.distance.value > 1:
             my_dog.head_move([[0, 0, 0]], immediately=True, speed=90)
@@ -69,7 +69,7 @@ def alert():
         if my_dog.touch_sw.is_slide() != 'N':
             if len(my_dog.head_actions_buffer) < 2:
                 head_nod(1)
-                my_dog.do_action('tail_wagging', step_count=8, speed=100)
+                my_dog.do_action('tail_wagging', step_count=20, speed=100)
                 my_dog.rgb_strip.set_mode('breath', front_color='pink', brightness=0.8, delay=0.08)
         sleep(0.2)
 

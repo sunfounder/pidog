@@ -60,6 +60,7 @@ def face_track():
         if people > 0 and flag == False:
             flag = True
             my_dog.head_move([[yaw,0,25]], pitch_init=-40, immediately=True, speed=100)
+            my_dog.do_action('tail_wagging', step_count=2, speed=100)
             my_dog.speak('single_bark_001')
             delay(0.08)
             my_dog.head_move([[yaw,0,0]], pitch_init=-40, immediately=True, speed=100)

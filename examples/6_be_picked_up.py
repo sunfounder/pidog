@@ -14,6 +14,7 @@ def delay(time):
 def fly():  
     my_dog.rgb_strip.set_mode('boom', front_color='red', delay=0.01) 
     my_dog.feet.servo_move([45,-45,90,-80,90,90,-90,-90], speed=100)
+    my_dog.do_action('tail_wagging', step_count=20, speed=100)
     my_dog.speak('woohoo') 
     delay(1)
 
@@ -31,7 +32,7 @@ def be_picked_up():
 
     while True:
         ax = my_dog.accData[0]
-        print('ax: %s,isUp: %s'%(ax, isUp))
+        print('ax: %s, is up: %s'%(ax, isUp))
         
         # gravity : 1G = 16384 
         if ax < -16000:
@@ -42,7 +43,7 @@ def be_picked_up():
                 downflag = False
                 stand()
                                           
-        if ax > -15000:
+        if ax > -13000:
             if upflag == True:
                 isUp = True
                 upflag = False

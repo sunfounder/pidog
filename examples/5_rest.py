@@ -35,9 +35,10 @@ def rest():
 
     while True: 
         # Sleeping
-        my_dog.rgb_strip.set_mode('breath', 'pink')
+        my_dog.rgb_strip.set_mode('breath', 'pink', delay=0.14)
         my_dog.head_move([[0,0,-30]], immediately=True, speed=5)
-        my_dog.do_action('doze_off', wait=False, speed=90)
+        my_dog.do_action('tail_wagging', step_count=20, speed=20)
+        my_dog.do_action('doze_off', wait=False, speed=95)
         
         # If heard anything, wake up
         if is_sound():
@@ -49,6 +50,7 @@ def rest():
             my_dog.wait_all_done()
             # Look arround
             shake_head(60, 0.5, 100)
+            sleep(0.5)
             # tilt head and being confused
             my_dog.speak('confused_003')
             my_dog.do_action('tilting_head_left', wait=True, speed=80)
