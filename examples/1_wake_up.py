@@ -55,5 +55,4 @@ if __name__ == "__main__":
         wake_up()
     finally: 
         my_dog.close()
-        quit()
 

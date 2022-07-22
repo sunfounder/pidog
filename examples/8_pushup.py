@@ -7,9 +7,15 @@ my_dog = Pidog(feet_pins=[1,2,3,4,5,6,7,8],
                 head_pins=[9,10,11],
                 tail_pin=[12],
                 )
-sleep(0.5) 
+sleep(0.5)
 
 def bark():
+    [
+        [0, 0, -40],
+        [0, 0, -10],
+        [0, 0, -10],
+        [0, 0, -40],
+    ]
     my_dog.do_action('head_bark', speed=95)
     sleep(0.1)
     my_dog.speak('single_bark_001')

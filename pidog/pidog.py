@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 import os
 from time import sleep,time
-from multiprocessing import Process, Manager, Value, Lock
+from multiprocessing import Process, Value, Lock
 import threading
-from turtle import delay
 import numpy as np
 from math import pi, sin, cos, sqrt, acos, atan2, atan
 from robot_hat import Robot, Pin, Ultrasonic, utils, Music
@@ -40,8 +39,6 @@ from .touch_sw import TouchSW
 # user and User home directory
 User = os.popen('echo ${SUDO_USER:-$LOGNAME}').readline().strip()
 UserHome = os.popen('getent passwd %s | cut -d: -f 6'%User).readline().strip()
-# print(User)  # pi
-# print(UserHome) # /home/pi
 config_file = '%s/.config/pidog/pidog.conf'%UserHome
 
 
@@ -124,9 +121,6 @@ class Pidog():
         self.rgb_strip.set_mode('breath', 'black')
         self.sensory_processes = None
         self.distance = Value('f',-1.0)
-        # self.sound_direction = Value('f',-1.0)
-        # from ctypes import c_char_p
-        # self.touch = Manager().Value(c_char_p,'N') 
         self.sensory_lock = Lock()
 
         self.touch_sw = TouchSW('D2','D3')
@@ -152,6 +146,7 @@ class Pidog():
 
         self.rgb_fail_count = 0
         self.imu_fail_count = 0
+        self.music = Music()
 
     # action related: feet,head,tail,imu,rgb_strip
 
@@ -163,19 +158,19 @@ class Pidog():
         import sys
 
         def handler(signal,frame):
-            print(' please wait')
+            print('Please wait')
         signal.signal(signal.SIGINT, handler)
-        print('\rstopping and returning to the initial position ... ')
+        print('\rStopping and returning to the initial position ... ')
 
         try:
             self.stop_and_lie()
             self.close_all_thread()
-            print(' quit')
+            print('Quit')
         except Exception as e:
-            print('close error:',e)
+            print('Close error:',e)
 
         def handler(signal,frame):
-            print(' quit done')
+            print('Quit done')
             sys.exit(0)
         signal.signal(signal.SIGINT, handler)
 
@@ -255,7 +250,6 @@ class Pidog():
 
     # feet
     def _feet_action_thread(self):
-        # print('_feet_action_thread start')
         while True:            
             try:
                 if self.exit_flag == True:
@@ -272,34 +266,6 @@ class Pidog():
                 self.exit_flag = True
                 break
 
-    # def _feet_action_thread(self):
-    #     # print('_feet_action_thread start')
-    #     while True:            
-    #         try:
-    #             if self.exit_flag == True:
-    #                 break
-    #             print('_feet_action_thread:[0]',self.feet_actions_coords_buffer[0])
-    #             _steps = self.feet_actions_coords_buffer[0]
-    #             print('_feet_action_thread:',_steps)
-    #             for i, step in enumerate(_steps) :
-    #                 self.pose = np.mat([step[0], 0.0,  step[1]]).T  # 目标位置向量
-    #                 coord = self.pose2coords(self.roll, self.pitch)
-    #                 # print(i, coord)
-
-
-    #             # self.feet.servo_move(self.feet_actions_buffer[0],self.feet_speed)
-    #             # self.feet_current_angle = list.copy(self.feet_actions_buffer[0])
-    #             self.feet_actions_coords_buffer.pop(0)
-
-    #         except IndexError:
-    #             sleep(0.1)
-    #             pass
-    #         except Exception as e:
-    #             print('_feet_action_thread Exception: %s'%e)
-    #             self.exit_flag = True
-    #             break
-
-
     # head
     def _head_action_thread(self):
         while True:
@@ -312,7 +278,6 @@ class Pidog():
 
             except IndexError:
                 sleep(0.1)
-                pass
             except Exception as e:
                 print('_head_action_thread Exception: %s'%e)
                 self.exit_flag = True
@@ -446,7 +411,6 @@ class Pidog():
         pitch_servo = roll * ratio  + pitch * (1-ratio) + pitch_init
         roll_servo = -(signed * (roll * (1-ratio)  + pitch * ratio) + roll_init)
         yaw_servo = yaw
-        print(target_yrp, '|',  yaw_servo, roll_servo, pitch_servo )
         return [yaw_servo, roll_servo, pitch_servo]
 
     def head_move(self, target_yrps, roll_init=0, pitch_init=0, immediately=True, speed=50): 
@@ -473,15 +437,7 @@ class Pidog():
         ultrasonic_thread = threading.Thread(name='ultrasonic_thread',
                                     target=self._ultrasonic_thread,
                                     args=(distance_addr,lock,))
-        # ear_thread = threading.Thread(name='ear_thread',
-        #                             target=self._ear_thread,
-        #                             args=(sound_direction_addr,)) 
-        # touch_thread = threading.Thread(name='touch_thread',
-        #                             target=self._touch_thread,
-        #                             args=(touch_addr,))
         ultrasonic_thread.start() 
-        # ear_thread.start() 
-        # touch_thread.start()
 
     def sensory_processes_start(self):
         if self.sensory_processes != None:
@@ -546,7 +502,7 @@ class Pidog():
         status, _ = utils.run_command('sudo killall pulseaudio')
         if status == 0:
             print('kill pulseaudio')
-        Music().sound_effect_threading('/home/pi/pidog/sounds/'+str(style)+'.'+format)
+        self.music.sound_effect_threading('/home/pi/pidog/sounds/'+str(style)+'.'+format)
         
 
 # calibration
@@ -654,12 +610,9 @@ class Pidog():
         coords = []
         angles = []
 
-        # print(f"foot_coor_list: {foot_coor_list}")
-        # print(f"body_coor_list: {body_coor_list}")
         for i in range(4):
             coords.append([foot_coor_list[i][1]-body_coor_list[i][1], body_coor_list[i][2] - foot_coor_list[i][2]])
 
-        # print(f"coords after rpy: {coords}")
         angles = []
         
         for i, coord in enumerate(coords):
@@ -696,17 +649,12 @@ class Pidog():
     
     def coord2polar(self, coord):
         y, z = coord
-        # print('y,z:',y,z)
         u = sqrt(pow(y,2) + pow(z,2))
-        # print('u: %s' % u)
         cos_angle1 = (self.foot**2 + self.leg**2 - u**2) / (2 * self.foot * self.leg)
         cos_angle1 = min(max(cos_angle1, -1), 1)
         beta = acos(cos_angle1)
 
-        # print('beta: %s' % beta)
-
         angle1 = atan2(y, z)
-        # print("angle1:",angle1)
         cos_angle2 = (self.leg**2 + u**2 - self.foot**2)/(2*self.leg*u)
         cos_angle2 = min(max(cos_angle2, -1), 1)
         angle2 = acos(cos_angle2)
@@ -734,7 +682,6 @@ class Pidog():
     @classmethod 
     def feet_angle_calculation(cls,coords):  # 注意这里使用了 @classmethod 
         translate_list = []
-        # print(coords)
         for i,coord in enumerate(coords): # each servo motion
             # coord2polar   
             leg_angle, foot_angle= Pidog.coord2polar(cls,coord) 
