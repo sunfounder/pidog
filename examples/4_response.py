@@ -28,7 +28,7 @@ def bark_action():
     sleep(0.01)
 
 def lean_forward():
-    my_dog.speak('angry', 'wav')
+    my_dog.speak('angry')
     bark_action()
     bark_action()
     sleep(0.2)

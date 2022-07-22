@@ -53,6 +53,8 @@ def wake_up():
 if __name__ == "__main__":
     try:
         wake_up()
-    finally: 
+    except KeyboardInterrupt:
+        my_dog.close()
+    finally:
         my_dog.close()
 

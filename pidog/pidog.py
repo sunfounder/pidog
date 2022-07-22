@@ -54,8 +54,8 @@ class Pidog():
         [ BODY_WIDTH / 2, -BODY_LENGTH / 2,  0],
         [-BODY_WIDTH / 2,  BODY_LENGTH / 2,  0],
         [ BODY_WIDTH / 2,  BODY_LENGTH / 2,  0]]).T
+    SOUND_DIR = "/home/pi/pidog/sounds/"
     # PID Constants
-
     KP = 0.033
     KI = 0.0
     KD = 0.0
@@ -129,13 +129,10 @@ class Pidog():
         self.ears = Sound_direction()
         self.sound_direction = -1
 
-        self.action_threads_start()
-        self.sensory_processes_start()
         self.exit_flag = False
         self.sensory_processes = None
-        self.threads_manage_t =  threading.Thread(target=self.threads_manage)
-        self.threads_manage_t.setDaemon(False)
-        self.threads_manage_t.start()
+        self.action_threads_start()
+        self.sensory_processes_start()
         
         self.roll_last_error = 0
         self.roll_error_integral = 0
@@ -160,6 +157,7 @@ class Pidog():
         def handler(signal,frame):
             print('Please wait')
         signal.signal(signal.SIGINT, handler)
+
         print('\rStopping and returning to the initial position ... ')
 
         try:
@@ -169,35 +167,14 @@ class Pidog():
         except Exception as e:
             print('Close error:',e)
 
-        def handler(signal,frame):
-            print('Quit done')
-            sys.exit(0)
-        signal.signal(signal.SIGINT, handler)
-
         self.feet_thread.join()
         self.head_thread.join()
         self.tail_thread.join()
-        self.threads_manage_t.join()
         self.rgb_strip_thread.join()
         self.imu_thread.join()
-
+        if self.sensory_processes != None:
+            self.sensory_processes.terminate()
         sys.exit(0)  
-
-
-    def threads_manage(self):
-        self.action_threads_start()  # setDaemon = True
-        # self.sensory_processes_start()
-
-        while True:
-            try:
-                if self.exit_flag ==  True:
-                    if self.sensory_processes != None:
-                        self.sensory_processes.terminate()
-                    break
-            except Exception as e:
-                print('threads_manage Exception: %s'%e)
-            sleep(0.02)
-
 
     def feet_simple_move(self, angles_list, speed=90):
 
@@ -498,12 +475,18 @@ class Pidog():
             print('stop_and_lie error:%s'%e)
 
 # speak
-    def speak(self, style, format='mp3'): 
+    def speak(self, name): 
         status, _ = utils.run_command('sudo killall pulseaudio')
         if status == 0:
             print('kill pulseaudio')
-        self.music.sound_effect_threading('/home/pi/pidog/sounds/'+str(style)+'.'+format)
-        
+        # Scan for all available audios, see if name matches
+        for filename in os.listdir(self.SOUND_DIR):
+            if filename.startswith(name):
+                self.music.sound_effect_threading(self.SOUND_DIR+filename)
+                break
+        else:
+            print('No sound found for %s'%name)
+            return False
 
 # calibration
     def feet_offset(self, cali_list):

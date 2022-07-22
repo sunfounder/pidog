@@ -27,7 +27,7 @@ def bark(yaw):
     h1 = [yaw, 0,  15]
     h2 = [yaw, 0, -15]
 
-    my_dog.speak('angry', 'wav')
+    my_dog.speak('angry')
     for _ in range(3):
         # delay_s(0.1)
         my_dog.head_move([h1], immediately=True, speed=90)
