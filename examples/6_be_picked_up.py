@@ -36,6 +36,7 @@ def be_picked_up():
         
         # gravity : 1G = 16384 
         if ax < -16000:
+            my_dog.body_stop()
             if upflag == False:
                 upflag =True
             if downflag == True:
@@ -44,6 +45,7 @@ def be_picked_up():
                 stand()
                                           
         if ax > -13000:
+            my_dog.body_stop()
             if upflag == True:
                 isUp = True
                 upflag = False

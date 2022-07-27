@@ -33,7 +33,7 @@ def main():
         else:
             print('key:',key)
             continue
-        sleep(0.001)
+        # sleep(0.001)
 
 if __name__ == "__main__":
     try:
