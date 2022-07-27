@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 from .pidog import Pidog
 from .walk import Walk
-from .turn_left import cal_turn_left
-from .turn_right import cal_turn_right
 from .trot import Trot
 from math import sin
 
@@ -78,22 +76,24 @@ class ActionDict(dict):
 
     # turn_left
     @property
-    def turn_left(self):
+    def turn_left(self): 
         data = []
-        coords = cal_turn_left()
+        turn_left = Walk(fb=Walk.FORWARD, lr=Walk.LEFT)
+        coords =  turn_left.get_coords()
         for coord in coords:
             data.append(Pidog.feet_angle_calculation(coord))
         return data,'feet'
 
-    # turn_left
+    # turn_right
     @property
-    def turn_right(self):
+    def turn_right(self): 
         data = []
-        coords = cal_turn_right()
+        turn_right = Walk(fb=Walk.FORWARD, lr=Walk.RIGHT)
+        coords =  turn_right.get_coords()
         for coord in coords:
             data.append(Pidog.feet_angle_calculation(coord))
         return data,'feet'
-        
+
     # 小跑 trot
     @property
     def trot(self):

@@ -409,7 +409,7 @@ class Pidog():
         self.tail_speed = speed   
         self.tail_actions_buffer += target_angles
 
-# sensory_processes : ultrasonic,sound_direction
+    # sensory_processes : ultrasonic,sound_direction
     def sensory_processes_work(self,distance_addr,sound_direction_addr,touch_addr,lock):
         ultrasonic_thread = threading.Thread(name='ultrasonic_thread',
                                     target=self._ultrasonic_thread,
@@ -460,7 +460,7 @@ class Pidog():
             touch_addr.value = touch_sw.is_slide()
             sleep(0.02)
 
-# reset: stop, stop_and_lie 
+    # reset: stop, stop_and_lie 
     def stop_and_lie(self, speed=85):
         try:
             self.body_stop()
@@ -474,7 +474,7 @@ class Pidog():
         except Exception as e:
             print('stop_and_lie error:%s'%e)
 
-# speak
+    # speak
     def speak(self, name): 
         status, _ = utils.run_command('sudo killall pulseaudio')
         if status == 0:
@@ -488,7 +488,7 @@ class Pidog():
             print('No sound found for %s'%name)
             return False
 
-# calibration
+    # calibration
     def feet_offset(self, cali_list):
         self.feet.set_offset(cali_list)
         self.feet.reset()
@@ -504,7 +504,7 @@ class Pidog():
         self.tail.reset()
         self.tail_current_angle = [0]
 
-# calculate angles and coords
+    # calculate angles and coords
 
     def set_pose(self, x=None, y=None, z=None):
         if x != None:
@@ -678,8 +678,7 @@ class Pidog():
 
         return translate_list        
 
-
-# limit
+    # limit
     def limit(self,min,max,x):
         if x > max:
             return max
@@ -710,7 +709,7 @@ class Pidog():
     #     # return
     #     return limit_flag,[alpha,beta,gamma]
 
-# set angle
+    # set angle
     def set_angle(self, angles_list,speed=50,israise=False):
         translate_list = []
         results = []
@@ -733,29 +732,28 @@ class Pidog():
 
         self.servo_move(translate_list,speed)
 
-# do action
-    def do_action(self, motion_name, step_count=1,wait=False,speed=50):
-
+    # do action
+    def do_action(self, motion_name, step_count=1, wait=False, speed=50):
         try:
-            actions,part = self.actions_dict[motion_name]
+            actions, part = self.actions_dict[motion_name]
             if part == 'feet':
                 if wait == True:
                     while len(self.feet_actions_buffer) > 0:
                         sleep(0.1)
                 for _ in range(step_count): 
-                    self.feet_move(actions,immediately=False,speed=speed)
+                    self.feet_move(actions, immediately=False, speed=speed)
             elif part == 'head':
                 if wait == True:
                     while len(self.head_actions_buffer) > 0:
                         sleep(0.1)              
                 for _ in range(step_count): 
-                    self.head_move(actions,immediately=False,speed=speed)
+                    self.head_move(actions, immediately=False, speed=speed)
             elif part == 'tail':
                 if wait == True:
                     while len(self.tail_actions_buffer) > 0:
                         sleep(0.1)
                 for _ in range(step_count): 
-                    self.tail_move(actions,immediately=False,speed=speed)
+                    self.tail_move(actions, immediately=False, speed=speed)
         except KeyError:
             print("No such action")
         except Exception as e:
