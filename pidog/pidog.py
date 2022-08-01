@@ -107,9 +107,9 @@ class Pidog():
         self.head_speed = 90
         self.tail_speed = 90
         
-        self.feet_done_flag  = False
-        self.head_done_flag  = False
-        self.tail_done_flag  = False
+        self.feet_done_flag = False
+        self.head_done_flag = False
+        self.tail_done_flag = False
 
         self.imu = Sh3001(db=config_file)
         self.imu_acc_offset = [0, 0, 0]
@@ -227,17 +227,15 @@ class Pidog():
 
     # feet
     def _feet_action_thread(self):
-        while True:            
+        while not self.exit_flag:
             try:
-                if self.exit_flag == True:
-                    break
+                self.feet_done_flag = False
                 self.feet.servo_move2(self.feet_actions_buffer[0], self.feet_speed)
                 self.feet_current_angle = list.copy(self.feet_actions_buffer[0])
                 self.feet_actions_buffer.pop(0)
-
             except IndexError:
-                sleep(0.1)
-                pass
+                self.feet_done_flag = True
+                sleep(0.001)
             except Exception as e:
                 print('_feet_action_thread Exception:%s'%e)
                 self.exit_flag = True
@@ -245,16 +243,15 @@ class Pidog():
 
     # head
     def _head_action_thread(self):
-        while True:
+        while not self.exit_flag:
             try:
-                if self.exit_flag == True:
-                    break
+                self.head_done_flag = False
                 self.head.servo_move2(self.head_actions_buffer[0],self.head_speed)
                 self.head_current_angle = list.copy(self.head_actions_buffer[0])
                 self.head_actions_buffer.pop(0)
-
             except IndexError:
-                sleep(0.1)
+                self.head_done_flag = True
+                sleep(0.001)
             except Exception as e:
                 print('_head_action_thread Exception: %s'%e)
                 self.exit_flag = True
@@ -264,12 +261,13 @@ class Pidog():
     def _tail_action_thread(self):
         while not self.exit_flag:  
             try:
+                self.tail_done_flag = False
                 self.tail.servo_move2(self.tail_actions_buffer[0],self.tail_speed)
                 self.tail_current_angle = list.copy(self.tail_actions_buffer[0])
                 self.tail_actions_buffer.pop(0)
             except IndexError:
-                sleep(0.1)
-                pass
+                self.tail_done_flag = True
+                sleep(0.001)
             except Exception as e:
                 print('_tail_action_thread Exception: %s'%e)
                 self.exit_flag = True   
@@ -355,24 +353,20 @@ class Pidog():
     # clear actions buff
     def feet_stop(self):
         self.feet_actions_buffer.clear()
-        while len(self.feet_actions_buffer) > 0:
-            sleep(0.001)
+        self.wait_feet_done()
 
     def head_stop(self):
         self.head_actions_buffer.clear()
-        while len(self.head_actions_buffer) > 0:
-            sleep(0.001)
+        self.wait_head_done()
 
     def tail_stop(self):
         self.tail_actions_buffer.clear()
-        while len(self.tail_actions_buffer) > 0:
-            sleep(0.001)
+        self.wait_tail_done()
 
     def body_stop(self):
         self.feet_stop()
         self.head_stop()
         self.tail_stop()
-        sleep(0.5)
 
     # move  
     def feet_move(self, target_angles, immediately=True, speed=50):
@@ -464,13 +458,10 @@ class Pidog():
     def stop_and_lie(self, speed=85):
         try:
             self.body_stop()
-            self.feet_move(self.actions_dict['lie'][0],speed)
+            self.feet_move(self.actions_dict['lie'][0], speed)
             self.head_move_raw([[0,0,0]],speed)
             self.tail_move([[0,0,0]],speed)
-            while len(self.feet_actions_buffer) > 0 or len(self.head_actions_buffer) > 0:
-                sleep(0.01)
-                if self.exit_flag == True:
-                    break
+            self.wait_all_done()
         except Exception as e:
             print('stop_and_lie error:%s'%e)
 
@@ -763,27 +754,27 @@ class Pidog():
 
     def wait_feet_done(self):
         while not self.is_feet_done():
-            sleep(0.01)
+            sleep(0.001)
 
     def wait_head_done(self):
         while not self.is_head_done():
-            sleep(0.01)
+            sleep(0.001)
 
     def wait_tail_done(self):
         while not self.is_tail_done():
-            sleep(0.01)
+            sleep(0.001)
 
     def is_all_done(self):
         return self.is_feet_done() and self.is_head_done() and self.is_tail_done()
 
     def is_feet_done(self):
-        return len(self.feet_actions_buffer) == 0
+        return self.feet_done_flag
 
     def is_head_done(self):
-        return len(self.head_actions_buffer) == 0
+        return self.head_done_flag
 
     def is_tail_done(self):
-        return len(self.tail_actions_buffer) == 0
+        return self.tail_done_flag
 
 
 
