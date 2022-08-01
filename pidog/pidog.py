@@ -737,23 +737,20 @@ class Pidog():
         try:
             actions, part = self.actions_dict[motion_name]
             if part == 'feet':
-                if wait == True:
-                    while len(self.feet_actions_buffer) > 0:
-                        sleep(0.1)
                 for _ in range(step_count): 
                     self.feet_move(actions, immediately=False, speed=speed)
+                if wait:
+                    self.wait_feet_done()
             elif part == 'head':
-                if wait == True:
-                    while len(self.head_actions_buffer) > 0:
-                        sleep(0.1)              
                 for _ in range(step_count): 
                     self.head_move(actions, immediately=False, speed=speed)
+                if wait:
+                    self.wait_head_done()
             elif part == 'tail':
-                if wait == True:
-                    while len(self.tail_actions_buffer) > 0:
-                        sleep(0.1)
                 for _ in range(step_count): 
                     self.tail_move(actions, immediately=False, speed=speed)
+                if wait:
+                    self.wait_tail_done()
         except KeyError:
             print("No such action")
         except Exception as e:
@@ -765,16 +762,29 @@ class Pidog():
         self.wait_tail_done()
 
     def wait_feet_done(self):
-        while len(self.feet_actions_buffer) > 0:
+        while not self.is_feet_done():
             sleep(0.01)
 
     def wait_head_done(self):
-        while len(self.head_actions_buffer) > 0:
+        while not self.is_head_done():
             sleep(0.01)
 
     def wait_tail_done(self):
-        while len(self.tail_actions_buffer) > 0:
+        while not self.is_tail_done():
             sleep(0.01)
+
+    def is_all_done(self):
+        return self.is_feet_done() and self.is_head_done() and self.is_tail_done()
+
+    def is_feet_done(self):
+        return len(self.feet_actions_buffer) == 0
+
+    def is_head_done(self):
+        return len(self.head_actions_buffer) == 0
+
+    def is_tail_done(self):
+        return len(self.tail_actions_buffer) == 0
+
 
 
 

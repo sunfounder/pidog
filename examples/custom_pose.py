@@ -4,7 +4,7 @@ from time import sleep
 
 
 # def main():
-#     my_pidog = Pidog(feet_pins=[1,2,3,4,5,6,7,8],
+#     my_dog = Pidog(feet_pins=[1,2,3,4,5,6,7,8],
 #             head_pins=[9,10,11],tail_pin=[12],
 #             feet_init_angles=[45,0,-45,0,45,0,-45,0],
 #             head_init_angles=[0,0,0],
@@ -18,15 +18,14 @@ from time import sleep
 #          [0,0,20]
 #     ]
 
-#     my_pidog.feet_move(new_feet_action,True)
-#     my_pidog.head_move(new_head_action,True)
+#     my_dog.feet_move(new_feet_action,True)
+#     my_dog.head_move(new_head_action,True)
 
 def main():
-    my_pidog = Pidog(feet_pins=[1,2,3,4,5,6,7,8],
-            head_pins=[9,10,11],tail_pin=[12],
-            feet_init_angles=[45,0,-45,0,45,0,-45,0],
-            head_init_angles=[0,0,0],
-            tail_init_angle=[0])
+    my_dog = Pidog(feet_pins=[1, 2, 9, 10, 3, 4, 11, 12],
+    head_pins=[7, 5, 6],
+        tail_pin=[8],
+    )
     sleep(0.1)
 
     new_feet_action = [
@@ -39,8 +38,8 @@ def main():
          [0,0,20]
     ]
 
-    my_pidog.feet_move(new_feet_action,True)
-    my_pidog.head_move(new_head_action,True)
+    my_dog.feet_move(new_feet_action,True)
+    my_dog.head_move(new_head_action,True)
 
 
 if __name__ == "__main__":

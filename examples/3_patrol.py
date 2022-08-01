@@ -5,11 +5,11 @@ from time import sleep
 
 
 t = time.time()
-my_dog = Pidog(feet_pins=[1,2,3,4,5,6,7,8],
-                head_pins=[9,10,11],
-                tail_pin=[12],
-                feet_init_angles=[45,0,-45,0,45,0,-45,0]
-                )
+my_dog = Pidog(feet_pins=[1, 2, 9, 10, 3, 4, 11, 12],
+    head_pins=[7, 5, 6],
+    tail_pin=[8],
+    feet_init_angles=[45,0,-45,0,45,0,-45,0]
+)
 sleep(0.1) 
 # print(1, time.time() -t)
 # t = time.time()
@@ -41,7 +41,7 @@ def patrol():
     my_dog.rgb_strip.set_mode('breath', 'white', delay=0.1)
     my_dog.do_action('forward', step_count=2, wait=False, speed=98)
     my_dog.do_action('shake_head', step_count=1, wait=False, speed=80)
-    my_dog.do_action('tail_wagging', step_count=5, wait=False, speed=99)
+    my_dog.do_action('wag_tail', step_count=5, wait=False, speed=99)
     print(f"distance: {round(my_dog.distance.value, 2)} cm")
     if my_dog.distance.value < 15:
         print(f"distance: {round(my_dog.distance.value, 2)} cm. DANGER!")

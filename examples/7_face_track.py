@@ -3,11 +3,13 @@ from pidog import Pidog
 from time import sleep
 from vilib import Vilib
 
-my_dog = Pidog(feet_pins=[1,2,3,4,5,6,7,8],
-            head_pins=[9,10,11],tail_pin=[12],
-            feet_init_angles = [30, 60, -30, -60, 80, -45, -80, 45],
-            head_init_angles = [0, 0, -40]
-            )
+my_dog = Pidog(feet_pins=[1, 2, 9, 10, 3, 4, 11, 12],
+    head_pins=[7, 5, 6],
+    tail_pin=[8],
+    feet_init_angles = [30, 60, -30, -60, 80, -45, -80, 45],
+    head_init_angles = [0, 0, -40]
+)
+
 sleep(0.1)
 
 
@@ -60,7 +62,7 @@ def face_track():
         if people > 0 and flag == False:
             flag = True
             my_dog.head_move([[yaw,0,25]], pitch_init=-40, immediately=True, speed=100)
-            my_dog.do_action('tail_wagging', step_count=2, speed=100)
+            my_dog.do_action('wag_tail', step_count=2, speed=100)
             my_dog.speak('single_bark_001')
             delay(0.08)
             my_dog.head_move([[yaw,0,0]], pitch_init=-40, immediately=True, speed=100)

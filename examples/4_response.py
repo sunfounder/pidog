@@ -2,37 +2,21 @@
 from pidog import Pidog
 from time import sleep
 from math import sin
+from preset_actions import bark_action
 
 
-my_dog = Pidog(feet_pins=[1, 2, 3, 4, 5, 6, 7, 8], 
-                head_pins=[9, 10, 11], 
-                tail_pin=[12], 
-                # feet_init_angles=[45, 0, -45, 0, 45, 0, -45, 0]
-                )
+my_dog = Pidog(feet_pins=[1, 2, 9, 10, 3, 4, 11, 12],
+    head_pins=[7, 5, 6],
+    tail_pin=[8],
+)
 sleep(0.1)
-
-def bark_action():
-    h1 = [0, 0, 20]
-    h2 = [0, 0, 0]
-
-    f1 = my_dog.feet_angle_calculation([[0, 100], [0, 100], [30, 90], [30, 90]])
-    f2 = my_dog.feet_angle_calculation([[-20, 90], [-20, 90], [0, 90], [0, 90]])
-
-    my_dog.feet_move([f1], immediately=True, speed=95)
-    my_dog.head_move([h1], immediately=True, speed=95)
-    my_dog.wait_all_done()
-    sleep(0.01)
-    my_dog.feet_move([f2], immediately=True, speed=95)
-    my_dog.head_move([h2], immediately=True, speed=95)
-    my_dog.wait_all_done()
-    sleep(0.01)
 
 def lean_forward():
     my_dog.speak('angry')
-    bark_action()
-    bark_action()
+    bark_action(my_dog)
+    bark_action(my_dog)
     sleep(0.2)
-    bark_action()
+    bark_action(my_dog)
 
 
 def head_nod(step):
@@ -69,7 +53,7 @@ def alert():
         if my_dog.touch_sw.is_slide() != 'N':
             if len(my_dog.head_actions_buffer) < 2:
                 head_nod(1)
-                my_dog.do_action('tail_wagging', step_count=20, speed=100)
+                my_dog.do_action('wag_tail', step_count=20, speed=100)
                 my_dog.rgb_strip.set_mode('breath', front_color='pink', brightness=0.8, delay=0.08)
         sleep(0.2)
 

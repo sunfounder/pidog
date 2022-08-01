@@ -206,9 +206,9 @@ class ActionDict(dict):
                 [0, 0, -40],
         ],'head'
 
-    # 摇尾巴 tail_wagging
+    # 摇尾巴 wag_tail
     @property
-    def tail_wagging(self):
+    def wag_tail(self):
         amplitude=50
         angs = []
         for i in range(21):

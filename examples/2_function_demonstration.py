@@ -2,10 +2,10 @@
 from time import sleep
 from pidog import Pidog
 
-my_dog = Pidog(feet_pins=[1, 2, 3, 4, 5, 6, 7, 8], 
-                head_pins=[9, 10, 11], 
-                tail_pin=[12], 
-                )
+my_dog = Pidog(feet_pins=[1, 2, 9, 10, 3, 4, 11, 12],
+    head_pins=[7, 5, 6],
+    tail_pin=[8],
+)
 sleep(0.5) 
 
 actions = [
@@ -24,7 +24,7 @@ actions = [
     ['pushup', -30, 50],
     ['shake_head', 0, 90],
     ['tilting_head', 0, 60],
-    ['tail_wagging', 0, 100],
+    ['wag_tail', 0, 100],
 ]
 
 sound_effects = [

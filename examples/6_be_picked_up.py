@@ -2,9 +2,10 @@
 from pidog import Pidog
 from time import sleep
 
-my_dog = Pidog(feet_pins=[1,2,3,4,5,6,7,8],
-            head_pins=[9,10,11],tail_pin=[12],
-            )
+my_dog = Pidog(feet_pins=[1, 2, 9, 10, 3, 4, 11, 12],
+    head_pins=[7, 5, 6],
+    tail_pin=[8],
+)
 sleep(0.1)
 
 def delay(time):
@@ -14,7 +15,7 @@ def delay(time):
 def fly():  
     my_dog.rgb_strip.set_mode('boom', front_color='red', delay=0.01) 
     my_dog.feet.servo_move([45,-45,90,-80,90,90,-90,-90], speed=100)
-    my_dog.do_action('tail_wagging', step_count=20, speed=100)
+    my_dog.do_action('wag_tail', step_count=20, speed=100)
     my_dog.speak('woohoo') 
     delay(1)
 

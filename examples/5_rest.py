@@ -1,22 +1,15 @@
 #!/usr/bin/env python3
 from pidog import Pidog
 from time import sleep
+from preset_actions import shake_head
 
-my_dog = Pidog(feet_pins=[1,2,3,4,5,6,7,8],
-            head_pins=[9,10,11],tail_pin=[12],
-            )
+my_dog = Pidog(feet_pins=[1, 2, 9, 10, 3, 4, 11, 12],
+    head_pins=[7, 5, 6],
+    tail_pin=[8],
+)
 sleep(0.1)
 
-
-def is_sound():
-    if my_dog.ears.isdetected():
-        direction = my_dog.ears.read()
-        if direction != 0:
-            return True
-        else:
-            return False
-
-def shake_head(amplitude, interval, speed):
+def loop_arround(amplitude=60, interval=0.5, speed=100):
     my_dog.head_move([[amplitude,0,0]], immediately=True, speed=speed)
     my_dog.wait_all_done()
     sleep(interval)
@@ -25,6 +18,14 @@ def shake_head(amplitude, interval, speed):
     sleep(interval)
     my_dog.head_move([[0,0,0]], immediately=True, speed=speed)
     my_dog.wait_all_done()
+
+def is_sound():
+    if my_dog.ears.isdetected():
+        direction = my_dog.ears.read()
+        if direction != 0:
+            return True
+        else:
+            return False
 
 def rest():
  
@@ -37,7 +38,7 @@ def rest():
         # Sleeping
         my_dog.rgb_strip.set_mode('breath', 'pink', delay=0.14)
         my_dog.head_move([[0,0,-30]], immediately=True, speed=5)
-        my_dog.do_action('tail_wagging', step_count=20, speed=20)
+        my_dog.do_action('wag_tail', step_count=20, speed=20)
         my_dog.do_action('doze_off', wait=False, speed=95)
         
         # If heard anything, wake up
@@ -49,7 +50,7 @@ def rest():
             my_dog.head_move([[0, 0, 0]], immediately=True, speed=80)
             my_dog.wait_all_done()
             # Look arround
-            shake_head(60, 0.5, 100)
+            loop_arround(60, 0.5, 100)
             sleep(0.5)
             # tilt head and being confused
             my_dog.speak('confused_003')
@@ -60,10 +61,7 @@ def rest():
             my_dog.wait_all_done()
             sleep(0.8)
             # Shake head to ignore it
-            my_dog.head_move([[40, 0, -20]], immediately=False, speed=92)
-            my_dog.head_move([[-40, 0, -20]], immediately=False, speed=92)
-            my_dog.head_move([[0, 0, -20]], immediately=False, speed=92)
-            my_dog.wait_all_done()
+            shake_head(my_dog)
             sleep(0.2)
             # Lay down again
             my_dog.rgb_strip.set_mode('breath', 'pink')
