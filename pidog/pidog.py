@@ -370,6 +370,7 @@ class Pidog():
 
     # move  
     def feet_move(self, target_angles, immediately=True, speed=50):
+        self.feet_done_flag = False
         if immediately == True:
             self.feet_stop() 
         self.feet_speed = speed   
@@ -385,6 +386,7 @@ class Pidog():
         return [yaw_servo, roll_servo, pitch_servo]
 
     def head_move(self, target_yrps, roll_init=0, pitch_init=0, immediately=True, speed=50): 
+        self.head_done_flag = False
         if immediately == True:
             self.head_stop() 
         self.head_speed = speed
@@ -392,19 +394,21 @@ class Pidog():
         self.head_actions_buffer += angles
 
     def head_move_raw(self, target_angles, immediately=True, speed=50): 
+        self.head_done_flag = False
         if immediately == True:
             self.head_stop() 
         self.head_speed = speed
         self.head_actions_buffer += target_angles
 
     def tail_move(self, target_angles, immediately=True, speed=50):
+        self.tail_done_flag = False
         if immediately == True:
             self.tail_stop() 
         self.tail_speed = speed   
         self.tail_actions_buffer += target_angles
 
     # sensory_processes : ultrasonic,sound_direction
-    def sensory_processes_work(self,distance_addr,sound_direction_addr,touch_addr,lock):
+    def sensory_processes_work(self,distance_addr,lock):
         ultrasonic_thread = threading.Thread(name='ultrasonic_thread',
                                     target=self._ultrasonic_thread,
                                     args=(distance_addr,lock,))
@@ -415,7 +419,7 @@ class Pidog():
             self.sensory_processes.terminate()
         self.sensory_processes = Process(name='sensory_processes',
                                         target=self.sensory_processes_work,
-                                        args=(self.distance,self.sound_direction,self.touch,self.sensory_lock))
+                                        args=(self.distance,self.sensory_lock))
         self.sensory_processes.start()
 
     # ultrasonic
@@ -434,33 +438,13 @@ class Pidog():
                 print('ultrasonic_thread  except')
                 break
 
-    # ear (sound direction )
-    def _ear_thread(self,sound_direction_addr):
-        print('_ear_thread start')
-        ears = Sound_direction()
-        while True:
-            try:
-                if ears.isdetected():
-                    sound_direction_addr.value = ears.read()
-            except Exception as e:
-                print("sound_direction error:%s"%e)  
-                sleep(0.2)
-
-    # touch 
-    def _touch_thread(self,touch_addr):
-        print("_touch_thread start")
-        touch_sw = TouchSW()
-        while True:
-            touch_addr.value = touch_sw.is_slide()
-            sleep(0.02)
-
     # reset: stop, stop_and_lie 
     def stop_and_lie(self, speed=85):
         try:
             self.body_stop()
             self.feet_move(self.actions_dict['lie'][0], speed)
-            self.head_move_raw([[0,0,0]],speed)
-            self.tail_move([[0,0,0]],speed)
+            self.head_move_raw([[0,0,0]], speed)
+            self.tail_move([[0,0,0]], speed)
             self.wait_all_done()
         except Exception as e:
             print('stop_and_lie error:%s'%e)
@@ -498,13 +482,16 @@ class Pidog():
     # calculate angles and coords
 
     def set_pose(self, x=None, y=None, z=None):
+        print("set_pose:", x, y, z)
         if x != None:
             self.pose[0,0] = float(x)
         if y != None:
             self.pose[1,0] = float(y)
         if z != None:
             self.pose[2,0] = float(z)
-            self.body_height = float(z)
+            # self.body_height = float(z)
+        print("origin_pose z: ", self.pose[2,0])
+        print("body_height: ", self.body_height)
 
     def set_rpy(self, roll=None, pitch=None, yaw=None, pid=False):
         if roll is None:
