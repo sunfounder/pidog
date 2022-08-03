@@ -87,7 +87,7 @@ def main():
             set_head(pitch=-40)
             my_dog.do_action('sit', wait=True, speed=70)
         elif key == 'q':
-            my_dog.speak('single_bark_001')
+            my_dog.speak('single_bark_1')
             bark(my_dog, head_yrp)
         elif key == 'Q':
             bark_action(my_dog, head_yrp)
