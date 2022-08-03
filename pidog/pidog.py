@@ -482,16 +482,12 @@ class Pidog():
     # calculate angles and coords
 
     def set_pose(self, x=None, y=None, z=None):
-        print("set_pose:", x, y, z)
         if x != None:
             self.pose[0,0] = float(x)
         if y != None:
             self.pose[1,0] = float(y)
         if z != None:
             self.pose[2,0] = float(z)
-            # self.body_height = float(z)
-        print("origin_pose z: ", self.pose[2,0])
-        print("body_height: ", self.body_height)
 
     def set_rpy(self, roll=None, pitch=None, yaw=None, pid=False):
         if roll is None:

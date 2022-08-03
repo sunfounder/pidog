@@ -35,16 +35,13 @@ class ActionDict(dict):
     # 坐 sit
     @property
     def sit(self):
-        return [     
+        return [
             [30, 60, -30, -60, 80, -45, -80, 45],
-            # [-20, 60, 20, -60, -80, -45, -80, 45]
         ],'feet'
     # 趴 lie
     @property
     def lie(self):
         return [
-            # [45,-30,-45,30,45,-45,-45,45], 
-            # [52, -52, -52, 52, 45, -45, -45, 45],
             [45, -45, -45, 45, 45, -45, -45, 45]
         ],'feet'
 
