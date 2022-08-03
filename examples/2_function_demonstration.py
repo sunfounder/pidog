@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from time import sleep
 from pidog import Pidog
+import os
 
 my_dog = Pidog(feet_pins=[1, 2, 9, 10, 3, 4, 11, 12],
     head_pins=[7, 5, 6],
@@ -27,21 +28,10 @@ actions = [
     ['wag_tail', 0, 100],
 ]
 
-sound_effects = [
-    "5x_barks",
-    "barking",
-    "confused_002",
-    "howling",
-    "single_bark_001",
-    "summon",
-    "woohoo",
-    "angry",
-    "confused_001",
-    "confused_003",
-    "pant",
-    "single_bark_002",
-    "warn",
-]
+sound_effects = []
+for name in os.listdir('../sounds'):
+    sound_effects.append(name.split('.')[0])
+sound_effects.sort()
 
 
 index = None
