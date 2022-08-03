@@ -1,6 +1,89 @@
 
 from time import sleep
 
+def scratch(my_dog):
+    h1 = [[0, 0, -40]]
+    h2 = [[0, 40, -40]]
+    f_up = [
+        [30, 60, 50, 50, 80, -45, -80, 45],
+    ]
+    f_scratch = [
+        [30, 60, 40, 40, 80, -45, -80, 45],
+        [30, 60, 50, 50, 80, -45, -80, 45],
+    ]
+    my_dog.head_move(h1, immediately=False, speed=80)
+    my_dog.do_action('sit', speed=80)
+    my_dog.wait_all_done()
+
+    my_dog.head_move(h2, immediately=False, speed=80)
+    my_dog.feet_move(f_up, immediately=False, speed=80)
+    my_dog.wait_all_done()
+    for _ in range(10):
+        my_dog.feet_move(f_scratch, immediately=False, speed=94)
+        my_dog.wait_all_done()
+
+    my_dog.head_move(h1, immediately=False, speed=80)
+    my_dog.do_action('sit', speed=80)
+    my_dog.wait_all_done()
+
+def hand_shake(my_dog):
+    h1 = [[0, 0, -40]]
+    f_up = [
+        [30, 60, -20, 65, 80, -45, -80, 45],
+    ]
+    f_handshake = [
+        [30, 60, 10, -25, 80, -45, -80, 45],
+        [30, 60, 10, -35, 80, -45, -80, 45],
+    ]
+    f_withdraw = [
+        [30, 60, -40, 30, 80, -45, -80, 45],
+    ]
+    my_dog.head_move(h1, immediately=False, speed=80)
+    my_dog.do_action('sit', speed=80)
+    my_dog.wait_all_done()
+
+    my_dog.feet_move(f_up, immediately=False, speed=80)
+    my_dog.wait_all_done()
+
+    for _ in range(5):
+        my_dog.feet_move(f_handshake, immediately=False, speed=90)
+        my_dog.wait_all_done()
+
+    my_dog.feet_move(f_withdraw, immediately=False, speed=80)
+    my_dog.wait_all_done()
+
+    my_dog.do_action('sit', speed=80)
+    my_dog.wait_all_done()
+
+def high_five(my_dog):
+    h1 = [[0, 0, -40]]
+    f_up = [
+        [30, 60, 50, 30, 80, -45, -80, 45],
+    ]
+    f_down = [
+        [30, 60, 70, -50, 80, -45, -80, 45],
+    ]
+    f_withdraw = [
+        [30, 60, -40, 30, 80, -45, -80, 45],
+    ]
+    my_dog.head_move(h1, immediately=False, speed=80)
+    my_dog.do_action('sit', speed=80)
+    my_dog.wait_all_done()
+
+    my_dog.feet_move(f_up, immediately=False, speed=80)
+    my_dog.wait_all_done()
+
+    my_dog.feet_move(f_down, immediately=False, speed=94)
+    my_dog.wait_all_done()
+    sleep(0.5)
+
+    my_dog.feet_move(f_withdraw, immediately=False, speed=80)
+    my_dog.wait_all_done()
+
+    my_dog.do_action('sit', speed=80)
+    my_dog.wait_all_done()
+
+
 def pant(my_dog, yrp=None):
     if yrp is None:
         yrp = [0, 0, -40]
@@ -57,7 +140,7 @@ def bark(my_dog, yrp=None):
     my_dog.head_move(angles, speed=95)
     # my_dog.do_action('head_bark', speed=95)
     sleep(0.1)
-    my_dog.speak('single_bark_001')
+    my_dog.speak('single_bark_1')
     my_dog.wait_all_done()
 
 def pushup(my_dog):
@@ -84,3 +167,14 @@ def howling(my_dog):
     my_dog.wait_all_done()
 
     sleep(2.34)
+
+
+if __name__ == "__main__":
+    from pidog import Pidog
+    import readchar
+
+    my_dog = Pidog(feet_pins=[1, 2, 9, 10, 3, 4, 11, 12],
+        head_pins=[7, 5, 6],
+        tail_pin=[8],
+    )
+    hand_shake(my_dog)
