@@ -72,3 +72,7 @@ website:
 
 E-mail:
     service@sunfounder.com, support@sunfounder.com
+
+## Credit
+
+Most sound effect are from [Zapsplat.com](https://www.zapsplat.com)

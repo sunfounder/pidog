@@ -53,7 +53,7 @@ def rest():
             loop_arround(60, 0.5, 100)
             sleep(0.5)
             # tilt head and being confused
-            my_dog.speak('confused_003')
+            my_dog.speak('confused_3')
             my_dog.do_action('tilting_head_left', wait=True, speed=80)
             my_dog.wait_all_done()
             sleep(0.8)

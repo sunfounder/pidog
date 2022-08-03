@@ -63,7 +63,7 @@ def face_track():
             flag = True
             my_dog.head_move([[yaw,0,25]], pitch_init=-40, immediately=True, speed=100)
             my_dog.do_action('wag_tail', step_count=2, speed=100)
-            my_dog.speak('single_bark_001')
+            my_dog.speak('single_bark_1')
             delay(0.08)
             my_dog.head_move([[yaw,0,0]], pitch_init=-40, immediately=True, speed=100)
             delay(0.5)
