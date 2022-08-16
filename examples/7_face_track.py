@@ -2,10 +2,11 @@
 from pidog import Pidog
 from time import sleep
 from vilib import Vilib
+from preset_actions import bark
 
-my_dog = Pidog(feet_pins=[1, 2, 9, 10, 3, 4, 11, 12],
-    head_pins=[7, 5, 6],
-    tail_pin=[8],
+my_dog = Pidog(feet_pins=[3, 4, 8, 9, 1, 2, 11, 12],
+    head_pins=[5, 7, 6],
+    tail_pin=[10],
     feet_init_angles = [30, 60, -30, -60, 80, -45, -80, 45],
     head_init_angles = [0, 0, -40]
 )
@@ -61,12 +62,8 @@ def face_track():
         # If see someone, bark at him/her
         if people > 0 and flag == False:
             flag = True
-            my_dog.head_move([[yaw,0,25]], pitch_init=-40, immediately=True, speed=100)
             my_dog.do_action('wag_tail', step_count=2, speed=100)
-            my_dog.speak('single_bark_1')
-            delay(0.08)
-            my_dog.head_move([[yaw,0,0]], pitch_init=-40, immediately=True, speed=100)
-            delay(0.5)
+            bark(my_dog, [yaw,0,0])
             if my_dog.ears.isdetected(): 
                 direction = my_dog.ears.read()
 

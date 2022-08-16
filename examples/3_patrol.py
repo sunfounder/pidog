@@ -2,40 +2,17 @@
 import time
 from pidog import Pidog
 from time import sleep
-
+from preset_actions import bark
 
 t = time.time()
-my_dog = Pidog(feet_pins=[1, 2, 9, 10, 3, 4, 11, 12],
-    head_pins=[7, 5, 6],
-    tail_pin=[8],
+my_dog = Pidog(feet_pins=[3, 4, 8, 9, 1, 2, 11, 12],
+    head_pins=[5, 7, 6],
+    tail_pin=[10],
     feet_init_angles=[45,0,-45,0,45,0,-45,0]
 )
 sleep(0.1) 
-# print(1, time.time() -t)
-# t = time.time()
-# def delay_s(time):
-#     while (len(my_dog.feet_actions_buffer) > 0 or len(my_dog.head_actions_buffer) > 0) :
-#         sleep(0.01)
-#     sleep(time)
 
-stand = my_dog.feet_angle_calculation([[0,110],[0,110],[30,95],[30,95]])
-
-# def look_far():
-    # my_dog.head_move([[0,0,-15]], speed=80)
-
-def bark(yaw):
-    h1 = [yaw, 0,  15]
-    h2 = [yaw, 0, -15]
-
-    my_dog.speak('angry')
-    for _ in range(3):
-        # delay_s(0.1)
-        my_dog.head_move([h1], immediately=True, speed=90)
-        my_dog.wait_head_done()
-        sleep(0.05)
-        my_dog.head_move([h2], immediately=True, speed=90)
-        my_dog.wait_head_done()
-        sleep(0.01)
+stand = my_dog.feet_angle_calculation([[0,80],[0,80],[30,75],[30,75]])
 
 def patrol():
     my_dog.rgb_strip.set_mode('breath', 'white', delay=0.1)
@@ -51,7 +28,8 @@ def patrol():
         my_dog.tail_move([[0]], speed=80)
         my_dog.feet_move([stand], speed=70)
         my_dog.wait_all_done()
-        bark(head_yaw)
+        sleep(0.1)
+        bark(my_dog, [head_yaw,0,0])
     my_dog.rgb_strip.set_mode('breath', 'white', delay=0.1)
 
 if __name__ == "__main__":

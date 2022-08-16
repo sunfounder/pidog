@@ -59,9 +59,11 @@ class Pidog():
     KP = 0.033
     KI = 0.0
     KD = 0.0
-
+    DEFAULT_FEET_PINS = [3, 4, 8, 9, 1, 2, 11, 12]
+    DEFAULT_HEAD_PINS = [5, 7, 6]
+    DEFAULT_TAIL_PIN = [10]
     # init
-    def __init__(self, feet_pins, head_pins, tail_pin,
+    def __init__(self, feet_pins=DEFAULT_FEET_PINS, head_pins=DEFAULT_HEAD_PINS, tail_pin=DEFAULT_TAIL_PIN,
             feet_init_angles=None, head_init_angles=None, tail_init_angle=None):
 
 
@@ -240,6 +242,7 @@ class Pidog():
                 print('_feet_action_thread Exception:%s'%e)
                 self.exit_flag = True
                 break
+        self.feet_done_flag = True
 
     # head
     def _head_action_thread(self):
@@ -256,6 +259,7 @@ class Pidog():
                 print('_head_action_thread Exception: %s'%e)
                 self.exit_flag = True
                 break
+        self.head_done_flag = True
                 
     # tail
     def _tail_action_thread(self):
@@ -272,6 +276,7 @@ class Pidog():
                 print('_tail_action_thread Exception: %s'%e)
                 self.exit_flag = True   
                 break
+        self.tail_done_flag = False
 
     # rgb strip
     def _rgb_strip_thread(self):
@@ -282,6 +287,7 @@ class Pidog():
             except Exception as e:
                 print('_rgb_strip_thread Exception: %s'%e)
                 self.rgb_fail_count += 1
+                sleep(0.001)
                 if self.rgb_fail_count > 10:
                     self.exit_flag = True
                     break
@@ -346,6 +352,7 @@ class Pidog():
                 print(data)
                 print('_imu_thread Exception: %s'%e)
                 self.imu_fail_count += 1
+                sleep(0.001)
                 if self.imu_fail_count > 10:
                     self.exit_flag = True
                     break
@@ -660,28 +667,6 @@ class Pidog():
             return min
         else:
             return x
-
-    # def limit_angle(self,angles):
-    #     alpha, beta, gamma = angles
-    #     # limit 
-    #     limit_flag = False
-    #     ## alpha
-    #     temp = self.limit(-90,90,alpha)
-    #     if temp != alpha:
-    #         alpha = temp
-    #         limit_flag = True
-    #     ## beta
-    #     temp = self.limit(-10,90,beta)
-    #     if temp != beta:
-    #         beta = temp
-    #         limit_flag = True
-    #     ## gamma
-    #     temp = self.limit(-52,60,gamma)
-    #     if temp != gamma:
-    #         gamma = temp
-    #         limit_flag = True
-    #     # return
-    #     return limit_flag,[alpha,beta,gamma]
 
     # set angle
     def set_angle(self, angles_list,speed=50,israise=False):

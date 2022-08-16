@@ -7,6 +7,7 @@ reset_mcu()
 sleep(0.2)
 
 if __name__ == '__main__':
-    for i in range(12):
-        servo = Servo(PWM(i))         
-        servo.angle(0)     
+    while True:
+        for i in range(12):
+            servo = Servo(PWM(i))
+            servo.angle(0)

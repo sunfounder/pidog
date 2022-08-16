@@ -2,9 +2,9 @@
 from pidog import Pidog
 from time import sleep
 
-my_dog = Pidog(feet_pins=[1, 2, 9, 10, 3, 4, 11, 12],
-    head_pins=[7, 5, 6],
-    tail_pin=[8],
+my_dog = Pidog(feet_pins=[3, 4, 8, 9, 1, 2, 11, 12],
+    head_pins=[5, 7, 6],
+    tail_pin=[10],
     feet_init_angles=[45,0,-45,0,45,0,-45,0],
     head_init_angles=[0,0,0],
     tail_init_angle=[0]
