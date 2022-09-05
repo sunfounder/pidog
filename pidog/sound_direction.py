@@ -34,25 +34,23 @@ import spidev
 from robot_hat import Pin
 from time import sleep
 
+
 class Sound_direction():
-    def __init__(self,busy_pin=6):
+    def __init__(self, busy_pin=6):
         self.spi = spidev.SpiDev()
-        self.spi.open(0,0)
+        self.spi.open(0, 0)
         self.spi.max_speed_hz = 500000
         self.spi.no_cs = True
 
         self.busy = Pin(busy_pin)
-        self.cs = Pin(8)
+        self.cs = Pin("D8")
 
     def read(self):
         self.cs.value(0)
-        _, _ = self.spi.xfer2([0,0])  # ignore the fist value read
-        l_val, h_val = self.spi.xfer2([0,0])
-        val = (h_val << 8)+ l_val
-        val = (360+160-val)%360  # Convert zero
-        # sleep(0.02)
-        # self.cs.value(1)
-        # print('l_val, h_val : %s,%s'%(l_val, h_val))
+        _, _ = self.spi.xfer2([0, 0])  # ignore the fist value read
+        l_val, h_val = self.spi.xfer2([0, 0])
+        val = (h_val << 8) + l_val
+        val = (360+160-val) % 360  # Convert zero
         return val
 
     def isdetected(self):
@@ -60,18 +58,11 @@ class Sound_direction():
 
 
 if __name__ == "__main__":
-    
+
     sd = Sound_direction()
-    # while sd.cs.value():
-    #     sleep(0.05)
     print('start')
     while True:
-        # sd.cs.value()
-        
         if sd.isdetected():
             sleep(0.2)
             print(sd.read())
         sleep(0.2)
-
-
-      

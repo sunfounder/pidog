@@ -5,11 +5,9 @@ from time import sleep
 from preset_actions import bark
 
 t = time.time()
-my_dog = Pidog(feet_pins=[3, 4, 8, 9, 1, 2, 11, 12],
-    head_pins=[5, 7, 6],
-    tail_pin=[10],
-    feet_init_angles=[45,0,-45,0,45,0,-45,0]
-)
+my_dog = Pidog()
+my_dog.do_action('stand', speed=80)
+my_dog.wait_all_done()
 sleep(0.1) 
 
 stand = my_dog.feet_angle_calculation([[0,80],[0,80],[30,75],[30,75]])

@@ -4,12 +4,7 @@ from time import sleep
 from vilib import Vilib
 from preset_actions import bark
 
-my_dog = Pidog(feet_pins=[3, 4, 8, 9, 1, 2, 11, 12],
-    head_pins=[5, 7, 6],
-    tail_pin=[10],
-    feet_init_angles = [30, 60, -30, -60, 80, -45, -80, 45],
-    head_init_angles = [0, 0, -40]
-)
+my_dog = Pidog()
 
 sleep(0.1)
 
@@ -30,7 +25,8 @@ def face_track():
     pitch = 0
     flag = False
     direction = 0
-     
+    
+    my_dog.do_action('sit', speed=80)
     my_dog.head_move([[yaw,0,pitch]], pitch_init=-40, immediately=True, speed=80)
     delay(0.5)
     if my_dog.ears.isdetected():
@@ -63,7 +59,7 @@ def face_track():
         if people > 0 and flag == False:
             flag = True
             my_dog.do_action('wag_tail', step_count=2, speed=100)
-            bark(my_dog, [yaw,0,0])
+            bark(my_dog, [yaw,0,0], pitch_init=-40)
             if my_dog.ears.isdetected(): 
                 direction = my_dog.ears.read()
 
@@ -81,8 +77,7 @@ def face_track():
             pitch += 0.5
             if pitch > 30:
                 pitch = 30
-           
-        
+
         print('direction: %s |number: %s | ex, ey: %s, %s | yrp: %s, %s, %s '
             %(direction, people, ex, ey, round(yaw,2), round(roll,2), round(pitch,2)),
             end='\r',

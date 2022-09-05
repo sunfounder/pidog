@@ -4,10 +4,25 @@ from pidog import Pidog
 from pidog.walk import Walk
 import readchar
 import threading
+import os
 
 my_dog = Pidog()
 
 sleep(0.5)
+
+usage = '''
+\033[104m\033[1m  Pidog          Balance         Ctrl + C to Exit  \033[0m
+    ┌────────┐┌────────┐┌────────┐┌────────┐
+    │Q       ││W       ││E       ││R       │
+    │        ││        ││        ││        │
+    │        ││ Forward││  Stand ││   UP   │
+    └────────┘└────────┘└────────┘└────────┘
+       ┌────────┐┌────────┐┌────────┐┌────────┐
+       │A       ││S       ││D       ││F       │
+       │  Turn  ││        ││  Turn  ││        │
+       │  Left  ││Backward││  Right ││  DOWN  │
+       └────────┘└────────┘└────────┘└────────┘
+'''
 
 stand_coords = [[[0, 80], [0, 80], [0, 80], [0, 80]]]
 forward_coords = Walk(fb=Walk.FORWARD, lr=Walk.STRAIGHT).get_coords()
@@ -33,11 +48,18 @@ def move_thread():
 t = threading.Thread(target=move_thread)
 def main():
     global current_coords, current_pose, current_rpy, thread_start
+    my_dog.do_action('stand', speed=80)
+    my_dog.wait_feet_done()
     t.start()
 
     while True:
+        os.system('cls' if os.name=='nt' else 'clear')
+        print(usage)
         key = readchar.readkey()
-        if key == 'w':
+        if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
+            thread_start = False
+            break
+        elif key == 'w':
             current_coords = forward_coords
         elif key == 's':
             current_coords = backward_coords
@@ -45,9 +67,6 @@ def main():
             current_coords = turn_left_coords
         elif key == 'd':
             current_coords = turn_right_coords
-        elif key == 'q':
-            thread_start = False
-            break
         elif key == 'e':
             current_coords = stand_coords
         elif key == 'r':

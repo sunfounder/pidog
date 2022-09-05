@@ -2,15 +2,16 @@
 from time import sleep
 
 def scratch(my_dog):
-    h2 = [[0, 40, -40]]
+    h1 = [[0, 0, -40]]
+    h2 = [[30, 70, -10]]
     f_up = [
-        [30, 60, 50, 50, 80, -45, -80, 45],
+        [30, 60, 50, 50, 80, -45, -80, 38], # Note 1
     ]
     f_scratch = [
-        [30, 60, 40, 40, 80, -45, -80, 45],
-        [30, 60, 50, 50, 80, -45, -80, 45],
+        [30, 60, 40, 40, 80, -45, -80, 38], # Note 1
+        [30, 60, 50, 50, 80, -45, -80, 38], # Note 1
     ]
-
+    my_dog.do_action('sit', speed=80)
     my_dog.head_move(h2, immediately=False, speed=80)
     my_dog.feet_move(f_up, immediately=False, speed=80)
     my_dog.wait_all_done()
@@ -21,17 +22,17 @@ def scratch(my_dog):
     my_dog.head_move(h1, immediately=False, speed=80)
     my_dog.do_action('sit', speed=80)
     my_dog.wait_all_done()
-
+# Note 1: Last servo(4th feet) original value is 45, change to 40 to push down alittle bit to support the rasing feet, prevent the dog from falling down.
 def hand_shake(my_dog):
     f_up = [
-        [30, 60, -20, 65, 80, -45, -80, 45],
+        [30, 60, -20, 65, 80, -45, -80, 38], # Note 1
     ]
     f_handshake = [
-        [30, 60, 10, -25, 80, -45, -80, 45],
-        [30, 60, 10, -35, 80, -45, -80, 45],
+        [30, 60, 10, -25, 80, -45, -80, 38], # Note 1
+        [30, 60, 10, -35, 80, -45, -80, 38], # Note 1
     ]
     f_withdraw = [
-        [30, 60, -40, 30, 80, -45, -80, 45],
+        [30, 60, -40, 30, 80, -45, -80, 38], # Note 1
     ]
 
     my_dog.feet_move(f_up, immediately=False, speed=80)
@@ -42,17 +43,18 @@ def hand_shake(my_dog):
         my_dog.wait_all_done()
 
     my_dog.feet_move(f_withdraw, immediately=False, speed=80)
+    my_dog.do_action('sit', speed=80)
     my_dog.wait_all_done()
 
 def high_five(my_dog):
     f_up = [
-        [30, 60, 50, 30, 80, -45, -80, 45],
+        [30, 60, 50, 30, 80, -45, -80, 38], # Note 1
     ]
     f_down = [
-        [30, 60, 70, -50, 80, -45, -80, 45],
+        [30, 60, 70, -50, 80, -45, -80, 38], # Note 1
     ]
     f_withdraw = [
-        [30, 60, -40, 30, 80, -45, -80, 45],
+        [30, 60, -40, 30, 80, -45, -80, 38], # Note 1
     ]
     my_dog.feet_move(f_up, immediately=False, speed=80)
     my_dog.wait_all_done()
@@ -62,17 +64,18 @@ def high_five(my_dog):
     sleep(0.5)
 
     my_dog.feet_move(f_withdraw, immediately=False, speed=80)
+    my_dog.do_action('sit', speed=80)
     my_dog.wait_all_done()
 
-def pant(my_dog, yrp=None):
+def pant(my_dog, yrp=None, pitch_init=0):
     if yrp is None:
-        yrp = [0, 0, -40]
-    h1 = [0 + yrp[0], 0 + yrp[1], 20 + yrp[2]]
-    h2 = [0 + yrp[0], 0 + yrp[1],  0 + yrp[2]]
+        yrp = [0, 0, 0]
+    h1 = [0 + yrp[0], 0 + yrp[1],   0 + yrp[2]]
+    h2 = [0 + yrp[0], 0 + yrp[1], -10 + yrp[2]]
     h = [h1] + [h2] + [h1]
     my_dog.speak('pant')
     for _ in range(10):
-        my_dog.head_move(h, immediately=False, speed=92)
+        my_dog.head_move(h, pitch_init=pitch_init, immediately=False, speed=92)
         my_dog.wait_head_done()
 
 def body_twisting(my_dog):
@@ -114,17 +117,17 @@ def shake_head(my_dog, yrp=None):
     my_dog.head_move(h3, immediately=False, speed=92)
     my_dog.wait_all_done()
 
-def bark(my_dog, yrp=None):
+def bark(my_dog, yrp=None, pitch_init=0, roll_init=0):
     if yrp is None:
         yrp = [0, 0, 0]
     head_up = [0 + yrp[0], 0 + yrp[1], 25 + yrp[2]]
     head_down = [0 + yrp[0], 0 + yrp[1],  0 + yrp[2]]
-    my_dog.head_move([head_up], immediately=True, speed=100)
+    my_dog.head_move([head_up], pitch_init=pitch_init, roll_init=roll_init, immediately=True, speed=100)
     my_dog.speak('single_bark_1')
-    my_dog.wait_all_done()
+    my_dog.wait_head_done()
     sleep(0.08)
-    my_dog.head_move([head_down], immediately=True, speed=100)
-    my_dog.wait_all_done()
+    my_dog.head_move([head_down], pitch_init=pitch_init, roll_init=roll_init, immediately=True, speed=100)
+    my_dog.wait_head_done()
     sleep(0.5)
 
 def pushup(my_dog):
@@ -133,7 +136,7 @@ def pushup(my_dog):
     my_dog.wait_all_done()
 
 def howling(my_dog):
-    my_dog.do_action('sit', speed=95)
+    my_dog.do_action('sit', speed=80)
     my_dog.head_move([[0,0,-30]], speed=95)
     my_dog.wait_all_done()
 
@@ -151,14 +154,18 @@ def howling(my_dog):
     my_dog.wait_all_done()
 
     sleep(2.34)
+    my_dog.do_action('sit', speed=80)
+    my_dog.head_move([[0,0,-40]], speed=80)
+    my_dog.wait_all_done()
 
 
 if __name__ == "__main__":
     from pidog import Pidog
     import readchar
 
-    my_dog = Pidog(feet_pins=[1, 2, 9, 10, 3, 4, 11, 12],
-        head_pins=[7, 5, 6],
-        tail_pin=[8],
-    )
-    hand_shake(my_dog)
+    yrp = [0, 0, -40]
+    my_dog = Pidog()
+    my_dog.do_action('sit', speed=80)
+    scratch(my_dog)
+    # my_dog.close()
+    
