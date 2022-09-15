@@ -7,9 +7,9 @@ import numpy as np
 from math import pi, sin, cos, sqrt, acos, atan2, atan
 from robot_hat import Robot, Pin, Ultrasonic, utils, Music
 from .sh3001 import Sh3001
-from .rgb_strip import RGB_Strip
+from .rgb_strip import RGBStrip
 from .sound_direction import Sound_direction
-from .touch_sw import TouchSW
+from .dual_touch import DualTouch
 
 ''' servos order
                      9,
@@ -60,9 +60,11 @@ class Pidog():
     KP = 0.033
     KI = 0.0
     KD = 0.0
-    DEFAULT_FEET_PINS = [3, 4, 8, 9, 1, 2, 11, 12]
-    DEFAULT_HEAD_PINS = [5, 7, 6]
-    DEFAULT_TAIL_PIN = [10]
+    # Left Front Leg, Left Front Foot, Right Front Leg, Right Front Foot, Left Hind Leg, Left Hind Foot, Right Hind Leg, Right Hind Foot
+    DEFAULT_FEET_PINS = [2, 3, 7, 8, 0, 1, 10, 11]
+    # Head Yaw, Roll, Pitch
+    DEFAULT_HEAD_PINS = [4, 6, 5]
+    DEFAULT_TAIL_PIN = [9]
     # init
 
     def __init__(self, feet_pins=DEFAULT_FEET_PINS, head_pins=DEFAULT_HEAD_PINS, tail_pin=DEFAULT_TAIL_PIN,
@@ -125,13 +127,13 @@ class Pidog():
         self.accData = []  # ax,ay,az
         self.gyroData = []  # gx,gy,gz
 
-        self.rgb_strip = RGB_Strip(0X74)
+        self.rgb_strip = RGBStrip(0X74)
         self.rgb_strip.set_mode('breath', 'black')
         self.sensory_processes = None
         self.distance = Value('f', -1.0)
         self.sensory_lock = Lock()
 
-        self.touch_sw = TouchSW('D2', 'D3')
+        self.dual_touch = DualTouch('D2', 'D3')
         self.touch = 'N'
 
         self.ears = Sound_direction()
@@ -160,9 +162,9 @@ class Pidog():
         import signal
         import sys
 
-        # def handler(signal,frame):
-        #     print('Please wait')
-        # signal.signal(signal.SIGINT, handler)
+        def handler(signal, frame):
+            print('Please wait')
+        signal.signal(signal.SIGINT, handler)
 
         print('\rStopping and returning to the initial position ... ')
 
@@ -199,7 +201,7 @@ class Pidog():
         rel_angles_list = []
         for i in range(len(angles_list)):
             rel_angles_list.append(angles_list[i] + self.feet.offset[i])
-        self.feet.angle_list(rel_angles_list)
+        self.feet.servo_write_raw(rel_angles_list)
 
         tt2 = time() - tt
         delay2 = 0.001*len(angles_list) - tt2

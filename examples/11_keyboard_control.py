@@ -46,6 +46,7 @@ head_pitch_init = 0
 command = None
 current_status = STATUS_LIE
 
+
 def set_head(roll=None, pitch=None, yaw=None):
     global head_yrp
     if roll is not None:
@@ -55,6 +56,7 @@ def set_head(roll=None, pitch=None, yaw=None):
     if yaw is not None:
         head_yrp[0] = yaw
     my_dog.head_move([head_yrp], immediately=True, speed=HEAD_SPEED)
+
 
 COMMANDS = {
     "forward": {
@@ -183,10 +185,13 @@ COMMANDS = {
     },
 }
 
+
 def set_head_pitch_init(pitch):
     global head_pitch_init
     head_pitch_init = pitch
-    my_dog.head_move([head_yrp], pitch_init=pitch, immediately=True, speed=HEAD_SPEED)
+    my_dog.head_move([head_yrp], pitch_init=pitch,
+                     immediately=True, speed=HEAD_SPEED)
+
 
 def change_status(status):
     global current_status
@@ -202,13 +207,13 @@ def change_status(status):
         my_dog.do_action('lie', wait=False, speed=70)
     my_dog.wait_all_done()
 
+
 def run_command():
     global command, head_pitch_init
     if not my_dog.is_feet_done() or not my_dog.is_head_done():
         return
     if command is None:
         return
-    print(command)
     for name in COMMANDS:
         if command in COMMANDS[name]["commands"]:
             if "status" in COMMANDS[name]:
@@ -217,18 +222,16 @@ def run_command():
             if "head_pitch" in COMMANDS[name]:
                 head_pitch_init = COMMANDS[name]["head_pitch"]
             if "before" in COMMANDS[name]:
-                print("Run before command:", COMMANDS[name]["before"])
                 before_command = COMMANDS[name]["before"]
                 COMMANDS[before_command]["function"]()
             if "function" in COMMANDS[name]:
-                print("Run command:", name)
                 COMMANDS[name]["function"]()
             if "after" in COMMANDS[name]:
-                print("Set after command:", COMMANDS[name]["after"])
                 command = COMMANDS[name]["after"]
             else:
                 command = None
             break
+
 
 COMMAND_KEY_MAP = {
     "W": "trot",
@@ -254,12 +257,13 @@ COMMAND_KEY_MAP = {
     "g": "high five",
 }
 
+
 def main():
     global head_yrp, command
     while True:
-        os.system('cls' if os.name=='nt' else 'clear')
+        os.system('cls' if os.name == 'nt' else 'clear')
         print(usage)
-        print("\033[?25l") # Hide terminal cursor
+        print("\033[?25l")  # Hide terminal cursor
         key = readchar.readchar()
         if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
             import sys
@@ -299,18 +303,20 @@ def main():
             # Head Reset
             elif key == 'm':
                 head_yrp = [0, 0, 0]
-            my_dog.head_move([head_yrp], pitch_init=head_pitch_init, immediately=True, speed=HEAD_SPEED)
+            my_dog.head_move([head_yrp], pitch_init=head_pitch_init,
+                             immediately=True, speed=HEAD_SPEED)
         else:
-            print('key:',key)
+            # print('key:', key)
             continue
         run_command()
         # sleep(0.001)
 
+
 if __name__ == "__main__":
-    # try:
-    # except Exception as e:
-        # raise e
-    # finally:
-    main()
-    print("\033[?25h") # Show terminal cursor
-    my_dog.close()
+    try:
+        main()
+        print("\033[?25h")  # Show terminal cursor
+    except Exception as e:
+        raise e
+    finally:
+        my_dog.close()

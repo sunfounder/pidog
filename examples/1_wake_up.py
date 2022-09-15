@@ -24,7 +24,7 @@ def wake_up():
     my_dog.do_action('wag_tail', step_count=10, wait=False, speed=100)
     my_dog.rgb_strip.set_mode('breath', front_color=[
                               245, 10, 10], brightness=0.8, delay=0.002)
-    pant(my_dog, pitch_init=-40)
+    pant(my_dog, pitch_init=-30)
     my_dog.wait_all_done()
     my_dog.rgb_strip.close()
 
