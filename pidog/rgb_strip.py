@@ -6,17 +6,17 @@ import math
 # from PIL import Image
 
 
-class RGB_Strip():
+class RGBStrip():
 
-# color define
+    # color define
     COLORS = {
         'white':   [255, 255, 255],
-        'black':   [  0,   0,   0],
+        'black':   [0,   0,   0],
         'red':     [255,   0,   0],
         'yellow':  [255, 255,   0],
-        'green':   [  0, 255,   0],
-        'blue':    [  0,   0, 255],
-        'cyan':    [  0, 255, 255],
+        'green':   [0, 255,   0],
+        'blue':    [0,   0, 255],
+        'cyan':    [0, 255, 255],
         'magenta': [255,   0, 255],
         'pink':    [255, 192, 203]
     }
@@ -42,86 +42,101 @@ class RGB_Strip():
     VAF_CTL_REG = 0X14
     VAF_CTL_REG2 = 0X15
 
-    MSKSTD1 = (0x3<<0)	
-    MSKSTD2 = (0x3<<2)
-    MSKSTD3 = (0x3<<4)	
-    MSKSTD4 = (0x3<<6)
-    CONST_STD_GROUP1 = 0x00		
-    CONST_STD_GROUP2 = 0x55	
-    CONST_STD_GROUP3 = 0xAA		
+    MSKSTD1 = (0x3 << 0)
+    MSKSTD2 = (0x3 << 2)
+    MSKSTD3 = (0x3 << 4)
+    MSKSTD4 = (0x3 << 6)
+    CONST_STD_GROUP1 = 0x00
+    CONST_STD_GROUP2 = 0x55
+    CONST_STD_GROUP3 = 0xAA
     CONST_STD_GROUP4 = 0xFF
 
-    MSKVAF1 = (0x4<<0) 
-    MSKVAF2 = (0x4<<4)
-    MSKVAF3 = (0x4<<0)
-    MSKFORCEVAFTIME_CONST= (0x0<<3)
-    MSKFORCEVAFCTL_ALWAYSON = (0x0<<6)
-    MSKFORCEVAFCTL_DISABLE = (0x2<<6)
-    MSKCURRENT_CTL_EN = (0x1<<7)
-    CONST_CURRENT_STEP_20mA = (0x19<<0)
-    mskBLINK_FRAME_300 = (0x0<<6)
-    mskBLINK_EN = (0x1<<3)
-    mskBLINK_DIS = (0x0<<3)
-    mskBLINK_PERIOD_TIME_CONST = (0x7<<0)
+    MSKVAF1 = (0x4 << 0)
+    MSKVAF2 = (0x4 << 4)
+    MSKVAF3 = (0x4 << 0)
+    MSKFORCEVAFTIME_CONST = (0x0 << 3)
+    MSKFORCEVAFCTL_ALWAYSON = (0x0 << 6)
+    MSKFORCEVAFCTL_DISABLE = (0x2 << 6)
+    MSKCURRENT_CTL_EN = (0x1 << 7)
+    CONST_CURRENT_STEP_20mA = (0x19 << 0)
+    mskBLINK_FRAME_300 = (0x0 << 6)
+    mskBLINK_EN = (0x1 << 3)
+    mskBLINK_DIS = (0x0 << 3)
+    mskBLINK_PERIOD_TIME_CONST = (0x7 << 0)
 
     Type3Vaf = [
-    #Frame 1
-	0x50, 0x55, 0x55, 0x55, #C1-A ~ C1-P
-	0x00, 0x00, 0x00, 0x00, #C2-A ~ C2-P
-	0x00, 0x00, 0x00, 0x00, #C3-A ~ C3-P  
-	0x15, 0x54, 0x55, 0x55, #C4-A ~ C4-P 
-	0x00, 0x00, 0x00, 0x00, #C5-A ~ C5-P  
-	0x00, 0x00, 0x00, 0x00, #C6-A ~ C6-P 
-	0x55, 0x05, 0x55, 0x55, #C7-A ~ C7-P  
-	0x00, 0x00, 0x00, 0x00, #C8-A ~ C8-P
-	#Frame 2
-	0x00, 0x00, 0x00, 0x00, #C9-A ~ C9-P 
-	0x55, 0x55, 0x41, 0x55, #C10-A ~ C10-P 
-	0x00, 0x00, 0x00, 0x00, #C11-A ~ C11-P  
-	0x00, 0x00, 0x00, 0x00, #C12-A ~ C12-P 
-	0x55, 0x55, 0x55, 0x50, #C13-A ~ C13-P  
-	0x00, 0x00, 0x00, 0x00, #C14-A ~ C14-P 
-	0x00, 0x00, 0x00, 0x00, #C15-A ~ C15-P 
-	0x00, 0x00, 0x00, 0x00, #C16-A ~ C16-P 
+        # Frame 1
+        0x50, 0x55, 0x55, 0x55,  # C1-A ~ C1-P
+        0x00, 0x00, 0x00, 0x00,  # C2-A ~ C2-P
+        0x00, 0x00, 0x00, 0x00,  # C3-A ~ C3-P
+        0x15, 0x54, 0x55, 0x55,  # C4-A ~ C4-P
+        0x00, 0x00, 0x00, 0x00,  # C5-A ~ C5-P
+        0x00, 0x00, 0x00, 0x00,  # C6-A ~ C6-P
+        0x55, 0x05, 0x55, 0x55,  # C7-A ~ C7-P
+        0x00, 0x00, 0x00, 0x00,  # C8-A ~ C8-P
+        # Frame 2
+        0x00, 0x00, 0x00, 0x00,  # C9-A ~ C9-P
+        0x55, 0x55, 0x41, 0x55,  # C10-A ~ C10-P
+        0x00, 0x00, 0x00, 0x00,  # C11-A ~ C11-P
+        0x00, 0x00, 0x00, 0x00,  # C12-A ~ C12-P
+        0x55, 0x55, 0x55, 0x50,  # C13-A ~ C13-P
+        0x00, 0x00, 0x00, 0x00,  # C14-A ~ C14-P
+        0x00, 0x00, 0x00, 0x00,  # C15-A ~ C15-P
+        0x00, 0x00, 0x00, 0x00,  # C16-A ~ C16-P
     ]
 
 # endregion constants
 
-# region init
-    def __init__(self, addr):
+    # region init
+    def __init__(self, addr=0X74):
 
         self.light_num = 11
 
-        self.style = 'breath', 
-        self.front_color = 'white', 
+        self.style = 'breath',
+        self.front_color = 'white',
         self.back_color = 'black',
-        self.brightness = 1, 
+        self.brightness = 1,
         self.delay = 0.1
 
         self.bus = SMBus(1)
         self.addr = addr
 
-        self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FUNCTION_PAGE)  #Setting SLED1735 Ram Page to Function Page
-        self.write_cmd(self.SW_SHUT_DOWN_REG, 0x0)  #System must go to SW shutdowm mode when initialization
-        self.write_cmd(self.PICTURE_DISPLAY_REG, 0x10)  #Setting Matrix Type = Type3
-        self.write_cmd(self.STAGGERED_DELAY_REG, ((self.MSKSTD4 & self.CONST_STD_GROUP4)|(self.MSKSTD3 & self.CONST_STD_GROUP3)|(self.MSKSTD2 & self.CONST_STD_GROUP2)|(self.MSKSTD1 & self.CONST_STD_GROUP1)))  #Setting Staggered Delay
-        self.write_cmd(self.SLEW_RATE_CTL_REG, 0x1)  #Enable Slew Rate control
-        self.write_cmd(self.VAF_CTL_REG, (self.MSKVAF2 | self.MSKVAF1))  #VAF Control settings base on the LED type.
-        self.write_cmd(self.VAF_CTL_REG2, (self.MSKFORCEVAFCTL_DISABLE | self.MSKFORCEVAFTIME_CONST | self.MSKVAF3))
-        self.write_cmd(self.CURRENT_CTL_REG, (self.MSKCURRENT_CTL_EN | self.CONST_CURRENT_STEP_20mA))  #Setting LED driving current = 20mA and Enable current control
-        self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FRAME1_PAGE)  #Init Frame1Page(Clear all Ram) Setting SLED1735 Ram Page to Frame 1 Page
-        self.write_Ndata(0x00, 0X00, 0XB3)  #send 0xB3 bytes length Data From address 0x00
-        self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FRAME2_PAGE)  #Clear Type3 Frame 2 Page 
-        self.write_Ndata(0x00, 0X00, 0XB3)  #send 0xB3 bytes length Data From address 0x00
+        # Setting SLED1735 Ram Page to Function Page
+        self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FUNCTION_PAGE)
+        # System must go to SW shutdowm mode when initialization
+        self.write_cmd(self.SW_SHUT_DOWN_REG, 0x0)
+        # Setting Matrix Type = Type3
+        self.write_cmd(self.PICTURE_DISPLAY_REG, 0x10)
+        self.write_cmd(self.STAGGERED_DELAY_REG, ((self.MSKSTD4 & self.CONST_STD_GROUP4) | (self.MSKSTD3 & self.CONST_STD_GROUP3) | (
+            self.MSKSTD2 & self.CONST_STD_GROUP2) | (self.MSKSTD1 & self.CONST_STD_GROUP1)))  # Setting Staggered Delay
+        self.write_cmd(self.SLEW_RATE_CTL_REG, 0x1)  # Enable Slew Rate control
+        # VAF Control settings base on the LED type.
+        self.write_cmd(self.VAF_CTL_REG, (self.MSKVAF2 | self.MSKVAF1))
+        self.write_cmd(self.VAF_CTL_REG2, (self.MSKFORCEVAFCTL_DISABLE |
+                       self.MSKFORCEVAFTIME_CONST | self.MSKVAF3))
+        # Setting LED driving current = 20mA and Enable current control
+        self.write_cmd(self.CURRENT_CTL_REG,
+                       (self.MSKCURRENT_CTL_EN | self.CONST_CURRENT_STEP_20mA))
+        # Init Frame1Page(Clear all Ram) Setting SLED1735 Ram Page to Frame 1 Page
+        self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FRAME1_PAGE)
+        # send 0xB3 bytes length Data From address 0x00
+        self.write_Ndata(0x00, 0X00, 0XB3)
+        # Clear Type3 Frame 2 Page
+        self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FRAME2_PAGE)
+        # send 0xB3 bytes length Data From address 0x00
+        self.write_Ndata(0x00, 0X00, 0XB3)
         self.write_cmd(self.CONFIGURE_CMD_PAGE, self.LED_VAF_PAGE)
         self.write_Ndata(0X00, self.Type3Vaf, 0X40)
         self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FUNCTION_PAGE)
-        self.write_cmd(self.SW_SHUT_DOWN_REG, 0x1)  #After initialization , system back to SW Normal mode.
+        # After initialization , system back to SW Normal mode.
+        self.write_cmd(self.SW_SHUT_DOWN_REG, 0x1)
         self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FRAME1_PAGE)
-        self.write_Ndata(0X00, 0XFF, 0X10)  #Clear LED CTL Registers (Frame1Page)
+        # Clear LED CTL Registers (Frame1Page)
+        self.write_Ndata(0X00, 0XFF, 0X10)
         self.write_Ndata(0x20, 0x00, 0X80)
         self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FRAME2_PAGE)
-        self.write_Ndata(0X00, 0XFF, 0X10)  #Clear LED CTL Registers (Frame1Page)
+        # Clear LED CTL Registers (Frame1Page)
+        self.write_Ndata(0X00, 0XFF, 0X10)
         self.write_Ndata(0x20, 0x00, 0X80)
 
 # endregion init
@@ -140,30 +155,32 @@ class RGB_Strip():
             for i in range(length):
                 self.write_cmd(addr, data[i])
                 addr += 1
-  
+
 # image should be a 3-column two-digit array
     def display(self, image):
 
-        reds = list(map(lambda x: x[0], image))     # 'lambda x: x[0]'  same as  'fun(x): return x[0]'
+        # 'lambda x: x[0]'  same as  'fun(x): return x[0]'
+        reds = list(map(lambda x: x[0], image))
         greens = list(map(lambda x: x[1], image))
         blues = list(map(lambda x: x[2], image))
         revert_image = [reds, greens, blues]
 
-        reg = 0x20  #一页的寄存器起始地址
-        empty = 0  #寄存器地址空缺的位置（写入的数据需要补0）
-        pos = 0  #数据列表需要写入的数据所对应的索引
+        reg = 0x20  # 一页的寄存器起始地址
+        empty = 0  # 寄存器地址空缺的位置（写入的数据需要补0）
+        pos = 0  # 数据列表需要写入的数据所对应的索引
 
         for i in range(3):
             if i == 0:
                 # print("Write Page 1")
-                self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FRAME1_PAGE)  #设置写入的页
+                self.write_cmd(self.CONFIGURE_CMD_PAGE,
+                               self.FRAME1_PAGE)  # 设置写入的页
             elif reg == 0x20:
                 # print("Write Page 2")
                 self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FRAME2_PAGE)
 
             color = i % 3
             data = revert_image[color][pos*14:(pos+1)*14]
-            data.insert(empty,0)  #写入的数据补0
+            data.insert(empty, 0)  # 写入的数据补0
             data.insert(empty + 1, 0)
 
             self.bus.write_i2c_block_data(self.addr, reg, data)
@@ -175,50 +192,48 @@ class RGB_Strip():
                 reg = 0x20
 
 # styles
-    def monochromatic(self,color='white'): 
-           
-        data = [ color ]*self.light_num
+    def monochromatic(self, color='white'):
+
+        data = [color]*self.light_num
         data.reverse()
         self.display(data)
 
-
-    def increase(self,direction='low',front_color='white',back_color='black',delay=0.1):
-        background = self.colorConvertor(back_color)* self.light_num
-        data=[]
+    def increase(self, direction='low', front_color='white', back_color='black', delay=0.1):
+        background = self.colorConvertor(back_color) * self.light_num
+        data = []
         for i in range(self.light_num):
             data[i] = self.colorConvertor(front_color)
         self.display(data)
 
-
-    def Normal_distribution_calculate(self,u,sig,a,x,offset):
+    def Normal_distribution_calculate(self, u, sig, a, x, offset):
         y = a*np.exp(-(x-u)**2/(2*sig**2))/(math.sqrt(2*math.pi)*sig) + offset
         return y
 
-    def cosine_calculate(self,x):
-        return math.sin(x) 
+    def cosine_calculate(self, x):
+        return math.sin(x)
 
-    def Normal_distribution_display(self,u, sig, a, offset, color):
+    def Normal_distribution_display(self, u, sig, a, offset, color):
         data = []
         for x in range(self.light_num):
-            brightness = self.Normal_distribution_calculate(u, sig, a, x, offset)
+            brightness = self.Normal_distribution_calculate(
+                u, sig, a, x, offset)
             # print(brightness)
             data.append(list([max(0, int(c * brightness)) for c in color]))
         # print(data)
         self.display(data)
 
-    def cos_func(self,max, a, x):
+    def cos_func(self, max, a, x):
         return max/2 * math.cos(a*x) + max/2
 
-    def drop_move_back_forth(self,color='yellow',
-        delay=0.1,
-        a=5,
-        sig = 2):
+    def drop_move_back_forth(self, color='yellow',
+                             delay=0.1,
+                             a=5,
+                             sig=2):
 
         u = 0
         offset = 0
         start = int(-(self.light_num/2))
-        end = int(self.light_num *1.5)
-
+        end = int(self.light_num * 1.5)
 
         while True:
             for u in range(start, end, 1):
@@ -229,26 +244,25 @@ class RGB_Strip():
                 time.sleep(delay)
 
     # def breath(color=Pink,frequency_min=)
-    def drop_move_breath(self,color='pink',
-        delay=0.1,
-        a=5,
-        sig = 2):
+    def drop_move_breath(self, color='pink',
+                         delay=0.1,
+                         a=5,
+                         sig=2):
 
-         
         u = 5
         start = int(-(self.light_num/2))
-        end = int(self.light_num *1.5)
+        end = int(self.light_num * 1.5)
 
         def loop(u, sig, a, offset):
             data = []
             for x in range(self.light_num):
-                brightness = self.Normal_distribution_calculate(u, sig, a, x, offset)
+                brightness = self.Normal_distribution_calculate(
+                    u, sig, a, x, offset)
                 print(brightness)
                 data.append(list([max(0, int(c * brightness)) for c in color]))
             print(data)
             self.display(data)
             time.sleep(delay)
-
 
         while True:
             for x in range(0, 32, 1):
@@ -268,36 +282,36 @@ class RGB_Strip():
     #         offset = -self.cos_func(1, 20, x / 100)
     #         self.Normal_distribution_display(u, sig, a, offset, color)
     #         time.sleep(delay)
-    #     time.sleep(hold) 
+    #     time.sleep(hold)
     #     for x in range(16, 32, 1):
     #         offset = -self.cos_func(1, 20, x / 100)
     #         self.Normal_distribution_display(u, sig, a, offset, color)
     #         time.sleep(delay)
     #     time.sleep(hold)
 
-    def breath_once(self,color='pink',a=5,sig = 2, frame=None, i=None):
+    def breath_once(self, color='pink', a=5, sig=2, frame=None, i=None):
         u = 5
         color = [i*self.brightness for i in color]
-        
+
         offset = -self.cos_func(1, 20, frame/100)
         brightness = self.Normal_distribution_calculate(u, sig, a, i, offset)
         return list([max(0, int(c * brightness)) for c in color])
 
-    def boom(self,color='pink',a=5,sig = 2, frame=None, i=None):
+    def boom(self, color='pink', a=5, sig=2, frame=None, i=None):
         u = 5
         color = [i*self.brightness for i in color]
-        
+
         offset = -self.cos_func(1, 40, frame/100)
         brightness = self.Normal_distribution_calculate(u, sig, a, i, offset)
         return list([max(0, int(c * brightness)) for c in color])
 
-    def bark(self,color='pink',
-        a=5,
-        sig = 2, frame=None, i=None):
+    def bark(self, color='pink',
+             a=5,
+             sig=2, frame=None, i=None):
 
         u = 5
         color = [i*self.brightness for i in color]
-        
+
         offset = -self.cos_func(1, 20, frame/100)
         brightness = self.Normal_distribution_calculate(u, sig, a, i, offset)
         return list([max(0, int(c * brightness)) for c in color])
@@ -310,17 +324,16 @@ class RGB_Strip():
         elif self.style == 'bark':
             return self.bark(color=self.front_color, frame=frame, i=i)
 
-
-    def set_mode(self, style='breath', front_color='white', back_color='black',brightness=1, delay=0.01):
-        try: 
+    def set_mode(self, style='breath', front_color='white', back_color='black', brightness=1, delay=0.01):
+        try:
             front_color = self.colorConvertor(front_color)
             back_color = self.colorConvertor(back_color)
         except KeyError:
             raise KeyError('Without this color !')
         except Exception as e:
-            print(e)    
+            print(e)
 
-        self.style = style 
+        self.style = style
         self.front_color = front_color
         self.back_color = back_color
         self.brightness = brightness
@@ -339,11 +352,10 @@ class RGB_Strip():
         elif (isinstance(color, int)):
             return [color >> 16, color >> 8 & 0xff, color & 0xff]
 
-         
     def show(self):
         if self.style != None:
             for frame in range(0, 32, 1):
-                
+
                 datas = []
                 for i in range(self.light_num):
                     data = self.mode(frame, i)
@@ -357,8 +369,8 @@ class RGB_Strip():
         self.brightness = 0
 
 
-if __name__=='__main__':
-    strip = RGB_Strip(0X74)
-    strip.set_mode('bark','yellow')
+if __name__ == '__main__':
+    strip = RGBStrip()
+    strip.set_mode('bark', 'yellow')
     while True:
         strip.show()
