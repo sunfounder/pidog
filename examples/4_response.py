@@ -44,7 +44,7 @@ def alert():
             my_dog.tail_move([[0]], immediately=True, speed=90)
             my_dog.rgb_strip.set_mode(
                 'boom', front_color='red', brightness=0.8, delay=0.001)
-            my_dog.do_action('backward', step_count=1, speed=99)
+            my_dog.do_action('backward', step_count=1, speed=98)
             my_dog.wait_all_done()
             lean_forward()
             while len(my_dog.feet_actions_buffer) > 0:
@@ -61,6 +61,8 @@ def alert():
                 my_dog.do_action('wag_tail', step_count=20, speed=100)
                 my_dog.rgb_strip.set_mode(
                     'breath', front_color='pink', brightness=0.8, delay=0.08)
+        else:
+            my_dog.tail_stop()
         sleep(0.2)
 
 

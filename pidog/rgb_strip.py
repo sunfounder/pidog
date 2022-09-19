@@ -21,7 +21,7 @@ class RGBStrip():
         'pink':    [255, 192, 203]
     }
 
-# region constants
+    # region constants
     CONFIGURE_CMD_PAGE = 0XFD
     FRAME1_PAGE = 0x00
     FRAME2_PAGE = 0x01
@@ -85,7 +85,13 @@ class RGBStrip():
         0x00, 0x00, 0x00, 0x00,  # C16-A ~ C16-P
     ]
 
-# endregion constants
+    MODES = [
+        "breath",
+        "boom",
+        "bark",
+    ]
+
+    # endregion constants
 
     # region init
     def __init__(self, addr=0X74):
@@ -139,9 +145,9 @@ class RGBStrip():
         self.write_Ndata(0X00, 0XFF, 0X10)
         self.write_Ndata(0x20, 0x00, 0X80)
 
-# endregion init
+    # endregion init
 
-# i2c communicate
+    # i2c communicate
     def write_cmd(self, reg, cmd):
         self.bus.write_byte_data(self.addr, reg, cmd)
 
@@ -156,7 +162,7 @@ class RGBStrip():
                 self.write_cmd(addr, data[i])
                 addr += 1
 
-# image should be a 3-column two-digit array
+    # image should be a 3-column two-digit array
     def display(self, image):
 
         # 'lambda x: x[0]'  same as  'fun(x): return x[0]'
@@ -191,7 +197,7 @@ class RGBStrip():
             if reg == 0xA0:
                 reg = 0x20
 
-# styles
+    # styles
     def monochromatic(self, color='white'):
 
         data = [color]*self.light_num
@@ -275,20 +281,6 @@ class RGBStrip():
                 time.sleep(delay)
             time.sleep(delay*260)
 
-    # def breath_once(self,color='pink',delay=0.1,hold=0.1,a=5,sig = 2):
-    #     u = 5
-    #     color = [i*self.brightness for i in color]
-    #     for x in range(0, 15, 1):
-    #         offset = -self.cos_func(1, 20, x / 100)
-    #         self.Normal_distribution_display(u, sig, a, offset, color)
-    #         time.sleep(delay)
-    #     time.sleep(hold)
-    #     for x in range(16, 32, 1):
-    #         offset = -self.cos_func(1, 20, x / 100)
-    #         self.Normal_distribution_display(u, sig, a, offset, color)
-    #         time.sleep(delay)
-    #     time.sleep(hold)
-
     def breath_once(self, color='pink', a=5, sig=2, frame=None, i=None):
         u = 5
         color = [i*self.brightness for i in color]
@@ -367,10 +359,3 @@ class RGBStrip():
         self.front_color = [0, 0, 0]
         self.back_color = [0, 0, 0]
         self.brightness = 0
-
-
-if __name__ == '__main__':
-    strip = RGBStrip()
-    strip.set_mode('bark', 'yellow')
-    while True:
-        strip.show()

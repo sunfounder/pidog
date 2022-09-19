@@ -9,6 +9,8 @@ gyroData = []  # gx,gy,gz
 imu_acc_offset = [0, 0, 0]
 imu_gyro_offset = [0, 0, 0]
 
+print("Calibrating IMU...")
+
 _ax = 0
 _ay = 0
 _az = 0
@@ -29,7 +31,6 @@ for _ in range(time):
     _gx += gyroData[0]
     _gy += gyroData[1]
     _gz += gyroData[2]
-    print(accData, gyroData)
     sleep(0.1)
 
 imu_acc_offset[0] = round(-16384 - _ax/time, 0)
@@ -39,7 +40,7 @@ imu_gyro_offset[0] = round(0 - _gx/time, 0)
 imu_gyro_offset[1] = round(0 - _gy/time, 0)
 imu_gyro_offset[2] = round(0 - _gz/time, 0)
 
-print(imu_acc_offset, imu_gyro_offset)
+print("Done!")
 
 
 while True:
@@ -53,5 +54,6 @@ while True:
     accData = [accData[i]+imu_acc_offset[i] for i in range(3)]
     gyroData = [gyroData[i]+imu_gyro_offset[i] for i in range(3)]
 
-    print(accData, gyroData)
+    print(f"\rACC: {accData[0]:8} {accData[1]:8} {accData[2]:8} | GYRO: {gyroData[0]:8} {gyroData[1]:8} {gyroData[2]:8}",
+          end="          ", flush=True)
     sleep(0.1)

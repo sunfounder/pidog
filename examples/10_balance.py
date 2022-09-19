@@ -35,6 +35,7 @@ current_pose = {'x': 0, 'y': 0, 'z': 80}
 current_rpy = {'roll': 0, 'pitch': 0, 'yaw': 0}
 thread_start = True
 
+
 def move_thread():
     while thread_start:
         for coord in current_coords:
@@ -43,9 +44,12 @@ def move_thread():
             my_dog.set_pose(**current_pose)
             my_dog.set_feet(coord)
             angles = my_dog.pose2feet_angle()
-            my_dog.feet.servo_move2(angles, speed=98)
+            my_dog.feet.servo_move(angles, speed=98)
+
 
 t = threading.Thread(target=move_thread)
+
+
 def main():
     global current_coords, current_pose, current_rpy, thread_start
     my_dog.do_action('stand', speed=80)
@@ -53,7 +57,7 @@ def main():
     t.start()
 
     while True:
-        os.system('cls' if os.name=='nt' else 'clear')
+        os.system('cls' if os.name == 'nt' else 'clear')
         print(usage)
         key = readchar.readkey()
         if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
@@ -77,6 +81,7 @@ def main():
             current_pose['z'] -= 1
             if current_pose['z'] < 30:
                 current_pose['z'] = 30
+
 
 if __name__ == "__main__":
     try:

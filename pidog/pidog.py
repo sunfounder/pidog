@@ -8,7 +8,7 @@ from math import pi, sin, cos, sqrt, acos, atan2, atan
 from robot_hat import Robot, Pin, Ultrasonic, utils, Music
 from .sh3001 import Sh3001
 from .rgb_strip import RGBStrip
-from .sound_direction import Sound_direction
+from .sound_direction import SoundDirection
 from .dual_touch import DualTouch
 
 ''' servos order
@@ -136,7 +136,7 @@ class Pidog():
         self.dual_touch = DualTouch('D2', 'D3')
         self.touch = 'N'
 
-        self.ears = Sound_direction()
+        self.ears = SoundDirection()
         self.sound_direction = -1
 
         self.exit_flag = False
@@ -723,6 +723,9 @@ class Pidog():
     def do_action(self, motion_name, step_count=1, wait=False, speed=50):
         try:
             actions, part = self.actions_dict[motion_name]
+            # Stand motion cannot be too fast, or power will break down and shut the Raspberry Pi done
+            if motion_name == "stand":
+                speed = min(speed, 70)
             if part == 'feet':
                 for _ in range(step_count):
                     self.feet_move(actions, immediately=False, speed=speed)

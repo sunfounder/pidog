@@ -1,10 +1,8 @@
 from robot_hat import Ultrasonic, Pin
 import time
 
-# Create an ultrasonic sensor object
-# Trigger pin is D0, echo pin is D1
 
-ultrasonic = Ultrasonic(Pin("D0"), Pin("D1"))
+ultrasonic = Ultrasonic(Pin("D1"), Pin("D0"))
 
 # Read the distance in centimeters
 while True:
