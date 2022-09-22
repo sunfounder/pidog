@@ -210,7 +210,7 @@ def change_status(status):
 
 def run_command():
     global command, head_pitch_init
-    if not my_dog.is_feet_done() or not my_dog.is_head_done():
+    if not my_dog.is_legs_done() or not my_dog.is_head_done():
         return
     if command is None:
         return

@@ -7,13 +7,13 @@ sleep(0.1)
 
 
 def delay(time):
-    my_dog.wait_feet_done()
+    my_dog.wait_legs_done()
     sleep(time)
 
 
 def fly():
     my_dog.rgb_strip.set_mode('boom', front_color='red', delay=0.01)
-    my_dog.feet.servo_move([45, -45, 90, -80, 90, 90, -90, -90], speed=60)
+    my_dog.legs.servo_move([45, -45, 90, -80, 90, 90, -90, -90], speed=60)
     my_dog.do_action('wag_tail', step_count=20, speed=100)
     my_dog.speak('woohoo')
     delay(1)

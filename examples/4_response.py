@@ -47,7 +47,7 @@ def alert():
             my_dog.do_action('backward', step_count=1, speed=98)
             my_dog.wait_all_done()
             lean_forward()
-            while len(my_dog.feet_actions_buffer) > 0:
+            while len(my_dog.legs_action_buffer) > 0:
                 sleep(0.1)
             my_dog.do_action('stand', step_count=1, speed=90)
             sleep(0.5)
@@ -56,7 +56,7 @@ def alert():
                 'breath', front_color='pink', brightness=0.8, delay=0.08)
         # relax
         if my_dog.dual_touch.is_slide() != 'N':
-            if len(my_dog.head_actions_buffer) < 2:
+            if len(my_dog.head_action_buffer) < 2:
                 head_nod(1)
                 my_dog.do_action('wag_tail', step_count=20, speed=100)
                 my_dog.rgb_strip.set_mode(

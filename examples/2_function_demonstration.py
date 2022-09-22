@@ -4,15 +4,15 @@ from pidog import Pidog
 import os
 
 my_dog = Pidog()
-sleep(0.5) 
+sleep(0.5)
 
 actions = [
     # name, head_pitch_adjust, speed
-    ['stand', 0, 20],
-    ['sit', -30, 20],
+    ['stand', 0, 50],
+    ['sit', -30, 50],
     ['lie', 0, 20],
     ['lie_with_hands_out', 0,  20],
-    ['trot', 0, 98],
+    ['trot', 0, 95],
     ['forward', 0, 98],
     ['backward', 0, 98],
     ['turn_left', 0, 98],
@@ -37,11 +37,14 @@ exit_flag = False
 
 STANDUP_ACTIONS = ['trot', 'forward', 'backward', 'turn_left', 'turn_right']
 
+
 def show_info():
     print("\033[H\033[J", end='')  # clear terminal windows
-    print("\033[104m\033[1m  Function Demonstration                            \033[0m")
+    print(
+        "\033[104m\033[1m  Function Demonstration                            \033[0m")
     print("\033[90m  Input Function number to see how it goes.\n  Actions will repeat 10 times.\033[0m")
-    print("\033[100m\033[1m   Actions:                    Sound Effect:        \033[0m")
+    print(
+        "\033[100m\033[1m   Actions:                    Sound Effect:        \033[0m")
     first_line = 5
     last_line = 0
     for i, action in enumerate(actions):
@@ -50,13 +53,15 @@ def show_info():
     for i, sound_effect in enumerate(sound_effects):
         print(f'\033[{i+first_line};32H{i+len(actions)+1}. {sound_effect}')
     last_line = max(i+first_line, last_line) - 1
-    print(f"\033[100m\033[1m\033[{last_line +2};0H   Ctrl+C: Quit                                     \033[0m")
+    print(
+        f"\033[100m\033[1m\033[{last_line +2};0H   Ctrl+C: Quit                                     \033[0m")
     if index != None:
         print('Current selection: ', end="")
         if index < len(actions):
             print(f"{index+1}. {actions[index][0]}")
         else:
             print(f"{index+1}. {sound_effects[index-len(actions)]}")
+
 
 def do_function(index):
     global last_index
@@ -69,16 +74,18 @@ def do_function(index):
         # If this action is trot, forward, turn left, turn right and backward, and, last action is not, then stand up
         if name in STANDUP_ACTIONS and last_index < len(actions) and actions[last_index][0] not in STANDUP_ACTIONS:
             my_dog.do_action('stand', wait=False, speed=60)
-        my_dog.head_move_raw([[0, 0, head_pitch_adjust]], immediately=True ,speed=60)
+        my_dog.head_move_raw([[0, 0, head_pitch_adjust]],
+                             immediately=True, speed=60)
         my_dog.do_action(name, step_count=10, wait=False, speed=speed)
     elif index < len(actions) + len(sound_effects):
         my_dog.speak(sound_effects[index - len(actions)])
-    last_index = index 
+    last_index = index
+
 
 def function_demonstration():
     global index
     global exit_flag
-    
+
     show_info()
 
     while True:
@@ -96,8 +103,6 @@ def function_demonstration():
             my_dog.close()
         sleep(0.05)
 
+
 if __name__ == "__main__":
     function_demonstration()
-
-
-

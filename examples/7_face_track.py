@@ -10,7 +10,7 @@ sleep(0.1)
 
 
 def delay(time):
-    my_dog.wait_feet_done()
+    my_dog.wait_legs_done()
     my_dog.wait_head_done()
     sleep(time)
 

@@ -7,9 +7,10 @@ my_dog = Pidog()
 
 sleep(0.5)
 
+
 def main():
-    my_dog.feet_move([[45, -25, -45, 25, 80, 70, -80, -70]],speed=90)
-    my_dog.head_move([[0, 0, -20]],speed=90)
+    my_dog.legs_move([[45, -25, -45, 25, 80, 70, -80, -70]], speed=90)
+    my_dog.head_move([[0, 0, -20]], speed=90)
     my_dog.wait_all_done()
     sleep(0.2)
     bark(my_dog, [0, 0, -20])
@@ -23,9 +24,9 @@ def main():
         bark(my_dog, [0, 0, -40])
         sleep(0.4)
 
+
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
         my_dog.close()
-  

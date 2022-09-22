@@ -23,8 +23,10 @@ head_pitch_init = 0
 command = None
 current_status = STATUS_LIE
 
+
 def map(x, in_min, in_max, out_min, out_max):
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+
 
 def set_head(roll=None, pitch=None, yaw=None):
     global head_yrp
@@ -34,19 +36,31 @@ def set_head(roll=None, pitch=None, yaw=None):
         head_yrp[2] = pitch + head_origin_yrp[2]
     if yaw is not None:
         head_yrp[0] = yaw + head_origin_yrp[0]
-    my_dog.head_move([head_yrp], pitch_init=head_pitch_init, immediately=True, speed=100)
+    my_dog.head_move([head_yrp], pitch_init=head_pitch_init,
+                     immediately=True, speed=100)
 
 # IP address
+
+
 def getIP():
-    wlan0 = os.popen("ifconfig wlan0 |awk '/inet/'|awk 'NR==1 {print $2}'").readline().strip('\n')
-    eth0 = os.popen("ifconfig eth0 |awk '/inet/'|awk 'NR==1 {print $2}'").readline().strip('\n')
+    wlan0 = os.popen(
+        "ifconfig wlan0 |awk '/inet/'|awk 'NR==1 {print $2}'").readline().strip('\n')
+    eth0 = os.popen(
+        "ifconfig eth0 |awk '/inet/'|awk 'NR==1 {print $2}'").readline().strip('\n')
 
     if wlan0 == '':
         wlan0 = None
     if eth0 == '':
         eth0 = None
 
-    return wlan0,eth0
+    return wlan0, eth0
+
+
+def stretch():
+    my_dog.do_action('stretch', wait=True, speed=10)
+    my_dog.wait_all_done()
+    # sleep(1)
+
 
 COMMANDS = {
     "forward": {
@@ -128,7 +142,7 @@ COMMANDS = {
     },
     "stretch": {
         "commands": ["stretch"],
-        "function": lambda: my_dog.do_action('stretch', wait=True, speed=80),
+        "function": lambda: stretch(),
         "after": "stand up",
         "status": STATUS_STAND,
     },
@@ -151,7 +165,7 @@ COMMANDS = {
         "status": STATUS_SIT,
     },
     "twist body": {
-        "commands": ["twist body"],
+        "commands": ["twist body", "taste body", "twist party", "taste party"],
         "function": lambda: body_twisting(my_dog),
         "before": "stretch",
         "after": "sit",
@@ -180,10 +194,12 @@ COMMANDS = {
     },
 }
 
+
 def set_head_pitch_init(pitch):
     global head_pitch_init
     head_pitch_init = pitch
     my_dog.head_move([head_yrp], pitch_init=pitch, immediately=True, speed=80)
+
 
 def change_status(status):
     global current_status
@@ -198,9 +214,10 @@ def change_status(status):
         set_head_pitch_init(STAND_HEAD_PITCH)
         my_dog.do_action('lie', wait=True, speed=70)
 
+
 def run_command():
     global command, head_pitch_init
-    if not my_dog.is_feet_done() or not my_dog.is_head_done():
+    if not my_dog.is_legs_done() or not my_dog.is_head_done():
         return
     if command is None:
         return
@@ -223,23 +240,24 @@ def run_command():
                 command = None
             break
 
+
 def main():
     global command
     sc.set_name('Mydog')
     sc.set_type('Pidog')
     sc.start()
 
-    wlan0,eth0 = getIP()
+    wlan0, eth0 = getIP()
     if wlan0 != None:
         ip = wlan0
     else:
         ip = eth0
-    print('ip : %s'%ip)
-    sc.set('video','http://'+ip+':9000/mjpg')
+    print('ip : %s' % ip)
+    sc.set('video', 'http://'+ip+':9000/mjpg')
 
-    Vilib.camera_start(vflip=False,hflip=False)
+    Vilib.camera_start(vflip=False, hflip=False)
     Vilib.display(local=False, web=True)
-    
+
     print("Voice Command: ")
     for command_name in COMMANDS:
         print(command_name)
@@ -304,19 +322,19 @@ def main():
         n_value = sc.get('N')
         if n_value:
             command = 'bark'
-        
+
         # Wag tail
         O_value = sc.get('O')
         if O_value:
             command = 'wag tail'
         elif command == 'wag tail':
             command = None
-        
+
         # pant
         P_value = sc.get('P')
         if P_value:
             command = 'pant'
-        
+
         # Scratch
         I_value = sc.get('I')
         if I_value:
@@ -326,7 +344,7 @@ def main():
         E_value = sc.get('E')
         if E_value:
             command = 'sit'
-        
+
         # Stand
         F_value = sc.get('F')
         if F_value:
@@ -347,7 +365,7 @@ def main():
         run_command()
         sleep(0.008)
 
- 
+
 if __name__ == "__main__":
     try:
         main()

@@ -23,11 +23,11 @@ from .dual_touch import DualTouch
                     / 
     thighs and calf crus shank
 
-    feet order: 1~8
-        left front leg, left front foot, 
-        right front leg, right front foot,
-        left hind leg, left hind foot, 
-        right hind leg, right hind foot,
+    legs order: 1~8
+        left front leg, left front leg
+        right front leg, right front leg
+        left hind leg, left hind leg, 
+        right hind leg, right hind leg,
 
     head order: 9~11
         yaw, roll, pitch
@@ -47,7 +47,7 @@ class Pidog():
 
     # structure constants
     leg = 42
-    foot = 76
+    leg = 76
     BODY_LENGTH = 117
     BODY_WIDTH = 98
     BODY_STRUCT = np.mat([
@@ -56,19 +56,23 @@ class Pidog():
         [-BODY_WIDTH / 2,  BODY_LENGTH / 2,  0],
         [BODY_WIDTH / 2,  BODY_LENGTH / 2,  0]]).T
     SOUND_DIR = "/home/pi/pidog/sounds/"
+    # Servo Speed
+    HEAD_DPS = 300
+    LEGS_DPS = 400
+    TAIL_DPS = 500
     # PID Constants
     KP = 0.033
     KI = 0.0
     KD = 0.0
-    # Left Front Leg, Left Front Foot, Right Front Leg, Right Front Foot, Left Hind Leg, Left Hind Foot, Right Hind Leg, Right Hind Foot
-    DEFAULT_FEET_PINS = [2, 3, 7, 8, 0, 1, 10, 11]
+    # Left Front Leg, Left Front Leg, Right Front Leg, Right Front Leg, Left Hind Leg, Left Hind Leg, Right Hind Leg, Right Hind Leg
+    DEFAULT_LEGS_PINS = [2, 3, 7, 8, 0, 1, 10, 11]
     # Head Yaw, Roll, Pitch
     DEFAULT_HEAD_PINS = [4, 6, 5]
     DEFAULT_TAIL_PIN = [9]
-    # init
 
-    def __init__(self, feet_pins=DEFAULT_FEET_PINS, head_pins=DEFAULT_HEAD_PINS, tail_pin=DEFAULT_TAIL_PIN,
-                 feet_init_angles=None, head_init_angles=None, tail_init_angle=None):
+    # init
+    def __init__(self, leg_pins=DEFAULT_LEGS_PINS, head_pins=DEFAULT_HEAD_PINS, tail_pin=DEFAULT_TAIL_PIN,
+                 leg_init_angles=None, head_init_angles=None, tail_init_angle=None):
 
         from .actions_dictionary import ActionDict
         self.actions_dict = ActionDict()
@@ -76,7 +80,7 @@ class Pidog():
         self.body_height = 80
         self.pose = np.mat([0.0,  0.0,  self.body_height]).T  # 目标位置向量
         self.rpy = np.array([0.0,  0.0,  0.0]) * pi / 180  # 欧拉角，化为弧度值
-        self.footpoint_struc = np.mat([
+        self.leg_point_struc = np.mat([
             [-self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2,  0],
             [self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2,  0],
             [-self.BODY_WIDTH / 2,  self.BODY_LENGTH / 2,  0],
@@ -85,36 +89,40 @@ class Pidog():
         self.pitch = 0
         self.roll = 0
 
-        if feet_init_angles == None:
-            feet_init_angles = self.actions_dict['lie'][0][0]
+        if leg_init_angles == None:
+            leg_init_angles = self.actions_dict['lie'][0][0]
         if head_init_angles == None:
             # head_init_angles = [0,0,-20]
             head_init_angles = [0]*3
         if tail_init_angle == None:
             tail_init_angle = [0]
 
-        self.feet = Robot(pin_list=feet_pins, name='feet', init_angles=feet_init_angles, init_order=[
+        self.legs = Robot(pin_list=leg_pins, name='legs', init_angles=leg_init_angles, init_order=[
                           0, 2, 4, 6, 1, 3, 5, 7], db=config_file)
         self.head = Robot(pin_list=head_pins, name='head',
                           init_angles=head_init_angles, db=config_file)
         self.tail = Robot(pin_list=tail_pin, name='tail',
                           init_angles=tail_init_angle, db=config_file)
 
-        self.feet_actions_buffer = []
-        self.head_actions_buffer = []
-        self.tail_actions_buffer = []
+        self.legs.max_dps = self.LEGS_DPS
+        self.head.max_dps = self.HEAD_DPS
+        self.tail.max_dps = self.TAIL_DPS
 
-        self.feet_actions_coords_buffer = []
+        self.legs_action_buffer = []
+        self.head_action_buffer = []
+        self.tail_action_buffer = []
 
-        self.feet_current_angle = feet_init_angles
-        self.head_current_angle = head_init_angles
-        self.tail_current_angle = tail_init_angle
+        self.legs_actions_coords_buffer = []
 
-        self.feet_speed = 90
+        self.leg_current_angles = leg_init_angles
+        self.head_current_angles = head_init_angles
+        self.tail_current_angles = tail_init_angle
+
+        self.legs_speed = 90
         self.head_speed = 90
         self.tail_speed = 90
 
-        self.feet_done_flag = False
+        self.legs_done_flag = False
         self.head_done_flag = False
         self.tail_done_flag = False
 
@@ -153,7 +161,7 @@ class Pidog():
 
         self.music = Music()
 
-    # action related: feet,head,tail,imu,rgb_strip
+    # action related: legs,head,tail,imu,rgb_strip
 
     def close_all_thread(self):
         self.exit_flag = True
@@ -175,7 +183,7 @@ class Pidog():
         except Exception as e:
             print('Close error:', e)
 
-        self.feet_thread.join()
+        self.legs_thread.join()
         self.head_thread.join()
         self.tail_thread.join()
         self.rgb_strip_thread.join()
@@ -184,7 +192,7 @@ class Pidog():
             self.sensory_processes.terminate()
         sys.exit(0)
 
-    def feet_simple_move(self, angles_list, speed=90):
+    def legs_simple_move(self, angles_list, speed=90):
 
         tt = time()
 
@@ -200,8 +208,8 @@ class Pidog():
 
         rel_angles_list = []
         for i in range(len(angles_list)):
-            rel_angles_list.append(angles_list[i] + self.feet.offset[i])
-        self.feet.servo_write_raw(rel_angles_list)
+            rel_angles_list.append(angles_list[i] + self.legs.offset[i])
+        self.legs.servo_write_raw(rel_angles_list)
 
         tt2 = time() - tt
         delay2 = 0.001*len(angles_list) - tt2
@@ -210,22 +218,22 @@ class Pidog():
             delay2 = -delay
         sleep(delay + delay2)
 
-    def feet_switch(self, flag=False):
-        self.feet_sw_flag = flag
+    def legs_switch(self, flag=False):
+        self.legs_sw_flag = flag
 
     def action_threads_start(self):
         # Immutable objects int, float, string, tuple, etc., need to be declared with global
         # Variable object lists, dicts, instances of custom classes, etc., do not need to be declared with global
-        self.feet_thread = threading.Thread(
-            name='feet_thread', target=self._feet_action_thread)
+        self.legs_thread = threading.Thread(
+            name='legs_thread', target=self._legs_action_thread)
         self.head_thread = threading.Thread(
             name='head_thread', target=self._head_action_thread)
         self.tail_thread = threading.Thread(
             name='tail_thread', target=self._tail_action_thread)
-        self.feet_thread.setDaemon(True)
+        self.legs_thread.setDaemon(True)
         self.head_thread.setDaemon(True)
         self.tail_thread.setDaemon(True)
-        self.feet_thread.start()
+        self.legs_thread.start()
         self.head_thread.start()
         self.tail_thread.start()
         self.rgb_strip_thread = threading.Thread(
@@ -237,23 +245,23 @@ class Pidog():
         self.rgb_strip_thread.start()
         self.imu_thread.start()
 
-    # feet
-    def _feet_action_thread(self):
+    # legs
+    def _legs_action_thread(self):
         while not self.exit_flag:
             try:
-                self.feet_done_flag = False
-                self.feet.servo_move(
-                    self.feet_actions_buffer[0], self.feet_speed)
-                self.feet_current_angle = list.copy(
-                    self.feet_actions_buffer[0])
-                self.feet_actions_buffer.pop(0)
+                self.legs_done_flag = False
+                self.legs.servo_move(
+                    self.legs_action_buffer[0], self.legs_speed)
+                self.leg_current_angles = list.copy(
+                    self.legs_action_buffer[0])
+                self.legs_action_buffer.pop(0)
             except IndexError:
-                self.feet_done_flag = True
+                self.legs_done_flag = True
                 sleep(0.001)
             except Exception as e:
-                print('_feet_action_thread Exception:%s' % e)
+                print('_legs_action_thread Exception:%s' % e)
                 break
-        self.feet_done_flag = True
+        self.legs_done_flag = True
 
     # head
     def _head_action_thread(self):
@@ -261,10 +269,10 @@ class Pidog():
             try:
                 self.head_done_flag = False
                 self.head.servo_move(
-                    self.head_actions_buffer[0], self.head_speed)
-                self.head_current_angle = list.copy(
-                    self.head_actions_buffer[0])
-                self.head_actions_buffer.pop(0)
+                    self.head_action_buffer[0], self.head_speed)
+                self.head_current_angles = list.copy(
+                    self.head_action_buffer[0])
+                self.head_action_buffer.pop(0)
             except IndexError:
                 self.head_done_flag = True
                 sleep(0.001)
@@ -279,10 +287,10 @@ class Pidog():
             try:
                 self.tail_done_flag = False
                 self.tail.servo_move(
-                    self.tail_actions_buffer[0], self.tail_speed)
-                self.tail_current_angle = list.copy(
-                    self.tail_actions_buffer[0])
-                self.tail_actions_buffer.pop(0)
+                    self.tail_action_buffer[0], self.tail_speed)
+                self.tail_current_angles = list.copy(
+                    self.tail_action_buffer[0])
+                self.tail_action_buffer.pop(0)
             except IndexError:
                 self.tail_done_flag = True
                 sleep(0.001)
@@ -371,30 +379,30 @@ class Pidog():
                     break
 
     # clear actions buff
-    def feet_stop(self):
-        self.feet_actions_buffer.clear()
-        self.wait_feet_done()
+    def legs_stop(self):
+        self.legs_action_buffer.clear()
+        self.wait_legs_done()
 
     def head_stop(self):
-        self.head_actions_buffer.clear()
+        self.head_action_buffer.clear()
         self.wait_head_done()
 
     def tail_stop(self):
-        self.tail_actions_buffer.clear()
+        self.tail_action_buffer.clear()
         self.wait_tail_done()
 
     def body_stop(self):
-        self.feet_stop()
+        self.legs_stop()
         self.head_stop()
         self.tail_stop()
 
     # move
-    def feet_move(self, target_angles, immediately=True, speed=50):
-        self.feet_done_flag = False
+    def legs_move(self, target_angles, immediately=True, speed=50):
+        self.legs_done_flag = False
         if immediately == True:
-            self.feet_stop()
-        self.feet_speed = speed
-        self.feet_actions_buffer += target_angles
+            self.legs_stop()
+        self.legs_speed = speed
+        self.legs_action_buffer += target_angles
 
     def head_rpy_to_angle(self, target_yrp, roll_init=0, pitch_init=0):
         yaw, roll, pitch = target_yrp
@@ -412,21 +420,21 @@ class Pidog():
         self.head_speed = speed
         angles = [self.head_rpy_to_angle(
             target_yrp, roll_init, pitch_init) for target_yrp in target_yrps]
-        self.head_actions_buffer += angles
+        self.head_action_buffer += angles
 
     def head_move_raw(self, target_angles, immediately=True, speed=50):
         self.head_done_flag = False
         if immediately == True:
             self.head_stop()
         self.head_speed = speed
-        self.head_actions_buffer += target_angles
+        self.head_action_buffer += target_angles
 
     def tail_move(self, target_angles, immediately=True, speed=50):
         self.tail_done_flag = False
         if immediately == True:
             self.tail_stop()
         self.tail_speed = speed
-        self.tail_actions_buffer += target_angles
+        self.tail_action_buffer += target_angles
 
     # sensory_processes : ultrasonic,sound_direction
     def sensory_processes_work(self, distance_addr, lock):
@@ -463,7 +471,7 @@ class Pidog():
     def stop_and_lie(self, speed=85):
         try:
             self.body_stop()
-            self.feet_move(self.actions_dict['lie'][0], speed)
+            self.legs_move(self.actions_dict['lie'][0], speed)
             self.head_move_raw([[0, 0, 0]], speed)
             self.tail_move([[0, 0, 0]], speed)
             self.wait_all_done()
@@ -485,20 +493,20 @@ class Pidog():
             return False
 
     # calibration
-    def feet_offset(self, cali_list):
-        self.feet.set_offset(cali_list)
-        self.feet.reset()
-        self.feet_current_angle = [0]*8
+    def leg_offsets(self, cali_list):
+        self.legs.set_offset(cali_list)
+        self.legs.reset()
+        self.leg_current_angles = [0]*8
 
     def head_offset(self, cali_list):
         self.head.set_offset(cali_list)
         self.head.reset()
-        self.head_current_angle = [0]*3
+        self.head_current_angles = [0]*3
 
     def tail_offset(self, cali_list):
         self.tail.set_offset(cali_list)
         self.tail.reset()
-        self.tail_current_angle = [0]
+        self.tail_current_angles = [0]
 
     # calculate angles and coords
 
@@ -542,16 +550,16 @@ class Pidog():
             self.rpy[1] = pitch / 180. * pi
             self.rpy[2] = yaw / 180. * pi
 
-    def set_feet(self, feet_list):
-        self.footpoint_struc = np.mat([
+    def set_legs(self, legs_list):
+        self.legpoint_struc = np.mat([
             [-self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2 +
-                feet_list[0][0], self.body_height - feet_list[0][1]],
+                legs_list[0][0], self.body_height - legs_list[0][1]],
             [self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2 +
-                feet_list[1][0], self.body_height - feet_list[1][1]],
+                legs_list[1][0], self.body_height - legs_list[1][1]],
             [-self.BODY_WIDTH / 2,  self.BODY_LENGTH / 2 +
-                feet_list[2][0], self.body_height - feet_list[2][1]],
+                legs_list[2][0], self.body_height - legs_list[2][1]],
             [self.BODY_WIDTH / 2,  self.BODY_LENGTH / 2 +
-                feet_list[3][0], self.body_height - feet_list[3][1]]
+                legs_list[3][0], self.body_height - legs_list[3][1]]
         ]).T
 
     # pose and Euler Angle algorithm
@@ -576,43 +584,43 @@ class Pidog():
         AB = np.mat(np.zeros((3, 4)))
         for i in range(4):
             AB[:, i] = - self.pose - rot_mat * \
-                self.BODY_STRUCT[:, i] + self.footpoint_struc[:, i]
+                self.BODY_STRUCT[:, i] + self.legpoint_struc[:, i]
 
         body_coor_list = []
         for i in range(4):
-            body_coor_list.append([(self.footpoint_struc - AB).T[i, 0],
-                                  (self.footpoint_struc - AB).T[i, 1], (self.footpoint_struc - AB).T[i, 2]])
+            body_coor_list.append([(self.legpoint_struc - AB).T[i, 0],
+                                  (self.legpoint_struc - AB).T[i, 1], (self.legpoint_struc - AB).T[i, 2]])
 
-        foot_coor_list = []
+        leg_coor_list = []
         for i in range(4):
-            foot_coor_list.append(
-                [self.footpoint_struc.T[i, 0], self.footpoint_struc.T[i, 1], self.footpoint_struc.T[i, 2]])
+            leg_coor_list.append(
+                [self.legpoint_struc.T[i, 0], self.legpoint_struc.T[i, 1], self.legpoint_struc.T[i, 2]])
 
-        return {"foot": foot_coor_list, "body": body_coor_list}
+        return {"leg": leg_coor_list, "body": body_coor_list}
 
-    def pose2feet_angle(self):
+    def pose2legs_angle(self):
         data = self.pose2coords()
-        foot_coor_list = data["foot"]
+        leg_coor_list = data["leg"]
         body_coor_list = data["body"]
         coords = []
         angles = []
 
         for i in range(4):
-            coords.append([foot_coor_list[i][1]-body_coor_list[i]
-                          [1], body_coor_list[i][2] - foot_coor_list[i][2]])
+            coords.append([leg_coor_list[i][1]-body_coor_list[i]
+                          [1], body_coor_list[i][2] - leg_coor_list[i][2]])
 
         angles = []
 
         for i, coord in enumerate(coords):
 
-            leg_angle, foot_angle = self.fieldcoord2polar(coord)
+            leg_angle, leg_angle = self.fieldcoord2polar(coord)
             # The left and right sides are opposite
             leg_angle = leg_angle
-            foot_angle = foot_angle-90
+            leg_angle = leg_angle-90
             if i % 2 != 0:
                 leg_angle = -leg_angle
-                foot_angle = -foot_angle
-            angles += [leg_angle, foot_angle]
+                leg_angle = -leg_angle
+            angles += [leg_angle, leg_angle]
 
         return angles
 
@@ -620,13 +628,13 @@ class Pidog():
     def fieldcoord2polar(self, coord):
         y, z = coord
         u = sqrt(pow(y, 2) + pow(z, 2))
-        cos_angle1 = (self.foot**2 + self.leg**2 - u**2) / \
-            (2 * self.foot * self.leg)
+        cos_angle1 = (self.leg**2 + self.leg**2 - u**2) / \
+            (2 * self.leg * self.leg)
         cos_angle1 = min(max(cos_angle1, -1), 1)
         beta = acos(cos_angle1)
 
         angle1 = atan2(y, z)
-        cos_angle2 = (self.leg**2 + u**2 - self.foot**2)/(2*self.leg*u)
+        cos_angle2 = (self.leg**2 + u**2 - self.leg**2)/(2*self.leg*u)
         cos_angle2 = min(max(cos_angle2, -1), 1)
         angle2 = acos(cos_angle2)
         alpha = angle2 + angle1 + self.rpy[1]
@@ -639,13 +647,13 @@ class Pidog():
     def coord2polar(self, coord):
         y, z = coord
         u = sqrt(pow(y, 2) + pow(z, 2))
-        cos_angle1 = (self.foot**2 + self.leg**2 - u**2) / \
-            (2 * self.foot * self.leg)
+        cos_angle1 = (self.leg**2 + self.leg**2 - u**2) / \
+            (2 * self.leg * self.leg)
         cos_angle1 = min(max(cos_angle1, -1), 1)
         beta = acos(cos_angle1)
 
         angle1 = atan2(y, z)
-        cos_angle2 = (self.leg**2 + u**2 - self.foot**2)/(2*self.leg*u)
+        cos_angle2 = (self.leg**2 + u**2 - self.leg**2)/(2*self.leg*u)
         cos_angle2 = min(max(cos_angle2, -1), 1)
         angle2 = acos(cos_angle2)
         alpha = angle2 + angle1
@@ -670,18 +678,18 @@ class Pidog():
         return [round(x, 4), round(y, 4), round(z, 4)]
 
     @classmethod
-    def feet_angle_calculation(cls, coords):  # 注意这里使用了 @classmethod
+    def legs_angle_calculation(cls, coords):  # 注意这里使用了 @classmethod
         translate_list = []
         for i, coord in enumerate(coords):  # each servo motion
             # coord2polar
-            leg_angle, foot_angle = Pidog.coord2polar(cls, coord)
+            leg_angle, leg_angle = Pidog.coord2polar(cls, coord)
             # The left and right sides are opposite
             leg_angle = leg_angle
-            foot_angle = foot_angle-90
+            leg_angle = leg_angle-90
             if i % 2 != 0:
                 leg_angle = -leg_angle
-                foot_angle = -foot_angle
-            translate_list += [leg_angle, foot_angle]
+                leg_angle = -leg_angle
+            translate_list += [leg_angle, leg_angle]
 
         return translate_list
 
@@ -723,14 +731,11 @@ class Pidog():
     def do_action(self, motion_name, step_count=1, wait=False, speed=50):
         try:
             actions, part = self.actions_dict[motion_name]
-            # Stand motion cannot be too fast, or power will break down and shut the Raspberry Pi done
-            if motion_name == "stand":
-                speed = min(speed, 70)
-            if part == 'feet':
+            if part == 'legs':
                 for _ in range(step_count):
-                    self.feet_move(actions, immediately=False, speed=speed)
+                    self.legs_move(actions, immediately=False, speed=speed)
                 if wait:
-                    self.wait_feet_done()
+                    self.wait_legs_done()
             elif part == 'head':
                 for _ in range(step_count):
                     self.head_move(actions, immediately=False, speed=speed)
@@ -746,16 +751,8 @@ class Pidog():
         except Exception as e:
             print(e)
 
-    def wait_all_done(self):
-        self.wait_feet_done()
-        self.wait_head_done()
-        self.wait_tail_done()
-
-    def wait_feet_done(self):
-        while not self.is_feet_done():
-            # print(f"Feet buffer size: {len(self.feet_actions_buffer)}")
-            # print(f"Feet buffer: {self.feet_actions_buffer}")
-            # print(f"Feet done Flag: {self.feet_done_flag}")
+    def wait_legs_done(self):
+        while not self.is_legs_done():
             sleep(0.001)
 
     def wait_head_done(self):
@@ -766,14 +763,19 @@ class Pidog():
         while not self.is_tail_done():
             sleep(0.001)
 
-    def is_all_done(self):
-        return self.is_feet_done() and self.is_head_done() and self.is_tail_done()
+    def wait_all_done(self):
+        self.wait_legs_done()
+        self.wait_head_done()
+        self.wait_tail_done()
 
-    def is_feet_done(self):
-        return self.feet_done_flag
+    def is_legs_done(self):
+        return self.legs_done_flag
 
     def is_head_done(self):
         return self.head_done_flag
 
     def is_tail_done(self):
         return self.tail_done_flag
+
+    def is_all_done(self):
+        return self.is_legs_done() and self.is_head_done() and self.is_tail_done()

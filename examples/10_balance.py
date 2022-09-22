@@ -42,9 +42,9 @@ def move_thread():
             # print(coord)
             my_dog.set_rpy(**current_rpy, pid=True)
             my_dog.set_pose(**current_pose)
-            my_dog.set_feet(coord)
-            angles = my_dog.pose2feet_angle()
-            my_dog.feet.servo_move(angles, speed=98)
+            my_dog.set_legs(coord)
+            angles = my_dog.pose2legs_angle()
+            my_dog.legs.servo_move(angles, speed=98)
 
 
 t = threading.Thread(target=move_thread)
@@ -53,7 +53,7 @@ t = threading.Thread(target=move_thread)
 def main():
     global current_coords, current_pose, current_rpy, thread_start
     my_dog.do_action('stand', speed=80)
-    my_dog.wait_feet_done()
+    my_dog.wait_legs_done()
     t.start()
 
     while True:
