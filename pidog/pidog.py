@@ -46,8 +46,8 @@ config_file = '%s/.config/pidog/pidog.conf' % UserHome
 class Pidog():
 
     # structure constants
-    leg = 42
-    leg = 76
+    LEG = 42
+    FOOT = 76
     BODY_LENGTH = 117
     BODY_WIDTH = 98
     BODY_STRUCT = np.mat([
@@ -58,7 +58,7 @@ class Pidog():
     SOUND_DIR = "/home/pi/pidog/sounds/"
     # Servo Speed
     HEAD_DPS = 300
-    LEGS_DPS = 400
+    LEGS_DPS = 350
     TAIL_DPS = 500
     # PID Constants
     KP = 0.033
@@ -628,13 +628,13 @@ class Pidog():
     def fieldcoord2polar(self, coord):
         y, z = coord
         u = sqrt(pow(y, 2) + pow(z, 2))
-        cos_angle1 = (self.leg**2 + self.leg**2 - u**2) / \
-            (2 * self.leg * self.leg)
+        cos_angle1 = (self.FOOT**2 + self.LEG**2 - u**2) / \
+            (2 * self.FOOT * self.LEG)
         cos_angle1 = min(max(cos_angle1, -1), 1)
         beta = acos(cos_angle1)
 
         angle1 = atan2(y, z)
-        cos_angle2 = (self.leg**2 + u**2 - self.leg**2)/(2*self.leg*u)
+        cos_angle2 = (self.LEG**2 + u**2 - self.FOOT**2)/(2*self.LEG*u)
         cos_angle2 = min(max(cos_angle2, -1), 1)
         angle2 = acos(cos_angle2)
         alpha = angle2 + angle1 + self.rpy[1]
@@ -647,13 +647,13 @@ class Pidog():
     def coord2polar(self, coord):
         y, z = coord
         u = sqrt(pow(y, 2) + pow(z, 2))
-        cos_angle1 = (self.leg**2 + self.leg**2 - u**2) / \
-            (2 * self.leg * self.leg)
+        cos_angle1 = (self.FOOT**2 + self.LEG**2 - u**2) / \
+            (2 * self.FOOT * self.LEG)
         cos_angle1 = min(max(cos_angle1, -1), 1)
         beta = acos(cos_angle1)
 
         angle1 = atan2(y, z)
-        cos_angle2 = (self.leg**2 + u**2 - self.leg**2)/(2*self.leg*u)
+        cos_angle2 = (self.LEG**2 + u**2 - self.FOOT**2)/(2*self.LEG*u)
         cos_angle2 = min(max(cos_angle2, -1), 1)
         angle2 = acos(cos_angle2)
         alpha = angle2 + angle1
@@ -682,14 +682,14 @@ class Pidog():
         translate_list = []
         for i, coord in enumerate(coords):  # each servo motion
             # coord2polar
-            leg_angle, leg_angle = Pidog.coord2polar(cls, coord)
+            leg_angle, foot_angle = Pidog.coord2polar(cls, coord)
             # The left and right sides are opposite
             leg_angle = leg_angle
-            leg_angle = leg_angle-90
+            foot_angle = foot_angle-90
             if i % 2 != 0:
                 leg_angle = -leg_angle
-                leg_angle = -leg_angle
-            translate_list += [leg_angle, leg_angle]
+                foot_angle = -foot_angle
+            translate_list += [leg_angle, foot_angle]
 
         return translate_list
 
