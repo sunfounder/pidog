@@ -606,21 +606,22 @@ class Pidog():
         angles = []
 
         for i in range(4):
-            coords.append([leg_coor_list[i][1]-body_coor_list[i]
-                          [1], body_coor_list[i][2] - leg_coor_list[i][2]])
+            coords.append([
+                leg_coor_list[i][1] - body_coor_list[i][1],
+                body_coor_list[i][2] - leg_coor_list[i][2]])
 
         angles = []
 
         for i, coord in enumerate(coords):
 
-            leg_angle, leg_angle = self.fieldcoord2polar(coord)
+            leg_angle, foot_angle = self.fieldcoord2polar(coord)
             # The left and right sides are opposite
             leg_angle = leg_angle
-            leg_angle = leg_angle-90
+            foot_angle = foot_angle-90
             if i % 2 != 0:
                 leg_angle = -leg_angle
-                leg_angle = -leg_angle
-            angles += [leg_angle, leg_angle]
+                foot_angle = -foot_angle
+            angles += [leg_angle, foot_angle]
 
         return angles
 
