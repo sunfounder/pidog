@@ -12,37 +12,47 @@ from .sound_direction import SoundDirection
 from .dual_touch import DualTouch
 
 ''' servos order
-                     9,
-                   0, '-'
+                     4,
+                   5, '6'
                      |
-              2,1 --[ ]-- 3,4
+              3,2 --[ ]-- 7,8
                     [ ]
-              6,5 --[ ]-- 7,8
+              1,0 --[ ]-- 10,11
                      |
-                    '='
+                    '9'
                     / 
-    thighs and calf crus shank
 
-    legs order: 1~8
+    legs pins: [2, 3, 7, 8, 0, 1, 10, 11]
         left front leg, left front leg
         right front leg, right front leg
         left hind leg, left hind leg, 
         right hind leg, right hind leg,
 
-    head order: 9~11
+    head pins: [4, 6, 5]
         yaw, roll, pitch
     
-    tail order: 12
+    tail pin: [9]
 
 '''
 
 # user and User home directory
 User = os.popen('echo ${SUDO_USER:-$LOGNAME}').readline().strip()
-UserHome = os.popen('getent passwd %s | cut -d: -f 6' %
-                    User).readline().strip()
+UserHome = os.popen('getent passwd %s | cut -d: -f 6' %User).readline().strip()
 config_file = '%s/.config/pidog/pidog.conf' % UserHome
 
+# color:
+# 30:black 31:red, 32:green, 33:yellow, 34:blue, 35:purple, 36:dark green, 37:white
+def print_color(msg, color=''):
+    print('\033[%sm%s\033[0m'%(color, msg))
 
+class MyUltrasonic(Ultrasonic):
+    def __init__(self, tring, echo):
+        super().__init__(tring, echo)
+        self.distance = Value('f', -1.0)
+        
+    def read_distance(self):
+        return self.distance.value
+        
 class Pidog():
 
     # structure constants
@@ -89,6 +99,12 @@ class Pidog():
         self.pitch = 0
         self.roll = 0
 
+        self.roll_last_error = 0
+        self.roll_error_integral = 0
+        self.pitch_last_error = 0
+        self.pitch_error_integral = 0
+        self.target_rpy = [0, 0, 0]
+        
         if leg_init_angles == None:
             leg_init_angles = self.actions_dict['lie'][0][0]
         if head_init_angles == None:
@@ -97,72 +113,120 @@ class Pidog():
         if tail_init_angle == None:
             tail_init_angle = [0]
 
-        self.legs = Robot(pin_list=leg_pins, name='legs', init_angles=leg_init_angles, init_order=[
-                          0, 2, 4, 6, 1, 3, 5, 7], db=config_file)
-        self.head = Robot(pin_list=head_pins, name='head',
-                          init_angles=head_init_angles, db=config_file)
-        self.tail = Robot(pin_list=tail_pin, name='tail',
-                          init_angles=tail_init_angle, db=config_file)
+        self.thread_list = []
 
-        self.legs.max_dps = self.LEGS_DPS
-        self.head.max_dps = self.HEAD_DPS
-        self.tail.max_dps = self.TAIL_DPS
+        try:
+            print("rotbot_hat init ... ", end='', flush=True)
+            self.legs = Robot(pin_list=leg_pins, name='legs', init_angles=leg_init_angles, init_order=[
+                            0, 2, 4, 6, 1, 3, 5, 7], db=config_file)
+            self.head = Robot(pin_list=head_pins, name='head',
+                            init_angles=head_init_angles, db=config_file)
+            self.tail = Robot(pin_list=tail_pin, name='tail',
+                            init_angles=tail_init_angle, db=config_file)
+            # add thread
+            self.thread_list.extend(["legs", "head", "tail"])
+            # via
+            self.legs.max_dps = self.LEGS_DPS
+            self.head.max_dps = self.HEAD_DPS
+            self.tail.max_dps = self.TAIL_DPS
 
-        self.legs_action_buffer = []
-        self.head_action_buffer = []
-        self.tail_action_buffer = []
+            self.legs_action_buffer = []
+            self.head_action_buffer = []
+            self.tail_action_buffer = []
 
-        self.legs_actions_coords_buffer = []
+            self.legs_thread_lock = threading.Lock()
+            self.head_thread_lock = threading.Lock()
+            self.tail_thread_lock = threading.Lock()
 
-        self.leg_current_angles = leg_init_angles
-        self.head_current_angles = head_init_angles
-        self.tail_current_angles = tail_init_angle
+            self.legs_actions_coords_buffer = []
 
-        self.legs_speed = 90
-        self.head_speed = 90
-        self.tail_speed = 90
+            self.leg_current_angles = leg_init_angles
+            self.head_current_angles = head_init_angles
+            self.tail_current_angles = tail_init_angle
 
-        self.legs_done_flag = False
-        self.head_done_flag = False
-        self.tail_done_flag = False
+            self.legs_speed = 90
+            self.head_speed = 90
+            self.tail_speed = 90
 
-        self.rgb_fail_count = 0
-        self.imu_fail_count = 0
+            # done
+            print("done")
+        except OSError:
+            print_color("failed", "31")
+            raise OSError("rotbot_hat I2C init failed. Please try again.")
+            
+        try:
+            print("imu_sh3001 init ... ", end='', flush=True)
+            self.imu = Sh3001(db=config_file)
+            self.imu_acc_offset = [0, 0, 0]
+            self.imu_gyro_offset = [0, 0, 0]
+            self.accData = []  # ax,ay,az
+            self.gyroData = []  # gx,gy,gz
+            self.imu_fail_count = 0
+            # add imu thread
+            self.thread_list.append("imu")
+            print("done")
+        except OSError:
+            print_color("failed", "33")
 
-        self.imu = Sh3001(db=config_file)
-        self.imu_acc_offset = [0, 0, 0]
-        self.imu_gyro_offset = [0, 0, 0]
-        self.accData = []  # ax,ay,az
-        self.gyroData = []  # gx,gy,gz
+        try:
+            print("rgb_strip init ... ", end='', flush=True)
+            self.rgb_strip = RGBStrip(0X74)
+            self.rgb_strip.set_mode('breath', 'black')
+            self.rgb_fail_count = 0
+            # add rgb thread
+            self.thread_list.append("rgb")
+            print("done")
+        except OSError:
+            print_color("failed", "33")
 
-        self.rgb_strip = RGBStrip(0X74)
-        self.rgb_strip.set_mode('breath', 'black')
+        try:
+            print("ultrasonic init ... ", end='', flush=True)
+            echo = Pin('D0')
+            trig = Pin('D1')
+            self.ultrasonic = MyUltrasonic(trig, echo)
+            # add ultrasonic thread
+            self.thread_list.append("ultrasonic")
+            print("done")
+        except Exception as e:
+            # print(e)
+            print_color("failed", "33")
+            raise ValueRrror(e)
+
+        try:
+            print("dual_touch init ... ", end='', flush=True)
+            self.dual_touch = DualTouch('D2', 'D3')
+            self.touch = 'N'
+            print("done")
+        except:
+            print_color("failed", "33")
+
+        try:
+            print("sound_direction init ... ", end='', flush=True)
+            self.ears = SoundDirection()
+            # self.sound_direction = -1
+            print("done")
+        except:
+            print_color("failed", "33")
+
+        try:
+            print("sound_effect init ... ", end='', flush=True)
+            self.music = Music()
+            print("done")
+        except:
+            print_color("failed", "33")
+
+
         self.sensory_processes = None
-        self.distance = Value('f', -1.0)
         self.sensory_lock = Lock()
 
-        self.dual_touch = DualTouch('D2', 'D3')
-        self.touch = 'N'
-
-        self.ears = SoundDirection()
-        self.sound_direction = -1
-
         self.exit_flag = False
-        self.sensory_processes = None
         self.action_threads_start()
         self.sensory_processes_start()
 
-        self.roll_last_error = 0
-        self.roll_error_integral = 0
-        self.pitch_last_error = 0
-        self.pitch_error_integral = 0
-
-        self.target_rpy = [0, 0, 0]
-
-        self.music = Music()
+    # class PidogUltrasonic(Ultrasonic):
+    #     def __init__(self,
 
     # action related: legs,head,tail,imu,rgb_strip
-
     def close_all_thread(self):
         self.exit_flag = True
 
@@ -177,6 +241,9 @@ class Pidog():
         print('\rStopping and returning to the initial position ... ')
 
         try:
+            if self.exit_flag == True:
+                self.exit_flag = False
+                self.action_threads_start()
             self.stop_and_lie()
             self.close_all_thread()
             print('Quit')
@@ -186,8 +253,11 @@ class Pidog():
         self.legs_thread.join()
         self.head_thread.join()
         self.tail_thread.join()
-        self.rgb_strip_thread.join()
-        self.imu_thread.join()
+
+        if 'rgb' in self.thread_list:
+            self.rgb_strip_thread.join()
+        if 'imu' in self.thread_list:
+            self.imu_thread.join()
         if self.sensory_processes != None:
             self.sensory_processes.terminate()
         sys.exit(0)
@@ -224,80 +294,68 @@ class Pidog():
     def action_threads_start(self):
         # Immutable objects int, float, string, tuple, etc., need to be declared with global
         # Variable object lists, dicts, instances of custom classes, etc., do not need to be declared with global
-        self.legs_thread = threading.Thread(
-            name='legs_thread', target=self._legs_action_thread)
-        self.head_thread = threading.Thread(
-            name='head_thread', target=self._head_action_thread)
-        self.tail_thread = threading.Thread(
-            name='tail_thread', target=self._tail_action_thread)
-        self.legs_thread.setDaemon(True)
-        self.head_thread.setDaemon(True)
-        self.tail_thread.setDaemon(True)
-        self.legs_thread.start()
-        self.head_thread.start()
-        self.tail_thread.start()
-        self.rgb_strip_thread = threading.Thread(
-            name='rgb_strip_thread', target=self._rgb_strip_thread)
-        self.imu_thread = threading.Thread(
-            name='imu_thread', target=self._imu_thread)
-        self.rgb_strip_thread.setDaemon(True)
-        self.imu_thread.setDaemon(True)
-        self.rgb_strip_thread.start()
-        self.imu_thread.start()
+        if 'legs' in self.thread_list:
+            self.legs_thread = threading.Thread(name='legs_thread', target=self._legs_action_thread)
+            self.legs_thread.setDaemon(True)
+            self.legs_thread.start()
+        if 'head' in self.thread_list:
+            self.head_thread = threading.Thread(name='head_thread', target=self._head_action_thread)
+            self.head_thread.setDaemon(True)
+            self.head_thread.start()
+        if 'tail' in self.thread_list:
+            self.tail_thread = threading.Thread(name='tail_thread', target=self._tail_action_thread)
+            self.tail_thread.setDaemon(True)
+            self.tail_thread.start()
+        if 'rgb' in self.thread_list:
+            self.rgb_strip_thread = threading.Thread(name='rgb_strip_thread', target=self._rgb_strip_thread)
+            self.rgb_strip_thread.setDaemon(True)
+            self.rgb_strip_thread.start()
+        if 'imu' in self.thread_list:
+            self.imu_thread = threading.Thread(name='imu_thread', target=self._imu_thread)
+            self.imu_thread.setDaemon(True)
+            self.imu_thread.start()
 
     # legs
     def _legs_action_thread(self):
         while not self.exit_flag:
             try:
-                self.legs_done_flag = False
-                self.legs.servo_move(
-                    self.legs_action_buffer[0], self.legs_speed)
-                self.leg_current_angles = list.copy(
-                    self.legs_action_buffer[0])
-                self.legs_action_buffer.pop(0)
+                with self.legs_thread_lock:
+                    self.leg_current_angles = list.copy(self.legs_action_buffer[0])
+                    self.legs_action_buffer.pop(0)
+                self.legs.servo_move(self.leg_current_angles, self.legs_speed)
             except IndexError:
-                self.legs_done_flag = True
                 sleep(0.001)
             except Exception as e:
                 print('_legs_action_thread Exception:%s' % e)
                 break
-        self.legs_done_flag = True
 
     # head
     def _head_action_thread(self):
         while not self.exit_flag:
             try:
-                self.head_done_flag = False
-                self.head.servo_move(
-                    self.head_action_buffer[0], self.head_speed)
-                self.head_current_angles = list.copy(
-                    self.head_action_buffer[0])
-                self.head_action_buffer.pop(0)
+                with self.head_thread_lock:
+                    self.head_current_angles = list.copy(self.head_action_buffer[0])
+                    self.head_action_buffer.pop(0)
+                self.head.servo_move(self.head_current_angles, self.head_speed)
             except IndexError:
-                self.head_done_flag = True
                 sleep(0.001)
             except Exception as e:
                 print('_head_action_thread Exception: %s' % e)
                 break
-        self.head_done_flag = True
 
     # tail
     def _tail_action_thread(self):
         while not self.exit_flag:
             try:
-                self.tail_done_flag = False
-                self.tail.servo_move(
-                    self.tail_action_buffer[0], self.tail_speed)
-                self.tail_current_angles = list.copy(
-                    self.tail_action_buffer[0])
-                self.tail_action_buffer.pop(0)
+                with self.tail_thread_lock:
+                    self.tail_current_angles = list.copy(self.tail_action_buffer[0])
+                    self.tail_action_buffer.pop(0)
+                self.tail.servo_move(self.tail_current_angles, self.tail_speed)
             except IndexError:
-                self.tail_done_flag = True
                 sleep(0.001)
             except Exception as e:
                 print('_tail_action_thread Exception: %s' % e)
                 break
-        self.tail_done_flag = True
 
     # rgb strip
     def _rgb_strip_thread(self):
@@ -306,10 +364,10 @@ class Pidog():
                 self.rgb_strip.show()
                 self.rgb_fail_count = 0
             except Exception as e:
-                print('_rgb_strip_thread Exception: %s' % e)
                 self.rgb_fail_count += 1
                 sleep(0.001)
                 if self.rgb_fail_count > 10:
+                    print('_rgb_strip_thread Exception: %s' % e)
                     break
 
     # IMU
@@ -349,9 +407,9 @@ class Pidog():
             try:
                 data = self.imu._sh3001_getimudata()
                 if data == False:
-                    print('_imu_thread imu data error')
                     self.imu_fail_count += 1
                     if self.imu_fail_count > 10:
+                        print('_imu_thread imu data error')
                         break
                 self.accData, self.gyroData = data
                 self.accData[0] += self.imu_acc_offset[0]
@@ -370,25 +428,27 @@ class Pidog():
                 self.imu_fail_count = 0
                 sleep(0.05)
             except Exception as e:
-                print(data)
-                print('_imu_thread Exception: %s' % e)
                 self.imu_fail_count += 1
                 sleep(0.001)
                 if self.imu_fail_count > 10:
+                    print('_imu_thread Exception: %s' % e)
                     self.exit_flag = True
                     break
 
     # clear actions buff
     def legs_stop(self):
-        self.legs_action_buffer.clear()
+        with self.legs_thread_lock:
+            self.legs_action_buffer.clear()
         self.wait_legs_done()
 
     def head_stop(self):
-        self.head_action_buffer.clear()
+        with self.head_thread_lock:
+            self.head_action_buffer.clear()
         self.wait_head_done()
 
     def tail_stop(self):
-        self.tail_action_buffer.clear()
+        with self.tail_thread_lock:
+            self.tail_action_buffer.clear()
         self.wait_tail_done()
 
     def body_stop(self):
@@ -398,11 +458,11 @@ class Pidog():
 
     # move
     def legs_move(self, target_angles, immediately=True, speed=50):
-        self.legs_done_flag = False
         if immediately == True:
             self.legs_stop()
         self.legs_speed = speed
-        self.legs_action_buffer += target_angles
+        with self.legs_thread_lock:
+            self.legs_action_buffer += target_angles
 
     def head_rpy_to_angle(self, target_yrp, roll_init=0, pitch_init=0):
         yaw, roll, pitch = target_yrp
@@ -414,58 +474,57 @@ class Pidog():
         return [yaw_servo, roll_servo, pitch_servo]
 
     def head_move(self, target_yrps, roll_init=0, pitch_init=0, immediately=True, speed=50):
-        self.head_done_flag = False
         if immediately == True:
             self.head_stop()
         self.head_speed = speed
         angles = [self.head_rpy_to_angle(
             target_yrp, roll_init, pitch_init) for target_yrp in target_yrps]
-        self.head_action_buffer += angles
+        with self.head_thread_lock:
+            self.head_action_buffer += angles
 
     def head_move_raw(self, target_angles, immediately=True, speed=50):
-        self.head_done_flag = False
         if immediately == True:
             self.head_stop()
         self.head_speed = speed
-        self.head_action_buffer += target_angles
+        with self.head_thread_lock:
+            self.head_action_buffer += target_angles
 
     def tail_move(self, target_angles, immediately=True, speed=50):
-        self.tail_done_flag = False
         if immediately == True:
             self.tail_stop()
         self.tail_speed = speed
-        self.tail_action_buffer += target_angles
-
-    # sensory_processes : ultrasonic,sound_direction
-    def sensory_processes_work(self, distance_addr, lock):
-        ultrasonic_thread = threading.Thread(name='ultrasonic_thread',
-                                             target=self._ultrasonic_thread,
-                                             args=(distance_addr, lock,))
-        ultrasonic_thread.start()
-
-    def sensory_processes_start(self):
-        if self.sensory_processes != None:
-            self.sensory_processes.terminate()
-        self.sensory_processes = Process(name='sensory_processes',
-                                         target=self.sensory_processes_work,
-                                         args=(self.distance, self.sensory_lock))
-        self.sensory_processes.start()
+        with self.tail_thread_lock:
+            self.tail_action_buffer += target_angles
 
     # ultrasonic
     def _ultrasonic_thread(self, distance_addr, lock):
-        echo = Pin('D0')
-        trig = Pin('D1')
-        ultrasonic = Ultrasonic(trig, echo)
         while True:
             try:
                 with lock:
-                    val = round(float(ultrasonic.read()), 2)
+                    val = round(float(self.ultrasonic.read()), 2)
                     distance_addr.value = val
                 # sleep(1)
             except:
                 sleep(0.1)
                 print('ultrasonic_thread  except')
                 break
+
+    # sensory_processes : ultrasonic
+    def sensory_processes_work(self, distance_addr, lock):
+        if 'ultrasonic' in self.thread_list:
+            ultrasonic_thread = threading.Thread(name='ultrasonic_thread',
+                                             target=self._ultrasonic_thread,
+                                             args=(distance_addr, lock,))
+            # ultrasonic_thread.setDaemon(True)
+            ultrasonic_thread.start()
+
+    def sensory_processes_start(self):
+        if self.sensory_processes != None:
+            self.sensory_processes.terminate()
+        self.sensory_processes = Process(name='sensory_processes',
+                                         target=self.sensory_processes_work,
+                                         args=(self.ultrasonic.distance, self.sensory_lock))
+        self.sensory_processes.start()
 
     # reset: stop, stop_and_lie
     def stop_and_lie(self, speed=85):
@@ -480,9 +539,9 @@ class Pidog():
 
     # speak
     def speak(self, name):
-        status, _ = utils.run_command('sudo killall pulseaudio')
-        if status == 0:
-            print('killed pulseaudio')
+        status, _ = utils.run_command('sudo killall pulseaudio') # Solve the problem that there is no sound when running in the vnc environment
+        # if status == 0:
+        #     print('killed pulseaudio')
         # Scan for all available audios, see if name matches
         for filename in os.listdir(self.SOUND_DIR):
             if filename.startswith(name):
@@ -729,9 +788,9 @@ class Pidog():
         self.servo_move(translate_list, speed)
 
     # do action
-    def do_action(self, motion_name, step_count=1, wait=False, speed=50):
+    def do_action(self, action_name, step_count=1, wait=False, speed=50):
         try:
-            actions, part = self.actions_dict[motion_name]
+            actions, part = self.actions_dict[action_name]
             if part == 'legs':
                 for _ in range(step_count):
                     self.legs_move(actions, immediately=False, speed=speed)
@@ -770,13 +829,13 @@ class Pidog():
         self.wait_tail_done()
 
     def is_legs_done(self):
-        return self.legs_done_flag
+        return not bool(len(self.legs_action_buffer) > 0)
 
     def is_head_done(self):
-        return self.head_done_flag
+        return not bool(len(self.head_action_buffer) > 0)
 
     def is_tail_done(self):
-        return self.tail_done_flag
+        return not bool(len(self.tail_action_buffer) > 0)
 
     def is_all_done(self):
         return self.is_legs_done() and self.is_head_done() and self.is_tail_done()
