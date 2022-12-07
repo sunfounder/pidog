@@ -155,7 +155,7 @@ def howling(my_dog):
     my_dog.head_move([[0, 0, -30]], speed=95)
     my_dog.wait_all_done()
 
-    my_dog.rgb_strip.set_mode('breath', front_color='cyan', delay=0.08)
+    my_dog.rgb_strip.set_mode('breath', color='cyan', delay=0.08)
     my_dog.do_action('half_sit', wait=True, speed=80)
     my_dog.head_move([[0, 0, -60]], speed=80)
     my_dog.wait_all_done()

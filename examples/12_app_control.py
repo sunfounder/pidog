@@ -268,7 +268,7 @@ def main():
     last_qy = 0
 
     while True:
-        sc.set("A", my_dog.distance.value)
+        sc.set("A", my_dog.ultrasonic.read_distance())
         # print("Receive: ", sc.getall())
 
         # Left Joystick move
@@ -371,6 +371,8 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         pass
+    except Exception as e:
+        print(f"\033[31mERROR: {e}\033[m")
     finally:
         sc.close()
         Vilib.camera_close()

@@ -95,5 +95,10 @@ if __name__ == "__main__":
     try:
         face_track()
     except KeyboardInterrupt:
+        pass
+    except Exception as e:
+        print(f"\033[31mERROR: {e}\033[m")
+    finally:
         Vilib.camera_close()
         my_dog.close()
+

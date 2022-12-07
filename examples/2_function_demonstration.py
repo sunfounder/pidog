@@ -99,10 +99,15 @@ def function_demonstration():
             show_info()
         except ValueError:
             print('ValueError')
-        except KeyboardInterrupt:
-            my_dog.close()
         sleep(0.05)
 
 
 if __name__ == "__main__":
-    function_demonstration()
+    try:
+        function_demonstration()
+    except KeyboardInterrupt:
+        pass
+    except Exception as e:
+        print(f"\033[31mERROR: {e}\033[m")
+    finally:
+        my_dog.close()

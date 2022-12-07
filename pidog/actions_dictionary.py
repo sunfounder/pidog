@@ -6,7 +6,6 @@ from math import sin
 
 # ActionDict: - > angles_dict
 
-
 class ActionDict(dict):
 
     def __init__(self, *args, **kwargs):
@@ -112,8 +111,8 @@ class ActionDict(dict):
         return [
             [-80, 70, 80, -70, -20, 64, 20, -64],
         ], 'legs'
+        
     # 俯卧撑 pushup
-
     @property
     def pushup(self):
         return [
@@ -185,8 +184,8 @@ class ActionDict(dict):
         return [
             [yaw, roll, pitch]
         ], 'head'
-    # 右歪头
 
+    # 右歪头
     @property
     def tilting_head_right(self):
         yaw = 0
@@ -195,8 +194,8 @@ class ActionDict(dict):
         return [
             [yaw, roll, pitch]
         ], 'head'
+        
     # 左右歪头
-
     @property
     def tilting_head(self):
         yaw = 0

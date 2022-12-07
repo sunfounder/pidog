@@ -34,16 +34,16 @@ def head_nod(step):
 def alert():
     my_dog.do_action('stand', step_count=1, speed=90)
     my_dog.rgb_strip.set_mode(
-        'breath', front_color='pink', brightness=0.8, delay=0.08)
+        'breath', color='pink', brightness=0.8, delay=0.08)
     while True:
         print(
-            f'distance.value: {round(my_dog.distance.value, 2)} cm, touch {my_dog.dual_touch.is_slide()}')
+            f'distance.value: {round(my_dog.ultrasonic.read_distance(), 2)} cm, touch {my_dog.dual_touch.read()}')
         # alert
-        if my_dog.distance.value < 15 and my_dog.distance.value > 1:
+        if my_dog.ultrasonic.read_distance() < 15 and my_dog.ultrasonic.read_distance() > 1:
             my_dog.head_move([[0, 0, 0]], immediately=True, speed=90)
             my_dog.tail_move([[0]], immediately=True, speed=90)
             my_dog.rgb_strip.set_mode(
-                'boom', front_color='red', brightness=0.8, delay=0.001)
+                'boom', color='red', brightness=0.8, delay=0.001)
             my_dog.do_action('backward', step_count=1, speed=98)
             my_dog.wait_all_done()
             lean_forward()
@@ -53,14 +53,14 @@ def alert():
             sleep(0.5)
         else:
             my_dog.rgb_strip.set_mode(
-                'breath', front_color='pink', brightness=0.8, delay=0.08)
+                'breath', color='pink', brightness=0.8, delay=0.08)
         # relax
-        if my_dog.dual_touch.is_slide() != 'N':
+        if my_dog.dual_touch.read() != 'N':
             if len(my_dog.head_action_buffer) < 2:
                 head_nod(1)
                 my_dog.do_action('wag_tail', step_count=20, speed=100)
                 my_dog.rgb_strip.set_mode(
-                    'breath', front_color='pink', brightness=0.8, delay=0.08)
+                    'breath', color='pink', brightness=0.8, delay=0.08)
         else:
             my_dog.tail_stop()
         sleep(0.2)
@@ -70,4 +70,9 @@ if __name__ == "__main__":
     try:
         alert()
     except KeyboardInterrupt:
+        pass
+    except Exception as e:
+        print(f"\033[31mERROR: {e}\033[m")
+    finally:
         my_dog.close()
+

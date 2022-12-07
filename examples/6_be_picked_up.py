@@ -12,7 +12,7 @@ def delay(time):
 
 
 def fly():
-    my_dog.rgb_strip.set_mode('boom', front_color='red', delay=0.01)
+    my_dog.rgb_strip.set_mode('boom', color='red', delay=0.01)
     my_dog.legs.servo_move([45, -45, 90, -80, 90, 90, -90, -90], speed=60)
     my_dog.do_action('wag_tail', step_count=20, speed=100)
     my_dog.speak('woohoo')
@@ -20,7 +20,7 @@ def fly():
 
 
 def stand():
-    my_dog.rgb_strip.set_mode('breath', front_color='green', delay=0.02)
+    my_dog.rgb_strip.set_mode('breath', color='green', delay=0.02)
     my_dog.do_action('stand', wait=True, speed=60)
 
 
@@ -29,7 +29,7 @@ def be_picked_up():
     upflag = False
     downflag = False
 
-    my_dog.rgb_strip.set_mode('breath', front_color='green', delay=0.02)
+    my_dog.rgb_strip.set_mode('breath', color='green', delay=0.02)
     stand()
 
     while True:
@@ -63,4 +63,9 @@ if __name__ == "__main__":
     try:
         be_picked_up()
     except KeyboardInterrupt:
+        pass
+    except Exception as e:
+        print(f"\033[31mERROR: {e}\033[m")
+    finally:
         my_dog.close()
+

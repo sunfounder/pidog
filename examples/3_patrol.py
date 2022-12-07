@@ -18,9 +18,9 @@ def patrol():
     my_dog.do_action('forward', step_count=2, wait=False, speed=98)
     my_dog.do_action('shake_head', step_count=1, wait=False, speed=80)
     my_dog.do_action('wag_tail', step_count=5, wait=False, speed=99)
-    print(f"distance: {round(my_dog.distance.value, 2)} cm")
-    if my_dog.distance.value < 15:
-        print(f"distance: {round(my_dog.distance.value, 2)} cm. DANGER!")
+    print(f"distance: {round(my_dog.ultrasonic.read_distance(), 2)} cm")
+    if my_dog.ultrasonic.read_distance() < 15:
+        print(f"distance: {round(my_dog.ultrasonic.read_distance(), 2)} cm. DANGER!")
         my_dog.body_stop()
         head_yaw = my_dog.head_current_angles[0]
         my_dog.rgb_strip.set_mode('boom', 'red', delay=0.01)
@@ -36,5 +36,9 @@ if __name__ == "__main__":
     try:
         while True:
             patrol()
+    except KeyboardInterrupt:
+        pass
+    except Exception as e:
+        print(f"\033[31mERROR: {e}\033[m")
     finally:
         my_dog.close()

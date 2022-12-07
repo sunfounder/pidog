@@ -316,7 +316,10 @@ if __name__ == "__main__":
     try:
         main()
         print("\033[?25h")  # Show terminal cursor
+    except KeyboardInterrupt:
+        pass
     except Exception as e:
-        raise e
+        print(f"\033[31mERROR: {e}\033[m")
     finally:
         my_dog.close()
+

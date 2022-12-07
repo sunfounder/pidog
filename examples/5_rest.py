@@ -75,4 +75,8 @@ if __name__ == "__main__":
     try:
         rest()
     except KeyboardInterrupt:
+        pass
+    except Exception as e:
+        print(f"\033[31mERROR: {e}\033[m")
+    finally:
         my_dog.close()
