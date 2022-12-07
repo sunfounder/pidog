@@ -99,8 +99,7 @@ class RGBStrip():
         self.light_num = 11
 
         self.style = 'breath',
-        self.front_color = 'white',
-        self.back_color = 'black',
+        self.color = 'white',
         self.brightness = 1,
         self.delay = 0.1
 
@@ -204,11 +203,10 @@ class RGBStrip():
         data.reverse()
         self.display(data)
 
-    def increase(self, direction='low', front_color='white', back_color='black', delay=0.1):
-        background = self.colorConvertor(back_color) * self.light_num
+    def increase(self, direction='low', color='white', delay=0.1):
         data = []
         for i in range(self.light_num):
-            data[i] = self.colorConvertor(front_color)
+            data[i] = self.colorConvertor(color)
         self.display(data)
 
     def Normal_distribution_calculate(self, u, sig, a, x, offset):
@@ -310,24 +308,22 @@ class RGBStrip():
 
     def mode(self, frame, i):
         if self.style == 'breath':
-            return self.breath_once(color=self.front_color, frame=frame, i=i)
+            return self.breath_once(color=self.color, frame=frame, i=i)
         elif self.style == 'boom':
-            return self.boom(color=self.front_color, frame=frame, i=i)
+            return self.boom(color=self.color, frame=frame, i=i)
         elif self.style == 'bark':
-            return self.bark(color=self.front_color, frame=frame, i=i)
+            return self.bark(color=self.color, frame=frame, i=i)
 
-    def set_mode(self, style='breath', front_color='white', back_color='black', brightness=1, delay=0.01):
+    def set_mode(self, style='breath', color='white', brightness=1, delay=0.01):
         try:
-            front_color = self.colorConvertor(front_color)
-            back_color = self.colorConvertor(back_color)
+            color = self.colorConvertor(color)
         except KeyError:
             raise KeyError('Without this color !')
         except Exception as e:
             print(e)
 
         self.style = style
-        self.front_color = front_color
-        self.back_color = back_color
+        self.color = color
         self.brightness = brightness
         self.delay = delay
 
@@ -356,6 +352,5 @@ class RGBStrip():
                 time.sleep(self.delay)
 
     def close(self):
-        self.front_color = [0, 0, 0]
-        self.back_color = [0, 0, 0]
+        self.color = [0, 0, 0]
         self.brightness = 0
