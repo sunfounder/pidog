@@ -9,7 +9,7 @@ class DualTouch():
         self.touch_1 = Pin(sw1)
         self.touch_2 = Pin(sw2)
 
-    def is_slide(self):
+    def read(self):
         if self.touch_1.value() == 0:
             sleep(0.1)
             if self.touch_2.value() == 0:
