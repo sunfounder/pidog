@@ -6,6 +6,10 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
+import sys
+sys.path.append("./pidog")
+from version import VERSION
+
 # Get the long description from the relevant file
 with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
     long_description = f.read()
@@ -16,7 +20,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version="0.0.1",
+    version=VERSION,
 
     description='Picrawler gait Library for Raspberry Pi',
     long_description=long_description,
