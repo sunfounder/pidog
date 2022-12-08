@@ -1,7 +1,11 @@
 # !/usr/bin/env python3
 ''' read imu sh3001 data
     SH3001, an imu with integrated 3-axis accelerometer and 3-axis gyroscope
-    Pay attention to the installation direction of the module when using
+    Pay attention to the installation direction of the module when using.
+
+    The data "accData" and "gyroData" of the imu will be continuously refreshed
+    in the built-in thread of the Pidog class.
+
 API:
     Pidog.accData = [ax, ay, az]
         the acceleration value, default gravity 1G = -16384
