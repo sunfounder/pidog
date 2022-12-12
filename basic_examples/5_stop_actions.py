@@ -29,7 +29,7 @@ try:
         [45, 35, -45, -35, 80, 70, -80, -70]
     ]
     my_dog.legs_move(pushup_prepare_action, speed=30)
-    my_dog.head_move([[0, 0, 0]], pitch_init=-10, speed=80) # head level
+    my_dog.head_move([[0, 0, 0]], pitch_comp=-10, speed=80) # head level
     my_dog.wait_all_done() # wait all the actions to be done
     time.sleep(0.5)
 
@@ -45,7 +45,7 @@ try:
     # fill action buffers
     for _ in range(20):
         my_dog.legs_move(pushup_action, immediately=False, speed=50)
-        my_dog.head_move(head_up_down_action, pitch_init=-10, immediately=False, speed=50)
+        my_dog.head_move(head_up_down_action, pitch_comp=-10, immediately=False, speed=50)
     print(f"legs buffer length (start): {len(my_dog.legs_action_buffer)}")
     time.sleep(5)
     print(f"legs buffer length (5s): {len(my_dog.legs_action_buffer)}")

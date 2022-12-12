@@ -10,7 +10,7 @@ sleep(0.5)
 
 def main():
     my_dog.do_action('sit', speed=50)
-    my_dog.head_move([[0, 0, 0]], pitch_init=-
+    my_dog.head_move([[0, 0, 0]], pitch_comp=-
                      40, immediately=True, speed=80)
     sleep(0.5)
     while True:
