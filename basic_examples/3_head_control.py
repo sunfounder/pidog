@@ -25,9 +25,9 @@ API:
 
         - target_yrps    n*3 2D list, relative angle arrangements of head servos
 
-        - roll_comp   int, initial angle of roll axis
+        - roll_comp   angle compensation on roll axis
 
-        - pitch    int, initial angle of pitch axis
+        - pitch_comp    angle compensation on pitch axis
 
         - immediately   bool, whether to execute the specified action immediately
 
