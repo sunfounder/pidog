@@ -464,21 +464,21 @@ class Pidog():
         with self.legs_thread_lock:
             self.legs_action_buffer += target_angles
 
-    def head_rpy_to_angle(self, target_yrp, roll_init=0, pitch_init=0):
+    def head_rpy_to_angle(self, target_yrp, roll_comp=0, pitch_comp=0):
         yaw, roll, pitch = target_yrp
         signed = -1 if yaw < 0 else 1
         ratio = abs(yaw) / 90
-        pitch_servo = roll * ratio + pitch * (1-ratio) + pitch_init
-        roll_servo = -(signed * (roll * (1-ratio) + pitch * ratio) + roll_init)
+        pitch_servo = roll * ratio + pitch * (1-ratio) + pitch_comp
+        roll_servo = -(signed * (roll * (1-ratio) + pitch * ratio) + roll_comp)
         yaw_servo = yaw
         return [yaw_servo, roll_servo, pitch_servo]
 
-    def head_move(self, target_yrps, roll_init=0, pitch_init=0, immediately=True, speed=50):
+    def head_move(self, target_yrps, roll_comp=0, pitch_comp=0, immediately=True, speed=50):
         if immediately == True:
             self.head_stop()
         self.head_speed = speed
         angles = [self.head_rpy_to_angle(
-            target_yrp, roll_init, pitch_init) for target_yrp in target_yrps]
+            target_yrp, roll_comp, pitch_comp) for target_yrp in target_yrps]
         with self.head_thread_lock:
             self.head_action_buffer += angles
 

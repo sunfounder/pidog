@@ -18,14 +18,14 @@ API:
         
         - speed    int, speed of action, 0 ~ 100
 
-    Pidog.head_move(target_yrps, roll_init=0, pitch_init=0, immediately=True, speed=50)
+    Pidog.head_move(target_yrps, roll_comp=0, pitch_comp=0, immediately=True, speed=50)
         
-        legs servo angles control with "relative ypr angles", You can set "roll_init" and "pitch_init" so that the initial position of the head is in a 
+        legs servo angles control with "relative ypr angles", You can set "roll_comp" and "pitch_comp" so that the initial position of the head is in a 
         horizontal position to offset the influence of body tilt. In this way, the same set of c can be used for different body tilt angles
 
         - target_yrps    n*3 2D list, relative angle arrangements of head servos
 
-        - roll_init   int, initial angle of roll axis
+        - roll_comp   int, initial angle of roll axis
 
         - pitch    int, initial angle of pitch axis
 
@@ -63,9 +63,9 @@ my_dog.wait_legs_done()
 # my_dog.head_move_raw([[0, 0, -30]], speed=80)
 
 # level-view by head_move()
-my_dog.head_move([[0, 0, 0]], pitch_init=-30, speed=80)
+my_dog.head_move([[0, 0, 0]], pitch_comp=-30, speed=80)
 
-# actually "head_move_raw([[0, 0, -30]]" is the same as "head_move([[0, 0, 0]], pitch_init=-30)"
+# actually "head_move_raw([[0, 0, -30]]" is the same as "head_move([[0, 0, 0]], pitch_comp=-30)"
 
 my_dog.wait_head_done()
 
@@ -76,6 +76,6 @@ head_test_actions = [ # relative angles
 ]
 
 while True:
-    my_dog.head_move(head_test_actions, pitch_init=-30, speed=50)
+    my_dog.head_move(head_test_actions, pitch_comp=-30, speed=50)
     my_dog.wait_head_done()
     time.sleep(0.2)

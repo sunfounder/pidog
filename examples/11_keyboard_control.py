@@ -112,7 +112,7 @@ COMMANDS = {
     },
     "bark": {
         "commands": ["bark", "park", "fuck"],
-        "function": lambda: bark(my_dog, head_yrp, pitch_init=head_pitch_init),
+        "function": lambda: bark(my_dog, head_yrp, pitch_comp=head_pitch_init),
     },
     "bark harder": {
         "commands": ["bark harder", "park harder", "fuck harder", "bark harbor", "park harbor", "fuck harbor"],
@@ -120,7 +120,7 @@ COMMANDS = {
     },
     "pant": {
         "commands": ["pant", "paint"],
-        "function": lambda: pant(my_dog, head_yrp, pitch_init=head_pitch_init),
+        "function": lambda: pant(my_dog, head_yrp, pitch_comp=head_pitch_init),
     },
     "wag tail": {
         "commands": ["wag tail", "wake tail", "wake town", "wait town", "wait tail", "wake time", "wait time", "wait tail"],
@@ -189,7 +189,7 @@ COMMANDS = {
 def set_head_pitch_init(pitch):
     global head_pitch_init
     head_pitch_init = pitch
-    my_dog.head_move([head_yrp], pitch_init=pitch,
+    my_dog.head_move([head_yrp], pitch_comp=pitch,
                      immediately=True, speed=HEAD_SPEED)
 
 
@@ -303,7 +303,7 @@ def main():
             # Head Reset
             elif key == 'm':
                 head_yrp = [0, 0, 0]
-            my_dog.head_move([head_yrp], pitch_init=head_pitch_init,
+            my_dog.head_move([head_yrp], pitch_comp=head_pitch_init,
                              immediately=True, speed=HEAD_SPEED)
         else:
             # print('key:', key)
