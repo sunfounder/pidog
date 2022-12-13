@@ -15,9 +15,9 @@ stand = my_dog.legs_angle_calculation([[0, 80], [0, 80], [30, 75], [30, 75]])
 
 def patrol():
     my_dog.rgb_strip.set_mode('breath', 'white', delay=0.1)
-    my_dog.do_action('forward', step_count=2, wait=False, speed=98)
-    my_dog.do_action('shake_head', step_count=1, wait=False, speed=80)
-    my_dog.do_action('wag_tail', step_count=5, wait=False, speed=99)
+    my_dog.do_action('forward', step_count=2, speed=98)
+    my_dog.do_action('shake_head', step_count=1, speed=80)
+    my_dog.do_action('wag_tail', step_count=5, speed=99)
     print(f"distance: {round(my_dog.ultrasonic.read_distance(), 2)} cm")
     if my_dog.ultrasonic.read_distance() < 15:
         print(f"distance: {round(my_dog.ultrasonic.read_distance(), 2)} cm. DANGER!")

@@ -21,7 +21,7 @@ def fly():
 
 def stand():
     my_dog.rgb_strip.set_mode('breath', color='green', delay=0.02)
-    my_dog.do_action('stand', wait=True, speed=60)
+    my_dog.do_action('stand', speed=60)
 
 
 def be_picked_up():

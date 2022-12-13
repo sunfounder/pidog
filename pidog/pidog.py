@@ -788,24 +788,24 @@ class Pidog():
         self.servo_move(translate_list, speed)
 
     # do action
-    def do_action(self, action_name, step_count=1, wait=False, speed=50):
+    def do_action(self, action_name, step_count=1, speed=50):
         try:
             actions, part = self.actions_dict[action_name]
             if part == 'legs':
                 for _ in range(step_count):
                     self.legs_move(actions, immediately=False, speed=speed)
-                if wait:
-                    self.wait_legs_done()
+                # if wait:
+                #     self.wait_legs_done()
             elif part == 'head':
                 for _ in range(step_count):
                     self.head_move(actions, immediately=False, speed=speed)
-                if wait:
-                    self.wait_head_done()
+                # if wait:
+                #     self.wait_head_done()
             elif part == 'tail':
                 for _ in range(step_count):
                     self.tail_move(actions, immediately=False, speed=speed)
-                if wait:
-                    self.wait_tail_done()
+                # if wait:
+                #     self.wait_tail_done()
         except KeyError:
             print("No such action")
         except Exception as e:

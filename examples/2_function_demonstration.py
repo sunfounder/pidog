@@ -70,13 +70,13 @@ def do_function(index):
         name, head_pitch_adjust, speed = actions[index]
         # If last action is pushup, then lie down first
         if last_index < len(actions) and actions[last_index][0] in ('pushup'):
-            my_dog.do_action('lie', wait=False, speed=60)
+            my_dog.do_action('lie', speed=60)
         # If this action is trot, forward, turn left, turn right and backward, and, last action is not, then stand up
         if name in STANDUP_ACTIONS and last_index < len(actions) and actions[last_index][0] not in STANDUP_ACTIONS:
-            my_dog.do_action('stand', wait=False, speed=60)
+            my_dog.do_action('stand', speed=60)
         my_dog.head_move_raw([[0, 0, head_pitch_adjust]],
                              immediately=True, speed=60)
-        my_dog.do_action(name, step_count=10, wait=False, speed=speed)
+        my_dog.do_action(name, step_count=10, speed=speed)
     elif index < len(actions) + len(sound_effects):
         my_dog.speak(sound_effects[index - len(actions)])
     last_index = index

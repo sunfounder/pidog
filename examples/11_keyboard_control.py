@@ -61,31 +61,31 @@ def set_head(roll=None, pitch=None, yaw=None):
 COMMANDS = {
     "forward": {
         "commands": ["forward"],
-        "function": lambda: my_dog.do_action('forward', wait=False, speed=98),
+        "function": lambda: my_dog.do_action('forward', speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
     "backward": {
         "commands": ["backward"],
-        "function": lambda: my_dog.do_action('backward', wait=False, speed=98),
+        "function": lambda: my_dog.do_action('backward', speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
     "turn left": {
         "commands": ["turn left"],
-        "function": lambda: my_dog.do_action('turn_left', wait=False, speed=98),
+        "function": lambda: my_dog.do_action('turn_left', speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
     "turn right": {
         "commands": ["turn right"],
-        "function": lambda: my_dog.do_action('turn_right', wait=False, speed=98),
+        "function": lambda: my_dog.do_action('turn_right', speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
     "trot": {
         "commands": ["trot"],
-        "function": lambda: my_dog.do_action('trot', wait=False, speed=98),
+        "function": lambda: my_dog.do_action('trot', speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
@@ -94,19 +94,19 @@ COMMANDS = {
     },
     "lie down": {
         "commands": ["lie down"],
-        "function": lambda: my_dog.do_action('lie', wait=False, speed=70),
+        "function": lambda: my_dog.do_action('lie', speed=70),
         "head_pitch": STAND_HEAD_PITCH,
         "status": STATUS_LIE,
     },
     "stand up": {
         "commands": ["stand up"],
-        "function": lambda: my_dog.do_action('stand', wait=False, speed=70),
+        "function": lambda: my_dog.do_action('stand', speed=70),
         "head_pitch": STAND_HEAD_PITCH,
         "status": STATUS_STAND,
     },
     "sit": {
         "commands": ["sit", "sit down", "set", "set down"],
-        "function": lambda: my_dog.do_action('sit', wait=False, speed=70),
+        "function": lambda: my_dog.do_action('sit', speed=70),
         "head_pitch": SIT_HEAD_PITCH,
         "status": STATUS_SIT,
     },
@@ -124,7 +124,7 @@ COMMANDS = {
     },
     "wag tail": {
         "commands": ["wag tail", "wake tail", "wake town", "wait town", "wait tail", "wake time", "wait time", "wait tail"],
-        "function": lambda: my_dog.do_action('wag_tail', wait=True, speed=100),
+        "function": lambda: my_dog.do_action('wag_tail', speed=100),
         "after": "wag tail",
     },
     "shake head": {
@@ -133,13 +133,13 @@ COMMANDS = {
     },
     "stretch": {
         "commands": ["stretch"],
-        "function": lambda: my_dog.do_action('stretch', wait=True, speed=80),
+        "function": lambda: my_dog.do_action('stretch', speed=80),
         "after": "stand up",
         "status": STATUS_STAND,
     },
     "doze off": {
         "commands": ["doze off", "does off"],
-        "function": lambda: my_dog.do_action('doze_off', wait=True, speed=95),
+        "function": lambda: my_dog.do_action('doze_off', speed=95),
         "after": "doze off",
         "status": STATUS_LIE,
     },
@@ -198,13 +198,13 @@ def change_status(status):
     current_status = status
     if status == STATUS_STAND:
         set_head_pitch_init(STAND_HEAD_PITCH)
-        my_dog.do_action('stand', wait=False, speed=70)
+        my_dog.do_action('stand', speed=70)
     elif status == STATUS_SIT:
         set_head_pitch_init(SIT_HEAD_PITCH)
-        my_dog.do_action('sit', wait=False, speed=70)
+        my_dog.do_action('sit', speed=70)
     elif status == STATUS_LIE:
         set_head_pitch_init(STAND_HEAD_PITCH)
-        my_dog.do_action('lie', wait=False, speed=70)
+        my_dog.do_action('lie', speed=70)
     my_dog.wait_all_done()
 
 

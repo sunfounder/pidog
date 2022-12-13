@@ -2,13 +2,12 @@
 ''' do preset actions
     
 API:
-    Pidog.do_action(action_name, step_count=1, wait=False, speed=50):
+    Pidog.do_action(action_name, step_count=1, speed=50):
         do preset actions
         
         - action_name   str, name of preset actions, eg: "stand", "sit", "forward",
                         more to see: ../pidogg/actions_dictionary.py
         - step_count    int, times to perform the action
-        - wait          bool, whether to wait for previous actions to complete
         - speed         int, speed of action, 0 ~ 100
 
 more to see: ../pidog/actions_dictionary.py

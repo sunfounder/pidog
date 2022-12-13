@@ -26,7 +26,8 @@ def is_sound():
 
 def rest():
  
-    my_dog.do_action('lie', wait=True, speed=50)
+    my_dog.wait_all_done()
+    my_dog.do_action('lie', speed=50)
     my_dog.wait_all_done()
     # Cleanup sound detection
     is_sound()
@@ -36,14 +37,14 @@ def rest():
         my_dog.rgb_strip.set_mode('breath', 'pink', delay=0.14)
         my_dog.head_move([[0,0,-40]], immediately=True, speed=5)
         my_dog.do_action('wag_tail', step_count=20, speed=20)
-        my_dog.do_action('doze_off', wait=False, speed=95)
+        my_dog.do_action('doze_off', speed=95)
         
         # If heard anything, wake up
         if is_sound():
             # Set light to yellow and stand up
             my_dog.rgb_strip.set_mode('boom', 'yellow', delay=0.01)
             my_dog.body_stop()
-            my_dog.do_action('stand', wait=False, speed=90)
+            my_dog.do_action('stand', speed=90)
             my_dog.head_move([[0, 0, 0]], immediately=True, speed=80)
             my_dog.wait_all_done()
             # Look arround
@@ -51,7 +52,7 @@ def rest():
             sleep(0.5)
             # tilt head and being confused
             my_dog.speak('confused_3')
-            my_dog.do_action('tilting_head_left', wait=True, speed=80)
+            my_dog.do_action('tilting_head_left', speed=80)
             my_dog.wait_all_done()
             sleep(0.8)
             my_dog.head_move([[0, 0, -10]], immediately=True, speed=80)
@@ -62,7 +63,7 @@ def rest():
             sleep(0.2)
             # Lay down again
             my_dog.rgb_strip.set_mode('breath', 'pink')
-            my_dog.do_action('lie', wait=True, speed=50)
+            my_dog.do_action('lie', speed=50)
             my_dog.wait_all_done()
             sleep(0.2)
             # Cleanup sound detection
