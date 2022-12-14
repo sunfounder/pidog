@@ -335,8 +335,10 @@ class Pidog():
             try:
                 with self.head_thread_lock:
                     self.head_current_angles = list.copy(self.head_action_buffer[0])
+                    _angles = list.copy(self.head_action_buffer[0])
+                    _angles[2] += 40
                     self.head_action_buffer.pop(0)
-                self.head.servo_move(self.head_current_angles, self.head_speed)
+                self.head.servo_move(_angles, self.head_speed)
             except IndexError:
                 sleep(0.001)
             except Exception as e:
@@ -559,7 +561,8 @@ class Pidog():
 
     def head_offset(self, cali_list):
         self.head.set_offset(cali_list)
-        self.head.reset()
+        #self.head.reset()
+        self.head_move([[0]*3], immediately=True, speed=80)
         self.head_current_angles = [0]*3
 
     def tail_offset(self, cali_list):
