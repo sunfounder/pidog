@@ -8,7 +8,7 @@ t = time.time()
 my_dog = Pidog()
 my_dog.do_action('stand', speed=80)
 my_dog.wait_all_done()
-sleep(0.1)
+sleep(.5)
 
 stand = my_dog.legs_angle_calculation([[0, 80], [0, 80], [30, 75], [30, 75]])
 
