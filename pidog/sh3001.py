@@ -560,7 +560,7 @@ class Sh3001(I2C):
 
             return accData, gyroData
         except Exception as e:
-            print("_sh3001_getimudata")
+            # print("_sh3001_getimudata error: ", e)
             return False
 
     def sh3001_getimudata(self, aram, axis):
