@@ -105,6 +105,13 @@ class Pidog():
     DEFAULT_TAIL_PIN = [9]
 
     HEAD_PITCH_OFFSET = 45
+    
+    HEAD_YAW_MIN = -90
+    HEAD_YAW_MAX = 90
+    HEAD_ROLL_MIN = -70
+    HEAD_ROLL_MAX = 70
+    HEAD_PITCH_MIN = -45
+    HEAD_PITCH_MAX = 30
 
     # init
     def __init__(self, leg_pins=DEFAULT_LEGS_PINS, head_pins=DEFAULT_HEAD_PINS, tail_pin=DEFAULT_TAIL_PIN,
@@ -134,15 +141,17 @@ class Pidog():
         if leg_init_angles == None:
             leg_init_angles = self.actions_dict['lie'][0][0]
         if head_init_angles == None:
-            # head_init_angles = [0,0,-20]
-            head_init_angles = [0]*3
+            head_init_angles = [0, 0, self.HEAD_PITCH_OFFSET]
+        else:
+            head_init_angles[2] += self.HEAD_PITCH_OFFSET
+            # head_init_angles = [0]*3
         if tail_init_angle == None:
             tail_init_angle = [0]
 
         self.thread_list = []
 
         try:
-            debug("rotbot_hat init ... ", end='', flush=True)
+            debug("robot_hat init ... ", end='', flush=True)
             self.legs = Robot(pin_list=leg_pins, name='legs', init_angles=leg_init_angles, init_order=[
                             0, 2, 4, 6, 1, 3, 5, 7], db=config_file)
             self.head = Robot(pin_list=head_pins, name='head',
@@ -361,6 +370,9 @@ class Pidog():
                 with self.head_thread_lock:
                     self.head_current_angles = list.copy(self.head_action_buffer[0])
                     _angles = list.copy(self.head_action_buffer[0])
+                    _angles[0] = self.limit(self.HEAD_YAW_MIN, self.HEAD_YAW_MAX, _angles[0])
+                    _angles[1] = self.limit(self.HEAD_ROLL_MIN, self.HEAD_ROLL_MAX, _angles[1])
+                    _angles[2] = self.limit(self.HEAD_PITCH_MIN, self.HEAD_PITCH_MAX, _angles[2])
                     _angles[2] += self.HEAD_PITCH_OFFSET
                     self.head_action_buffer.pop(0)
                 self.head.servo_move(_angles, self.head_speed)
@@ -818,18 +830,12 @@ class Pidog():
             if part == 'legs':
                 for _ in range(step_count):
                     self.legs_move(actions, immediately=False, speed=speed)
-                # if wait:
-                #     self.wait_legs_done()
             elif part == 'head':
                 for _ in range(step_count):
                     self.head_move(actions, immediately=False, speed=speed)
-                # if wait:
-                #     self.wait_head_done()
             elif part == 'tail':
                 for _ in range(step_count):
                     self.tail_move(actions, immediately=False, speed=speed)
-                # if wait:
-                #     self.wait_tail_done()
         except KeyError:
             error("do_action: No such action")
         except Exception as e:
