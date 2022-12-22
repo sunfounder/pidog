@@ -268,9 +268,17 @@ class Pidog():
         import signal
         import sys
 
+
         def handler(signal, frame):
             info('Please wait')
         signal.signal(signal.SIGINT, handler)
+
+        def _handle_timeout(signum, frame):
+            raise TimeoutError('function timeout')
+
+        timeout_sec = 5
+        signal.signal(signal.SIGALRM, _handle_timeout)
+        signal.alarm(timeout_sec)
 
         info('\rStopping and returning to the initial position ... ')
 
@@ -280,21 +288,24 @@ class Pidog():
                 self.action_threads_start()
             self.stop_and_lie()
             self.close_all_thread()
+
+            self.legs_thread.join()
+            self.head_thread.join()
+            self.tail_thread.join()
+
+            if 'rgb' in self.thread_list:
+                self.rgb_strip_thread.join()
+            if 'imu' in self.thread_list:
+                self.imu_thread.join()
+            if self.sensory_processes != None:
+                self.sensory_processes.terminate()
+
             info('Quit')
         except Exception as e:
-            error(f'Close error:{e}')
-
-        self.legs_thread.join()
-        self.head_thread.join()
-        self.tail_thread.join()
-
-        if 'rgb' in self.thread_list:
-            self.rgb_strip_thread.join()
-        if 'imu' in self.thread_list:
-            self.imu_thread.join()
-        if self.sensory_processes != None:
-            self.sensory_processes.terminate()
-        sys.exit(0)
+            error(f'Close error: {e}')
+        finally:
+            signal.alarm(0)
+            sys.exit(0)
 
     def legs_simple_move(self, angles_list, speed=90):
 
