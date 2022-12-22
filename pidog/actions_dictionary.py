@@ -28,7 +28,7 @@ class ActionDict(dict):
     @property
     def stand(self):
         x = self.barycenter
-        y = 80
+        y = 95
         return [
             Pidog.legs_angle_calculation(
                 [[x, y], [x, y], [x+20, y-5], [x+20, y-5]])
@@ -131,7 +131,8 @@ class ActionDict(dict):
         t = 4
         for i in range(0, am+1, 1):  # up
             anl_f = start + i
-            anl_b = 45 - i/2
+            # anl_b = 45 - i/2
+            anl_b = 45 - i
             angs += [[45, anl_f, -45, -anl_f, 45, -anl_b, -45, anl_b]]*t
         for _ in range(4):  # stop
             anl_f = start + am
@@ -139,7 +140,8 @@ class ActionDict(dict):
             angs += [[45, anl_f, -45, -anl_f, 45, -anl_b, -45, anl_b]]*t
         for i in range(am, -1, -1):  # down
             anl_f = start + i
-            anl_b = 45 - i/2
+            # anl_b = 45 - i/2
+            anl_b = 45 - i
             angs += [[45, anl_f, -45, -anl_f, 45, -anl_b, -45, anl_b]]*t
         for _ in range(4):  # stop
             anl_f = start

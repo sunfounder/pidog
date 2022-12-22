@@ -3,6 +3,11 @@ from time import sleep
 from pidog import Pidog
 import os
 
+# change working directory
+abspath = os.path.abspath(os.path.dirname(__file__))
+# print(abspath)
+os.chdir(abspath)
+
 my_dog = Pidog()
 sleep(0.5)
 
