@@ -31,7 +31,9 @@ class ActionDict(dict):
         y = 95
         return [
             Pidog.legs_angle_calculation(
-                [[x, y], [x, y], [x+20, y-5], [x+20, y-5]])
+                [[x, 50], [x, 50], [x+20, 50], [x+20, 50]]),
+            Pidog.legs_angle_calculation(
+                [[x, y], [x, y], [x+20, y-5], [x+20, y-5]]),
         ], 'legs'
 
     # 坐 sit
@@ -131,22 +133,24 @@ class ActionDict(dict):
         t = 4
         for i in range(0, am+1, 1):  # up
             anl_f = start + i
-            # anl_b = 45 - i/2
             anl_b = 45 - i
             angs += [[45, anl_f, -45, -anl_f, 45, -anl_b, -45, anl_b]]*t
+            # print(1, anl_b)
         for _ in range(4):  # stop
             anl_f = start + am
-            anl_b = 45 - am/2
+            anl_b = 45 - am
             angs += [[45, anl_f, -45, -anl_f, 45, -anl_b, -45, anl_b]]*t
+            # print(2, anl_b)
         for i in range(am, -1, -1):  # down
             anl_f = start + i
-            # anl_b = 45 - i/2
             anl_b = 45 - i
             angs += [[45, anl_f, -45, -anl_f, 45, -anl_b, -45, anl_b]]*t
+            # print(3, anl_b)
         for _ in range(4):  # stop
             anl_f = start
             anl_b = 45
             angs += [[45, anl_f, -45, -anl_f, 45, -anl_b, -45, anl_b]]*t
+            # print(4, anl_b)
 
         return angs, 'legs'
 
