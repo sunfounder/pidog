@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import sys
 from time import sleep, time
 from multiprocessing import Process, Value, Lock
 import threading
@@ -10,6 +11,7 @@ from .sh3001 import Sh3001
 from .rgb_strip import RGBStrip
 from .sound_direction import SoundDirection
 from .dual_touch import DualTouch
+
 
 ''' servos order
                      4,
@@ -41,9 +43,31 @@ UserHome = os.popen('getent passwd %s | cut -d: -f 6' %User).readline().strip()
 config_file = '%s/.config/pidog/pidog.conf' % UserHome
 
 # color:
-# 30:black 31:red, 32:green, 33:yellow, 34:blue, 35:purple, 36:dark green, 37:white
-def print_color(msg, color=''):
-    print('\033[%sm%s\033[0m'%(color, msg))
+# 30:gray 31:red, 32:green, 33:yellow, 34:blue, 35:purple, 36:dark green, 37:white
+GRAY = '30'
+RED = '31'
+GREEN = '32'
+YELLOW = '33'
+BLUE = '34'
+PURPLE = '35'
+DARK_GREEN = '36'
+WHITE = '37'
+
+def print_color(msg, end='\n', file=sys.stdout, flush=False, color=''):
+    print('\033[%sm%s\033[0m'%(color, msg), end=end, file=file, flush=flush)
+
+def info(msg, end='\n', file=sys.stdout, flush=False):
+    print_color('\033[%sm%s\033[0m'%(WHITE, msg), end=end, file=file, flush=flush)
+
+def debug(msg, end='\n', file=sys.stdout, flush=False):
+    print_color('\033[%sm%s\033[0m'%(GRAY, msg), end=end, file=file, flush=flush)
+
+def warn(msg, end='\n', file=sys.stdout, flush=False):
+    print_color('\033[%sm%s\033[0m'%(YELLOW, msg), end=end, file=file, flush=flush)
+
+def error(msg, end='\n', file=sys.stdout, flush=False):
+    print_color('\033[%sm%s\033[0m'%(RED, msg), end=end, file=file, flush=flush)
+
 
 class MyUltrasonic(Ultrasonic):
     def __init__(self, tring, echo):
@@ -80,6 +104,8 @@ class Pidog():
     DEFAULT_HEAD_PINS = [4, 6, 5]
     DEFAULT_TAIL_PIN = [9]
 
+    HEAD_PITCH_OFFSET = 45
+
     # init
     def __init__(self, leg_pins=DEFAULT_LEGS_PINS, head_pins=DEFAULT_HEAD_PINS, tail_pin=DEFAULT_TAIL_PIN,
                  leg_init_angles=None, head_init_angles=None, tail_init_angle=None):
@@ -88,8 +114,8 @@ class Pidog():
         self.actions_dict = ActionDict()
 
         self.body_height = 80
-        self.pose = np.mat([0.0,  0.0,  self.body_height]).T  # 目标位置向量
-        self.rpy = np.array([0.0,  0.0,  0.0]) * pi / 180  # 欧拉角，化为弧度值
+        self.pose = np.mat([0.0,  0.0,  self.body_height]).T  # target position vector
+        self.rpy = np.array([0.0,  0.0,  0.0]) * pi / 180  # Euler angle, converted to radian value
         self.leg_point_struc = np.mat([
             [-self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2,  0],
             [self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2,  0],
@@ -116,7 +142,7 @@ class Pidog():
         self.thread_list = []
 
         try:
-            print("rotbot_hat init ... ", end='', flush=True)
+            debug("rotbot_hat init ... ", end='', flush=True)
             self.legs = Robot(pin_list=leg_pins, name='legs', init_angles=leg_init_angles, init_order=[
                             0, 2, 4, 6, 1, 3, 5, 7], db=config_file)
             self.head = Robot(pin_list=head_pins, name='head',
@@ -149,13 +175,13 @@ class Pidog():
             self.tail_speed = 90
 
             # done
-            print("done")
+            debug("done")
         except OSError:
-            print_color("failed", "31")
+            error("fail")
             raise OSError("rotbot_hat I2C init failed. Please try again.")
             
         try:
-            print("imu_sh3001 init ... ", end='', flush=True)
+            debug("imu_sh3001 init ... ", end='', flush=True)
             self.imu = Sh3001(db=config_file)
             self.imu_acc_offset = [0, 0, 0]
             self.imu_gyro_offset = [0, 0, 0]
@@ -164,56 +190,55 @@ class Pidog():
             self.imu_fail_count = 0
             # add imu thread
             self.thread_list.append("imu")
-            print("done")
+            debug("done")
         except OSError:
-            print_color("failed", "33")
+            error("fail")
 
         try:
-            print("rgb_strip init ... ", end='', flush=True)
+            debug("rgb_strip init ... ", end='', flush=True)
             self.rgb_strip = RGBStrip(0X74)
             self.rgb_strip.set_mode('breath', 'black')
             self.rgb_fail_count = 0
             # add rgb thread
             self.thread_list.append("rgb")
-            print("done")
+            debug("done")
         except OSError:
-            print_color("failed", "33")
+            error("fail")
 
         try:
-            print("ultrasonic init ... ", end='', flush=True)
+            debug("ultrasonic init ... ", end='', flush=True)
             echo = Pin('D0')
             trig = Pin('D1')
             self.ultrasonic = MyUltrasonic(trig, echo)
             # add ultrasonic thread
             self.thread_list.append("ultrasonic")
-            print("done")
+            debug("done")
         except Exception as e:
-            # print(e)
-            print_color("failed", "33")
+            error("fail")
             raise ValueRrror(e)
 
         try:
-            print("dual_touch init ... ", end='', flush=True)
+            debug("dual_touch init ... ", end='', flush=True)
             self.dual_touch = DualTouch('D2', 'D3')
             self.touch = 'N'
-            print("done")
+            debug("done")
         except:
-            print_color("failed", "33")
+            error("fail")
 
         try:
-            print("sound_direction init ... ", end='', flush=True)
+            debug("sound_direction init ... ", end='', flush=True)
             self.ears = SoundDirection()
             # self.sound_direction = -1
-            print("done")
+            debug("done")
         except:
-            print_color("failed", "33")
+            error("fail")
 
         try:
-            print("sound_effect init ... ", end='', flush=True)
+            debug("sound_effect init ... ", end='', flush=True)
             self.music = Music()
-            print("done")
+            debug("done")
         except:
-            print_color("failed", "33")
+            error("fail")
 
 
         self.sensory_processes = None
@@ -235,10 +260,10 @@ class Pidog():
         import sys
 
         def handler(signal, frame):
-            print('Please wait')
+            info('Please wait')
         signal.signal(signal.SIGINT, handler)
 
-        print('\rStopping and returning to the initial position ... ')
+        info('\rStopping and returning to the initial position ... ')
 
         try:
             if self.exit_flag == True:
@@ -246,9 +271,9 @@ class Pidog():
                 self.action_threads_start()
             self.stop_and_lie()
             self.close_all_thread()
-            print('Quit')
+            info('Quit')
         except Exception as e:
-            print('Close error:', e)
+            error(f'Close error:{e}')
 
         self.legs_thread.join()
         self.head_thread.join()
@@ -326,7 +351,7 @@ class Pidog():
             except IndexError:
                 sleep(0.001)
             except Exception as e:
-                print('_legs_action_thread Exception:%s' % e)
+                error(f'\r_legs_action_thread Exception:{e}')
                 break
 
     # head
@@ -336,13 +361,13 @@ class Pidog():
                 with self.head_thread_lock:
                     self.head_current_angles = list.copy(self.head_action_buffer[0])
                     _angles = list.copy(self.head_action_buffer[0])
-                    _angles[2] += 40
+                    _angles[2] += self.HEAD_PITCH_OFFSET
                     self.head_action_buffer.pop(0)
                 self.head.servo_move(_angles, self.head_speed)
             except IndexError:
                 sleep(0.001)
             except Exception as e:
-                print('_head_action_thread Exception: %s' % e)
+                error(f'\r_head_action_thread Exception:{e}')
                 break
 
     # tail
@@ -356,7 +381,7 @@ class Pidog():
             except IndexError:
                 sleep(0.001)
             except Exception as e:
-                print('_tail_action_thread Exception: %s' % e)
+                error(f'\r_tail_action_thread Exception:{e}')
                 break
 
     # rgb strip
@@ -369,7 +394,7 @@ class Pidog():
                 self.rgb_fail_count += 1
                 sleep(0.001)
                 if self.rgb_fail_count > 10:
-                    print('_rgb_strip_thread Exception: %s' % e)
+                    error(f'\r_rgb_strip_thread Exception:{e}')
                     break
 
     # IMU
@@ -386,7 +411,6 @@ class Pidog():
         for _ in range(time):
             data = self.imu._sh3001_getimudata()
             if data == False:
-                print('_imu_thread imu data error')
                 break
 
             self.accData, self.gyroData = data
@@ -411,7 +435,7 @@ class Pidog():
                 if data == False:
                     self.imu_fail_count += 1
                     if self.imu_fail_count > 10:
-                        print('_imu_thread imu data error')
+                        error('\r_imu_thread imu data error')
                         break
                 self.accData, self.gyroData = data
                 self.accData[0] += self.imu_acc_offset[0]
@@ -433,7 +457,7 @@ class Pidog():
                 self.imu_fail_count += 1
                 sleep(0.001)
                 if self.imu_fail_count > 10:
-                    print('_imu_thread Exception: %s' % e)
+                    error(f'\r_imu_thread Exception:{e}')
                     self.exit_flag = True
                     break
 
@@ -506,9 +530,9 @@ class Pidog():
                     val = round(float(self.ultrasonic.read()), 2)
                     distance_addr.value = val
                 # sleep(1)
-            except:
+            except Exception as e:
                 sleep(0.1)
-                print('ultrasonic_thread  except')
+                error(f'\rultrasonic_thread  except: {e}')
                 break
 
     # sensory_processes : ultrasonic
@@ -537,20 +561,17 @@ class Pidog():
             self.tail_move([[0, 0, 0]], speed)
             self.wait_all_done()
         except Exception as e:
-            print('stop_and_lie error:%s' % e)
+            error(f'\rstop_and_lie error:{e}')
 
     # speak
     def speak(self, name):
         status, _ = utils.run_command('sudo killall pulseaudio') # Solve the problem that there is no sound when running in the vnc environment
-        # if status == 0:
-        #     print('killed pulseaudio')
-        # Scan for all available audios, see if name matches
         for filename in os.listdir(self.SOUND_DIR):
             if filename.startswith(name):
                 self.music.sound_play_threading(self.SOUND_DIR+filename)
                 break
         else:
-            print('No sound found for %s' % name)
+            warn(f'No sound found for {name}')
             return False
 
     # calibration
@@ -810,9 +831,9 @@ class Pidog():
                 # if wait:
                 #     self.wait_tail_done()
         except KeyError:
-            print("No such action")
+            error("do_action: No such action")
         except Exception as e:
-            print(e)
+            error("do_action:{e}")
 
     def wait_legs_done(self):
         while not self.is_legs_done():

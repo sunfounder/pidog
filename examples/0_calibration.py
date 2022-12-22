@@ -23,9 +23,9 @@ manual = '''
 
 my_dog = Pidog()
 
-my_dog.legs_move([[0]*8], immediately=True, speed=80)
-my_dog.head_move([[0]*3], immediately=True, speed=80)
-my_dog.tail_move([[0]], immediately=True, speed=80)
+my_dog.legs_move([[0]*8], immediately=True, speed=60)
+my_dog.head_move([[0]*3], immediately=True, speed=60)
+my_dog.tail_move([[0]], immediately=True, speed=60)
 my_dog.wait_all_done()
 
 leg_angles = 0.0
@@ -184,10 +184,20 @@ def keyboard_control():
                 sleep(0.01)
         # qiut
         elif key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
-            my_dog.close()
+            # my_dog.close()
+            break
 
         sleep(0.01)
 
 
 if __name__ == "__main__":
-    keyboard_control()
+    try:
+        keyboard_control()
+    except KeyboardInterrupt:
+        pass
+    except Exception as e:
+        print(f"\033[31mERROR: {e}\033[m")
+    finally:
+        my_dog.close()
+
+
