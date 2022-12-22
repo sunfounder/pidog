@@ -28,8 +28,7 @@ def face_track():
     direction = 0
 
     my_dog.do_action('sit', speed=50)
-    my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-
-                     40, immediately=True, speed=80)
+    my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-40, immediately=True, speed=80)
     delay(0.5)
     if my_dog.ears.isdetected():
         direction = my_dog.ears.read()
@@ -50,8 +49,7 @@ def face_track():
                 yaw = 360 - direction
                 if yaw > 80:
                     yaw = 80
-            my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-
-                             40, immediately=True, speed=80)
+            my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-40, immediately=True, speed=80)
             sleep(0.05)
 
         ex = Vilib.detect_obj_parameter['human_x'] - 320
@@ -86,8 +84,7 @@ def face_track():
               end='\r',
               flush=True,
               )
-        my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-
-                         40, immediately=True, speed=100)
+        my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-40, immediately=True, speed=100)
         sleep(0.05)
 
 
