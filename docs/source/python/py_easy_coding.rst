@@ -20,3 +20,4 @@ Easy Coding
     py_b10_imu
     py_b11_sound_direction
     py_b12_dual_touch
+    py_b13_more
