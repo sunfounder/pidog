@@ -11,9 +11,14 @@ from pidog import Pidog
 import os
 import time
 
+# change working directory
+abspath = os.path.abspath(os.path.dirname(__file__))
+# print(abspath)
+os.chdir(abspath)
+
 my_dog = Pidog()
 
-print("\033[033m Note that you need to run with sudo \033[m")
+print("\033[033m Note that you need to run with \"sudo\" \033[m")
 
 # my_dog.speak("angry")
 # time.sleep(2)

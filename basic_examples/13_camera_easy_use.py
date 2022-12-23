@@ -27,9 +27,12 @@ try:
     print('')
 
     while True:
-        n = Vilib.detect_obj_parameter['human_n'] 
-        print(f"\r \033[032m{n}\033[m faces are found.", end='', flush=True)   
+        n = Vilib.detect_obj_parameter['human_n']
+        print(f"\r \033[032m{n:^3}\033[m faces are found.", end='', flush=True)   
         time.sleep(1)
+        print("\r \033[032m   \033[m faces are found.", end='', flush=True)   
+        time.sleep(0.1)
+        
 
 except KeyboardInterrupt:
     pass

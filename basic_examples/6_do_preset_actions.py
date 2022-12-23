@@ -20,7 +20,7 @@ import time
 my_dog = Pidog()
 
 try:
-    my_dog.do_action("sit", speed=60)
+    my_dog.do_action("stand", speed=60)
     my_dog.wait_all_done()
 
     my_dog.do_action("pushup", step_count=10, speed=60)
