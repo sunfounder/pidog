@@ -3,9 +3,9 @@
 
 API:
     Pidog.rgb_strip.set_mode(style='breath', color='white', brightness=1, delay=0.01):
-        
+
         Set the display mode of the rgb light strip
-        
+
         - style    str, display style, could be: breath, boom, bark
         - color    str, display color, could be: 16-bit rgb value, eg: #a10a0a; or predefined colors:
                    "white", "black", "red", "yellow", "green", "blue", "cyan", "magenta", "pink"
@@ -15,7 +15,7 @@ API:
     Pidog.rgb_strip.close():
         - turn off rgb display
 
-    
+
 more to see: ../pidog/rgb_strip.py
 
 '''

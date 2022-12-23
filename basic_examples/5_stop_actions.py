@@ -1,7 +1,7 @@
 # !/usr/bin/env python3
 ''' stop all actions
 
-    
+
 API:
     Pidog.wait_all_done()
         wait for all the actions in the leg actions buffer, head buffer and tail buffer to be executed
@@ -33,10 +33,10 @@ try:
     my_dog.wait_all_done() # wait all the actions to be done
     time.sleep(0.5)
 
-    # pushup 
+    # pushup
     pushup_action = [
         [90, -30, -90, 30, 80, 70, -80, -70],
-        [45, 35, -45, -35, 80, 70, -80, -70],       
+        [45, 35, -45, -35, 80, 70, -80, -70],
     ]
     head_up_down_action = [
         [0, 0, -30],
@@ -49,7 +49,7 @@ try:
     print(f"legs buffer length (start): {len(my_dog.legs_action_buffer)}")
     time.sleep(5)
     print(f"legs buffer length (5s): {len(my_dog.legs_action_buffer)}")
-    
+
     my_dog.body_stop()
     print(f"legs buffer length (stop): {len(my_dog.legs_action_buffer)}")
     time.sleep(1)

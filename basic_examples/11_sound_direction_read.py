@@ -3,8 +3,8 @@
 
 API:
     Pidog.ears.isdetected():
-        return    bool, whether the sound direction recognition module has detected the sound 
-        
+        return    bool, whether the sound direction recognition module has detected the sound
+
     Pidog.ears.read()
         return    int, the azimuth of the identified sound, 0 ~ 359
 

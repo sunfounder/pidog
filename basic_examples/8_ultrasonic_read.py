@@ -16,4 +16,4 @@ while True:
     distance = my_dog.ultrasonic.read_distance()
     distance = round(distance,2)
     print(f"Distance: {distance} cm")
-    time.sleep(0.5)    
+    time.sleep(0.5)

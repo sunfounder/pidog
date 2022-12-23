@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-'''     
+'''
                 声音方位识别模块 通讯协议
 
 1.通讯格式：master 随机发送16bit数据给slave，然后接收16bit数据
@@ -26,7 +26,7 @@
 3. In the process, the master pulls up busy, and 064B (TR16F064B) starts to monitor the direction.
     When 064B recognizes the direction, it will pull down the busy line (usually high); the master monitors that BUSY is pulled low, and sends 16bit arbitrary data to 064B,
     And accept 16bit data, after the acceptance is completed, the main control pulls up the busy line and detects the direction again.
-    
+
 '''
 
 

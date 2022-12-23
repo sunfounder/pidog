@@ -23,7 +23,7 @@ time.sleep(1) #wait here to avoid 121 IO Error
 address = 0x57 #I2C address
 
 while True:
-    
+
     cmd = 1
     bus.write_byte(address, cmd)
     time.sleep(0.2) #wait for the echo  # 0.2

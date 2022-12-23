@@ -1,10 +1,10 @@
 # !/usr/bin/env python3
 ''' do preset actions
-    
+
 API:
     Pidog.do_action(action_name, step_count=1, speed=50):
         do preset actions
-        
+
         - action_name   str, name of preset actions, eg: "stand", "sit", "forward",
                         more to see: ../pidogg/actions_dictionary.py
         - step_count    int, times to perform the action
@@ -25,7 +25,7 @@ try:
 
     my_dog.do_action("pushup", step_count=10, speed=60)
     my_dog.wait_all_done()
-    
+
     my_dog.do_action("half_sit", speed=60)
     my_dog.wait_all_done()
 

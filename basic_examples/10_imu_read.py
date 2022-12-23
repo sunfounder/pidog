@@ -10,7 +10,7 @@ API:
     Pidog.accData = [ax, ay, az]
         the acceleration value, default gravity 1G = -16384
         note that the accelerometer direction is opposite to the actual acceleration direction
-    
+
     Pidog.gyroData = [gx, gy, gz]
         the gyro value
 

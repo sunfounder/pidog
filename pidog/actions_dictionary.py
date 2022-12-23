@@ -113,7 +113,7 @@ class ActionDict(dict):
         return [
             [-80, 70, 80, -70, -20, 64, 20, -64],
         ], 'legs'
-        
+
     # 俯卧撑 pushup
     @property
     def pushup(self):
@@ -201,7 +201,7 @@ class ActionDict(dict):
         return [
             [yaw, roll, pitch]
         ], 'head'
-        
+
     # 左右歪头 tilting_head left and right
     @property
     def tilting_head(self):

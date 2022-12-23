@@ -22,17 +22,17 @@ from .dual_touch import DualTouch
               1,0 --[ ]-- 10,11
                      |
                     '9'
-                    / 
+                    /
 
     legs pins: [2, 3, 7, 8, 0, 1, 10, 11]
         left front leg, left front leg
         right front leg, right front leg
-        left hind leg, left hind leg, 
+        left hind leg, left hind leg,
         right hind leg, right hind leg,
 
     head pins: [4, 6, 5]
         yaw, roll, pitch
-    
+
     tail pin: [9]
 
 '''
@@ -73,10 +73,10 @@ class MyUltrasonic(Ultrasonic):
     def __init__(self, tring, echo):
         super().__init__(tring, echo)
         self.distance = Value('f', -1.0)
-        
+
     def read_distance(self):
         return self.distance.value
-        
+
 class Pidog():
 
     # structure constants
@@ -105,7 +105,7 @@ class Pidog():
     DEFAULT_TAIL_PIN = [9]
 
     HEAD_PITCH_OFFSET = 45
-    
+
     HEAD_YAW_MIN = -90
     HEAD_YAW_MAX = 90
     HEAD_ROLL_MIN = -70
@@ -137,7 +137,7 @@ class Pidog():
         self.pitch_last_error = 0
         self.pitch_error_integral = 0
         self.target_rpy = [0, 0, 0]
-        
+
         if leg_init_angles == None:
             leg_init_angles = self.actions_dict['lie'][0][0]
         if head_init_angles == None:
@@ -188,7 +188,7 @@ class Pidog():
         except OSError:
             error("fail")
             raise OSError("rotbot_hat I2C init failed. Please try again.")
-            
+
         try:
             debug("imu_sh3001 init ... ", end='', flush=True)
             self.imu = Sh3001(db=config_file)

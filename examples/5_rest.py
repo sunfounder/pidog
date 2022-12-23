@@ -25,20 +25,20 @@ def is_sound():
             return False
 
 def rest():
- 
+
     my_dog.wait_all_done()
     my_dog.do_action('lie', speed=50)
     my_dog.wait_all_done()
     # Cleanup sound detection
     is_sound()
 
-    while True: 
+    while True:
         # Sleeping
         my_dog.rgb_strip.set_mode('breath', 'pink', delay=0.14)
         my_dog.head_move([[0,0,-40]], immediately=True, speed=5)
         my_dog.do_action('wag_tail', step_count=20, speed=20)
         my_dog.do_action('doze_off', speed=95)
-        
+
         # If heard anything, wake up
         if is_sound():
             # Set light to yellow and stand up

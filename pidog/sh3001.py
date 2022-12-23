@@ -42,7 +42,7 @@ class Sh3001(I2C):
     # region: Macro Definitions
     '''
     /******************************************************************
-    *	SH3001 Registers Macro Definitions 
+    *	SH3001 Registers Macro Definitions
     ******************************************************************/
     '''
     SH3001_ACC_XL = 0x00
@@ -136,7 +136,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	ACC Config Macro Definitions 
+    *	ACC Config Macro Definitions
     ******************************************************************/
     '''
     SH3001_ODR_1000HZ = 0x00
@@ -167,7 +167,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	GYRO Config Macro Definitions 
+    *	GYRO Config Macro Definitions
     ******************************************************************/
     '''
     SH3001_GYRO_RANGE_125 = 0x02
@@ -186,7 +186,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	Temperature Config Macro Definitions 
+    *	Temperature Config Macro Definitions
     ******************************************************************/
     '''
     SH3001_TEMP_ODR_500 = 0x00
@@ -199,7 +199,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	INT Config Macro Definitions 
+    *	INT Config Macro Definitions
     ******************************************************************/
     '''
     SH3001_INT_LOWG = 0x8000
@@ -236,7 +236,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	Orientation Blocking Config Macro Definitions 
+    *	Orientation Blocking Config Macro Definitions
     ******************************************************************/
     '''
     SH3001_ORIENT_BLOCK_MODE0 = 0x00
@@ -250,7 +250,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	Flat Time Config Macro Definitions 
+    *	Flat Time Config Macro Definitions
     ******************************************************************/
     '''
     SH3001_FLAT_TIME_500MS = 0x40
@@ -259,7 +259,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	ACT and INACT Int Config Macro Definitions 
+    *	ACT and INACT Int Config Macro Definitions
     ******************************************************************/
     '''
     SH3001_ACT_AC_MODE = 0x80
@@ -285,7 +285,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	TAP Int Config Macro Definitions 
+    *	TAP Int Config Macro Definitions
     ******************************************************************/
     '''
     SH3001_TAP_X_INT_EN = 0x08
@@ -297,7 +297,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	HIGHG Int Config Macro Definitions 
+    *	HIGHG Int Config Macro Definitions
     ******************************************************************/
     '''
 
@@ -312,7 +312,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	LOWG Int Config Macro Definitions 
+    *	LOWG Int Config Macro Definitions
     ******************************************************************/
     '''
     SH3001_LOWG_ALL_INT_EN = 0x01
@@ -320,7 +320,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	SPI Interface Config Macro Definitions 
+    *	SPI Interface Config Macro Definitions
     ******************************************************************/
     '''
     SH3001_SPI_3_WIRE = 0x01
@@ -328,7 +328,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	FIFO Config Macro Definitions 
+    *	FIFO Config Macro Definitions
     ******************************************************************/
     '''
     SH3001_FIFO_MODE_DIS = 0x00
@@ -364,7 +364,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	AUX I2C Config Macro Definitions 
+    *	AUX I2C Config Macro Definitions
     ******************************************************************/
     '''
     SH3001_MI2C_NORMAL_MODE = 0x00
@@ -383,7 +383,7 @@ class Sh3001(I2C):
 
     '''
     /******************************************************************
-    *	Other Macro Definitions 
+    *	Other Macro Definitions
     ******************************************************************/
     '''
     SH3001_TRUE = 0

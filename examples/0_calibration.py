@@ -13,12 +13,12 @@ manual = '''
                     │   │
               {c6}[6]\033[0m{c5}[5]\033[0m└─┬─┘{c7}[7]\033[0m{c8}[8]\033[0m
                      {c12}[=]\033[0m
-                      / 
+                      /
     1 ~ 8 : Leg servos      W: increase angle
-    9 : Head yaw ↺          S: decreases angle 
-    0 : Head roll ↔          
-    - : Head pitch ↕       
-    = : Tail                
+    9 : Head yaw ↺          S: decreases angle
+    0 : Head roll ↔
+    - : Head pitch ↕
+    = : Tail
 '''
 
 my_dog = Pidog()
