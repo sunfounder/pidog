@@ -7,7 +7,6 @@ Easy Coding
 .. toctree::
     :maxdepth: 2
 
-    py_0_calibrate
     py_b1_init
     py_b2_leg_move
     py_b3_head_move

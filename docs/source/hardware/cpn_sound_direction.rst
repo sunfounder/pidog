@@ -1,8 +1,9 @@
-Sound Directoin Sensor
+Sound Direction Sensor
 =====================================
 
-.. image:: img/sdm-01.jpeg
-
+.. image:: img/cpn_sound.png
+   :width: 400
+   :align: center
 
 This is a sound direction recognition module. It is equipped with 3 microphones, which can detect sound sources from all directions, and is equipped with a TR16F064B, which is used to process sound signals and calculate the sound source direction. The minimum reconnaissance unit of this module is 20 degrees, and the data range is 0~355
 
@@ -22,8 +23,6 @@ After completion, the main control will pull the BUSY pin high to detect the dir
 
 **Pin Out**
 
-
-.. image:: img/sdm-02.jpeg
 
 * GND - Ground Input
 * VCC - 3.3V Power Supply Input

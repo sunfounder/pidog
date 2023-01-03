@@ -45,23 +45,23 @@ You need to download the APP on your phone/tablet first, then connect to the hot
       
     * There are preset controllers for some products in the Preset section. Here we choose PiDog.
 
-    ..[做不了图]
+        .. image:: img/app_preset-1.png
 
     * Give it a name, then click Confirm.
 
-    ..[做不了图]
+        .. image:: img/app_preset-2.png
 
     * Now you have entered the inside of the remote control, which has several components for setting. Click the save button in the upper right corner.
 
-    .. image:: img/app_edit.png
+        .. image:: img/app_preset-3.png
 
     * Next you need to connect PiDog with your device by pressing the connect button.
 
-    .. image:: img/sc_connect.jpg
+        .. image:: img/sc_connect.jpg
 
     * Wait a few seconds, MyDog(IP) will appear, click it to connect.
 
-    .. image:: img/sc_mydog.jpg
+        .. image:: img/sc_mydog.jpg
 
     .. note::
         If the automatic connection cannot find the device, please click Scan to search again, or click Manual to input PiDog's IP manually.
@@ -72,7 +72,7 @@ You need to download the APP on your phone/tablet first, then connect to the hot
 
     * The picture taken by the camera will appear on the APP, and now you can control your PiDog with these widgets.
 
-    .. image:: img/sc_run.jpg
+        .. image:: img/sc_run.jpg
     
 
 Here are the functions of the widgets.

@@ -1,6 +1,10 @@
 Dual Touch Sensor
 ==================================
 
+.. image:: img/cpn_touchswitch.png
+   :width: 200
+   :align: center
+
 Dual channel touch sensor, based on two ttp223 touch sensors.
 When a touch signal is detected, the corresponding pin level will be pulled low.
 
@@ -8,7 +12,6 @@ TTP223 is a touch pad detector IC that provides 1 touch key.
 The touch detection IC is specially designed to replace the traditional direct keys with different pad sizes.
 It features low power consumption and wide operating voltage.
 
-.. image:: img/dual_touch.png
 
 **Specifications**
 

@@ -4,23 +4,18 @@ SunFounder Raspberry Pi Robot - PiDog
 
 Thank you for choosing our PiDog.
 
-.. .. image:: img/picrawler.jpg
-..     :width: 400
-..     :align: center
+PiDog is a Raspberry Pi pet robot with aluminum alloy structure. It can act as a mechanical pet, show cuteness to you, and interact with you.
 
-.. PiCrawler is a Raspberry Pi quadruped robot with aluminum alloy structure. 
-.. It is equipped with a camera module, which can perform color recognition, face detection and other items; 
-.. 12 metal gear servos support it to walk, dance, and pose various postures; 
-.. the ultrasonic module on the body allows it to quickly detect obstacles in front of it; the expansion board-robot HAT is equipped with a speaker, allowing it to express emotions such as happiness and excitement.
+It is equipped with a camera module, which can perform color recognition, face detection and other projects;
+12 metal gear servos support it to walk, stand, sit, shake its head, and pose in various poses;
+The ultrasonic module on the head enables it to quickly detect obstacles ahead;
+Special touch sensors allow it to respond to your touch;
+The Light Board on the chest can emit colorful light effects, and with the speaker equipped with the robot HAT, PiDog can express emotions such as happiness and excitement.
+In addition, PiDog is also equipped with a sound direction sensor and a 6-DOF IMU module to realize more complex and interesting usage scenarios.
+
+This document includes the list and assembly pdf, hardware introduction and PiDog programming.
 
 
-.. This document includes the list and assembly pdf, Robot HAT introduction and PiCrawler programming.
-
-.. The programming part is divided into two chapters: :ref:`play_ezblock` & :ref:`play_python`, each chapter allows you to explain how to make PiCrawler work the way you want.
-
-.. Ezblock Studio is a development platform developed by SunFounder for beginners, aiming to lower the barriers to entry for Raspberry Pi. It has two programming languages: Graphical and Python, which can be used on almost all different types of devices. With Bluetooth and Wi-Fi support, you can download codes on Ezblock Studio and remotely control Raspberry Pi.
-
-.. More experienced makers can use the popular programming language-Python.
 
 
 **Content**
