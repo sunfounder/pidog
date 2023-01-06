@@ -3,6 +3,9 @@ Wake Up
 
 This is PiDog's first project. It will wake your PiDog from a deep sleep.
 
+.. image:: img/py_wakeup.gif
+
+
 **Run the Code**
 
 .. raw:: html

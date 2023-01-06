@@ -5,6 +5,9 @@ In this project, PiDog makes a vivid behavior: patrolling.
 
 PiDog will walk forward, if there is an obstacle in front of it, it will stop and bark.
 
+
+.. image:: img/py_3.gif
+
 **Run the Code**
 
 .. raw:: html

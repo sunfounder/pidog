@@ -4,6 +4,9 @@ Howling
 
 PiDog is not only a cute puppy, but also a mighty dog. Come hear it howl!
 
+
+.. image:: img/py_9.gif
+
 **Run the Code**
 
 .. raw:: html

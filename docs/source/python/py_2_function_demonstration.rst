@@ -7,6 +7,8 @@ You can make PiDog make actions or make sounds by entering the serial number.
 
 The motion/sound effects currently included in this example are listed below.
 
+.. image:: img/py_2.gif
+
 .. list-table:: 
     :widths: 25 25
     :header-rows: 1

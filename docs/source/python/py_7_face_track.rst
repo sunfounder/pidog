@@ -3,6 +3,8 @@ Face Track
 
 PiDog will sit quietly in place. You applaud it, it looks your way, and if it sees you, it says hello.
 
+.. image:: img/py_7.jpg
+
 **Run the Code**
 
 .. raw:: html

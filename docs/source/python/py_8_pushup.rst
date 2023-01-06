@@ -3,6 +3,8 @@ Push Up
 
 PiDog is an exercise-loving robot that will do push-ups with you.
 
+.. image:: img/py_8.gif
+
 **Run the Code**
 
 .. raw:: html

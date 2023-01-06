@@ -3,7 +3,7 @@ Rest
 
 PiDog will doze off on the ground, and when it hears sounds around it, it will stand up in confusion to see who woke it up.
 
-
+.. image:: img/py_5.gif
 
 **Run the Code**
 

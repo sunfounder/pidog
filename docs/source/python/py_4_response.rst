@@ -4,7 +4,16 @@ Response
 In this project, PiDog will interact with you in an interesting way.
 
 If you reach out and grab PiDog's head from the front, it will bark vigilantly.
+
+
+.. image:: img/py_4-2.gif
+    :width: 430
+
+
 But if you reach out from behind it and pet its head, it will enjoy it very much.
+
+.. image:: img/py_4.gif
+    :width: 430
 
 **Run the Code**
 

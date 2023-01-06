@@ -7,6 +7,8 @@ Because PiDog is equipped with a 6-DOF IMU module, it has a great sense of balan
 In this example, you can make PiDog walk smoothly on the table, even if you lift one side of the table, PiDog will walk smoothly on the gentle slope.
 
 
+.. image:: img/py_10.gif
+
 **Run the Code**
 
 .. raw:: html

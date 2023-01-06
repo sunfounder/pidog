@@ -3,6 +3,8 @@ Be Picked Up
 
 Try lifting your PiDog from the ground, PiDog will feel like it can fly, and it will cheer in a superman pose.
 
+.. image:: img/py_6.gif
+
 **Run the Code**
 
 .. raw:: html
