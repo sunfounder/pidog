@@ -470,6 +470,8 @@ class Pidog():
                 ax = self.accData[0]
                 ay = self.accData[1]
                 az = self.accData[2]
+                ay = -ay
+                az = -az
 
                 self.pitch = atan(ay/sqrt(ax*ax+az*az))*57.2957795
                 self.roll = atan(az/sqrt(ax*ax+ay*ay))*57.2957795
