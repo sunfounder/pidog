@@ -20,7 +20,7 @@
 import sphinx_rtd_theme
 
 project = 'SunFounder PiDog Kit'
-copyright = '2022, sunfounder'
+copyright = '2023, sunfounder'
 author = 'sunfounder'
 
 # The full version, including alpha/beta/rc tags

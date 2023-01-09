@@ -2,6 +2,9 @@ SunFounder Raspberry Pi Robot - PiDog
 =============================================
 
 
+.. image:: IMG_8574-1.jpg
+    :width: 680
+
 Thank you for choosing our PiDog.
 
 PiDog is a Raspberry Pi pet robot with aluminum alloy structure. It can act as a mechanical pet, show cuteness to you, and interact with you.
