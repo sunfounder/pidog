@@ -1,6 +1,6 @@
-.. _remote_desktop:
+.. _n-remote_desktop:
 
-Remote Desktop 
+n-Remote Desktop 
 =====================
 
 There are two ways to control the desktop of the Raspberry Pi remotely:

@@ -57,4 +57,5 @@ your device.
 
 The Raspberry Pi is equipped with an audio port about 3.5 mm that can be
 used when your screen has no built-in speakers or when there is no
+.00
 screen operation.
