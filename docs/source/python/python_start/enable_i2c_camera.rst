@@ -1,4 +1,4 @@
-Enable I2C and Camera Interface
+Enable I2C, SPI and Camera Interface
 ========================================
 
 Here we are using the Raspberry Pi's I2C and Camera interfaces, but by default they are disabled, so we need to enable them first.
@@ -27,6 +27,14 @@ Here we are using the Raspberry Pi's I2C and Camera interfaces, but by default t
 
     .. image:: img/image284.png
         :align: center
+
+#. Go to **3 Interfacing Options** again and select **P4 SPI**.
+
+    .. image:: img/image-spi1.png
+
+#. Use the arrow keys on the keyboard to select **<Yes>** -> **<OK>** to complete the setup of the SPI.
+
+    .. image:: img/image-spi2.png
 
 #. Go to **3 Interfacing Options** again and select **P1 Camera**.
 
