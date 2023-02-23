@@ -26,6 +26,6 @@ for mode in mode_list:
         f'Color: {mode["color"]}, brightness: {mode["brightness"]}, delay: {mode["delay"]}')
     sleep(1)
     for _ in range(5):
-        strip.set_mode('breath', front_color=mode["color"],
+        strip.set_mode('breath', color=mode["color"],
                        brightness=mode["brightness"], delay=mode["delay"])
         strip.show()
