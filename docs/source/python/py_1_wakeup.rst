@@ -15,7 +15,7 @@ This is PiDog's first project. It will wake your PiDog from a deep sleep.
 .. code-block::
 
     cd /home/pi/pidog/examples
-    sudo python3 1_wakeup.py
+    sudo python3 1_wake_up.py
 
 After the code is executed, 
 PiDog will perform the following actions in sequence: 
