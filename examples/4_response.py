@@ -14,7 +14,7 @@ def lean_forward():
     bark_action(my_dog)
     sleep(0.2)
     bark_action(my_dog)
-    sleep(0.4)
+    sleep(0.8)
     bark_action(my_dog)
 
 
