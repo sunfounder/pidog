@@ -366,8 +366,8 @@ class Pidog():
             try:
                 with self.legs_thread_lock:
                     self.leg_current_angles = list.copy(self.legs_action_buffer[0])
+                    self.legs.servo_move(self.leg_current_angles, self.legs_speed)
                     self.legs_action_buffer.pop(0)
-                self.legs.servo_move(self.leg_current_angles, self.legs_speed)
             except IndexError:
                 sleep(0.001)
             except Exception as e:
@@ -385,8 +385,8 @@ class Pidog():
                     _angles[1] = self.limit(self.HEAD_ROLL_MIN, self.HEAD_ROLL_MAX, _angles[1])
                     _angles[2] = self.limit(self.HEAD_PITCH_MIN, self.HEAD_PITCH_MAX, _angles[2])
                     _angles[2] += self.HEAD_PITCH_OFFSET
+                    self.head.servo_move(_angles, self.head_speed)
                     self.head_action_buffer.pop(0)
-                self.head.servo_move(_angles, self.head_speed)
             except IndexError:
                 sleep(0.001)
             except Exception as e:
@@ -399,8 +399,8 @@ class Pidog():
             try:
                 with self.tail_thread_lock:
                     self.tail_current_angles = list.copy(self.tail_action_buffer[0])
+                    self.tail.servo_move(self.tail_current_angles, self.tail_speed)
                     self.tail_action_buffer.pop(0)
-                self.tail.servo_move(self.tail_current_angles, self.tail_speed)
             except IndexError:
                 sleep(0.001)
             except Exception as e:
