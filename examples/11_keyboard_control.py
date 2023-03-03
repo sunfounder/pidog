@@ -265,7 +265,7 @@ def main():
         print(usage)
         print("\033[?25l")  # Hide terminal cursor
         key = readchar.readchar()
-        if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
+        if key == readchar.key.CTRL_C:
             import sys
             print('')
             # sys.exit(0)

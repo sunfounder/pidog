@@ -60,7 +60,7 @@ def main():
         os.system('cls' if os.name == 'nt' else 'clear')
         print(usage)
         key = readchar.readkey()
-        if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
+        if key == readchar.key.CTRL_C:
             thread_start = False
             break
         elif key == 'w':
