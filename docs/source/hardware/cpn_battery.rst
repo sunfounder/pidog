@@ -10,7 +10,7 @@
 * **GND**: Negative battery terminal.
 
 
-This is a custom battery pack made by SunFounder consisting of two 18650 batteries with a capacity of 2200mAh. The connector is XH2.54-4P, which can be charged directly after being inserted into the Robot HAT.
+This is a custom battery pack made by SunFounder consisting of two 18650 batteries with a capacity of 2200mAh. The connector is PH2.0-5P, which can be charged directly after being inserted into the Robot HAT.
 
 
 **Features**
