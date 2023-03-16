@@ -20,7 +20,7 @@ def wake_up():
     sleep(0.5)
     my_dog.head_move([[0, 0, -30]], immediately=True, speed=90)
     # sit and wag_tail
-    my_dog.do_action('sit', speed=50)
+    my_dog.do_action('sit', speed=25)
     my_dog.wait_legs_done()
     my_dog.do_action('wag_tail', step_count=10, speed=100)
     my_dog.rgb_strip.set_mode('breath', color=[245, 10, 10], brightness=0.8, delay=0.002)
