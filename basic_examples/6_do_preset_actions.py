@@ -29,7 +29,7 @@ try:
     my_dog.do_action("half_sit", speed=60)
     my_dog.wait_all_done()
 
-    my_dog.do_action("wag_tail", step_count=100,speed=90)
+    my_dog.do_action("wag_tail", step_count=80,speed=90)
     my_dog.do_action("tilting_head", step_count=5, speed=20)
     my_dog.wait_head_done()
     my_dog.body_stop()
