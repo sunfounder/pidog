@@ -246,14 +246,14 @@ COMMAND_KEY_MAP = {
     "Q": "bark harder",
     "e": "pant",
     "r": "wag tail",
-    "t": "shake head",
+    "t": "handshake",
     "v": "stretch",
     "1": "doze off",
     "2": "push-up",
     "3": "howling",
     "4": "twist body",
     "5": "scratch",
-    "t": "handshake",
+    "f": "shake head",
     "g": "high five",
 }
 
