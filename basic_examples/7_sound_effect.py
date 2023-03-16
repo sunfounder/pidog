@@ -18,7 +18,7 @@ os.chdir(abspath)
 
 my_dog = Pidog()
 
-print("\033[033m Note that you need to run with \"sudo\" \033[m")
+print("\033[033mNote that you need to run with \"sudo\", otherwise there may be no sound.\033[m")
 
 # my_dog.speak("angry")
 # time.sleep(2)
@@ -28,3 +28,5 @@ for name in os.listdir('../sounds'):
     print(name)
     my_dog.speak(name)
     time.sleep(3) # Note that the duration of each sound effect is different
+print("closing ...")
+my_dog.close()
