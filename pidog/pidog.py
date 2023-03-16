@@ -11,7 +11,8 @@ from .sh3001 import Sh3001
 from .rgb_strip import RGBStrip
 from .sound_direction import SoundDirection
 from .dual_touch import DualTouch
-
+import warnings
+warnings.filterwarnings("ignore") # ignore warnings for pygame
 
 ''' servos order
                      4,
@@ -43,15 +44,16 @@ UserHome = os.popen('getent passwd %s | cut -d: -f 6' %User).readline().strip()
 config_file = '%s/.config/pidog/pidog.conf' % UserHome
 
 # color:
-# 30:gray 31:red, 32:green, 33:yellow, 34:blue, 35:purple, 36:dark green, 37:white
-GRAY = '30'
-RED = '31'
-GREEN = '32'
-YELLOW = '33'
-BLUE = '34'
-PURPLE = '35'
-DARK_GREEN = '36'
-WHITE = '37'
+# https://gist.github.com/rene-d/9e584a7dd2935d0f461904b9f2950007
+# 1;30:gray 31:red, 32:green, 33:yellow, 34:blue, 35:purple, 36:dark green, 37:white
+GRAY = '1;30'
+RED = '0;31'
+GREEN = '0;32'
+YELLOW = '0;33'
+BLUE = '0;34'
+PURPLE = '0;35'
+DARK_GREEN = '0;36'
+WHITE = '0;37'
 
 def print_color(msg, end='\n', file=sys.stdout, flush=False, color=''):
     print('\033[%sm%s\033[0m'%(color, msg), end=end, file=file, flush=flush)
@@ -366,8 +368,9 @@ class Pidog():
             try:
                 with self.legs_thread_lock:
                     self.leg_current_angles = list.copy(self.legs_action_buffer[0])
-                    self.legs.servo_move(self.leg_current_angles, self.legs_speed)
-                    self.legs_action_buffer.pop(0)
+                # Release lock after copying data before the next operations
+                self.legs.servo_move(self.leg_current_angles, self.legs_speed)
+                self.legs_action_buffer.pop(0)
             except IndexError:
                 sleep(0.001)
             except Exception as e:
@@ -380,13 +383,14 @@ class Pidog():
             try:
                 with self.head_thread_lock:
                     self.head_current_angles = list.copy(self.head_action_buffer[0])
-                    _angles = list.copy(self.head_action_buffer[0])
-                    _angles[0] = self.limit(self.HEAD_YAW_MIN, self.HEAD_YAW_MAX, _angles[0])
-                    _angles[1] = self.limit(self.HEAD_ROLL_MIN, self.HEAD_ROLL_MAX, _angles[1])
-                    _angles[2] = self.limit(self.HEAD_PITCH_MIN, self.HEAD_PITCH_MAX, _angles[2])
-                    _angles[2] += self.HEAD_PITCH_OFFSET
-                    self.head.servo_move(_angles, self.head_speed)
-                    self.head_action_buffer.pop(0)
+                # Release lock after copying data before the next operations
+                _angles = list.copy(self.head_current_angles)
+                _angles[0] = self.limit(self.HEAD_YAW_MIN, self.HEAD_YAW_MAX, _angles[0])
+                _angles[1] = self.limit(self.HEAD_ROLL_MIN, self.HEAD_ROLL_MAX, _angles[1])
+                _angles[2] = self.limit(self.HEAD_PITCH_MIN, self.HEAD_PITCH_MAX, _angles[2])
+                _angles[2] += self.HEAD_PITCH_OFFSET
+                self.head.servo_move(_angles, self.head_speed)
+                self.head_action_buffer.pop(0)
             except IndexError:
                 sleep(0.001)
             except Exception as e:
@@ -399,8 +403,9 @@ class Pidog():
             try:
                 with self.tail_thread_lock:
                     self.tail_current_angles = list.copy(self.tail_action_buffer[0])
-                    self.tail.servo_move(self.tail_current_angles, self.tail_speed)
-                    self.tail_action_buffer.pop(0)
+                # Release lock after copying data before the next operations
+                self.tail.servo_move(self.tail_current_angles, self.tail_speed)
+                self.tail_action_buffer.pop(0)
             except IndexError:
                 sleep(0.001)
             except Exception as e:
@@ -528,8 +533,10 @@ class Pidog():
         if immediately == True:
             self.head_stop()
         self.head_speed = speed
+        
         angles = [self.head_rpy_to_angle(
             target_yrp, roll_comp, pitch_comp) for target_yrp in target_yrps]
+
         with self.head_thread_lock:
             self.head_action_buffer += angles
 
@@ -539,6 +546,7 @@ class Pidog():
         self.head_speed = speed
         with self.head_thread_lock:
             self.head_action_buffer += target_angles
+        
 
     def tail_move(self, target_angles, immediately=True, speed=50):
         if immediately == True:
@@ -546,6 +554,7 @@ class Pidog():
         self.tail_speed = speed
         with self.tail_thread_lock:
             self.tail_action_buffer += target_angles
+        
 
     # ultrasonic
     def _ultrasonic_thread(self, distance_addr, lock):
@@ -585,6 +594,7 @@ class Pidog():
             self.head_move_raw([[0, 0, 0]], speed)
             self.tail_move([[0, 0, 0]], speed)
             self.wait_all_done()
+            sleep(0.1)
         except Exception as e:
             error(f'\rstop_and_lie error:{e}')
 
