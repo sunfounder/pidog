@@ -91,5 +91,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\033[31mERROR: {e}\033[m")
     finally:
+        thread_start = False
         t.join()
         my_dog.close()
