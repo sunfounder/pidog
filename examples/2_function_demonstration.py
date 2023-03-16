@@ -64,9 +64,11 @@ def show_info():
         print('Current selection: ', end="")
         if index < len(actions):
             print(f"{index+1}. {actions[index][0]}")
-        else:
+        elif index < len(actions) + len(sound_effects):
             print(f"{index+1}. {sound_effects[index-len(actions)]}")
-
+            print("\033[033mNote that you need to run with \"sudo\", otherwise there may be no sound.\033[m")
+        else:
+            print('\033[033mOut of range\033[m')
 
 def do_function(index):
     global last_index
@@ -95,9 +97,10 @@ def function_demonstration():
 
     while True:
         try:
-            num = input("Enter function number: ")
+            num = input("Enter function number\033[5m:\033[m")
             if int(num) > len(actions) + len(sound_effects):
-                print('Out of range')
+                index = int(num) - 1
+                show_info()
                 continue
             index = int(num) - 1
             do_function(index)
