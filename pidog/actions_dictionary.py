@@ -31,8 +31,6 @@ class ActionDict(dict):
         y = 95
         return [
             Pidog.legs_angle_calculation(
-                [[x, 50], [x, 50], [x+20, 50], [x+20, 50]]),
-            Pidog.legs_angle_calculation(
                 [[x, y], [x, y], [x+20, y-5], [x+20, y-5]]),
         ], 'legs'
 
