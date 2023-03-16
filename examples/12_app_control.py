@@ -217,7 +217,7 @@ def change_status(status):
 
 def run_command():
     global command, head_pitch_init
-    if not my_dog.is_legs_done() or not my_dog.is_head_done():
+    if not my_dog.is_legs_done():
         return
     if command is None:
         return
@@ -268,8 +268,9 @@ def main():
     last_qy = 0
 
     while True:
-        sc.set("A", my_dog.ultrasonic.read_distance())
         # print("Receive: ", sc.getall())
+
+        sc.set("A", round(my_dog.ultrasonic.read_distance(),2))
 
         # Left Joystick move
         k_value = sc.get('K')
@@ -316,7 +317,10 @@ def main():
         # Voice Control
         voice_command = sc.get('J')
         if voice_command != None:
-            command = voice_command
+            if voice_command in COMMANDS:
+                command = voice_command
+            else:
+                print("\033[0;31m no this voice command\033[m")
 
         # Bark
         n_value = sc.get('N')
