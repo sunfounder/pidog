@@ -1,5 +1,5 @@
-Sound Direction Detect
-======================
+11. Sound Direction Detect
+================================
 
 The PiDog has a Sound Direction Sensor Module that detects where sound is coming from, and we can trigger it by clapping near it.
 

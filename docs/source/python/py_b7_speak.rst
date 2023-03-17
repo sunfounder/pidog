@@ -1,4 +1,4 @@
-PiDog Speak
+7. PiDog Speak
 ==========================
 
 PiDog can make sound, it is actually playing a piece of audio.

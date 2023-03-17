@@ -1,5 +1,5 @@
-Play PiDog with Keyboard
-========================
+11. Play PiDog with Keyboard
+======================================
 
 
 In this example, we will use the keyboard to control PiDog. You can press these keys in the terminal to make it act.
@@ -63,7 +63,7 @@ In this example, we will use the keyboard to control PiDog. You can press these 
 
 .. code-block::
 
-    cd /home/pi/pidog/examples
+    cd ~/pidog/examples
     sudo python3 11_keyboard_control.py
 
 After the program runs, you will see a printed keyboard on the terminal. Now you can control PiDog with keyboard in terminal.

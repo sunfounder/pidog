@@ -1,5 +1,5 @@
-Howling
-=======
+9. Howling
+===============
 
 
 PiDog is not only a cute puppy, but also a mighty dog. Come hear it howl!
@@ -15,7 +15,7 @@ PiDog is not only a cute puppy, but also a mighty dog. Come hear it howl!
 
 .. code-block::
 
-    cd /home/pi/pidog/examples
+    cd ~/pidog/examples
     sudo python3 9_howling.py
 
 After the program runs, PiDog will sit on the ground and howl.

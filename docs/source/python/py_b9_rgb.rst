@@ -1,5 +1,5 @@
-PiDog RGB Strip
-===============
+9. PiDog RGB Strip
+========================
 
 There is an RGB Strip on PiDog's chest, which PiDog can use to express emotions.
 

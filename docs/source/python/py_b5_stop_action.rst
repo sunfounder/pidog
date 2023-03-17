@@ -1,5 +1,5 @@
-Stop All Actions
-================
+5. Stop All Actions
+======================
 
 After the previous chapters, you can find that the servo control of PiDog is divided into three threads.
 This allows PiDog's head and body to move at the same time, even with two lines of code.

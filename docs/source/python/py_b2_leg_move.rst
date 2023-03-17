@@ -1,7 +1,7 @@
 .. _py_b2_leg_move:
 
-Leg Move
-========
+2. Leg Move
+=================
 
 PiDog's leg movements are implemented by the following functions.
 

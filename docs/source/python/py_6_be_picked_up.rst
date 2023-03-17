@@ -1,5 +1,5 @@
-Be Picked Up
-============
+6. Be Picked Up
+===================
 
 Try lifting your PiDog from the ground, PiDog will feel like it can fly, and it will cheer in a superman pose.
 
@@ -13,7 +13,7 @@ Try lifting your PiDog from the ground, PiDog will feel like it can fly, and it 
 
 .. code-block::
 
-    cd /home/pi/pidog/examples
+    cd ~/pidog/examples
     sudo python3 6_be_picked_up.py
 
 After the program runs, the 6-DOF IMU Module will always calculate the acceleration in the vertical direction.

@@ -1,5 +1,5 @@
-More
-=====
+13. More
+==============
 
 The following address will explain the use of PiDog's more basic functions:
 

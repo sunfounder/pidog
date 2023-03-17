@@ -1,5 +1,5 @@
-Head Move
-=========
+3. Head Move
+================
 
 The control of PiDog's head servo is implemented by the following functions.
 

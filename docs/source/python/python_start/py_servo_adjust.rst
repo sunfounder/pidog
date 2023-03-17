@@ -1,5 +1,5 @@
-Servo Adjust
-===============
+6. Servo Adjust
+===================
 
 To ensure that the servo has been properly set to 0°, first insert the rocker arm into the servo shaft and then gently rotate the rocker arm to a different angle.
 
@@ -17,7 +17,7 @@ Now, run ``servo_zeroing.py`` in the ``examples/`` folder.
 
 .. code-block::
 
-    cd /home/pi/pidog/examples
+    cd ~/pidog/examples
     sudo python3 servo_zeroing.py
 
 

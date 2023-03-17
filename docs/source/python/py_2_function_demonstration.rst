@@ -1,5 +1,5 @@
-Function Demonstration
-======================
+2. Function Demonstration
+===============================
 
 This project shows you all of PiDog's usual actions and sounds.
 
@@ -56,7 +56,7 @@ The motion/sound effects currently included in this example are listed below.
 
 .. code-block::
 
-    cd /home/pi/pidog/examples
+    cd ~/pidog/examples
     sudo python3 2_function_demonstration.py
 
 After running this example, you input ``1`` and press ``ENTER``, PiDog will stand; input ``2``, PiDog will sit down; input ``27``, PiDog will issue "woohoo~ ".

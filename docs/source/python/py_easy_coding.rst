@@ -1,7 +1,5 @@
-Easy Coding
-===========
-
-
+4. Easy Coding
+======================
 
 
 .. toctree::

@@ -1,5 +1,5 @@
-Play PiDog with APP
-===================
+12. Play PiDog with APP
+=============================
 
 
 In this example, we will use SunFounder Controller APP to control PiDog.
@@ -21,7 +21,7 @@ You need to download the APP on your phone/tablet first, then connect to the hot
 
     .. code-block::
 
-        cd /home/pi/pidog/examples
+        cd ~/pidog/examples
         sudo python3 12_app_control.py
 
     After the code runs, you will see the following prompt, which means your PiDog has successfully started network communication.

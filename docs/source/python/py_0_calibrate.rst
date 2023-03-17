@@ -1,4 +1,4 @@
-Calibrate the PiDog
+2. Calibrate the PiDog
 =============================
 
 Due to possible deviations during PiDog installation or limitations of the servos themselves, 
@@ -21,7 +21,7 @@ The specific steps are as follows:
 
     .. code-block::
 
-        cd /home/pi/pidog/examples
+        cd ~/pidog/examples
         sudo python3 0_calibration.py
         
     After running the above code, you will see the following interface displayed in the terminal.

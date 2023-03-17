@@ -1,5 +1,5 @@
-Response
-========
+4. Response
+================
 
 In this project, PiDog will interact with you in an interesting way.
 
@@ -23,7 +23,7 @@ But if you reach out from behind it and pet its head, it will enjoy it very much
 
 .. code-block::
 
-    cd /home/pi/pidog/examples
+    cd ~/pidog/examples
     sudo python3 4_response.py
 
 After running this example, PiDog's ultrasonic module will detect whether there is an obstacle ahead,

@@ -1,10 +1,9 @@
-Funny Project
-=============
+3. Funny Project
+=========================
 
 .. toctree::
     :maxdepth: 2
 
-    py_0_calibrate
     py_1_wakeup
     py_2_function_demonstration
     py_3_patrol

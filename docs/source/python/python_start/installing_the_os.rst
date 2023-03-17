@@ -1,4 +1,4 @@
-Installing the OS
+2. Installing the OS
 =======================
 
 **Required Components**

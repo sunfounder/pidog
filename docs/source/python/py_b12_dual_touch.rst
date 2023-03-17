@@ -1,5 +1,5 @@
-Pat the PiDog's Head
-====================
+12. Pat the PiDog's Head
+=========================
 
 The Touch Swich on the head of PiDog can detect how you touch it. You can call the following functions to use it.
 

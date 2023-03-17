@@ -1,5 +1,5 @@
-Tail Move
-============
+4. Tail Move
+===================
 
 Following are the functions that control PiDog's tail. This function is similar to :ref:`py_b2_leg_move`.
 

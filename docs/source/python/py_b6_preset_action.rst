@@ -1,5 +1,5 @@
-Do Preset Action
-================
+6. Do Preset Action
+=======================
 
 Some commonly used actions have been pre-written in PiDog's library.
 You can call the following function to make PiDog do these actions directly.

@@ -1,6 +1,6 @@
 .. _quick_guide_python:
 
-Quick Guide on Python
+1. Quick Guide on Python
 ==========================
 
 This section is to teach you how to install Raspberry Pi OS, configure wifi to Raspberry Pi, remote access to Raspberry Pi to run the corresponding code.

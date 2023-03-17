@@ -1,5 +1,5 @@
-Push Up
-=======
+8. Push Up
+===============
 
 PiDog is an exercise-loving robot that will do push-ups with you.
 
@@ -13,7 +13,7 @@ PiDog is an exercise-loving robot that will do push-ups with you.
 
 .. code-block::
 
-    cd /home/pi/pidog/examples
+    cd ~/pidog/examples
     sudo python3 8_pushup.py
 
 After the program runs, PiDog will perform a plank, then cycle through push-ups and barks.

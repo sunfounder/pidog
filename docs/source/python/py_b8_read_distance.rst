@@ -1,5 +1,5 @@
-Read Distance
-=============
+8. Read Distance
+==================
 
 Through the Ultrasonic Module in its head, PiDog can detect obstacles ahead.
 

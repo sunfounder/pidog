@@ -1,5 +1,5 @@
-Rest
-=====
+5. Rest
+=========
 
 PiDog will doze off on the ground, and when it hears sounds around it, it will stand up in confusion to see who woke it up.
 
@@ -13,7 +13,7 @@ PiDog will doze off on the ground, and when it hears sounds around it, it will s
 
 .. code-block::
 
-    cd /home/pi/pidog/examples
+    cd ~/pidog/examples
     sudo python3 5_rest.py
 
 After the program runs, PiDog will get down on the ground, shake its head and tail as if dozing off.

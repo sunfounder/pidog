@@ -1,4 +1,4 @@
-PiDog Initialization
+1. PiDog Initialization
 ============================
 
 The functions of PiDog are written in the Pidog class, and the prototype of this class is shown below.

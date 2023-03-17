@@ -1,5 +1,5 @@
-Balance
-=======
+10. Balance
+=============
 
 
 Because PiDog is equipped with a 6-DOF IMU module, it has a great sense of balance.
@@ -17,7 +17,7 @@ In this example, you can make PiDog walk smoothly on the table, even if you lift
 
 .. code-block::
 
-    cd /home/pi/pidog/examples
+    cd ~/pidog/examples
     sudo python3 10_balance.py
 
 After the program is running, you will see a printed keyboard on the terminal.

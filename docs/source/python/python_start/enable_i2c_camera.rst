@@ -1,4 +1,4 @@
-Enable I2C, SPI and Camera Interface
+5. Enable I2C, SPI and Camera Interface
 ========================================
 
 Here we are using the Raspberry Pi's I2C and Camera interfaces, but by default they are disabled, so we need to enable them first.

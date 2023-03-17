@@ -1,5 +1,5 @@
-Patrol
-==========
+3. Patrol
+==============
 
 In this project, PiDog makes a vivid behavior: patrolling.
 
@@ -16,7 +16,7 @@ PiDog will walk forward, if there is an obstacle in front of it, it will stop an
 
 .. code-block::
 
-    cd /home/pi/pidog/examples
+    cd ~/pidog/examples
     sudo python3 3_patrol.py
 
 After running this example, PiDog will wag its tail, scan left and right, and walk forward.

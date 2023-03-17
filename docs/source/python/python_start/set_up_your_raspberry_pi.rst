@@ -1,4 +1,4 @@
-Set up Your Raspberry Pi
+3. Set up Your Raspberry Pi
 ============================
 
 If You Have a Screen

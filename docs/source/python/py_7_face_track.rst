@@ -1,5 +1,5 @@
-Face Track
-==========
+7. Face Track
+======================
 
 PiDog will sit quietly in place. You applaud it, it looks your way, and if it sees you, it says hello.
 
@@ -13,7 +13,7 @@ PiDog will sit quietly in place. You applaud it, it looks your way, and if it se
 
 .. code-block::
 
-    cd /home/pi/pidog/examples
+    cd ~/pidog/examples
     sudo python3 7_face_track.py
 
 

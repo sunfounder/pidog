@@ -13,7 +13,14 @@ please configure the Raspberry Pi first according to :ref:`quick_guide_python`.
 
     python_start/quick_guide_on_python
 
-After the assembly is complete, you can try to run the projects below.
+As soon as the assembly is completed, you need to calibrate the Pidog to prevent it from damaging the servo if there is a slight deviation in the assembly.
+
+.. toctree::
+    :maxdepth: 2
+
+    py_0_calibrate
+
+Once calibrated, you can have Pidog achieve the following project effects.
 
 .. toctree::
 
@@ -21,11 +28,11 @@ After the assembly is complete, you can try to run the projects below.
     
 Then you may want to master its basic functions, or write some fun examples.
 
-If you are familiar with Python programming, you can find examples of PiDog's basic functions in the ``/home/pi/pidog/basic_examples`` directory.
+If you are familiar with Python programming, you can find examples of PiDog's basic functions in the ``~/pidog/basic_examples`` directory.
 
 If you prefer, you can master them in a step-by-step fashion using the lessons provided below.
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
-   py_easy_coding
+    py_easy_coding
