@@ -1,0 +1,239 @@
+#! /bin/bash
+
+manual=$(cat << EOF
+script version 1.0.0
+Usage:
+  pidog_app <OPTION> [input]
+Options:
+  -h, help              help, show this message
+
+  start, restart        restart pidog_app service
+
+  stop                  stop pidog_app service
+  
+  disable               disable auto-start app_controller program on bootstrap
+
+  enable                enable auto-start app_controller program on bootstrap
+
+  close_ap              close hotspot, disable auto-start hotspot on boot
+
+  open_ap               open hotspot, enable auto-start hotspot on boot
+
+  ssid                  set the ssid (network name) of the hotspot
+
+  psk                   set the password of the hotspot
+
+  country               set the country code of the hotspot
+
+EOF
+)
+
+# print colors
+# ========================
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+GRAY='\033[1;30m'
+#
+NC='\033[0m'
+
+# ========================
+READ_TIMEOUT=30
+
+# get user name && user_home
+# ==========================================
+user=${SUDO_USER:-$(who -m | awk '{ print $1 }')}
+user_home="$(eval echo ~$user)"
+# echo $user
+# echo $user_home
+
+# 
+# ============================ Define fuctions ============================
+help() {
+    echo "$manual"
+}
+
+restart() {
+    sudo systemctl restart pidog_app.service
+}
+
+stop() {
+    sudo systemctl stop pidog_app.service
+}
+
+disable_autostart() {
+    echo "Disable auto-start app_control program on boot ..."
+    sudo systemctl disable pidog_app.service
+}
+
+enable_autostart() {
+    echo "Enable auto-start app_control program on boot ..."
+    sudo systemctl enable pidog_app.service
+}
+
+disableAP() {
+    echo disableAP
+    # stop hostapd
+    sudo systemctl stop hostapd
+    sudo systemctl disable hostapd
+    # revert dhcpcd
+    sudo systemctl stop dhcpcd
+    sudo cp /etc/dhcpcd.conf.bak /etc/dhcpcd.conf
+    sudo systemctl start dhcpcd
+    # stop dnsmasq
+    sudo systemctl stop dnsmasq
+    # stop iptable
+    sudo systemctl stop iptables.service 
+    sudo systemctl disable iptables.service
+    # restart app control server
+    restart
+}
+
+enableAP() {
+    echo enableAP
+    # start hostapd
+    sudo systemctl restart hostapd
+    sudo systemctl enable hostapd
+    # configure and start dhcpcd
+    sudo systemctl stop dhcpcd
+    sudo cp /etc/dhcpcd.conf.ap.bak /etc/dhcpcd.conf
+    sudo systemctl restart dhcpcd
+    # start dnsmasq
+    sudo systemctl restart dnsmasq
+    # start iptable
+    # iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+    # sudo netfilter-persistent save
+    sudo systemctl restart iptables.service 
+    sudo systemctl enable iptables.service
+
+    echo -n -e "$(echo -e ${BLUE}Do you want to reboot to start hotspot?\(Y/N\): ${NC} )"
+    count=0
+    while true; do
+        # ((count++))
+        let count++
+        if ! read -t $READ_TIMEOUT choice; then
+            echo -e '\nTime is up, no entered.'
+            exit 1
+        fi
+        case "$choice" in
+            y|Y)
+                echo "Rebooting now ..."
+                sudo reboot
+                break
+                ;;
+            n|N|"")
+                break
+                ;;
+            *)
+                if [ $count -lt 5 ]; then
+                    echo -n 'Invalid input, please enter again:'
+                else
+                    break
+                fi
+                ;;
+        esac
+    done
+}
+
+set_ssid() {
+    echo -n "plese input your ap ssid: "
+    if ! read -t $READ_TIMEOUT ssid; then
+        echo "Time is up, no password entered."
+        exit 1
+    fi
+    length=${#ssid}
+    # echo $length
+    if [ $length -lt 2 ] || [ $length -gt 32 ]; then
+        echo -e "${YELLOW}Wi-Fi ssid must be between 2 and 32 characters.${NC}"
+    else
+        echo "set hotspot ssid: $ssid"
+        sudo systemctl stop hostapd
+        sudo sed -i -e "s:^ssid=.*:ssid=$ssid:g" /etc/hostapd/hostapd.conf
+        sudo systemctl restart hostapd
+        restart
+    fi
+}
+
+set_psk() {
+    echo -n "plese input your ap psk: "
+    # '-s' hide characters
+    if ! read -t $READ_TIMEOUT -s psk; then 
+        echo -e '\nTime is up, no entered.'
+        exit 1
+    fi
+    echo "" # newline
+    length=${#psk}
+    # echo $length
+    if [ $length -lt 8 ] || [ $length -gt 63 ]; then
+        echo -e "${YELLOW}Wi-Fi password must be between 8 and 63 characters.${NC}"
+    else
+        echo "set hotspot password."
+        sudo systemctl stop hostapd
+        sudo sed -i -e "s:^wpa_passphrase=.*:wpa_passphrase=$psk:g" /etc/hostapd/hostapd.conf
+        sudo systemctl restart hostapd
+        restart
+    fi
+}
+
+set_country() {
+    echo -n "plese input your ap country code: "
+    if ! read -t $READ_TIMEOUT country_code; then
+        echo -e '\nTime is up, no entered.'
+        exit 1
+    fi
+    # two letters, '[[ ... ]]'double brackets support regular expression matching.
+    if [[ "$country_code" =~ ^[A-Za-z]{2}$ ]]; then
+        country_code=${country_code^^} # uppercase
+        echo "set hotspot country: $country_code"
+        sudo sed -i -e "s:.*country_code=.*:country_code=$country_code:g" /etc/hostapd/hostapd.conf
+    else
+        sudo systemctl stop hostapd
+        echo -e "${YELLOW}Country code must be 2 letters.Eg:\"GB\".${NC}"
+        sudo systemctl restart hostapd
+        restart
+    fi
+}
+
+# ==================================== main ====================================
+if [ $# == 0 ] || [ $1 == '-h' ]|| [ $1 == 'help' ];then
+    help
+    exit 0
+fi
+
+case "$1" in
+    start|restart)
+        restart
+        ;;
+    stop)
+        stop
+        ;;
+    disable)
+        disable_autostart
+        ;;
+    enable)
+        enable_autostart
+        ;;
+    close_ap)
+        disableAP
+        ;;
+    open_ap)
+        enableAP
+        ;;
+    ssid)
+        set_ssid
+        ;;
+    psk)
+        set_psk
+        ;;
+    country)
+        set_country
+        ;;
+    *)
+        echo "no this command: $1"
+        echo "please run [ pidod_app ] or [ pidod_app -h ] to get help infomation "
+        exit 1
+        ;;
+esac
+
+exit 0
