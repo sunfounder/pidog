@@ -1,7 +1,13 @@
 from pidog.sh3001 import Sh3001
 from time import sleep
+import os
 
-imu = Sh3001(db="home/pi/.config/pidog/pidog.conf")
+# user and User home directory
+User = os.popen('echo ${SUDO_USER:-$LOGNAME}').readline().strip()
+UserHome = os.popen('getent passwd %s | cut -d: -f 6' %User).readline().strip()
+config_file = '%s/.config/pidog/pidog.conf' % UserHome
+
+imu = Sh3001(db=config_file)
 
 accData = []  # ax,ay,az
 gyroData = []  # gx,gy,gz
