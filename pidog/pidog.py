@@ -91,7 +91,7 @@ class Pidog():
         [BODY_WIDTH / 2, -BODY_LENGTH / 2,  0],
         [-BODY_WIDTH / 2,  BODY_LENGTH / 2,  0],
         [BODY_WIDTH / 2,  BODY_LENGTH / 2,  0]]).T
-    SOUND_DIR = "/home/pi/pidog/sounds/"
+    SOUND_DIR = f"{UserHome}/pidog/sounds/"
     # Servo Speed
     HEAD_DPS = 300
     LEGS_DPS = 350
@@ -153,6 +153,7 @@ class Pidog():
         self.thread_list = []
 
         try:
+            debug(f"config_file: {config_file}")
             debug("robot_hat init ... ", end='', flush=True)
             self.legs = Robot(pin_list=leg_pins, name='legs', init_angles=leg_init_angles, init_order=[
                             0, 2, 4, 6, 1, 3, 5, 7], db=config_file)
@@ -862,7 +863,7 @@ class Pidog():
         except KeyError:
             error("do_action: No such action")
         except Exception as e:
-            error("do_action:{e}")
+            error(f"do_action:{e}")
 
     def wait_legs_done(self):
         while not self.is_legs_done():
