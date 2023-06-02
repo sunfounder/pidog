@@ -1,26 +1,10 @@
 #!/usr/bin/env python3
 from pidog import Pidog
+import curses
 from time import sleep
-import readchar
-''' https://github.com/magmax/python-readchar '''
 
-manual = '''
-                      ↺{c9}[9]\033[0m
-                ↕{c11}[-]\033[0m ┌─┐ ↔{c10}[0]\033[0m
-                     │ │
-              {c2}[2]\033[0m{c1}[1]\033[0m┌└─┘┐{c3}[3]\033[0m{c4}[4]\033[0m
-                    │   │
-                    │   │
-              {c6}[6]\033[0m{c5}[5]\033[0m└─┬─┘{c7}[7]\033[0m{c8}[8]\033[0m
-                     {c12}[=]\033[0m
-                      /
-    1 ~ 8 : Leg servos      W: increase angle
-    9 : Head yaw ↺          S: decreases angle
-    0 : Head roll ↔
-    - : Head pitch ↕
-    = : Tail
-'''
-
+# init pidog
+# ======================================
 my_dog = Pidog()
 
 my_dog.legs_move([[0]*8], immediately=True, speed=60)
@@ -28,191 +12,355 @@ my_dog.head_move([[0]*3], immediately=True, speed=60)
 my_dog.tail_move([[0]], immediately=True, speed=60)
 my_dog.wait_all_done()
 
-leg_angles = 0.0
-head_angles = 0.0
-tail_angle = 0.0
-leg_offsets = 0.0
-head_offset = 0.0
-tail_offset = 0.0
-servo_num = '1'
+# global variables
+# ======================================
+leg_angles = [0.0]*8
+head_angles = [0.0]*3
+tail_angle = [0.0]*1
+leg_offsets = [0.0]*8
+head_offsets = [0.0]*3
+tail_offset = [0.0]*1
+current_servo = "1"
+
+OFFSET_STEP = (180 / 2000) * (20000 / 4095)  # actual precision of steering gear
 
 is_save = False
 
-OFFSET_STEP = (180 / 2000) * (20000 / 4095)  # 舵机实际精度
-MOVE_STEP = 1
-
-
+# get_real_values()
+# ======================================
 def get_real_values():
     global leg_angles, head_angles, tail_angle
-    global leg_offsets, head_offset, tail_offset
+    global leg_offsets, head_offsets, tail_offset
     leg_angles = list.copy(my_dog.leg_current_angles)
     head_angles = list.copy(my_dog.head_current_angles)
     tail_angle = list.copy(my_dog.tail_current_angles)
     leg_offsets = list.copy(my_dog.legs.offset)
-    head_offset = list.copy(my_dog.head.offset)
+    head_offsets = list.copy(my_dog.head.offset)
     tail_offset = list.copy(my_dog.tail.offset)
 
+# constrain(), constrain value range
+# ======================================
+def constrain(val, min_val, max_val):
 
-def show_info():
-    selected_servo_colors = {
-        "c1": '\033[97m',
-        "c2": '\033[97m',
-        "c3": '\033[97m',
-        "c4": '\033[97m',
-        "c5": '\033[97m',
-        "c6": '\033[97m',
-        "c7": '\033[97m',
-        "c8": '\033[97m',
-        "c9": '\033[97m',
-        "c10": '\033[97m',
-        "c11": '\033[97m',
-        "c12": '\033[97m',
-    }
-    if servo_num in "123456789":
-        cnum = int(servo_num)
-    elif servo_num == "0":
-        cnum = 10
-    elif servo_num == "-":
-        cnum = 11
-    elif servo_num == "=":
-        cnum = 12
-    selected_servo_colors[f"c{cnum}"] = '\033[1m\033[104m'
-    print("\033[H\033[J", end='')  # clear terminal windows
-    print(
-        "\033[104m\033[1m                         Calibration                         \033[0m")
-    print("\033[90m  Press coresponding key to select servo,\n  [W] and [S] to adjust the servo\033[0m")
-    print(manual.format(**selected_servo_colors))
-    print(
-        f"\033[100m\033[1m   Ctrl+C: Quit    Space: Save                               \033[0m")
-    print('Current Servo: %s' % servo_num)
-    print('leg_offsets: [{c1}{0}\033[0m, {c2}{1}\033[0m, {c3}{2}\033[0m, {c4}{3}\033[0m, {c5}{4}\033[0m, {c6}{5}\033[0m, {c7}{6}\033[0m, {c8}{7}\033[0m]'.format(
-        *[round(val, 2)for val in leg_offsets], **selected_servo_colors))
-    print('head_offset: [{c9}{0}\033[0m, {c10}{1}\033[0m, {c11}{2}\033[0m]'.format(
-        *[round(val, 2)for val in head_offset], **selected_servo_colors))
-    print('tail_offset: [{c12}{0}\033[0m]'.format(
-        round(tail_offset[0], 2), **selected_servo_colors))
+    if val < min_val: return min_val
+    if val > max_val: return max_val
+    return val
+
+# define pad size
+# ======================================
+PAD_Y = 40
+PAD_X = 80
+
+pad_ypos = 0
+pad_xpos = 0
+
+# define color
+# ======================================
 
 
-def keyboard_control():
-    global leg_angles, head_angles, tail_angle
-    global leg_offsets, head_offset, tail_offset
-    global servo_num
+# display fuctions
+# ======================================
+def pad_refresh(pad):
+    # Displays a section of the pad in the middle of the screen.
+    # (0,0) : coordinate of upper-left corner of pad area to display.
+    # (5,5) : coordinate of upper-left corner of window area to be filled
+    #         with pad content.
+    # (20, 75) : coordinate of lower-right corner of window area to be
+    #          : filled with pad content.
+    curses.update_lines_cols()
+    pad.refresh(pad_ypos, pad_xpos, 0,0, curses.LINES - 1, curses.COLS - 1)
+
+def clear_line(pad, line, xlen=PAD_X, color=None):
+    if color is None:
+        pad.addstr(line, 0, " "*(xlen-2))
+    else:
+        pad.addstr(line, 0, " "*(xlen-1), color)
+
+def display_title(subpad, color=1):
+    title = "PiDog  Calibration"
+    # tip1
+    clear_line(subpad, 0, color=curses.color_pair(3) | curses.A_REVERSE)
+    subpad.addstr(0, int((PAD_X-len(title))/2), title, curses.color_pair(3) | curses.A_REVERSE)
+    # subpad.noutrefresh()
+    # curses.doupdate()
+
+tip1 = [
+    "Press key to select servo:",
+    "1 ~ 8 : Leg servos",
+    "9 : Head yaw ↺   ",
+    "0 : Head roll ↔  ",
+    "- : Head pitch ↕ ",
+    "= : Tail         ",
+]
+def display_tip1(subpad, color=1):
+    subpad.addstr(0, 0, tip1[0], curses.color_pair(4)| curses.A_BOLD | curses.A_REVERSE)
+    for i in range(1, len(tip1)):
+        subpad.addstr(i, 0, tip1[i], curses.color_pair(4)| curses.A_BOLD)
+
+tip2 = [
+    "Press key to adjust servo:",
+    "W: increase angle ",
+    "S: decreases angle",
+]
+def display_tip2(subpad, color=1):
+    subpad.addstr(0, 0, tip2[0], curses.color_pair(4)| curses.A_BOLD | curses.A_REVERSE)
+    for i in range(1, len(tip2)):
+        subpad.addstr(i, 0, tip2[i], curses.color_pair(4)| curses.A_BOLD)
+
+body = [
+    "        ↺ [9]     ",
+    "  ↕[-] ┌─┐ ↔[0]  ",
+    "       │ │       ",
+    "[2][1]┌└─┘┐[3][4]",
+    "      │   │      ",
+    "      │   │      ",
+    "[6][5]└─┬─┘[7][8]",
+    "       [=]       ",
+    "        /        ",
+]
+servo_pos = { # servo_pos in body
+    "1": [3, 3], # ypos, xpos
+    "2": [3, 0],
+    "3": [3, 11],
+    "4": [3, 14],
+    "5": [6, 3],
+    "6": [6, 0],
+    "7": [6, 11],
+    "8": [6, 14],
+    "9": [0, 10],
+    "0": [1, 12],
+    "-": [1, 3],
+    "=": [7, 7],
+}
+def display_dog_body(subpad, servo="1", color=1):
+    for i in range(len(body)):
+        subpad.addstr(i, 0, body[i], curses.color_pair(color)| curses.A_BOLD)
+    if servo in servo_pos.keys():
+        subpad.addstr(servo_pos[servo][0], servo_pos[servo][1], f"[{servo}]", curses.color_pair(3)| curses.A_BOLD)
+
+tip3 = [
+    "Ctrl+C: Quit    Space: Save",
+]
+def display_tip3(subpad, color=1):
+    max_y, max_x = subpad.getmaxyx()
+    clear_line(subpad, 0)
+    subpad.addstr(0, 0, tip3[0], curses.color_pair(4)| curses.A_BOLD | curses.A_REVERSE)
+
+
+def display_servo_num(subpad, color=1):
+    subpad.addstr(0, 0, "Current Servo:", curses.color_pair(4)| curses.A_BOLD)
+    subpad.addstr(0, 15, f"{current_servo}", curses.color_pair(3)| curses.A_BOLD)
+
+def display_offsets(subpad, servo="1", color=1):
+    servo_num = "1234567890-="
+    clear_line(subpad, 0)
+    subpad.addstr(0, 0, f"leg_offsets:", curses.color_pair(4)| curses.A_BOLD)
+    for i, x in enumerate(leg_offsets):
+        if servo_num[i] == current_servo:
+            subpad.addstr(f' {x:.2f},', curses.color_pair(3)| curses.A_BOLD)
+        else:
+            subpad.addstr(f' {x:.2f},', curses.color_pair(color)| curses.A_BOLD)
+    # 
+    clear_line(subpad, 1)
+    subpad.addstr(1, 0, f"head_offsets:", curses.color_pair(4)| curses.A_BOLD)
+    for i, x in enumerate(head_offsets):
+        if servo_num[i+8] == current_servo:
+            subpad.addstr(f' {x:.2f},', curses.color_pair(3)| curses.A_BOLD)
+        else:
+            subpad.addstr(f' {x:.2f},', curses.color_pair(color)| curses.A_BOLD)
+    #
+    clear_line(subpad, 2)
+    subpad.addstr(2, 0, f"tail_offset:", curses.color_pair(4)| curses.A_BOLD)
+    for i, x in enumerate(tail_offset):
+        if servo_num[i+11] == current_servo:
+            subpad.addstr(f' {x:.2f},', curses.color_pair(3)| curses.A_BOLD)
+        else:
+            subpad.addstr(f' {x:.2f},', curses.color_pair(color)| curses.A_BOLD)
+
+
+def main(stdscr):
+    # global winlines, wincols
+    global pad_ypos, pad_xpos, current_servo
     global is_save
-    inc = 1  # 1 or -1
+    
+    inc = 1  # 1 or -1, angle increase direction
+
+    # winlines = curses.LINES
+    # wincols = curses.LINES
+
+    # reset screen
+    stdscr.clear()
+    stdscr.move(0, 0)
+    stdscr.refresh()
+
+    # disable cursor 
+    curses.curs_set(0)
+
+
+    # set colors
+    curses.start_color()
+    curses.use_default_colors()
+    curses.init_color(8, 192, 192, 192)
+    curses.init_pair(1, curses.COLOR_WHITE, -1)
+    curses.init_pair(2, curses.COLOR_GREEN, -1)
+    curses.init_pair(3, curses.COLOR_CYAN, -1)
+    curses.init_pair(4, 8, -1)
+
+    # init pad    
+    pad = curses.newpad(PAD_Y, PAD_X)
+    # pad.box()
+
+    # get the offset
     get_real_values()
-    show_info()
-    my_dog.legs_move([leg_angles], True, 80)
-    my_dog.head_move_raw([head_angles], True, 80)
-    my_dog.tail_move([tail_angle], True, 80)
+
+    # init subpad
+    title_pad = pad.subpad(1, PAD_X, 0, 0)
+    tip1_pad = pad.subpad(len(tip1), len(tip1[0]), 1, 0)
+    # tip2_pad = pad.subpad(len(tip2), len(tip2[0]), 1, PAD_X-len(tip2[0])-1)
+    tip2_pad = pad.subpad(len(tip2), len(tip2[0]), len(tip1)+2, 0)
+    # body_pad = pad.subpad(len(body), len(body[0]), 2, int((PAD_X-len(body[0]))/2)-2)
+    body_pad = pad.subpad(len(body), len(body[0]), 2, PAD_X-len(body[0])-20)
+    if curses.COLS < PAD_X - 20:
+        body_pad.move(2, 1)
+    tip3_pad = pad.subpad(len(tip3), PAD_X, len(body)+3, 0)
+    servo_num_pad = pad.subpad(1, PAD_X, len(body)+4, 0)
+    offsets_pad = pad.subpad(3, PAD_X, len(body)+5, 0)
+
+    display_title(title_pad)
+    display_tip1(tip1_pad)
+    display_tip2(tip2_pad)
+    display_dog_body(body_pad, current_servo)
+    display_tip3(tip3_pad)
+    display_servo_num(servo_num_pad)
+    display_offsets(offsets_pad)
+
+    pad.refresh( 0,0, 0,0, curses.LINES - 1, curses.COLS - 1)
+
+    stdscr.nodelay(True) # set non-blocking mode for getch()
+    # TODO:
+        # what is the detection interval of getch() in non-blocking mode 
 
     while True:
-        # readkey
-        key = readchar.readkey()
-        key = key.lower()
-
-        # select the servo
-        if key in ('1234567890-='):
-            servo_num = key
-            show_info()
-        # move
-        elif key in 'ws':
-            # set increment
-            if key == 'w':
-                inc = 1
-            elif key == 's':
-                inc = -1
-            # control legs
-            if servo_num in ('12345678'):
-                index = int(servo_num)-1
-
-                leg_angles[index] += inc*OFFSET_STEP
-                leg_offsets[index] = leg_angles[index] + \
-                    my_dog.legs.offset[index]
-                if leg_offsets[index] > 20:
-                    leg_offsets[index] = 20
-                    leg_angles[index] = 20 - my_dog.legs.offset[index]
-                elif leg_offsets[index] < -20:
-                    leg_offsets[index] = -20
-                    leg_angles[index] = -20 - my_dog.legs.offset[index]
-                my_dog.legs_simple_move(leg_angles)
-            # control head
-            elif servo_num in ('90-'):
-                if servo_num == '9':
-                    index = 0
-                elif servo_num == '0':
-                    index = 1
-                elif servo_num == '-':
-                    index = 2
-                head_angles[index] += inc*OFFSET_STEP
-                head_offset[index] = my_dog.head.offset[index] + \
-                    head_angles[index]
-                if head_offset[index] > 20:
-                    head_offset[index] = 20
-                    head_angles[index] = 20 - my_dog.head.offset[index]
-                elif head_offset[index] < -20:
-                    head_offset[index] = -20
-                    head_angles[index] = -20 - my_dog.head.offset[index]
-                my_dog.head_move_raw([head_angles], True, 80)
-            # control tail
-            elif servo_num == '=':
-                tail_angle[0] += inc*OFFSET_STEP
-                tail_offset[0] = my_dog.tail.offset[0] + tail_angle[0]
-                if tail_offset[0] > 20:
-                    tail_offset[0] = 20
-                    tail_angle[0] = 20 - my_dog.tail.offset[0]
-                elif tail_offset[0] < -20:
-                    tail_offset[0] = -20
-                    tail_angle[0] = - 20 - my_dog.tail.offset[0]
-                my_dog.tail_move([tail_angle], True, 80)
-            # show_info
-            show_info()
-        # calibrate
-        elif key == readchar.key.SPACE:
-            print('Confirm save ?(y/n)')
-            while True:
-                key = readchar.readkey()
-                key = key.lower()
-                if key == 'y':
-                    my_dog.leg_offsets(leg_offsets)
-                    my_dog.head_offset(head_offset)
-                    my_dog.tail_offset(tail_offset)
-                    sleep(0.5)
-                    get_real_values()
-                    show_info()
-                    print('Offset saved')
-                    is_save = True
-                    break
-                elif key == 'n':
-                    show_info()
-                    break
-                sleep(0.01)
-        
-        sleep(0.01)
-
-
-if __name__ == "__main__":
-    try:
-        while True:
-            try:
-                keyboard_control()
-            except KeyboardInterrupt:
-                if is_save:
+        try:
+            key = stdscr.getch()
+            if key == curses.ERR:
+                continue
+            # ---- resize window ----
+            if key == curses.KEY_RESIZE:
+                pad_ypos = 0
+                pad_xpos = 0
+                curses.update_lines_cols()
+                # if curses.COLS < PAD_X - 20:
+                    # body_pad.refresh(2, curses.COLS-1-len(body[0]))
+                # body_pad.erase() # ok
+                pad_refresh(pad)
+                sleep(0.5)
+            # ---- select the servo ----
+            elif chr(key) in ('1234567890-='):
+                current_servo = chr(key)
+                display_dog_body(body_pad, current_servo)
+                display_servo_num(servo_num_pad)
+                display_offsets(offsets_pad)
+                clear_line(pad, 17)
+                pad_refresh(pad)
+            # ---- move ----
+            elif chr(key) in ('wsWS'):
+                if chr(key) in ('wW'):
+                    inc = 1
+                else:
+                    inc = -1
+                # control legs
+                if current_servo in ('12345678'):
+                    # get index
+                    index = ('12345678').index(current_servo)
+                    # 
+                    leg_angles[index] += inc*OFFSET_STEP
+                    offset_temp = leg_angles[index] + my_dog.legs.offset[index]
+                    offset_temp = constrain(offset_temp, -20, 20)
+                    #
+                    leg_angles[index] = offset_temp - my_dog.legs.offset[index]
+                    leg_offsets[index] = offset_temp
+                    # move servos
+                    my_dog.legs_simple_move(leg_angles)
+                # control head
+                elif current_servo in ('90-'):
+                    index = ('90-').index(current_servo)
+                    # 
+                    head_angles[index] += inc*OFFSET_STEP
+                    offset_temp = my_dog.head.offset[index] + head_angles[index]
+                    offset_temp = constrain(offset_temp, -20, 20)
+                    #
+                    head_offsets[index] = offset_temp
+                    head_angles[index] = offset_temp - my_dog.head.offset[index]
+                    #
+                    my_dog.head_move_raw([head_angles], True, 80)
+                # control tail
+                elif current_servo == '=':
+                    tail_angle[0] += inc*OFFSET_STEP
+                    offset_temp = my_dog.tail.offset[0] + tail_angle[0]
+                    offset_temp = constrain(offset_temp, -20, 20)
+                    #
+                    tail_offset[0] = offset_temp
+                    tail_angle[0] = offset_temp - my_dog.tail.offset[0]
+                    #
+                    my_dog.tail_move([tail_angle], True, 80) 
+                # display offsets 
+                display_offsets(offsets_pad)
+                clear_line(pad, 17)
+                pad_refresh(pad)
+            # ---- save calibration ----
+            elif key == 32: # space key
+                clear_line(pad, 17)
+                pad.addstr(17, 0, 'Confirm save ? (y/n)  ', curses.color_pair(3) | curses.A_REVERSE)
+                pad_refresh(pad)
+                while True:
+                    key = stdscr.getch()
+                    if key == curses.ERR:
+                        continue
+                    if chr(key) in ('yY'):
+                        my_dog.leg_offsets(leg_offsets)
+                        my_dog.head_offset(head_offsets)
+                        my_dog.tail_offset(tail_offset)
+                        sleep(0.5)
+                        get_real_values()
+                        display_offsets(offsets_pad)
+                        clear_line(pad, 17)
+                        pad.addstr(17, 0, 'Offsets saved.  ', curses.color_pair(3) | curses.A_REVERSE)
+                        pad_refresh(pad)
+                        is_save = True
+                        break
+                    elif chr(key) in ('nN'):
+                        display_offsets(offsets_pad)
+                        clear_line(pad, 17)
+                        pad_refresh(pad)
+                        break
+                    sleep(0.02) # save while interval
+            sleep(0.02) # main while interval
+        except KeyboardInterrupt:
+            # ---- exit and remind to save calibration ----
+            if is_save:
+                break
+            else:
+                pad.addstr(17, 0, 'Change not saved, whether to exit? (y/n)  ', curses.color_pair(3) | curses.A_REVERSE)
+                pad_refresh(pad)
+                key = None
+                while True:
+                    key = stdscr.getch()
+                    if key == curses.ERR:
+                        continue
+                    if chr(key) in ('ynYN'):
+                        break
+                if chr(key) in 'yY':
                     break
                 else:
-                    print('Change not saved, whether to exit?')
-                    key = None
-                    while True:
-                        key = readchar.readkey()
-                        key = key.lower()
-                        if key == 'y' or 'n':
-                            break
-                    if key == 'y':
-                        break
-                    else:
-                        continue
+                    clear_line(pad, 17)
+                    pad_refresh(pad)
+                    continue
+
+if __name__ == '__main__':
+    try:
+        curses.wrapper(main)
     except Exception as e:
         print(f"\033[31mERROR: {e}\033[m")
     finally:
         my_dog.close()
-
-
