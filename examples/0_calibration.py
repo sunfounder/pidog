@@ -36,6 +36,8 @@ head_offset = 0.0
 tail_offset = 0.0
 servo_num = '1'
 
+is_save = False
+
 OFFSET_STEP = (180 / 2000) * (20000 / 4095)  # 舵机实际精度
 MOVE_STEP = 1
 
@@ -95,6 +97,7 @@ def keyboard_control():
     global leg_angles, head_angles, tail_angle
     global leg_offsets, head_offset, tail_offset
     global servo_num
+    global is_save
     inc = 1  # 1 or -1
     get_real_values()
     show_info()
@@ -177,24 +180,36 @@ def keyboard_control():
                     get_real_values()
                     show_info()
                     print('Offset saved')
+                    is_save = True
                     break
                 elif key == 'n':
                     show_info()
                     break
                 sleep(0.01)
-        # qiut
-        elif key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
-            # my_dog.close()
-            break
-
+        
         sleep(0.01)
 
 
 if __name__ == "__main__":
     try:
-        keyboard_control()
-    except KeyboardInterrupt:
-        pass
+        while True:
+            try:
+                keyboard_control()
+            except KeyboardInterrupt:
+                if is_save:
+                    break
+                else:
+                    print('Change not saved, whether to exit?')
+                    key = None
+                    while True:
+                        key = readchar.readkey()
+                        key = key.lower()
+                        if key == 'y' or 'n':
+                            break
+                    if key == 'y':
+                        break
+                    else:
+                        continue
     except Exception as e:
         print(f"\033[31mERROR: {e}\033[m")
     finally:
