@@ -37,6 +37,16 @@ def get_real_values():
     leg_offsets = list.copy(my_dog.legs.offset)
     head_offsets = list.copy(my_dog.head.offset)
     tail_offset = list.copy(my_dog.tail.offset)
+    for i, x in enumerate(leg_angles):
+        leg_angles[i] = round(x, 2)
+    for i, x in enumerate(head_angles):
+        head_angles[i] = round(x, 2)
+    tail_angle[0] = round(tail_angle[0], 2)
+    for i, x in enumerate(leg_offsets):
+        leg_offsets[i] = round(x, 2)
+    for i, x in enumerate(head_offsets):
+        head_offsets[i] = round(x, 2)
+    tail_offset[0] = round(tail_offset[0], 2)
 
 # constrain(), constrain value range
 # ======================================
@@ -204,7 +214,6 @@ def main(stdscr):
     # disable cursor 
     curses.curs_set(0)
 
-
     # set colors
     curses.start_color()
     curses.use_default_colors()
@@ -212,6 +221,7 @@ def main(stdscr):
     curses.init_pair(1, curses.COLOR_WHITE, -1)
     curses.init_pair(2, curses.COLOR_GREEN, -1)
     curses.init_pair(3, curses.COLOR_CYAN, -1)
+    # curses.init_pair(3, curses.COLOR_BLUE, -1)
     curses.init_pair(4, 8, -1)
 
     # init pad    
@@ -325,9 +335,9 @@ def main(stdscr):
                     if key == curses.ERR:
                         continue
                     if chr(key) in ('yY'):
-                        my_dog.leg_offsets(leg_offsets)
-                        my_dog.head_offset(head_offsets)
-                        my_dog.tail_offset(tail_offset)
+                        my_dog.set_leg_offsets(leg_offsets)
+                        my_dog.set_head_offsets(head_offsets)
+                        my_dog.set_tail_offset(tail_offset)
                         sleep(0.5)
                         get_real_values()
                         display_offsets(offsets_pad)
