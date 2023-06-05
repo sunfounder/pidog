@@ -67,8 +67,13 @@ def pad_refresh(pad):
     #         with pad content.
     # (20, 75) : coordinate of lower-right corner of window area to be
     #          : filled with pad content.
-    curses.update_lines_cols()
-    pad.refresh(pad_ypos, pad_xpos, 0,0, curses.LINES - 1, curses.COLS - 1)
+    y, x = pad.getbegyx()
+    h, w = pad.getmaxyx()
+    if h > curses.LINES-1:
+        h = curses.LINES-1
+    if w > curses.COLS-1:
+        w = curses.COLS-1
+    pad.refresh(0, 0, y, x, h, w)
 
 def clear_line(pad, line, xlen=PAD_X, color=None):
     if color is None:
@@ -153,29 +158,32 @@ def display_servo_num(subpad, color=1):
 
 def display_offsets(subpad, servo="1", color=1):
     servo_num = "1234567890-="
+    comma = ""
     clear_line(subpad, 0)
     subpad.addstr(0, 0, f"leg_offsets:", curses.color_pair(4)| curses.A_BOLD)
     for i, x in enumerate(leg_offsets):
+        comma = "," if i < len(leg_offsets)-1 else ""
         if servo_num[i] == current_servo:
-            subpad.addstr(f' {x:.2f},', curses.color_pair(3)| curses.A_BOLD)
+            subpad.addstr(f' {x:.2f}{comma}', curses.color_pair(3)| curses.A_BOLD)
         else:
-            subpad.addstr(f' {x:.2f},', curses.color_pair(color)| curses.A_BOLD)
+            subpad.addstr(f' {x:.2f}{comma}', curses.color_pair(color)| curses.A_BOLD)
     # 
     clear_line(subpad, 1)
     subpad.addstr(1, 0, f"head_offsets:", curses.color_pair(4)| curses.A_BOLD)
     for i, x in enumerate(head_offsets):
+        comma = "," if i < len(head_offsets)-1 else ""
         if servo_num[i+8] == current_servo:
-            subpad.addstr(f' {x:.2f},', curses.color_pair(3)| curses.A_BOLD)
+            subpad.addstr(f' {x:.2f}{comma}', curses.color_pair(3)| curses.A_BOLD)
         else:
-            subpad.addstr(f' {x:.2f},', curses.color_pair(color)| curses.A_BOLD)
+            subpad.addstr(f' {x:.2f}{comma}', curses.color_pair(color)| curses.A_BOLD)
     #
     clear_line(subpad, 2)
     subpad.addstr(2, 0, f"tail_offset:", curses.color_pair(4)| curses.A_BOLD)
     for i, x in enumerate(tail_offset):
         if servo_num[i+11] == current_servo:
-            subpad.addstr(f' {x:.2f},', curses.color_pair(3)| curses.A_BOLD)
+            subpad.addstr(f' {x:.2f}', curses.color_pair(3)| curses.A_BOLD)
         else:
-            subpad.addstr(f' {x:.2f},', curses.color_pair(color)| curses.A_BOLD)
+            subpad.addstr(f' {x:.2f}', curses.color_pair(color)| curses.A_BOLD)
 
 
 def main(stdscr):
@@ -234,16 +242,15 @@ def main(stdscr):
     display_servo_num(servo_num_pad)
     display_offsets(offsets_pad)
 
-    pad.refresh( 0,0, 0,0, curses.LINES - 1, curses.COLS - 1)
+    pad_refresh(pad)
 
     stdscr.nodelay(True) # set non-blocking mode for getch()
-    # TODO:
-        # what is the detection interval of getch() in non-blocking mode 
+    stdscr.timeout(50) # set timeout when no key is pressed
 
     while True:
         try:
             key = stdscr.getch()
-            if key == curses.ERR:
+            if key == curses.ERR: # if no key
                 continue
             # ---- resize window ----
             if key == curses.KEY_RESIZE:
@@ -334,8 +341,6 @@ def main(stdscr):
                         clear_line(pad, 17)
                         pad_refresh(pad)
                         break
-                    sleep(0.02) # save while interval
-            sleep(0.02) # main while interval
         except KeyboardInterrupt:
             # ---- exit and remind to save calibration ----
             if is_save:
