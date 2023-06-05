@@ -600,29 +600,28 @@ class Pidog():
             error(f'\rstop_and_lie error:{e}')
 
     # speak
-    def speak(self, name):
+    def speak(self, name, volume=100):
         status, _ = utils.run_command('sudo killall pulseaudio') # Solve the problem that there is no sound when running in the vnc environment
         for filename in os.listdir(self.SOUND_DIR):
             if filename.startswith(name):
-                self.music.sound_play_threading(self.SOUND_DIR+filename)
+                self.music.sound_play_threading(self.SOUND_DIR+filename, volume)
                 break
         else:
             warn(f'No sound found for {name}')
             return False
-
     # calibration
-    def leg_offsets(self, cali_list):
+    def set_leg_offsets(self, cali_list):
         self.legs.set_offset(cali_list)
         self.legs.reset()
         self.leg_current_angles = [0]*8
 
-    def head_offset(self, cali_list):
+    def set_head_offsets(self, cali_list):
         self.head.set_offset(cali_list)
         #self.head.reset()
         self.head_move([[0]*3], immediately=True, speed=80)
         self.head_current_angles = [0]*3
 
-    def tail_offset(self, cali_list):
+    def set_tail_offset(self, cali_list):
         self.tail.set_offset(cali_list)
         self.tail.reset()
         self.tail_current_angles = [0]
