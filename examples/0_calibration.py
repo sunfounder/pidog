@@ -328,7 +328,7 @@ def main(stdscr):
             # ---- save calibration ----
             elif key == 32: # space key
                 clear_line(pad, 17)
-                pad.addstr(17, 0, 'Confirm save ? (y/n)  ', curses.color_pair(3) | curses.A_REVERSE)
+                pad.addstr(17, 0, ' Confirm save ? (y/n)  ', curses.color_pair(3) | curses.A_REVERSE)
                 pad_refresh(pad)
                 while True:
                     key = stdscr.getch()
@@ -342,7 +342,7 @@ def main(stdscr):
                         get_real_values()
                         display_offsets(offsets_pad)
                         clear_line(pad, 17)
-                        pad.addstr(17, 0, 'Offsets saved.  ', curses.color_pair(3) | curses.A_REVERSE)
+                        pad.addstr(17, 0, ' Offsets saved.  ', curses.color_pair(3) | curses.A_REVERSE)
                         pad_refresh(pad)
                         is_save = True
                         break
@@ -351,12 +351,16 @@ def main(stdscr):
                         clear_line(pad, 17)
                         pad_refresh(pad)
                         break
+            else:
+                pad.addstr(17, 0, ' Invalid Key  ', curses.color_pair(3) | curses.A_REVERSE)
+                pad_refresh(pad)
+
         except KeyboardInterrupt:
             # ---- exit and remind to save calibration ----
             if is_save:
                 break
             else:
-                pad.addstr(17, 0, 'Change not saved, whether to exit? (y/n)  ', curses.color_pair(3) | curses.A_REVERSE)
+                pad.addstr(17, 0, ' Change not saved, whether to exit? (y/n)  ', curses.color_pair(3) | curses.A_REVERSE)
                 pad_refresh(pad)
                 key = None
                 while True:
