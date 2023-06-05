@@ -148,12 +148,12 @@ KEYS = {
     },
     "p": {
         "pos": [5, 95],
-        "tip": ["Head", "Roll"],
+        "tip": ["", ""],
         "operation": None,
     },
     "P": {
         "pos": [5, 95],
-        "tip_upper": "x2",
+        "tip_upper": " ",
         "operation": None,
     },
     ####################
@@ -192,14 +192,29 @@ KEYS = {
         "tip": ["Head", "Yaw"],
         "operation": None,
     },
+    "J": {
+        "pos": [10, 69],
+        "tip_upper": "x2",
+        "operation": None,
+    },
     "k": {
         "pos": [10, 79],
         "tip": ["Head", "Pitch"],
         "operation": None,
     },
+    "K": {
+        "pos": [10, 79],
+        "tip_upper": "x2",
+        "operation": None,
+    },
     "l": {
         "pos": [10, 89],
         "tip": ["Head", "Yaw"],
+        "operation": None,
+    },
+    "L": {
+        "pos": [10, 89],
+        "tip_upper": "x2",
         "operation": None,
     },
     #############
@@ -297,7 +312,7 @@ OPERATIONS = {
         "after": "wag tail",
     },
     "shake head": {
-        "function": lambda: shake_head(my_dog, head_yrp),
+        "function": lambda: shake_head(my_dog,[ head_yrp[0], head_yrp[1], head_yrp[2]+head_pitch_init]),
     },
     "stretch": {
         "function": lambda: my_dog.do_action('stretch', speed=80),
@@ -311,7 +326,6 @@ OPERATIONS = {
     },
     "push up": {
         "function": lambda: pushup(my_dog),
-        "after": "push up",
         "status": STATUS_STAND,
     },
     "howling": {
@@ -345,10 +359,34 @@ OPERATIONS = {
     },
 }
 
+# set_head_pitch_init(pitch)
+# ======================================
+def set_head_pitch_init(pitch):
+    global head_pitch_init
+    head_pitch_init = pitch
+    my_dog.head_move([head_yrp], pitch_comp=pitch,
+                     immediately=True, speed=HEAD_SPEED)
+
+# change_status(status)
+# ======================================
+def change_status(status):
+    global current_status
+    current_status = status
+    if status == STATUS_STAND:
+        set_head_pitch_init(STAND_HEAD_PITCH)
+        my_dog.do_action('stand', speed=70)
+    elif status == STATUS_SIT:
+        set_head_pitch_init(SIT_HEAD_PITCH)
+        my_dog.do_action('sit', speed=70)
+    elif status == STATUS_LIE:
+        set_head_pitch_init(STAND_HEAD_PITCH)
+        my_dog.do_action('lie', speed=70)
+    my_dog.wait_all_done()
+
 #
 # ======================================
 def run_operation(key):
-    global command, head_pitch_init
+    global command, head_pitch_init, head_yrp
     if not my_dog.is_legs_done() or not my_dog.is_head_done():
         return
     
@@ -356,17 +394,56 @@ def run_operation(key):
     operation = None
     # before = None
     # after = None
-
     if key not in KEYS.keys():
         return
     else:
         key_data = KEYS[key]
 
+    # head control
+    if key in ('uiojklmUIOJKL'):
+        # Head Pitch
+        if key == 'i':
+            head_yrp[2] = HEAD_ANGLE
+        elif key == 'I':
+            head_yrp[2] = HEAD_ANGLE * 2
+        elif key == 'k':
+            head_yrp[2] = -HEAD_ANGLE
+        elif key == 'K':
+            head_yrp[2] = -HEAD_ANGLE * 2
+        # Head Yaw
+        elif key == 'j':
+            head_yrp[0] = HEAD_ANGLE
+        elif key == 'J':
+            head_yrp[0] = HEAD_ANGLE * 2
+        elif key == 'l':
+            head_yrp[0] = -HEAD_ANGLE
+        elif key == 'L':
+            head_yrp[0] = -HEAD_ANGLE * 2
+        # Head Roll
+        elif key == 'u':
+            head_yrp[1] = -HEAD_ANGLE
+        elif key == 'U':
+            head_yrp[1] = -HEAD_ANGLE * 2
+        elif key == 'o':
+            head_yrp[1] = HEAD_ANGLE
+        elif key == 'O':
+            head_yrp[1] = HEAD_ANGLE * 2
+                    # Head Reset
+        elif key == 'm':
+            head_yrp = [0, 0, 0]
+        my_dog.head_move([head_yrp], pitch_comp=head_pitch_init,
+                            immediately=True, speed=HEAD_SPEED)
+        return
+    # actions
     if "operation" in key_data and key_data["operation"] != None:
         if key_data["operation"] in OPERATIONS:
             operation = OPERATIONS[key_data["operation"]]
         else:
             return
+        # status
+        if "status" in operation and operation["status"] != None:
+            if current_status != operation["status"]:
+                change_status(operation["status"])
         # before
         if "before" in operation and operation["before"] != None:
             before = operation["before"]
@@ -388,7 +465,7 @@ PAD_X = 110
 
 # define title
 # ======================================
-TITLE = "Pidog Keyboard Control"
+TITLE = "Pidog   Keyboard Control"
 
 # display fuctions
 # ======================================
@@ -401,11 +478,11 @@ def pad_refresh(pad):
     #          : filled with pad content.
     y, x = pad.getbegyx()
     h, w = pad.getmaxyx()
-    if h > curses.LINES:
-        h = curses.LINES
-    if w > curses.COLS:
-        w = curses.COLS
-    pad.refresh(0, 0, y, x, h-1, w-1)
+    if h > curses.LINES-1:
+        h = curses.LINES-1
+    if w > curses.COLS-1:
+        w = curses.COLS-1
+    pad.refresh(0, 0, y, x, h, w)
 
 def clear_line(pad, line, xlen=PAD_X, color=None):
     if color is None:
@@ -414,8 +491,8 @@ def clear_line(pad, line, xlen=PAD_X, color=None):
         pad.addstr(line, 0, " "*(xlen-1), color)
 
 def display_title(subpad, color=1):
-    clear_line(subpad, 0, color=curses.color_pair(3) | curses.A_REVERSE)
-    subpad.addstr(0, int((PAD_X-len(TITLE))/2), TITLE, curses.color_pair(3) | curses.A_REVERSE)
+    clear_line(subpad, 0, color=curses.color_pair(3)|curses.A_REVERSE)
+    subpad.addstr(0, int((PAD_X-len(TITLE))/2), TITLE, curses.color_pair(3)|curses.A_REVERSE)
     # subpad.noutrefresh()
     # curses.doupdate()
 
@@ -505,7 +582,9 @@ def main(stdscr):
     curses.init_color(8, 192, 192, 192)
     curses.init_pair(1, curses.COLOR_WHITE, -1)
     curses.init_pair(2, curses.COLOR_GREEN, -1)
-    curses.init_pair(3, curses.COLOR_CYAN, -1)
+    # curses.init_pair(3, curses.COLOR_CYAN, -1)
+    curses.init_pair(3, curses.COLOR_BLUE, -1)
+    curses.init_pair(5, curses.COLOR_WHITE, curses.COLOR_BLUE)
     curses.init_pair(4, 8, -1)
 
     # init pad    
@@ -530,7 +609,7 @@ def main(stdscr):
     stdscr.refresh()
 
     stdscr.nodelay(True) # set non-blocking mode for getch()
-    stdscr.timeout(100)
+    stdscr.timeout(10)
     # TODO:
         # what is the detection interval of getch() in non-blocking mode 
 
@@ -558,7 +637,6 @@ def main(stdscr):
                 pad_refresh(keys_pad)
                 stdscr.move(PAD_Y+1, 0)
                 stdscr.refresh()
-                time.sleep(0.1)
                 run_operation(key)
                 last_key = key
         else:
@@ -568,8 +646,6 @@ def main(stdscr):
                 stdscr.move(PAD_Y+1, 0)
                 stdscr.refresh()
                 last_key = None
-        time.sleep(0.1)
-
 
 if __name__ == '__main__':
     try:
