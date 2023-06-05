@@ -112,9 +112,9 @@ class ActionDict(dict):
             [-80, 70, 80, -70, -20, 64, 20, -64],
         ], 'legs'
 
-    # 俯卧撑 pushup
+    # 俯卧撑 push_up
     @property
-    def pushup(self):
+    def push_up(self):
         return [
             [90, -30, -90, 30, 80, 70, -80, -70],
             [45, 35, -45, -35, 80, 70, -80, -70]

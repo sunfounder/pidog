@@ -41,7 +41,7 @@ single_action = [ # half stand
 ]
 my_dog.legs_move(single_action, speed=30)
 
-single_action_2 = [ # pushup preparation
+single_action_2 = [ # push_up preparation
     [45, 35, -45, -35, 80, 70, -80, -70]
 ]
 my_dog.legs_move(single_action_2, immediately=False, speed=20)
@@ -51,7 +51,7 @@ my_dog.wait_legs_done()
 time.sleep(0.5)
 
 # multiple actions
-multiple_actions  = [ # pushup
+multiple_actions  = [ # push_up
     [90, -30, -90, 30, 80, 70, -80, -70],
     [45, 35, -45, -35, 80, 70, -80, -70]
 ]

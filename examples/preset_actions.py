@@ -145,9 +145,9 @@ def bark(my_dog, yrp=None, pitch_comp=0, roll_comp=0):
     sleep(0.5)
 
 
-def pushup(my_dog):
+def push_up(my_dog):
     my_dog.head_move([[0, 0, -80], [0, 0, -40]], speed=70)
-    my_dog.do_action('pushup', speed=80)
+    my_dog.do_action('push_up', speed=80)
     my_dog.wait_all_done()
 
 
@@ -160,7 +160,7 @@ def howling(my_dog):
     my_dog.do_action('half_sit', speed=80)
     my_dog.head_move([[0, 0, -60]], speed=80)
     my_dog.wait_all_done()
-    my_dog.speak('howling')
+    my_dog.speak('howling', 0)
     my_dog.do_action('sit', speed=60)
     my_dog.head_move([[0, 0, 10]], speed=70)
     my_dog.wait_all_done()

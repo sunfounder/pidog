@@ -325,7 +325,7 @@ OPERATIONS = {
         "status": STATUS_LIE,
     },
     "push up": {
-        "function": lambda: pushup(my_dog),
+        "function": lambda: push_up(my_dog),
         "status": STATUS_STAND,
     },
     "howling": {
