@@ -11,7 +11,7 @@ try:
         sleep(2)
         my_dog.do_action("lie", speed=SPEED)
         sleep(2)
-        my_dog.do_action("pushup", speed=SPEED)
+        my_dog.do_action("push_up", speed=SPEED)
         sleep(2)
         my_dog.do_action("lie", speed=SPEED)
         sleep(2)

@@ -92,7 +92,7 @@ COMMANDS = {
         "head_pitch": STAND_HEAD_PITCH,
     },
     "trot": {
-        "commands": ["trot"],
+        "commands": ["trot", "run"],
         "function": lambda: my_dog.do_action('trot', speed=98),
         "after": "trot",
         "status": STATUS_STAND,
@@ -153,7 +153,7 @@ COMMANDS = {
         "status": STATUS_LIE,
     },
     "push-up": {
-        "commands": ["push-up"],
+        "commands": ["push up"],
         "function": lambda: push_up(my_dog),
         "after": "push-up",
         "status": STATUS_STAND,

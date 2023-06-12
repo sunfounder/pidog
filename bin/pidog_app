@@ -65,6 +65,7 @@ stop() {
 disable_autostart() {
     echo "Disable auto-start app_control program on boot ..."
     sudo systemctl disable pidog_app.service
+    stop
 }
 
 enable_autostart() {

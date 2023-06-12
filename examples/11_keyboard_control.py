@@ -1,38 +1,17 @@
 #!/usr/bin/env python3
-from time import sleep
+import curses
+import time
+import sys
 from pidog import Pidog
-import readchar
 from preset_actions import *
-import os
 
+# init pidog
+# ======================================
 my_dog = Pidog()
+time.sleep(0.5)
 
-sleep(0.5)
-
-usage = '''
-\033[104m\033[1m  Pidog                                  Keyboard Control                             Ctrl + C to Exit  \033[0m
-┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐
-│1       ││2       ││3       ││4       ││5       ││6       ││7       ││8       ││9       ││0       │
-│  Doze  ││  Push  ││        ││  Body  ││        ││        ││        ││        ││        ││        │
-│   Off  ││   Up   ││ Howling││  Twist ││ Scratch││        ││        ││        ││        ││        │
-└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘
-    ┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐
-    │Q       ││W       ││E       ││R       ││T       ││Y       ││U       ││I       ││O       ││P       │
-    │        ││        ││        ││   Wag  ││  Hand  ││        ││  Head  ││  Head  ││  Head  ││        │
-    │  Bark  ││ Forward││  Pant  ││  Tail  ││  Shake ││        ││  Roll  ││  Pitch ││  Roll  ││        │
-    └────────┘└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘
-       ┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐
-       │A       ││S       ││D       ││F       ││G       ││H       ││J       ││K       ││L       │
-       │  Turn  ││        ││  Turn  ││  Shake ││  High  ││        ││  Head  ││  Head  ││  Head  │
-       │  Left  ││Backward││  Right ││  Head  ││  Five  ││        ││   Yaw  ││  Pitch ││   Yaw  │
-       └────────┘└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘
-          ┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐
-          │Z       ││X       ││C       ││V       ││B       ││N       ││M       │
-          │        ││        ││        ││        ││        ││        ││  Head  │
-          │   Lie  ││  Stand ││   Sit  ││ Stretch││        ││        ││  Reset │
-          └────────┘└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘
-'''
-
+# global variables
+# ======================================
 SIT_HEAD_PITCH = -40
 STAND_HEAD_PITCH = 0
 STATUS_STAND = 0
@@ -46,138 +25,333 @@ head_pitch_init = 0
 command = None
 current_status = STATUS_LIE
 
+last_key = None
 
-def set_head(roll=None, pitch=None, yaw=None):
-    global head_yrp
-    if roll is not None:
-        head_yrp[1] = roll
-    if pitch is not None:
-        head_yrp[2] = pitch
-    if yaw is not None:
-        head_yrp[0] = yaw
-    my_dog.head_move([head_yrp], immediately=True, speed=HEAD_SPEED)
+# KEYS and OPERATIONS:dict
+# ======================================
+KEYS = {
+    "1": {  # keyname
+        "pos": [0, 0], # ypos, xpos
+        "tip": ["Doze", "Off"],
+        "operation": "doze off",
+    },
+    "2": {
+        "pos": [0, 10],
+        "tip": ["Push", "Up"],
+        "operation": "push up",
+    },
+    "3": {
+        "pos": [0, 20],
+        "tip": ["Howling", ""],
+        "operation": "howling",
+    },
+    "4": {
+        "pos": [0, 30],
+        "tip": ["Body", "Twist"],
+        "operation": "twist body",
+    },
+    "5": {
+        "pos": [0, 40],
+        "tip": ["Scratch", ""],
+        "operation": "scratch",
+    },
+    "6": {
+        "pos": [0, 50],
+        "tip": ["", ""],
+        "operation": None,
+    },
+    "7": {
+        "pos": [0, 60],
+        "tip": ["", ""],
+        "operation": None,
+    },
+    "8": {
+        "pos": [0, 70],
+        "tip": ["", ""],
+        "operation": None,
+    },
+    "9": {
+        "pos": [0, 80],
+        "tip": ["", ""],
+        "operation": None,
+    },
+    "0": {
+        "pos": [0, 90],
+        "tip": ["", ""],
+        "operation": None,
+    },
+    # #################################
+    "q": {
+        "pos": [5, 5],
+        "tip": ["Bark", ""],
+        "operation": "bark",
+    },
+    "w": {
+        "pos": [5, 15],
+        "tip": ["Forward", ""],
+        "operation": "forward",
+    },
+    "W": {
+        "pos": [5, 15],
+        "tip_upper": "Trot",
+        "operation": "trot",
+    },
+    "e": {
+        "pos": [5, 25],
+        "tip": ["Pant", ""],
+        "operation": "pant",
+    },
+    "r": {
+        "pos": [5, 35],
+        "tip": ["Wag", "Tail"],
+        "operation": "wag tail",
+    },
+    "t": {
+        "pos": [5, 45],
+        "tip": ["Hand", "Shake"],
+        "operation": "handshake",
+    },
+    "y": {
+        "pos": [5, 55],
+        "tip": ["", ""],
+        "operation": None,
+    },
+    "u": {
+        "pos": [5, 65],
+        "tip": ["Head", "Roll"],
+        "operation": None,
+    },
+    "U": {
+        "pos": [5, 65],
+        "tip_upper": "x2",
+        "operation": None,
+    },
+    "i": {
+        "pos": [5, 75],
+        "tip": ["Head", "Pitch"],
+        "operation": None,
+    },
+    "I": {
+        "pos": [5, 75],
+        "tip_upper": "x2",
+        "operation": None,
+    },
+    "o": {
+        "pos": [5, 85],
+        "tip": ["Head", "Roll"],
+        "operation": None,
+    },
+    "O": {
+        "pos": [5, 85],
+        "tip_upper": "x2",
+        "operation": None,
+    },
+    "p": {
+        "pos": [5, 95],
+        "tip": ["", ""],
+        "operation": None,
+    },
+    "P": {
+        "pos": [5, 95],
+        "tip_upper": " ",
+        "operation": None,
+    },
+    ####################
+    "a": {
+        "pos": [10, 9],
+        "tip": ["Turn", "Left"],
+        "operation": "turn left",
+    },
+    "s": {
+        "pos": [10, 19],
+        "tip": ["Backward", ""],
+        "operation": "backward",
+    },
+    "d": {
+        "pos": [10, 29],
+        "tip": ["Turn", "Right"],
+        "operation": "turn right",
+    },
+    "f": {
+        "pos": [10, 39],
+        "tip": ["Shake", "Head"],
+        "operation": "shake head",
+    },
+    "g": {
+        "pos": [10, 49],
+        "tip": ["High", "Five"],
+        "operation": "high five",
+    },
+    "h": {
+        "pos": [10, 59],
+        "tip": ["", ""],
+        "operation": None,
+    },
+    "j": {
+        "pos": [10, 69],
+        "tip": ["Head", "Yaw"],
+        "operation": None,
+    },
+    "J": {
+        "pos": [10, 69],
+        "tip_upper": "x2",
+        "operation": None,
+    },
+    "k": {
+        "pos": [10, 79],
+        "tip": ["Head", "Pitch"],
+        "operation": None,
+    },
+    "K": {
+        "pos": [10, 79],
+        "tip_upper": "x2",
+        "operation": None,
+    },
+    "l": {
+        "pos": [10, 89],
+        "tip": ["Head", "Yaw"],
+        "operation": None,
+    },
+    "L": {
+        "pos": [10, 89],
+        "tip_upper": "x2",
+        "operation": None,
+    },
+    #############
+    "z": {
+        "pos": [15, 12],
+        "tip": ["Lie", ""],
+        "operation": "lie",
+    },
+    "x": {
+        "pos": [15, 22],
+        "tip": ["Stand", ""],
+        "operation": "stand",
+    },
+    "c": {
+        "pos": [15, 32],
+        "tip": ["Sit", ""],
+        "operation": "sit",
+    },
+    "v": {
+        "pos": [15, 42],
+        "tip": ["Stretch", ""],
+        "operation": "stretch",
+    },
+    "b": {
+        "pos": [15, 52],
+        "tip": ["", ""],
+        "operation": None,
+    },
+    "n": {
+        "pos": [15, 62],
+        "tip": ["", ""],
+        "operation": None,
+    },
+    "m": {
+        "pos": [15, 72],
+        "tip": ["Head", "Reset"],
+        "operation": None,
+    },
+}
 
-
-COMMANDS = {
+OPERATIONS = {
     "forward": {
-        "commands": ["forward"],
         "function": lambda: my_dog.do_action('forward', speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
     "backward": {
-        "commands": ["backward"],
         "function": lambda: my_dog.do_action('backward', speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
     "turn left": {
-        "commands": ["turn left"],
         "function": lambda: my_dog.do_action('turn_left', speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
     "turn right": {
-        "commands": ["turn right"],
         "function": lambda: my_dog.do_action('turn_right', speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
     "trot": {
-        "commands": ["trot"],
         "function": lambda: my_dog.do_action('trot', speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
     "stop": {
-        "commands": ["stop"],
     },
-    "lie down": {
-        "commands": ["lie down"],
+    "lie": {
         "function": lambda: my_dog.do_action('lie', speed=70),
         "head_pitch": STAND_HEAD_PITCH,
         "status": STATUS_LIE,
     },
-    "stand up": {
-        "commands": ["stand up"],
+    "stand": {
         "function": lambda: my_dog.do_action('stand', speed=70),
         "head_pitch": STAND_HEAD_PITCH,
         "status": STATUS_STAND,
     },
     "sit": {
-        "commands": ["sit", "sit down", "set", "set down"],
         "function": lambda: my_dog.do_action('sit', speed=70),
         "head_pitch": SIT_HEAD_PITCH,
         "status": STATUS_SIT,
     },
     "bark": {
-        "commands": ["bark", "park", "fuck"],
         "function": lambda: bark(my_dog, head_yrp, pitch_comp=head_pitch_init),
     },
     "bark harder": {
-        "commands": ["bark harder", "park harder", "fuck harder", "bark harbor", "park harbor", "fuck harbor"],
         "function": lambda: bark_action(my_dog, head_yrp, 'single_bark_1'),
     },
     "pant": {
-        "commands": ["pant", "paint"],
         "function": lambda: pant(my_dog, head_yrp, pitch_comp=head_pitch_init),
     },
     "wag tail": {
-        "commands": ["wag tail", "wake tail", "wake town", "wait town", "wait tail", "wake time", "wait time", "wait tail"],
         "function": lambda: my_dog.do_action('wag_tail', speed=100),
         "after": "wag tail",
     },
     "shake head": {
-        "commands": ["shake head"],
-        "function": lambda: shake_head(my_dog, head_yrp),
+        "function": lambda: shake_head(my_dog,[ head_yrp[0], head_yrp[1], head_yrp[2]+head_pitch_init]),
     },
     "stretch": {
-        "commands": ["stretch"],
         "function": lambda: my_dog.do_action('stretch', speed=80),
-        "after": "stand up",
+        "after": "stand",
         "status": STATUS_STAND,
     },
     "doze off": {
-        "commands": ["doze off", "does off"],
         "function": lambda: my_dog.do_action('doze_off', speed=95),
         "after": "doze off",
         "status": STATUS_LIE,
     },
-    "push-up": {
-        "commands": ["push-up"],
+    "push up": {
         "function": lambda: push_up(my_dog),
-        "after": "push-up",
         "status": STATUS_STAND,
     },
     "howling": {
-        "commands": ["howling"],
         "function": lambda: howling(my_dog),
         "after": "sit",
         "status": STATUS_SIT,
     },
     "twist body": {
-        "commands": ["twist body"],
         "function": lambda: body_twisting(my_dog),
         "before": "stretch",
         "after": "sit",
         "status": STATUS_STAND,
     },
     "scratch": {
-        "commands": ["scratch"],
         "function": lambda: scratch(my_dog),
         "after": "sit",
         "head_pitch": SIT_HEAD_PITCH,
         "status": STATUS_SIT,
     },
     "handshake": {
-        "commands": ["handshake"],
         "function": lambda: hand_shake(my_dog),
         "after": "sit",
         "head_pitch": SIT_HEAD_PITCH,
         "status": STATUS_SIT,
     },
     "high five": {
-        "commands": ["high five", "hi five"],
         "function": lambda: high_five(my_dog),
         "after": "sit",
         "head_pitch": SIT_HEAD_PITCH,
@@ -185,14 +359,16 @@ COMMANDS = {
     },
 }
 
-
+# set_head_pitch_init(pitch)
+# ======================================
 def set_head_pitch_init(pitch):
     global head_pitch_init
     head_pitch_init = pitch
     my_dog.head_move([head_yrp], pitch_comp=pitch,
                      immediately=True, speed=HEAD_SPEED)
 
-
+# change_status(status)
+# ======================================
 def change_status(status):
     global current_status
     current_status = status
@@ -207,115 +383,273 @@ def change_status(status):
         my_dog.do_action('lie', speed=70)
     my_dog.wait_all_done()
 
-
-def run_command():
-    global command, head_pitch_init
+#
+# ======================================
+def run_operation(key):
+    global command, head_pitch_init, head_yrp
     if not my_dog.is_legs_done() or not my_dog.is_head_done():
         return
-    if command is None:
+    
+    key_data = None
+    operation = None
+    # before = None
+    # after = None
+    if key not in KEYS.keys():
         return
-    for name in COMMANDS:
-        if command in COMMANDS[name]["commands"]:
-            if "status" in COMMANDS[name]:
-                if current_status != COMMANDS[name]["status"]:
-                    change_status(COMMANDS[name]["status"])
-            if "head_pitch" in COMMANDS[name]:
-                head_pitch_init = COMMANDS[name]["head_pitch"]
-            if "before" in COMMANDS[name]:
-                before_command = COMMANDS[name]["before"]
-                COMMANDS[before_command]["function"]()
-            if "function" in COMMANDS[name]:
-                COMMANDS[name]["function"]()
-            if "after" in COMMANDS[name]:
-                command = COMMANDS[name]["after"]
-            else:
-                command = None
-            break
+    else:
+        key_data = KEYS[key]
 
-
-COMMAND_KEY_MAP = {
-    "W": "trot",
-    "w": "forward",
-    "s": "backward",
-    "a": "turn left",
-    "d": "turn right",
-    "z": "lie down",
-    "x": "stand up",
-    "c": "sit",
-    "q": "bark",
-    "Q": "bark harder",
-    "e": "pant",
-    "r": "wag tail",
-    "t": "handshake",
-    "v": "stretch",
-    "1": "doze off",
-    "2": "push-up",
-    "3": "howling",
-    "4": "twist body",
-    "5": "scratch",
-    "f": "shake head",
-    "g": "high five",
-}
-
-
-def main():
-    global head_yrp, command
-    while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print(usage)
-        print("\033[?25l")  # Hide terminal cursor
-        key = readchar.readchar()
-        if key == readchar.key.CTRL_C:
-            import sys
-            print('')
-            # sys.exit(0)
-            break
-        elif key in COMMAND_KEY_MAP:
-            command = COMMAND_KEY_MAP[key]
+    # head control
+    if key in ('uiojklmUIOJKL'):
         # Head Pitch
-        elif key in 'uiojklUIOJKLm':
-            if key == 'i':
-                head_yrp[2] = HEAD_ANGLE
-            elif key == 'I':
-                head_yrp[2] = HEAD_ANGLE * 2
-            elif key == 'k':
-                head_yrp[2] = -HEAD_ANGLE
-            elif key == 'K':
-                head_yrp[2] = -HEAD_ANGLE * 2
-            # Head Yaw
-            elif key == 'j':
-                head_yrp[0] = HEAD_ANGLE
-            elif key == 'J':
-                head_yrp[0] = HEAD_ANGLE * 2
-            elif key == 'l':
-                head_yrp[0] = -HEAD_ANGLE
-            elif key == 'L':
-                head_yrp[0] = -HEAD_ANGLE * 2
-            # Head Roll
-            elif key == 'u':
-                head_yrp[1] = -HEAD_ANGLE
-            elif key == 'U':
-                head_yrp[1] = -HEAD_ANGLE * 2
-            elif key == 'o':
-                head_yrp[1] = HEAD_ANGLE
-            elif key == 'O':
-                head_yrp[1] = HEAD_ANGLE * 2
-            # Head Reset
-            elif key == 'm':
-                head_yrp = [0, 0, 0]
-            my_dog.head_move([head_yrp], pitch_comp=head_pitch_init,
-                             immediately=True, speed=HEAD_SPEED)
+        if key == 'i':
+            head_yrp[2] = HEAD_ANGLE
+        elif key == 'I':
+            head_yrp[2] = HEAD_ANGLE * 2
+        elif key == 'k':
+            head_yrp[2] = -HEAD_ANGLE
+        elif key == 'K':
+            head_yrp[2] = -HEAD_ANGLE * 2
+        # Head Yaw
+        elif key == 'j':
+            head_yrp[0] = HEAD_ANGLE
+        elif key == 'J':
+            head_yrp[0] = HEAD_ANGLE * 2
+        elif key == 'l':
+            head_yrp[0] = -HEAD_ANGLE
+        elif key == 'L':
+            head_yrp[0] = -HEAD_ANGLE * 2
+        # Head Roll
+        elif key == 'u':
+            head_yrp[1] = -HEAD_ANGLE
+        elif key == 'U':
+            head_yrp[1] = -HEAD_ANGLE * 2
+        elif key == 'o':
+            head_yrp[1] = HEAD_ANGLE
+        elif key == 'O':
+            head_yrp[1] = HEAD_ANGLE * 2
+                    # Head Reset
+        elif key == 'm':
+            head_yrp = [0, 0, 0]
+        my_dog.head_move([head_yrp], pitch_comp=head_pitch_init,
+                            immediately=True, speed=HEAD_SPEED)
+        return
+    # actions
+    if "operation" in key_data and key_data["operation"] != None:
+        if key_data["operation"] in OPERATIONS:
+            operation = OPERATIONS[key_data["operation"]]
         else:
-            # print('key:', key)
-            continue
-        run_command()
-        # sleep(0.001)
+            return
+        # status
+        if "status" in operation and operation["status"] != None:
+            if current_status != operation["status"]:
+                change_status(operation["status"])
+        # before
+        if "before" in operation and operation["before"] != None:
+            before = operation["before"]
+            if before in OPERATIONS and OPERATIONS[before]["function"] != None:
+                OPERATIONS[before]["function"]() # run before function
+        # function
+        if "function" in operation and operation["function"] != None:
+            operation["function"]() # run function function
+        # after
+        if "after" in operation and operation["after"] != None:
+            after = operation["after"]
+            if after in OPERATIONS and OPERATIONS[after]["function"] != None:
+                OPERATIONS[after]["function"]() # run after function
 
+# define window size
+# ======================================
+PAD_Y = 22
+PAD_X = 110
 
-if __name__ == "__main__":
+# define title
+# ======================================
+TITLE = "Pidog   Keyboard Control"
+
+# display fuctions
+# ======================================
+def pad_refresh(pad):
+    # Displays a section of the pad in the middle of the screen.
+    # (0,0) : coordinate of upper-left corner of pad area to display.
+    # (5,5) : coordinate of upper-left corner of window area to be filled
+    #         with pad content.
+    # (20, 75) : coordinate of lower-right corner of window area to be
+    #          : filled with pad content.
+    y, x = pad.getbegyx()
+    h, w = pad.getmaxyx()
+    if h > curses.LINES-1:
+        h = curses.LINES-1
+    if w > curses.COLS-1:
+        w = curses.COLS-1
+    pad.refresh(0, 0, y, x, h, w)
+
+def clear_line(pad, line, xlen=PAD_X, color=None):
+    if color is None:
+        pad.addstr(line, 0, " "*(xlen-2))
+    else:
+        pad.addstr(line, 0, " "*(xlen-1), color)
+
+def display_title(subpad, color=1):
+    clear_line(subpad, 0, color=curses.color_pair(3)|curses.A_REVERSE)
+    subpad.addstr(0, int((PAD_X-len(TITLE))/2), TITLE, curses.color_pair(3)|curses.A_REVERSE)
+    # subpad.noutrefresh()
+    # curses.doupdate()
+
+def set_simulated_key(stdscr, key, color=1):
+    if key in KEYS.keys():
+        ypos = KEYS[key]["pos"][0]
+        xpos = KEYS[key]["pos"][1]
+    else:
+        raise ValueError("No this key")
+
+    # key_bottom_layer
+    key_bottom_layer = [
+        "┌────────┐",
+        "│        │",
+        "│        │",
+        "│        │",
+        "└────────┘",     
+    ]
+    for i in range(len(key_bottom_layer)):
+        stdscr.addstr(ypos+i, xpos, key_bottom_layer[i], curses.color_pair(color)| curses.A_BOLD)
+
+    # key name
+    key_ypos = ypos + 1
+    key_xpos = xpos + 1
+    stdscr.addstr(key_ypos, key_xpos, key.upper(), curses.color_pair(color))
+
+    # check reuse
+    key_upper = key.upper()
+    key_lower = key.lower()
+    upper_color = 4
+    lower_color = 1
+    if key.isupper():
+        if color != 1:
+            upper_color = color
+            lower_color = 1
+    else:
+        upper_color = 4
+        lower_color = color
+
+    # tip_upper
+    if key_upper in KEYS and "tip_upper" in KEYS[key_upper].keys():
+        tip_upper = KEYS[key_upper]["tip_upper"]
+        if tip_upper is not None:
+            tip_shift_ypos = ypos + 1
+            tip_shift_xpos = xpos + 9 - int(len(tip_upper))
+            stdscr.addstr(tip_shift_ypos, tip_shift_xpos, tip_upper, curses.color_pair(upper_color))
+        
+    # tip1 and tip2
+    if key_lower in KEYS:
+        tip1 = KEYS[key_lower]["tip"][0]
+        tip2 = KEYS[key_lower]["tip"][1]
+
+        if tip1 != None and tip1 != "":
+            if tip2 == None or tip2 == "":
+                tip1_ypos = ypos + 3
+                tip1_xpos = xpos + 5 - int(len(tip1)/2)
+                stdscr.addstr(tip1_ypos, tip1_xpos, tip1, curses.color_pair(lower_color))
+            else:
+                tip1_ypos = ypos + 2
+                tip1_xpos = xpos + 5 - int(len(tip1)/2)
+                tip2_ypos = ypos + 3
+                tip2_xpos = xpos + 6 - int(len(tip2)/2)
+                stdscr.addstr(tip1_ypos, tip1_xpos, tip1, curses.color_pair(lower_color))
+                stdscr.addstr(tip2_ypos, tip2_xpos, tip2, curses.color_pair(lower_color))
+
+def display_tip(subpad, color=1):
+    tip_upper = "Some keys are uppercase and lowercase for different functions."
+    tip_quit = "Press Ctrl^C to quit"
+    clear_line(subpad, 0, color=curses.color_pair(4) | curses.A_REVERSE)
+    subpad.addstr(0, 0, tip_upper, curses.color_pair(4)| curses.A_BOLD | curses.A_REVERSE)
+    subpad.addstr(0, PAD_X-25, tip_quit, curses.color_pair(4)| curses.A_BOLD | curses.A_REVERSE)
+
+def main(stdscr):
+    global last_key
+
+    # reset screen
+    stdscr.clear()
+    stdscr.move(0, 0)
+    stdscr.refresh()
+
+    # disable cursor 
+    curses.curs_set(0)
+    
+    # set colors
+    curses.start_color()
+    curses.use_default_colors()
+    curses.init_color(8, 192, 192, 192)
+    curses.init_pair(1, curses.COLOR_WHITE, -1)
+    curses.init_pair(2, curses.COLOR_GREEN, -1)
+    # curses.init_pair(3, curses.COLOR_CYAN, -1)
+    curses.init_pair(3, curses.COLOR_BLUE, -1)
+    curses.init_pair(5, curses.COLOR_WHITE, curses.COLOR_BLUE)
+    curses.init_pair(4, 8, -1)
+
+    # init pad    
+    pad = curses.newpad(PAD_Y, PAD_X)
+
+    # init subpad
+    title_pad = pad.subpad(1, PAD_X, 0, 0)
+    keys_pad = pad.subpad(20, PAD_X, 1, 0)
+    tip_pad = pad.subpad(1, PAD_X, 21, 0)
+
+    # display TITLE
+    display_title(title_pad)
+    # display simulated keys
+    for key in KEYS.keys():
+        set_simulated_key(keys_pad, key=key)
+    # display tip
+    display_tip(tip_pad)
+
+    # refresh
+    pad_refresh(pad)
+    stdscr.move(PAD_Y+1, 0)
+    stdscr.refresh()
+
+    stdscr.nodelay(True) # set non-blocking mode for getch()
+    stdscr.timeout(10)
+    # TODO:
+        # what is the detection interval of getch() in non-blocking mode 
+
+    while True:
+        curses.flushinp()
+        key = stdscr.getch()
+        if key == curses.ERR: # if no key
+            if last_key == None:
+                continue
+        # ---- resize window ----
+        if key == curses.KEY_RESIZE:
+            curses.update_lines_cols()
+            stdscr.move(PAD_Y+1, 0)
+            stdscr.refresh()
+            sleep(0.5)
+        if key > 32 and key < 127:
+            key = chr(key)
+            if key in KEYS:
+                if last_key != key:
+                    if last_key != None:
+                        set_simulated_key(keys_pad, key=last_key, color=1)
+                    set_simulated_key(keys_pad, key=key, color=3)
+                    my_dog.body_stop()
+                    my_dog.rgb_strip.close()
+                pad_refresh(keys_pad)
+                stdscr.move(PAD_Y+1, 0)
+                stdscr.refresh()
+                run_operation(key)
+                last_key = key
+        else:
+            if last_key != None and my_dog.is_all_done():
+                set_simulated_key(keys_pad,key=last_key, color=1)
+                pad_refresh(keys_pad)
+                stdscr.move(PAD_Y+1, 0)
+                stdscr.refresh()
+                last_key = None
+
+if __name__ == '__main__':
     try:
-        main()
-        print("\033[?25h")  # Show terminal cursor
+        curses.wrapper(main)
     except KeyboardInterrupt:
         pass
     except Exception as e:

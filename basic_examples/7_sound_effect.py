@@ -2,10 +2,10 @@
 ''' play sound effecfs
     Note that you need to run with "sudo"
 API:
-    Pidog.speak(name)
+    Pidog.speak(name, volume=100)
         play sound effecf in the file "../sounds"
         - name    str, file name of sound effect, no suffix required, eg: "angry"
-
+        - volume  int, volume 0-100, default 100
 '''
 from pidog import Pidog
 import os
@@ -27,6 +27,7 @@ for name in os.listdir('../sounds'):
     name = name.split('.')[0] # remove suffix
     print(name)
     my_dog.speak(name)
+    # my_dog.speak(name, volume=50)
     time.sleep(3) # Note that the duration of each sound effect is different
 print("closing ...")
 my_dog.close()
