@@ -862,7 +862,7 @@ class Pidog():
         except KeyError:
             error("do_action: No such action")
         except Exception as e:
-            error("do_action:{e}")
+            error(f"do_action:{e}")
 
     def wait_legs_done(self):
         while not self.is_legs_done():

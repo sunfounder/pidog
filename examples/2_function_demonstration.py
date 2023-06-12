@@ -24,7 +24,7 @@ actions = [
     ['turn_right', 0, 98],
     ['doze_off', -30, 90],
     ['stretch', 30, 20],
-    ['pushup', -30, 50],
+    ['push_up', -30, 50],
     ['shake_head', 0, 90],
     ['tilting_head', 0, 60],
     ['wag_tail', 0, 100],
@@ -75,8 +75,8 @@ def do_function(index):
     my_dog.body_stop()
     if index < len(actions):
         name, head_pitch_adjust, speed = actions[index]
-        # If last action is pushup, then lie down first
-        if last_index < len(actions) and actions[last_index][0] in ('pushup'):
+        # If last action is push_up, then lie down first
+        if last_index < len(actions) and actions[last_index][0] in ('push_up'):
             my_dog.do_action('lie', speed=60)
         # If this action is trot, forward, turn left, turn right and backward, and, last action is not, then stand up
         if name in STANDUP_ACTIONS and last_index < len(actions) and actions[last_index][0] not in STANDUP_ACTIONS:

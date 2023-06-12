@@ -12,12 +12,17 @@ mode_list = [
     {
         "color": "green",
         "brightness": 0.2,
-        "delay": 0.05,
+        "delay": 0.02,
     },
     {
-        "color": "yellow",
+        "color": "blue",
         "brightness": 0.5,
-        "delay": 0.1,
+        "delay": 0.03,
+    },
+    {
+        "color": "white",
+        "brightness": 0.5,
+        "delay": 0.04,
     },
 ]
 

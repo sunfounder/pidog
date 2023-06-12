@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from pidog import Pidog
 from time import sleep
-from preset_actions import pushup, bark
+from preset_actions import push_up, bark
 
 my_dog = Pidog()
 
@@ -20,7 +20,7 @@ def main():
     sleep(1)
 
     while True:
-        pushup(my_dog)
+        push_up(my_dog)
         bark(my_dog, [0, 0, -40])
         sleep(0.4)
 

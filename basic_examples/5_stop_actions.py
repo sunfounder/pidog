@@ -24,7 +24,7 @@ import time
 my_dog = Pidog()
 
 try:
-    # pushup prepare
+    # push_up prepare
     pushup_prepare_action = [
         [45, 35, -45, -35, 80, 70, -80, -70]
     ]
@@ -33,7 +33,7 @@ try:
     my_dog.wait_all_done() # wait all the actions to be done
     time.sleep(0.5)
 
-    # pushup
+    # push_up
     pushup_action = [
         [90, -30, -90, 30, 80, 70, -80, -70],
         [45, 35, -45, -35, 80, 70, -80, -70],
