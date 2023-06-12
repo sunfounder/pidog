@@ -25,16 +25,16 @@ my_dog = Pidog()
 
 try:
     # push_up prepare
-    pushup_prepare_action = [
+    push_up_prepare_action = [
         [45, 35, -45, -35, 80, 70, -80, -70]
     ]
-    my_dog.legs_move(pushup_prepare_action, speed=30)
+    my_dog.legs_move(push_up_prepare_action, speed=30)
     my_dog.head_move([[0, 0, 0]], pitch_comp=-10, speed=80) # head level
     my_dog.wait_all_done() # wait all the actions to be done
     time.sleep(0.5)
 
     # push_up
-    pushup_action = [
+    push_up_action = [
         [90, -30, -90, 30, 80, 70, -80, -70],
         [45, 35, -45, -35, 80, 70, -80, -70],
     ]
@@ -44,7 +44,7 @@ try:
     ]
     # fill action buffers
     for _ in range(20):
-        my_dog.legs_move(pushup_action, immediately=False, speed=50)
+        my_dog.legs_move(push_up_action, immediately=False, speed=50)
         my_dog.head_move(head_up_down_action, pitch_comp=-10, immediately=False, speed=50)
     print(f"legs buffer length (start): {len(my_dog.legs_action_buffer)}")
     time.sleep(5)
