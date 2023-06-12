@@ -8,7 +8,7 @@ here = path.abspath(path.dirname(__file__))
 
 import sys
 sys.path.append("./pidog")
-from pidog import __version__
+from version import __version__
 
 # Get the long description from the relevant file
 with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:

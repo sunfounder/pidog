@@ -2,8 +2,7 @@
 from .pidog import Pidog
 from robot_hat import utils
 from time import sleep
-
-__version__ = "1.1.0"
+from version import __version__
 
 utils.reset_mcu()
 sleep(0.2)
