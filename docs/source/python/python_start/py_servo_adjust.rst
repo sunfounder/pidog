@@ -9,6 +9,15 @@ Follow the instructions on the assembly foldout, insert the battery holder cable
 
 .. image:: img/power_on_robothat.png
 
+
+.. note::
+    
+    When debugging, you can plug the USB-C cable into the Robot HAT and charge your battery by the way.
+
+    .. image:: img/charge_robothat.png
+
+
+
 Now, run ``servo_zeroing.py`` in the ``examples/`` folder.
 
 .. raw:: html

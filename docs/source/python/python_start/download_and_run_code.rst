@@ -90,7 +90,7 @@
 
 #. Run the script ``i2samp.sh``.
 
-    Finally, you need to run the script ``i2samp.sh`` to install the components required by the i2s amplifier, otherwise the pislot will have no sound.
+    Finally, you need to run the script ``i2samp.sh`` to install the components required by the i2s amplifier, otherwise the robot will have no sound.
 
     .. raw:: html
 
