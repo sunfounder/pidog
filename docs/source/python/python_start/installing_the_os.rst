@@ -41,17 +41,17 @@ Insert your SD card into the computer or laptop SD card slot.
 
 **Step 4**
 
-.. In the Raspberry Pi Imager, select the OS that you want to install and
-.. the SD card you would like to install it on.
+In the Raspberry Pi Imager, select the OS that you want to install and
+the SD card you would like to install it on.
 
-.. .. image:: img/image13.png
-..     :align: center
+.. image:: img/sp230607_161330.png
+    :align: center
 
-.. .. note:: 
+.. note:: 
 
-..     1) You will need to be connected to the internet the first time.
+    1) You will need to be connected to the internet the first time.
 
-..     2) That OS will then be stored for future offline use(lastdownload.cache, C:/Users/yourname/AppData/Local/Raspberry Pi/Imager/cache). So the next time you open the software, it will have the display "Released: date, cached on your computer".
+    2) That OS will then be stored for future offline use(lastdownload.cache, C:/Users/yourname/AppData/Local/Raspberry Pi/Imager/cache). So the next time you open the software, it will have the display "Released: date, cached on your computer".
 
 
 .. Download the `raspios_armhf-2020-05-28 <https://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2021-05-28/2021-05-07-raspios-buster-armhf.zip>`_ image and select it in Raspberry Pi Imager.
@@ -63,20 +63,20 @@ Insert your SD card into the computer or laptop SD card slot.
 ..     Raspberry Pi OS has major changes after the 2021-05-28 version, which may cause some functions to be unavailable. Please do not use the latest version for now.
 
 
-.. warning::
+.. .. warning::
 
-    Upgrading the Raspberry Pi OS to **Debian Bullseye** will cause some features to not work, so it is recommended to continue using the **Debian Buster** version.
+..     Upgrading the Raspberry Pi OS to **Debian Bullseye** will cause some features to not work, so it is recommended to continue using the **Debian Buster** version.
 
-In the Raspberry Pi Imager, click **CHOOSE OS** -> **Raspberry Pi OS(other)**.
+.. In the Raspberry Pi Imager, click **CHOOSE OS** -> **Raspberry Pi OS(other)**.
 
-.. image:: img/3d33.png
-    :align: center
+.. .. image:: img/3d33.png
+..     :align: center
 
-Scroll down to the end of the newly opened page and you will see **Raspberry Pi OS(Legacy)** and **Raspberry Pi OS Lite(Legacy)**, these are security updates for Debian Buster, the difference between them is with or without the desktop.
-It is recommended to install **Raspberry Pi OS(Legacy)**, the system with the desktop.
+.. Scroll down to the end of the newly opened page and you will see **Raspberry Pi OS(Legacy)** and **Raspberry Pi OS Lite(Legacy)**, these are security updates for Debian Buster, the difference between them is with or without the desktop.
+.. It is recommended to install **Raspberry Pi OS(Legacy)**, the system with the desktop.
 
-.. image:: img/3d34.png
-    :align: center
+.. .. image:: img/3d34.png
+..     :align: center
 
 
 **Step 5**
