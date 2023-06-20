@@ -6,13 +6,13 @@ from multiprocessing import Process, Value, Lock
 import threading
 import numpy as np
 from math import pi, sin, cos, sqrt, acos, atan2, atan
-from robot_hat import Robot, Pin, Ultrasonic, utils, Music
+from robot_hat import Robot, Pin, Ultrasonic, utils, Music, I2C
 from .sh3001 import Sh3001
 from .rgb_strip import RGBStrip
 from .sound_direction import SoundDirection
 from .dual_touch import DualTouch
 import warnings
-warnings.filterwarnings("ignore") # ignore warnings for pygame
+warnings.filterwarnings("ignore") # ignore warnings for pygame # not work
 
 ''' servos order
                      4,
@@ -34,7 +34,7 @@ warnings.filterwarnings("ignore") # ignore warnings for pygame
     head pins: [4, 6, 5]
         yaw, roll, pitch
 
-    tail pin: [9]
+    tail pin: [9] 
 
 '''
 
@@ -72,8 +72,8 @@ def error(msg, end='\n', file=sys.stdout, flush=False):
 
 
 class MyUltrasonic(Ultrasonic):
-    def __init__(self, tring, echo):
-        super().__init__(tring, echo)
+    def __init__(self, tring, echo, timeout: float = 0.02):
+        super().__init__(tring, echo, timeout)
         self.distance = Value('f', -1.0)
 
     def read_distance(self):
@@ -93,8 +93,11 @@ class Pidog():
         [BODY_WIDTH / 2,  BODY_LENGTH / 2,  0]]).T
     SOUND_DIR = f"{UserHome}/pidog/sounds/"
     # Servo Speed
-    HEAD_DPS = 300
-    LEGS_DPS = 350
+    # HEAD_DPS = 300
+    # LEGS_DPS = 350
+    # TAIL_DPS = 500
+    HEAD_DPS = 300   # dps, degrees per second
+    LEGS_DPS = 428
     TAIL_DPS = 500
     # PID Constants
     KP = 0.033
@@ -208,7 +211,7 @@ class Pidog():
 
         try:
             debug("rgb_strip init ... ", end='', flush=True)
-            self.rgb_strip = RGBStrip(0X74)
+            self.rgb_strip = RGBStrip(addr=0X74, nums=11)
             self.rgb_strip.set_mode('breath', 'black')
             self.rgb_fail_count = 0
             # add rgb thread
@@ -221,13 +224,13 @@ class Pidog():
             debug("ultrasonic init ... ", end='', flush=True)
             echo = Pin('D0')
             trig = Pin('D1')
-            self.ultrasonic = MyUltrasonic(trig, echo)
+            self.ultrasonic = MyUltrasonic(trig, echo, timeout=0.017)
             # add ultrasonic thread
             self.thread_list.append("ultrasonic")
             debug("done")
         except Exception as e:
             error("fail")
-            raise ValueRrror(e)
+            raise ValueError(e)
 
         try:
             debug("dual_touch init ... ", end='', flush=True)
@@ -259,9 +262,6 @@ class Pidog():
         self.exit_flag = False
         self.action_threads_start()
         self.sensory_processes_start()
-
-    # class PidogUltrasonic(Ultrasonic):
-    #     def __init__(self,
 
     # action related: legs,head,tail,imu,rgb_strip
     def close_all_thread(self):
@@ -344,31 +344,32 @@ class Pidog():
         # Variable object lists, dicts, instances of custom classes, etc., do not need to be declared with global
         if 'legs' in self.thread_list:
             self.legs_thread = threading.Thread(name='legs_thread', target=self._legs_action_thread)
-            self.legs_thread.setDaemon(True)
+            self.legs_thread.daemon = True
             self.legs_thread.start()
         if 'head' in self.thread_list:
             self.head_thread = threading.Thread(name='head_thread', target=self._head_action_thread)
-            self.head_thread.setDaemon(True)
+            self.head_thread.daemon = True
             self.head_thread.start()
         if 'tail' in self.thread_list:
             self.tail_thread = threading.Thread(name='tail_thread', target=self._tail_action_thread)
-            self.tail_thread.setDaemon(True)
+            self.tail_thread.daemon = True
             self.tail_thread.start()
         if 'rgb' in self.thread_list:
             self.rgb_strip_thread = threading.Thread(name='rgb_strip_thread', target=self._rgb_strip_thread)
-            self.rgb_strip_thread.setDaemon(True)
+            self.rgb_strip_thread.daemon = True
             self.rgb_strip_thread.start()
         if 'imu' in self.thread_list:
             self.imu_thread = threading.Thread(name='imu_thread', target=self._imu_thread)
-            self.imu_thread.setDaemon(True)
+            self.imu_thread.daemon = True
             self.imu_thread.start()
 
     # legs
     def _legs_action_thread(self):
         while not self.exit_flag:
             try:
-                with self.legs_thread_lock:
-                    self.leg_current_angles = list.copy(self.legs_action_buffer[0])
+                # with self.legs_thread_lock:
+                #     self.leg_current_angles = list.copy(self.legs_action_buffer[0])
+                self.leg_current_angles = list.copy(self.legs_action_buffer[0])
                 # Release lock after copying data before the next operations
                 self.legs.servo_move(self.leg_current_angles, self.legs_speed)
                 self.legs_action_buffer.pop(0)
@@ -520,7 +521,7 @@ class Pidog():
         self.legs_speed = speed
         with self.legs_thread_lock:
             self.legs_action_buffer += target_angles
-
+        
     def head_rpy_to_angle(self, target_yrp, roll_comp=0, pitch_comp=0):
         yaw, roll, pitch = target_yrp
         signed = -1 if yaw < 0 else 1
@@ -576,7 +577,7 @@ class Pidog():
             ultrasonic_thread = threading.Thread(name='ultrasonic_thread',
                                              target=self._ultrasonic_thread,
                                              args=(distance_addr, lock,))
-            # ultrasonic_thread.setDaemon(True)
+            # ultrasonic_thread.daemon = True
             ultrasonic_thread.start()
 
     def sensory_processes_start(self):
@@ -599,8 +600,15 @@ class Pidog():
         except Exception as e:
             error(f'\rstop_and_lie error:{e}')
 
-    # speak
     def speak(self, name, volume=100):
+        """
+        speak, play audio
+
+        :param name: the file name int the folder(SOUND_DIR)
+        :type name: str
+        :param volume: volume, 0-100
+        :type volume: int
+        """
         status, _ = utils.run_command('sudo killall pulseaudio') # Solve the problem that there is no sound when running in the vnc environment
         for filename in os.listdir(self.SOUND_DIR):
             if filename.startswith(name):
@@ -892,3 +900,6 @@ class Pidog():
 
     def is_all_done(self):
         return self.is_legs_done() and self.is_head_done() and self.is_tail_done()
+
+    def get_battery_voltage(self):
+        return round( utils.get_battery_voltage(), 2)
