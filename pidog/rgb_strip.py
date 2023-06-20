@@ -296,7 +296,6 @@ class RGBStrip():
         u = 5
         color = [i*self.brightness for i in color]
         multiple = float(2*math.pi/(self.max_frames*2.0)) # multiple, period = 2*max_frames
-        print(f"multiple: {multiple}")
         offset = -self.cos_func(1, multiple, frame_index)
         brightness = self.Normal_distribution_calculate(u, sig, A, light_index, offset)
         return list([max(0, int(c * brightness)) for c in color])
@@ -456,7 +455,8 @@ class RGBStrip():
                     for light_index in range(self.light_num):
                         _data = self.calulate_data(frame_index, light_index)
                         frame.append(_data)
-                    print(f"{frame_index}:{frame}")
+                    if __name__ == '__main__':
+                        print(f"{frame_index}:{frame}")
                     self.frames.append(frame)
             # dispaly frame-by-frame, to quickly change mode or close 
             if self.current_frame >= self.max_frames:
