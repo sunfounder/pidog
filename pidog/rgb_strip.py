@@ -458,9 +458,6 @@ class RGBStrip():
                         frame.append(_data)
                     print(f"{frame_index}:{frame}")
                     self.frames.append(frame)
-                multiple = float(math.pi/(self.max_frames)) # multiple, the zero position is half of the max_frames (period = max_frames)
-                print(f"multiple:{multiple}")
-                
             # dispaly frame-by-frame, to quickly change mode or close 
             if self.current_frame >= self.max_frames:
                 self.current_frame = 0
@@ -480,11 +477,11 @@ if __name__ == '__main__':
     # rgb.set_mode(style="bark", color="red", bps=2.5, brightness=1)
     # rgb.set_mode(style="speak", color="magenta", bps=1, brightness=1)
     rgb.set_mode(style="listen", color="cyan", bps=0.5, brightness=1)
-    st = time.time()
-    while True:
+    try:
+        while True:
+            rgb.show()
+    finally:
+        rgb.close()
         rgb.show()
-        # if time.time() - st > 30:
-        #     rgb.close()
-        #     rgb.show()
-        #     break
+        print("close while exiting.")
 
