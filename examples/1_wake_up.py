@@ -9,9 +9,8 @@ sleep(1)
 
 def wake_up():
     # stretch
-    my_dog.rgb_strip.set_mode(
-        'breath', color='yellow', brightness=0.8, delay=0.095)
-    my_dog.do_action('stretch', speed=30)
+    my_dog.rgb_strip.set_mode('listen', color='yellow', bps=0.6, brightness=0.8)
+    my_dog.do_action('stretch', speed=50)
     my_dog.head_move([[0, 0, 30]]*2, immediately=True)
     my_dog.wait_all_done()
     sleep(0.2)
@@ -23,12 +22,12 @@ def wake_up():
     my_dog.do_action('sit', speed=25)
     my_dog.wait_legs_done()
     my_dog.do_action('wag_tail', step_count=10, speed=100)
-    my_dog.rgb_strip.set_mode('breath', color=[245, 10, 10], brightness=0.8, delay=0.002)
-    pant(my_dog, pitch_comp=-30)
+    my_dog.rgb_strip.set_mode('breath', color=[245, 10, 10], bps=2.5, brightness=0.8)
+    pant(my_dog, pitch_comp=-30, volume=80)
     my_dog.wait_all_done()
     # hold
-    my_dog.do_action('wag_tail', step_count=1, speed=30)
-    my_dog.rgb_strip.set_mode('breath', 'pink', delay=0.14)
+    my_dog.do_action('wag_tail', step_count=10, speed=30)
+    my_dog.rgb_strip.set_mode('breath', 'pink', bps=0.5)
     while True:
         sleep(1)
 
