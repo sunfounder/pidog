@@ -72,15 +72,16 @@ def high_five(my_dog):
     my_dog.wait_all_done()
 
 
-def pant(my_dog, yrp=None, pitch_comp=0):
+def pant(my_dog, yrp=None, pitch_comp=0, speed=80, volume=100):
     if yrp is None:
         yrp = [0, 0, 0]
     h1 = [0 + yrp[0], 0 + yrp[1],   0 + yrp[2]]
     h2 = [0 + yrp[0], 0 + yrp[1], -10 + yrp[2]]
     h = [h1] + [h2] + [h1]
-    my_dog.speak('pant')
-    for _ in range(10):
-        my_dog.head_move(h, pitch_comp=pitch_comp, immediately=False, speed=92)
+    my_dog.speak('pant', volume)
+    sleep(0.01)
+    for _ in range(6):
+        my_dog.head_move(h, pitch_comp=pitch_comp, immediately=False, speed=speed)
         my_dog.wait_head_done()
 
 
