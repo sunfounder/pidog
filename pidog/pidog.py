@@ -39,6 +39,7 @@ warnings.filterwarnings("ignore") # ignore warnings for pygame # not work
 '''
 
 # user and User home directory
+is_run_with_root = (os.geteuid() == 0)
 User = os.popen('echo ${SUDO_USER:-$LOGNAME}').readline().strip()
 UserHome = os.popen('getent passwd %s | cut -d: -f 6' %User).readline().strip()
 config_file = '%s/.config/pidog/pidog.conf' % UserHome
@@ -77,7 +78,7 @@ class MyUltrasonic(Ultrasonic):
         self.distance = Value('f', -1.0)
 
     def read_distance(self):
-        return self.distance.value
+        return round(self.distance.value, 2)
 
 class Pidog():
 
@@ -298,6 +299,7 @@ class Pidog():
 
             if 'rgb' in self.thread_list:
                 self.rgb_strip_thread.join()
+                self.rgb_strip.close()
             if 'imu' in self.thread_list:
                 self.imu_thread.join()
             if self.sensory_processes != None:
@@ -367,12 +369,11 @@ class Pidog():
     def _legs_action_thread(self):
         while not self.exit_flag:
             try:
-                # with self.legs_thread_lock:
-                #     self.leg_current_angles = list.copy(self.legs_action_buffer[0])
-                self.leg_current_angles = list.copy(self.legs_action_buffer[0])
+                with self.legs_thread_lock:
+                    self.leg_current_angles = list.copy(self.legs_action_buffer[0])
+                    self.legs_action_buffer.pop(0)
                 # Release lock after copying data before the next operations
                 self.legs.servo_move(self.leg_current_angles, self.legs_speed)
-                self.legs_action_buffer.pop(0)
             except IndexError:
                 sleep(0.001)
             except Exception as e:
@@ -385,6 +386,7 @@ class Pidog():
             try:
                 with self.head_thread_lock:
                     self.head_current_angles = list.copy(self.head_action_buffer[0])
+                    self.head_action_buffer.pop(0)
                 # Release lock after copying data before the next operations
                 _angles = list.copy(self.head_current_angles)
                 _angles[0] = self.limit(self.HEAD_YAW_MIN, self.HEAD_YAW_MAX, _angles[0])
@@ -392,7 +394,6 @@ class Pidog():
                 _angles[2] = self.limit(self.HEAD_PITCH_MIN, self.HEAD_PITCH_MAX, _angles[2])
                 _angles[2] += self.HEAD_PITCH_OFFSET
                 self.head.servo_move(_angles, self.head_speed)
-                self.head_action_buffer.pop(0)
             except IndexError:
                 sleep(0.001)
             except Exception as e:
@@ -405,9 +406,9 @@ class Pidog():
             try:
                 with self.tail_thread_lock:
                     self.tail_current_angles = list.copy(self.tail_action_buffer[0])
+                    self.tail_action_buffer.pop(0)
                 # Release lock after copying data before the next operations
                 self.tail.servo_move(self.tail_current_angles, self.tail_speed)
-                self.tail_action_buffer.pop(0)
             except IndexError:
                 sleep(0.001)
             except Exception as e:
@@ -548,7 +549,6 @@ class Pidog():
         self.head_speed = speed
         with self.head_thread_lock:
             self.head_action_buffer += target_angles
-        
 
     def tail_move(self, target_angles, immediately=True, speed=50):
         if immediately == True:
@@ -557,7 +557,6 @@ class Pidog():
         with self.tail_thread_lock:
             self.tail_action_buffer += target_angles
         
-
     # ultrasonic
     def _ultrasonic_thread(self, distance_addr, lock):
         while True:
@@ -609,6 +608,9 @@ class Pidog():
         :param volume: volume, 0-100
         :type volume: int
         """
+        if not is_run_with_root and not hasattr(self, "speak_first"):
+            self.speak_first = True
+            warn("Play sound needs to be run with sudo.")
         status, _ = utils.run_command('sudo killall pulseaudio') # Solve the problem that there is no sound when running in the vnc environment
         for filename in os.listdir(self.SOUND_DIR):
             if filename.startswith(name):
@@ -855,7 +857,7 @@ class Pidog():
         self.servo_move(translate_list, speed)
 
     # do action
-    def do_action(self, action_name, step_count=1, speed=50):
+    def do_action(self, action_name, step_count=1, speed=50, pitch_comp=0):
         try:
             actions, part = self.actions_dict[action_name]
             if part == 'legs':
@@ -863,7 +865,7 @@ class Pidog():
                     self.legs_move(actions, immediately=False, speed=speed)
             elif part == 'head':
                 for _ in range(step_count):
-                    self.head_move(actions, immediately=False, speed=speed)
+                    self.head_move(actions, pitch_comp=pitch_comp, immediately=False, speed=speed)
             elif part == 'tail':
                 for _ in range(step_count):
                     self.tail_move(actions, immediately=False, speed=speed)
