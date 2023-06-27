@@ -438,13 +438,7 @@ class RGBStrip():
             return self.listen(frame_index, light_index, color=self.color)
 
     def show(self):
-        if self.style is None:
-            if self.is_changed:
-                self.is_changed = False
-                self.display([[0, 0, 0]]*self.light_num)
-            time.sleep(self.MIN_DELAY)
-            return
-        else:
+        if self.style is not None:
             # if changed, calulate frames
             if self.is_changed:
                 self.is_changed = False
@@ -468,6 +462,8 @@ class RGBStrip():
     def close(self):
         self.style = None
         self.is_changed = True
+        self.display([[0, 0, 0]]*self.light_num)
+        time.sleep(self.MIN_DELAY)
 
 if __name__ == '__main__':
     rgb = RGBStrip(0X74, 11)
@@ -480,8 +476,9 @@ if __name__ == '__main__':
     try:
         while True:
             rgb.show()
+    except KeyboardInterrupt:
+        pass
     finally:
         rgb.close()
-        rgb.show()
         print("close while exiting.")
 
