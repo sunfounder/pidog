@@ -12,7 +12,7 @@ my_dog = Pidog()
 sleep(0.5)
 
 actions = [
-    # name, head_pitch_adjust, speed
+    # name, head_pitch_adjust(-1, use last_pitch), speed
     ['stand', 0, 50],
     ['sit', -30, 50],
     ['lie', 0, 20],
@@ -25,8 +25,8 @@ actions = [
     ['doze_off', -30, 90],
     ['stretch', 30, 20],
     ['push_up', -30, 50],
-    ['shake_head', 0, 90],
-    ['tilting_head', 0, 60],
+    ['shake_head', -1, 90],
+    ['tilting_head', -1, 60],
     ['wag_tail', 0, 100],
 ]
 
@@ -39,6 +39,7 @@ sound_effects.sort()
 index = None
 last_index = 2
 exit_flag = False
+last_head_pitch = 0
 
 STANDUP_ACTIONS = ['trot', 'forward', 'backward', 'turn_left', 'turn_right']
 
@@ -66,26 +67,28 @@ def show_info():
             print(f"{index+1}. {actions[index][0]}")
         elif index < len(actions) + len(sound_effects):
             print(f"{index+1}. {sound_effects[index-len(actions)]}")
-            print("\033[033mNote that you need to run with \"sudo\", otherwise there may be no sound.\033[m")
         else:
             print('\033[033mOut of range\033[m')
 
 def do_function(index):
-    global last_index
+    global last_index, last_head_pitch
     my_dog.body_stop()
     if index < len(actions):
         name, head_pitch_adjust, speed = actions[index]
         # If last action is push_up, then lie down first
         if last_index < len(actions) and actions[last_index][0] in ('push_up'):
+            last_head_pitch = 0
             my_dog.do_action('lie', speed=60)
         # If this action is trot, forward, turn left, turn right and backward, and, last action is not, then stand up
         if name in STANDUP_ACTIONS and last_index < len(actions) and actions[last_index][0] not in STANDUP_ACTIONS:
+            last_head_pitch = 0
             my_dog.do_action('stand', speed=60)
-        my_dog.head_move_raw([[0, 0, head_pitch_adjust]],
-                             immediately=True, speed=60)
-        my_dog.do_action(name, step_count=10, speed=speed)
+        if head_pitch_adjust != -1:
+            last_head_pitch = head_pitch_adjust
+        my_dog.head_move_raw([[0, 0, last_head_pitch]], immediately=False, speed=60)
+        my_dog.do_action(name, step_count=10, speed=speed, pitch_comp=last_head_pitch)
     elif index < len(actions) + len(sound_effects):
-        my_dog.speak(sound_effects[index - len(actions)])
+        my_dog.speak(sound_effects[index - len(actions)], volume=80)
     last_index = index
 
 
@@ -97,7 +100,7 @@ def function_demonstration():
 
     while True:
         try:
-            num = input("Enter function number\033[5m:\033[m")
+            num = input("Enter function number\033[5m: \033[m")
             if int(num) > len(actions) + len(sound_effects):
                 index = int(num) - 1
                 show_info()
