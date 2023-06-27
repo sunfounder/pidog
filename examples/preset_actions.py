@@ -94,7 +94,7 @@ def body_twisting(my_dog):
     my_dog.legs_move(f, immediately=False, speed=50)
 
 
-def bark_action(my_dog, yrp=None, speak=None):
+def bark_action(my_dog, yrp=None, speak=None, volume=100):
     if yrp is None:
         yrp = [0, 0, 0]
     h1 = [0 + yrp[0], 0 + yrp[1], 20 + yrp[2]]
@@ -106,7 +106,7 @@ def bark_action(my_dog, yrp=None, speak=None):
         [[-20, 90], [-20, 90], [0, 90], [0, 90]])
 
     if speak is not None:
-        my_dog.speak(speak)
+        my_dog.speak(speak, volume)
     my_dog.legs_move([f1], immediately=True, speed=95)
     my_dog.head_move([h1], immediately=True, speed=95)
     my_dog.wait_all_done()
@@ -129,7 +129,7 @@ def shake_head(my_dog, yrp=None):
     my_dog.wait_all_done()
 
 
-def bark(my_dog, yrp=None, pitch_comp=0, roll_comp=0):
+def bark(my_dog, yrp=None, pitch_comp=0, roll_comp=0, volume=100):
     if yrp is None:
         yrp = [0, 0, 0]
     head_up = [0 + yrp[0], 0 + yrp[1], 25 + yrp[2]]
@@ -137,7 +137,7 @@ def bark(my_dog, yrp=None, pitch_comp=0, roll_comp=0):
     my_dog.wait_head_done()
     my_dog.head_move([head_up], pitch_comp=pitch_comp,
                      roll_comp=roll_comp, immediately=True, speed=100)
-    my_dog.speak('single_bark_1')
+    my_dog.speak('single_bark_1', volume)
     my_dog.wait_head_done()
     sleep(0.08)
     my_dog.head_move([head_down], pitch_comp=pitch_comp,
@@ -152,7 +152,7 @@ def push_up(my_dog):
     my_dog.wait_all_done()
 
 
-def howling(my_dog):
+def howling(my_dog, volume=100):
     my_dog.do_action('sit', speed=80)
     my_dog.head_move([[0, 0, -30]], speed=95)
     my_dog.wait_all_done()
@@ -161,7 +161,7 @@ def howling(my_dog):
     my_dog.do_action('half_sit', speed=80)
     my_dog.head_move([[0, 0, -60]], speed=80)
     my_dog.wait_all_done()
-    my_dog.speak('howling', 0)
+    my_dog.speak('howling', volume)
     my_dog.do_action('sit', speed=60)
     my_dog.head_move([[0, 0, 10]], speed=70)
     my_dog.wait_all_done()
