@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 import time
 from pidog import Pidog
-from time import sleep
 from preset_actions import bark
 
 t = time.time()
 my_dog = Pidog()
 my_dog.do_action('stand', speed=80)
 my_dog.wait_all_done()
-sleep(.5)
+time.sleep(.5)
 
 DANGER_DISTANCE = 15
 
@@ -23,11 +22,12 @@ def patrol():
         print("\033[0;31m DANGER !\033[m")
         my_dog.body_stop()
         head_yaw = my_dog.head_current_angles[0]
-        my_dog.rgb_strip.set_mode('boom', 'red', delay=0.01)
+        # my_dog.rgb_strip.set_mode('boom', 'red', bps=2)
+        my_dog.rgb_strip.set_mode('bark', 'red', bps=2)
         my_dog.tail_move([[0]], speed=80)
         my_dog.legs_move([stand], speed=70)
         my_dog.wait_all_done()
-        sleep(0.5)
+        time.sleep(0.5)
         bark(my_dog, [head_yaw, 0, 0])
 
         while distance < DANGER_DISTANCE:
@@ -40,7 +40,7 @@ def patrol():
     # safe
     else:
         print("")
-        my_dog.rgb_strip.set_mode('breath', 'white', delay=0.1)
+        my_dog.rgb_strip.set_mode('breath', 'white', bps=0.5)
         my_dog.do_action('forward', step_count=2, speed=98)
         my_dog.do_action('shake_head', step_count=1, speed=80)
         my_dog.do_action('wag_tail', step_count=5, speed=99)
