@@ -212,6 +212,7 @@ class Pidog():
 
         try:
             debug("rgb_strip init ... ", end='', flush=True)
+            self.rgb_thread_run = True
             self.rgb_strip = RGBStrip(addr=0X74, nums=11)
             self.rgb_strip.set_mode('breath', 'black')
             self.rgb_fail_count = 0
@@ -290,6 +291,7 @@ class Pidog():
             if self.exit_flag == True:
                 self.exit_flag = False
                 self.action_threads_start()
+            
             self.stop_and_lie()
             self.close_all_thread()
 
@@ -298,6 +300,7 @@ class Pidog():
             self.tail_thread.join()
 
             if 'rgb' in self.thread_list:
+                self.rgb_thread_run = False
                 self.rgb_strip_thread.join()
                 self.rgb_strip.close()
             if 'imu' in self.thread_list:
@@ -417,7 +420,7 @@ class Pidog():
 
     # rgb strip
     def _rgb_strip_thread(self):
-        while not self.exit_flag:
+        while self.rgb_thread_run:
             try:
                 self.rgb_strip.show()
                 self.rgb_fail_count = 0
