@@ -60,17 +60,16 @@ def print_color(msg, end='\n', file=sys.stdout, flush=False, color=''):
     print('\033[%sm%s\033[0m'%(color, msg), end=end, file=file, flush=flush)
 
 def info(msg, end='\n', file=sys.stdout, flush=False):
-    print_color('\033[%sm%s\033[0m'%(WHITE, msg), end=end, file=file, flush=flush)
+    print_color(msg, end=end, file=file, flush=flush, color=WHITE)
 
 def debug(msg, end='\n', file=sys.stdout, flush=False):
-    print_color('\033[%sm%s\033[0m'%(GRAY, msg), end=end, file=file, flush=flush)
+    print_color(msg, end=end, file=file, flush=flush, color=GRAY)
 
 def warn(msg, end='\n', file=sys.stdout, flush=False):
-    print_color('\033[%sm%s\033[0m'%(YELLOW, msg), end=end, file=file, flush=flush)
+    print_color(msg, end=end, file=file, flush=flush, color=YELLOW)
 
 def error(msg, end='\n', file=sys.stdout, flush=False):
-    print_color('\033[%sm%s\033[0m'%(RED, msg), end=end, file=file, flush=flush)
-
+    print_color(msg, end=end, file=file, flush=flush, color=RED)
 
 class MyUltrasonic(Ultrasonic):
     def __init__(self, tring, echo, timeout: float = 0.02):
@@ -258,12 +257,12 @@ class Pidog():
             error("fail")
 
 
-        self.sensory_processes = None
+        self.sensory_process = None
         self.sensory_lock = Lock()
 
         self.exit_flag = False
         self.action_threads_start()
-        self.sensory_processes_start()
+        self.sensory_process_start()
 
     # action related: legs,head,tail,imu,rgb_strip
     def close_all_thread(self):
@@ -305,14 +304,14 @@ class Pidog():
                 self.rgb_strip.close()
             if 'imu' in self.thread_list:
                 self.imu_thread.join()
-            if self.sensory_processes != None:
-                self.sensory_processes.terminate()
+            if self.sensory_process != None:
+                self.sensory_process.terminate()
 
             info('Quit')
         except Exception as e:
             error(f'Close error: {e}')
         finally:
-            signal.alarm(0)
+            # signal.alarm(0)
             sys.exit(0)
 
     def legs_simple_move(self, angles_list, speed=90):
@@ -573,8 +572,8 @@ class Pidog():
                 error(f'\rultrasonic_thread  except: {e}')
                 break
 
-    # sensory_processes : ultrasonic
-    def sensory_processes_work(self, distance_addr, lock):
+    # sensory_process : ultrasonic
+    def sensory_process_work(self, distance_addr, lock):
         if 'ultrasonic' in self.thread_list:
             ultrasonic_thread = threading.Thread(name='ultrasonic_thread',
                                              target=self._ultrasonic_thread,
@@ -582,13 +581,13 @@ class Pidog():
             # ultrasonic_thread.daemon = True
             ultrasonic_thread.start()
 
-    def sensory_processes_start(self):
-        if self.sensory_processes != None:
-            self.sensory_processes.terminate()
-        self.sensory_processes = Process(name='sensory_processes',
-                                         target=self.sensory_processes_work,
+    def sensory_process_start(self):
+        if self.sensory_process != None:
+            self.sensory_process.terminate()
+        self.sensory_process = Process(name='sensory_process',
+                                         target=self.sensory_process_work,
                                          args=(self.ultrasonic.distance, self.sensory_lock))
-        self.sensory_processes.start()
+        self.sensory_process.start()
 
     # reset: stop, stop_and_lie
     def stop_and_lie(self, speed=85):
