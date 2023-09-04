@@ -5,7 +5,7 @@ To ensure that the servo has been properly set to 0°, first insert the rocker a
 
 .. image:: img/servo_arm.png
 
-Follow the instructions on the assembly foldout, insert the battery holder cable and turn the power switch to the ON. Wait for 1-2 minutes, there will be a sound to indicate that the Raspberry Pi boots successfully.
+Follow the instructions on the assembly foldout, insert the battery holder cable and turn the power switch to the ON. Then plug in a powered USB-C cable to activate the battery. Wait for 1-2 minutes, there will be a sound to indicate that the Raspberry Pi boots successfully.
 
 .. image:: img/power_on_robothat.png
 
