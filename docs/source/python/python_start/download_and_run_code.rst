@@ -60,9 +60,17 @@
     .. code-block::
 
         cd ~/
-        git clone https://github.com/sunfounder/vilib.git
+        git clone -b picamera2 https://github.com/sunfounder/vilib.git
         cd vilib
         sudo python3 install.py
+
+.. .. code-block::
+
+..     cd ~/
+..     git clone https://github.com/sunfounder/vilib.git
+..     cd vilib
+..     sudo python3 install.py
+
 
 #. Download the code.
 
