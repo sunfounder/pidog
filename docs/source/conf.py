@@ -18,9 +18,10 @@
 # -- Project information -----------------------------------------------------
 
 import sphinx_rtd_theme
+import time
 
 project = 'SunFounder PiDog Kit'
-copyright = '2023, sunfounder'
+copyright = f'{time.localtime().tm_year}, SunFounder'
 author = 'sunfounder'
 
 # The full version, including alpha/beta/rc tags
