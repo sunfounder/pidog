@@ -33,7 +33,6 @@ Then it'll doze off again.
 
 .. code-block:: python
 
-
     #!/usr/bin/env python3
     from pidog import Pidog
     from time import sleep
@@ -42,7 +41,7 @@ Then it'll doze off again.
     my_dog = Pidog()
     sleep(0.1)
 
-    def loop_arround(amplitude=60, interval=0.5, speed=100):
+    def loop_around(amplitude=60, interval=0.5, speed=100):
         my_dog.head_move([[amplitude,0,0]], immediately=True, speed=speed)
         my_dog.wait_all_done()
         sleep(interval)
@@ -59,51 +58,54 @@ Then it'll doze off again.
                 return True
             else:
                 return False
+        else:
+            return False
 
     def rest():
-    
-        my_dog.do_action('lie', wait=True, speed=50)
         my_dog.wait_all_done()
-        # Cleanup sound detection
-        is_sound()
+        my_dog.do_action('lie', speed=50)
+        my_dog.wait_all_done()
 
-        while True: 
+        while True:
             # Sleeping
-            my_dog.rgb_strip.set_mode('breath', 'pink', delay=0.14)
+            my_dog.rgb_strip.set_mode('breath', 'pink', bps=0.3)
             my_dog.head_move([[0,0,-40]], immediately=True, speed=5)
-            my_dog.do_action('wag_tail', step_count=20, speed=20)
-            my_dog.do_action('doze_off', wait=False, speed=95)
-            
-            # If heard anything, wake up
-            if is_sound():
-                # Set light to yellow and stand up
-                my_dog.rgb_strip.set_mode('boom', 'yellow', delay=0.01)
-                my_dog.body_stop()
-                my_dog.do_action('stand', wait=False, speed=90)
-                my_dog.head_move([[0, 0, 0]], immediately=True, speed=80)
-                my_dog.wait_all_done()
-                # Look arround
-                loop_arround(60, 0.5, 100)
-                sleep(0.5)
-                # tilt head and being confused
-                my_dog.speak('confused_3')
-                my_dog.do_action('tilting_head_left', wait=True, speed=80)
-                my_dog.wait_all_done()
-                sleep(0.8)
-                my_dog.head_move([[0, 0, -10]], immediately=True, speed=80)
-                my_dog.wait_all_done()
-                sleep(0.8)
-                # Shake head to ignore it
-                shake_head(my_dog)
-                sleep(0.2)
-                # Lay down again
-                my_dog.rgb_strip.set_mode('breath', 'pink')
-                my_dog.do_action('lie', wait=True, speed=50)
-                my_dog.wait_all_done()
-                sleep(0.2)
-                # Cleanup sound detection
-                is_sound()
+            my_dog.do_action('doze_off', speed=92)
+            # Cleanup sound detection
+            sleep(1)
+            is_sound()
 
+            # keep sleeping
+            while is_sound() is False:
+                my_dog.do_action('doze_off', speed=92)
+                sleep(0.2)
+
+            # If heard anything, wake up
+            # Set light to yellow and stand up
+            my_dog.rgb_strip.set_mode('boom', 'yellow', bps=1)
+            my_dog.body_stop()
+            my_dog.do_action('stand', speed=90)
+            my_dog.head_move([[0, 0, 0]], immediately=True, speed=80)
+            my_dog.wait_all_done()
+            # Look arround
+            loop_around(60, 1, 60)
+            sleep(0.5)
+            # tilt head and being confused
+            my_dog.speak('confused_3', volume=80)
+            my_dog.do_action('tilting_head_left', speed=80)
+            my_dog.wait_all_done()
+            sleep(1.2)
+            my_dog.head_move([[0, 0, -10]], immediately=True, speed=80)
+            my_dog.wait_all_done()
+            sleep(0.4)
+            # Shake head , mean to ignore it
+            shake_head(my_dog)
+            sleep(0.2)
+
+            # Lay down again
+            my_dog.rgb_strip.set_mode('breath', 'pink', bps=1)
+            my_dog.do_action('lie', speed=50)
+            my_dog.wait_all_done()
             sleep(1)
 
 
@@ -111,4 +113,8 @@ Then it'll doze off again.
         try:
             rest()
         except KeyboardInterrupt:
+            pass
+        except Exception as e:
+            print(f"\033[31mERROR: {e}\033[m")
+        finally:
             my_dog.close()

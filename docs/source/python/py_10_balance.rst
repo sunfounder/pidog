@@ -70,8 +70,7 @@ You can control PiDog to walk smoothly on the ramp by typing the below keys.
     sleep(0.5)
 
     usage = '''
-    Pidog          Balance         Ctrl + C to Exit
-    ...
+    message
     '''
 
     stand_coords = [[[0, 80], [0, 80], [0, 80], [0, 80]]]
@@ -110,7 +109,7 @@ You can control PiDog to walk smoothly on the ramp by typing the below keys.
             os.system('cls' if os.name == 'nt' else 'clear')
             print(usage)
             key = readchar.readkey()
-            if key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
+            if key == readchar.key.CTRL_C:
                 thread_start = False
                 break
             elif key == 'w':
@@ -138,6 +137,9 @@ You can control PiDog to walk smoothly on the ramp by typing the below keys.
             main()
         except KeyboardInterrupt:
             pass
+        except Exception as e:
+            print(f"\033[31mERROR: {e}\033[m")
         finally:
+            thread_start = False
             t.join()
             my_dog.close()

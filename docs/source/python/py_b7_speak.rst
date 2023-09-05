@@ -28,27 +28,36 @@ These audios are saved under ``pidog\sounds`` path, you can call the following f
 
 .. code-block:: python
 
+    # !/usr/bin/env python3
+    ''' play sound effecfs
+        Note that you need to run with "sudo"
+    API:
+        Pidog.speak(name, volume=100)
+            play sound effecf in the file "../sounds"
+            - name    str, file name of sound effect, no suffix required, eg: "angry"
+            - volume  int, volume 0-100, default 100
+    '''
     from pidog import Pidog
+    import os
     import time
+
+    # change working directory
+    abspath = os.path.abspath(os.path.dirname(__file__))
+    # print(abspath)
+    os.chdir(abspath)
 
     my_dog = Pidog()
 
-    try:
-        my_dog.do_action("sit", speed=60)
-        my_dog.wait_all_done()
-        time.sleep(0.5)
+    print("\033[033mNote that you need to run with \"sudo\", otherwise there may be no sound.\033[m")
 
-        my_dog.do_action("wag_tail", step_count=100,speed=20)
-        my_dog.do_action("tilting_head", step_count=2, speed=20)
-        my_dog.speak('confused_3')
-        my_dog.wait_head_done()
+    # my_dog.speak("angry")
+    # time.sleep(2)
 
-        my_dog.stop_and_lie()
-
-    except KeyboardInterrupt:
-        pass
-    except Exception as e:
-        print(f"\033[31mERROR: {e}\033[m")
-    finally:
-        print("closing ...")
-        my_dog.close()        
+    for name in os.listdir('../sounds'):
+        name = name.split('.')[0] # remove suffix
+        print(name)
+        my_dog.speak(name)
+        # my_dog.speak(name, volume=50)
+        time.sleep(3) # Note that the duration of each sound effect is different
+    print("closing ...")
+    my_dog.close()

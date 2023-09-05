@@ -13,14 +13,21 @@ please configure the Raspberry Pi first according to :ref:`quick_guide_python`.
 
     python_start/quick_guide_on_python
 
-As soon as the assembly is completed, you need to calibrate the Pidog to prevent it from damaging the servo if there is a slight deviation in the assembly.
+As soon as the assembly is completed, you need to calibrate the PiDog to prevent it from damaging the servo if there is a slight deviation in the assembly.
 
 .. toctree::
     :maxdepth: 2
 
     py_0_calibrate
 
-Once calibrated, you can have Pidog achieve the following project effects.
+Once calibrated, you can follow the tutorial to play PiDog with the APP.
+
+.. toctree::
+    :maxdepth: 2
+
+    auto_run_app
+
+You can also have PiDog achieve the following project effects.
 
 .. toctree::
 

@@ -1,4 +1,4 @@
-3. Funny Project
+4. Funny Project
 =========================
 
 .. toctree::
@@ -16,3 +16,4 @@
     py_10_balance
     py_11_keyboard_control
     py_12_app_control
+    py_13_ball_track

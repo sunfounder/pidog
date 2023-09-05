@@ -46,15 +46,7 @@ If it sees you (face detection finds an object), it will wag its tail and let ou
     from preset_actions import bark
 
     my_dog = Pidog()
-
     sleep(0.1)
-
-
-    def delay(time):
-        my_dog.wait_legs_done()
-        my_dog.wait_head_done()
-        sleep(time)
-
 
     def face_track():
         Vilib.camera_start(vflip=False, hflip=False)
@@ -69,30 +61,31 @@ If it sees you (face detection finds an object), it will wag its tail and let ou
         direction = 0
 
         my_dog.do_action('sit', speed=50)
-        my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-
-                        40, immediately=True, speed=80)
-        delay(0.5)
-        if my_dog.ears.isdetected():
+        my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-40, immediately=True, speed=80)
+        my_dog.wait_all_done()
+        sleep(0.5)
+        # Cleanup sound detection by servos moving
+        if my_dog.ears.isdetected():    
             direction = my_dog.ears.read()
 
         while True:
             if flag == False:
-                my_dog.rgb_strip.set_mode('breath', 'pink', delay=0.1)
+                my_dog.rgb_strip.set_mode('breath', 'pink', bps=1)
             # If heard somthing, turn to face it
             if my_dog.ears.isdetected():
                 flag = False
                 direction = my_dog.ears.read()
                 pitch = 0
-                if direction > 0 and direction < 100:
+                if direction > 0 and direction < 160:
                     yaw = -direction
                     if yaw < -80:
                         yaw = -80
-                elif direction > 260 and direction < 360:
+                elif direction > 200 and direction < 360:
                     yaw = 360 - direction
                     if yaw > 80:
                         yaw = 80
-                my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-
-                                40, immediately=True, speed=80)
+                my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-40, immediately=True, speed=80)
+                my_dog.wait_head_done()
                 sleep(0.05)
 
             ex = Vilib.detect_obj_parameter['human_x'] - 320
@@ -103,22 +96,22 @@ If it sees you (face detection finds an object), it will wag its tail and let ou
             if people > 0 and flag == False:
                 flag = True
                 my_dog.do_action('wag_tail', step_count=2, speed=100)
-                bark(my_dog, [yaw, 0, 0], pitch_comp=-40)
+                bark(my_dog, [yaw, 0, 0], pitch_comp=-40, volume=80)
                 if my_dog.ears.isdetected():
                     direction = my_dog.ears.read()
 
             if ex > 15 and yaw > -80:
-                yaw -= 0.5
+                yaw -= 0.5 * int(ex/30.0+0.5)
 
             elif ex < -15 and yaw < 80:
-                yaw += 0.5
+                yaw += 0.5 * int(-ex/30.0+0.5)
 
             if ey > 25:
-                pitch -= 0.5
+                pitch -= 1*int(ey/50+0.5)
                 if pitch < - 30:
                     pitch = -30
             elif ey < -25:
-                pitch += 0.5
+                pitch += 1*int(-ey/50+0.5)
                 if pitch > 30:
                     pitch = 30
 
@@ -127,8 +120,7 @@ If it sees you (face detection finds an object), it will wag its tail and let ou
                 end='\r',
                 flush=True,
                 )
-            my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-
-                            40, immediately=True, speed=100)
+            my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-40, immediately=True, speed=100)
             sleep(0.05)
 
 
@@ -136,5 +128,9 @@ If it sees you (face detection finds an object), it will wag its tail and let ou
         try:
             face_track()
         except KeyboardInterrupt:
+            pass
+        except Exception as e:
+            print(f"\033[31mERROR: {e}\033[m")
+        finally:
             Vilib.camera_close()
             my_dog.close()

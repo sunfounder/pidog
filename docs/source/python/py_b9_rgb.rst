@@ -7,7 +7,7 @@ You can call the following function to control it.
 
 .. code-block:: python
 
-    Pidog.rgb_strip.set_mode(style='breath', color='white', brightness=1, delay=0.01)
+    Pidog.rgb_strip.set_mode(style='breath', color='white', bps=1, brightness=1):
 
 * ``style`` : The lighting display mode of RGB Strip, the following are its available values.
 
@@ -57,8 +57,8 @@ Here are examples of their use:
         my_dog.rgb_strip.set_mode(style="bark", color="#a10a0a")
         time.sleep(3)
 
-        # style:"boom", color="cyan", brightness=0.1, delay=0.1
-        my_dog.rgb_strip.set_mode(style="boom", color="cyan", brightness=0.5, delay=0.05)
+        # style:"boom", color="#a10a0a", brightness=0.5, bps=2.5
+        my_dog.rgb_strip.set_mode(style="boom", color="#a10a0a", bps=2.5, brightness=0.5)
         time.sleep(3)
 
         # close

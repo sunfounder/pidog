@@ -18,7 +18,7 @@ In addition, PiDog is also equipped with a sound direction sensor and a 6-DOF IM
 
 This document includes the list and assembly pdf, hardware introduction and PiDog programming.
 
-
+If you have any questions, please send an email to service@sunfounder.com and we will respond as soon as possible.
 
 
 **Content**
@@ -26,6 +26,7 @@ This document includes the list and assembly pdf, hardware introduction and PiDo
 .. toctree::
     :maxdepth: 2
 
+    About This Kit <self>
     list_and_assembly
     python/play_with_python 
     hardware/cpn_hardware
