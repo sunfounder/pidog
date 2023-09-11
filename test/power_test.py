@@ -1,5 +1,5 @@
 from pidog import Pidog
-from time import sleep
+import time
 import threading
 
 
@@ -15,21 +15,34 @@ try:
         print(f"{thread.name}")
 
     my_dog.rgb_strip.set_mode("boom", "red")
+
+    my_dog.do_action("stand", step_count=54, speed=SPEED)
+    # my_dog.head_move([[0, 0, 0]], pitch_comp=-30)
+
+    # my_dog.rgb_strip.set_mode("boom", "red")
+    st = time.time()
     while True:
         # my_dog.do_action("stand", speed=SPEED)
-        # sleep(2)
+        # time.sleep(1.5)
         # my_dog.do_action("lie", speed=SPEED)
-        # sleep(2)
+        # time.sleep(1.5)
         # my_dog.do_action("push_up", speed=SPEED)
-        # sleep(2)
+        # time.sleep(1.5)
         # my_dog.do_action("lie", speed=SPEED)
-        # sleep(2)
+        # time.sleep(1.5)
         # print(len(my_dog.legs_action_buffer))
-        my_dog.do_action("trot", step_count=1, speed=SPEED)
+        my_dog.do_action("trot", step_count=2, speed=SPEED)
         my_dog.do_action("wag_tail", step_count=10, speed=SPEED)
-        my_dog.do_action("shake_head", step_count=2, speed=SPEED)
+        my_dog.do_action("shake_head", step_count=5, pitch_comp=-10, speed=SPEED)
         # print(f"{my_dog.accData, my_dog.ultrasonic.read_distance()}")
-        sleep(0.1)
+        # if time.time() - st > 60:
+        #     my_dog.body_stop()
+        #     time.sleep(3)
+        #     st = time.time()
+        
+        time.sleep(1)
+
+
 except KeyboardInterrupt:
     my_dog.close()
 
