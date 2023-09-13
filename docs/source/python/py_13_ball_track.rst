@@ -1,4 +1,4 @@
-13. Face Track
+13. Ball Track
 ======================
 
 PiDog will sit quietly in place.
@@ -13,7 +13,7 @@ You put a red ball in front of it, it will stand, and then chase the ball.
 .. code-block::
 
     cd ~/pidog/examples
-    sudo python3 7_face_track.py
+    sudo python3 13_ball_track.py
 
 
 After running this code, PiDog will start the camera.
