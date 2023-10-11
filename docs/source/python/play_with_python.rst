@@ -31,7 +31,7 @@ You can also have PiDog achieve the following project effects.
 
 .. toctree::
 
-    py_funny_project
+    py_fun_project
     
 Then you may want to master its basic functions, or write some fun examples.
 

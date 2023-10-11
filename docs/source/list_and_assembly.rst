@@ -1,4 +1,4 @@
-Component List and Assembly Instructions
+Assembly Instructions
 ==============================================
 
 You need to check whether there are missing or damaged components according to the list first. 

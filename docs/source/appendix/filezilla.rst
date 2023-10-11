@@ -11,7 +11,7 @@ Filezilla is an open source software that not only supports FTP, but also FTP ov
 
 **Step 1**: Download Filezilla.
 
-Download the client from `Filezilla’s official website <https://filezilla-project.org/>`_, Filezilla has a very good tutorial, please refer to: `Documentation - Filezilla <https://wiki.filezilla-project.org/Documentation>`_.
+Download the client from `Filezilla's official website <https://filezilla-project.org/>`_, Filezilla has a very good tutorial, please refer to: `Documentation - Filezilla <https://wiki.filezilla-project.org/Documentation>`_.
 
 **Step 2**: Connect to Raspberry Pi
 

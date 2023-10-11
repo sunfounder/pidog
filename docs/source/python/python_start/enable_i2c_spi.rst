@@ -1,3 +1,5 @@
+.. _i2c_spi_config:
+
 5. Enable I2C, SPI Interface
 ========================================
 

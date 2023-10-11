@@ -20,8 +20,13 @@ Additionally, we offer three programming languages. MicroPython, C/C++ (Arduino)
 
 <a id="update"></a>
 ## Update:
+
+2023-10-11:
+ - Optimize some of the content in the quick guide on Python.
+ - Add more chapter descriptions and make some corrections.
+
 2023-09-05:
-    Add 1 more example
+ - Add 1 more example
 
 
 <a id="trouble"></a>

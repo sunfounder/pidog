@@ -1,7 +1,7 @@
 2. Installing the OS
 =======================
 
-**Required Components**
+**Required Components**
 
 ================== ======================
 Any Raspberry Pi   1 \* Personal Computer
@@ -29,7 +29,7 @@ When you launch the installer, your operating system may try to block
 you from running it. For example, on Windows I receive the following
 message:
 
-If this pops up, click on **More info** and then **Run anyway**, then
+If this pops up, click on **More info** and then **Run anyway**, then
 follow the instructions to install the Raspberry Pi Imager.
 
 .. image:: img/image12.png
@@ -47,7 +47,7 @@ the SD card you would like to install it on.
 .. image:: img/sp230607_161330.png
     :align: center
 
-.. note:: 
+.. note:: 
 
     1) You will need to be connected to the internet the first time.
 

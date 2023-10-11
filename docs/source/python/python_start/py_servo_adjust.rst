@@ -1,21 +1,15 @@
+.. _py_servo_adjust:
+
 6. Servo Adjust
 ===================
 
-To ensure that the servo has been properly set to 0°, first insert the rocker arm into the servo shaft and then gently rotate the rocker arm to a different angle.
+The angle range of the servo is -90~90, but the angle set at the factory is random, maybe 0°, maybe 45°; if we assemble it with such an angle directly, it will lead to a chaotic state after the robot runs the code, or worse, it will cause the servo to block and burn out.
 
-.. image:: img/servo_arm.png
+So here we need to set all the servo angles to 0° and then install them, so that the servo angle is in the middle, no matter which direction to turn.
 
-Follow the instructions on the assembly foldout, insert the battery holder cable and turn the power switch to the ON. Then plug in a powered USB-C cable to activate the battery. Wait for 1-2 minutes, there will be a sound to indicate that the Raspberry Pi boots successfully.
+#. To ensure that the servo has been properly set to 0°, first insert the servo arm into the servo shaft and then gently rotate to any angle.
 
-.. image:: img/power_on_robothat.png
-
-
-.. note::
-    
-    When debugging, you can plug the USB-C cable into the Robot HAT and charge your battery by the way.
-
-    .. image:: img/charge_robothat.png
-
+    .. image:: img/servo_arm.png
 
 
 Now, run ``servo_zeroing.py`` in the ``examples/`` folder.
@@ -31,13 +25,13 @@ Now, run ``servo_zeroing.py`` in the ``examples/`` folder.
 
 
 .. note::
-    If you get an error, try re-enabling the Raspberry Pi's I2C port, see: :ref:`i2c_config`.
+    If you get an error, try re-enabling the Raspberry Pi's I2C port, see: :ref:`i2c_spi_config`.
 
 Next, plug the servo cable into the **any PWM port**.
 
 .. image:: img/pwm_connect.png
 
-At this point you will see the servo arm rotate to a specific position (0°). If the servo arm does not return to 0°, press the RST button to restart the Robot HAT.
+At this point you will see the servo arm rotate to a specific position (0°).
 
 Now you can continue the installation as instructed on the assembly foldout.
 

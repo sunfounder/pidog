@@ -12,8 +12,7 @@ You need to download the APP on your phone/tablet first, then connect to the hot
 
 #. Install `SunFounder Controller <https://docs.sunfounder.com/projects/sf-controller/en/latest/>`_ from **APP Store(iOS)** or **Google Play(Android)**.
 
-
-#. Run the Code。
+#. Run the Code.
 
     .. raw:: html
 

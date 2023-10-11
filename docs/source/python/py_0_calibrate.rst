@@ -1,8 +1,9 @@
 2. Calibrate the PiDog
 =============================
+It is recommended that you calibrating the Pidog after assembling it. The servo angle will be tilted due to possible deviations during assembly or limitations of the servo itself, so you can get the servo to a perfect state by calibrating it, usually the calibration angle is -5~5°.
 
-Due to possible deviations during PiDog installation or limitations of the servos themselves, 
-some servo angles may be slightly tilted, so you can calibrate them.
+But if the deviation angle is too big, you still have to go back to :ref:`py_servo_adjust` to set the servo angle to 0°, and then follow the instructions to reassemble the Pidog.
+
 
 Of course you can skip this chapter if you think the assembly is perfect and doesn't require calibration.
 

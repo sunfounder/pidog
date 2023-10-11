@@ -1,54 +1,73 @@
-3. Quickly Use the APP
+3. Quick Play with the App
 =================================================
 
-If you want to directly control PiDog through the APP after booting, please follow the steps below to install the autostart program.
+Now that your PiDog is all set up and raring to go, this section is perfect for those eager to dive in and explore all its features in a jiffy. We'll walk you through the process of installing the app, seamlessly connecting your PiDog with your mobile device, and unleashing the myriad of fun functionalities it offers, all at your fingertips. By the end of this chapter, you'll be confidently navigating and playing with your PiDog using your device. Let's get started and immerse ourselves in the world of interactive robotics!
 
-1. Run the following commands:
+#. Install ``sunfounder-controller`` module.
+
+    The robot-hat, vilib, and picar-x modules need to be installed first, for details see: :ref:`install_all_modules`.
+
+    .. raw:: html
+
+        <run></run>
+
+    .. code-block::
+
+        cd ~
+        git clone https://github.com/sunfounder/sunfounder-controller.git
+        cd ~/sunfounder-controller
+        sudo python3 setup.py install
+
+#. Run the following commands:
 
 
-.. raw:: html
+    .. raw:: html
 
-    <run></run>
+        <run></run>
 
-.. code-block::
+    .. code-block::
 
-    cd ~/pidog/bin
-    sudo bash pidog_app_install.sh
+        cd ~/pidog/bin
+        sudo bash pidog_app_install.sh
 
 
-2. Restart PiDog.
+#. Restart PiDog.
 
-3. Install `SunFounder Controller <https://docs.sunfounder.com/projects/sf-controller/en/latest/>`_ from **APP Store(iOS)** or **Google Play(Android)**.
+#. Install `SunFounder Controller <https://docs.sunfounder.com/projects/sf-controller/en/latest/>`_ from **APP Store(iOS)** or **Google Play(Android)**.
 
-4. Connect your phone (or tablet) to the hotspot network emitted by PiDog. Default SSID= ``pidog`` , PSK= ``12345678``
+#. Connect to ``pidog`` WLAN.
 
-5. Open the ``Sunfounder Controller`` APP. Click the + icon to add a remote.
+    Now, connect your mobile device to the local area network (LAN) broadcast by the Pidog. This way, your mobile device and the Pidog will be on the same network, which will facilitate communication between the applications on your mobile device and the Pidog.
+
+    * Find ``pidog`` on the WLAN of the mobile phone (tablet), enter the password ``12345678`` and connect to it.
+
+    * The default connection mode is AP mode. So after you connect, there will be a prompt telling you that there is no Internet access on this WLAN network, please choose to continue connecting.
+
+        .. image:: img/app_no_internet.png
+
+
+
+
+#. Open the ``Sunfounder Controller`` APP. Click the + icon to add a remote.
 
         .. image:: img/app1.png
 
-#. There are preset controllers for some products in the Preset section. Here we choose PiDog.
+#. Preset controllers are available for some products, here we choose **PiDog**. Give it a name, or simply tap **Confirm**.
 
-        .. image:: img/app_preset-1.png
+        .. image:: img/app_preset.jpg
 
-#. Give it a name, then click Confirm.
 
-        .. image:: img/app_preset-2.png
+#. Once inside, the app will automatically search for the **Mydog**. After a moment, you will see a prompt saying “Connected Successfully.”
 
-#. You've now entered the remote control interface, which has several components for setting. Click the save button in the upper-right corner.
-
-        .. image:: img/app_preset-3.png
-
-#. Next, you need to connect PiDog with your device by pressing the connect button.
-
-        .. image:: img/sc_connect.jpg
-
-#. Wait a few seconds, MyDog(IP) will appear, click it to connect.
-
-        .. image:: img/sc_mydog.jpg
+        .. image:: img/app_auto_connect.jpg
 
     .. note::
-        If the automatic connection can't find the device, please click Scan to search again, or click Manual to input PiDog's IP manually.
 
+        * You can also manually click the |app_connect| button. Wait a few seconds, MyDog(IP) will appear, click it to connect.
+
+            .. image:: img/sc_mydog.jpg
+
+        * 
 #. Run the Controller.
 
     * When the "Connected Successfully" prompt appears, tap the ▶ button in the upper-right corner.

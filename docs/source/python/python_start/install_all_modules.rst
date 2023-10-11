@@ -44,11 +44,7 @@
         cd robot-hat
         sudo python3 setup.py install
 
-    .. note::
-        Running ``setup.py`` will download some necessary components. You may fail to download due to network problems. You may need to download again at this time.
-        In the following cases, enter ``Y`` and press Enter.
-        
-        .. image:: img/dowload_code.png
+
 
 #. Install ``vilib`` module.
 
@@ -64,12 +60,7 @@
         cd vilib
         sudo python3 install.py
 
-.. .. code-block::
 
-..     cd ~/
-..     git clone https://github.com/sunfounder/vilib.git
-..     cd vilib
-..     sudo python3 install.py
 
 
 #. Download the code.
@@ -123,16 +114,3 @@
 
     .. note::
         If there is no sound after restarting, you may need to run the ``i2samp.sh`` script multiple times.
-
-#. Install ``sunfounder-controller`` module.
-
-    .. raw:: html
-
-        <run></run>
-
-    .. code-block::
-
-        cd ~
-        git clone https://github.com/sunfounder/sunfounder-controller.git
-        cd ~/sunfounder-controller
-        sudo python3 setup.py install

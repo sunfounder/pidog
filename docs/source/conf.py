@@ -37,7 +37,7 @@ extensions = ['sphinx.ext.intersphinx','sphinx.ext.autosectionlabel'
 ]
 
 
-# Link to other projects’ documentation with intersphinx. Use the intersphinx_mapping configuration to indicate the name and link of the projects you want to use
+# Link to other projects' documentation with intersphinx. Use the intersphinx_mapping configuration to indicate the name and link of the projects you want to use
 intersphinx_mapping = {
     'ezblock': ('https://docs.sunfounder.com/projects/ezblock3/en/latest/', None),
 }
@@ -94,3 +94,24 @@ language = 'en'
 locale_dirs = ['locale/'] 
 
 gettext_compact = False
+
+rst_epilog = """
+
+.. |app_connect| image:: /python/img/app_connect.jpg
+    :width: 20
+
+"""
+
+#links
+rst_epilog += """
+
+.. |link_code_10_balance| raw:: html
+
+    <a href="https://github.com/sunfounder/pidog/blob/master/examples/10_balance.py" target="_blank">10_balance.py - Github</a>
+
+
+.. |link_code_11_keyboard_control| raw:: html
+
+    <a href="https://github.com/sunfounder/pidog/blob/master/examples/11_keyboard_control.py" target="_blank">11_keyboard_control.py.py - Github</a>
+
+"""
