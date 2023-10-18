@@ -1,4 +1,4 @@
-4. Fun Python Projects
+3. Fun Python Projects
 =========================
 
 

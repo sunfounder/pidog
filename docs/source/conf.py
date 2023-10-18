@@ -112,6 +112,6 @@ rst_epilog += """
 
 .. |link_code_11_keyboard_control| raw:: html
 
-    <a href="https://github.com/sunfounder/pidog/blob/master/examples/11_keyboard_control.py" target="_blank">11_keyboard_control.py.py - Github</a>
+    <a href="https://github.com/sunfounder/pidog/blob/master/examples/11_keyboard_control.py" target="_blank">11_keyboard_control.py - Github</a>
 
 """

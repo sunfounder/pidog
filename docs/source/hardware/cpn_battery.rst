@@ -17,7 +17,7 @@ This is a custom battery pack made by SunFounder consisting of two 18650 batteri
 
 * Battery charge: 5V/2A
 * Battery output: 5V/3A
-* Battery capacity: 3.7V 2000mAh x 2
-* Battery life: 90min
-* Battery charge time: 130min
+* Battery capacity: 3.7V 2200mAh x 2
+* Battery life: <90min
+* Battery charge time: >130min
 * Connector: PH2.0, 5P

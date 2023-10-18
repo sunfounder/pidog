@@ -15,12 +15,12 @@ Here we are using the Raspberry Pi's I2C and Camera interfaces, but by default t
 
         sudo raspi-config
 
-#. Choose **3** **Interfacing Options** by press the down arrow key on your keyboard, then press the **Enter** key.
+#. Choose **Interfacing Options** by press the down arrow key on your keyboard, then press the **Enter** key.
 
     .. image:: img/image282.png
         :align: center
 
-#. Then **P5 I2C**.
+#. Then **I2C**.
 
     .. image:: img/image283.png
         :align: center
@@ -30,16 +30,10 @@ Here we are using the Raspberry Pi's I2C and Camera interfaces, but by default t
     .. image:: img/image284.png
         :align: center
 
-#. Go to **3 Interfacing Options** again and select **P4 SPI**.
+#. Go to **Interfacing Options** again and select **SPI**.
 
     .. image:: img/image-spi1.png
 
 #. Use the arrow keys on the keyboard to select **<Yes>** -> **<OK>** to complete the setup of the SPI.
 
     .. image:: img/image-spi2.png
-
-
-#. After you select **<Finish>**, a pop-up will remind you that you need to reboot for the settings to take effect, select **<Yes>**.
-
-    .. image:: img/camera_enable2.png
-        :align: center

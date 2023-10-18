@@ -20,12 +20,12 @@ As soon as the assembly is completed, you need to calibrate the PiDog to prevent
 
     py_0_calibrate
 
-Once calibrated, you can follow the tutorial to play PiDog with the APP.
+.. Once calibrated, you can follow the tutorial to play PiDog with the APP.
 
-.. toctree::
-    :maxdepth: 2
+.. .. toctree::
+..     :maxdepth: 2
 
-    auto_run_app
+..     auto_run_app
 
 You can also have PiDog achieve the following project effects.
 
