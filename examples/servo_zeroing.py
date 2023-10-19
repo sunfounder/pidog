@@ -7,7 +7,6 @@ reset_mcu()
 sleep(1)
 
 if __name__ == '__main__':
-    servos = []
     for i in range(12):
         print(f"Servo {i} set to zero")
         Servo(i).angle(10)
