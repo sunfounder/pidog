@@ -114,8 +114,8 @@ def display_tip1(subpad, color=1):
 
 tip2 = [
     "Press key to adjust servo:",
-    "W: increase angle ",
-    "S: decreases angle",
+    "W or A: increase angle ",
+    "S or D: decreases angle",
 ]
 def display_tip2(subpad, color=1):
     subpad.addstr(0, 0, tip2[0], curses.color_pair(4)| curses.A_BOLD | curses.A_REVERSE)
@@ -281,8 +281,8 @@ def main(stdscr):
                 clear_line(pad, 17)
                 pad_refresh(pad)
             # ---- move ----
-            elif chr(key) in ('wsWS'):
-                if chr(key) in ('wW'):
+            elif chr(key) in ('wsadWSAD'):
+                if chr(key) in ('wWdD'):
                     inc = 1
                 else:
                     inc = -1

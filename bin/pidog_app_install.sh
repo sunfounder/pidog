@@ -27,8 +27,7 @@ fi
 # ========================
 user=${SUDO_USER:-$(who -m | awk '{ print $1 }')}
 user_home="$(eval echo ~$user)"
-echo $user
-echo $user_home
+echo "User: "$user
 
 # ================================ interactive commands ==============================
 echo -e "${GREEN}install pidog_app interactive commands ...${NC}"
@@ -83,29 +82,22 @@ if [ ! -n "$1" ] || [ "$1" != "--no-dep" ]; then
     DEBIAN_FRONTEND=noninteractive apt install -y netfilter-persistent iptables-persistent
 fi
 
-# Define the Wireless Interface IP Configuration
+# Create and backup files of the Wireless Interface IP Configuration
 # ==========================================
-echo -e "${GREEN}Define the Wireless Interface IP Configuration ...${NC}"
+echo -e "${GREEN}Create and backup the Wireless Interface IP Configuration ...${NC}"
 
-systemctl stop dhcpcd
-
-if [ ! -e /etc/dhcpcd.conf.bak ]; then
-    cp /etc/dhcpcd.conf /etc/dhcpcd.conf.bak
+if [ ! -e /etc/dhcpcd.conf.sta.bak ]; then
+    cp /etc/dhcpcd.conf /etc/dhcpcd.conf.sta.bak
 fi
 
-cp /etc/dhcpcd.conf.bak /etc/dhcpcd.conf
-
-cat >> /etc/dhcpcd.conf << EOF
+cat >> /etc/dhcpcd.conf.ap.bak << EOF
 interface wlan0
     static ip_address=192.168.4.1/24
     nohook wpa_supplicant
 EOF
 
-cp /etc/dhcpcd.conf /etc/dhcpcd.conf.ap.bak
 
-systemctl start dhcpcd
-
-# Enable Routing and IP Masquerading
+# Create file of Routing and IP Masquerading
 # ==========================================
 echo -e "${GREEN}Enable Routing and IP Masquerading ...${NC}"
 
@@ -114,14 +106,18 @@ cat > /etc/sysctl.d/routed-ap.conf << EOF
 net.ipv4.ip_forward=1
 EOF
 
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-sudo netfilter-persistent save
+# iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+# sudo netfilter-persistent save
+
+# # stop iptable
+# sudo systemctl stop iptables.service 
+# sudo systemctl disable iptables.service
 
 # Configure the DHCP and DNS services for the wireless network
 # ==========================================
 echo -e "${GREEN}Configure the DHCP and DNS services for the wireless network ...${NC}"
 
-systemctl stop dnsmasq
+# systemctl stop dnsmasq
 
 if [ ! -e /etc/dnsmasq.conf.orig ]; then
     mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
@@ -136,7 +132,7 @@ address=/gw.wlan/192.168.4.1
                 # Alias for this router
 EOF
 
-systemctl start dnsmasq
+# systemctl start dnsmasq
 
 # Ensure Wireless Operation
 # ==========================================
@@ -163,39 +159,39 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP
 EOF
 
-# whether start hotspot
-# ==========================================
-echo -n -e "$(echo -e ${BLUE}Do you want to reboot to start hotspot?\(Y/N\): ${NC} )"
-count=0
-while true; do
-    # ((count++))
-    let count++
+# # whether start hotspot
+# # ==========================================
+# echo -n -e "$(echo -e ${BLUE}Do you want to reboot to start hotspot?\(Y/N\): ${NC} )"
+# count=0
+# while true; do
+#     # ((count++))
+#     let count++
 
-    if ! read -t $READ_TIMEOUT choice; then
-        echo -e "\nTime is up, no password entered."
-        exit 1
-    fi
+#     if ! read -t $READ_TIMEOUT choice; then
+#         echo -e "\nTime is up, no password entered."
+#         exit 1
+#     fi
 
-    case "$choice" in
-        y|Y)
-            systemctl unmask hostapd
-            systemctl enable hostapd
-            systemctl start hostapd
-            echo "Rebooting now ..."
-            sudo reboot
-            break
-            ;;
-        n|N|"")
-            break
-            ;;
-        *)
-            if [ $count -lt 5 ]; then
-                echo -n 'Invalid input, please enter again:'
-            else
-                break
-            fi
-            ;;
-    esac
-done
+#     case "$choice" in
+#         y|Y)
+#             systemctl unmask hostapd
+#             systemctl enable hostapd
+#             systemctl start hostapd
+#             echo "Rebooting now ..."
+#             sudo reboot
+#             break
+#             ;;
+#         n|N|"")
+#             break
+#             ;;
+#         *)
+#             if [ $count -lt 5 ]; then
+#                 echo -n 'Invalid input, please enter again:'
+#             else
+#                 break
+#             fi
+#             ;;
+#     esac
+# done
 
 exit 0

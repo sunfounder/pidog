@@ -3,23 +3,32 @@ import time
 from smbus import SMBus
 import numpy as np
 import math
-# from PIL import Image
-
 
 class RGBStrip():
-
-    # color define
+    # preset colors define
     COLORS = {
         'white':   [255, 255, 255],
         'black':   [0,   0,   0],
         'red':     [255,   0,   0],
-        'yellow':  [255, 255,   0],
+        'yellow':  [255, 225,   0],
         'green':   [0, 255,   0],
         'blue':    [0,   0, 255],
         'cyan':    [0, 255, 255],
         'magenta': [255,   0, 255],
-        'pink':    [255, 192, 203]
+        'pink':    [255, 100, 100]
     }
+
+    # styles define
+    STYLES = [
+        "monochromatic",
+        "breath",
+        "boom",
+        "bark",
+        "speak",
+        "listen",
+    ]
+
+    MIN_DELAY = 0.05
 
     # region constants
     CONFIGURE_CMD_PAGE = 0XFD
@@ -84,25 +93,26 @@ class RGBStrip():
         0x00, 0x00, 0x00, 0x00,  # C15-A ~ C15-P
         0x00, 0x00, 0x00, 0x00,  # C16-A ~ C16-P
     ]
-
-    MODES = [
-        "breath",
-        "boom",
-        "bark",
-    ]
-
     # endregion constants
 
-    # region init
-    def __init__(self, addr=0X74):
-
-        self.light_num = 11
+    def __init__(self, addr=0X74, nums=8):
+        """
+        :param addr: i2c address
+        :nums: number of lights
+        """
+        self.light_num = nums
 
         self.style = 'breath',
         self.color = 'white',
         self.brightness = 1,
         self.delay = 0.1
+        self.frames = []
+        self.current_frame = 0
+        self.bps = 1.5 # beats per second
+        self.is_changed = False
 
+        # Initial
+        # =================================================================
         self.bus = SMBus(1)
         self.addr = addr
 
@@ -144,9 +154,8 @@ class RGBStrip():
         self.write_Ndata(0X00, 0XFF, 0X10)
         self.write_Ndata(0x20, 0x00, 0X80)
 
-    # endregion init
-
     # i2c communicate
+    # =================================================================
     def write_cmd(self, reg, cmd):
         self.bus.write_byte_data(self.addr, reg, cmd)
 
@@ -161,31 +170,35 @@ class RGBStrip():
                 self.write_cmd(addr, data[i])
                 addr += 1
 
-    # image should be a 3-column two-digit array
+    # display fuction
+    # =================================================================
     def display(self, image):
+        """
+        Display the rgb datas
 
+        :param image: rgb datas, should be a x*3 array 
+        :type image: list [[r, g, b], [r, g, b], ...]
+        """
         # 'lambda x: x[0]'  same as  'fun(x): return x[0]'
         reds = list(map(lambda x: x[0], image))
         greens = list(map(lambda x: x[1], image))
         blues = list(map(lambda x: x[2], image))
         revert_image = [reds, greens, blues]
 
-        reg = 0x20  # 一页的寄存器起始地址
-        empty = 0  # 寄存器地址空缺的位置（写入的数据需要补0）
-        pos = 0  # 数据列表需要写入的数据所对应的索引
+        reg = 0x20  # Register start address of a page
+        empty = 0  # Register address vacancy position (needs to be filled with 0)
+        pos = 0  # data position, index
 
         for i in range(3):
+            # Set the page to write
             if i == 0:
-                # print("Write Page 1")
-                self.write_cmd(self.CONFIGURE_CMD_PAGE,
-                               self.FRAME1_PAGE)  # 设置写入的页
+                self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FRAME1_PAGE)  
             elif reg == 0x20:
-                # print("Write Page 2")
                 self.write_cmd(self.CONFIGURE_CMD_PAGE, self.FRAME2_PAGE)
 
             color = i % 3
             data = revert_image[color][pos*14:(pos+1)*14]
-            data.insert(empty, 0)  # 写入的数据补0
+            data.insert(empty, 0)  # The written data is filled with 0
             data.insert(empty + 1, 0)
 
             self.bus.write_i2c_block_data(self.addr, reg, data)
@@ -196,161 +209,276 @@ class RGBStrip():
             if reg == 0xA0:
                 reg = 0x20
 
-    # styles
-    def monochromatic(self, color='white'):
+    # 
+    # calulate rgb data of different styles
+    # =================================================================
+    def monochromatic(self, color="white"):
+        """
+        monochromatic style
+        """
+        color = [i*self.brightness for i in color]
+        return color
 
-        data = [color]*self.light_num
-        data.reverse()
-        self.display(data)
+    def Normal_distribution_calculate(self, u, sig, A, x, offset):
+        """
+        Normal distribution calculate
 
-    def increase(self, direction='low', color='white', delay=0.1):
-        data = []
-        for i in range(self.light_num):
-            data[i] = self.colorConvertor(color)
-        self.display(data)
-
-    def Normal_distribution_calculate(self, u, sig, a, x, offset):
-        y = a*np.exp(-(x-u)**2/(2*sig**2))/(math.sqrt(2*math.pi)*sig) + offset
+        :param u: mathematical expectation, average value, affects the x position of the highest point 
+        :type u: float or int
+        :param sig: standard deviation, affects the magnitude and range of the central area
+        :type sig: float or int
+        :param A: amplitude ratio
+        :type  A: float or int
+        :param x: x pos
+        :type x: int
+        :param offset: amplitude offset
+        :type offset: float or int
+        :return: Normal distribution y(x)
+        :rtype: float or int
+        """
+        y = A*np.exp(-(x-u)**2/(2*sig**2))/(math.sqrt(2*math.pi)*sig) + offset
         return y
 
-    def cosine_calculate(self, x):
-        return math.sin(x)
+    def cos_func(self, peak, a, x, offset=0):
+        """
+        cos fuction
 
-    def Normal_distribution_display(self, u, sig, a, offset, color):
-        data = []
-        for x in range(self.light_num):
-            brightness = self.Normal_distribution_calculate(
-                u, sig, a, x, offset)
-            # print(brightness)
-            data.append(list([max(0, int(c * brightness)) for c in color]))
-        # print(data)
-        self.display(data)
+        :param peak:
+        :param a: multiple
+        :param x: xpos
+        :return: result, float  or int
+        """
+        return (peak/2.0) * math.cos(a*x + offset) + peak/2
 
-    def cos_func(self, max, a, x):
-        return max/2 * math.cos(a*x) + max/2
+    def breath(self, frame_index, light_index, color='pink', A=5, sig=2):
+        """
+        breath style, from dark to bright, and then from bright to dark
 
-    def drop_move_back_forth(self, color='yellow',
-                             delay=0.1,
-                             a=5,
-                             sig=2):
-
-        u = 0
-        offset = 0
-        start = int(-(self.light_num/2))
-        end = int(self.light_num * 1.5)
-
-        while True:
-            for u in range(start, end, 1):
-                self.Normal_distribution_display(u, sig, a, offset, color)
-                time.sleep(delay)
-            for u in range(end, start, -1):
-                self.Normal_distribution_display(u, sig, a, offset, color)
-                time.sleep(delay)
-
-    # def breath(color=Pink,frequency_min=)
-    def drop_move_breath(self, color='pink',
-                         delay=0.1,
-                         a=5,
-                         sig=2):
-
-        u = 5
-        start = int(-(self.light_num/2))
-        end = int(self.light_num * 1.5)
-
-        def loop(u, sig, a, offset):
-            data = []
-            for x in range(self.light_num):
-                brightness = self.Normal_distribution_calculate(
-                    u, sig, a, x, offset)
-                print(brightness)
-                data.append(list([max(0, int(c * brightness)) for c in color]))
-            print(data)
-            self.display(data)
-            time.sleep(delay)
-
-        while True:
-            for x in range(0, 32, 1):
-                offset = -self.cos_func(1, 20, x / 100)
-                self.Normal_distribution_display(u, sig, a, offset, color)
-                time.sleep(delay)
-            for x in range(0, 32, 1):
-                offset = -self.cos_func(0.7, 20, x / 100)
-                self.Normal_distribution_display(u, sig, a, offset, color)
-                time.sleep(delay)
-            time.sleep(delay*260)
-
-    def breath_once(self, color='pink', a=5, sig=2, frame=None, i=None):
+        :param frame_index: the index of the frame
+        :type frame_index: int
+        :param light_index: the index of the light
+        :type light_index: int
+        :param color: rgb display color
+        :type color: str , 1*3 list, tuple, eg: "white", "WHITE", "#a2c20c", 0xa2c20c, [168, 192, 203], (168, 192, 203)
+        :param A: amplitude ratio
+        :type  A: float or int
+        :param sig: standard deviation
+        :type sig: float or int
+        :return list of 11*[r, g, b] values
+        :rtype: list, 11*[int, int, int]
+        """
+        # https://www.geogebra.org/calculator/qz3vsjjn
         u = 5
         color = [i*self.brightness for i in color]
-
-        offset = -self.cos_func(1, 20, frame/100)
-        brightness = self.Normal_distribution_calculate(u, sig, a, i, offset)
+        multiple = float(2*math.pi/(self.max_frames)) # multiple, period = max_frames
+        offset = -self.cos_func(1, multiple, frame_index)
+        brightness = self.Normal_distribution_calculate(u, sig, A, light_index, offset)
         return list([max(0, int(c * brightness)) for c in color])
 
-    def boom(self, color='pink', a=5, sig=2, frame=None, i=None):
+    def boom(self, frame_index, light_index, color='pink', A=5, sig=2):
+        """
+        boom style, from dark to bright (from middle to both sides)
+
+        :param frame_index: the index of the frame
+        :type frame_index: int
+        :param light_index: the index of the light
+        :type light_index: int
+        :param color: rgb display color
+        :type color: str , 1*3 list, tuple, eg: "white", "WHITE", "#a2c20c", 0xa2c20c, [168, 192, 203], (168, 192, 203)
+        :param A: amplitude ratio
+        :type  A: float or int
+        :param sig: standard deviation
+        :type sig: float or int
+        :return: list of 11*[r, g, b] values
+        :rtype: list, 11*[int, int, int]
+        """
+        # https://www.geogebra.org/calculator/gpmxfpks
         u = 5
         color = [i*self.brightness for i in color]
-
-        offset = -self.cos_func(1, 40, frame/100)
-        brightness = self.Normal_distribution_calculate(u, sig, a, i, offset)
+        multiple = float(2*math.pi/(self.max_frames*2.0)) # multiple, period = 2*max_frames
+        offset = -self.cos_func(1, multiple, frame_index)
+        brightness = self.Normal_distribution_calculate(u, sig, A, light_index, offset)
         return list([max(0, int(c * brightness)) for c in color])
 
-    def bark(self, color='pink',
-             a=5,
-             sig=2, frame=None, i=None):
+    def bark(self, frame_index, light_index, color='pink', A=2.5, sig=1):
+        """
+        bark style, from middle to both sides
 
-        u = 5
+        :param frame_index: the index of the frame
+        :type frame_index: int
+        :param light_index: the index of the light
+        :type light_index: int
+        :param color: rgb display color
+        :type color: str , 1*3 list, tuple, eg: "white", "WHITE", "#a2c20c", 0xa2c20c, [168, 192, 203], (168, 192, 203)
+        :param A: amplitude ratio
+        :type  A: float or int
+        :param sig: standard deviation
+        :type sig: float or int
+        :return: list of 11*[r, g, b] values
+        :rtype: list, 11*[int, int, int]
+        """
+        # https://www.geogebra.org/calculator/yyemmqht
         color = [i*self.brightness for i in color]
-
-        offset = -self.cos_func(1, 20, frame/100)
-        brightness = self.Normal_distribution_calculate(u, sig, a, i, offset)
+        peak = (self.light_num-1)/2
+        multiple = float(2*math.pi/(self.max_frames*2.0)) # multiple, period = 2*max_frames
+        u_offset = self.cos_func(peak, multiple, frame_index)
+        if light_index <= peak:
+            u = u_offset 
+        else:
+            u = 2*peak - u_offset
+        brightness = self.Normal_distribution_calculate(u, sig, A, light_index, 0)
         return list([max(0, int(c * brightness)) for c in color])
 
-    def mode(self, frame, i):
-        if self.style == 'breath':
-            return self.breath_once(color=self.color, frame=frame, i=i)
-        elif self.style == 'boom':
-            return self.boom(color=self.color, frame=frame, i=i)
-        elif self.style == 'bark':
-            return self.bark(color=self.color, frame=frame, i=i)
+    def speak(self, frame_index, light_index, color='pink', A=2.5, sig=1):
+        """
+        speak style, from middle to both sides, then from both sides to middle
 
-    def set_mode(self, style='breath', color='white', brightness=1, delay=0.01):
-        try:
-            color = self.colorConvertor(color)
-        except KeyError:
-            raise KeyError('Without this color !')
-        except Exception as e:
-            print(e)
+        """
+        # https://www.geogebra.org/calculator/tpzypj5s
+        color = [i*self.brightness for i in color]
+        peak = (self.light_num-1)/2
+        multiple = float(2*math.pi/(self.max_frames)) # multiple, period = max_frames
+        u_offset = self.cos_func(peak, multiple, frame_index)
+        if light_index <= peak:
+            u = u_offset 
+        else:
+            u = 2*peak - u_offset
+        brightness = self.Normal_distribution_calculate(u, sig, A, light_index, 0)
+        return list([max(0, int(c * brightness)) for c in color])
 
-        self.style = style
-        self.color = color
-        self.brightness = brightness
-        self.delay = delay
+    def listen(self, frame_index, light_index, color='pink', A=2.5, sig=1):
+        """
+        listen style, from middle to left, then from left to right, finally from right to middle
 
+        """
+        # https://www.geogebra.org/calculator/gwbrzrkt
+        color = [i*self.brightness for i in color]
+        peak = self.light_num-1
+        multiple = float(2*math.pi/(self.max_frames)) # multiple, period = max_frames
+        offset = math.pi/2 # offset left pi/2
+        u = self.cos_func(peak, multiple, frame_index, offset)
+        brightness = self.Normal_distribution_calculate(u, sig, A, light_index, 0)
+        return list([max(0, int(c * brightness)) for c in color])
+
+    # set mode
+    # =================================================================
     def colorConvertor(self, color):
-        if (isinstance(color, str)):
-            if color.lower() in self.COLORS:
-                return self.COLORS[color.lower()]
-            elif color.startswith('#'):
-                return [int(color[i:i+2], 16) for i in range(1, len(color), 2)]
-        elif (isinstance(color, list)):
-            return color
-        elif (isinstance(color, tuple)):
-            return list(color)
-        elif (isinstance(color, int)):
-            return [color >> 16, color >> 8 & 0xff, color & 0xff]
+        """"
+        Unify color values to [r, g, b]
+        
+        :param color: color value
+        :type color: str , 1*3 list, tuple, eg: "white", "WHITE", "#a2c20c", 0xa2c20c, [168, 192, 203], (168, 192, 203) 
+        :return: list of r,g,b values
+        :rtype: list
+        """
+        try:
+            if isinstance(color, str):
+                if color.lower() in self.COLORS:
+                    return self.COLORS[color.lower()]
+                elif color.startswith('#') and len(color) == 7:
+                    return [int(color[1:3], 16), int(color[3:5], 16), int(color[5:7], 16)]
+                else:
+                    raise # trigger exception
+            elif isinstance(color, list) or isinstance(color, tuple):
+                return [color[0], color[1], color[2]]
+            elif isinstance(color, int):
+                return [color >> 16, color >> 8 & 0xff, color & 0xff]
+        except:
+            raise ValueError('\033[0;31m%s\033[0m'%("Invalid color value."))
+
+    def set_mode(self, style='breath', color='white', bps=1, brightness=1):
+        """
+        Set the display mode of the rgb strip
+
+        :param style: rgb display style
+        :type style: str
+        :param color: rgb display color
+        :type color: str , 1*3 list, tuple, eg: "white", "WHITE", "#a2c20c", 0xa2c20c, [168, 192, 203], (168, 192, 203)
+        :param bps: beats per second, this number of style actions executed per second
+        :type bps: float or int
+        :param brightness: rgb display brightness
+        :type brightness: float or int
+        """
+        if style in self.STYLES:
+            self.style = style
+        else:
+            self.style = None
+            raise ValueError("Invalid style value.")
+
+        color = self.colorConvertor(color)
+        self.color = color
+
+        if isinstance(bps, int) or isinstance(bps, float):
+            self.bps = bps
+        else:
+            raise ValueError("Invalid bps value.")
+
+        if isinstance(brightness, int) or isinstance(brightness, float):
+            self.brightness = brightness
+        else:
+            raise ValueError("Invalid brightness value.")
+
+        self.is_changed = True
+        
+
+    # calulate and display frames
+    # =================================================================
+    def calulate_data(self, frame_index, light_index):
+        if self.style == "monochromatic":
+            return self.monochromatic(color=self.color)
+        elif self.style == 'breath':
+            return self.breath(frame_index, light_index, color=self.color)
+        elif self.style == 'boom':
+            return self.boom(frame_index, light_index, color=self.color)
+        elif self.style == 'bark':
+            return self.bark(frame_index, light_index, color=self.color)
+        elif self.style == 'speak':
+            return self.speak(frame_index, light_index, color=self.color)
+        elif self.style == 'listen':
+            return self.listen(frame_index, light_index, color=self.color)
 
     def show(self):
-        if self.style != None:
-            for frame in range(0, 32, 1):
-
-                datas = []
-                for i in range(self.light_num):
-                    data = self.mode(frame, i)
-                    datas.append(data)
-                self.display(datas)
-                time.sleep(self.delay)
+        if self.style is not None:
+            # if changed, calulate frames
+            if self.is_changed:
+                self.is_changed = False
+                self.frames.clear()
+                self.max_frames = int(1/self.bps/self.MIN_DELAY)
+                for frame_index in range(self.max_frames):
+                    frame = [] # 11*[r, g ,b]
+                    for light_index in range(self.light_num):
+                        _data = self.calulate_data(frame_index, light_index)
+                        frame.append(_data)
+                    if __name__ == '__main__':
+                        print(f"{frame_index}:{frame}")
+                    self.frames.append(frame)
+            # dispaly frame-by-frame, to quickly change mode or close 
+            if self.current_frame >= self.max_frames:
+                self.current_frame = 0
+            self.display(self.frames[self.current_frame])
+            self.current_frame += 1
+            time.sleep(self.MIN_DELAY)
 
     def close(self):
-        self.color = [0, 0, 0]
-        self.brightness = 0
+        self.style = None
+        self.is_changed = True
+        self.display([[0, 0, 0]]*self.light_num)
+        time.sleep(self.MIN_DELAY)
+
+if __name__ == '__main__':
+    rgb = RGBStrip(0X74, 11)
+    # rgb.set_mode(style="monochromatic", color="white", bps=5, brightness=1)
+    # rgb.set_mode(style="breath", color="pink", bps=1.5, brightness=1)
+    # rgb.set_mode(style="boom", color="yellow", bps=2.5, brightness=1)
+    # rgb.set_mode(style="bark", color="red", bps=2.5, brightness=1)
+    # rgb.set_mode(style="speak", color="magenta", bps=1, brightness=1)
+    rgb.set_mode(style="listen", color="cyan", bps=0.5, brightness=1)
+    try:
+        while True:
+            rgb.show()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        rgb.close()
+        print("close while exiting.")
+
