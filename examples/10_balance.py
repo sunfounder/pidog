@@ -24,7 +24,7 @@ usage = '''
        └────────┘└────────┘└────────┘└────────┘
 '''
 
-stand_coords = [[[0, 80], [0, 80], [0, 80], [0, 80]]]
+stand_coords = [[[-15, 95], [-15, 95], [5, 90], [5, 90]]]
 forward_coords = Walk(fb=Walk.FORWARD, lr=Walk.STRAIGHT).get_coords()
 backward_coords = Walk(fb=Walk.BACKWARD, lr=Walk.STRAIGHT).get_coords()
 turn_left_coords = Walk(fb=Walk.FORWARD, lr=Walk.LEFT).get_coords()
@@ -54,6 +54,7 @@ def main():
     global current_coords, current_pose, current_rpy, thread_start
     my_dog.do_action('stand', speed=80)
     my_dog.wait_legs_done()
+    sleep(1)
     t.start()
 
     while True:

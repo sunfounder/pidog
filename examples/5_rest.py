@@ -44,7 +44,7 @@ def rest():
             # Set light to yellow and stand up
             my_dog.rgb_strip.set_mode('boom', 'yellow', delay=0.01)
             my_dog.body_stop()
-            my_dog.do_action('stand', speed=90)
+            my_dog.do_action('stand', speed=80)
             my_dog.head_move([[0, 0, 0]], immediately=True, speed=80)
             my_dog.wait_all_done()
             # Look arround
