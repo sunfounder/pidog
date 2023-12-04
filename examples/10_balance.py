@@ -54,7 +54,7 @@ def main():
     global current_coords, current_pose, current_rpy, thread_start
     my_dog.do_action('stand', speed=80)
     my_dog.wait_legs_done()
-    sleep(1)
+    # sleep(1)
     t.start()
 
     while True:

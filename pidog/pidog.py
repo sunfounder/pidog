@@ -373,9 +373,10 @@ class Pidog():
             try:
                 with self.legs_thread_lock:
                     self.leg_current_angles = list.copy(self.legs_action_buffer[0])
-                    self.legs_action_buffer.pop(0)
                 # Release lock after copying data before the next operations
                 self.legs.servo_move(self.leg_current_angles, self.legs_speed)
+                with self.legs_thread_lock:
+                    self.legs_action_buffer.pop(0)
             except IndexError:
                 sleep(0.001)
             except Exception as e:
