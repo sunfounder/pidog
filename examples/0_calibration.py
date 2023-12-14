@@ -94,17 +94,21 @@ def clear_line(pad, line, xlen=PAD_X, color=None):
 def display_title(subpad, color=1):
     title = "PiDog  Calibration"
     # tip1
-    clear_line(subpad, 0, color=curses.color_pair(3) | curses.A_REVERSE)
-    subpad.addstr(0, int((PAD_X-len(title))/2), title, curses.color_pair(3) | curses.A_REVERSE)
+    # clear_line(subpad, 0, color=curses.color_pair(3) | curses.A_REVERSE)
+    # subpad.addstr(0, int((PAD_X-len(title))/2), title, curses.color_pair(3) | curses.A_REVERSE)
+
+    clear_line(subpad, 0, color=curses.color_pair(3) )
+    subpad.addstr(0, int((PAD_X-len(title))/2), title, curses.color_pair(3))
+
     # subpad.noutrefresh()
     # curses.doupdate()
 
 tip1 = [
     "Press key to select servo:",
     "1 ~ 8 : Leg servos",
-    "9 : Head yaw ↺   ",
-    "0 : Head roll ↔  ",
-    "- : Head pitch ↕ ",
+    "9 : Head yaw    ",
+    "0 : Head roll   ",
+    "- : Head pitch  ",
     "= : Tail         ",
 ]
 def display_tip1(subpad, color=1):
@@ -123,8 +127,8 @@ def display_tip2(subpad, color=1):
         subpad.addstr(i, 0, tip2[i], curses.color_pair(4)| curses.A_BOLD)
 
 body = [
-    "        ↺ [9]     ",
-    "  ↕[-] ┌─┐ ↔[0]  ",
+    "        [9]        ",
+    "   [-] ┌─┐  [0]  ",
     "       │ │       ",
     "[2][1]┌└─┘┐[3][4]",
     "      │   │      ",
@@ -217,12 +221,20 @@ def main(stdscr):
     # set colors
     curses.start_color()
     curses.use_default_colors()
-    curses.init_color(8, 192, 192, 192)
+    # curses.init_color(8, 192, 192, 192)
+    # curses.init_pair(1, curses.COLOR_WHITE, -1)
+    # curses.init_pair(2, curses.COLOR_GREEN, -1)
+    # curses.init_pair(3, curses.COLOR_CYAN, -1)
+    # # curses.init_pair(3, curses.COLOR_BLUE, -1)
+    # curses.init_pair(4, 8, -1)
+
+    # curses.init_color(8, 192, 192, 192)
     curses.init_pair(1, curses.COLOR_WHITE, -1)
     curses.init_pair(2, curses.COLOR_GREEN, -1)
-    curses.init_pair(3, curses.COLOR_CYAN, -1)
+    curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
     # curses.init_pair(3, curses.COLOR_BLUE, -1)
-    curses.init_pair(4, 8, -1)
+    curses.init_pair(4, curses.COLOR_WHITE, -1)
+
 
     # init pad    
     pad = curses.newpad(PAD_Y, PAD_X)
@@ -360,7 +372,7 @@ def main(stdscr):
             if is_save:
                 break
             else:
-                pad.addstr(17, 0, ' Change not saved, whether to exit? (y/n)  ', curses.color_pair(3) | curses.A_REVERSE)
+                pad.addstr(17, 0, ' Change not saved, whether to exit? (y/n)  ', curses.color_pair(4) | curses.A_BOLD |curses.A_REVERSE)
                 pad_refresh(pad)
                 key = None
                 while True:
