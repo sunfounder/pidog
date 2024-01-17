@@ -122,6 +122,10 @@ class Pidog():
     def __init__(self, leg_pins=DEFAULT_LEGS_PINS, head_pins=DEFAULT_HEAD_PINS, tail_pin=DEFAULT_TAIL_PIN,
                  leg_init_angles=None, head_init_angles=None, tail_init_angle=None):
 
+
+        utils.reset_mcu()
+        sleep(0.2)
+
         from .actions_dictionary import ActionDict
         self.actions_dict = ActionDict()
 
