@@ -1,13 +1,11 @@
-9. Howling
+9. 遠吠え
 ===============
 
-
-PiDog is not only a cute puppy, but also a mighty dog. Come hear it howl!
-
+PiDogはかわいい子犬だけでなく、勇ましい犬でもあります。遠吠えを聞いてみましょう！
 
 .. image:: img/py_9.gif
 
-**Run the Code**
+**コードの実行**
 
 .. raw:: html
 
@@ -18,14 +16,14 @@ PiDog is not only a cute puppy, but also a mighty dog. Come hear it howl!
     cd ~/pidog/examples
     sudo python3 9_howling.py
 
-After the program runs, PiDog will sit on the ground and howl.
+プログラムを実行すると、PiDogは地面に座って遠吠えします。
 
 
 
-**Code**
+**コード**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    以下のコードを **変更/リセット/コピー/実行/停止** することができます。ただし、それにはまず ``pidog\examples`` のようなソースコードのパスに移動する必要があります。コードを変更した後、直接実行して効果を確認することができます。
 
 .. raw:: html
 

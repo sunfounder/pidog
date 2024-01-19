@@ -1,19 +1,19 @@
 .. _py_servo_adjust:
 
-7. Servo Adjust(Importtant)
+7. サーボの調整（重要）
 ===========================================
 
-The angle range of the servo is -90~90, but the angle set at the factory is random, maybe 0°, maybe 45°; if we assemble it with such an angle directly, it will lead to a chaotic state after the robot runs the code, or worse, it will cause the servo to block and burn out.
+サーボの角度範囲は-90〜90度ですが、工場で設定された角度はランダムで、0°かもしれないし、45°かもしれません。このような角度で直接組み立てると、ロボットがコードを実行した後に混乱状態になったり、最悪の場合、サーボがブロックして焼き切れる原因になります。
 
-So here we need to set all the servo angles to 0° and then install them, so that the servo angle is in the middle, no matter which direction to turn.
+したがって、ここではすべてのサーボの角度を0°に設定してから取り付ける必要があります。これにより、サーボの角度が中央にあり、どの方向に回転しても問題ありません。
 
-#. To ensure that the servo has been properly set to 0°, first insert the servo arm into the servo shaft and then gently rotate the rocker arm to a different angle. This servo arm is just to allow you to clearly see that the servo is rotating.
+#. サーボが正しく0°に設定されていることを確認するために、まずサーボアームをサーボ軸に挿入し、ロッカーアームを優しく異なる角度に回転させます。このサーボアームは、サーボが回転していることを明確に確認するためのものです。
 
     .. image:: img/servo_arm.png
         :align: center
 
 
-#. Now, run ``servo_zeroing.py`` in the ``examples/`` folder.
+#. それでは、 ``examples/`` フォルダ内の ``servo_zeroing.py`` を実行します。
 
     .. raw:: html
 
@@ -26,18 +26,17 @@ So here we need to set all the servo angles to 0° and then install them, so tha
 
 
     .. note::
-        If you get an error, try re-enabling the Raspberry Pi's I2C port, see: :ref:`i2c_spi_config`.
+        エラーが発生した場合は、Raspberry PiのI2Cポートを再度有効にしてみてください。詳細は :ref:`i2c_spi_config` を参照。
 
-#. Next, plug the servo cable into the P11 port as follows, at the same time you will see the servo arm rotate to a position(This is the 0° position, which is a random location and may not be vertical or parallel.).
+#. 次に、以下のようにサーボケーブルをP11ポートに接続します。同時に、サーボアームが位置に回転するのが見えます（これが0°の位置で、ランダムな位置であり、垂直または平行でない場合があります）。
 
     .. image:: img/servo_pin11.jpg
 
 
-#. Now, remove the servo arm, ensuring the servo wire remains connected, and do not turn off the power. Then continue the assembly following the paper instructions.
+#. 今度はサーボアームを取り外し、サーボワイヤーが接続されたままにし、電源を切らないでください。その後、紙の指示に従って組み立てを続けます。
 
 .. note::
 
-    * Do not unplug this servo cable before fixing it with the servo screw, you can unplug it after fixing it.
-    * Do not rotate the servo while it is powered on to avoid damage; if the servo shaft is not inserted at the right angle, pull the servo out and reinsert it.
-    * Before assembling each servo, you need to plug the servo cable into PWM pin and turn on the power to set its angle to 0°.
-
+    * サーボスクリューで固定する前に、このサーボケーブルを抜かないでください。固定した後に抜くことができます。
+    * 電源が入っている状態でサーボを回転させないでください。これにより損傷を防ぐことができます。サーボ軸が正しい角度で挿入されていない場合は、サーボを取り出して再挿入してください。
+    * 各サーボを組み立てる前に、PWMピンにサーボケーブルを接続し、電源を入れて0°に設定する必要があります。

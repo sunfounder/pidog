@@ -1,43 +1,40 @@
-4. Tail Move
+4. 尾の動き
 ===================
 
-Following are the functions that control PiDog's tail. This function is similar to :ref:`py_b2_leg_move`.
-
+以下はPiDogの尾を制御する関数です。この関数は :ref:`py_b2_leg_move` と似ています。
 
 .. code-block:: python
 
     Pidog.tail_move(target_angles, immediately=True, speed=50)
 
-* ``target_angles`` : It is a two-dimensional array composed of an array of 1 servo angles (referred to as angle group) as elements. These angle groups will be used to control the angles of the 8 foot servos. If multiple angle groups are written, the unexecuted angle groups will be stored in the cache.
-* ``immediately`` : When calling the function, set this parameter to ``True``, the cache will be cleared immediately to execute the newly written angle group; if the parameter is set to ``False``, the newly written The incoming angular group is added to the execution queue.
-* ``speed`` : The speed at which the angular group is executed.
+* ``target_angles``: 1つのサーボ角度の配列（角度グループと呼ばれる）からなる二次元配列です。これらの角度グループは、尾のサーボの角度を制御するために使用されます。複数の角度グループが書かれている場合、実行されていない角度グループはキャッシュに保存されます。
+* ``immediately``: 関数を呼び出すとき、このパラメータを ``True`` に設定すると、キャッシュはすぐにクリアされて新しく書かれた角度グループが実行されます。パラメータを ``False`` に設定すると、新しく書かれた角度グループが実行キューに追加されます。
+* ``speed``: 角度グループの実行速度。
 
-
-**PiDog's tail servo control also has some supporting functions:**
+**PiDogの尾サーボ制御には、以下のサポート機能もあります**：
 
 .. code-block:: python
 
     Pidog.is_tail_done()
 
-whether all the tail actions in the buffer to be executed
+実行される予定のバッファ内のすべての尾のアクションが完了しているかどうか
 
 .. code-block:: python
 
     Pidog.wait_tail_done()
 
-wait for all the tail actions in the buffer to be executed
+バッファ内のすべての尾のアクションが実行されるまで待ちます
 
 .. code-block:: python
 
     Pidog.tail_stop()
 
-clear all the tail actions of leg in the buffer, to make tail servo stop
+バッファ内の足のすべての尾のアクションをクリアし、尾サーボを停止させます
 
 
-**Here are some common usages:**
+**以下は一般的な使用例です**：
 
-
-1. Wag tail for 10 seconds.
+1. 10秒間尾を振る。
 
 .. code-block:: python
 
@@ -49,7 +46,7 @@ clear all the tail actions of leg in the buffer, to make tail servo stop
     for _ in range(99):
         my_dog.tail_move([[30],[-30]], immediately=False, speed=30)
 
-    # keep 10s
+    # 10秒間維持
     time.sleep(10)
 
     my_dog.tail_stop()

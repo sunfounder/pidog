@@ -1,9 +1,7 @@
-Hardware
+ハードウェア
 ==================
 
-When you are writing code, you may need to know how each module works or the role of each pin, then please see this chapter.
-
-In this chapter you will find a description of each module's function, technical parameters and working principle.
+コードを書いているとき、各モジュールの動作方法や各ピンの役割を知る必要があるかもしれません。この章では、各モジュールの機能、技術的なパラメーター、動作原理について説明します。
 
 .. toctree::
     :maxdepth: 1

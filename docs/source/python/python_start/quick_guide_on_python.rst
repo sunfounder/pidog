@@ -1,11 +1,11 @@
 .. _quick_guide_python:
 
-1. Quick Guide on Python
-==========================
+1. Pythonについてのクイックガイド
+===================================
 
-This section is to teach you how to install Raspberry Pi OS, configure wifi to Raspberry Pi, remote access to Raspberry Pi to run the corresponding code.
+このセクションでは、Raspberry Pi OSのインストール方法、Raspberry Piへのwifiの設定方法、Raspberry Piへのリモートアクセス方法、対応するコードの実行方法について学びます。
 
-If you are familiar with Raspberry Pi and can open the command line successfully, then you can skip the first 3 parts and then complete the last part. 
+Raspberry Piに慣れており、コマンドラインを開くことができる場合は、最初の3部分をスキップして最後の部分を完了することができます。
 
 
 
@@ -20,9 +20,9 @@ If you are familiar with Raspberry Pi and can open the command line successfully
     enable_i2c_spi
     py_servo_adjust
 
-**Video**
+**ビデオ**
 
-In our assembly video from **3:40 to 7:23**, there is also a detailed tutorial for this chapter. You can follow the video instructions directly.
+私たちの組み立てビデオの **3:40から7:23** まで、この章の詳細なチュートリアルがあります。直接ビデオの指示に従うことができます。
 
 .. raw:: html
 

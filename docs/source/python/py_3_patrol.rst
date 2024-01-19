@@ -1,14 +1,13 @@
-3. Patrol
+3. パトロール
 ==============
 
-In this project, PiDog makes a vivid behavior: patrolling.
+このプロジェクトでは、PiDogが生き生きとした行動をとります：パトロール。
 
-PiDog will walk forward, if there is an obstacle in front of it, it will stop and bark.
-
+PiDogは前方に進みますが、前方に障害物がある場合は停止して吠えます。
 
 .. image:: img/py_3.gif
 
-**Run the Code**
+**コードの実行**
 
 .. raw:: html
 
@@ -19,16 +18,13 @@ PiDog will walk forward, if there is an obstacle in front of it, it will stop an
     cd ~/pidog/examples
     sudo python3 3_patrol.py
 
-After running this example, PiDog will wag its tail, scan left and right, and walk forward.
+この例を実行すると、PiDogは尻尾を振り、左右をスキャンし、前方に歩きます。
 
 
-
-
-
-**Code**
+**コード**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    以下のコードを **変更/リセット/コピー/実行/停止** することができます。ただし、それにはまず ``pidog\examples`` のようなソースコードのパスに移動する必要があります。コードを変更した後、直接実行して効果を確認することができます。
 
 .. raw:: html
 

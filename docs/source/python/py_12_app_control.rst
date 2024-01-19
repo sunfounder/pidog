@@ -1,27 +1,25 @@
-12. Play PiDog with APP
+12. アプリでPiDogを操作する
 =============================
 
-In this example, we will use SunFounder Controller APP to control PiDog.
+この例では、SunFounder Controller APPを使ってPiDogを操作します。
 
 .. raw:: html
 
    <video width="600" loop autoplay muted>
       <source src="../_static/video/app_control.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      お使いのブラウザはビデオタグをサポートしていません。
    </video>
 
+まずは携帯電話/タブレットにAPPをダウンロードし、PiDogが発信するホットスポットに接続し、SunFounder Controllerで独自のリモコンを作成してPiDogを操作します。
 
-You need to download the APP on your phone/tablet first, then connect to the hotspot sent by PiDog, and finally create your own remote control on SunFounder Controller to control PiDog.
-
-Control Pidog with app
+アプリでPiDogを操作する
 ----------------------------
 
+#. **APP Store(iOS)** または **Google Play(Android)** から `SunFounder Controller <https://docs.sunfounder.com/projects/sf-controller/en/latest/>`_ をインストールします。
 
-#. Install `SunFounder Controller <https://docs.sunfounder.com/projects/sf-controller/en/latest/>`_ from **APP Store(iOS)** or **Google Play(Android)**.
+#. ``sunfounder-controller`` モジュールをインストールします。
 
-#. Install ``sunfounder-controller`` module.
-
-    The ``robot-hat``, ``vilib``, and ``picar-x`` modules need to be installed first, for details see: :ref:`install_all_modules`.
+    最初に ``robot-hat`` 、 ``vilib`` 、 ``picar-x`` モジュールをインストールする必要があります。詳細は :ref:`install_all_modules` を参照してください。
 
     .. raw:: html
 
@@ -34,7 +32,7 @@ Control Pidog with app
         cd ~/sunfounder-controller
         sudo python3 setup.py install
 
-#. Run the Code.
+#. コードを実行します。
 
     .. raw:: html
 
@@ -45,7 +43,7 @@ Control Pidog with app
         cd ~/pidog/examples
         sudo python3 12_app_control.py
 
-    After the code runs, you will see the following prompt, which means your PiDog has successfully started network communication.
+    コードを実行すると、以下のプロンプトが表示され、PiDogがネットワーク通信を正常に開始したことがわかります。
 
     .. code-block:: 
 
@@ -56,54 +54,54 @@ Control Pidog with app
         * Debug mode: off
         * Running on http://0.0.0.0:9000/ (Press CTRL+C to quit)       
 
-#. Connect ``PiDog`` and ``Sunfounder Controller``.
+#. ``PiDog`` と ``Sunfounder Controller`` を接続します。
 
-    * Connect your tablet/phone to the WLAN where PiDog is located.
+    * タブレット/携帯電話をPiDogがあるWLANに接続します。
 
-    * Open the ``Sunfounder Controller`` APP. Click the + icon to add a controller.
+    * ``Sunfounder Controller`` アプリを開き、+アイコンをクリックしてコントローラーを追加します。
 
         .. image:: img/app1.png
       
 
-    * Preset controllers are available for some products, here we choose **PiDog**. Give it a name, or simply tap **Confirm**.
+    * 一部の製品にはプリセットコントローラーが用意されており、ここでは **PiDog** を選択します。名前を入力するか、そのまま **確認** をタップします。
 
         .. image:: img/app_preset.jpg
 
 
-    * Once inside, the app will automatically search for the **Mydog**. After a moment, you will see a prompt saying “Connected Successfully.”
+    * 中に入ると、アプリが自動的に **Mydog** を検索します。しばらくすると、「接続成功」というプロンプトが表示されます。
 
         .. image:: img/app_auto_connect.jpg
 
     .. note::
 
-        * You can also manually click the |app_connect| button. Wait a few seconds, MyDog(IP) will appear, click it to connect.
+        * 手動で |app_connect| ボタンをクリックすることもできます。数秒待ってから、MyDog(IP)が表示されたらクリックして接続します。
 
             .. image:: img/sc_mydog.jpg
 
-#. Run the Controller.
+#. コントローラーを実行します。
 
-    * When the "Connected Successfully" prompt appears, tap the ▶ button in the upper right corner.
+    * 「接続成功」というプロンプトが表示されたら、右上隅の▶ボタンをタップします。
 
-    * The picture taken by the camera will appear on the APP, and now you can control your PiDog with these widgets.
+    * カメラが撮影した画像がアプリに表示され、これらのウィジェットでPiDogを操作できます。
 
         .. image:: img/sc_run.jpg
     
 
-Here are the functions of the widgets.
+ウィジェットの機能は以下の通りです。
 
-* A: Detect the obstacle distance, that is, the reading of the ultrasonic module.
-* C: Turn on/off face detection.
-* D: Control PiDog's head tilt angle (tilt head).
-* E: Sit.
-* F: Stand.
-* G: Lie.
-* I: Scratch PiDog's head.
-* N: Bark.
-* O: Wag tail.
-* P: Pant.
-* K: Control PiDog's movement (forward, backward, left and right).
-* Q: Controls the orientation of PiDog's head.
-* J: Switch to voice control mode. It supports the following voice commands: 
+* **A**: 超音波モジュールの読み取り、つまり障害物の距離を検出します。
+* **C**: 顔検出のオン/オフを切り替えます。
+* **D**: PiDogの頭の傾き角度を制御します（頭を傾ける）。
+* **E**: 座る。
+* **F**: 立つ。
+* **G**: 横になる。
+* **I**: PiDogの頭を撫でる。
+* **N**: 吠える。
+* **O**: 尻尾を振る。
+* **P**: ハアハアする。
+* **K**: PiDogの動きを制御します（前進、後退、左右）。
+* **Q**: PiDogの頭の向きを制御します。
+* **J**: 音声制御モードに切り替えます。次の音声コマンドに対応しています：
 
     * ``forward``
     * ``backward``
@@ -128,15 +126,15 @@ Here are the functions of the widgets.
     * ``handshake``
     * ``high five``
 
-Autostart on Boot
+起動時に自動起動
 -----------------
-When controlling PiDog via the APP, you wouldn't want to first log into the Raspberry Pi and keep ``12_app_control.py`` running before connecting with the APP.
+アプリでPiDogを制御する際に、まずRaspberry Piにログインして ``12_app_control.py`` を実行してからアプリで接続するのは面倒です。
 
-There's a more streamlined approach. You can set PiDog to automatically run ``12_app_control.py`` every time it's powered on. After this, you can directly connect to PiDog using the APP and control your robotic dog with ease.
+より簡潔な方法があります。PiDogが電源を入れるたびに ``12_app_control.py`` を自動的に実行するように設定できます。これにより、アプリを使ってPiDogに直接接続し、ロボット犬を簡単に制御できます。
 
-How to set this up?
+どのように設定するか？
 
-#. Execute the following commands to install and configure the ``pidog_app`` application and set up WiFi for PiDog.
+#. 以下のコマンドを実行して、 ``pidog_app`` アプリケーションをインストールおよび設定し、PiDogのWiFiを設定します。
 
     .. raw:: html
 
@@ -147,35 +145,34 @@ How to set this up?
         cd ~/pidog/bin
         sudo bash pidog_app_install.sh
 
-#. At the end, input ``y`` to reboot PiDog.
+#. 最後に「y」と入力してPiDogを再起動します。
 
     .. image:: img/auto_start.png
 
-#. From then on, you can simply power on PiDog and control it directly using the APP.
+#. それ以降は、PiDogを電源オンにしてアプリで直接操作できます。
 
 .. warning::
 
-    If you wish to run other scripts, first execute ``pidog_app disable`` to turn off the autostart feature.
+    他のスクリプトを実行したい場合は、まず ``pidog_app disable`` を実行して自動起動機能をオフにしてください。
 
 
-APP Program Configuration
+アプリプログラムの設定
 -----------------------------
 
-You can input the following commands to modify the APP mode's settings.
+以下のコマンドを入力して、アプリモードの設定を変更できます。
 
 .. code-block::
 
     pidog_app <OPTION> [input]
 
 **OPTION**
-    * ``-h`` ``help``: help, show this message
-    * ``start`` ``restart``: restart ``pidog_app`` service
-    * ``stop``: stop ``pidog_app`` service
-    * ``disable``: disable auto-start ``app_controller`` program on bootstrap
-    * ``enable``: enable auto-start ``app_controller`` program on bootstrap
-    * ``close_ap``: close hotspot, disable auto-start hotspot on boot and switch to sta mode
-    * ``open_ap``: open hotspot, enable auto-start hotspot on boot
-    * ``ssid``: set the ssid (network name) of the hotspot
-    * ``psk``: set the password of the hotspot
-    * ``country``: set the country code of the hotspot
-
+    * ``-h`` ``help``: ヘルプ、このメッセージを表示
+    * ``start`` ``restart``: ``pidog_app`` サービスを再起動
+    * ``stop``: ``pidog_app`` サービスを停止
+    * ``disable``: 起動時に自動起動する ``app_controller`` プログラムを無効にする
+    * ``enable``: 起動時に自動起動する ``app_controller`` プログラムを有効にする
+    * ``close_ap``: ホットスポットを閉じる、起動時に自動起動するホットスポットを無効にし、STAモードに切り替える
+    * ``open_ap``: ホットスポットを開く、起動時に自動起動するホットスポットを有効にする
+    * ``ssid``: ホットスポットのSSID（ネットワーク名）を設定
+    * ``psk``: ホットスポットのパスワードを設定
+    * ``country``: ホットスポットの国コードを設定

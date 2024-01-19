@@ -1,49 +1,47 @@
-SunFounder Raspberry Pi Robot - PiDog
+SunFounder Raspberry Pi ロボット - PiDog
 =============================================
-
 
 .. image:: img/pidog.jpg
     :width: 400
     :align: center
 
-Thank you for choosing our PiDog.
+私たちのPiDogを選んでいただき、ありがとうございます。
 
 .. note::
-    This document is available in the following languages.
+    この文書は以下の言語で利用可能です。
 
         * |link_german_tutorials|
         * |link_jp_tutorials|
         * |link_en_tutorials|
     
-    Please click on the respective links to access the document in your preferred language.
+    希望する言語で文書にアクセスするには、それぞれのリンクをクリックしてください。
 
 
-PiDog is a Raspberry Pi pet robot with aluminum alloy structure. It can act as a mechanical pet, show cuteness to you, and interact with you.
+PiDogは、アルミニウム合金構造のRaspberry Piペットロボットです。機械式ペットとして活動し、かわいらしさを見せ、あなたと交流することができます。
 
-It is equipped with a camera module, which can perform color recognition, face detection and other projects;
-12 metal gear servos support it to walk, stand, sit, shake its head, and pose in various poses;
-The ultrasonic module on the head enables it to quickly detect obstacles ahead;
-Special touch sensors allow it to respond to your touch;
-The Light Board on the chest can emit colorful light effects, and with the speaker equipped with the robot HAT, PiDog can express emotions such as happiness and excitement.
-In addition, PiDog is also equipped with a sound direction sensor and a 6-DOF IMU module to realize more complex and interesting usage scenarios.
-
-
-If you have any questions, please send an email to service@sunfounder.com and we will respond as soon as possible.
+カメラモジュールを搭載しており、色認識、顔検出などのプロジェクトを実行することができます；
+12個の金属ギアサーボにより、歩行、立ち、座り、頭を振る、さまざまなポーズを取ることができます；
+頭部に搭載された超音波モジュールは、前方の障害物を迅速に検出することが可能です；
+特別なタッチセンサーにより、あなたのタッチに反応します；
+胸部のライトボードはカラフルな光効果を発し、ロボットHATに搭載されたスピーカーを使用して、PiDogは喜びや興奮などの感情を表現できます。
+さらに、PiDogには音の方向センサーと6軸IMUモジュールが装備されており、より複雑で面白い使用シナリオを実現できます。
 
 
-**Content**
+ご質問がある場合は、service@sunfounder.comまでメールを送ってください。できるだけ早く対応いたします。
+
+
+**内容**
 
 .. toctree::
     :maxdepth: 2
 
-    About This Kit <self>
+    このキットについて <self>
     assemble_video
     python/play_with_python 
     hardware/cpn_hardware
     appendix/appendix
 
-Copyright Notice
+著作権に関するお知らせ
 --------------------------
 
-All contents including but not limited to texts, images, and code in this manual are owned by the SunFounder Company. You should only use it for personal study,investigation, enjoyment, or other non-commercial or nonprofit purposes, under therelated regulations and copyrights laws, without infringing the legal rights of the author and relevant right holders. For any individual or organization that uses these for commercial profit without permission, the Company reserves the right to take legal action.
-
+このマニュアルに含まれるテキスト、画像、コードなどのすべての内容は、SunFounder Companyによって所有されています。これらのコンテンツは、関連する法規制および著作権法の下で、著者および関連する権利保持者の法的権利を侵害することなく、個人的な

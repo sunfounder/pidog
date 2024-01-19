@@ -1,15 +1,13 @@
-10. Balance
+10. バランス
 =============
 
+PiDogには6軸IMUモジュールが搭載されているため、非常に優れたバランス感覚を持っています。
 
-Because PiDog is equipped with a 6-DOF IMU module, it has a great sense of balance.
-
-In this example, you can make PiDog walk smoothly on the table, even if you lift one side of the table, PiDog will walk smoothly on the gentle slope.
-
+この例では、PiDogをテーブル上でスムーズに歩かせることができます。たとえテーブルの片側を持ち上げても、PiDogは緩やかな斜面でスムーズに歩くことができます。
 
 .. image:: img/py_10.gif
 
-**Run the Code**
+**コードの実行**
 
 .. raw:: html
 
@@ -20,33 +18,30 @@ In this example, you can make PiDog walk smoothly on the table, even if you lift
     cd ~/pidog/examples
     sudo python3 10_balance.py
 
-After the program is running, you will see a printed keyboard on the terminal.
-You can control PiDog to walk smoothly on the ramp by typing the below keys.
-
+プログラムが実行されると、ターミナルにキーボードが表示されます。
+以下のキーを入力して、斜面上でPiDogをスムーズに歩かせることができます。
 
 .. list-table:: 
     :widths: 25 25
     :header-rows: 1
 
-    * - Keys
-      - Function
+    * - キー
+      - 機能
     * -  W
-      -  Forward 
+      -  前進 
     * -  E
-      -  Stand 
+      -  立つ 
     * -  A
-      -  Turn Left 
+      -  左に回る 
     * -  S
-      -  Backward 
+      -  後退 
     * -  D
-      -  Turn Right 
+      -  右に回る 
     * -  R
-      -  Each press slightly lifts the body; multiple presses are needed for a noticeable rise.     
+      -  体を少し持ち上げる；顕著な上昇には複数回の押下が必要。
     * -  F
-      -  Each press lowers the body a bit; it takes multiple presses for a noticeable descent.
-    
+      -  体を少し下げる；顕著な下降には複数回の押下が必要。
 
-**Code**
+**コード**
 
-
-Please find the code in |link_code_10_balance|.
+コードは |link_code_10_balance| にあります。

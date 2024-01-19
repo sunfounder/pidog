@@ -1,43 +1,37 @@
-Camera Module
+カメラモジュール
 ====================================
 
-
-**Description**
+**説明**
 
 .. image:: img/camera_module_pic.png
    :width: 200
    :align: center
 
-This is a 5MP Raspberry Pi camera module with OV5647 sensor. It's plug and play, connect the included ribbon cable to the CSI (Camera Serial Interface) port on your Raspberry Pi and you're ready to go.
+これはOV5647センサーを搭載した5MPのRaspberry Piカメラモジュールです。プラグアンドプレイで、Raspberry PiのCSI（カメラシリアルインターフェース）ポートに含まれているリボンケーブルを接続するだけで使用できます。
 
-The board is small, about 25mm x 23mm x 9mm, and weighs 3g, making it ideal for mobile or other size and weight-critical applications. The camera module has a native resolution of 5 megapixels and has an on-board fixed focus lens that captures still images at 2592 x 1944 pixels, and also supports 1080p30, 720p60 and 640x480p90 video.
+このボードは小型で、約25mm x 23mm x 9mmのサイズで、重さは3gで、モバイルやその他のサイズや重量に制約のあるアプリケーションに最適です。カメラモジュールはネイティブ解像度が5メガピクセルで、2592 x 1944ピクセルで静止画をキャプチャし、1080p30、720p60、640x480p90のビデオもサポートしています。
 
-.. note:: 
+.. note::
 
-   The module is only capable of capturing pictures and videos, not sound.
-
-
-
-**Specification**
-
-* **Static Images Resolution**: 2592×1944 
-* **Supported Video Resolution**: 1080p/30 fps, 720p/ 60fps and 640 x480p 60/90 video recording 
-* **Aperture (F)**: 1.8 
-* **Visual Angle**: 65 degree 
-* **Dimension**: 24mmx23.5mmx8mm 
-* **Weight**: 3g 
-* **Interface**: CSI connector 
-* **Supported OS**: Raspberry Pi OS(latest version recommended) 
+   このモジュールは写真とビデオのキャプチャのみが可能で、音声はキャプチャできません。
 
 
+**仕様**
 
-**Assemble the Camera Module**
+* **静止画の解像度**: 2592×1944
+* **サポートされるビデオの解像度**: 1080p/30 fps、720p/ 60fpsおよび640 x480p 60/90のビデオ録画
+* **絞り値（F）**: 1.8
+* **視野角**: 65度
+* **寸法**: 24mmx23.5mmx8mm
+* **重さ**: 3g
+* **インターフェース**: CSIコネクタ
+* **サポートされるOS**: Raspberry Pi OS（最新バージョンを推奨）
 
+**カメラモジュールの組み立て**
 
-On the camera module or Raspberry Pi, you will find a flat plastic connector. Carefully pull out the black fixing switch until the fixing switch is partially pulled out. Insert the FFC cable into the plastic connector in the direction shown and push the fixing switch back into place.
+カメラモジュールまたはRaspberry Piには、平らなプラスチックコネクタがあります。黒い固定スイッチを注意して引き出し、固定スイッチが部分的に引き出された状態にします。 FFCケーブルを示された方向にプラスチックコネクタに挿入し、固定スイッチを元の位置に押し戻します。
 
-If the FFC wire is installed correctly, it will be straight and will not pull out when you gently pull on it. If not, reinstall it again.
-
+FFCワイヤが正しく取り付けられている場合、引っ張るとまっすぐで取り出されなくなります。そうでない場合は、再度取り付けてください。
 
 .. image:: img/connect_ffc.png
 .. image:: img/1.10_camera.png
@@ -45,41 +39,4 @@ If the FFC wire is installed correctly, it will be straight and will not pull ou
 
 .. warning::
 
-   Do not install the camera with the power on, it may damage your camera.
-
-.. **Enable the Camera Interface**
-
-.. Run the following command to enable the camera interface of your Raspberry Pi. If you have enabled it, skip this; if you do not know whether you have done that or not, please continue.
-
-.. .. raw:: html
-
-..    <run></run>
-
-.. .. code-block:: 
-
-..    sudo raspi-config
-
-.. **3 Interfacing options**
-
-.. .. image:: img/image282.png
-..    :align: center
-
-.. **P1 Camera**
-
-.. .. image:: img/camera_config1.png
-..    :align: center
-
-.. **<Yes>, then <Ok> -> <Finish>**
-
-.. .. image:: img/camera_config2.png
-..    :align: center
-
-.. After the configuration is complete, it is recommended to reboot the Raspberry Pi.
-
-.. .. raw:: html
-
-..    <run></run>
-
-.. .. code-block:: 
-
-..    sudo reboot
+   電源を入れた状態でカメラを取り付けないでください。それはカメラを壊す可能性があります。

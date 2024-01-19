@@ -1,25 +1,23 @@
-4. Response
+4. 反応
 ================
 
-In this project, PiDog will interact with you in an interesting way.
+このプロジェクトでは、PiDogが興味深い方法であなたと相互作用します。
 
-If you reach out and grab PiDog's head from the front, it will bark vigilantly.
-
+前から手を伸ばしてPiDogの頭をつかむと、警戒して吠えます。
 
 .. image:: img/py_4-2.gif
     :width: 430
 
-
-But if you reach out from behind it and pet its head, it will enjoy it very much.
+しかし、後ろから手を伸ばして頭をなでると、とても楽しむでしょう。
 
 .. raw:: html
 
    <video width="600" loop autoplay muted>
       <source src="../_static/video/touch_head.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      お使いのブラウザはビデオタグをサポートしていません。
    </video>
 
-**Run the Code**
+**コードの実行**
 
 .. raw:: html
 
@@ -30,19 +28,19 @@ But if you reach out from behind it and pet its head, it will enjoy it very much
     cd ~/pidog/examples
     sudo python3 4_response.py
 
-After running this example, PiDog's ultrasonic module will detect whether there is an obstacle ahead,
-If it detects your hand, it makes the breathing light glow red, takes a step back, and barks.
+この例を実行すると、PiDogの超音波モジュールが前方に障害物があるかどうかを検出します。
+手を検出すると、呼吸ライトが赤く光り、後退して吠えます。
 
-At the same time, the touch sensor will also work. If the touch sensor is stroked (not just touched), 
-PiDog will shake its head, wag its tail, and show a comfortable look.
-
-
+同時に、タッチセンサーも作動します。タッチセンサーが撫でられた場合（単に触れられただけでなく）、
+PiDogは頭を振り、尻尾を振り、快適な表情を見せます。
 
 
-**Code**
+
+
+**コード**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    以下のコードを **変更/リセット/コピー/実行/停止** することができます。ただし、それにはまず ``pidog\examples`` のようなソースコードのパスに移動する必要があります。コードを変更した後、直接実行して効果を確認することができます。
 
 .. raw:: html
 

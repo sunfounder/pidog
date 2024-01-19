@@ -1,13 +1,13 @@
-3. Power Supply for Raspberry Pi (Important)
+3. Raspberry Piへの電源供給（重要）
 ===============================================
 
-#. Insert the SD card set up with Raspberry Pi OS into the microSD card slot located on the underside of the Raspberry Pi.
+#. Raspberry Pi OSがセットアップされたSDカードを、Raspberry Piの裏側にあるmicroSDカードスロットに挿入します。
 
     .. image:: img/insert_sd_card.png
         :width: 500
         :align: center
 
-#. Following the assembly instructions, insert the battery cable and turn on the power switch. Next, insert the USB-C cable to power up the battery. Wait for 1-2 minutes, and you will hear a sound indicating that the Raspberry Pi has successfully booted.
+#. 組み立て説明に従って、バッテリーケーブルを挿入し電源スイッチをオンにします。次に、USB-Cケーブルを挿入してバッテリーに電源を供給します。1-2分待って、Raspberry Piが正常に起動したことを示す音が聞こえます。
 
     .. image:: img/Z_BTR.JPG
         :width: 800
@@ -15,4 +15,4 @@
 
   .. note::
 
-    It is recommended to leave the USB-C cable plugged in, as the subsequent software setup process can take a considerable amount of time.
+    その後のソフトウェアセットアッププロセスにはかなりの時間がかかるため、USB-Cケーブルを接続したままにしておくことをお勧めします。

@@ -1,11 +1,11 @@
 .. _install_all_modules:
 
-5. Install All the Modules(Important)
-==============================================
+5. すべてのモジュールをインストールする（重要）
+================================================
 
-#. Update your system.
+#. システムを更新します。
 
-    Make sure you are connected to the Internet and update your system:
+    インターネットに接続していることを確認し、システムを更新してください：
 
     .. raw:: html
 
@@ -18,7 +18,7 @@
 
     .. note::
 
-        Python3 related packages must be installed if you are installing the Lite version OS.
+        LiteバージョンのOSをインストールする場合は、Python3関連のパッケージがインストールされている必要があります。
 
         .. raw:: html
 
@@ -28,9 +28,7 @@
         
             sudo apt install git python3-pip python3-setuptools python3-smbus
 
-
-#. Install ``robot-hat`` module.
-
+#. ``robot-hat`` モジュールをインストールします。
 
     .. raw:: html
 
@@ -43,10 +41,7 @@
         cd robot-hat
         sudo python3 setup.py install
 
-
-
-#. Install ``vilib`` module.
-
+#. ``vilib`` モジュールをインストールします。
 
     .. raw:: html
 
@@ -59,10 +54,7 @@
         cd vilib
         sudo python3 install.py
 
-
-
-
-#. Download the code.
+#. コードをダウンロードします。
 
     .. raw:: html
 
@@ -73,7 +65,7 @@
         cd ~/
         git clone https://github.com/sunfounder/pidog.git
 
-#. Install ``pidog`` module.
+#. ``pidog`` モジュールをインストールします。
 
     .. raw:: html
 
@@ -84,11 +76,11 @@
         cd pidog
         sudo python3 setup.py install
 
-    This step will take a little time, so please be patient.
+    このステップには少し時間がかかるので、気長にお待ちください。
 
-#. Run the script ``i2samp.sh``.
+#. スクリプト ``i2samp.sh`` を実行します。
 
-    Finally, you need to run the script ``i2samp.sh`` to install the components required by the i2s amplifier, otherwise the robot will have no sound.
+    最後に、i2sアンプに必要なコンポーネントをインストールするためのスクリプト ``i2samp.sh`` を実行する必要があります。そうしないと、ロボットに音が出ません。
 
     .. raw:: html
 
@@ -101,15 +93,15 @@
         
     .. image:: img/i2s.png
 
-    Type ``y`` and press ``Enter`` to continue running the script.
+    ``y`` と入力し、 ``Enter`` を押してスクリプトの実行を続行します。
 
     .. image:: img/i2s2.png
 
-    Type ``y`` and press ``Enter`` to run ``/dev/zero`` in the background.
+    ``y`` と入力し、 ``Enter`` を押して ``/dev/zero`` をバックグラウンドで実行します。
 
     .. image:: img/i2s3.png
 
-    Type ``y`` and press ``Enter`` to restart the machine.
+    ``y`` と入力し、 ``Enter`` を押してマシンを再起動します。
 
     .. note::
-        If there is no sound after restarting, you may need to run the ``i2samp.sh`` script multiple times.
+        再起動後に音が出ない場合は、 ``i2samp.sh`` スクリプトを複数回実行する必要があるかもしれません。

@@ -1,17 +1,18 @@
-8. Read Distance
+8. 距離の読み取り
 ==================
 
-Through the Ultrasonic Module in its head, PiDog can detect obstacles ahead.
+頭部にある超音波モジュールを通じて、PiDogは前方の障害物を検出することができます。
 
-An ultrasonic module can detect objects between 2 and 400 cm away.
+超音波モジュールは、2cmから400cm離れた物体を検出することができます。
 
-With the following function, you can read the distance as a floating point number.
+以下の関数を使用すると、距離を浮動小数点数として読み取ることができます。
 
 .. code-block:: python
 
     Pidog.ultrasonic.read_distance()
 
-**Here is an example of usage:**
+**使用例を以下に示します**：
+
 
 .. code-block:: python
 

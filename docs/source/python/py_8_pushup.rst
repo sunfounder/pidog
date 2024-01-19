@@ -1,11 +1,11 @@
-8. Push Up
+8. 腕立て伏せ
 ===============
 
-PiDog is an exercise-loving robot that will do push-ups with you.
+PiDogは運動好きなロボットで、あなたと一緒に腕立て伏せをします。
 
 .. image:: img/py_8.gif
 
-**Run the Code**
+**コードの実行**
 
 .. raw:: html
 
@@ -16,14 +16,14 @@ PiDog is an exercise-loving robot that will do push-ups with you.
     cd ~/pidog/examples
     sudo python3 8_pushup.py
 
-After the program runs, PiDog will perform a plank, then cycle through push-ups and barks.
+プログラムを実行すると、PiDogはプランクを行い、腕立て伏せと吠え声を繰り返します。
 
 
 
-**Code**
+**コード**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    以下のコードを **変更/リセット/コピー/実行/停止** することができます。ただし、それにはまず ``pidog\examples`` のようなソースコードのパスに移動する必要があります。コードを変更した後、直接実行して効果を確認することができます。
 
 .. raw:: html
 

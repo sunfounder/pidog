@@ -1,59 +1,47 @@
-1. What Do We Need?
-========================
+1. 必要なものは何ですか？
+==============================
 
-Required Components
------------------------
+必要なコンポーネント
+------------------------
 
 **Raspberry Pi**
 
-The Raspberry Pi is a low cost, credit-card sized computer that plugs
-into a computer monitor or TV, and uses a standard keyboard and mouse.
-It is a capable little device that enables people of all ages to explore
-computing, and to learn how to program in languages like Scratch and
-Python.
+Raspberry Piは、低コストでクレジットカードサイズのコンピュータで、コンピュータモニターやテレビに接続し、標準のキーボードとマウスを使用します。この小さなデバイスを使えば、あらゆる年齢の人々がコンピューティングを探求し、ScratchやPythonなどの言語でプログラミングを学ぶことができます。
 
 .. image:: img/image10.jpeg
    :align: center
 
-**Power Adapter**
+**電源アダプター**
 
-To connect to a power socket, the Raspberry Pi has a micro USB port (the
-same found on many mobile phones). You will need a power supply which
-provides at least 2.5 amps.
+電源ソケットに接続するために、Raspberry PiにはマイクロUSBポート（多くの携帯電話に見られるものと同じ）があります。少なくとも2.5アンペアを提供する電源が必要です。
 
-**Micro SD Card**
+**マイクロSDカード**
 
-Your Raspberry Pi needs an Micro SD card to store all its files and the
-Raspberry Pi OS. You will need a micro SD card with a capacity of at
-least 8 GB
+Raspberry Piは、すべてのファイルとRaspberry Pi OSを保存するために、マイクロSDカードが必要です。少なくとも8GBの容量があるマイクロSDカードが必要です。
 
-Optional Components
--------------------------
+オプションのコンポーネント
+-----------------------------
 
-**Screen**
+**スクリーン**
 
-To view the desktop environment of Raspberry Pi, you need to use the
-screen that can be a TV screen or a computer monitor. If the screen has
-built-in speakers, the Pi plays sounds via them.
+Raspberry Piのデスクトップ環境を見るためには、テレビ画面またはコンピュータモニターを使う必要があります。スクリーンにスピーカーが内蔵されている場合、Piはそれらを通して音を再生します。
 
-**Mouse & Keyboard**
+**マウス＆キーボード**
 
-When you use a screen , a USB keyboard and a USB mouse are also needed.
+スクリーンを使用する場合、USBキーボードとUSBマウスも必要です。
 
 **HDMI**
 
-The Raspberry Pi has a HDMI output port that is compatible with the HDMI
-ports of most modern TV and computer monitors. If your screen has only
-DVI or VGA ports, you will need to use the appropriate conversion line.
+Raspberry Piには、ほとんどの現代のテレビやコンピュータモニターのHDMIポートと互換性のあるHDMI出力ポートがあります。画面にDVIポートやVGAポートしかない場合は、適切な変換ケーブルが必要になります。
 
-**Case**
+**ケース**
 
-You can put the Raspberry Pi in a case; by this means, you can protect
-your device.
+Raspberry Piをケースに入れることができます。これにより、デバイスを保護することができます。
 
-**Sound or Earphone**
+**サウンドまたはイヤホン**
 
-The Raspberry Pi is equipped with an audio port about 3.5 mm that can be
-used when your screen has no built-in speakers or when there is no
-.00
-screen operation.
+Raspberry Piには約3.5mmのオーディオポートが装備されており、スクリーンに内蔵スピーカーがない場合やスクリーンを操作しない場合に使用できます。
+
+
+
+

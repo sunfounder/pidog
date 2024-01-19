@@ -1,45 +1,45 @@
-Assemble Videos
+組み立て動画
 ==============================================
 
-Before assembling the PiDog, please first verify that all parts and components have been included. If there are any missing or damaged components, please contact SunFounder immediately at service@sunfounder.com to resolve the issue as soon as possible.
+PiDogを組み立てる前に、すべての部品とコンポーネントが含まれていることを確認してください。欠品や破損したコンポーネントがある場合は、できるだけ早く問題を解決するために、すぐにSunFounderのservice@sunfounder.comに連絡してください。
 
-Please follow the steps on the following PDF for assembly instructions: 
+組み立て指示については、以下のPDFの手順に従ってください：
 
-* :Download:`Component List and Assembly Instructions <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
+* :Download:`コンポーネントリストと組み立て指示書 <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`。
 
-**Mount Raspberry Pi Zero W on PiDog**
+**Raspberry Pi Zero WをPiDogに取り付ける**
 
-If your mainboard is a Raspberry Pi Zero W, here are the steps to install it on the PiDog. 
+メインボードがRaspberry Pi Zero Wの場合、以下の手順でPiDogに取り付けてください。
 
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/Zfv-8O_Sq9s?si=ZT_6cy9uvupJ0Y_d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-Afterward, you can continue following the instructions in the video below from **2:28** onwards to assemble it.
+その後、 **2:28** からの動画の指示に従って、組み立てを続けてください。
 
 
-**Assembly Tutorial Video(Raspberry Pi 4/3/1 Model)**
+**組み立てチュートリアル動画（Raspberry Pi 4/3/1モデル用）**
 
-This video will walk you through the process of assembling your robot from scratch.
+この動画では、ロボットを一から組み立てるプロセスを案内します。
 
-In this tutorial, you will learn:
+このチュートリアルでは、以下の内容を学びます：
 
-* **Preparation**: We'll introduce you to all the tools and parts needed, ensuring you're fully equipped before starting the assembly.
+* **準備**：必要なツールと部品を紹介し、組み立てを開始する前に完全に準備が整っていることを確認します。
 
-* **Assembly Steps**: We'll demonstrate each assembly step in a systematic manner.
+* **組み立て手順**：各組み立てステップを体系的にデモンストレーションします。
 
-* **Tips and Considerations**: Throughout the process, we'll share essential tips and tricks to help you avoid common mistakes and ensure your robot operates smoothly.
+* **ヒントと注意点**：プロセス全体を通して、一般的な間違いを避け、ロボットがスムーズに動作するようにするための重要なヒントとコツを共有します。
 
-* **Zeroing a Servo**: Before fixing each servo, it needs to be zeroed first. The steps for zeroing are to first install the Raspberry Pi OS, then install the required modules, and then run a script (set the angle of all PWM pins to 0). After that, plug in the servo wire to zero the servo.
+* **サーボをゼロに設定する**：各サーボを固定する前に、最初にゼロに設定する必要があります。ゼロに設定する手順は、最初にRaspberry Pi OSをインストールし、必要なモジュールをインストールし、スクリプトを実行することです（すべてのPWMピンの角度を0に設定します）。その後、サーボワイヤーを接続してサーボをゼロに設定します。
 
 
-The assembly process for Pidog is quite long, so we have divided it into two videos. The first video covers assembling Pidog's body and four legs.
+Pidogの組み立てプロセスはかなり長いので、2つの動画に分けています。最初の動画では、Pidogの本体と4本の脚の組み立てをカバーしています。
 
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/Gskge1fDR30?si=FTFTjqg1kayH42Od" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-The second video covers assembling the head and calibration.
+2つ目の動画では、頭部の組み立てとキャリブレーションをカバーしています。
 
 .. raw:: html
 

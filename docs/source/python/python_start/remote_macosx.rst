@@ -1,9 +1,9 @@
-For Mac OS X Users
+Mac OS Xユーザー向け
 ==========================
 
-For Mac OS X users, SSH (Secure Shell) offers a secure and convenient method to remotely access and control a Raspberry Pi. This is particularly handy for working with the Raspberry Pi remotely or when it's not connected to a monitor. Using the Terminal application on a Mac, you can establish this secure connection. The process involves an SSH command incorporating the Raspberry Pi's username and hostname. During the initial connection, a security prompt will ask for confirmation of the Raspberry Pi's authenticity.
+Mac OS Xユーザーにとって、SSH（Secure Shell）はRaspberry Piへのリモートアクセスと制御を安全かつ便利に行う方法を提供します。これは、Raspberry Piをリモートで作業する場合や、モニターに接続されていない場合に特に便利です。Macのターミナルアプリケーションを使用すると、この安全な接続を確立できます。このプロセスには、Raspberry Piのユーザー名とホスト名を含むSSHコマンドが含まれます。初回接続時には、Raspberry Piの認証性を確認するセキュリティプロンプトが表示されます。
 
-#. To connect to the Raspberry Pi, type the following SSH command:
+#. Raspberry Piに接続するには、次のSSHコマンドを入力します：
 
     .. code-block::
 
@@ -11,7 +11,7 @@ For Mac OS X users, SSH (Secure Shell) offers a secure and convenient method to 
 
     .. image:: img/mac_vnc14.png
 
-#. A security message will appear during your first login. Respond with **yes** to proceed.
+#. 初めてログインする際にセキュリティメッセージが表示されます。 **yes** と応答して進行します。
 
     .. code-block::
 
@@ -19,7 +19,7 @@ For Mac OS X users, SSH (Secure Shell) offers a secure and convenient method to 
         ED25519 key fingerprint is SHA256:oo7x3ZSgAo032wD1tE8eW0fFM/kmewIvRwkBys6XRwg.
         Are you sure you want to continue connecting (yes/no/[fingerprint])?
 
-#. Input the password for the Raspberry Pi. Be aware that the password won’t display on the screen as you type, which is a standard security feature.
+#. Raspberry Piのパスワードを入力します。入力しているパスワードが画面に表示されないことに注意してください。これは標準的なセキュリティ機能です。
 
     .. code-block::
 

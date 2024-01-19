@@ -1,16 +1,16 @@
-7. Face Track
+7. 顔追跡
 ======================
 
-PiDog will sit quietly in place. You applaud it, it looks your way, and if it sees you, it says hello.
+PiDogは静かに座っています。あなたが手をたたくと、PiDogはあなたの方を向き、あなたを見つけると挨拶します。
 
 .. raw:: html
 
    <video width="600" loop autoplay muted>
       <source src="../_static/video/face_track.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      お使いのブラウザはビデオタグをサポートしていません。
    </video>
 
-**Run the Code**
+**コードの実行**
 
 .. raw:: html
 
@@ -22,21 +22,21 @@ PiDog will sit quietly in place. You applaud it, it looks your way, and if it se
     sudo python3 7_face_track.py
 
 
-After running this code, PiDog will start the camera and enable the face detection function.
-You can visit ``http://+ PiDog's IP +/mjpg`` (like mine is ``http://192.168.18.138:9000/mjpg``) in your browser to view the camera's picture.
+このコードを実行すると、PiDogはカメラを起動し、顔検出機能を有効にします。
+ブラウザで ``http://+ PiDogのIP +/mjpg`` （私の場合は「http://192.168.18.138:9000/mjpg」）にアクセスして、カメラの画像を確認できます。
 
-Then PiDog will sit down and activate the Sound Direction Sensor Module to detect the direction of your clapping.
-When PiDog hears clapping (or other noise), it turns its head toward the sound source, trying to find you.
+その後、PiDogは座り、音の方向センサーモジュールをアクティベートして、拍手の方向を検出します。
+PiDogが拍手（または他の音）を聞くと、音源の方向に頭を向けてあなたを探します。
 
-If it sees you (face detection finds an object), it will wag its tail and let out a bark.
-
-
+あなたを見つけると（顔検出がオブジェクトを見つけると）、尻尾を振って吠えます。
 
 
-**Code**
+
+
+**コード**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    以下のコードを **変更/リセット/コピー/実行/停止** することができます。ただし、それにはまず ``pidog\examples`` のようなソースコードのパスに移動する必要があります。コードを変更した後、直接実行して効果を確認することができます。
 
 .. raw:: html
 

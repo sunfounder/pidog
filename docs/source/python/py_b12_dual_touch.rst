@@ -1,19 +1,20 @@
-12. Pat the PiDog's Head
+12. PiDogの頭を撫でる
 =========================
 
-The Touch Swich on the head of PiDog can detect how you touch it. You can call the following functions to use it.
+PiDogの頭にあるタッチスイッチは、どのように触れるかを検出することができます。以下の関数を呼び出して使用できます。
 
 .. code-block:: python
 
    Pidog.dual_touch.read()
 
-* Touch the module from left to right (front to back for PiDog's orientation), it will return ``"LS"``.
-* Touch the module from right to left, it will return ``"RS"``.
-* Touch the module If the left side of the module is touched, it will return ``"L"``.
-* If the right side of the module is touched, it will return ``"R"``.
-* If the module is not touched, it will return ``"N"``.
+* モジュールを左から右へ（PiDogの向きにとって前から後ろへ）触れると、 ``"LS"`` を返します。
+* モジュールを右から左へ触れると、 ``"RS"`` を返します。
+* モジュールの左側を触れると、 ``"L"`` を返します。
+* モジュールの右側を触れると、 ``"R"`` を返します。
+* モジュールが触れられていない場合は、 ``"N"`` を返します。
 
-**Here is an example of its use:**
+**使用例を以下に示します**：
+
 
 .. code-block:: python
 

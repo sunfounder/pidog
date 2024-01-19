@@ -1,9 +1,9 @@
 .. _openssh_powershell:
 
-Install OpenSSH via Powershell
------------------------------------
+Powershellを使用してOpenSSHをインストール
+-----------------------------------------------
 
-When you use ``ssh <username>@<hostname>.local`` (or ``ssh <username>@<IP address>``) to connect to your Raspberry Pi, but the following error message appears.
+``ssh <username>@<hostname>.local`` （または ``ssh <username>@<IPアドレス>`` ）を使用してRaspberry Piに接続しようとすると、次のエラーメッセージが表示される場合があります。
 
     .. code-block::
 
@@ -11,20 +11,20 @@ When you use ``ssh <username>@<hostname>.local`` (or ``ssh <username>@<IP addres
         spelling of the name, or if a path was included, verify that the path is correct and try again.
 
 
-It means your computer system is too old and does not have `OpenSSH <https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui>`_ pre-installed, you need to follow the tutorial below to install it manually.
+これは、コンピューターシステムが古すぎて `OpenSSH <https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui>`_ が事前にインストールされていないことを意味します。以下のチュートリアルに従って、手動でインストールする必要があります。
 
-#. Type ``powershell`` in the search box of your Windows desktop, right click on the ``Windows PowerShell``, and select ``Run as administrator`` from the menu that appears.
+#. Windowsデスクトップの検索ボックスに ``powershell`` と入力し、 ``Windows PowerShell`` を右クリックし、表示されるメニューから ``管理者として実行`` を選択します。
 
     .. image:: img/powershell_ssh.png
         :align: center
 
-#. Use the following command to install ``OpenSSH.Client``.
+#. 以下のコマンドを使用して ``OpenSSH.Client`` をインストールします。
 
     .. code-block::
 
         Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
 
-#. After installation, the following output will be returned.
+#. インストール後、以下の出力が返されます。
 
     .. code-block::
 
@@ -32,13 +32,13 @@ It means your computer system is too old and does not have `OpenSSH <https://lea
         Online        : True
         RestartNeeded : False
 
-#. Verify the installation by using the following command.
+#. 次のコマンドを使用してインストールを確認します。
 
     .. code-block::
 
         Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
 
-#. It now tells you that ``OpenSSH.Client`` has been successfully installed.
+#. これにより、 ``OpenSSH.Client`` が正常にインストールされたことがわかります。
 
     .. code-block::
 
@@ -49,8 +49,8 @@ It means your computer system is too old and does not have `OpenSSH <https://lea
         State : NotPresent
 
     .. warning:: 
-        If the above prompt does not appear, it means that your Windows system is still too old, and you are advised to install a third-party SSH tool, like :ref:`login_windows`.
+        上記のプロンプトが表示されない場合、Windowsシステムがまだ古い可能性があり、 :ref:`login_windows` のようなサードパーティのSSHツールをインストールすることをお勧めします。
 
-#. Now restart PowerShell and continue to run it as administrator. At this point you will be able to log in to your Raspberry Pi using the ``ssh`` command, where you will be prompted to enter the password you set up earlier.
+#. 今、PowerShellを再起動し、管理者として実行し続けます。この時点で、 ``ssh`` コマンドを使用してRaspberry Piにログインできるようになり、以前に設定したパスワードを入力するように求められます。
 
     .. image:: img/powershell_login.png

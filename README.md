@@ -21,18 +21,7 @@ Additionally, we offer three programming languages. MicroPython, C/C++ (Arduino)
 <a id="update"></a>
 ## Update:
 2024-01-19:
-- Add more contents
-
-2023-10-11:
-- Primarily revising the app control content.
-- Enhancing some descriptions.
-
-2023-10-11:
-- Optimize some of the content in the quick guide on Python.
-- Add more chapter descriptions and make some corrections.
-
-2023-09-05:
-- Add 1 more example
+- First release of the Japanese version.
 
 
 <a id="trouble"></a>

@@ -1,49 +1,49 @@
-4. Setting Up Your Raspberry Pi
+4. Raspberry Piの設定
 =====================================
 
-Setting Up with a Screen
+画面を使った設定
 ---------------------------
 
-Having a screen simplifies the process of working with your Raspberry Pi.
+画面を使うことで、Raspberry Piの作業が簡単になります。
 
-**Required Components**
+**必要なコンポーネント**
 
 * Raspberry Pi 5 Model B
-* Power Adapter
-* Micro SD card
-* Screen Power Adapter
-* HDMI cable
-* Screen
-* Mouse
-* Keyboard
+* 電源アダプター
+* マイクロSDカード
+* 画面用電源アダプター
+* HDMIケーブル
+* 画面
+* マウス
+* キーボード
 
-**Steps**:
+**手順**：
 
-#. Connect the Mouse and Keyboard to the Raspberry Pi.
+#. マウスとキーボードをRaspberry Piに接続します。
 
-#. Use the HDMI cable to connect the screen to the Raspberry Pi's HDMI port. Ensure the screen is plugged into a power source and turned on.
+#. HDMIケーブルを使用して、画面をRaspberry PiのHDMIポートに接続します。画面が電源に接続され、オンになっていることを確認します。
 
-#. Power the Raspberry Pi using the power adapter. The Raspberry Pi OS desktop should appear on the screen after a few seconds.
+#. 電源アダプターを使用してRaspberry Piに電源を供給します。数秒後にRaspberry Pi OSのデスクトップが画面に表示されるはずです。
 
     .. image:: img/bullseye_desktop.png
         :align: center
 
-Setting Up Without a Screen
+画面がない場合の設定
 ------------------------------
 
-If you don't have a monitor, remote login is a viable option.
+モニターがない場合は、リモートログインが適切なオプションです。
 
-**Required Components**
+**必要なコンポーネント**
 
-* Raspberry Pi 5 Model B 
-* Power Adapter
-* Micro SD card
+* Raspberry Pi 5 Model B
+* 電源アダプター
+* マイクロSDカード
 
-Using SSH, you can access the Raspberry Pi's Bash shell, which is the default Linux shell. Bash offers a command-line interface for performing various tasks.
+SSHを使用して、Raspberry PiのBashシェル（デフォルトのLinuxシェル）にアクセスできます。Bashは、さまざまなタスクを実行するためのコマンドラインインターフェースを提供します。
 
-For those preferring a graphical user interface (GUI), the remote desktop feature is a convenient alternative for managing files and operations.
+グラフィカルユーザーインターフェース（GUI）を好む方には、リモートデスクトップ機能がファイル管理や操作を行うための便利な代替手段です。
 
-For detailed setup tutorials based on your operating system, refer to the following sections:
+お使いのオペレーティングシステムに基づいた詳細な設定チュートリアルについては、以下のセクションを参照してください：
 
 .. toctree::
 

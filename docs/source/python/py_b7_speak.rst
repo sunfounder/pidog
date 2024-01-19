@@ -1,15 +1,15 @@
-7. PiDog Speak
+7. PiDogが話す
 ==========================
 
-PiDog can make sound, it is actually playing a piece of audio.
+PiDogは音を出すことができ、実際にはオーディオの一部を再生しています。
 
-These audios are saved under ``pidog\sounds`` path, you can call the following function to play them.
+これらのオーディオは ``pidog\sounds`` のパスに保存されており、以下の関数を呼び出して再生することができます。
 
 .. code-block:: python
 
    Pidog.speak(name)
 
-* ``name`` : Filename (without suffix), such as ``"angry"``. ``Pidog`` provides the following audio.
+* ``name``: ファイル名（接尾辞なし）、例えば ``"angry"`` 。 ``Pidog`` は以下のオーディオを提供しています。
 
   * ``"angry"``
   * ``"confused_1"``
@@ -24,7 +24,8 @@ These audios are saved under ``pidog\sounds`` path, you can call the following f
   * ``"snoring"``
   * ``"woohoo"``
 
-**Here is an example of usage:**
+**使用例を以下に示します**：
+
 
 .. code-block:: python
 

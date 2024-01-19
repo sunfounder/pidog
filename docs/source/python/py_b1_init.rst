@@ -1,7 +1,7 @@
-1. PiDog Initialization
+1. PiDogの初期化
 ============================
 
-The functions of PiDog are written in the ``Pidog`` class, and the prototype of this class is shown below.
+PiDogの機能は ``Pidog`` クラスに記述されており、このクラスのプロトタイプは以下のようになります。
 
 .. code-block:: python
 
@@ -15,48 +15,48 @@ The functions of PiDog are written in the ``Pidog`` class, and the prototype of 
             tail_init_angle=None)
 
 
-PiDog must be instantiated in one of several ways, as shown below.
+PiDogは、以下に示すようないくつかの方法でインスタンス化する必要があります。
 
-1. Following are the simplest steps of initialization.
+1. 初期化の最も単純なステップは以下の通りです。
 
 .. code-block:: python
 
-    # Import Pidog class
+    # Pidogクラスをインポート
     from pidog import Pidog
 
-    # instantiate a Pidog
+    # PiDogのインスタンスを作成
     my_dog = Pidog()
 
-2. PiDog has 12 servos, which can be initialized when we instantiate it.
+2. PiDogには12個のサーボがあり、インスタンス化する際に初期化することができます。
 
 .. code-block:: python
 
-    # Import Pidog class
+    # Pidogクラスをインポート
     from pidog import Pidog
 
-    # instantiate a Pidog with custom initialized servo angles
+    # カスタム初期化サーボ角度でPiDogのインスタンスを作成
     my_dog = Pidog(leg_init_angles = [25, 25, -25, -25, 70, -45, -70, 45],
                     head_init_angles = [0, 0, -25],
                     tail_init_angle= [0]
                 )
 
-In the ``Pidog`` class, the servos are divided into three groups.
+``Pidog`` クラスでは、サーボは3つのグループに分かれています。
 
-* ``leg_init_angles`` : In this array, 8 values determine the angles of eight servos, with the servos (pin numbers) they control being ``2, 3, 7, 8, 0, 1, 10, 11``. From the foldout, you can see where these servos are located.
+* ``leg_init_angles``: この配列では、8つの値が8つのサーボの角度を決定し、制御するサーボ（ピン番号）は ``2, 3, 7, 8, 0, 1, 10, 11`` です。展開図からこれらのサーボの位置がわかります。
 
-* ``head_init_angles`` : There is an array with 3 values, controllers for PiDog-head yaw, roll, pitch servos (``no. 4, 6, 5``) which react to yaw, roll, pitch, or Deflection of the body.
+* ``head_init_angles``: 3つの値の配列で、PiDogの頭部のヨー、ロール、ピッチサーボ（ ``番号 4, 6, 5`` ）を制御し、体のヨー、ロール、ピッチ、または偏向に反応します。
 
-* ``tail_init_angle`` : In this array, there is only one value, which is dedicated to controlling the tail servo, which is ``9``.
+* ``tail_init_angle``: この配列には1つの値のみがあり、尾サーボ（ ``9`` ）を制御するために専用です。
 
 
-3. ``Pidog`` allows you to redefine the serial number of the servos when instantiating the robot if your servo order is different.
+3. ``Pidog`` は、サーボの順番が異なる場合にロボットをインスタンス化する際にサーボのシリアル番号を再定義することができます。
 
 .. code-block:: python
 
-    # Import Pidog class
+    # Pidogクラスをインポート
     from pidog import Pidog
 
-    # instantiate a Pidog with custom initialized pins & servo angles
+    # カスタム初期化ピン＆サーボ角度でPiDogのインスタンスを作成
     my_dog = Pidog(leg_pins=[2, 3, 7, 8, 0, 1, 10, 11], 
                     head_pins=[4, 6, 5],
                     tail_pin=[9],

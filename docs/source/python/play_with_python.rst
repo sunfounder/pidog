@@ -1,11 +1,9 @@
 .. _play_python:
 
-Play with Python
+Pythonで遊ぶ
 ====================
 
-If you want to program in python, 
-then you will need to learn some basic Python programming skills and basic knowledge of Raspberry Pi, 
-please configure the Raspberry Pi first according to :ref:`quick_guide_python`.
+Pythonでプログラミングしたい場合は、基本的なPythonプログラミングスキルとRaspberry Piの基本的な知識が必要になります。まず :ref:`quick_guide_python` に従ってRaspberry Piを設定してください。
 
 
 .. toctree::
@@ -13,31 +11,22 @@ please configure the Raspberry Pi first according to :ref:`quick_guide_python`.
 
     python_start/quick_guide_on_python
 
-As soon as the assembly is completed, you need to calibrate the PiDog to prevent it from damaging the servo if there is a slight deviation in the assembly.
+組み立てが完了したら、組み立てにわずかなずれがある場合にサーボが損傷するのを防ぐために、PiDogをキャリブレーションする必要があります。
 
 .. toctree::
     :maxdepth: 2
 
     py_0_calibrate
 
-.. Once calibrated, you can follow the tutorial to play PiDog with the APP.
-
-.. .. toctree::
-..     :maxdepth: 2
-
-..     auto_run_app
-
-You can also have PiDog achieve the following project effects.
+また、PiDogで以下のプロジェクト効果を実現することもできます。
 
 .. toctree::
 
     py_fun_project
     
-Then you may want to master its basic functions, or write some fun examples.
+基本機能を習得したい場合、またはいくつかの楽しい例を作成したい場合は、 ``~/pidog/basic_examples`` ディレクトリにPiDogの基本機能の例があります。
 
-If you are familiar with Python programming, you can find examples of PiDog's basic functions in the ``~/pidog/basic_examples`` directory.
-
-If you prefer, you can master them in a step-by-step fashion using the lessons provided below.
+希望に応じて、以下のレッスンを使用してステップバイステップで習得することもできます。
 
 .. toctree::
     :maxdepth: 2

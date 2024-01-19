@@ -1,11 +1,11 @@
-5. Rest
+5. 休息
 =========
 
-PiDog will doze off on the ground, and when it hears sounds around it, it will stand up in confusion to see who woke it up.
+PiDogは地面でうとうとし、周りの音を聞くと混乱して立ち上がり、誰が自分を起こしたのかを見ます。
 
 .. image:: img/py_5.gif
 
-**Run the Code**
+**コードの実行**
 
 .. raw:: html
 
@@ -16,16 +16,16 @@ PiDog will doze off on the ground, and when it hears sounds around it, it will s
     cd ~/pidog/examples
     sudo python3 5_rest.py
 
-After the program runs, PiDog will get down on the ground, shake its head and tail as if dozing off.
-At the same time, its sound direction sensor module is working. If PiDog hears noise, it will stand up, look around, and then make a confused look.
-Then it'll doze off again.
+プログラムが実行されると、PiDogは地面に降りて、うとうとするかのように頭と尻尾を振ります。
+同時に、音の方向センサーモジュールが動作しています。PiDogが騒音を聞くと、立ち上がって周りを見回し、その後困惑した表情を見せます。
+そして再びうとうとします。
 
 
 
-**Code**
+**コード**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    以下のコードを **変更/リセット/コピー/実行/停止** することができます。ただし、それにはまず ``pidog\examples`` のようなソースコードのパスに移動する必要があります。コードを変更した後、直接実行して効果を確認することができます。
 
 .. raw:: html
 

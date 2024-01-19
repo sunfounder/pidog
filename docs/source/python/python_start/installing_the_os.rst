@@ -1,90 +1,90 @@
-2. Installing the OS
+2. OSのインストール
 =======================
 
-**Required Components**
+**必要なコンポーネント**
 
 * Raspberry Pi 5B
-* A Personal Computer
-* A Micro SD card 
+* パーソナルコンピュータ
+* マイクロSDカード 
 
-**Installation Steps**
+**インストール手順**
 
-#. Visit the Raspberry Pi software download page at `Raspberry Pi Imager <https://www.raspberrypi.org/software/>`_. Choose the Imager version compatible with your operating system. Download and open the file to initiate installation.
+#. `Raspberry Pi Imager <https://www.raspberrypi.org/software/>`_ のRaspberry Piソフトウェアダウンロードページを訪れてください。お使いのオペレーティングシステムに対応するImagerバージョンを選択します。ファイルをダウンロードして開き、インストールを開始します。
 
     .. image:: img/os_install_imager.png
 
-#. A security prompt may appear during installation, depending on your operating system. For example, Windows might display a warning message. In such cases, select **More info** and then **Run anyway**. Follow the on-screen guidance to complete the installation of the Raspberry Pi Imager.
+#. インストール中に、オペレーティングシステムによってはセキュリティプロンプトが表示される場合があります。例えば、Windowsでは警告メッセージが表示されることがあります。その場合は、 **詳細情報** を選択してから **とにかく実行** を選択します。画面上の指示に従って、Raspberry Pi Imagerのインストールを完了します。
 
     .. image:: img/os_info.png
 
-#. Insert your SD card into your computer or laptop's SD card slot.
+#. SDカードをコンピュータまたはラップトップのSDカードスロットに挿入します。
 
-#. Launch the Raspberry Pi Imager application by clicking its icon or typing ``rpi-imager`` in your terminal.
+#. Raspberry Pi Imagerアプリケーションをクリックするか、ターミナルで ``rpi-imager`` と入力して起動します。
 
     .. image:: img/os_open_imager.png
 
-#. Click **CHOOSE DEVICE** and select your specific Raspberry Pi model from the list (Note: Raspberry Pi 5 is not applicable).
+#. **CHOOSE DEVICE** をクリックして、リストから特定のRaspberry Piモデルを選択します（注：Raspberry Pi 5は適用されません）。
 
     .. image:: img/os_choose_device.png
 
-#. Select **CHOOSE OS** and then choose **Raspberry Pi OS (Legacy)**.
+#. **CHOOSE OS** を選択し、 **Raspberry Pi OS (Legacy)** を選びます。
 
     .. warning::
 
-        * Please do not install the **Bookworm** version as the speaker will not work.
-        * You need to install the **Raspberry Pi OS (Legacy)** version - **Debian Bullseye**.
+        * スピーカーが動作しないため、 **Bookworm** バージョンはインストールしないでください。
+        * **Debian Bullseye** バージョンの **Raspberry Pi OS (Legacy)** をインストールする必要があります。
 
             .. image:: img/os_choose_os.png
 
-#. Click **Choose Storage** and select the appropriate storage device for the installation.
+#. **Choose Storage** をクリックして、インストールに適したストレージデバイスを選択します。
 
     .. note::
 
-        Ensure you select the correct storage device. To avoid confusion, disconnect any additional storage devices if multiple ones are connected.
+        正しいストレージデバイスを選択してください。混乱を避けるために、複数のストレージデバイスが接続されている場合は、追加のデバイスを切断してください。
 
     .. image:: img/os_choose_sd.png
 
-#. Click **NEXT** and then **EDIT SETTINGS** to tailor your OS settings. If you have a monitor for your Raspberry Pi, you can skip the next steps and click 'Yes' to begin the installation. Adjust other settings later on the monitor.
+#. **NEXT** をクリックし、 **EDIT SETTINGS** をクリックしてOSの設定をカスタマイズします。Raspberry Pi用のモニターがある場合は、次のステップをスキップして「Yes」をクリックしてインストールを開始します。他の設定は後でモニター上で調整します。
 
     .. image:: img/os_enter_setting.png
 
-#. Define a **hostname** for your Raspberry Pi.
+#. Raspberry Piの **ホスト名** を定義します。
 
     .. note::
 
-        The hostname is your Raspberry Pi's network identifier. You can access your Pi using ``<hostname>.local`` or ``<hostname>.lan``.
+        ホスト名はRaspberry Piのネットワーク識別子です。 ``<hostname>.local`` または ``<hostname>.lan`` を使用してPiにアクセスできます。
 
     .. image:: img/os_set_hostname.png
 
-#. Create a **Username** and **Password** for the Raspberry Pi's administrator account.
+#. Raspberry Piの管理者アカウント用に **ユーザー名** と **パスワード** を作成します。
 
     .. note::
 
-        Establishing a unique username and password is vital for securing your Raspberry Pi, which lacks a default password.
+        デフォルトパスワードがないため、独自のユーザー名とパスワードを設定することがRaspberry Piのセキュリティにとって重要です。
 
     .. image:: img/os_set_username.png
 
-#. Configure the wireless LAN by providing your network's **SSID** and **Password**.
+#. ワイヤレスLANを設定し、ネットワークの **SSID** と **パスワード** を入力します。
 
     .. note::
 
-        Set the ``Wireless LAN country`` to the two-letter `ISO/IEC alpha2 code <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements>`_ corresponding to your location.
+        ``Wireless LAN country`` を、お住まいの場所に対応する2文字の `ISO/IEC alpha2コード <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements>`_ に設定してください。
 
     .. image:: img/os_set_wifi.png
 
-#. Click **SERVICES** and activate **SSH** for secure, password-based remote access. Remember to save your settings.
+#. **SERVICES** をクリックし、安全なパスワードベースのリモートアクセスのために **SSH** を有効にします。設定を保存することを忘れないでください。
 
     .. image:: img/os_enable_ssh.png
 
-#. Confirm your selected settings by clicking **Yes**.
+#. **Yes** をクリックして選択した設定を確認します。
 
     .. image:: img/os_click_yes.png
 
-#. If the SD card contains existing data, ensure you back it up to prevent data loss. Proceed by clicking **Yes** if no backup is needed.
+#. SDカードに既存のデータがある場合は、データ損失を防ぐためにバックアップしてください。バックアップが不要な場合は、「Yes」をクリックして進行します。
 
     .. image:: img/os_continue.png
 
-#. The OS installation process will commence on the SD card. A confirmation dialog will appear upon completion.
+#. OSのインストールプロセスがSDカード上で開始されます。完了時に確認ダイアログが表示されます。
 
     .. image:: img/os_finish.png
         :align: center

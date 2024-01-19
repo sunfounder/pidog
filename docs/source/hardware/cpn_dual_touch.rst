@@ -1,27 +1,27 @@
-Dual Touch Sensor
-==================================
+
+デュアルタッチセンサー
+=============================
 
 .. image:: img/cpn_touchswitch.png
    :width: 200
    :align: center
 
-Dual channel touch sensor, based on two ttp223 touch sensors.
-When a touch signal is detected, the corresponding pin level will be pulled low.
+2つのttp223タッチセンサーをベースにしたデュアルチャンネルタッチセンサーです。
+タッチ信号が検出されると、対応するピンレベルが低くなります。
 
-TTP223 is a touch pad detector IC that provides 1 touch key.
-The touch detection IC is specially designed to replace the traditional direct keys with different pad sizes.
-It features low power consumption and wide operating voltage.
+TTP223は、1つのタッチキーを提供するタッチパッド検出ICです。
+このタッチ検出ICは、異なるパッドサイズの従来の直接キーを置き換えるために特別に設計されています。
+低消費電力と広い動作電圧が特徴です。
 
+**仕様**
 
-**Specifications**
+* 電源供給：2.0V〜5.5V
+* シグナル出力：デジタル信号
+* コネクタ：SH1.0 4P
 
-* Power Supply: 2.0V~5.5V
-* Signal Output: Digital signal
-* Connector: SH1.0 4P
+**ピン配置**
 
-**Pin Out**
-
-* GND - Ground Input
-* VCC - Power Supply Input
-* SIG1 - Touch signal 1, low level means touch
-* SIG2 - Touch signal 2, low level means touch
+* GND - グラウンド入力
+* VCC - 電源供給入力
+* SIG1 - タッチシグナル1、低レベルはタッチを意味します
+* SIG2 - タッチシグナル2、低レベルはタッチを意味します

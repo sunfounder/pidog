@@ -1,21 +1,21 @@
-9. PiDog RGB Strip
+9. PiDogのRGBストリップ
 ========================
 
-There is an RGB Strip on PiDog's chest, which PiDog can use to express emotions.
+PiDogの胸にはRGBストリップがあり、PiDogはこれを使って感情を表現することができます。
 
-You can call the following function to control it.
+以下の関数を呼び出して制御することができます。
 
 .. code-block:: python
 
     Pidog.rgb_strip.set_mode(style='breath', color='white', bps=1, brightness=1):
 
-* ``style`` : The lighting display mode of RGB Strip, the following are its available values.
+* ``style``: RGBストリップの照明表示モードで、以下の値が利用可能です。
 
   * ``breath``
   * ``boom``
   * ``bark``
 
-* ``color`` : The lights of the RGB Strip show the colors. You can enter 16-bit RGB values, such as ``#a10a0a``, or the following color names.
+* ``color`` : RGBストリップのライトの色を表示します。16進数のRGB値を入力することができます。例えば ``#a10a0a`` 、または以下の色名。
 
   * ``"white"``
   * ``"black"``
@@ -28,18 +28,19 @@ You can call the following function to control it.
   * ``"magenta"``
   * ``"pink"``
 
-* ``brightness`` : RGB Strip lights display brightness, you can enter a floating-point value from 0 to 1, such as ``0.5``.
+* ``brightness``: RGBストリップライトの表示の明るさを設定します。0から1までの浮動小数点値を入力することができます。例えば ``0.5``。
 
-* ``delay`` : Float, display animation speed, the smaller the value, the faster the change.
+* ``delay``: Float, アニメーションの表示速度で、値が小さいほど変化が速くなります。
 
-Use the following statement to disable RGB Striping.
+RGBストリップを無効にするには、以下のステートメントを使用します。
 
 .. code-block:: python
 
     Pidog.rgb_strip.close()
 
 
-Here are examples of their use:
+使用例を以下に示します：
+
 
 .. code-block:: python
 

@@ -1,37 +1,38 @@
-5. Stop All Actions
-======================
+5. すべてのアクションの停止
+===================================
 
-After the previous chapters, you can find that the servo control of PiDog is divided into three threads.
-This allows PiDog's head and body to move at the same time, even with two lines of code.
+これまでの章で、PiDogのサーボ制御が3つのスレッドに分かれていることがわかります。
+これにより、PiDogの頭部と体が同時に動くことができ、たとえ2行のコードであっても実行できます。
 
-**Here are a few functions that work with the three servo threads:**
+**ここでは、3つのサーボスレッドと共に動作するいくつかの関数を紹介します**：
 
 .. code-block:: python
 
     Pidog.wait_all_done()
     
-Wait for all the actions in the leg actions buffer, head buffer and tail buffer to be executed
+足のアクションバッファ、頭部バッファ、尾バッファのすべてのアクションが実行されるのを待ちます
 
 .. code-block:: python
 
     Pidog.body_stop()
     
-Stop all the actions of legs, head and tail
+足、頭部、尾のすべてのアクションを停止します
 
 .. code-block:: python
 
     Pidog.stop_and_lie()
     
-Stop all the actions of legs, head and tail, then reset to "lie" pose
+足、頭部、尾のすべてのアクションを停止し、その後 ``横になる`` ポーズにリセットします
 
 .. code-block:: python
 
     Pidog.close()
     
-Stop all the actions, reset to "lie" pose, and  close all the threads, usually used when exiting a program
+すべてのアクションを停止し、 ``横になる`` ポーズにリセットし、プログラムを終了するときに通常使用されるすべてのスレッドを閉じます
 
 
-**Here are some common usages:**
+**以下は一般的な使用例です：**
+
 
 
 

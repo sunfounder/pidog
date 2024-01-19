@@ -1,4 +1,4 @@
-11-channel Light Board
+11チャンネルライトボード
 =============================
 
 .. image:: img/cpn_lightboard.png
@@ -6,23 +6,23 @@
    :align: center
 
 
-This is an 11-channel RGB LED module, which is equipped with 11 RGB LEDs controlled by the SLED1735 chip.
+これは11チャンネルのRGB LEDモジュールで、SLED1735チップによって制御される11個のRGB LEDを搭載しています。
 
-SLED1734 can drive up to 256 LEDs and 75 RGB LEDs.
-In the LED matrix controlled by SLED1734, each LED has on/off, blinking, breathing light and automatic synchronization and many other functions.
-The chip has built-in PWM (pulse width modulation) technology, which can provide 256 levels of brightness adjustment. It also has a 16-level dot correction function.
+SLED1734は最大256個のLEDと75個のRGB LEDを駆動できます。
+SLED1734によって制御されるLEDマトリックスでは、各LEDにはオン/オフ、点滅、ブリンク、呼吸灯、自動同期など多くの機能が備わっています。
+このチップにはPWM（パルス幅変調）技術が組み込まれており、256段階の明るさ調整が可能です。また、16段階のドット補正機能も備えています。
 
 
-**Specifications**
+**仕様**
 
-* Power supply: 3.3V
-* Communication: IIC
-* Connector: SH1.0 4P
-* LEDs: 3535 RGB LEDs
+* 電源供給: 3.3V
+* 通信: IIC
+* コネクタ: SH1.0 4P
+* LED: 3535 RGB LED
 
-**Pin Out**
+**ピン配置**
 
-* GND - Ground Input
-* VCC - Power Supply Input
+* GND - グラウンド入力
+* VCC - 電源供給入力
 * SDA - IIC SDA
 * SCL - IIC SCL

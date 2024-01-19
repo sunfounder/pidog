@@ -1,20 +1,20 @@
 .. _py_ball_track:
 
-13. Ball Track
+13. ボール追跡
 ======================
 
-PiDog will sit quietly in place.
-You put a red ball in front of it, it will stand, and then chase the ball.
+PiDogは静かに座っています。
+それに赤いボールを前に置くと、立ち上がってボールを追いかけます。
 
 .. raw:: html
 
    <video width="600" loop autoplay muted>
       <source src="../_static/video/bull_track.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      お使いのブラウザはビデオタグをサポートしていません。
    </video>
 
 
-**Run the Code**
+**コードの実行**
 
 .. raw:: html
 
@@ -25,15 +25,14 @@ You put a red ball in front of it, it will stand, and then chase the ball.
     cd ~/pidog/examples
     sudo python3 13_ball_track.py
 
+このコードを実行すると、PiDogはカメラを起動します。
+ブラウザで ``http://+ PiDogのIP +/mjpg`` （私の場合は「http://192.168.18.138:9000/mjpg」）にアクセスして、カメラの画像を確認できます。
 
-After running this code, PiDog will start the camera.
-You can visit ``http://+ PiDog's IP +/mjpg`` (like mine is ``http://192.168.18.138:9000/mjpg``) in your browser to view the camera's picture.
 
-
-**Code**
+**コード**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    以下のコードを **変更/リセット/コピー/実行/停止** することができます。ただし、それにはまず ``pidog\examples`` のようなソースコードのパスに移動する必要があります。コードを変更した後、直接実行して効果を確認することができます。
 
 .. raw:: html
 

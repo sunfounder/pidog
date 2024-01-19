@@ -1,33 +1,30 @@
-Sound Direction Sensor
+サウンド方向センサー
 =====================================
 
 .. image:: img/cpn_sound.png
    :width: 400
    :align: center
 
-This is a sound direction recognition module. It is equipped with 3 microphones, which can detect sound sources from all directions, and is equipped with a TR16F064B, which is used to process sound signals and calculate the sound source direction. The minimum reconnaissance unit of this module is 20 degrees, and the data range is 0~355
+これはサウンド方向認識モジュールです。3つのマイクロフォンが搭載されており、全方向からの音源を検出することができます。また、音信号の処理と音源方向の計算に使用されるTR16F064Bが搭載されています。このモジュールの最小偵察単位は20度で、データ範囲は0〜355です。
 
-Data transmission process: the main controller pulls up the BUSY pin, and TR16F064B starts to monitor the direction. When 064B recognizes the direction, it will pull down the BUSY pin;
-When the main control detects that BUSY is low, it will send 16bit arbitrary data to 064B (follow the MSB transmission), and accept 16bit data, which is the sound direction data processed by 064B.
-After completion, the main control will pull the BUSY pin high to detect the direction again.
+データ伝送プロセス：メインコントローラがBUSYピンをプルアップし、TR16F064Bが方向を監視を開始します。064Bが方向を認識すると、BUSYピンをプルダウンします。
+メインコントロールがBUSYがローであることを検出すると、16ビットの任意データを064Bに送信し（MSB送信に従う）、064Bによって処理された音方向データである16ビットデータを受け入れます。
+完了後、メインコントロールはBUSYピンをプルアップして再び方向を検出します。
 
+**仕様**
 
-**Specifications**
+* 電源：3.3V
+* 通信：SPI
+* コネクタ：PH2.0 7P
+* 音声認識角度範囲360°
+* 音声認識角度精度〜10°
 
-* Power supply: 3.3V
-* Communication: SPI
-* Connector: PH2.0 7P
-* Sound recognition angle range 360°
-* Voice recognition angular accuracy ~10°
+**ピンアウト**
 
-
-**Pin Out**
-
-
-* GND - Ground Input
-* VCC - 3.3V Power Supply Input
+* GND - グラウンド入力
+* VCC - 3.3V 電源入力
 * MOSI - SPI MOSI
 * MISO - SPI MISO
-* SCLK - SPI clock
-* CS - SPI Chip Select
-* BUSY - busy detection
+* SCLK - SPIクロック
+* CS - SPIチップセレクト
+* BUSY - ビジー検出

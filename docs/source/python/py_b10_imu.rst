@@ -1,90 +1,89 @@
-10. IMU Read
-==============
+10. IMU読み取り
+==================
 
+6軸IMUモジュールを通じて、PiDogは斜面に立っているか、持ち上げられているかを判断することができます。
 
-Through the 6-DOF IMU Module, PiDog can determine if it's standing on a slope, or if it's being picked up.
-
-The 6-DOF IMU Module is equipped with a 3-axis accelerometer and a 3-axis gyroscope, allowing acceleration and angular velocity to be measured in three directions.
+6軸IMUモジュールには、3軸加速度計と3軸ジャイロスコープが搭載されており、3方向の加速度と角速度を測定することができます。
 
 .. note::
 
-    Before using the module, make sure that it is correctly assembled. The label on the module will let you know if it is reversed.
+    モジュールを使用する前に、正しく組み立てられていることを確認してください。モジュールのラベルで、逆さまになっているかどうかを確認できます。
 
-**You can read their acceleration with:**
+**加速度は次のように読み取ります：**
 
 .. code-block:: python
 
    ax, ay, az = Pidog.accData
 
-With the PiDog placed horizontally, the acceleration on the x-axis (ie ax) should be close to the acceleration of gravity (1g), with a value of -16384.
-The values of the y-axis and x-axis are close to 0.
+PiDogが水平に置かれている場合、x軸の加速度（つまりax）は重力加速度（1g）に近く、値は-16384に近くなります。
+y軸とx軸の値は0に近いです。
 
-**Use the following way to read their angular velocity:**
+**角速度を読み取るには次の方法を使用します**：
 
 .. code-block:: python
 
    gx, gy, gz = my_dog.gyroData
 
-In the case where PiDog is placed horizontally, all three values are close to 0.
+PiDogが水平に置かれている場合、3つの値はすべて0に近いです。
 
 
-**Here are some examples of how 6-DOF Module is used:**
+**6軸モジュールの使用例をいくつか紹介します**：
 
-1. Read real-time acceleration, angular velocity
+1. リアルタイムの加速度、角速度を読み取る
 
-.. code-block:: python
+  .. code-block:: python
+  
+      from pidog import Pidog
+      import time
+  
+      my_dog = Pidog()
+  
+      my_dog.do_action("pushup", step_count=10, speed=20)
+  
+      while True:
+          ax, ay, az = my_dog.accData
+          gx, gy, gz = my_dog.gyroData
+          print(f"accData: {ax/16384:.2f} g ,{ay/16384:.2f} g, {az/16384:.2f} g       gyroData: {gx} °/s, {gy} °/s, {gz} °/s")
+          time.sleep(0.2)
+          if my_dog.is_legs_done():
+              break
+  
+      my_dog.stop_and_lie()
+  
+      my_dog.close()
 
-    from pidog import Pidog
-    import time
+2. PiDogの体の傾き角度を計算する
 
-    my_dog = Pidog()
+  .. code-block:: python
+  
+      from pidog import Pidog
+      import time
+      import math
+  
+      my_dog = Pidog()
+  
+      while True:
+          ax, ay, az = my_dog.accData
+          body_pitch = math.atan2(ay,ax)/math.pi*180%360-180
+          print(f"Body Degree: {body_pitch:.2f} °" )
+          time.sleep(0.2)
+  
+      my_dog.close()
 
-    my_dog.do_action("pushup", step_count=10, speed=20)
+3. 傾いている間、PiDogは目線を水平に保つ。
 
-    while True:
-        ax, ay, az = my_dog.accData
-        gx, gy, gz = my_dog.gyroData
-        print(f"accData: {ax/16384:.2f} g ,{ay/16384:.2f} g, {az/16384:.2f} g       gyroData: {gx} °/s, {gy} °/s, {gz} °/s")
-        time.sleep(0.2)
-        if my_dog.is_legs_done():
-            break
-
-    my_dog.stop_and_lie()
-
-    my_dog.close()
-
-2. Calculate the lean angle of PiDog's body.
-
-.. code-block:: python
-
-    from pidog import Pidog
-    import time
-    import math
-
-    my_dog = Pidog()
-
-    while True:
-        ax, ay, az = my_dog.accData
-        body_pitch = math.atan2(ay,ax)/math.pi*180%360-180
-        print(f"Body Degree: {body_pitch:.2f} °" )
-        time.sleep(0.2)
-
-    my_dog.close()
-
-3. While leaning, PiDog keeps its eyes level.
-
-.. code-block:: python
-
-    from pidog import Pidog
-    import time
-    import math
-
-    my_dog = Pidog()
-
-    while True:
-        ax, ay, az = my_dog.accData
-        body_pitch = math.atan2(ay,ax)/math.pi*180%360-180
-        my_dog.head_move([[0, 0, 0]], pitch_comp=-body_pitch, speed=80)
-        time.sleep(0.2)
-
-    my_dog.close()
+  .. code-block:: python
+  
+      from pidog import Pidog
+      import time
+      import math
+  
+      my_dog = Pidog()
+  
+      while True:
+          ax, ay, az = my_dog.accData
+          body_pitch = math.atan2(ay,ax)/math.pi*180%360-180
+          my_dog.head_move([[0, 0, 0]], pitch_comp=-body_pitch, speed=80)
+          time.sleep(0.2)
+  
+      my_dog.close()

@@ -1,14 +1,14 @@
-6. Do Preset Action
-=======================
+6. プリセットアクションを実行する
+==========================================
 
-Some commonly used actions have been pre-written in PiDog's library.
-You can call the following function to make PiDog do these actions directly.
+PiDogのライブラリには、よく使われるアクションが予め記述されています。
+以下の関数を呼び出して、PiDogにこれらのアクションを直接行わせることができます。
 
 .. code-block:: python
 
     Pidog.do_action(action_name, step_count=1, speed=50)
 
-* ``action_name`` : Action name, the following strings can be written.
+* ``action_name``: アクション名、以下の文字列が記述できます。
 
     * ``"sit"``
     * ``"half_sit"``
@@ -32,12 +32,13 @@ You can call the following function to make PiDog do these actions directly.
     * ``"head_up_down"``
     * ``"wag_tail"``
 
-* ``step_count`` : How many times to perform this action.
-* ``speed`` : How fast to perform the action.
+* ``step_count``: このアクションを何回実行するか。
+* ``speed``: アクションを実行する速度。
 
-**Here is an example of usage:**
+**使用例を以下に示します**：
 
-1. Do ten push-ups, then sit on the floor and act cute.
+1. 腕立て伏せを10回実行し、その後床に座ってかわいらしい態度をとる。
+
 
 .. code-block:: python
 

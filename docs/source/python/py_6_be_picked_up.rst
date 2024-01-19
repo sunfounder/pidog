@@ -1,11 +1,11 @@
-6. Be Picked Up
+6. 持ち上げられる
 ===================
 
-Try lifting your PiDog from the ground, PiDog will feel like it can fly, and it will cheer in a superman pose.
+PiDogを地面から持ち上げてみてください。PiDogは飛べると感じ、スーパーマンのポーズで歓声をあげます。
 
 .. image:: img/py_6.gif
 
-**Run the Code**
+**コードの実行**
 
 .. raw:: html
 
@@ -16,16 +16,16 @@ Try lifting your PiDog from the ground, PiDog will feel like it can fly, and it 
     cd ~/pidog/examples
     sudo python3 6_be_picked_up.py
 
-After the program runs, the 6-DOF IMU Module will always calculate the acceleration in the vertical direction.
-If PiDog is calculated to be in a state of weightlessness, PiDog assumes a superman pose and cheers.
-Otherwise, consider PiDog to be on flat ground and make a standing pose.
+プログラムが実行されると、6軸IMUモジュールは常に垂直方向の加速度を計算します。
+PiDogが無重力状態にあると計算された場合、スーパーマンのポーズをとり、歓声をあげます。
+そうでない場合は、PiDogが平地にあると考え、立ち姿勢をとります。
 
 
 
-**Code**
+**コード**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    以下のコードを **変更/リセット/コピー/実行/停止** することができます。ただし、それにはまず ``pidog\examples`` のようなソースコードのパスに移動する必要があります。コードを変更した後、直接実行して効果を確認することができます。
 
 .. raw:: html
 

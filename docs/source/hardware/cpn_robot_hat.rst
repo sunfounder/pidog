@@ -1,74 +1,68 @@
-Robot HAT
+ロボットHAT
 -----------------------------
-|link_robot_hat_v4| is a multifunctional expansion board that allows Raspberry Pi to be quickly turned into a robot. 
-An MCU is on board to extend the PWM output and ADC input for the Raspberry Pi, 
-as well as a motor driver chip, I2S audio module and mono speaker. 
-As well as the GPIOs that lead out of the Raspberry Pi itself.
+|link_robot_hat_v4| は、Raspberry Piを迅速にロボットに変換することができる多機能拡張ボードです。
+MCUが搭載されており、Raspberry PiのPWM出力とADC入力を拡張し、
+モータードライバーチップ、I2Sオーディオモジュール、モノスピーカーも備えています。
+また、Raspberry Pi自体から引き出されるGPIOもあります。
 
-It also comes with a Speaker, 
-which can be used to play background music, sound effects and implement TTS functions to make your project more interesting.
+スピーカーも付属しており、
+バックグラウンドミュージック、効果音、TTS機能の実装を行うことで、プロジェクトをより面白くすることができます。
 
-Accepts 7-12V PH2.0 5pin power input with 2 battery indicators, 1 charge indicator and 1 power indicator. 
-The board also has a user available LED and a button for you to quickly test some effects.
-
+7-12V PH2.0 5ピンの電源入力には2つのバッテリーインジケーター、1つの充電インジケーター、1つの電源インジケーターが付いています。
+ボードには、ユーザーが簡単にいくつかの効果をテストできるLEDとボタンもあります。
 
 .. image:: img/O1902V40RobotHAT.png
 
-**Left/Right Motor Port**
-    * 2-channel XH2.54 motor ports.
-    * The left port is connected to GPIO 4 and the right port is connected to GPIO 5.
+**電源ポート**
+    * 7-12V PH2.0 3ピンの電源入力。
+    * Raspberry PiとロボットHATを同時に供給。
 
-**I2C Pin/Port**
-    * I2C pins from Raspberry Pi.
+**電源スイッチ**
+    * ロボットHATの電源をオン/オフします。
+    * 電源ポートに電源を接続すると、Raspberry Piが起動します。しかし、ロボットHATを有効にするには電源スイッチをONに切り替える必要があります。
 
-**SPI Pin**
-    * SPI pins from Raspberry Pi.
+**Type-C USBポート**
+    * Type-Cケーブルを差し込んでバッテリーを充電します。
+    * 同時に、充電インジケーターが赤色で点灯します。
+    * バッテリーが完全に充電されると、充電インジケーターが消灯します。
+    * バッテリーが完全に充電された約4時間後にUSBケーブルがまだ接続されている場合、充電インジケーターが点滅してプロンプトが表示されます。
 
-**UART Pin**
-    * UART pins from Raspberry Pi.
+**デジタルピン**
+    * 4チャンネルのデジタルピン、D0-D3。
 
-**PWM Pin**
-    * 12-channel PWM pins, P0-P12.
+**ADCピン**
+    * 4チャンネルのADCピン、A0-A3。
 
-**ADC Pin**
-    * 4-channel ADC pins, A0-A3.
+**PWMピン**
+    * 12チャンネルのPWMピン、P0-P11。
 
-**Digital Pin**
-    * 4-channel digital pins, D0-D3.
+**左/右モーターポート**
+    * 2チャンネルのXH2.54モーターポート。
+    * 左ポートはGPIO 4に、右ポートはGPIO 5に接続されています。
 
-**Type-C USB Port**
-    * Energize this port to activate the battery.
-    * Used to charge the battery.
+**I2CピンとI2Cポート**
+    * **I2Cピン**: P2.54 4ピンインターフェース。
+    * **I2Cポート**: SH1.0 4ピンインターフェースで、QWIICとSTEMMA QTと互換性があります。
+    * これらのI2Cインターフェースは、GPIO2（SDA）とGPIO3（SCL）を介してRaspberry PiのI2Cインターフェースに接続されています。
 
-**Battery Indicator**
-    * Two LEDs light up when the voltage is higher than 7.8V.
-    * One LED lights up in the 6.7V to 7.8V range. 
-    * Below 6.7V, both LEDs turn off.
+**SPIピン**
+    * P2.54 7ピンSPIインターフェース。
 
-**Power Indicator**
-    * If Robot HAT is working, it lights up.
+**UARTピン**
+    * P2.54 4ピンインターフェース。
 
-**Chip Work Indicator**
-    * If Robot HAT chip is working, it lights up.
+**RSTボタン**
+    * Ezblockを使用する場合、RSTボタンはEzblockプログラムを再起動するためのボタンとして機能します。
+    * Ezblockを使用していない場合、RSTボタンには定義済みの機能はなく、必要に応じて完全にカスタマイズできます。
 
-**Charge Indicator**
-    * On when charging the battery.
-    * Off when the battery is fully charged.
+**USRボタン**
+    * USRボタンの機能はプログラミングによって設定できます。（押し込むと入力「0」；放すと入力「1」が生成されます。）
 
-**User LED**
-    * Set by your program. (Outputting 1 turns the LED on; Outputting 0 turns it off.)
+**バッテリーインジケーター**
+    * 電圧が7.6Vを超えると2つのLEDが点灯します。
+    * 7.15Vから7.6Vの範囲で1つのLEDが点灯します。
+    * 7.15V以下では、両方のLEDが消灯します。
 
-**RST Button**
-    * Short pressing RST Button causes program resetting.
-    * Long press RST Button till the LED lights up then release, and you will disconnect the Bluetooth.
-
-**USR Button**
-    * The functions of USR Button can be set by your programming. (Pressing down leads to a input “0”; releasing produces a input “1”. ) 
-
-**Power Switch**
-    * Turn on/off the power of the robot HAT.
-    * When you connect power to the power port, the Raspberry Pi will boot up. However, you will need to switch the power switch to ON to enable Robot HAT.
-
-**Power Port**
-    * 7-12V PH2.0 5pin power input.
-    * Powering the Raspberry Pi and Robot HAT at the same time.
+**スピーカーとスピーカーポート**
+    * **スピーカー**: これは2030オーディオチャンバースピーカーです。
+    * **スピーカーポート**: ロボットHATにはオンボードI2Sオーディオ出力が装備されており、2030オーディオチャンバースピーカーとともにモノサウンド出力を提供します。

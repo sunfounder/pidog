@@ -1,44 +1,41 @@
-3. Head Move
+3. 頭の動き
 ================
 
-The control of PiDog's head servo is implemented by the following functions.
+PiDogの頭部サーボの制御は、以下の関数によって実装されています。
 
 .. code-block:: python
 
     Pidog.head_move(target_yrps, roll_comp=0, pitch_comp=0, immediately=True, speed=50)
 
-* ``target_angles`` : It is a two-dimensional array composed of an array of 3 servo angles (referred to as angle group) as elements. These angle groups will be used to control the angles of the 8 foot servos. If multiple angle groups are written, the unexecuted angle groups will be stored in the cache.
-* ``roll_comp`` : Provides angular compensation on the roll axis.
-* ``pitch_comp`` : Provides angle compensation on the pitch axis.
-* ``immediately`` : When calling the function, set this parameter to ``True``, the cache will be cleared immediately to execute the newly written angle group; if the parameter is set to ``False``, the newly written The incoming angular group is added to the execution queue.
-* ``speed`` : The speed at which the angular group is executed.
+* ``target_angles``: 3つのサーボ角度の配列（角度グループと呼ばれる）からなる二次元配列です。これらの角度グループは、頭部の3つのサーボの角度を制御するために使用されます。複数の角度グループが書かれている場合、実行されていない角度グループはキャッシュに保存されます。
+* ``roll_comp``: ロール軸に対する角度補正を提供します。
+* ``pitch_comp``: ピッチ軸に対する角度補正を提供します。
+* ``immediately``: 関数を呼び出すとき、このパラメータを ``True`` に設定すると、キャッシュはすぐにクリアされて新しく書かれた角度グループが実行されます。パラメータを ``False`` に設定すると、新しく書かれた角度グループが実行キューに追加されます。
+* ``speed``: 角度グループの実行速度。
 
-
-**PiDog's head servo control also has some supporting functions:**
-
+**PiDogの頭部サーボ制御には、以下のサポート機能もあります**：
 
 .. code-block:: python
 
     Pidog.is_head_done()
 
-Whether all the head actions in the buffer to be executed
+実行される予定のバッファ内のすべての頭部アクションが完了しているかどうか
 
 .. code-block:: python
 
     Pidog.wait_head_done()
 
-Wait for all the head actions in the buffer to be executed
+バッファ内のすべての頭部アクションが実行されるまで待ちます
 
 .. code-block:: python
 
     Pidog.head_stop()
 
-Clear all the head actions of leg in the buffer, to make head servos stop
+バッファ内の足のすべての頭部アクションをクリアし、頭部サーボを停止させます
 
+**以下は一般的な使用例です**：
 
-**Here are some common use cases:**
-
-1. Nod five times.
+1. 5回うなずく。
 
 .. code-block:: python
 
@@ -52,7 +49,7 @@ Clear all the head actions of leg in the buffer, to make head servos stop
         my_dog.wait_head_done()
         time.sleep(0.5)
 
-2. Shake your head for 10 seconds.
+2. 10秒間頭を振る。
 
 .. code-block:: python
 
@@ -64,12 +61,12 @@ Clear all the head actions of leg in the buffer, to make head servos stop
     for _ in range(99):
         my_dog.head_move([[30, 0, 0],[-30, 0, 0]], immediately=False, speed=30)
 
-    # keep 10s
+    # 10秒間維持
     time.sleep(10)
 
     my_dog.head_move([[0, 0, 0]], immediately=True, speed=80)
 
-3. Whether sitting or half standing, PiDog keeps its head level when shaking its head.
+3. 座っているか半立ちしているかにかかわらず、PiDogは頭を振るときに頭を水平に保ちます。
 
 .. code-block:: python
 
@@ -78,23 +75,22 @@ Clear all the head actions of leg in the buffer, to make head servos stop
 
     my_dog = Pidog()
 
-    # action list
+    # アクションリスト
     shake_head = [[30, 0, 0],[-30, 0, 0]]
     half_stand_leg = [[45, 10, -45, -10, 45, 10, -45, -10]]
     sit_leg = [[30, 60, -30, -60, 80, -45, -80, 45]]
 
     while True:
-        # shake head in half stand
+        # 半立ちで頭を振る
         my_dog.legs_move(half_stand_leg, speed=30)
         for _ in range(5):
             my_dog.head_move(shake_head, pitch_comp=0, speed=50)
         my_dog.wait_head_done()
         time.sleep(0.5)
 
-        # shake head in sit
+        # 座って頭を振る
         my_dog.legs_move(sit_leg, speed=30)
         for _ in range(5):
             my_dog.head_move(shake_head, pitch_comp=-30, speed=50)
         my_dog.wait_head_done()
         time.sleep(0.5)
-

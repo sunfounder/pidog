@@ -1,89 +1,87 @@
-11. Play PiDog with Keyboard
+11. キーボードでPiDogを操作する
 ======================================
 
-
-In this example, we will use the keyboard to control PiDog. You can press these keys in the terminal to make it act.
-
+この例では、キーボードを使ってPiDogを操作します。ターミナルでこれらのキーを押すことで、PiDogに行動させることができます。
 
 .. list-table:: 
     :widths: 25 50 25 50 25 50
     :header-rows: 1
 
-    * - Keys
-      - Function
-      - Keys
-      - Function
-      - Keys
-      - Function  
+    * - キー
+      - 機能
+      - キー
+      - 機能
+      - キー
+      - 機能  
     * - 1
-      - doze off
+      - うとうとする
       - q
-      - bark harder
+      - より大きく吠える
       - a
-      - turn left
+      - 左に回る
     * - 2
-      - push-up
+      - 腕立て伏せ
       - w
-      - forward
+      - 前進
       - s
-      - backward
+      - 後退
     * - 3
-      - howling
+      - 遠吠え
       - e
-      - pant
+      - ハアハアする
       - d
-      - turn right
+      - 右に回る
     * - 4
-      - twist body
+      - 体をねじる
       - r
-      - wag tail
+      - 尻尾を振る
       - f
-      - shake head
+      - 頭を振る
     * - 5
-      - scratch
+      - かく
       - t
-      - hake head
+      - 頭を振る
       - g
-      - high five
+      - ハイファイブ
     * - u
-      - head roll
+      - 頭をロールする
       - U
-      - head roll+
+      - 頭をロールする+
       - z
-      - lie
+      - 横になる
     * - i
-      - head pitch
+      - 頭をピッチする
       - I
-      - head pitch+
+      - 頭をピッチする+
       - x
-      - stand up
+      - 立ち上がる
     * - o
-      - head roll
+      - 頭をロールする
       - O
-      - head roll+
+      - 頭をロールする+
       - c
-      - sit
+      - 座る
     * - j
-      - head yaw
+      - 頭をヨーする
       - J
-      - head yaw+
+      - 頭をヨーする+
       - v
-      - stretch
+      - 伸びる
     * - k
-      - head pitch
+      - 頭をピッチする
       - K
-      - head pitch+
+      - 頭をピッチする+
       - m
-      - head reset
+      - 頭をリセットする
     * - l
-      - head yaw
+      - 頭をヨーする
       - L
-      - head yaw+
+      - 頭をヨーする+
       - W
-      - trot
+      - トロット
 
 
-**Run the Code**
+**コードの実行**
 
 .. raw:: html
 
@@ -94,10 +92,10 @@ In this example, we will use the keyboard to control PiDog. You can press these 
     cd ~/pidog/examples
     sudo python3 11_keyboard_control.py
 
-After the program runs, you will see a printed keyboard on the terminal. Now you can control PiDog with keyboard in terminal.
+プログラムが実行されると、ターミナルにキーボードが表示されます。これで、ターミナルでキーボードを使ってPiDogを制御できます。
 
 
 
-**Code**
+**コード**
 
-Please find the code in |link_code_11_keyboard_control|.
+コードは |link_code_11_keyboard_control| にあります。

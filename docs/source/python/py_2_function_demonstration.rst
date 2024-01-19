@@ -1,11 +1,12 @@
-2. Function Demonstration
+2. 機能デモンストレーション
 ===============================
 
-This project shows you all of PiDog's usual actions and sounds.
+このプロジェクトでは、PiDogの一般的な動作と音をすべて紹介します。
 
-You can make PiDog make actions or make sounds by entering the serial number.
+シリアル番号を入力することで、PiDogに動作や音を出させることができます。
 
-The motion/sound effects currently included in this example are listed below.
+現在この例に含まれている動作/音響効果は以下の通りです。
+
 
 .. image:: img/py_2.gif
 
@@ -48,7 +49,7 @@ The motion/sound effects currently included in this example are listed below.
 
 
 
-**Run the Code**
+**コードの実行**
 
 .. raw:: html
 
@@ -59,16 +60,16 @@ The motion/sound effects currently included in this example are listed below.
     cd ~/pidog/examples
     sudo python3 2_function_demonstration.py
 
-After running this example, you input ``1`` and press ``ENTER``, PiDog will stand; input ``2``, PiDog will sit down; input ``27``, PiDog will issue "woohoo~ ".
+この例を実行した後、 ``1`` と入力して ``ENTER`` キーを押すと、PiDogが立ち上がります； ``2`` と入力すると、PiDogが座ります； ``27`` と入力すると、PiDogが ``woohoo~`` と音を発します。
 
-Press ``Ctrl+C`` to exit the program.
+プログラムを終了するには ``Ctrl+C`` を押します。
 
 
 
-**Code**
+**コード**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    以下のコードを **変更/リセット/コピー/実行/停止** することができます。ただし、それにはまず ``pidog\examples`` のようなソースコードのパスに移動する必要があります。コードを変更した後、直接実行して効果を確認することができます。
 
 .. raw:: html
 
