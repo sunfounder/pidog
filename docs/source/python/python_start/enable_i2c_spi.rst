@@ -1,9 +1,9 @@
 .. _i2c_spi_config:
 
-5. Enable I2C, SPI Interface
+6. Check I2C and SPI Interface
 ========================================
 
-Here we are using the Raspberry Pi's I2C and Camera interfaces, but by default they are disabled, so we need to enable them first.
+We will be using Raspberry Pi's I2C and SPI interfaces. These interfaces should have been enabled when installing the ``robot-hat`` module earlier. To ensure everything is in order, let's check if they are indeed enabled.
 
 #. Input the following command:
 
@@ -33,7 +33,9 @@ Here we are using the Raspberry Pi's I2C and Camera interfaces, but by default t
 #. Go to **Interfacing Options** again and select **SPI**.
 
     .. image:: img/image-spi1.png
+        :align: center
 
 #. Use the arrow keys on the keyboard to select **<Yes>** -> **<OK>** to complete the setup of the SPI.
 
     .. image:: img/image-spi2.png
+        :align: center

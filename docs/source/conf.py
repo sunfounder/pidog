@@ -109,9 +109,13 @@ rst_epilog += """
 
     <a href="https://github.com/sunfounder/pidog/blob/master/examples/10_balance.py" target="_blank">10_balance.py - Github</a>
 
-
 .. |link_code_11_keyboard_control| raw:: html
 
     <a href="https://github.com/sunfounder/pidog/blob/master/examples/11_keyboard_control.py" target="_blank">11_keyboard_control.py - Github</a>
+
+.. |link_robot_hat_v4| raw:: html
+
+    <a href="https://docs.sunfounder.com/projects/robot-hat-v4/en/latest/hardware_introduction.html" target="_blank">Robot HAT</a>
+
 
 """

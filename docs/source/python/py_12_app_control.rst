@@ -1,8 +1,14 @@
 12. Play PiDog with APP
 =============================
 
-
 In this example, we will use SunFounder Controller APP to control PiDog.
+
+.. raw:: html
+
+   <video width="600" loop autoplay muted>
+      <source src="../_static/video/app_control.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+   </video>
 
 
 You need to download the APP on your phone/tablet first, then connect to the hotspot sent by PiDog, and finally create your own remote control on SunFounder Controller to control PiDog.
@@ -124,13 +130,13 @@ Here are the functions of the widgets.
 
 Autostart on Boot
 -----------------
-When controlling Pidog via the APP, you wouldn't want to first log into the Raspberry Pi and keep ``12_app_control.py`` running before connecting with the APP.
+When controlling PiDog via the APP, you wouldn't want to first log into the Raspberry Pi and keep ``12_app_control.py`` running before connecting with the APP.
 
-There's a more streamlined approach. You can set Pidog to automatically run ``12_app_control.py`` every time it's powered on. After this, you can directly connect to Pidog using the APP and control your robotic dog with ease.
+There's a more streamlined approach. You can set PiDog to automatically run ``12_app_control.py`` every time it's powered on. After this, you can directly connect to PiDog using the APP and control your robotic dog with ease.
 
 How to set this up?
 
-#. Execute the following commands to install and configure the ``pidog_app`` application and set up WiFi for Pidog.
+#. Execute the following commands to install and configure the ``pidog_app`` application and set up WiFi for PiDog.
 
     .. raw:: html
 
@@ -141,11 +147,11 @@ How to set this up?
         cd ~/pidog/bin
         sudo bash pidog_app_install.sh
 
-#. At the end, input ``y`` to reboot Pidog.
+#. At the end, input ``y`` to reboot PiDog.
 
     .. image:: img/auto_start.png
 
-#. From then on, you can simply power on Pidog and control it directly using the APP.
+#. From then on, you can simply power on PiDog and control it directly using the APP.
 
 .. warning::
 
@@ -162,14 +168,14 @@ You can input the following commands to modify the APP mode's settings.
     pidog_app <OPTION> [input]
 
 **OPTION**
-    * ``-h`` ``help`` : help, show this message
-    * ``start`` ``restart`` : restart ``pidog_app`` service
-    * ``stop`` : stop ``pidog_app`` service
-    * ``disable`` : disable auto-start ``app_controller`` program on bootstrap
-    * ``enable`` : enable auto-start ``app_controller`` program on bootstrap
-    * ``close_ap`` : close hotspot, disable auto-start hotspot on boot and switch to sta mode
-    * ``open_ap`` : open hotspot, enable auto-start hotspot on boot
-    * ``ssid`` : set the ssid (network name) of the hotspot
-    * ``psk`` : set the password of the hotspot
-    * ``country`` : set the country code of the hotspot
+    * ``-h`` ``help``: help, show this message
+    * ``start`` ``restart``: restart ``pidog_app`` service
+    * ``stop``: stop ``pidog_app`` service
+    * ``disable``: disable auto-start ``app_controller`` program on bootstrap
+    * ``enable``: enable auto-start ``app_controller`` program on bootstrap
+    * ``close_ap``: close hotspot, disable auto-start hotspot on boot and switch to sta mode
+    * ``open_ap``: open hotspot, enable auto-start hotspot on boot
+    * ``ssid``: set the ssid (network name) of the hotspot
+    * ``psk``: set the password of the hotspot
+    * ``country``: set the country code of the hotspot
 

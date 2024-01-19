@@ -1,68 +1,54 @@
-3. Set up Your Raspberry Pi
-============================
+4. Setting Up Your Raspberry Pi
+=====================================
 
-Power Supply for Raspberry Pi (Important)
---------------------------------------------------
+Setting Up with a Screen
+---------------------------
 
-#. Insert the SD card set up with Raspberry Pi OS into the microSD card slot located on the underside of the Raspberry Pi.
-
-    .. image:: img/insert_sd_card.png
-        :width: 500
-        :align: center
-
-#. Following the assembly instructions, insert the battery cable and turn on the power switch. Next, insert the USB-C cable to power up the battery. Wait for 1-2 minutes, and you will hear a sound indicating that the Raspberry Pi has successfully booted.
-
-    .. image:: img/Z_BTR.JPG
-        :width: 800
-        :align: center
-
-    .. note::
-
-        It is recommended to leave the USB-C cable plugged in, as the subsequent software setup process can take a considerable amount of time.
-
-
-If You Have a Screen
--------------------------
-
-If you have a screen, it will be easy for you to operate on the
-Raspberry Pi.
+Having a screen simplifies the process of working with your Raspberry Pi.
 
 **Required Components**
 
-================== =========================
-Any Raspberry Pi   1 \* Power Adapter
-1 \* Micro SD card 1 \* Screen Power Adapter
-1 \* HDMI cable    1 \* Screen
-1 \* Mouse         1 \* Keyboard
-================== =========================
+* Raspberry Pi 5 Model B
+* Power Adapter
+* Micro SD card
+* Screen Power Adapter
+* HDMI cable
+* Screen
+* Mouse
+* Keyboard
 
-#. Plug in the Mouse and Keyboard.
+**Steps**:
 
-#. Connect the screen to Raspberry Pi's HDMI port and make sure your screen is plugged into a wall socket and switched on.
+#. Connect the Mouse and Keyboard to the Raspberry Pi.
 
-    .. note::
+#. Use the HDMI cable to connect the screen to the Raspberry Pi's HDMI port. Ensure the screen is plugged into a power source and turned on.
 
-        If you use a Raspberry Pi 4, you need to connect the screen to the HDMI0 (nearest the power in port).
+#. Power the Raspberry Pi using the power adapter. The Raspberry Pi OS desktop should appear on the screen after a few seconds.
 
-#. Use the power adapter to power the Raspberry Pi. After a few seconds, the Raspberry Pi OS desktop will be displayed.
-
-    .. image:: img/image20.png
+    .. image:: img/bullseye_desktop.png
         :align: center
 
-If You Have No Screen
---------------------------
+Setting Up Without a Screen
+------------------------------
 
-If you don't have a monitor, you can remotely log into your Raspberry Pi.
+If you don't have a monitor, remote login is a viable option.
 
-You can apply the SSH command to open the Raspberry Pi's Bash shell. Bash is the standard default shell for Linux. The shell itself is a command (instruction) when the user uses Unix/Linux. Most of what you need to do can be done through the shell.
+**Required Components**
 
-If you're not satisfied with using the command window to access your Raspberry Pi, you can also use the remote desktop feature to easily manage files on your Raspberry Pi using a GUI.
+* Raspberry Pi 5 Model B 
+* Power Adapter
+* Micro SD card
 
-See below for detailed tutorials for each system.
+Using SSH, you can access the Raspberry Pi's Bash shell, which is the default Linux shell. Bash offers a command-line interface for performing various tasks.
 
+For those preferring a graphical user interface (GUI), the remote desktop feature is a convenient alternative for managing files and operations.
+
+For detailed setup tutorials based on your operating system, refer to the following sections:
 
 .. toctree::
 
     remote_macosx
     remote_windows
     remote_linux
+    remote_desktop
+

@@ -1,7 +1,7 @@
 1. PiDog Initialization
 ============================
 
-The functions of PiDog are written in the Pidog class, and the prototype of this class is shown below.
+The functions of PiDog are written in the ``Pidog`` class, and the prototype of this class is shown below.
 
 .. code-block:: python
 
@@ -15,7 +15,7 @@ The functions of PiDog are written in the Pidog class, and the prototype of this
             tail_init_angle=None)
 
 
-Pidog must be instantiated in one of several ways, as shown below.
+PiDog must be instantiated in one of several ways, as shown below.
 
 1. Following are the simplest steps of initialization.
 
@@ -40,16 +40,16 @@ Pidog must be instantiated in one of several ways, as shown below.
                     tail_init_angle= [0]
                 )
 
-In the Pidog class, the servos are divided into three groups.
+In the ``Pidog`` class, the servos are divided into three groups.
 
-* ``leg_init_angles`` : In this array, 8 values determine the angles of eight servos, with the servos (pin numbers) they control being `2, 3, 7, 8, 0, 1, 10, 11`. From the foldout, you can see where these servos are located.
+* ``leg_init_angles`` : In this array, 8 values determine the angles of eight servos, with the servos (pin numbers) they control being ``2, 3, 7, 8, 0, 1, 10, 11``. From the foldout, you can see where these servos are located.
 
-* ``head_init_angles`` : There is an array with 3 values, controllers for PiDog-head yaw, roll, pitch servos (`no. 4, 6, 5`) which react to yaw, roll, pitch, or Deflection of the body.
+* ``head_init_angles`` : There is an array with 3 values, controllers for PiDog-head yaw, roll, pitch servos (``no. 4, 6, 5``) which react to yaw, roll, pitch, or Deflection of the body.
 
-* ``tail_init_angle`` : In this array, there is only one value, which is dedicated to controlling the tail servo, which is `9`.
+* ``tail_init_angle`` : In this array, there is only one value, which is dedicated to controlling the tail servo, which is ``9``.
 
 
-3. Pidog allows you to redefine the serial number of the servos when instantiating the robot if your servo order is different.
+3. ``Pidog`` allows you to redefine the serial number of the servos when instantiating the robot if your servo order is different.
 
 .. code-block:: python
 

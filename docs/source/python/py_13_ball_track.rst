@@ -6,6 +6,14 @@
 PiDog will sit quietly in place.
 You put a red ball in front of it, it will stand, and then chase the ball.
 
+.. raw:: html
+
+   <video width="600" loop autoplay muted>
+      <source src="../_static/video/bull_track.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+   </video>
+
+
 **Run the Code**
 
 .. raw:: html

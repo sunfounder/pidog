@@ -12,8 +12,12 @@ If you reach out and grab PiDog's head from the front, it will bark vigilantly.
 
 But if you reach out from behind it and pet its head, it will enjoy it very much.
 
-.. image:: img/py_4.gif
-    :width: 430
+.. raw:: html
+
+   <video width="600" loop autoplay muted>
+      <source src="../_static/video/touch_head.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+   </video>
 
 **Run the Code**
 

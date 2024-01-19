@@ -2,8 +2,9 @@ SunFounder Raspberry Pi Robot - PiDog
 =============================================
 
 
-.. image:: IMG_8574-1.jpg
-    :width: 680
+.. image:: img/pidog.jpg
+    :width: 400
+    :align: center
 
 Thank you for choosing our PiDog.
 
@@ -16,7 +17,6 @@ Special touch sensors allow it to respond to your touch;
 The Light Board on the chest can emit colorful light effects, and with the speaker equipped with the robot HAT, PiDog can express emotions such as happiness and excitement.
 In addition, PiDog is also equipped with a sound direction sensor and a 6-DOF IMU module to realize more complex and interesting usage scenarios.
 
-This document includes the list and assembly pdf, hardware introduction and PiDog programming.
 
 If you have any questions, please send an email to service@sunfounder.com and we will respond as soon as possible.
 
@@ -27,7 +27,7 @@ If you have any questions, please send an email to service@sunfounder.com and we
     :maxdepth: 2
 
     About This Kit <self>
-    list_and_assembly
+    assemble_video
     python/play_with_python 
     hardware/cpn_hardware
     appendix/appendix

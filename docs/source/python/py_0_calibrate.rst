@@ -1,20 +1,37 @@
 2. Calibrate the PiDog
 =============================
-It is recommended that you calibrating the Pidog after assembling it. The servo angle will be tilted due to possible deviations during assembly or limitations of the servo itself, so you can get the servo to a perfect state by calibrating it, usually the calibration angle is -5~5°.
 
-But if the deviation angle is too big, you still have to go back to :ref:`py_servo_adjust` to set the servo angle to 0°, and then follow the instructions to reassemble the Pidog.
+**Introduction**
+
+Calibrating your PiDog is an essential step to ensure its stable and efficient operation. This process helps correct any imbalances or inaccuracies that might have arisen during assembly or from structural issues. Follow these steps carefully to ensure your PiDog walks steadily and performs as expected.
+
+.. raw:: html
+
+   <video width="600" loop autoplay muted>
+      <source src="../_static/video/calibrate_before.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+   </video>
 
 
-Of course you can skip this chapter if you think the assembly is perfect and doesn't require calibration.
+But if the deviation angle is too big, you still have to go back to :ref:`py_servo_adjust` to set the servo angle to 0°, and then follow the instructions to reassemble the PiDog.
 
+**Calibrate Video**
+
+For a comprehensive guide, refer to the full calibration video. It provides a visual step-by-step process to accurately calibrate your PiDog.
+
+.. raw:: html
+
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=g8_RZDUkfjdwbLZu&amp;start=871&end=1160" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+**Steps**
 
 The specific steps are as follows:
 
-1. Put the PiDog on the base.
+#. Put the PiDog on the base.
 
-.. image:: img/place-pidog.JPG
+    .. image:: img/place-pidog.JPG
 
-2. Run the ``0_calibration.py``.
+#. Navigate to the PiDog examples directory and run the ``0_calibration.py`` script.
 
     .. raw:: html
 
@@ -25,17 +42,16 @@ The specific steps are as follows:
         cd ~/pidog/examples
         sudo python3 0_calibration.py
         
-    After running the above code, you will see the following interface displayed in the terminal.
+    Upon running the script, a user interface will appear in your terminal.
 
     .. image:: img/calibration_1.png
 
+#. Position the **Calibration Ruler** (Acrylic C) as shown in the provided image. In the terminal, press ``1``, followed by ``w`` and ``s`` keys to align the edges as indicated in the image.
 
-3. Place the square (Acrylic C) to the position shown in the picture. Press ``1`` in the terminal, then press ``w``, ``s`` to make the two edges marked in the figure coincide.
+    .. image:: img/CALI-1.2.png
 
-.. image:: img/CALI-1.2.png
+#. Reposition the **Calibration Ruler** (Acrylic C) as illustrated in the next image. Press ``2`` in the terminal, then use ``w`` and ``s`` to align the edges as shown.
 
-4. Place the square (Acrylic C) to the position shown in the picture. Press ``2`` in the terminal, then press ``w``, ``s`` to make the two edges marked in the figure coincide.
+    .. image:: img/CALI-2.2.png
 
-.. image:: img/CALI-2.2.png
-
-5. Configure the remaining ``3``, ``4``, ``5``, ``6``, ``7``, ``8`` servos in turn, and calibrate all four feet .
+5. Repeat the calibration process for the remaining servos (3 to 8). Ensure all four legs of the PiDog are calibrated.

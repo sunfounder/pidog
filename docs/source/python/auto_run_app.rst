@@ -37,7 +37,7 @@ Now that your PiDog is all set up and raring to go, this section is perfect for 
 
 #. Connect to ``pidog`` WLAN.
 
-    Now, connect your mobile device to the local area network (LAN) broadcast by the Pidog. This way, your mobile device and the Pidog will be on the same network, which will facilitate communication between the applications on your mobile device and the Pidog.
+    Now, connect your mobile device to the local area network (LAN) broadcast by the PiDog. This way, your mobile device and the PiDog will be on the same network, which will facilitate communication between the applications on your mobile device and the PiDog.
 
     * Find ``pidog`` on the WLAN of the mobile phone (tablet), enter the password ``12345678`` and connect to it.
 

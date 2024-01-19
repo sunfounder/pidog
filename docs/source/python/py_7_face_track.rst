@@ -3,7 +3,12 @@
 
 PiDog will sit quietly in place. You applaud it, it looks your way, and if it sees you, it says hello.
 
-.. image:: img/py_7.jpg
+.. raw:: html
+
+   <video width="600" loop autoplay muted>
+      <source src="../_static/video/face_track.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+   </video>
 
 **Run the Code**
 

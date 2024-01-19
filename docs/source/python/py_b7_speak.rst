@@ -9,7 +9,7 @@ These audios are saved under ``pidog\sounds`` path, you can call the following f
 
    Pidog.speak(name)
 
-* ``name`` : Filename (without suffix), such as ``"angry"``. PiDog provides the following audio.
+* ``name`` : Filename (without suffix), such as ``"angry"``. ``Pidog`` provides the following audio.
 
   * ``"angry"``
   * ``"confused_1"``

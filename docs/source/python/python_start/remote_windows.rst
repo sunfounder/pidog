@@ -1,114 +1,53 @@
-Windows Users
+For Windows Users
 =======================
 
+For Windows 10 or higher users, remote login to a Raspberry Pi can be achieved through the following steps:
 
-If you're a Windows user, you can use Windows PowerShell to login Raspberry Pi remotely.
+#. Search for ``powershell`` in your Windows search box. Right-click on ``Windows PowerShell`` and select ``Run as administrator``.
 
-#. Press the ``windows`` + ``R`` shortcut key in your keyboard to open the **Run** program. Then type **powershell** in the input box. 
-
-    .. image:: img/sp221221_135900.png
+    .. image:: img/powershell_ssh.png
         :align: center
 
-#. Check if your Raspberry Pi is on the same network by type in ``ping <hostname>.local``. 
+#. Determine your Raspberry Pi's IP address by typing ``ping -4 <hostname>.local`` in PowerShell.
 
     .. code-block::
 
-        ping raspberrypi.local
+        ping -4 raspberrypi.local
 
     .. image:: img/sp221221_145225.png
         :width: 550
         :align: center
 
-    * If terminal prompts ``Ping request could not find host <hostname>.local``, it is possible that the Raspberry Pi failed to connect to the network.lease check the network.
-    * If you really can't ping ``<hostname>.local``, try to :ref:`get_ip`  and ``ping <IP address>`` instead. (e.g., ``ping 192.168.6.116``)
-    * If multiple prompts like "Reply from <IP address>: bytes=32 time<1ms TTL=64" appear, it means your computer can access the Raspberry Pi.
+    The Raspberry Pi's IP address will be displayed once it's connected to the network.
 
+    * If the terminal displays ``Ping request could not find host pi.local. Please check the name and try again.``, verify the hostname you've entered is correct.
+    * If the IP address still isn't retrievable, check your network or WiFi settings on the Raspberry Pi.
 
-#. Type in ``ssh <username>@<hostname>.local`` (or ``ssh <username>@<IP address>``).
+#. Once the IP address is confirmed, log in to your Raspberry Pi using ``ssh <username>@<hostname>.local`` or ``ssh <username>@<IP address>``.
 
     .. code-block::
 
         ssh pi@raspberrypi.local
 
+    .. warning::
 
-#. The following message may appear.
+        If an error appears stating ``The term 'ssh' is not recognized as the name of a cmdlet...``, your system may not have SSH tools pre-installed. In this case, you need to manually install OpenSSH following :ref:`openssh_powershell`, or use a third-party tool as described in :ref:`login_windows`.
+
+#. A security message will appear on your first login. Enter ``yes`` to proceed.
 
     .. code-block::
 
-        The authenticity of host 'raspberrypi.local (192.168.6.116)' can't be established.
-        ECDSA key fingerprint is SHA256:7ggckKZ2EEgS76a557cddfxFNDOBBuzcJsgaqA/igz4.
-        Are you sure you want to continue connecting (yes/no/[fingerprint])? 
+        The authenticity of host 'raspberrypi.local (2400:2410:2101:5800:635b:f0b6:2662:8cba)' can't be established.
+        ED25519 key fingerprint is SHA256:oo7x3ZSgAo032wD1tE8eW0fFM/kmewIvRwkBys6XRwg.
+        Are you sure you want to continue connecting (yes/no/[fingerprint])?
 
-    Input \"yes\".
-
-#. Input the password you set before. (Mine is ``raspberry``.)
+#. Enter the password you previously set. Note that the password characters won't be displayed on the screen, which is a standard security feature.
 
     .. note::
-        When you input the password, the characters do not display on
-        window accordingly, which is normal. What you need is to input the
-        correct password.
+        The absence of visible characters when typing the password is normal. Ensure you input the correct password.
 
-#. We now get the Raspberry Pi connected and are ready to go to the next step.
+#. Once connected, your Raspberry Pi is ready for remote operations.
 
     .. image:: img/sp221221_140628.png
         :width: 550
-        :align: center
-
-Remote Desktop
-------------------
-
-If you're not satisfied with using the command window to access your Raspberry Pi, you can also use the remote desktop feature to easily manage files on your Raspberry Pi using a GUI.
-
-Here we use `VNC® Viewer <https://www.realvnc.com/en/connect/download/viewer/>`_.
-
-**Enable VNC service**
-
-The VNC service has been installed in the system. By default, VNC is
-disabled. You need to enable it in config.
-
-#. Input the following command:
-
-    .. raw:: html
-
-        <run></run>
-
-    .. code-block:: 
-
-        sudo raspi-config
-
-    .. image:: img/image287.png
-        :align: center
-
-#. Choose **3** **Interfacing Options** by press the down arrow key on your keyboard, then press the **Enter** key.
-
-    .. image:: img/image282.png
-        :align: center
-
-#. Then **P3 VNC**. 
-
-    .. image:: img/image288.png
-        :align: center
-
-#. Use the arrow keys on the keyboard to select **<Yes>** -> **<OK>** -> **<Finish>** to complete the setup.
-
-    .. image:: img/mac_vnc8.png
-        :align: center
-
-**Login to VNC**
-
-#. You need to download and install the `VNC Viewer <https://www.realvnc.com/en/connect/download/viewer/>`_ on personal computer.
-
-#.  Open it once the installation is complete. Then, enter the host name or IP address and press Enter.
-
-    .. image:: img/vnc_viewer1.png
-        :align: center
-
-#. After entering your Raspberry Pi name and password, click **OK**.
-
-    .. image:: img/vnc_viewer2.png
-        :align: center
-
-#. Now you can see the desktop of the Raspberry Pi.
-
-    .. image:: img/image294.png
         :align: center

@@ -41,9 +41,9 @@ You can control PiDog to walk smoothly on the ramp by typing the below keys.
     * -  D
       -  Turn Right 
     * -  R
-      -  Up     
+      -  Each press slightly lifts the body; multiple presses are needed for a noticeable rise.     
     * -  F
-      -  Down 
+      -  Each press lowers the body a bit; it takes multiple presses for a noticeable descent.
     
 
 **Code**
