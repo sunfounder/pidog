@@ -8,6 +8,16 @@ SunFounder Raspberry Pi Robot - PiDog
 
 Thank you for choosing our PiDog.
 
+.. note::
+    This document is available in the following languages.
+
+        * |link_german_tutorials|
+        * |link_jp_tutorials|
+        * |link_en_tutorials|
+    
+    Please click on the respective links to access the document in your preferred language.
+
+
 PiDog is a Raspberry Pi pet robot with aluminum alloy structure. It can act as a mechanical pet, show cuteness to you, and interact with you.
 
 It is equipped with a camera module, which can perform color recognition, face detection and other projects;
