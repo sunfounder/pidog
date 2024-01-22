@@ -12,7 +12,6 @@ MCUが搭載されており、Raspberry PiのPWM出力とADC入力を拡張し�
 ボードには、ユーザーが簡単にいくつかの効果をテストできるLEDとボタンもあります。
 
 .. image:: img/O1902V40RobotHAT.png
-
 **電源ポート**
     * 7-12V PH2.0 3ピンの電源入力。
     * Raspberry PiとロボットHATを同時に供給。
