@@ -1,15 +1,13 @@
 10. Balance
 =============
 
+Da PiDog mit einem 6-DOF-IMU-Modul ausgestattet ist, hat es einen großartigen Sinn für Balance.
 
-Because PiDog is equipped with a 6-DOF IMU module, it has a great sense of balance.
-
-In this example, you can make PiDog walk smoothly on the table, even if you lift one side of the table, PiDog will walk smoothly on the gentle slope.
-
+In diesem Beispiel können Sie PiDog sanft auf dem Tisch laufen lassen, selbst wenn Sie eine Seite des Tisches anheben, wird PiDog sanft am Hang entlanglaufen.
 
 .. image:: img/py_10.gif
 
-**Run the Code**
+**Code ausführen**
 
 .. raw:: html
 
@@ -20,33 +18,31 @@ In this example, you can make PiDog walk smoothly on the table, even if you lift
     cd ~/pidog/examples
     sudo python3 10_balance.py
 
-After the program is running, you will see a printed keyboard on the terminal.
-You can control PiDog to walk smoothly on the ramp by typing the below keys.
-
+Nachdem das Programm läuft, sehen Sie eine gedruckte Tastatur im Terminal.
+Sie können PiDog steuern, um sanft am Hang zu laufen, indem Sie die folgenden Tasten verwenden.
 
 .. list-table:: 
     :widths: 25 25
     :header-rows: 1
 
-    * - Keys
-      - Function
+    * - Tasten
+      - Funktion
     * -  W
-      -  Forward 
+      -  Vorwärts gehen
     * -  E
-      -  Stand 
+      -  Stehen
     * -  A
-      -  Turn Left 
+      -  Links drehen
     * -  S
-      -  Backward 
+      -  Rückwärts gehen
     * -  D
-      -  Turn Right 
+      -  Rechts drehen
     * -  R
-      -  Each press slightly lifts the body; multiple presses are needed for a noticeable rise.     
+      -  Jeder Druck hebt den Körper leicht an; mehrere Drücke sind für einen bemerkbaren Anstieg notwendig.     
     * -  F
-      -  Each press lowers the body a bit; it takes multiple presses for a noticeable descent.
+      -  Jeder Druck senkt den Körper ein wenig; es bedarf mehrerer Drücke für einen bemerkbaren Abstieg.
     
 
 **Code**
 
-
-Please find the code in |link_code_10_balance|.
+Bitte finden Sie den Code unter |link_code_10_balance|.

@@ -1,11 +1,11 @@
-1. PiDog Initialization
+1. PiDog-Initialisierung
 ============================
 
-The functions of PiDog are written in the ``Pidog`` class, and the prototype of this class is shown below.
+Die Funktionen von PiDog sind in der Klasse ``Pidog`` geschrieben, und der Prototyp dieser Klasse wird unten gezeigt.
 
 .. code-block:: python
 
-    Class: Pidog()
+    Klasse: Pidog()
 
     __init__(leg_pins=DEFAULT_LEGS_PINS, 
             head_pins=DEFAULT_HEAD_PINS,
@@ -15,48 +15,48 @@ The functions of PiDog are written in the ``Pidog`` class, and the prototype of 
             tail_init_angle=None)
 
 
-PiDog must be instantiated in one of several ways, as shown below.
+PiDog muss auf eine der folgenden Arten instanziiert werden, wie unten gezeigt.
 
-1. Following are the simplest steps of initialization.
+1. Folgend sind die einfachsten Schritte der Initialisierung.
 
 .. code-block:: python
 
-    # Import Pidog class
+    # Pidog-Klasse importieren
     from pidog import Pidog
 
-    # instantiate a Pidog
+    # Instanziere einen Pidog
     my_dog = Pidog()
 
-2. PiDog has 12 servos, which can be initialized when we instantiate it.
+2. PiDog hat 12 Servos, die bei der Instanziierung initialisiert werden können.
 
 .. code-block:: python
 
-    # Import Pidog class
+    # Pidog-Klasse importieren
     from pidog import Pidog
 
-    # instantiate a Pidog with custom initialized servo angles
+    # Instanziere einen Pidog mit benutzerdefinierten initialisierten Servowinkeln
     my_dog = Pidog(leg_init_angles = [25, 25, -25, -25, 70, -45, -70, 45],
                     head_init_angles = [0, 0, -25],
                     tail_init_angle= [0]
                 )
 
-In the ``Pidog`` class, the servos are divided into three groups.
+In der Klasse ``Pidog`` werden die Servos in drei Gruppen unterteilt.
 
-* ``leg_init_angles`` : In this array, 8 values determine the angles of eight servos, with the servos (pin numbers) they control being ``2, 3, 7, 8, 0, 1, 10, 11``. From the foldout, you can see where these servos are located.
+* ``leg_init_angles``: In diesem Array bestimmen 8 Werte die Winkel von acht Servos, wobei die Servos (Pinnummern) die sie steuern, ``2, 3, 7, 8, 0, 1, 10, 11`` sind. Aus dem Faltblatt können Sie sehen, wo sich diese Servos befinden.
 
-* ``head_init_angles`` : There is an array with 3 values, controllers for PiDog-head yaw, roll, pitch servos (``no. 4, 6, 5``) which react to yaw, roll, pitch, or Deflection of the body.
+* ``head_init_angles``: Es gibt ein Array mit 3 Werten, Steuerungen für PiDog-Kopf Gieren, Rollen, Neigen Servos (``Nr. 4, 6, 5``) die auf Gieren, Rollen, Neigen oder Auslenkung des Körpers reagieren.
 
-* ``tail_init_angle`` : In this array, there is only one value, which is dedicated to controlling the tail servo, which is ``9``.
+* ``tail_init_angle``: In diesem Array gibt es nur einen Wert, der sich der Steuerung des Schwanzservos widmet, das ist ``9``.
 
 
-3. ``Pidog`` allows you to redefine the serial number of the servos when instantiating the robot if your servo order is different.
+3. ``Pidog`` ermöglicht es Ihnen, die Seriennummer der Servos neu zu definieren, wenn Sie den Roboter instanziieren, falls Ihre Servoreihenfolge anders ist.
 
 .. code-block:: python
 
-    # Import Pidog class
+    # Pidog-Klasse importieren
     from pidog import Pidog
 
-    # instantiate a Pidog with custom initialized pins & servo angles
+    # Instanziere einen Pidog mit benutzerdefinierten initialisierten Pins & Servowinkeln
     my_dog = Pidog(leg_pins=[2, 3, 7, 8, 0, 1, 10, 11], 
                     head_pins=[4, 6, 5],
                     tail_pin=[9],

@@ -1,37 +1,36 @@
-2. Calibrate the PiDog
+2. PiDog kalibrieren
 =============================
 
-**Introduction**
+**Einführung**
 
-Calibrating your PiDog is an essential step to ensure its stable and efficient operation. This process helps correct any imbalances or inaccuracies that might have arisen during assembly or from structural issues. Follow these steps carefully to ensure your PiDog walks steadily and performs as expected.
+Die Kalibrierung Ihres PiDog ist ein wesentlicher Schritt, um einen stabilen und effizienten Betrieb zu gewährleisten. Dieser Prozess hilft, eventuelle Ungleichgewichte oder Ungenauigkeiten zu korrigieren, die während der Montage oder durch strukturelle Probleme entstanden sein könnten. Folgen Sie diesen Schritten sorgfältig, um sicherzustellen, dass Ihr PiDog stabil läuft und wie erwartet funktioniert.
 
 .. raw:: html
 
    <video width="600" loop autoplay muted>
       <source src="../_static/video/calibrate_before.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      Ihr Browser unterstützt das Video-Tag nicht.
    </video>
 
+Wenn der Abweichungswinkel jedoch zu groß ist, müssen Sie trotzdem zu :ref:`py_servo_adjust` zurückkehren, um den Servowinkel auf 0° einzustellen, und dann den Anweisungen folgen, um den PiDog erneut zusammenzubauen.
 
-But if the deviation angle is too big, you still have to go back to :ref:`py_servo_adjust` to set the servo angle to 0°, and then follow the instructions to reassemble the PiDog.
+**Kalibrierungsvideo**
 
-**Calibrate Video**
-
-For a comprehensive guide, refer to the full calibration video. It provides a visual step-by-step process to accurately calibrate your PiDog.
+Für eine umfassende Anleitung beachten Sie das vollständige Kalibrierungsvideo. Es bietet einen visuellen Schritt-für-Schritt-Prozess, um Ihren PiDog genau zu kalibrieren.
 
 .. raw:: html
 
-    <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=g8_RZDUkfjdwbLZu&amp;start=871&end=1160" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=g8_RZDUkfjdwbLZu&amp;start=871&end=1160" title="YouTube-Video-Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**Steps**
+**Schritte**
 
-The specific steps are as follows:
+Die spezifischen Schritte sind wie folgt:
 
-#. Put the PiDog on the base.
+#. Stellen Sie den PiDog auf die Basis.
 
     .. image:: img/place-pidog.JPG
 
-#. Navigate to the PiDog examples directory and run the ``0_calibration.py`` script.
+#. Navigieren Sie zum PiDog-Beispielverzeichnis und führen Sie das Skript ``0_calibration.py`` aus.
 
     .. raw:: html
 
@@ -42,16 +41,16 @@ The specific steps are as follows:
         cd ~/pidog/examples
         sudo python3 0_calibration.py
         
-    Upon running the script, a user interface will appear in your terminal.
+    Nach dem Ausführen des Skripts erscheint eine Benutzeroberfläche in Ihrem Terminal.
 
     .. image:: img/calibration_1.png
 
-#. Position the **Calibration Ruler** (Acrylic C) as shown in the provided image. In the terminal, press ``1``, followed by ``w`` and ``s`` keys to align the edges as indicated in the image.
+#. Positionieren Sie den **Kalibrierungslineal** (Acryl C) wie im bereitgestellten Bild gezeigt. Drücken Sie im Terminal ``1``, gefolgt von den Tasten ``w`` und ``s``, um die Kanten wie im Bild angezeigt auszurichten.
 
     .. image:: img/CALI-1.2.png
 
-#. Reposition the **Calibration Ruler** (Acrylic C) as illustrated in the next image. Press ``2`` in the terminal, then use ``w`` and ``s`` to align the edges as shown.
+#. Positionieren Sie den **Kalibrierungslineal** (Acryl C) wie im nächsten Bild dargestellt. Drücken Sie ``2`` im Terminal und verwenden Sie ``w`` und ``s``, um die Kanten wie gezeigt auszurichten.
 
     .. image:: img/CALI-2.2.png
 
-5. Repeat the calibration process for the remaining servos (3 to 8). Ensure all four legs of the PiDog are calibrated.
+5. Wiederholen Sie den Kalibrierungsprozess für die verbleibenden Servos (3 bis 8). Stellen Sie sicher, dass alle vier Beine des PiDog kalibriert sind.

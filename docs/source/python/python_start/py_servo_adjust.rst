@@ -1,19 +1,19 @@
 .. _py_servo_adjust:
 
-7. Servo Adjust(Importtant)
+7. Servoeinstellung (Wichtig)
 ===========================================
 
-The angle range of the servo is -90~90, but the angle set at the factory is random, maybe 0°, maybe 45°; if we assemble it with such an angle directly, it will lead to a chaotic state after the robot runs the code, or worse, it will cause the servo to block and burn out.
+Der Winkelbereich des Servos liegt zwischen -90° und 90°, aber der in der Fabrik eingestellte Winkel ist zufällig, vielleicht 0°, vielleicht 45°. Wenn wir ihn mit einem solchen Winkel direkt montieren, führt das zu einem chaotischen Zustand, nachdem der Roboter den Code ausführt, oder schlimmer noch, es kann dazu führen, dass der Servo blockiert und durchbrennt.
 
-So here we need to set all the servo angles to 0° and then install them, so that the servo angle is in the middle, no matter which direction to turn.
+Daher müssen wir zuerst alle Servowinkel auf 0° einstellen und sie dann montieren, damit der Servowinkel in der Mitte ist, egal in welche Richtung er sich dreht.
 
-#. To ensure that the servo has been properly set to 0°, first insert the servo arm into the servo shaft and then gently rotate the rocker arm to a different angle. This servo arm is just to allow you to clearly see that the servo is rotating.
+#. Um sicherzustellen, dass der Servo korrekt auf 0° eingestellt wurde, stecken Sie zuerst den Servoarm auf die Servoachse und drehen Sie dann vorsichtig den Schwenkarm in einen anderen Winkel. Dieser Servoarm dient nur dazu, Ihnen deutlich zu zeigen, dass sich der Servo dreht.
 
     .. image:: img/servo_arm.png
         :align: center
 
 
-#. Now, run ``servo_zeroing.py`` in the ``examples/`` folder.
+#. Führen Sie jetzt ``servo_zeroing.py`` im Ordner ``examples/`` aus.
 
     .. raw:: html
 
@@ -26,18 +26,17 @@ So here we need to set all the servo angles to 0° and then install them, so tha
 
 
     .. note::
-        If you get an error, try re-enabling the Raspberry Pi's I2C port, see: :ref:`i2c_spi_config`.
+        Wenn ein Fehler auftritt, versuchen Sie, den I2C-Port des Raspberry Pi erneut zu aktivieren, siehe: :ref:`i2c_spi_config`.
 
-#. Next, plug the servo cable into the P11 port as follows, at the same time you will see the servo arm rotate to a position(This is the 0° position, which is a random location and may not be vertical or parallel.).
+#. Stecken Sie als nächstes das Servokabel in den P11-Anschluss, wie folgt. Gleichzeitig werden Sie sehen, dass sich der Servoarm in eine Position dreht (Dies ist die 0°-Position, die eine zufällige Position sein kann und möglicherweise nicht vertikal oder parallel ist.).
 
     .. image:: img/servo_pin11.jpg
 
 
-#. Now, remove the servo arm, ensuring the servo wire remains connected, and do not turn off the power. Then continue the assembly following the paper instructions.
+#. Entfernen Sie jetzt den Servoarm und stellen Sie sicher, dass das Servokabel angeschlossen bleibt, und schalten Sie den Strom nicht aus. Fahren Sie dann mit der Montage gemäß der Papieranleitung fort.
 
 .. note::
 
-    * Do not unplug this servo cable before fixing it with the servo screw, you can unplug it after fixing it.
-    * Do not rotate the servo while it is powered on to avoid damage; if the servo shaft is not inserted at the right angle, pull the servo out and reinsert it.
-    * Before assembling each servo, you need to plug the servo cable into PWM pin and turn on the power to set its angle to 0°.
-
+    * Ziehen Sie dieses Servokabel nicht ab, bevor es mit der Servoschraube befestigt ist; Sie können es abziehen, nachdem es befestigt wurde.
+    * Drehen Sie den Servo nicht, während er eingeschaltet ist, um Schäden zu vermeiden. Wenn die Servoachse nicht im richtigen Winkel eingesteckt ist, ziehen Sie den Servo heraus und stecken Sie ihn erneut ein.
+    * Bevor Sie jeden Servo montieren, müssen Sie das Servokabel in den PWM-Pin stecken und den Strom einschalten, um seinen Winkel auf 0° zu setzen.

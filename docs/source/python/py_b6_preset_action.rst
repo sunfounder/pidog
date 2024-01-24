@@ -1,14 +1,14 @@
-6. Do Preset Action
-=======================
+6. Vordefinierte Aktionen ausführen
+========================================
 
-Some commonly used actions have been pre-written in PiDog's library.
-You can call the following function to make PiDog do these actions directly.
+Einige häufig verwendete Aktionen wurden bereits in PiDogs Bibliothek vorprogrammiert.
+Sie können die folgende Funktion aufrufen, um PiDog diese Aktionen direkt ausführen zu lassen.
 
 .. code-block:: python
 
     Pidog.do_action(action_name, step_count=1, speed=50)
 
-* ``action_name`` : Action name, the following strings can be written.
+* ``action_name``: Aktionsname, es können die folgenden Strings geschrieben werden.
 
     * ``"sit"``
     * ``"half_sit"``
@@ -32,12 +32,12 @@ You can call the following function to make PiDog do these actions directly.
     * ``"head_up_down"``
     * ``"wag_tail"``
 
-* ``step_count`` : How many times to perform this action.
-* ``speed`` : How fast to perform the action.
+* ``step_count``: Wie oft diese Aktion ausgeführt werden soll.
+* ``speed``: Wie schnell die Aktion ausgeführt werden soll.
 
-**Here is an example of usage:**
+**Hier ist ein Beispiel für die Nutzung:**
 
-1. Do ten push-ups, then sit on the floor and act cute.
+1. Zehn Liegestütze machen, dann auf dem Boden sitzen und süß wirken.
 
 .. code-block:: python
 
@@ -47,15 +47,15 @@ You can call the following function to make PiDog do these actions directly.
     my_dog = Pidog()
 
     try:
-        # pushup
-        my_dog.do_action("half_sit", speed=60)
-        my_dog.do_action("pushup", step_count=10, speed=60)
+        # Liegestütze
+        my_dog.do_action("halb_sitzen", speed=60)
+        my_dog.do_action("liegestütze", step_count=10, speed=60)
         my_dog.wait_all_done()
         
-        # act cute
-        my_dog.do_action("sit", speed=60)
-        my_dog.do_action("wag_tail", step_count=100,speed=90)
-        my_dog.do_action("tilting_head", step_count=5, speed=20)
+        # süß wirken
+        my_dog.do_action("sitzen", speed=60)
+        my_dog.do_action("schwanz_wedeln", step_count=100, speed=90)
+        my_dog.do_action("kopf_neigen", step_count=5, speed=20)
         my_dog.wait_head_done()
         
         my_dog.stop_and_lie()
@@ -63,7 +63,7 @@ You can call the following function to make PiDog do these actions directly.
     except KeyboardInterrupt:
         pass
     except Exception as e:
-        print(f"\033[31mERROR: {e}\033[m")
+        print(f"\033[31mFEHLER: {e}\033[m")
     finally:
-        print("closing ...")
+        print("Schließe ...")
         my_dog.close()    

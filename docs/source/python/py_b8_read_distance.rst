@@ -1,17 +1,17 @@
-8. Read Distance
-==================
+8. Entfernung lesen
+======================
 
-Through the Ultrasonic Module in its head, PiDog can detect obstacles ahead.
+Durch das Ultraschallmodul in seinem Kopf kann PiDog Hindernisse vor ihm erkennen.
 
-An ultrasonic module can detect objects between 2 and 400 cm away.
+Ein Ultraschallmodul kann Objekte zwischen 2 und 400 cm Entfernung erkennen.
 
-With the following function, you can read the distance as a floating point number.
+Mit der folgenden Funktion können Sie die Entfernung als Fließkommazahl lesen.
 
 .. code-block:: python
 
     Pidog.ultrasonic.read_distance()
 
-**Here is an example of usage:**
+**Hier ist ein Beispiel für die Nutzung:**
 
 .. code-block:: python
 
@@ -21,6 +21,6 @@ With the following function, you can read the distance as a floating point numbe
     my_dog = Pidog()
     while True:
         distance = my_dog.ultrasonic.read_distance()
-        distance = round(distance,2)
-        print(f"Distance: {distance} cm")
+        distance = round(distance, 2)
+        print(f"Entfernung: {distance} cm")
         time.sleep(0.5)    

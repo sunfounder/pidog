@@ -1,44 +1,42 @@
-3. Head Move
-================
+3. Kopfbewegungen
+======================
 
-The control of PiDog's head servo is implemented by the following functions.
+Die Steuerung von PiDogs Kopfservo wird durch die folgenden Funktionen implementiert.
 
 .. code-block:: python
 
     Pidog.head_move(target_yrps, roll_comp=0, pitch_comp=0, immediately=True, speed=50)
 
-* ``target_angles`` : It is a two-dimensional array composed of an array of 3 servo angles (referred to as angle group) as elements. These angle groups will be used to control the angles of the 8 foot servos. If multiple angle groups are written, the unexecuted angle groups will be stored in the cache.
-* ``roll_comp`` : Provides angular compensation on the roll axis.
-* ``pitch_comp`` : Provides angle compensation on the pitch axis.
-* ``immediately`` : When calling the function, set this parameter to ``True``, the cache will be cleared immediately to execute the newly written angle group; if the parameter is set to ``False``, the newly written The incoming angular group is added to the execution queue.
-* ``speed`` : The speed at which the angular group is executed.
+* ``target_angles``: Es ist ein zweidimensionales Array, das aus einem Array von 3 Servowinkeln (als Winkelgruppe bezeichnet) als Elemente besteht. Diese Winkelgruppen werden verwendet, um die Winkel der Kopfservos zu steuern. Wenn mehrere Winkelgruppen geschrieben werden, werden die nicht ausgeführten Winkelgruppen im Cache gespeichert.
+* ``roll_comp``: Bietet Winkelkompensation auf der Rollachse.
+* ``pitch_comp``: Bietet Winkelkompensation auf der Pitchachse.
+* ``immediately``: Wenn diese Funktion aufgerufen wird, setzen Sie diesen Parameter auf ``True``, der Cache wird sofort geleert, um die neu geschriebene Winkelgruppe auszuführen; wenn der Parameter auf ``False`` gesetzt wird, wird die neu geschriebene Winkelgruppe zur Ausführungswarteschlange hinzugefügt.
+* ``speed``: Die Geschwindigkeit, mit der die Winkelgruppe ausgeführt wird.
 
-
-**PiDog's head servo control also has some supporting functions:**
+**PiDogs Kopfservo-Steuerung hat auch einige unterstützende Funktionen:**
 
 
 .. code-block:: python
 
     Pidog.is_head_done()
 
-Whether all the head actions in the buffer to be executed
+Ob alle Kopfaktionen im Puffer ausgeführt werden sollen
 
 .. code-block:: python
 
     Pidog.wait_head_done()
 
-Wait for all the head actions in the buffer to be executed
+Warten, bis alle Kopfaktionen im Puffer ausgeführt wurden
 
 .. code-block:: python
 
     Pidog.head_stop()
 
-Clear all the head actions of leg in the buffer, to make head servos stop
+Alle Kopfaktionen des Beins im Puffer löschen, um die Kopfservos anzuhalten
 
+**Hier sind einige häufige Anwendungsfälle:**
 
-**Here are some common use cases:**
-
-1. Nod five times.
+1. Fünfmal nicken.
 
 .. code-block:: python
 
@@ -52,7 +50,7 @@ Clear all the head actions of leg in the buffer, to make head servos stop
         my_dog.wait_head_done()
         time.sleep(0.5)
 
-2. Shake your head for 10 seconds.
+2. 10 Sekunden den Kopf schütteln.
 
 .. code-block:: python
 
@@ -64,12 +62,12 @@ Clear all the head actions of leg in the buffer, to make head servos stop
     for _ in range(99):
         my_dog.head_move([[30, 0, 0],[-30, 0, 0]], immediately=False, speed=30)
 
-    # keep 10s
+    # 10s halten
     time.sleep(10)
 
     my_dog.head_move([[0, 0, 0]], immediately=True, speed=80)
 
-3. Whether sitting or half standing, PiDog keeps its head level when shaking its head.
+3. Ob sitzend oder halb stehend, PiDog hält seinen Kopf beim Kopfschütteln auf gleicher Höhe.
 
 .. code-block:: python
 
@@ -78,23 +76,22 @@ Clear all the head actions of leg in the buffer, to make head servos stop
 
     my_dog = Pidog()
 
-    # action list
+    # Aktionsliste
     shake_head = [[30, 0, 0],[-30, 0, 0]]
     half_stand_leg = [[45, 10, -45, -10, 45, 10, -45, -10]]
     sit_leg = [[30, 60, -30, -60, 80, -45, -80, 45]]
 
     while True:
-        # shake head in half stand
+        # Kopf schütteln im Halbstand
         my_dog.legs_move(half_stand_leg, speed=30)
         for _ in range(5):
             my_dog.head_move(shake_head, pitch_comp=0, speed=50)
         my_dog.wait_head_done()
         time.sleep(0.5)
 
-        # shake head in sit
+        # Kopf schütteln im Sitzen
         my_dog.legs_move(sit_leg, speed=30)
         for _ in range(5):
             my_dog.head_move(shake_head, pitch_comp=-30, speed=50)
         my_dog.wait_head_done()
         time.sleep(0.5)
-

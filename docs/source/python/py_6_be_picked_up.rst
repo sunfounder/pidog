@@ -1,11 +1,11 @@
-6. Be Picked Up
-===================
+6. Hochgehoben werden
+==============================
 
-Try lifting your PiDog from the ground, PiDog will feel like it can fly, and it will cheer in a superman pose.
+Versuchen Sie, Ihren PiDog vom Boden zu heben, PiDog wird sich fühlen, als könnte es fliegen, und es wird in einer Superman-Pose jubeln.
 
 .. image:: img/py_6.gif
 
-**Run the Code**
+**Code ausführen**
 
 .. raw:: html
 
@@ -16,16 +16,14 @@ Try lifting your PiDog from the ground, PiDog will feel like it can fly, and it 
     cd ~/pidog/examples
     sudo python3 6_be_picked_up.py
 
-After the program runs, the 6-DOF IMU Module will always calculate the acceleration in the vertical direction.
-If PiDog is calculated to be in a state of weightlessness, PiDog assumes a superman pose and cheers.
-Otherwise, consider PiDog to be on flat ground and make a standing pose.
-
-
+Nachdem das Programm gestartet wurde, berechnet das 6-DOF-IMU-Modul ständig die Beschleunigung in vertikaler Richtung.
+Wenn PiDog in einem Zustand der Schwerelosigkeit berechnet wird, nimmt PiDog eine Superman-Pose ein und jubelt.
+Andernfalls wird angenommen, dass PiDog auf flachem Boden steht und eine Stehpose einnimmt.
 
 **Code**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Sie können den unten stehenden Code **modifizieren/zurücksetzen/kopieren/ausführen/stoppen**. Bevor Sie das tun, müssen Sie jedoch zum Quellcode-Pfad wie ``pidog\examples`` gehen. Nachdem Sie den Code modifiziert haben, können Sie ihn direkt ausführen, um den Effekt zu sehen.
 
 .. raw:: html
 

@@ -1,20 +1,19 @@
 .. _py_ball_track:
 
-13. Ball Track
+13. Ballverfolgung
 ======================
 
-PiDog will sit quietly in place.
-You put a red ball in front of it, it will stand, and then chase the ball.
+PiDog wird ruhig an Ort und Stelle sitzen.
+Wenn Sie einen roten Ball vor ihm platzieren, wird es aufstehen und dann dem Ball nachjagen.
 
 .. raw:: html
 
    <video width="600" loop autoplay muted>
       <source src="../_static/video/bull_track.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      Ihr Browser unterstützt das Video-Tag nicht.
    </video>
 
-
-**Run the Code**
+**Code ausführen**
 
 .. raw:: html
 
@@ -25,15 +24,13 @@ You put a red ball in front of it, it will stand, and then chase the ball.
     cd ~/pidog/examples
     sudo python3 13_ball_track.py
 
-
-After running this code, PiDog will start the camera.
-You can visit ``http://+ PiDog's IP +/mjpg`` (like mine is ``http://192.168.18.138:9000/mjpg``) in your browser to view the camera's picture.
-
+Nachdem Sie diesen Code ausgeführt haben, startet PiDog die Kamera.
+Sie können in Ihrem Browser ``http://+ PiDogs IP +/mjpg`` besuchen (wie meine ``http://192.168.18.138:9000/mjpg``), um das Bild der Kamera zu sehen.
 
 **Code**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Sie können den unten stehenden Code **modifizieren/zurücksetzen/kopieren/ausführen/stoppen**. Bevor Sie das tun, müssen Sie jedoch zum Quellcode-Pfad wie ``pidog\examples`` gehen. Nachdem Sie den Code modifiziert haben, können Sie ihn direkt ausführen, um den Effekt zu sehen.
 
 .. raw:: html
 

@@ -1,27 +1,26 @@
-Dual Touch Sensor
-==================================
+Dualer Berührungssensor
+==========================
 
 .. image:: img/cpn_touchswitch.png
    :width: 200
    :align: center
 
-Dual channel touch sensor, based on two ttp223 touch sensors.
-When a touch signal is detected, the corresponding pin level will be pulled low.
+Dualer Berührungssensor, basierend auf zwei ttp223 Berührungssensoren.
+Wenn ein Berührungssignal erkannt wird, wird das entsprechende Pin-Niveau auf niedrig gezogen.
 
-TTP223 is a touch pad detector IC that provides 1 touch key.
-The touch detection IC is specially designed to replace the traditional direct keys with different pad sizes.
-It features low power consumption and wide operating voltage.
+TTP223 ist ein IC zur Erkennung von Berührungspads, das 1 Berührungstaste bietet.
+Der Berührungserkennungs-IC ist speziell dafür konzipiert, die traditionellen direkten Tasten mit verschiedenen Pad-Größen zu ersetzen.
+Es zeichnet sich durch geringen Stromverbrauch und einen weiten Betriebsspannungsbereich aus.
 
+**Spezifikationen**
 
-**Specifications**
+* Stromversorgung: 2,0V~5,5V
+* Signalausgang: Digitales Signal
+* Anschluss: SH1.0 4P
 
-* Power Supply: 2.0V~5.5V
-* Signal Output: Digital signal
-* Connector: SH1.0 4P
+**Pinbelegung**
 
-**Pin Out**
-
-* GND - Ground Input
-* VCC - Power Supply Input
-* SIG1 - Touch signal 1, low level means touch
-* SIG2 - Touch signal 2, low level means touch
+* GND - Ground-Eingang
+* VCC - Stromversorgungseingang
+* SIG1 - Berührungssignal 1, niedriges Niveau bedeutet Berührung
+* SIG2 - Berührungssignal 2, niedriges Niveau bedeutet Berührung

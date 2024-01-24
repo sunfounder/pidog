@@ -1,30 +1,29 @@
+
 .. _openssh_powershell:
 
-Install OpenSSH via Powershell
------------------------------------
+OpenSSH über Powershell installieren
+------------------------------------------------------
 
-When you use ``ssh <username>@<hostname>.local`` (or ``ssh <username>@<IP address>``) to connect to your Raspberry Pi, but the following error message appears.
+Wenn Sie ``ssh <username>@<hostname>.local`` (oder ``ssh <username>@<IP address>``) verwenden, um eine Verbindung zu Ihrem Raspberry Pi herzustellen, und folgende Fehlermeldung erscheint:
 
     .. code-block::
 
-        ssh: The term 'ssh' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the
-        spelling of the name, or if a path was included, verify that the path is correct and try again.
+        ssh: The term 'ssh' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
 
+Dies bedeutet, dass Ihr Computersystem zu alt ist und `OpenSSH <https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui>`_ nicht vorinstalliert hat. Sie müssen der folgenden Anleitung folgen, um es manuell zu installieren.
 
-It means your computer system is too old and does not have `OpenSSH <https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui>`_ pre-installed, you need to follow the tutorial below to install it manually.
-
-#. Type ``powershell`` in the search box of your Windows desktop, right click on the ``Windows PowerShell``, and select ``Run as administrator`` from the menu that appears.
+#. Geben Sie ``powershell`` in das Suchfeld Ihres Windows-Desktops ein, klicken Sie mit der rechten Maustaste auf die ``Windows PowerShell`` und wählen Sie ``Als Administrator ausführen`` aus dem erscheinenden Menü.
 
     .. image:: img/powershell_ssh.png
         :align: center
 
-#. Use the following command to install ``OpenSSH.Client``.
+#. Verwenden Sie den folgenden Befehl, um ``OpenSSH.Client`` zu installieren.
 
     .. code-block::
 
         Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
 
-#. After installation, the following output will be returned.
+#. Nach der Installation wird die folgende Ausgabe zurückgegeben.
 
     .. code-block::
 
@@ -32,25 +31,24 @@ It means your computer system is too old and does not have `OpenSSH <https://lea
         Online        : True
         RestartNeeded : False
 
-#. Verify the installation by using the following command.
+#. Überprüfen Sie die Installation mit dem folgenden Befehl.
 
     .. code-block::
 
         Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
 
-#. It now tells you that ``OpenSSH.Client`` has been successfully installed.
+#. Es zeigt Ihnen jetzt an, dass ``OpenSSH.Client`` erfolgreich installiert wurde.
 
     .. code-block::
 
-        Name  : OpenSSH.Client~~~~0.0.1.0
-        State : Installed
-
-        Name  : OpenSSH.Server~~~~0.0.1.0
-        State : NotPresent
+        Name : OpenSSH.Client~~~~0.0.1.0
+        State: Installed
+        Name : OpenSSH.Server~~~~0.0.1.0
+        State: NotPresent
 
     .. warning:: 
-        If the above prompt does not appear, it means that your Windows system is still too old, and you are advised to install a third-party SSH tool, like :ref:`login_windows`.
+        Wenn der obige note nicht erscheint, bedeutet das, dass Ihr Windows-System immer noch zu alt ist, und es wird empfohlen, ein Drittanbieter-SSH-Tool zu installieren, wie :ref:`login_windows`.
 
-#. Now restart PowerShell and continue to run it as administrator. At this point you will be able to log in to your Raspberry Pi using the ``ssh`` command, where you will be prompted to enter the password you set up earlier.
+#. Starten Sie nun PowerShell neu und führen Sie es weiterhin als Administrator aus. Zu diesem Zeitpunkt können Sie sich mit dem ``ssh``-Befehl in Ihren Raspberry Pi einloggen, wobei Sie aufgefordert werden, das zuvor eingerichtete Passwort einzugeben.
 
     .. image:: img/powershell_login.png

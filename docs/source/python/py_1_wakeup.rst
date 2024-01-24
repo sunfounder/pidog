@@ -1,14 +1,14 @@
 .. _py_wake_up:
 
-1. Wake Up
+1. Aufwecken
 ===============
 
-This is PiDog's first project. It will wake your PiDog from a deep sleep.
+Dies ist PiDogs erstes Projekt. Es wird Ihren PiDog aus einem tiefen Schlaf wecken.
 
 .. image:: img/py_wakeup.gif
 
 
-**Run the Code**
+**Code ausführen**
 
 .. raw:: html
 
@@ -19,17 +19,17 @@ This is PiDog's first project. It will wake your PiDog from a deep sleep.
     cd ~/pidog/examples
     sudo python3 1_wake_up.py
 
-After the code is executed, 
-PiDog will perform the following actions in sequence: 
+Nachdem der Code ausgeführt wurde,
+wird PiDog die folgenden Aktionen nacheinander durchführen:
 
-Stretch, twist, sit, wag its tail, pant.
+Sich strecken, sich drehen, sitzen, mit dem Schwanz wedeln, hecheln.
 
 
 
 **Code**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Sie können den unten stehenden Code **modifizieren/zurücksetzen/kopieren/ausführen/stoppen**. Bevor Sie das tun, müssen Sie jedoch zum Quellcode-Pfad wie ``pidog\examples`` gehen. Nachdem Sie den Code modifiziert haben, können Sie ihn direkt ausführen, um den Effekt zu sehen.
 
 .. raw:: html
 

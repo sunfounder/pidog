@@ -3,41 +3,38 @@
 PuTTY
 =========================
 
-If you are a Windows user, you can use some applications of SSH. Here, we recommend `PuTTY <https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html>`_.
+Wenn Sie ein Windows-Benutzer sind, können Sie einige SSH-Anwendungen verwenden. Hier empfehlen wir `PuTTY <https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html>`_.
 
-**Step 1**
+**Schritt 1**
 
-Download PuTTY.
+Laden Sie PuTTY herunter.
 
-**Step 2**
+**Schritt 2**
 
-Open PuTTY and click **Session** on the left tree-alike structure. Enter
-the IP address of the RPi in the text box under **Host Name (or IP
-address)** and **22** under **Port** (by default it is 22).
+Öffnen Sie PuTTY und klicken Sie auf der linksbaumähnlichen Struktur auf **Sitzung**. Geben Sie
+die IP-Adresse des RPi in das Textfeld unter **Host-Name (oder IP-Adresse)** und **22** unter **Port** ein (standardmäßig ist es 22).
 
 .. image:: img/image25.png
     :align: center
 
-**Step 3**
+**Schritt 3**
 
-Click **Open**. Note that when you first log in to the Raspberry Pi with
-the IP address, there prompts a security reminder. Just click **Yes**.
+Klicken Sie auf **Öffnen**. Beachten Sie, dass beim ersten Einloggen in den Raspberry Pi mit
+der IP-Adresse eine Sicherheitserinnerung erscheint. Klicken Sie einfach auf **Ja**.
 
-**Step 4**
+**Schritt 4**
 
-When the PuTTY window prompts \"**login as:**\", type in
-\"**pi**\" (the user name of the RPi), and **password**: \"raspberry\"
-(the default one, if you haven't changed it).
+Wenn das PuTTY-Fenster **login as:** auffordert, geben Sie den Benutzernamen des RPi ein, und **Passwort**.
 
 .. note::
 
-    When you input the password, the characters do not display on window accordingly, which is normal. What you need is to input the correct password.
+    Wenn Sie das Passwort eingeben, werden die Zeichen im Fenster nicht entsprechend angezeigt, was normal ist. Wichtig ist, dass Sie das korrekte Passwort eingeben.
     
-    If inactive appears next to PuTTY, it means that the connection has been broken and needs to be reconnected.
+    Wenn neben PuTTY erscheint, bedeutet dies, dass die Verbindung unterbrochen wurde und neu verbunden werden muss.
     
 .. image:: img/image26.png
     :align: center
 
-**Step 5**
+**Schritt 5**
 
-Here, we get the Raspberry Pi connected and it is time to conduct the next steps.
+Hier ist der Raspberry Pi verbunden und es ist Zeit, die nächsten Schritte durchzuführen.

@@ -1,23 +1,24 @@
-11. Sound Direction Detect
-================================
 
-The PiDog has a Sound Direction Sensor Module that detects where sound is coming from, and we can trigger it by clapping near it.
+11. Schallerkennung in Richtung
+===================================
 
-**Using this module is as simple as calling these functions.**
+Der PiDog verfügt über ein Soundrichtungssensor-Modul, das erkennt, aus welcher Richtung der Ton kommt, und wir können es durch Klatschen in seiner Nähe auslösen.
+
+**Die Verwendung dieses Moduls ist so einfach wie das Aufrufen dieser Funktionen.**
 
 .. code-block:: python
 
     Pidog.ears.isdetected()
 
-Returns ``True`` if sound is detected, ``False`` otherwise.
+Gibt ``True`` zurück, wenn ein Ton erkannt wird, andernfalls ``False``.
 
 .. code-block:: python
 
     Pidog.ears.read()
 
-This function returns the direction of the sound source, with a range of 0 to 359; if the sound comes from the front, it returns 0; if it comes from the right, it returns 90.
+Diese Funktion gibt die Richtung der Schallquelle zurück, im Bereich von 0 bis 359; wenn der Ton von vorne kommt, gibt es 0 zurück; wenn er von rechts kommt, gibt es 90 zurück.
 
-**An example of how to use this module is as follows:**
+**Ein Beispiel, wie man dieses Modul verwendet, sieht wie folgt aus:**
 
 .. code-block:: python
 
@@ -28,9 +29,5 @@ This function returns the direction of the sound source, with a range of 0 to 35
     while True:
         if my_dog.ears.isdetected():
             direction = my_dog.ears.read()
-            print(f"sound direction: {direction}")
-
-
-
-
+            print(f"Schallrichtung: {direction}")
 

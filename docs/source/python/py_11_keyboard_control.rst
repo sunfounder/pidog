@@ -1,9 +1,7 @@
-11. Play PiDog with Keyboard
+11. PiDog mit Tastatur steuern
 ======================================
 
-
-In this example, we will use the keyboard to control PiDog. You can press these keys in the terminal to make it act.
-
+In diesem Beispiel werden wir die Tastatur verwenden, um PiDog zu steuern. Sie können diese Tasten im Terminal drücken, um es handeln zu lassen.
 
 .. list-table:: 
     :widths: 25 50 25 50 25 50
@@ -82,8 +80,7 @@ In this example, we will use the keyboard to control PiDog. You can press these 
       - W
       - trot
 
-
-**Run the Code**
+**Code ausführen**
 
 .. raw:: html
 
@@ -94,10 +91,8 @@ In this example, we will use the keyboard to control PiDog. You can press these 
     cd ~/pidog/examples
     sudo python3 11_keyboard_control.py
 
-After the program runs, you will see a printed keyboard on the terminal. Now you can control PiDog with keyboard in terminal.
-
-
+Nachdem das Programm gestartet wurde, sehen Sie eine gedruckte Tastatur im Terminal. Jetzt können Sie PiDog mit der Tastatur im Terminal steuern.
 
 **Code**
 
-Please find the code in |link_code_11_keyboard_control|.
+Bitte finden Sie den Code unter |link_code_11_keyboard_control|.

@@ -1,15 +1,17 @@
-13. More
+
+13. Mehr
 ==============
 
-The following address will explain the use of PiDog's more basic functions:
+Die folgenden Links erläutern die Verwendung der grundlegenden Funktionen des PiDog:
 
-* `Vilib Library <https://vilib-rpi.readthedocs.io/en/latest/>`_
+* `Vilib Bibliothek <https://vilib-rpi.readthedocs.io/en/latest/>`_
 
-    Vilib is a library developed by SunFounder for Raspberry Pi camera.
+    Vilib ist eine von SunFounder entwickelte Bibliothek für die Raspberry Pi-Kamera.
 
-    It contains some practical functions, such as taking pictures, video recording, pose detection, face detection, motion detection, image classification and so on.
+    Sie enthält einige praktische Funktionen wie das Aufnehmen von Bildern, Videodreh, Posen- und Gesichtserkennung, Bewegungserkennung, Bildklassifikation und mehr.
 
 
 * `SunFounder Controller <https://docs.sunfounder.com/projects/sf-controller/en/latest/index.html>`_
 
-    SunFounder Controller is an application that allows users to customize the controller for controlling their robot or as an IoT platform.
+    SunFounder Controller ist eine Anwendung, die es Benutzern ermöglicht, den Controller für die Steuerung ihres Roboters oder als IoT-Plattform anzupassen.
+

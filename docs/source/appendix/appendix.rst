@@ -1,6 +1,5 @@
-Appendix
+Anhang
 =================
-
 
 .. toctree::
 

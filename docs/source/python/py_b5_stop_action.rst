@@ -1,37 +1,36 @@
-5. Stop All Actions
-======================
+5. Alle Aktionen stoppen
+===========================
 
-After the previous chapters, you can find that the servo control of PiDog is divided into three threads.
-This allows PiDog's head and body to move at the same time, even with two lines of code.
+Nach den vorherigen Kapiteln können Sie feststellen, dass die Servo-Steuerung von PiDog in drei Threads unterteilt ist.
+Dies ermöglicht es PiDog, Kopf und Körper gleichzeitig zu bewegen, sogar mit zwei Codezeilen.
 
-**Here are a few functions that work with the three servo threads:**
+**Hier sind einige Funktionen, die mit den drei Servo-Threads arbeiten:**
 
 .. code-block:: python
 
     Pidog.wait_all_done()
     
-Wait for all the actions in the leg actions buffer, head buffer and tail buffer to be executed
+Warten, bis alle Aktionen in den Puffern für Beinaktionen, Kopf und Schwanz ausgeführt wurden
 
 .. code-block:: python
 
     Pidog.body_stop()
     
-Stop all the actions of legs, head and tail
+Stoppen Sie alle Aktionen von Beinen, Kopf und Schwanz
 
 .. code-block:: python
 
     Pidog.stop_and_lie()
     
-Stop all the actions of legs, head and tail, then reset to "lie" pose
+Stoppen Sie alle Aktionen von Beinen, Kopf und Schwanz und setzen Sie dann auf die "Liegen"-Pose zurück
 
 .. code-block:: python
 
     Pidog.close()
     
-Stop all the actions, reset to "lie" pose, and  close all the threads, usually used when exiting a program
+Stoppen Sie alle Aktionen, setzen Sie auf die "Liegen"-Pose zurück und schließen Sie alle Threads, normalerweise beim Beenden eines Programms verwendet
 
-
-**Here are some common usages:**
+**Hier sind einige häufige Anwendungen:**
 
 
 
@@ -44,13 +43,13 @@ Stop all the actions, reset to "lie" pose, and  close all the threads, usually u
     my_dog = Pidog()
 
     try:
-        # pushup prepare
+        # Vorbereitung Liegestütz
         my_dog.legs_move([[45, 35, -45, -35, 80, 70, -80, -70]], speed=30)
         my_dog.head_move([[0, 0, 0]], pitch_comp=-10, speed=80) 
-        my_dog.wait_all_done() # wait all the actions to be done
+        my_dog.wait_all_done() # warten, bis alle Aktionen ausgeführt sind
         time.sleep(0.5)
 
-        # pushup 
+        # Liegestütz 
         leg_pushup_action = [
             [90, -30, -90, 30, 80, 70, -80, -70],
             [45, 35, -45, -35, 80, 70, -80, -70],       
@@ -60,26 +59,26 @@ Stop all the actions, reset to "lie" pose, and  close all the threads, usually u
             [0, 0, 20],
         ]
         
-        # fill action buffers
+        # Puffer mit Aktionen füllen
         for _ in range(50):
             my_dog.legs_move(leg_pushup_action, immediately=False, speed=50)
             my_dog.head_move(head_pushup_action, pitch_comp=-10, immediately=False, speed=50)
         
-        # show buffer length
-        print(f"legs buffer length (start): {len(my_dog.legs_action_buffer)}")
+        # Pufferlänge anzeigen
+        print(f"Länge des Beinpuffers (Start): {len(my_dog.legs_action_buffer)}")
         
-        # keep 5 second & show buffer length
+        # 5 Sekunden halten & Pufferlänge anzeigen
         time.sleep(5)
-        print(f"legs buffer length (5s): {len(my_dog.legs_action_buffer)}")
+        print(f"Länge des Beinpuffers (5s): {len(my_dog.legs_action_buffer)}")
         
-        # stop action & show buffer length
+        # Aktion stoppen & Pufferlänge anzeigen
         my_dog.stop_and_lie()
-        print(f"legs buffer length (stop): {len(my_dog.legs_action_buffer)}")
+        print(f"Länge des Beinpuffers (Stopp): {len(my_dog.legs_action_buffer)}")
 
     except KeyboardInterrupt:
         pass
     except Exception as e:
-        print(f"\033[31mERROR: {e}\033[m")
+        print(f"\033[31mFEHLER: {e}\033[m")
     finally:
-        print("closing ...")
-        my_dog.close() # close all the servo threads
+        print("Schließe ...")
+        my_dog.close() # alle Servo-Threads schließen

@@ -1,11 +1,11 @@
-2. Function Demonstration
+2. Funktionsdemonstration
 ===============================
 
-This project shows you all of PiDog's usual actions and sounds.
+Dieses Projekt zeigt Ihnen alle üblichen Aktionen und Geräusche von PiDog.
 
-You can make PiDog make actions or make sounds by entering the serial number.
+Sie können PiDog Aktionen ausführen oder Geräusche machen lassen, indem Sie die Seriennummer eingeben.
 
-The motion/sound effects currently included in this example are listed below.
+Die derzeit in diesem Beispiel enthaltenen Bewegungs-/Soundeffekte sind unten aufgeführt.
 
 .. image:: img/py_2.gif
 
@@ -47,8 +47,7 @@ The motion/sound effects currently included in this example are listed below.
       -
 
 
-
-**Run the Code**
+**Code ausführen**
 
 .. raw:: html
 
@@ -59,16 +58,16 @@ The motion/sound effects currently included in this example are listed below.
     cd ~/pidog/examples
     sudo python3 2_function_demonstration.py
 
-After running this example, you input ``1`` and press ``ENTER``, PiDog will stand; input ``2``, PiDog will sit down; input ``27``, PiDog will issue "woohoo~ ".
+Nachdem Sie dieses Beispiel ausgeführt haben, geben Sie ``1`` ein und drücken Sie ``ENTER``, PiDog wird stehen; geben Sie ``2`` ein, PiDog wird sich hinsetzen; geben Sie ``27`` ein, PiDog wird "woohoo~ " von sich geben.
 
-Press ``Ctrl+C`` to exit the program.
+Drücken Sie ``Ctrl+C``, um das Programm zu beenden.
 
 
 
 **Code**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Sie können den unten stehenden Code **modifizieren/zurücksetzen/kopieren/ausführen/stoppen**. Bevor Sie das tun, müssen Sie jedoch zum Quellcode-Pfad wie ``pidog\examples`` gehen. Nachdem Sie den Code modifiziert haben, können Sie ihn direkt ausführen, um den Effekt zu sehen.
 
 .. raw:: html
 

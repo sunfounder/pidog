@@ -1,16 +1,16 @@
-7. Face Track
-======================
+7. Gesichtsverfolgung
+========================
 
-PiDog will sit quietly in place. You applaud it, it looks your way, and if it sees you, it says hello.
+PiDog wird ruhig an Ort und Stelle sitzen. Sie klatschen Beifall, es sieht in Ihre Richtung, und wenn es Sie sieht, sagt es Hallo.
 
 .. raw:: html
 
    <video width="600" loop autoplay muted>
       <source src="../_static/video/face_track.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      Ihr Browser unterstützt das Video-Tag nicht.
    </video>
 
-**Run the Code**
+**Code ausführen**
 
 .. raw:: html
 
@@ -21,22 +21,18 @@ PiDog will sit quietly in place. You applaud it, it looks your way, and if it se
     cd ~/pidog/examples
     sudo python3 7_face_track.py
 
+Nachdem Sie diesen Code ausgeführt haben, startet PiDog die Kamera und aktiviert die Gesichtserkennungsfunktion.
+Sie können in Ihrem Browser ``http://+ PiDogs IP +/mjpg`` besuchen (wie meine ``http://192.168.18.138:9000/mjpg``), um das Bild der Kamera zu sehen.
 
-After running this code, PiDog will start the camera and enable the face detection function.
-You can visit ``http://+ PiDog's IP +/mjpg`` (like mine is ``http://192.168.18.138:9000/mjpg``) in your browser to view the camera's picture.
+Dann setzt sich PiDog hin und aktiviert das Soundrichtungssensor-Modul, um die Richtung Ihres Klatschens zu erkennen.
+Wenn PiDog Klatschen (oder andere Geräusche) hört, dreht es seinen Kopf in Richtung der Schallquelle und versucht, Sie zu finden.
 
-Then PiDog will sit down and activate the Sound Direction Sensor Module to detect the direction of your clapping.
-When PiDog hears clapping (or other noise), it turns its head toward the sound source, trying to find you.
-
-If it sees you (face detection finds an object), it will wag its tail and let out a bark.
-
-
-
+Wenn es Sie sieht (die Gesichtserkennung findet ein Objekt), wedelt es mit dem Schwanz und gibt ein Bellen von sich.
 
 **Code**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Sie können den unten stehenden Code **modifizieren/zurücksetzen/kopieren/ausführen/stoppen**. Bevor Sie das tun, müssen Sie jedoch zum Quellcode-Pfad wie ``pidog\examples`` gehen. Nachdem Sie den Code modifiziert haben, können Sie ihn direkt ausführen, um den Effekt zu sehen.
 
 .. raw:: html
 

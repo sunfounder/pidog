@@ -1,11 +1,11 @@
 .. _install_all_modules:
 
-5. Install All the Modules(Important)
+5. Installieren Sie alle Module (Wichtig)
 ==============================================
 
-#. Update your system.
+#. Aktualisieren Sie Ihr System.
 
-    Make sure you are connected to the Internet and update your system:
+    Stellen Sie sicher, dass Sie mit dem Internet verbunden sind und aktualisieren Sie Ihr System:
 
     .. raw:: html
 
@@ -18,7 +18,7 @@
 
     .. note::
 
-        Python3 related packages must be installed if you are installing the Lite version OS.
+        Python3-bezogene Pakete müssen installiert werden, wenn Sie die Lite-Version des Betriebssystems installieren.
 
         .. raw:: html
 
@@ -29,7 +29,7 @@
             sudo apt install git python3-pip python3-setuptools python3-smbus
 
 
-#. Install ``robot-hat`` module.
+#. Installieren Sie das ``robot-hat``-Modul.
 
 
     .. raw:: html
@@ -45,7 +45,7 @@
 
 
 
-#. Install ``vilib`` module.
+#. Installieren Sie das ``vilib``-Modul.
 
 
     .. raw:: html
@@ -62,7 +62,7 @@
 
 
 
-#. Download the code.
+#. Laden Sie den Code herunter.
 
     .. raw:: html
 
@@ -73,7 +73,7 @@
         cd ~/
         git clone https://github.com/sunfounder/pidog.git
 
-#. Install ``pidog`` module.
+#. Installieren Sie das ``pidog``-Modul.
 
     .. raw:: html
 
@@ -84,11 +84,11 @@
         cd pidog
         sudo python3 setup.py install
 
-    This step will take a little time, so please be patient.
+    Dieser Schritt wird etwas Zeit in Anspruch nehmen, also bitte Geduld haben.
 
-#. Run the script ``i2samp.sh``.
+#. Führen Sie das Skript ``i2samp.sh`` aus.
 
-    Finally, you need to run the script ``i2samp.sh`` to install the components required by the i2s amplifier, otherwise the robot will have no sound.
+    Schließlich müssen Sie das Skript ``i2samp.sh`` ausführen, um die Komponenten zu installieren, die der i2s-Verstärker benötigt, sonst hat der Roboter keinen Ton.
 
     .. raw:: html
 
@@ -101,15 +101,15 @@
         
     .. image:: img/i2s.png
 
-    Type ``y`` and press ``Enter`` to continue running the script.
+    Geben Sie ``y`` ein und drücken Sie ``Enter``, um das Skript weiter auszuführen.
 
     .. image:: img/i2s2.png
 
-    Type ``y`` and press ``Enter`` to run ``/dev/zero`` in the background.
+    Geben Sie ``y`` ein und drücken Sie ``Enter``, um ``/dev/zero`` im Hintergrund laufen zu lassen.
 
     .. image:: img/i2s3.png
 
-    Type ``y`` and press ``Enter`` to restart the machine.
+    Geben Sie ``y`` ein und drücken Sie ``Enter``, um den Computer neu zu starten.
 
     .. note::
-        If there is no sound after restarting, you may need to run the ``i2samp.sh`` script multiple times.
+        Wenn nach dem Neustart kein Ton zu hören ist, müssen Sie möglicherweise das Skript ``i2samp.sh`` mehrmals ausführen.

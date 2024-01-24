@@ -1,23 +1,21 @@
-18650 Battery
+18650 Batterie
 =================
 
 .. image:: img/2battery.jpg
     :width: 300
     :align: center
 
-* **VCC**: Battery positive terminal, here there are two sets of VCC and GND is to increase the current and reduce the resistance.
-* **Middle**: To balance the voltage between the two cells and thus protect the battery.
-* **GND**: Negative battery terminal.
+* **VCC**: Positiver Batteriepol, hier gibt es zwei Sätze von VCC und GND, um den Strom zu erhöhen und den Widerstand zu verringern.
+* **Mitte**: Zur Ausbalancierung der Spannung zwischen den beiden Zellen und somit zum Schutz der Batterie.
+* **GND**: Negativer Batteriepol.
 
+Dies ist ein speziell von SunFounder angefertigtes Batteriepack, bestehend aus zwei 18650-Batterien mit einer Kapazität von 2000mAh. Der Anschluss ist PH2.0-5P, der direkt nach dem Einsetzen in den Robot HAT aufgeladen werden kann.
 
-This is a custom battery pack made by SunFounder consisting of two 18650 batteries with a capacity of 2000mAh. The connector is PH2.0-5P, which can be charged directly after being inserted into the Robot HAT.
+**Merkmale**
 
-
-**Features**
-
-* Battery charge: 5V/2A
-* Battery output: 5V/3A
-* Battery capacity: 3.7V 2000mAh x 2
-* Battery life: <90min
-* Battery charge time: >130min
-* Connector: PH2.0, 5P
+* Batterieladung: 5V/2A
+* Batterieausgang: 5V/3A
+* Batteriekapazität: 3,7V 2000mAh x 2
+* Batterielebensdauer: <90min
+* Ladezeit der Batterie: >130min
+* Anschluss: PH2.0, 5P

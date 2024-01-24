@@ -1,14 +1,14 @@
-For Windows Users
+Für Windows-Benutzer
 =======================
 
-For Windows 10 or higher users, remote login to a Raspberry Pi can be achieved through the following steps:
+Für Benutzer von Windows 10 oder höher kann der Fernzugriff auf einen Raspberry Pi wie folgt erreicht werden:
 
-#. Search for ``powershell`` in your Windows search box. Right-click on ``Windows PowerShell`` and select ``Run as administrator``.
+#. Suchen Sie in Ihrer Windows-Suchleiste nach ``powershell``. Klicken Sie mit der rechten Maustaste auf ``Windows PowerShell`` und wählen Sie ``Als Administrator ausführen``.
 
     .. image:: img/powershell_ssh.png
         :align: center
 
-#. Determine your Raspberry Pi's IP address by typing ``ping -4 <hostname>.local`` in PowerShell.
+#. Bestimmen Sie die IP-Adresse Ihres Raspberry Pi, indem Sie in PowerShell ``ping -4 <hostname>.local`` eingeben.
 
     .. code-block::
 
@@ -18,12 +18,12 @@ For Windows 10 or higher users, remote login to a Raspberry Pi can be achieved t
         :width: 550
         :align: center
 
-    The Raspberry Pi's IP address will be displayed once it's connected to the network.
+    Die IP-Adresse des Raspberry Pi wird angezeigt, sobald er mit dem Netzwerk verbunden ist.
 
-    * If the terminal displays ``Ping request could not find host pi.local. Please check the name and try again.``, verify the hostname you've entered is correct.
-    * If the IP address still isn't retrievable, check your network or WiFi settings on the Raspberry Pi.
+    * Wenn das Terminal ``Ping request could not find host pi.local. Please check the name and try again.`` anzeigt, überprüfen Sie, ob der eingegebene Hostname korrekt ist.
+    * Wenn die IP-Adresse immer noch nicht abgerufen werden kann, überprüfen Sie Ihre Netzwerk- oder WLAN-Einstellungen auf dem Raspberry Pi.
 
-#. Once the IP address is confirmed, log in to your Raspberry Pi using ``ssh <username>@<hostname>.local`` or ``ssh <username>@<IP address>``.
+#. Sobald die IP-Adresse bestätigt ist, loggen Sie sich in Ihren Raspberry Pi ein, indem Sie ``ssh <username>@<hostname>.local`` oder ``ssh <username>@<IP address>`` verwenden.
 
     .. code-block::
 
@@ -31,9 +31,9 @@ For Windows 10 or higher users, remote login to a Raspberry Pi can be achieved t
 
     .. warning::
 
-        If an error appears stating ``The term 'ssh' is not recognized as the name of a cmdlet...``, your system may not have SSH tools pre-installed. In this case, you need to manually install OpenSSH following :ref:`openssh_powershell`, or use a third-party tool as described in :ref:`login_windows`.
+        Wenn ein Fehler angezeigt wird, der besagt, dass ``The term 'ssh' is not recognized as the name of a cmdlet...``, hat Ihr System möglicherweise keine vorinstallierten SSH-Tools. In diesem Fall müssen Sie OpenSSH manuell installieren, wie in :ref:`openssh_powershell` beschrieben, oder ein Drittanbieter-Tool verwenden, wie in :ref:`login_windows` beschrieben.
 
-#. A security message will appear on your first login. Enter ``yes`` to proceed.
+#. Bei Ihrer ersten Anmeldung erscheint eine Sicherheitsmeldung. Geben Sie ``yes`` ein, um fortzufahren.
 
     .. code-block::
 
@@ -41,12 +41,12 @@ For Windows 10 or higher users, remote login to a Raspberry Pi can be achieved t
         ED25519 key fingerprint is SHA256:oo7x3ZSgAo032wD1tE8eW0fFM/kmewIvRwkBys6XRwg.
         Are you sure you want to continue connecting (yes/no/[fingerprint])?
 
-#. Enter the password you previously set. Note that the password characters won't be displayed on the screen, which is a standard security feature.
+#. Geben Sie das zuvor festgelegte Passwort ein. Beachten Sie, dass die Passwortzeichen beim Tippen nicht auf dem Bildschirm angezeigt werden, was ein Standard-Sicherheitsmerkmal ist.
 
     .. note::
-        The absence of visible characters when typing the password is normal. Ensure you input the correct password.
+        Das Fehlen sichtbarer Zeichen beim Eingeben des Passworts ist normal. Stellen Sie sicher, dass Sie das richtige Passwort eingeben.
 
-#. Once connected, your Raspberry Pi is ready for remote operations.
+#. Sobald die Verbindung hergestellt ist, ist Ihr Raspberry Pi bereit für Fernoperationen.
 
     .. image:: img/sp221221_140628.png
         :width: 550

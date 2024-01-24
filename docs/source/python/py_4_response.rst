@@ -1,25 +1,23 @@
-4. Response
+4. Reaktion
 ================
 
-In this project, PiDog will interact with you in an interesting way.
+In diesem Projekt wird PiDog auf interessante Weise mit Ihnen interagieren.
 
-If you reach out and grab PiDog's head from the front, it will bark vigilantly.
-
+Wenn Sie von vorne nach PiDogs Kopf greifen und ihn festhalten, wird es wachsam bellen.
 
 .. image:: img/py_4-2.gif
     :width: 430
 
-
-But if you reach out from behind it and pet its head, it will enjoy it very much.
+Aber wenn Sie von hinten her nach seinem Kopf greifen und ihn streicheln, wird es das sehr genießen.
 
 .. raw:: html
 
    <video width="600" loop autoplay muted>
       <source src="../_static/video/touch_head.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      Ihr Browser unterstützt das Video-Tag nicht.
    </video>
 
-**Run the Code**
+**Code ausführen**
 
 .. raw:: html
 
@@ -30,19 +28,16 @@ But if you reach out from behind it and pet its head, it will enjoy it very much
     cd ~/pidog/examples
     sudo python3 4_response.py
 
-After running this example, PiDog's ultrasonic module will detect whether there is an obstacle ahead,
-If it detects your hand, it makes the breathing light glow red, takes a step back, and barks.
+Nachdem Sie dieses Beispiel ausgeführt haben, wird PiDogs Ultraschallmodul erkennen, ob sich ein Hindernis voraus befindet.
+Wenn es Ihre Hand erkennt, leuchtet das Atemlicht rot auf, PiDog macht einen Schritt zurück und bellt.
 
-At the same time, the touch sensor will also work. If the touch sensor is stroked (not just touched), 
-PiDog will shake its head, wag its tail, and show a comfortable look.
-
-
-
+Gleichzeitig wird auch der Berührungssensor arbeiten. Wenn der Berührungssensor gestreichelt wird (nicht nur berührt), 
+wird PiDog mit dem Kopf schütteln, mit dem Schwanz wedeln und ein zufriedenes Aussehen zeigen.
 
 **Code**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Sie können den unten stehenden Code **modifizieren/zurücksetzen/kopieren/ausführen/stoppen**. Bevor Sie das tun, müssen Sie jedoch zum Quellcode-Pfad wie ``pidog\examples`` gehen. Nachdem Sie den Code modifiziert haben, können Sie ihn direkt ausführen, um den Effekt zu sehen.
 
 .. raw:: html
 

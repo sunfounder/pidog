@@ -1,28 +1,26 @@
-11-channel Light Board
+11-Kanal Lichtplatine
 =============================
 
 .. image:: img/cpn_lightboard.png
    :width: 500
    :align: center
 
+Dies ist ein 11-Kanal RGB-LED-Modul, das mit 11 RGB-LEDs ausgestattet ist, die vom SLED1735-Chip gesteuert werden.
 
-This is an 11-channel RGB LED module, which is equipped with 11 RGB LEDs controlled by the SLED1735 chip.
+SLED1734 kann bis zu 256 LEDs und 75 RGB-LEDs ansteuern.
+In der von SLED1734 gesteuerten LED-Matrix hat jede LED Funktionen wie Ein/Aus, Blinken, Atmen sowie automatische Synchronisation und viele andere Funktionen.
+Der Chip verfügt über integrierte PWM-Technologie (Pulsweitenmodulation), die 256 Helligkeitsstufen bietet. Er hat auch eine 16-stufige Punktkorrekturfunktion.
 
-SLED1734 can drive up to 256 LEDs and 75 RGB LEDs.
-In the LED matrix controlled by SLED1734, each LED has on/off, blinking, breathing light and automatic synchronization and many other functions.
-The chip has built-in PWM (pulse width modulation) technology, which can provide 256 levels of brightness adjustment. It also has a 16-level dot correction function.
+**Spezifikationen**
 
+* Stromversorgung: 3.3V
+* Kommunikation: IIC
+* Anschluss: SH1.0 4P
+* LEDs: 3535 RGB-LEDs
 
-**Specifications**
+**Pinbelegung**
 
-* Power supply: 3.3V
-* Communication: IIC
-* Connector: SH1.0 4P
-* LEDs: 3535 RGB LEDs
-
-**Pin Out**
-
-* GND - Ground Input
-* VCC - Power Supply Input
+* GND - Ground-Eingang
+* VCC - Stromversorgungseingang
 * SDA - IIC SDA
 * SCL - IIC SCL

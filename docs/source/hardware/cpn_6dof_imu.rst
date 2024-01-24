@@ -5,26 +5,23 @@
    :width: 200
    :align: center
 
+Das 6-DOF IMU basiert auf dem SH3001.
 
-The 6-DOF IMU is based on the SH3001.
+Der SH3001 ist ein Sechsachsen-IMU (Inertial Measurement Unit). Es integriert ein dreiaxiales Gyroskop und einen dreiaxialen Beschleunigungsmesser. Es ist klein und verbraucht wenig Energie. Es eignet sich für Anwendungen im Markt für Verbraucherelektronik und kann hochpräzise Echtzeit-Winkelgeschwindigkeits- und lineare Beschleunigungsdaten liefern. Der SH3001 hat eine ausgezeichnete Temperaturstabilität und kann eine hohe Auflösung im Betriebsbereich von -40°C bis 85°C beibehalten.
 
-SH3001 is a six-axis IMU (Inertial measurement unit). It integrates a three-axis gyroscope and a three-axis accelerometer. It is small in size and low in power consumption. It is suitable for consumer electronics market applications and can provide high-precision real-time angular velocity and linear acceleration data. The SH3001 has excellent temperature stability and can maintain high resolution within the operating range of -40°C to 85°C.
+Es wird typischerweise in Smartphones, Tablet-Computern, Multirotor-Drohnen, intelligenten Kehrmaschinen, Seitenwendel-Laserpointern, AR/VR, intelligenten Fernbedienungen, Smart-Armbändern und anderen Produkten verwendet.
 
-It is typically used in smartphones, tablet computers, multi-rotor drones, smart sweepers, page-turning laser pointers, AR/VR, smart remote controls, smart bracelets and other products.
-
-
-
-**Specifications**
+**Spezifikationen**
 
 
-* Power Supply: 3.3V
-* Communication: IIC
-* Connector: SH1.0 4P
+* Stromversorgung: 3,3V
+* Kommunikation: IIC
+* Anschluss: SH1.0 4P
 
-**Pin Out**
+**Pinbelegung**
 
-* GND - Ground Input
-* VCC - Power Supply Input
+* GND - Ground-Eingang
+* VCC - Stromversorgungseingang
 * SDA - IIC SDA
 * SCL - IIC SCL
 

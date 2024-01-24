@@ -1,3 +1,4 @@
+
 SunFounder Raspberry Pi Robot - PiDog
 =============================================
 
@@ -6,44 +7,44 @@ SunFounder Raspberry Pi Robot - PiDog
     :width: 400
     :align: center
 
-Thank you for choosing our PiDog.
+Vielen Dank, dass Sie sich für unseren PiDog entschieden haben.
 
 .. note::
-    This document is available in the following languages.
+    Dieses Dokument ist in folgenden Sprachen verfügbar.
 
         * |link_german_tutorials|
         * |link_jp_tutorials|
         * |link_en_tutorials|
     
-    Please click on the respective links to access the document in your preferred language.
+    Bitte klicken Sie auf die entsprechenden Links, um das Dokument in Ihrer bevorzugten Sprache zu öffnen.
 
 
-PiDog is a Raspberry Pi pet robot with aluminum alloy structure. It can act as a mechanical pet, show cuteness to you, and interact with you.
+PiDog ist ein Raspberry Pi Haustierroboter mit einer Aluminiumlegierungstruktur. Er kann sich als mechanisches Haustier verhalten, Ihnen Niedlichkeit zeigen und mit Ihnen interagieren.
 
-It is equipped with a camera module, which can perform color recognition, face detection and other projects;
-12 metal gear servos support it to walk, stand, sit, shake its head, and pose in various poses;
-The ultrasonic module on the head enables it to quickly detect obstacles ahead;
-Special touch sensors allow it to respond to your touch;
-The Light Board on the chest can emit colorful light effects, and with the speaker equipped with the robot HAT, PiDog can express emotions such as happiness and excitement.
-In addition, PiDog is also equipped with a sound direction sensor and a 6-DOF IMU module to realize more complex and interesting usage scenarios.
-
-
-If you have any questions, please send an email to service@sunfounder.com and we will respond as soon as possible.
+Er ist mit einem Kameramodul ausgestattet, das Farberkennung, Gesichtserkennung und andere Projekte durchführen kann;
+12 Metallgetriebeservos unterstützen ihn beim Gehen, Stehen, Sitzen, Kopfschütteln und Posen in verschiedenen Posen;
+Das Ultraschallmodul auf dem Kopf ermöglicht ihm die schnelle Erkennung von Hindernissen im Voraus;
+Besondere Berührungssensoren ermöglichen es ihm, auf Ihre Berührung zu reagieren;
+Das Lichtbrett auf der Brust kann bunte Lichteffekte erzeugen, und mit dem mit dem Robot HAT ausgestatteten Lautsprecher kann PiDog Emotionen wie Freude und Aufregung ausdrücken.
+Darüber hinaus ist PiDog auch mit einem Soundrichtungssensor und einem 6-DOF-IMU-Modul ausgestattet, um komplexere und interessantere Anwendungsszenarien zu realisieren.
 
 
-**Content**
+Wenn Sie Fragen haben, senden Sie bitte eine E-Mail an service@sunfounder.com, und wir werden so schnell wie möglich antworten.
+
+
+**Inhalt**
 
 .. toctree::
     :maxdepth: 2
 
-    About This Kit <self>
+    Über dieses Kit <self>
     assemble_video
     python/play_with_python 
     hardware/cpn_hardware
     appendix/appendix
 
-Copyright Notice
+Copyright-note
 --------------------------
 
-All contents including but not limited to texts, images, and code in this manual are owned by the SunFounder Company. You should only use it for personal study,investigation, enjoyment, or other non-commercial or nonprofit purposes, under therelated regulations and copyrights laws, without infringing the legal rights of the author and relevant right holders. For any individual or organization that uses these for commercial profit without permission, the Company reserves the right to take legal action.
+Alle Inhalte, einschließlich, aber nicht beschränkt auf Texte, Bilder und Code, in diesem Handbuch gehören der SunFounder Company. Sie sollten es nur für persönliche Studien, Untersuchungen, zur Freude oder für andere nichtkommerzielle oder gemeinnützige Zwecke verwenden, gemäß den entsprechenden Vorschriften und Urheberrechtsbestimmungen, ohne die rechtlichen Rechte des Autors und der relevanten Rechteinhaber zu verletzen. Für Einzelpersonen oder Organisationen, die diese ohne Genehmigung für kommerziellen Gewinn verwenden, behält sich das Unternehmen das Recht vor, rechtliche Schritte einzuleiten.
 

@@ -1,13 +1,11 @@
-9. Howling
+9. Heulen
 ===============
 
-
-PiDog is not only a cute puppy, but also a mighty dog. Come hear it howl!
-
+PiDog ist nicht nur ein süßer Welpe, sondern auch ein mächtiger Hund. Kommen Sie und hören Sie es heulen!
 
 .. image:: img/py_9.gif
 
-**Run the Code**
+**Code ausführen**
 
 .. raw:: html
 
@@ -18,14 +16,12 @@ PiDog is not only a cute puppy, but also a mighty dog. Come hear it howl!
     cd ~/pidog/examples
     sudo python3 9_howling.py
 
-After the program runs, PiDog will sit on the ground and howl.
-
-
+Nachdem das Programm gestartet wurde, wird PiDog sich auf den Boden setzen und heulen.
 
 **Code**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Sie können den unten stehenden Code **modifizieren/zurücksetzen/kopieren/ausführen/stoppen**. Bevor Sie das tun, müssen Sie jedoch zum Quellcode-Pfad wie ``pidog\examples`` gehen. Nachdem Sie den Code modifiziert haben, können Sie ihn direkt ausführen, um den Effekt zu sehen.
 
 .. raw:: html
 

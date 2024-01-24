@@ -1,15 +1,15 @@
-7. PiDog Speak
+7. PiDog spricht
 ==========================
 
-PiDog can make sound, it is actually playing a piece of audio.
+PiDog kann Geräusche machen, es spielt eigentlich eine Audiodatei ab.
 
-These audios are saved under ``pidog\sounds`` path, you can call the following function to play them.
+Diese Audiodateien sind unter dem Pfad ``pidog\sounds`` gespeichert, und Sie können die folgende Funktion aufrufen, um sie abzuspielen.
 
 .. code-block:: python
 
    Pidog.speak(name)
 
-* ``name`` : Filename (without suffix), such as ``"angry"``. ``Pidog`` provides the following audio.
+* ``name``: Dateiname (ohne Suffix), wie z.B. ``"angry"``. ``Pidog`` bietet die folgenden Audiodateien.
 
   * ``"angry"``
   * ``"confused_1"``
@@ -24,7 +24,7 @@ These audios are saved under ``pidog\sounds`` path, you can call the following f
   * ``"snoring"``
   * ``"woohoo"``
 
-**Here is an example of usage:**
+**Hier ist ein Beispiel für die Nutzung:**
 
 .. code-block:: python
 
@@ -41,23 +41,23 @@ These audios are saved under ``pidog\sounds`` path, you can call the following f
     import os
     import time
 
-    # change working directory
+    # Arbeitsverzeichnis ändern
     abspath = os.path.abspath(os.path.dirname(__file__))
     # print(abspath)
     os.chdir(abspath)
 
     my_dog = Pidog()
 
-    print("\033[033mNote that you need to run with \"sudo\", otherwise there may be no sound.\033[m")
+    print("\033[033mBeachten Sie, dass Sie mit \"sudo\" ausführen müssen, sonst gibt es möglicherweise keinen Ton.\033[m")
 
     # my_dog.speak("angry")
     # time.sleep(2)
 
     for name in os.listdir('../sounds'):
-        name = name.split('.')[0] # remove suffix
+        name = name.split('.')[0] # Suffix entfernen
         print(name)
         my_dog.speak(name)
         # my_dog.speak(name, volume=50)
-        time.sleep(3) # Note that the duration of each sound effect is different
-    print("closing ...")
+        time.sleep(3) # Beachten Sie, dass die Dauer jedes Soundeffekts unterschiedlich ist
+    print("Schließe ...")
     my_dog.close()

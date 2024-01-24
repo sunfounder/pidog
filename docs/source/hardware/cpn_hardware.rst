@@ -1,9 +1,9 @@
 Hardware
 ==================
 
-When you are writing code, you may need to know how each module works or the role of each pin, then please see this chapter.
+Wenn Sie Code schreiben, müssen Sie möglicherweise wissen, wie jedes Modul funktioniert oder welche Rolle jeder Pin spielt, dann lesen Sie bitte dieses Kapitel.
 
-In this chapter you will find a description of each module's function, technical parameters and working principle.
+In diesem Kapitel finden Sie eine Beschreibung der Funktion jedes Moduls, der technischen Parameter und des Arbeitsprinzips.
 
 .. toctree::
     :maxdepth: 1

@@ -1,9 +1,10 @@
-4. Easy Coding
-======================
-Here, we delve into various functions, breaking them down for a comprehensive understanding. 
-Each sub-topic is dedicated to a specific function, making it easier for you to grasp and implement them. 
-Whether it's initiating parameters, controlling specific movements, or incorporating sensory inputs, we've covered them all. 
-Navigate through the sub-topics below to kickstart your coding journey with Pidog.
+
+4. Einfaches Codieren
+========================
+Hier tauchen wir in verschiedene Funktionen ein, zerlegen sie für ein umfassendes Verständnis. 
+Jedes Unterthema ist einer bestimmten Funktion gewidmet, um Ihnen das Verstehen und Implementieren zu erleichtern. 
+Ob das Initiieren von Parametern, die Steuerung bestimmter Bewegungen oder die Integration sensorischer Eingaben betrifft, wir haben alles abgedeckt. 
+Navigieren Sie durch die Unterthemen unten, um Ihre Coding-Reise mit Pidog zu starten.
 
 
 .. toctree::

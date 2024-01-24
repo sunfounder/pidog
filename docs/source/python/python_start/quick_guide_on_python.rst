@@ -1,11 +1,11 @@
 .. _quick_guide_python:
 
-1. Quick Guide on Python
-==========================
+1. Schnelleinführung in Python
+======================================
 
-This section is to teach you how to install Raspberry Pi OS, configure wifi to Raspberry Pi, remote access to Raspberry Pi to run the corresponding code.
+Dieser Abschnitt soll Ihnen beibringen, wie Sie das Raspberry Pi OS installieren, WLAN für Raspberry Pi konfigurieren, Fernzugriff auf Raspberry Pi herstellen und den entsprechenden Code ausführen.
 
-If you are familiar with Raspberry Pi and can open the command line successfully, then you can skip the first 3 parts and then complete the last part. 
+Wenn Sie mit Raspberry Pi vertraut sind und die Befehlszeile erfolgreich öffnen können, können Sie die ersten 3 Teile überspringen und dann den letzten Teil abschließen.
 
 
 
@@ -22,12 +22,8 @@ If you are familiar with Raspberry Pi and can open the command line successfully
 
 **Video**
 
-In our assembly video from **3:40 to 7:23**, there is also a detailed tutorial for this chapter. You can follow the video instructions directly.
+In unserem Montagevideo von **3:40 bis 7:23** gibt es auch ein detailliertes Tutorial für dieses Kapitel. Sie können den Videoanweisungen direkt folgen.
 
 .. raw:: html
 
-    <iframe width="700" height="500" src="https://www.youtube.com/embed/Gskge1fDR30?si=Yo12Teo6N_2NOkz2&amp;start=220&end=443" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-
-
-
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/Gskge1fDR30?si=Yo12Teo6N_2NOkz2&amp;start=220&end=443" title="YouTube-Video-Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

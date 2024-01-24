@@ -1,11 +1,11 @@
 .. _i2c_spi_config:
 
-6. Check I2C and SPI Interface
-========================================
+6. Überprüfung der I2C- und SPI-Schnittstelle
+=====================================================
 
-We will be using Raspberry Pi's I2C and SPI interfaces. These interfaces should have been enabled when installing the ``robot-hat`` module earlier. To ensure everything is in order, let's check if they are indeed enabled.
+Wir werden die I2C- und SPI-Schnittstellen des Raspberry Pi verwenden. Diese Schnittstellen sollten bereits aktiviert worden sein, als Sie das Modul ``robot-hat`` installiert haben. Um sicherzustellen, dass alles in Ordnung ist, überprüfen wir, ob sie tatsächlich aktiviert sind.
 
-#. Input the following command:
+#. Geben Sie den folgenden Befehl ein:
 
     .. raw:: html
 
@@ -15,27 +15,27 @@ We will be using Raspberry Pi's I2C and SPI interfaces. These interfaces should 
 
         sudo raspi-config
 
-#. Choose **Interfacing Options** by press the down arrow key on your keyboard, then press the **Enter** key.
+#. Wählen Sie **Interfacing Options** aus, indem Sie die Abwärtspfeiltaste auf Ihrer Tastatur drücken und dann die **Enter**-Taste drücken.
 
     .. image:: img/image282.png
         :align: center
 
-#. Then **I2C**.
+#. Wählen Sie dann **I2C** aus.
 
     .. image:: img/image283.png
         :align: center
 
-#. Use the arrow keys on the keyboard to select **<Yes>** -> **<OK>** to complete the setup of the I2C.
+#. Verwenden Sie die Pfeiltasten auf der Tastatur, um **<Ja>** -> **<OK>** auszuwählen, um die Einrichtung des I2C abzuschließen.
 
     .. image:: img/image284.png
         :align: center
 
-#. Go to **Interfacing Options** again and select **SPI**.
+#. Gehen Sie erneut zu **Interfacing Options** und wählen Sie **SPI** aus.
 
     .. image:: img/image-spi1.png
         :align: center
 
-#. Use the arrow keys on the keyboard to select **<Yes>** -> **<OK>** to complete the setup of the SPI.
+#. Verwenden Sie die Pfeiltasten auf der Tastatur, um **<Ja>** -> **<OK>** auszuwählen, um die Einrichtung des SPI abzuschließen.
 
     .. image:: img/image-spi2.png
         :align: center

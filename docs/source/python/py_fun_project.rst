@@ -1,9 +1,9 @@
-3. Fun Python Projects
-=========================
 
+3. Spaßige Python-Projekte
+============================
 
-Here, we delve into an exciting assortment of projects that showcase the versatility and capabilities of the PiDog. 
-From the basics of setting a wakeup routine in :ref:`py_wake_up` to the advanced dynamics of ball tracking in :ref:`py_ball_track`, each project offers a unique glimpse into the world of Python programming for robotics. Whether you're keen on making your PiDog patrol an area, respond to commands, execute pushups, or even howl on command, there's a project tailored for you. Furthermore, for those looking to extend their PiDog's capabilities to computer interfaces, we have tutorials on keyboard and app control as well. Dive in, and embark on a journey of discovery and fun with these hands-on Python projects for your PiDog!
+Hier tauchen wir in eine aufregende Auswahl von Projekten ein, die die Vielseitigkeit und Fähigkeiten des PiDog demonstrieren. 
+Von den Grundlagen des Einrichtens einer Weckroutine in :ref:`py_wake_up` bis zur fortgeschrittenen Dynamik des Ballverfolgens in :ref:`py_ball_track` bietet jedes Projekt einen einzigartigen Einblick in die Welt der Python-Programmierung für Robotik. Ob Sie Ihren PiDog dazu bringen möchten, ein Gebiet zu patrouillieren, auf Befehle zu reagieren, Liegestütze auszuführen oder sogar auf Befehl zu heulen, es gibt ein Projekt, das auf Sie zugeschnitten ist. Darüber hinaus bieten wir für diejenigen, die die Fähigkeiten ihres PiDog auf Computer-Schnittstellen erweitern möchten, Tutorials zur Tastatur- und App-Steuerung. Tauchen Sie ein und begeben Sie sich auf eine Entdeckungs- und Spaßreise mit diesen praktischen Python-Projekten für Ihren PiDog!
 
 
 .. toctree::

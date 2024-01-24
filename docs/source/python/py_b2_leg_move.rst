@@ -1,21 +1,21 @@
 .. _py_b2_leg_move:
 
-2. Leg Move
-=================
+2. Beinbewegungen
+==========================
 
-PiDog's leg movements are implemented by the following functions.
+Die Beinbewegungen von PiDog werden durch die folgenden Funktionen implementiert.
 
 .. code-block:: python
 
     Pidog.legs_move(target_angles, immediately=True, speed=50)
 
-* ``target_angles``: It is a two-dimensional array composed of an array of 8 servo angles (referred to as angle group) as elements. These angle groups will be used to control the angles of the 8 foot servos. If multiple angle groups are written, the unexecuted angle groups will be stored in the cache.
-* ``immediately`` : When calling the function, set this parameter to ``True``, the cache will be cleared immediately to execute the newly written angle group; if the parameter is set to ``False``, the newly written The incoming angular group is added to the execution queue.
-* ``speed`` : The speed at which the angular group is executed.
+* ``target_angles``: Es ist ein zweidimensionales Array, das aus einem Array von 8 Servowinkeln (als Winkelgruppe bezeichnet) als Elemente besteht. Diese Winkelgruppen werden verwendet, um die Winkel der 8 Fußservos zu steuern. Wenn mehrere Winkelgruppen geschrieben werden, werden die nicht ausgeführten Winkelgruppen im Cache gespeichert.
+* ``immediately`` : Wenn diese Funktion aufgerufen wird, setzen Sie diesen Parameter auf ``True``, der Cache wird sofort geleert, um die neu geschriebene Winkelgruppe auszuführen; wenn der Parameter auf ``False`` gesetzt wird, wird die neu geschriebene Winkelgruppe zur Ausführungswarteschlange hinzugefügt.
+* ``speed`` : Die Geschwindigkeit, mit der die Winkelgruppe ausgeführt wird.
 
-**Some common usages are listed below:**
+**Einige häufige Verwendungen sind unten aufgeführt:**
 
-1.  Take action immediately.
+1.  Sofortige Aktion.
 
 .. code-block:: python
 
@@ -24,11 +24,11 @@ PiDog's leg movements are implemented by the following functions.
 
     my_dog = Pidog()
 
-    # half stand
+    # halb stehen
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], speed=50)   
 
 
-2. Add some angular groups to the execution queue.
+2. Fügen Sie einige Winkelgruppen zur Ausführungswarteschlange hinzu.
 
 .. code-block:: python
 
@@ -37,15 +37,15 @@ PiDog's leg movements are implemented by the following functions.
 
     my_dog = Pidog()
 
-    # half stand
+    # halb stehen
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], speed=50)  
 
-    # multiple actions
+    # mehrere Aktionen
     my_dog.legs_move([[45, 35, -45, -35, 80, 70, -80, -70],
                         [90, -30, -90, 30, 80, 70, -80, -70],
                         [45, 35, -45, -35, 80, 70, -80, -70]],  immediately=False, speed=30)   
 
-3. Perform repetitions within 10 seconds.
+3. Wiederholungen innerhalb von 10 Sekunden durchführen.
 
 
 .. code-block:: python
@@ -55,40 +55,40 @@ PiDog's leg movements are implemented by the following functions.
 
     my_dog = Pidog()
 
-    # half stand
+    # halb stehen
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], speed=50)  
 
-    # pushup preparation
+    # Liegestütz-Vorbereitung
     my_dog.legs_move([[45, 35, -45, -35, 80, 70, -80, -70]], immediately=False, speed=20)
 
-    # pushup
+    # Liegestütz
     for _ in range(99):
         my_dog.legs_move([[90, -30, -90, 30, 80, 70, -80, -70],
                             [45, 35, -45, -35, 80, 70, -80, -70]],  immediately=False, speed=30)   
 
-    # keep 10s
+    # 10s halten
     time.sleep(10)
 
-    # stop and half stand
+    # stoppen und halb stehen
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], immediately=True, speed=50)  
 
 
-**PiDog's leg control also has the following functions that can be used together:**
+**PiDogs Beinkontrolle hat auch die folgenden Funktionen, die zusammen verwendet werden können:**
 
 .. code-block:: python
 
     Pidog.is_legs_done()
 
-This function is used to determine whether the angle group in the cache has been executed. If yes, return ``True``; otherwise, return ``False``.
+Diese Funktion wird verwendet, um zu bestimmen, ob die Winkelgruppe im Cache ausgeführt wurde. Wenn ja, gibt sie ``True`` zurück; andernfalls ``False``.
 
 .. code-block:: python
 
     Pidog.wait_legs_done()
 
-Suspends the program until the angle groups in the cache have been executed.
+Pausiert das Programm, bis die Winkelgruppen im Cache ausgeführt wurden.
 
 .. code-block:: python
 
     Pidog.legs_stop() 
 
-Empty the angular group in the cache.
+Leert die Winkelgruppe im Cache.

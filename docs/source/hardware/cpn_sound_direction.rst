@@ -5,29 +5,26 @@ Sound Direction Sensor
    :width: 400
    :align: center
 
-This is a sound direction recognition module. It is equipped with 3 microphones, which can detect sound sources from all directions, and is equipped with a TR16F064B, which is used to process sound signals and calculate the sound source direction. The minimum reconnaissance unit of this module is 20 degrees, and the data range is 0~355
+Dies ist ein Modul zur Erkennung von Schallrichtungen. Es ist mit 3 Mikrofonen ausgestattet, die Schallquellen aus allen Richtungen erkennen können, und verfügt über einen TR16F064B, der zur Verarbeitung von Schallsignalen und zur Berechnung der Schallrichtung verwendet wird. Die kleinste Aufklärungseinheit dieses Moduls beträgt 20 Grad, und der Datenbereich liegt zwischen 0~355.
 
-Data transmission process: the main controller pulls up the BUSY pin, and TR16F064B starts to monitor the direction. When 064B recognizes the direction, it will pull down the BUSY pin;
-When the main control detects that BUSY is low, it will send 16bit arbitrary data to 064B (follow the MSB transmission), and accept 16bit data, which is the sound direction data processed by 064B.
-After completion, the main control will pull the BUSY pin high to detect the direction again.
+Datenübertragungsprozess: Der Hauptcontroller zieht den BUSY-Pin hoch, und TR16F064B beginnt mit der Überwachung der Richtung. Wenn 064B die Richtung erkennt, zieht es den BUSY-Pin nach unten;
+Wenn der Hauptcontroller erkennt, dass BUSY niedrig ist, sendet er 16bit beliebige Daten an 064B (folgt der MSB-Übertragung) und akzeptiert 16bit Daten, die die von 064B verarbeiteten Schallrichtungsdaten sind.
+Nach Abschluss zieht der Hauptcontroller den BUSY-Pin hoch, um die Richtung erneut zu erkennen.
 
+**Spezifikationen**
 
-**Specifications**
+* Stromversorgung: 3.3V
+* Kommunikation: SPI
+* Anschluss: PH2.0 7P
+* Schallerkennungswinkelbereich 360°
+* Spracherkennungswinkelgenauigkeit ~10°
 
-* Power supply: 3.3V
-* Communication: SPI
-* Connector: PH2.0 7P
-* Sound recognition angle range 360°
-* Voice recognition angular accuracy ~10°
+**Pinbelegung**
 
-
-**Pin Out**
-
-
-* GND - Ground Input
-* VCC - 3.3V Power Supply Input
+* GND - Ground-Eingang
+* VCC - 3.3V Stromversorgungseingang
 * MOSI - SPI MOSI
 * MISO - SPI MISO
-* SCLK - SPI clock
-* CS - SPI Chip Select
-* BUSY - busy detection
+* SCLK - SPI-Uhr
+* CS - SPI Chip-Auswahl
+* BUSY - Beschäftigungserkennung

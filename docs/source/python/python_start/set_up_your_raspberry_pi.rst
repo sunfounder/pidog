@@ -1,49 +1,49 @@
-4. Setting Up Your Raspberry Pi
+4. Einrichten Ihres Raspberry Pi
 =====================================
 
-Setting Up with a Screen
----------------------------
+Einrichten mit einem Bildschirm
+--------------------------------------
 
-Having a screen simplifies the process of working with your Raspberry Pi.
+Mit einem Bildschirm wird das Arbeiten mit Ihrem Raspberry Pi erheblich vereinfacht.
 
-**Required Components**
+**Benötigte Komponenten**
 
-* Raspberry Pi 5 Model B
-* Power Adapter
-* Micro SD card
-* Screen Power Adapter
-* HDMI cable
-* Screen
-* Mouse
-* Keyboard
+* Raspberry Pi 5 Modell B
+* Stromadapter
+* Micro-SD-Karte
+* Stromadapter für den Bildschirm
+* HDMI-Kabel
+* Bildschirm
+* Maus
+* Tastatur
 
-**Steps**:
+**Schritte**:
 
-#. Connect the Mouse and Keyboard to the Raspberry Pi.
+#. Schließen Sie die Maus und die Tastatur an den Raspberry Pi an.
 
-#. Use the HDMI cable to connect the screen to the Raspberry Pi's HDMI port. Ensure the screen is plugged into a power source and turned on.
+#. Verwenden Sie das HDMI-Kabel, um den Bildschirm mit dem HDMI-Port des Raspberry Pi zu verbinden. Stellen Sie sicher, dass der Bildschirm an eine Stromquelle angeschlossen und eingeschaltet ist.
 
-#. Power the Raspberry Pi using the power adapter. The Raspberry Pi OS desktop should appear on the screen after a few seconds.
+#. Versorgen Sie den Raspberry Pi mit Strom über den Stromadapter. Der Desktop des Raspberry Pi OS sollte nach einigen Sekunden auf dem Bildschirm erscheinen.
 
     .. image:: img/bullseye_desktop.png
         :align: center
 
-Setting Up Without a Screen
+Einrichten ohne Bildschirm
 ------------------------------
 
-If you don't have a monitor, remote login is a viable option.
+Wenn Sie keinen Monitor haben, ist der Fernzugriff eine praktikable Option.
 
-**Required Components**
+**Benötigte Komponenten**
 
-* Raspberry Pi 5 Model B 
-* Power Adapter
-* Micro SD card
+* Raspberry Pi 5 Modell B
+* Stromadapter
+* Micro-SD-Karte
 
-Using SSH, you can access the Raspberry Pi's Bash shell, which is the default Linux shell. Bash offers a command-line interface for performing various tasks.
+Mit SSH können Sie auf die Bash-Shell des Raspberry Pi zugreifen, die die Standard-Linux-Shell ist. Bash bietet eine Befehlszeilenschnittstelle für die Durchführung verschiedener Aufgaben.
 
-For those preferring a graphical user interface (GUI), the remote desktop feature is a convenient alternative for managing files and operations.
+Für diejenigen, die eine grafische Benutzeroberfläche (GUI) bevorzugen, ist die Fernzugriffsfunktionalität per Desktop eine bequeme Alternative für die Verwaltung von Dateien und Operationen.
 
-For detailed setup tutorials based on your operating system, refer to the following sections:
+Für detaillierte Einrichtungsanleitungen, die auf Ihrem Betriebssystem basieren, siehe die folgenden Abschnitte:
 
 .. toctree::
 
@@ -51,4 +51,3 @@ For detailed setup tutorials based on your operating system, refer to the follow
     remote_windows
     remote_linux
     remote_desktop
-

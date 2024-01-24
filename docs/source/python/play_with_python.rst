@@ -1,11 +1,11 @@
 .. _play_python:
 
-Play with Python
+Mit Python spielen
 ====================
 
-If you want to program in python, 
-then you will need to learn some basic Python programming skills and basic knowledge of Raspberry Pi, 
-please configure the Raspberry Pi first according to :ref:`quick_guide_python`.
+Wenn Sie in Python programmieren möchten,
+müssen Sie einige grundlegende Python-Programmierfähigkeiten und Grundkenntnisse über den Raspberry Pi erlernen.
+Bitte konfigurieren Sie zuerst den Raspberry Pi gemäß :ref:`quick_guide_python`.
 
 
 .. toctree::
@@ -13,31 +13,31 @@ please configure the Raspberry Pi first according to :ref:`quick_guide_python`.
 
     python_start/quick_guide_on_python
 
-As soon as the assembly is completed, you need to calibrate the PiDog to prevent it from damaging the servo if there is a slight deviation in the assembly.
+Sobald die Montage abgeschlossen ist, müssen Sie den PiDog kalibrieren, um zu verhindern, dass er den Servo beschädigt, falls es bei der Montage zu geringfügigen Abweichungen kommt.
 
 .. toctree::
     :maxdepth: 2
 
     py_0_calibrate
 
-.. Once calibrated, you can follow the tutorial to play PiDog with the APP.
+.. Sobald kalibriert, können Sie dem Tutorial folgen, um PiDog mit der APP zu spielen.
 
 .. .. toctree::
 ..     :maxdepth: 2
 
 ..     auto_run_app
 
-You can also have PiDog achieve the following project effects.
+Sie können auch erreichen, dass PiDog die folgenden Projekteffekte erzielt.
 
 .. toctree::
 
     py_fun_project
     
-Then you may want to master its basic functions, or write some fun examples.
+Dann möchten Sie vielleicht seine Grundfunktionen beherrschen oder einige unterhaltsame Beispiele schreiben.
 
-If you are familiar with Python programming, you can find examples of PiDog's basic functions in the ``~/pidog/basic_examples`` directory.
+Wenn Sie mit Python-Programmierung vertraut sind, finden Sie Beispiele für die Grundfunktionen von PiDog im Verzeichnis ``~/pidog/basic_examples``.
 
-If you prefer, you can master them in a step-by-step fashion using the lessons provided below.
+Wenn Sie möchten, können Sie sie Schritt für Schritt mit den unten bereitgestellten Lektionen beherrschen.
 
 .. toctree::
     :maxdepth: 2

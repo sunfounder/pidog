@@ -1,14 +1,13 @@
-3. Patrol
-==============
+3. Patrouille
+=================
 
-In this project, PiDog makes a vivid behavior: patrolling.
+In diesem Projekt zeigt PiDog ein lebendiges Verhalten: Patrouillieren.
 
-PiDog will walk forward, if there is an obstacle in front of it, it will stop and bark.
-
+PiDog wird nach vorne laufen, und wenn es ein Hindernis vor sich hat, wird es anhalten und bellen.
 
 .. image:: img/py_3.gif
 
-**Run the Code**
+**Code ausführen**
 
 .. raw:: html
 
@@ -19,16 +18,12 @@ PiDog will walk forward, if there is an obstacle in front of it, it will stop an
     cd ~/pidog/examples
     sudo python3 3_patrol.py
 
-After running this example, PiDog will wag its tail, scan left and right, and walk forward.
-
-
-
-
+Nachdem Sie dieses Beispiel ausgeführt haben, wird PiDog mit dem Schwanz wedeln, nach links und rechts scannen und nach vorne laufen.
 
 **Code**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Sie können den unten stehenden Code **modifizieren/zurücksetzen/kopieren/ausführen/stoppen**. Bevor Sie das tun, müssen Sie jedoch zum Quellcode-Pfad wie ``pidog\examples`` gehen. Nachdem Sie den Code modifiziert haben, können Sie ihn direkt ausführen, um den Effekt zu sehen.
 
 .. raw:: html
 

@@ -1,90 +1,90 @@
-2. Installing the OS
-=======================
+2. Betriebssystem installieren
+========================================
 
-**Required Components**
+**Benötigte Komponenten**
 
 * Raspberry Pi 5B
-* A Personal Computer
-* A Micro SD card 
+* Ein Personal Computer
+* Eine Micro-SD-Karte
 
-**Installation Steps**
+**Installationsschritte**
 
-#. Visit the Raspberry Pi software download page at `Raspberry Pi Imager <https://www.raspberrypi.org/software/>`_. Choose the Imager version compatible with your operating system. Download and open the file to initiate installation.
+#. Besuchen Sie die Software-Download-Seite von Raspberry Pi unter `Raspberry Pi Imager <https://www.raspberrypi.org/software/>`_. Wählen Sie die Imager-Version, die mit Ihrem Betriebssystem kompatibel ist. Laden Sie die Datei herunter und öffnen Sie sie, um die Installation zu starten.
 
     .. image:: img/os_install_imager.png
 
-#. A security prompt may appear during installation, depending on your operating system. For example, Windows might display a warning message. In such cases, select **More info** and then **Run anyway**. Follow the on-screen guidance to complete the installation of the Raspberry Pi Imager.
+#. Während der Installation kann je nach Betriebssystem eine Sicherheitsaufforderung erscheinen. Zum Beispiel könnte Windows eine Warnmeldung anzeigen. Wählen Sie in solchen Fällen **Weitere Informationen** und dann **Trotzdem ausführen**. Folgen Sie den Anweisungen auf dem Bildschirm, um die Installation des Raspberry Pi Imager abzuschließen.
 
     .. image:: img/os_info.png
 
-#. Insert your SD card into your computer or laptop's SD card slot.
+#. Legen Sie Ihre SD-Karte in den SD-Kartensteckplatz Ihres Computers oder Laptops ein.
 
-#. Launch the Raspberry Pi Imager application by clicking its icon or typing ``rpi-imager`` in your terminal.
+#. Starten Sie die Raspberry Pi Imager-Anwendung, indem Sie auf das Symbol klicken oder ``rpi-imager`` in Ihrem Terminal eingeben.
 
     .. image:: img/os_open_imager.png
 
-#. Click **CHOOSE DEVICE** and select your specific Raspberry Pi model from the list (Note: Raspberry Pi 5 is not applicable).
+#. Klicken Sie auf **GERÄT AUSWÄHLEN** und wählen Sie Ihr spezifisches Raspberry Pi-Modell aus der Liste aus (note: Raspberry Pi 5 ist nicht anwendbar).
 
     .. image:: img/os_choose_device.png
 
-#. Select **CHOOSE OS** and then choose **Raspberry Pi OS (Legacy)**.
+#. Wählen Sie **BETRIEBSSYSTEM AUSWÄHLEN** und dann **Raspberry Pi OS (Legacy)**.
 
     .. warning::
 
-        * Please do not install the **Bookworm** version as the speaker will not work.
-        * You need to install the **Raspberry Pi OS (Legacy)** version - **Debian Bullseye**.
+        * Bitte installieren Sie nicht die **Bookworm**-Version, da der Lautsprecher nicht funktionieren wird.
+        * Sie müssen die **Raspberry Pi OS (Legacy)**-Version - **Debian Bullseye** installieren.
 
             .. image:: img/os_choose_os.png
 
-#. Click **Choose Storage** and select the appropriate storage device for the installation.
+#. Klicken Sie auf **Speicher auswählen** und wählen Sie das entsprechende Speichergerät für die Installation aus.
 
     .. note::
 
-        Ensure you select the correct storage device. To avoid confusion, disconnect any additional storage devices if multiple ones are connected.
+        Stellen Sie sicher, dass Sie das richtige Speichergerät auswählen. Um Verwechslungen zu vermeiden, trennen Sie alle zusätzlichen Speichergeräte, wenn mehrere angeschlossen sind.
 
     .. image:: img/os_choose_sd.png
 
-#. Click **NEXT** and then **EDIT SETTINGS** to tailor your OS settings. If you have a monitor for your Raspberry Pi, you can skip the next steps and click 'Yes' to begin the installation. Adjust other settings later on the monitor.
+#. Klicken Sie auf **WEITER** und dann auf **EINSTELLUNGEN BEARBEITEN**, um Ihre Betriebssystemeinstellungen anzupassen. Wenn Sie einen Monitor für Ihren Raspberry Pi haben, können Sie die nächsten Schritte überspringen und auf 'Ja' klicken, um mit der Installation zu beginnen. Passen Sie andere Einstellungen später am Monitor an.
 
     .. image:: img/os_enter_setting.png
 
-#. Define a **hostname** for your Raspberry Pi.
+#. Definieren Sie einen **Hostnamen** für Ihren Raspberry Pi.
 
     .. note::
 
-        The hostname is your Raspberry Pi's network identifier. You can access your Pi using ``<hostname>.local`` or ``<hostname>.lan``.
+        Der Hostname ist der Netzwerkidentifikator Ihres Raspberry Pi. Sie können auf Ihren Pi über ``<hostname>.local`` oder ``<hostname>.lan`` zugreifen.
 
     .. image:: img/os_set_hostname.png
 
-#. Create a **Username** and **Password** for the Raspberry Pi's administrator account.
+#. Erstellen Sie einen **Benutzernamen** und ein **Passwort** für das Administratorkonto des Raspberry Pi.
 
     .. note::
 
-        Establishing a unique username and password is vital for securing your Raspberry Pi, which lacks a default password.
+        Die Einrichtung eines einzigartigen Benutzernamens und Passworts ist entscheidend für die Sicherheit Ihres Raspberry Pi, der kein Standardpasswort hat.
 
     .. image:: img/os_set_username.png
 
-#. Configure the wireless LAN by providing your network's **SSID** and **Password**.
+#. Konfigurieren Sie das WLAN, indem Sie die **SSID** und das **Passwort** Ihres Netzwerks angeben.
 
     .. note::
 
-        Set the ``Wireless LAN country`` to the two-letter `ISO/IEC alpha2 code <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements>`_ corresponding to your location.
+        Setzen Sie das ``Wireless LAN-Land`` auf den zweistelligen `ISO/IEC alpha2-Code <https://de.wikipedia.org/wiki/ISO_3166-1_alpha-2>`_, der Ihrem Standort entspricht.
 
     .. image:: img/os_set_wifi.png
 
-#. Click **SERVICES** and activate **SSH** for secure, password-based remote access. Remember to save your settings.
+#. Klicken Sie auf **DIENSTE** und aktivieren Sie **SSH** für sicheren, passwortgeschützten Fernzugriff. Denken Sie daran, Ihre Einstellungen zu speichern.
 
     .. image:: img/os_enable_ssh.png
 
-#. Confirm your selected settings by clicking **Yes**.
+#. Bestätigen Sie Ihre ausgewählten Einstellungen, indem Sie auf **Ja** klicken.
 
     .. image:: img/os_click_yes.png
 
-#. If the SD card contains existing data, ensure you back it up to prevent data loss. Proceed by clicking **Yes** if no backup is needed.
+#. Wenn die SD-Karte vorhandene Daten enthält, stellen Sie sicher, dass Sie diese sichern, um Datenverlust zu vermeiden. Fahren Sie mit **Ja** fort, wenn keine Sicherung benötigt wird.
 
     .. image:: img/os_continue.png
 
-#. The OS installation process will commence on the SD card. A confirmation dialog will appear upon completion.
+#. Der Installationsprozess des Betriebssystems beginnt auf der SD-Karte. Ein Bestätigungsdialog erscheint nach Abschluss.
 
     .. image:: img/os_finish.png
         :align: center

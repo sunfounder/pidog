@@ -1,11 +1,11 @@
-8. Push Up
-===============
+8. Liegestütze
+=================
 
-PiDog is an exercise-loving robot that will do push-ups with you.
+PiDog ist ein sportbegeisterter Roboter, der mit Ihnen Liegestütze machen wird.
 
 .. image:: img/py_8.gif
 
-**Run the Code**
+**Code ausführen**
 
 .. raw:: html
 
@@ -16,14 +16,12 @@ PiDog is an exercise-loving robot that will do push-ups with you.
     cd ~/pidog/examples
     sudo python3 8_pushup.py
 
-After the program runs, PiDog will perform a plank, then cycle through push-ups and barks.
-
-
+Nachdem das Programm gestartet wurde, wird PiDog eine Plank-Position einnehmen und dann durch Liegestütze und Bellen zyklisch gehen.
 
 **Code**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Sie können den unten stehenden Code **modifizieren/zurücksetzen/kopieren/ausführen/stoppen**. Bevor Sie das tun, müssen Sie jedoch zum Quellcode-Pfad wie ``pidog\examples`` gehen. Nachdem Sie den Code modifiziert haben, können Sie ihn direkt ausführen, um den Effekt zu sehen.
 
 .. raw:: html
 
