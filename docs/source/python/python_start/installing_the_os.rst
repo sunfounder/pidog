@@ -88,3 +88,10 @@
 
     .. image:: img/os_finish.png
         :align: center
+
+
+#. Stecken Sie die mit dem Raspberry Pi OS eingerichtete SD-Karte in den microSD-Kartensteckplatz, der sich auf der Unterseite des Raspberry Pi befindet.
+
+    .. image:: img/insert_sd_card.png
+        :width: 500
+        :align: center
