@@ -88,3 +88,10 @@
 
     .. image:: img/os_finish.png
         :align: center
+
+
+#. Insert the SD card set up with Raspberry Pi OS into the microSD card slot located on the underside of the Raspberry Pi.
+
+    .. image:: img/insert_sd_card.png
+        :width: 500
+        :align: center
