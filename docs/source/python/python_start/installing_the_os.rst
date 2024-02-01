@@ -88,3 +88,10 @@
 
     .. image:: img/os_finish.png
         :align: center
+
+
+#. Raspberry Pi OSがセットアップされたSDカードを、Raspberry Piの裏側にあるmicroSDカードスロットに挿入します。
+
+    .. image:: img/insert_sd_card.png
+        :width: 500
+        :align: center
