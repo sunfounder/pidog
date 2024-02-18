@@ -107,12 +107,12 @@ def bark_action(my_dog, yrp=None, speak=None, volume=100):
 
     if speak is not None:
         my_dog.speak(speak, volume)
-    my_dog.legs_move([f1], immediately=True, speed=95)
-    my_dog.head_move([h1], immediately=True, speed=95)
+    my_dog.legs_move([f1], immediately=True, speed=85)
+    my_dog.head_move([h1], immediately=True, speed=85)
     my_dog.wait_all_done()
     sleep(0.01)
-    my_dog.legs_move([f2], immediately=True, speed=95)
-    my_dog.head_move([h2], immediately=True, speed=95)
+    my_dog.legs_move([f2], immediately=True, speed=85)
+    my_dog.head_move([h2], immediately=True, speed=85)
     my_dog.wait_all_done()
     sleep(0.01)
 

@@ -12,7 +12,7 @@ def lean_forward():
     bark_action(my_dog)
     sleep(0.2)
     bark_action(my_dog)
-    sleep(0.8)
+    sleep(0.4)
     bark_action(my_dog)
 
 def head_nod(step):
@@ -28,7 +28,7 @@ def head_nod(step):
     my_dog.head_move(angs*step, immediately=False, speed=80)
 
 def alert():
-    my_dog.do_action('stand', step_count=1, speed=90)
+    my_dog.do_action('stand', step_count=1, speed=70)
     my_dog.rgb_strip.set_mode('breath', color='pink', bps=1, brightness=0.8)
     while True:
         print(
@@ -36,9 +36,9 @@ def alert():
         # alert
         if my_dog.ultrasonic.read_distance() < 15 and my_dog.ultrasonic.read_distance() > 1:
             my_dog.head_move([[0, 0, 0]], immediately=True, speed=90)
-            my_dog.tail_move([[0]], immediately=True, speed=90)
+            my_dog.tail_move([[0]], immediately=True, speed=80)
             my_dog.rgb_strip.set_mode('bark', color='red', bps=2, brightness=0.8)
-            my_dog.do_action('backward', step_count=1, speed=98)
+            my_dog.do_action('backward', step_count=1, speed=95)
             my_dog.wait_all_done()
             lean_forward()
             while len(my_dog.legs_action_buffer) > 0:
