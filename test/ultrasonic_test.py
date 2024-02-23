@@ -18,7 +18,7 @@ while True:
 # DANGER_DISTANCE = 15
 
 # while True:
-#     distance = round(my_dog.ultrasonic.read_distance(), 2)
+#     distance = round(my_dog.read_distance(), 2)
 #     my_dog.do_action('shake_head', step_count=1, speed=80)
 #     if distance < DANGER_DISTANCE:
 #         print(f"\033[0;31m Distance: {distance}\033[m")
