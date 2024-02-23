@@ -270,7 +270,7 @@ def main():
     while True:
         # print("Receive: ", sc.getall())
 
-        sc.set("A", round(my_dog.ultrasonic.read_distance(),2))
+        sc.set("A", round(my_dog.read_distance(),2))
 
         # Left Joystick move
         k_value = sc.get('K')

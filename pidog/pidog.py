@@ -71,13 +71,6 @@ def warn(msg, end='\n', file=sys.stdout, flush=False):
 def error(msg, end='\n', file=sys.stdout, flush=False):
     print_color(msg, end=end, file=file, flush=flush, color=RED)
 
-class MyUltrasonic(Ultrasonic):
-    def __init__(self, tring, echo, timeout: float = 0.02):
-        super().__init__(tring, echo, timeout)
-        self.distance = Value('f', -1.0)
-
-    def read_distance(self):
-        return round(self.distance.value, 2)
 
 class Pidog():
 
@@ -226,18 +219,6 @@ class Pidog():
             error("fail")
 
         try:
-            debug("ultrasonic init ... ", end='', flush=True)
-            echo = Pin('D0')
-            trig = Pin('D1')
-            self.ultrasonic = MyUltrasonic(trig, echo, timeout=0.017)
-            # add ultrasonic thread
-            self.thread_list.append("ultrasonic")
-            debug("done")
-        except Exception as e:
-            error("fail")
-            raise ValueError(e)
-
-        try:
             debug("dual_touch init ... ", end='', flush=True)
             self.dual_touch = DualTouch('D2', 'D3')
             self.touch = 'N'
@@ -260,6 +241,7 @@ class Pidog():
         except:
             error("fail")
 
+        self.distance = Value('f', -1.0)
 
         self.sensory_process = None
         self.sensory_lock = Lock()
@@ -267,6 +249,9 @@ class Pidog():
         self.exit_flag = False
         self.action_threads_start()
         self.sensory_process_start()
+
+    def read_distance(self):
+        return round(self.distance.value, 2)
 
     # action related: legs,head,tail,imu,rgb_strip
     def close_all_thread(self):
@@ -571,7 +556,7 @@ class Pidog():
                 with lock:
                     val = round(float(self.ultrasonic.read()), 2)
                     distance_addr.value = val
-                # sleep(1)
+                sleep(0.01)
             except Exception as e:
                 sleep(0.1)
                 error(f'\rultrasonic_thread  except: {e}')
@@ -579,6 +564,18 @@ class Pidog():
 
     # sensory_process : ultrasonic
     def sensory_process_work(self, distance_addr, lock):
+        try:
+            debug("ultrasonic init ... ", end='', flush=True)
+            echo = Pin('D0')
+            trig = Pin('D1')
+            self.ultrasonic = Ultrasonic(trig, echo, timeout=0.017)
+            # add ultrasonic thread
+            self.thread_list.append("ultrasonic")
+            debug("done")
+        except Exception as e:
+            error("fail")
+            raise ValueError(e)
+
         if 'ultrasonic' in self.thread_list:
             ultrasonic_thread = threading.Thread(name='ultrasonic_thread',
                                              target=self._ultrasonic_thread,
@@ -591,7 +588,7 @@ class Pidog():
             self.sensory_process.terminate()
         self.sensory_process = Process(name='sensory_process',
                                          target=self.sensory_process_work,
-                                         args=(self.ultrasonic.distance, self.sensory_lock))
+                                         args=(self.distance, self.sensory_lock))
         self.sensory_process.start()
 
     # reset: stop, stop_and_lie

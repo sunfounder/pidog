@@ -14,7 +14,7 @@ DANGER_DISTANCE = 15
 stand = my_dog.legs_angle_calculation([[0, 80], [0, 80], [30, 75], [30, 75]])
 
 def patrol():
-    distance = round(my_dog.ultrasonic.read_distance(), 2)
+    distance = round(my_dog.read_distance(), 2)
     print(f"distance: {distance} cm", end="", flush=True)
 
     # danger
@@ -31,7 +31,7 @@ def patrol():
         bark(my_dog, [head_yaw, 0, 0])
 
         while distance < DANGER_DISTANCE:
-            distance = round(my_dog.ultrasonic.read_distance(), 2)
+            distance = round(my_dog.read_distance(), 2)
             if distance < DANGER_DISTANCE:
                 print(f"distance: {distance} cm \033[0;31m DANGER !\033[m")
             else:

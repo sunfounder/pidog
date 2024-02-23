@@ -32,9 +32,9 @@ def alert():
     my_dog.rgb_strip.set_mode('breath', color='pink', bps=1, brightness=0.8)
     while True:
         print(
-            f'distance.value: {round(my_dog.ultrasonic.read_distance(), 2)} cm, touch {my_dog.dual_touch.read()}')
+            f'distance.value: {round(my_dog.read_distance(), 2)} cm, touch {my_dog.dual_touch.read()}')
         # alert
-        if my_dog.ultrasonic.read_distance() < 15 and my_dog.ultrasonic.read_distance() > 1:
+        if my_dog.read_distance() < 15 and my_dog.read_distance() > 1:
             my_dog.head_move([[0, 0, 0]], immediately=True, speed=90)
             my_dog.tail_move([[0]], immediately=True, speed=80)
             my_dog.rgb_strip.set_mode('bark', color='red', bps=2, brightness=0.8)
