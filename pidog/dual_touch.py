@@ -5,12 +5,12 @@ import time
 
 class DualTouch():
 
-    SLIDE_MAX_INTERVAL = 0.5 # second, Maximum effective interval for sliding detection
+    SLIDE_MAX_INTERVAL = 0.5  # second, Maximum effective interval for sliding detection
 
     def __init__(self, sw1='D2', sw2='D3'):
 
-        self.touch_L = Pin(sw1)
-        self.touch_R = Pin(sw2)
+        self.touch_L = Pin(sw1, mode=Pin.IN, pull=Pin.PULL_UP)
+        self.touch_R = Pin(sw2, mode=Pin.IN, pull=Pin.PULL_UP)
         self.last_touch = 'N'
         self.last_touch_time = 0
 
