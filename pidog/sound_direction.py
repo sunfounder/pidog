@@ -2,16 +2,16 @@
 '''
                 声音方位识别模块 通讯协议
 
-1.通讯格式：master 随机发送16bit数据给slave，然后接收16bit数据
+1.通讯格式: master 随机发送16bit数据给slave,然后接收16bit数据
 主控接收的16BIT 格式：
-    (1) 先接收数据的低8bit，然后接收数据的高8bit
+    (1) 先接收数据的低8bit,然后接收数据的高8bit
     (2) 遵从MSB传送
 
-2.方向可以侦测360度方向，最小单位是20度。则数据范围为0~355.
+2.方向可以侦测360度方向,最小单位是20度。则数据范围为0~355.
 
-3. 流程，主控拉高busy，064B（TR16F064B）开始监测方向。
-   当064B识别到方向的时候，会拉低busy线（平时为高）;主控监测到BUSY拉低，发16bit任意数据给064B，
-   并接受16bit数据，接受完成后，主控把busy线拉高，再次检测方向.
+3. 流程,主控拉高busy,064B(TR16F064B)开始监测方向。
+   当064B识别到方向的时候,会拉低busy线(平时为高);主控监测到BUSY拉低,发16bit任意数据给064B,
+   并接受16bit数据,接受完成后,主控把busy线拉高,再次检测方向.
 
 
         Sound Location Recognition Module Communication Protocol
@@ -29,28 +29,44 @@
 
 '''
 
-
 import spidev
 from robot_hat import Pin
 
 
 class SoundDirection():
+    CS_DELAY_US = 500  # Mhz
+    CLOCK_SPEED = 10000000  # 10 MHz
+
     def __init__(self, busy_pin=6):
         self.spi = spidev.SpiDev()
         self.spi.open(0, 0)
-        self.spi.max_speed_hz = 500000
-        self.spi.no_cs = True
-
+        #
         self.busy = Pin(busy_pin)
-        self.cs = Pin(8)
-        self.cs.value(0)
+        self.busy.value(1)
 
     def read(self):
-        _, _ = self.spi.xfer2([0, 0])  # ignore the fist value read
-        l_val, h_val = self.spi.xfer2([0, 0])
-        val = (h_val << 8) + l_val
-        val = (360+160-val) % 360  # Convert zero
-        return val
+        result = self.spi.xfer2([0, 0, 0, 0], self.CLOCK_SPEED,
+                                self.CS_DELAY_US)
+        # print(result)
+        self.busy.value(1)
+
+        _, _, l_val, h_val = result[:4]  # ignore the fist value read
+        # print([h_val, l_val])
+        if h_val == 255:
+            return -1
+        else:
+            val = (h_val << 8) + l_val
+            val = (360 + 160 - val) % 360  # Convert zero
+            return val
 
     def isdetected(self):
         return self.busy.value() == 0
+
+
+if __name__ == '__main__':
+    from time import sleep
+    sd = SoundDirection()
+    while True:
+        if sd.isdetected():
+            print(f"Sound detected at {sd.read()} degrees")
+        sleep(0.2)
