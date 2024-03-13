@@ -1,36 +1,40 @@
 from pidog.rgb_strip import RGBStrip
-from time import sleep
+import time
 
-strip = RGBStrip()
+strip = RGBStrip(0X74, 11)
 
 mode_list = [
     {
         "color": "red",
         "brightness": 0.8,
-        "delay": 0.01,
+        "bps": 1,
     },
     {
         "color": "green",
         "brightness": 0.2,
-        "delay": 0.02,
+        "bps": 2,
     },
     {
         "color": "blue",
         "brightness": 0.5,
-        "delay": 0.03,
+        "bps": 3,
     },
     {
         "color": "white",
         "brightness": 0.5,
-        "delay": 0.04,
+        "bps": 4,
     },
 ]
 
 for mode in mode_list:
     print(
-        f'Color: {mode["color"]}, brightness: {mode["brightness"]}, delay: {mode["delay"]}')
-    sleep(1)
-    for _ in range(5):
-        strip.set_mode('breath', color=mode["color"],
-                       brightness=mode["brightness"], delay=mode["delay"])
+        f'Color: {mode["color"]}, brightness: {mode["brightness"]}, bps: {mode["bps"]}'
+    )
+    strip.set_mode('breath',
+                   color=mode["color"],
+                   brightness=mode["brightness"],
+                   bps=mode["bps"])
+
+    start_time = time.time()
+    while ((time.time() - start_time) <= 3):
         strip.show()
