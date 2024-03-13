@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import time
 from robot_hat import I2C, fileDB
-# from filedb import fileDB
 
+# from filedb import fileDB
 
 # Sensitivity
 # 2g: 1G = 16384
@@ -20,7 +20,7 @@ def bytes_toint(msb, lsb):
     '''
     if not msb & 0x80:
         return msb << 8 | lsb  # +ve
-    return - (((msb ^ 255) << 8) | (lsb ^ 255) + 1)
+    return -(((msb ^ 255) << 8) | (lsb ^ 255) + 1)
 
 
 def default_wait():
@@ -33,11 +33,12 @@ def default_wait():
 def stop_func():
     return False
 
+
 # endregion: General function
 
 
 class Sh3001(I2C):
-    SH3001_ADDRESS = 0x36		# 7bit: 011 0111
+    SH3001_ADDRESS = 0x36  # 7bit: 011 0111
 
     # region: Macro Definitions
     '''
@@ -71,12 +72,12 @@ class Sh3001(I2C):
     SH3001_TEMP_CONF0 = 0x20
     SH3001_TEMP_CONF1 = 0x21
 
-    SH3001_ACC_CONF0 = 0x22		# accelerometer config 0x22-0x26
+    SH3001_ACC_CONF0 = 0x22  # accelerometer config 0x22-0x26
     SH3001_ACC_CONF1 = 0x23
     SH3001_ACC_CONF2 = 0x25
     SH3001_ACC_CONF3 = 0x26
 
-    SH3001_GYRO_CONF0 = 0x28		# gyroscope config 0x28-0x2B
+    SH3001_GYRO_CONF0 = 0x28  # gyroscope config 0x28-0x2B
     SH3001_GYRO_CONF1 = 0x29
     SH3001_GYRO_CONF2 = 0x2B
 
@@ -133,7 +134,6 @@ class Sh3001(I2C):
     SH3001_GYRO_CONF4 = 0x9F
     SH3001_GYRO_CONF5 = 0xAF
     SH3001_AUX_I2C_CONF = 0xFD
-
     '''
     /******************************************************************
     *	ACC Config Macro Definitions
@@ -164,7 +164,6 @@ class Sh3001(I2C):
 
     SH3001_ACC_FILTER_EN = 0x00
     SH3001_ACC_FILTER_DIS = 0x80
-
     '''
     /******************************************************************
     *	GYRO Config Macro Definitions
@@ -183,7 +182,6 @@ class Sh3001(I2C):
 
     SH3001_GYRO_FILTER_EN = 0x00
     SH3001_GYRO_FILTER_DIS = 0x10
-
     '''
     /******************************************************************
     *	Temperature Config Macro Definitions
@@ -196,7 +194,6 @@ class Sh3001(I2C):
 
     SH3001_TEMP_EN = 0x80
     SH3001_TEMP_DIS = 0x00
-
     '''
     /******************************************************************
     *	INT Config Macro Definitions
@@ -233,7 +230,6 @@ class Sh3001(I2C):
     SH3001_INT_INT1_OD = 0xFB
     SH3001_INT_INT_NORMAL = 0x01
     SH3001_INT_INT_OD = 0xFE
-
     '''
     /******************************************************************
     *	Orientation Blocking Config Macro Definitions
@@ -247,7 +243,6 @@ class Sh3001(I2C):
     SH3001_ORIENT_SYMM = 0x00
     SH3001_ORIENT_HIGH_ASYMM = 0x01
     SH3001_ORIENT_LOW_ASYMM = 0x02
-
     '''
     /******************************************************************
     *	Flat Time Config Macro Definitions
@@ -256,7 +251,6 @@ class Sh3001(I2C):
     SH3001_FLAT_TIME_500MS = 0x40
     SH3001_FLAT_TIME_1000MS = 0x80
     SH3001_FLAT_TIME_2000MS = 0xC0
-
     '''
     /******************************************************************
     *	ACT and INACT Int Config Macro Definitions
@@ -282,7 +276,6 @@ class Sh3001(I2C):
 
     SH3001_LINK_PRE_STA = 0x01
     SH3001_LINK_PRE_STA_NO = 0x00
-
     '''
     /******************************************************************
     *	TAP Int Config Macro Definitions
@@ -294,7 +287,6 @@ class Sh3001(I2C):
     SH3001_TAP_Y_INT_DIS = 0x00
     SH3001_TAP_Z_INT_EN = 0x02
     SH3001_TAP_Z_INT_DIS = 0x00
-
     '''
     /******************************************************************
     *	HIGHG Int Config Macro Definitions
@@ -309,7 +301,6 @@ class Sh3001(I2C):
     SH3001_HIGHG_Y_INT_DIS = 0x00
     SH3001_HIGHG_Z_INT_EN = 0x10
     SH3001_HIGHG_Z_INT_DIS = 0x00
-
     '''
     /******************************************************************
     *	LOWG Int Config Macro Definitions
@@ -317,7 +308,6 @@ class Sh3001(I2C):
     '''
     SH3001_LOWG_ALL_INT_EN = 0x01
     SH3001_LOWG_ALL_INT_DIS = 0x00
-
     '''
     /******************************************************************
     *	SPI Interface Config Macro Definitions
@@ -325,7 +315,6 @@ class Sh3001(I2C):
     '''
     SH3001_SPI_3_WIRE = 0x01
     SH3001_SPI_4_WIRE = 0x00
-
     '''
     /******************************************************************
     *	FIFO Config Macro Definitions
@@ -361,7 +350,6 @@ class Sh3001(I2C):
     SH3001_FIFO_ACC_Y_EN = 0x0002
     SH3001_FIFO_ACC_X_EN = 0x0001
     SH3001_FIFO_ALL_DIS = 0x0000
-
     '''
     /******************************************************************
     *	AUX I2C Config Macro Definitions
@@ -380,7 +368,6 @@ class Sh3001(I2C):
 
     SH3001_MI2C_READ_MODE_AUTO = 0x40
     SH3001_MI2C_READ_MODE_MANUAL = 0x00
-
     '''
     /******************************************************************
     *	Other Macro Definitions
@@ -397,17 +384,20 @@ class Sh3001(I2C):
 
     # init
     def __init__(self, db="sh3001.config"):
-        super().__init__(address=self.SH3001_ADDRESS)
+        super().__init__(address=self.SH3001_ADDRESS, debug_level='debug')
         if not self.is_avaliable():
             raise IOError("SH3001 is not avaliable")
         self.sh3001_init()
         self.db = fileDB(db=db)
-        self.acc_offset = self.get_from_config(
-            'calibrate_offset_list', default_value=str(self.new_list(0)))
-        self.acc_max = self.get_from_config(
-            'calibrate_max_list', default_value=str(self.new_list(0)))
-        self.acc_min = self.get_from_config(
-            'calibrate_min_list', default_value=str(self.new_list(0)))
+        self.acc_offset = self.get_from_config('calibrate_offset_list',
+                                               default_value=str(
+                                                   self.new_list(0)))
+        self.acc_max = self.get_from_config('calibrate_max_list',
+                                            default_value=str(
+                                                self.new_list(0)))
+        self.acc_min = self.get_from_config('calibrate_min_list',
+                                            default_value=str(
+                                                self.new_list(0)))
 
         self.gyro_offset = [0, 0, 0]
         self.data_vector = [0, 0, 0]
@@ -433,18 +423,23 @@ class Sh3001(I2C):
                 self.acc_max = list(map(max, self.acc_max, self.data_vector))
                 self.acc_min = list(map(min, self.acc_min, self.data_vector))
                 self.acc_offset = list(
-                    map(lambda a, b: (a + b)/2, self.acc_max, self.acc_min))
+                    map(lambda a, b: (a + b) / 2, self.acc_max, self.acc_min))
                 print('\033[K\rmax_list: %s   min_list: %s' %
-                      (self.acc_max, self.acc_min), end="", flush=True)
+                      (self.acc_max, self.acc_min),
+                      end="",
+                      flush=True)
         elif aram == 'gyro':
             sum_list = [0, 0, 0]
             count = 0
             for i in range(503):
                 if i > 2:
                     sum_list = [
-                        sum_list[i] + self.sh3001_getimudata('gyro', 'xyz')[i] for i in range(3)]
+                        sum_list[i] + self.sh3001_getimudata('gyro', 'xyz')[i]
+                        for i in range(3)
+                    ]
             self.gyro_offset = [
-                round(sum_list[i], 2) / 500.0 for i in range(3)]
+                round(sum_list[i], 2) / 500.0 for i in range(3)
+            ]
             print("gyro_offset:", self.gyro_offset)
 
         else:
@@ -461,9 +456,14 @@ class Sh3001(I2C):
 
         self.sh3001_module_reset()
         self.sh3001_acc_config(self.SH3001_ODR_500HZ, self.SH3001_ACC_RANGE_2G,
-                               self.SH3001_ACC_ODRX025, self.SH3001_ACC_FILTER_EN)
-        self.sh3001_gyro_config(self.SH3001_ODR_500HZ, self.SH3001_GYRO_RANGE_2000, self.SH3001_GYRO_RANGE_2000,
-                                self.SH3001_GYRO_RANGE_2000, self.SH3001_GYRO_ODRX00, self.SH3001_GYRO_FILTER_EN)
+                               self.SH3001_ACC_ODRX025,
+                               self.SH3001_ACC_FILTER_EN)
+        self.sh3001_gyro_config(self.SH3001_ODR_500HZ,
+                                self.SH3001_GYRO_RANGE_2000,
+                                self.SH3001_GYRO_RANGE_2000,
+                                self.SH3001_GYRO_RANGE_2000,
+                                self.SH3001_GYRO_ODRX00,
+                                self.SH3001_GYRO_FILTER_EN)
         self.sh3001_temp_config(self.SH3001_TEMP_ODR_63, self.SH3001_TEMP_EN)
 
         return True
@@ -491,7 +491,8 @@ class Sh3001(I2C):
         self.mem_write(regData, self.SH3001_ADDRESS)
         time.sleep(0.01)
 
-    def sh3001_acc_config(self, accODR, accRange, accCutOffFreq, accFilterEnble):
+    def sh3001_acc_config(self, accODR, accRange, accCutOffFreq,
+                          accFilterEnble):
         # print('acc_config')
         # enable acc digital filter
         regData = self.mem_read(1, self.SH3001_ACC_CONF0)
@@ -512,7 +513,8 @@ class Sh3001(I2C):
         regData[0] |= (accCutOffFreq | accFilterEnble)
         self.mem_write(regData, self.SH3001_ACC_CONF3)
 
-    def sh3001_gyro_config(self, gyroODR, gyroRangeX, gyroRangeY, gyroRangeZ, gyroCutOffFreq, gyroFilterEnble):
+    def sh3001_gyro_config(self, gyroODR, gyroRangeX, gyroRangeY, gyroRangeZ,
+                           gyroCutOffFreq, gyroFilterEnble):
         regData = self.mem_read(1, self.SH3001_GYRO_CONF0)
         regData[0] |= 0x01
         self.mem_write(regData, self.SH3001_GYRO_CONF0)
@@ -567,8 +569,9 @@ class Sh3001(I2C):
         accData, gyroData = self._sh3001_getimudata()
         accData = [(accData[i] - self.acc_offset[i])
                    for i in range(len(accData))]
-        gyroData = [gyroData[i] - self.gyro_offset[i]
-                    for i in range(len(gyroData))]
+        gyroData = [
+            gyroData[i] - self.gyro_offset[i] for i in range(len(gyroData))
+        ]
         # print()
 
         if aram == 'acc':
@@ -621,7 +624,7 @@ class Sh3001(I2C):
         regData = self.mem_read(2, self.SH3001_TEMP_ZL)
         tempref[1] = regData[1] & 0x0F << 8 | regData[0]
 
-        return (tempref[1] - tempref[0])/16.0 + 25.0
+        return (tempref[1] - tempref[0]) / 16.0 + 25.0
 
     def set_offset(self, offset_list=None):
         if offset_list == None:
@@ -633,7 +636,8 @@ class Sh3001(I2C):
     def acc_calibrate_cmd(self):
         try:
             print(
-                'Calibration start!\nRotate the device for 720 degree in all 3 axis\nPress [Ctrl] + [C] if finish')
+                'Calibration start!\nRotate the device for 720 degree in all 3 axis\nPress [Ctrl] + [C] if finish'
+            )
             while True:
                 self.calibrate('acc')
         except KeyboardInterrupt:
