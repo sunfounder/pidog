@@ -34,7 +34,7 @@ try:
         my_dog.do_action("trot", step_count=2, speed=SPEED)
         my_dog.do_action("wag_tail", step_count=10, speed=SPEED)
         my_dog.do_action("shake_head", step_count=5, pitch_comp=-10, speed=SPEED)
-        # print(f"{my_dog.accData, my_dog.ultrasonic.read_distance()}")
+        # print(f"{my_dog.accData, my_dog.read_distance()}")
         # if time.time() - st > 60:
         #     my_dog.body_stop()
         #     time.sleep(3)
