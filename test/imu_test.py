@@ -4,7 +4,8 @@ import os
 
 # user and User home directory
 User = os.popen('echo ${SUDO_USER:-$LOGNAME}').readline().strip()
-UserHome = os.popen('getent passwd %s | cut -d: -f 6' %User).readline().strip()
+UserHome = os.popen('getent passwd %s | cut -d: -f 6' %
+                    User).readline().strip()
 config_file = '%s/.config/pidog/pidog.conf' % UserHome
 
 imu = Sh3001(db=config_file)
@@ -39,15 +40,14 @@ for _ in range(time):
     _gz += gyroData[2]
     sleep(0.1)
 
-imu_acc_offset[0] = round(-16384 - _ax/time, 0)
-imu_acc_offset[1] = round(0 - _ay/time, 0)
-imu_acc_offset[2] = round(0 - _az/time, 0)
-imu_gyro_offset[0] = round(0 - _gx/time, 0)
-imu_gyro_offset[1] = round(0 - _gy/time, 0)
-imu_gyro_offset[2] = round(0 - _gz/time, 0)
+imu_acc_offset[0] = round(-16384 - _ax / time, 0)
+imu_acc_offset[1] = round(0 - _ay / time, 0)
+imu_acc_offset[2] = round(0 - _az / time, 0)
+imu_gyro_offset[0] = round(0 - _gx / time, 0)
+imu_gyro_offset[1] = round(0 - _gy / time, 0)
+imu_gyro_offset[2] = round(0 - _gz / time, 0)
 
 print("Done!")
-
 
 while True:
     data = imu._sh3001_getimudata()
@@ -57,9 +57,11 @@ while True:
         break
 
     accData, gyroData = data
-    accData = [accData[i]+imu_acc_offset[i] for i in range(3)]
-    gyroData = [gyroData[i]+imu_gyro_offset[i] for i in range(3)]
+    accData = [accData[i] + imu_acc_offset[i] for i in range(3)]
+    gyroData = [gyroData[i] + imu_gyro_offset[i] for i in range(3)]
 
-    print(f"\rACC: {accData[0]:8} {accData[1]:8} {accData[2]:8} | GYRO: {gyroData[0]:8} {gyroData[1]:8} {gyroData[2]:8}",
-          end="          ", flush=True)
+    print(
+        f"\rACC: {accData[0]:8} {accData[1]:8} {accData[2]:8} | GYRO: {gyroData[0]:8} {gyroData[1]:8} {gyroData[2]:8}",
+        end="          ",
+        flush=True)
     sleep(0.1)
