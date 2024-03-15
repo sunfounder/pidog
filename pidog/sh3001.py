@@ -384,7 +384,7 @@ class Sh3001(I2C):
 
     # init
     def __init__(self, db="sh3001.config"):
-        super().__init__(address=self.SH3001_ADDRESS, debug_level='debug')
+        super().__init__(address=self.SH3001_ADDRESS)
         if not self.is_avaliable():
             raise IOError("SH3001 is not avaliable")
         self.sh3001_init()
