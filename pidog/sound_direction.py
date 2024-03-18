@@ -48,13 +48,13 @@ class SoundDirection():
         self.busy.on()
 
     def read(self):
-        result = self.spi.xfer2([0, 0, 0, 0], self.CLOCK_SPEED,
+        result = self.spi.xfer2([0, 0, 0, 0, 0, 0], self.CLOCK_SPEED,
                                 self.CS_DELAY_US)
         # print(result)
         # self.busy.value(1)
         self.busy.on()
 
-        _, _, l_val, h_val = result[:4]  # ignore the fist value read
+        l_val, h_val = result[4:]  # ignore the fist two values
         # print([h_val, l_val])
         if h_val == 255:
             return -1
