@@ -197,8 +197,8 @@ class Pidog():
             self.imu = Sh3001(db=config_file)
             self.imu_acc_offset = [0, 0, 0]
             self.imu_gyro_offset = [0, 0, 0]
-            self.accData = []  # ax,ay,az
-            self.gyroData = []  # gx,gy,gz
+            self.accData = [0, 0, 0]  # ax,ay,az
+            self.gyroData = [0, 0, 0]  # gx,gy,gz
             self.imu_fail_count = 0
             # add imu thread
             self.thread_list.append("imu")
