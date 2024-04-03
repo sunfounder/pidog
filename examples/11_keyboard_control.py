@@ -396,6 +396,7 @@ def run_operation(key):
     # before = None
     # after = None
     if key not in KEYS.keys():
+        sleep(0.2)
         return
     else:
         key_data = KEYS[key]
@@ -471,8 +472,8 @@ TITLE = "Pidog   Keyboard Control"
 # display fuctions
 # ======================================
 def display_title(subpad):
-    curses_utils.clear_line(subpad, 0, color=curses_utils.BLACK_BLUE)
-    subpad.addstr(0, int((curses_utils.PAD_X-len(TITLE))/2), TITLE, curses_utils.BLACK_BLUE | curses.A_BOLD)
+    curses_utils.clear_line(subpad, 0, color_pair=curses_utils.WHITE_BLUE | curses.A_REVERSE)
+    subpad.addstr(0, int((curses_utils.PAD_X-len(TITLE))/2), TITLE, curses_utils.WHITE_BLUE | curses.A_BOLD | curses.A_REVERSE)
 
 def set_simulated_key(stdscr, key, is_pressed=False):
     if key in KEYS.keys():
@@ -491,17 +492,17 @@ def set_simulated_key(stdscr, key, is_pressed=False):
     ]
     for i in range(len(key_bottom_layer)):
         if is_pressed:
-            stdscr.addstr(ypos+i, xpos, key_bottom_layer[i], curses_utils.BLUE)
+            stdscr.addstr(ypos+i, xpos, key_bottom_layer[i], curses_utils.CYAN)
         else:
-            stdscr.addstr(ypos+i, xpos, key_bottom_layer[i], curses_utils.LIGHT_GRAY)
+            stdscr.addstr(ypos+i, xpos, key_bottom_layer[i], curses_utils.WHITE)
 
     # key name
     key_ypos = ypos + 1
     key_xpos = xpos + 1
     if is_pressed:
-        stdscr.addstr(key_ypos, key_xpos, key.upper(), curses_utils.BLUE)
+        stdscr.addstr(key_ypos, key_xpos, key.upper(), curses_utils.CYAN)
     else:
-        stdscr.addstr(key_ypos, key_xpos, key.upper(), curses_utils.GRAY)
+        stdscr.addstr(key_ypos, key_xpos, key.upper(), curses_utils.WHITE)
 
     # check reuse
     key_upper = key.upper()
@@ -515,9 +516,9 @@ def set_simulated_key(stdscr, key, is_pressed=False):
             tip_shift_ypos = ypos + 1
             tip_shift_xpos = xpos + 9 - int(len(tip_upper))
             if is_pressed and is_upper:
-                stdscr.addstr(tip_shift_ypos, tip_shift_xpos, tip_upper, curses_utils.BLUE)
+                stdscr.addstr(tip_shift_ypos, tip_shift_xpos, tip_upper, curses_utils.CYAN)
             else:
-                stdscr.addstr(tip_shift_ypos, tip_shift_xpos, tip_upper, curses_utils.GRAY)
+                stdscr.addstr(tip_shift_ypos, tip_shift_xpos, tip_upper, curses_utils.WHITE)
 
     # tip1 and tip2
     if key_lower in KEYS:
@@ -529,27 +530,27 @@ def set_simulated_key(stdscr, key, is_pressed=False):
                 tip1_ypos = ypos + 3
                 tip1_xpos = xpos + 5 - int(len(tip1)/2)
                 if is_pressed and is_upper == False:
-                    stdscr.addstr(tip1_ypos, tip1_xpos, tip1, curses_utils.BLUE)
+                    stdscr.addstr(tip1_ypos, tip1_xpos, tip1, curses_utils.CYAN)
                 else:
-                    stdscr.addstr(tip1_ypos, tip1_xpos, tip1, curses_utils.LIGHT_GRAY)
+                    stdscr.addstr(tip1_ypos, tip1_xpos, tip1, curses_utils.WHITE |  curses.A_DIM)
             else:
                 tip1_ypos = ypos + 2
                 tip1_xpos = xpos + 5 - int(len(tip1)/2)
                 tip2_ypos = ypos + 3
                 tip2_xpos = xpos + 6 - int(len(tip2)/2)
                 if is_pressed and is_upper == False:
-                    stdscr.addstr(tip1_ypos, tip1_xpos, tip1, curses_utils.BLUE)
-                    stdscr.addstr(tip2_ypos, tip2_xpos, tip2, curses_utils.BLUE)
+                    stdscr.addstr(tip1_ypos, tip1_xpos, tip1, curses_utils.CYAN)
+                    stdscr.addstr(tip2_ypos, tip2_xpos, tip2, curses_utils.CYAN)
                 else:
-                    stdscr.addstr(tip1_ypos, tip1_xpos, tip1, curses_utils.LIGHT_GRAY)
-                    stdscr.addstr(tip2_ypos, tip2_xpos, tip2, curses_utils.LIGHT_GRAY)                   
+                    stdscr.addstr(tip1_ypos, tip1_xpos, tip1, curses_utils.WHITE |  curses.A_DIM)
+                    stdscr.addstr(tip2_ypos, tip2_xpos, tip2, curses_utils.WHITE |  curses.A_DIM)                   
 
 def display_tip(subpad):
     tip_upper = "Some keys are uppercase and lowercase for different functions."
     tip_quit = "Press Ctrl^C to quit"
-    curses_utils.clear_line(subpad, 0, color=curses_utils.WHITE_GRAY)
-    subpad.addstr(0, 0, tip_upper, curses_utils.WHITE_GRAY)
-    subpad.addstr(0, curses_utils.PAD_X-25, tip_quit, curses_utils.WHITE_GRAY)
+    curses_utils.clear_line(subpad, 0, color_pair=curses_utils.WHITE | curses.A_DIM | curses.A_REVERSE)
+    subpad.addstr(0, 0, tip_upper, curses_utils.WHITE | curses.A_DIM | curses.A_REVERSE)
+    subpad.addstr(0, curses_utils.PAD_X-25, tip_quit, curses_utils.WHITE | curses.A_DIM | curses.A_REVERSE)
 
 def main(stdscr):
     global last_key
@@ -565,8 +566,7 @@ def main(stdscr):
     # init color 
     curses.start_color()
     curses.use_default_colors()
-    curses_utils.init_preset_colors()
-    curses_utils.init_preset__color_pairs()
+    curses_utils.init_preset_color_pairs()
 
     # init pad    
     pad = curses.newpad(curses_utils.PAD_Y, curses_utils.PAD_X)
@@ -621,7 +621,7 @@ def main(stdscr):
                 # stdscr.refresh()
                 run_operation(key)
                 last_key = key
-                sleep(0.1)
+                sleep(0.01)
         else:
             if last_key != None and my_dog.is_all_done():
                 set_simulated_key(keys_pad, key=last_key, is_pressed=False)

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-from time import sleep
 from pidog import Pidog
 import os
 import curses
 import curses_utils
+from time import sleep
 
 # init pidog
 # ======================================
@@ -68,14 +68,14 @@ def display_head(subpad):
     type_name_2 = "Sound Effect:"
     tip3 = "(need to run with sudo)"
 
-    curses_utils.clear_line(subpad, 0, color=curses_utils.BLACK_BLUE)
-    subpad.addstr(0, 2, title, curses_utils.BLACK_BLUE | curses.A_BOLD)
-    subpad.addstr(1, 2, tip1, curses_utils.GRAY)
-    subpad.addstr(2, 2, tip2, curses_utils.GRAY)
-    curses_utils.clear_line(subpad, 3, color=curses_utils.WHITE_GRAY)
-    subpad.addstr(3, 2, type_name_1, curses_utils.WHITE_GRAY)
-    subpad.addstr(3, 30, type_name_2, curses_utils.WHITE_GRAY)
-    subpad.addstr(3, 31+len(type_name_2), tip3, curses_utils.YELLOW_GRAY)
+    curses_utils.clear_line(subpad, 0, color_pair=curses_utils.WHITE_BLUE | curses.A_REVERSE)
+    subpad.addstr(0, 2, title, curses_utils.WHITE_BLUE | curses.A_BOLD | curses.A_REVERSE)
+    subpad.addstr(1, 2, tip1, curses_utils.WHITE)
+    subpad.addstr(2, 2, tip2, curses_utils.WHITE)
+    curses_utils.clear_line(subpad, 3, color_pair=curses_utils.WHITE | curses.A_REVERSE)
+    subpad.addstr(3, 2, type_name_1, curses_utils.WHITE | curses.A_REVERSE)
+    subpad.addstr(3, 30, type_name_2, curses_utils.WHITE | curses.A_REVERSE)
+    subpad.addstr(3, 31+len(type_name_2), tip3, curses_utils.YELLOW | curses.A_REVERSE)
 
 def display_selection(subpad, index):
     global last_display_index
@@ -84,10 +84,10 @@ def display_selection(subpad, index):
         last_display_index = 0
     if last_display_index != index:
         if last_display_index < actions_len:
-            subpad.addstr(last_display_index, 2, f"{last_display_index+1}. {actions[last_display_index][0]}", curses_utils.LIGHT_GRAY)
+            subpad.addstr(last_display_index, 2, f"{last_display_index+1}. {actions[last_display_index][0]}", curses_utils.WHITE | curses.A_DIM)
         else:
             sound_index = last_display_index-actions_len
-            subpad.addstr(sound_index, 30, f"{last_display_index+1}. {sound_effects[sound_index]}", curses_utils.LIGHT_GRAY)
+            subpad.addstr(sound_index, 30, f"{last_display_index+1}. {sound_effects[sound_index]}", curses_utils.WHITE | curses.A_DIM)
         last_display_index = index
     # highlight currernt selection
     if index > actions_len + sound_len-1 or index < 0:
@@ -100,14 +100,14 @@ def display_selection(subpad, index):
 
 def display_actions(subpad):
     for i in range(actions_len):
-        subpad.addstr(i, 2, f"{i+1}. {actions[i][0]}", curses_utils.LIGHT_GRAY)
+        subpad.addstr(i, 2, f"{i+1}. {actions[i][0]}", curses_utils.WHITE | curses.A_DIM)
     for i in range(sound_len):
-        subpad.addstr(i, 30, f"{i+actions_len+1}. {sound_effects[i]}", curses_utils.LIGHT_GRAY)
+        subpad.addstr(i, 30, f"{i+actions_len+1}. {sound_effects[i]}", curses_utils.WHITE | curses.A_DIM)
 
 def display_bottom(subpad):
-    curses_utils.clear_line(subpad, 0, color=curses_utils.WHITE_GRAY)
-    subpad.addstr(0, 0, "Enter function number: ", curses_utils.WHITE_GRAY)
-    subpad.addstr(0, curses_utils.PAD_X-16, "Ctrl^C to quit", curses_utils.WHITE_GRAY)
+    curses_utils.clear_line(subpad, 0, color_pair=curses_utils.WHITE | curses.A_DIM)
+    subpad.addstr(0, 0, "Enter function number: ", curses_utils.WHITE | curses.A_DIM)
+    subpad.addstr(0, curses_utils.PAD_X-16, "Ctrl^C to quit", curses_utils.WHITE | curses.A_DIM)
 
 
 def do_function(index):
@@ -146,8 +146,7 @@ def main(stdscr):
     # init color 
     curses.start_color()
     curses.use_default_colors()
-    curses_utils.init_preset_colors()
-    curses_utils.init_preset__color_pairs()
+    curses_utils.init_preset_color_pairs()
 
     # init pad    
     pad = curses.newpad(curses_utils.PAD_Y, curses_utils.PAD_X)   

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from pidog import Pidog
 import curses
+import curses_utils
 from time import sleep
 
 # init pidog
@@ -56,52 +57,11 @@ def constrain(val, min_val, max_val):
     if val > max_val: return max_val
     return val
 
-# define pad size
-# ======================================
-PAD_Y = 40
-PAD_X = 80
-
-pad_ypos = 0
-pad_xpos = 0
-
-# define color
-# ======================================
-
-
-# display fuctions
-# ======================================
-def pad_refresh(pad):
-    # Displays a section of the pad in the middle of the screen.
-    # (0,0) : coordinate of upper-left corner of pad area to display.
-    # (5,5) : coordinate of upper-left corner of window area to be filled
-    #         with pad content.
-    # (20, 75) : coordinate of lower-right corner of window area to be
-    #          : filled with pad content.
-    y, x = pad.getbegyx()
-    h, w = pad.getmaxyx()
-    if h > curses.LINES-1:
-        h = curses.LINES-1
-    if w > curses.COLS-1:
-        w = curses.COLS-1
-    pad.refresh(0, 0, y, x, h, w)
-
-def clear_line(pad, line, xlen=PAD_X, color=None):
-    if color is None:
-        pad.addstr(line, 0, " "*(xlen-2))
-    else:
-        pad.addstr(line, 0, " "*(xlen-1), color)
-
-def display_title(subpad, color=1):
+def display_title(subpad, color_pair):
     title = "PiDog  Calibration"
     # tip1
-    # clear_line(subpad, 0, color=curses.color_pair(3) | curses.A_REVERSE)
-    # subpad.addstr(0, int((PAD_X-len(title))/2), title, curses.color_pair(3) | curses.A_REVERSE)
-
-    clear_line(subpad, 0, color=curses.color_pair(3) )
-    subpad.addstr(0, int((PAD_X-len(title))/2), title, curses.color_pair(3))
-
-    # subpad.noutrefresh()
-    # curses.doupdate()
+    curses_utils.clear_line(subpad, 0, color_pair=color_pair)
+    subpad.addstr(0, int((curses_utils.PAD_X-len(title))/2), title, color_pair)
 
 tip1 = [
     "Press key to select servo:",
@@ -111,20 +71,20 @@ tip1 = [
     "- : Head pitch  ",
     "= : Tail         ",
 ]
-def display_tip1(subpad, color=1):
-    subpad.addstr(0, 0, tip1[0], curses.color_pair(4)| curses.A_BOLD | curses.A_REVERSE)
+def display_tip1(subpad, color_pair):
+    subpad.addstr(0, 0, tip1[0], color_pair | curses.A_BOLD | curses.A_REVERSE)
     for i in range(1, len(tip1)):
-        subpad.addstr(i, 0, tip1[i], curses.color_pair(4)| curses.A_BOLD)
+        subpad.addstr(i, 0, tip1[i], color_pair | curses.A_BOLD)
 
 tip2 = [
     "Press key to adjust servo:",
     "W or A: increase angle ",
     "S or D: decreases angle",
 ]
-def display_tip2(subpad, color=1):
-    subpad.addstr(0, 0, tip2[0], curses.color_pair(4)| curses.A_BOLD | curses.A_REVERSE)
+def display_tip2(subpad, color_pair):
+    subpad.addstr(0, 0, tip2[0], color_pair | curses.A_BOLD | curses.A_REVERSE)
     for i in range(1, len(tip2)):
-        subpad.addstr(i, 0, tip2[i], curses.color_pair(4)| curses.A_BOLD)
+        subpad.addstr(i, 0, tip2[i], color_pair | curses.A_BOLD)
 
 body = [
     "        [9]        ",
@@ -151,58 +111,57 @@ servo_pos = { # servo_pos in body
     "-": [1, 3],
     "=": [7, 7],
 }
-def display_dog_body(subpad, servo="1", color=1):
+def display_dog_body(subpad, color_pair, color_pair_select):
     for i in range(len(body)):
-        subpad.addstr(i, 0, body[i], curses.color_pair(color)| curses.A_BOLD)
+        subpad.addstr(i, 0, body[i], color_pair | curses.A_BOLD)
+    servo = current_servo
     if servo in servo_pos.keys():
-        subpad.addstr(servo_pos[servo][0], servo_pos[servo][1], f"[{servo}]", curses.color_pair(3)| curses.A_BOLD)
+        subpad.addstr(servo_pos[servo][0], servo_pos[servo][1], f"[{servo}]", color_pair_select | curses.A_BOLD)
 
 tip3 = [
     "Ctrl+C: Quit    Space: Save",
 ]
-def display_tip3(subpad, color=1):
-    max_y, max_x = subpad.getmaxyx()
-    clear_line(subpad, 0)
-    subpad.addstr(0, 0, tip3[0], curses.color_pair(4)| curses.A_BOLD | curses.A_REVERSE)
+def display_tip3(subpad, color_pair):
+    curses_utils.clear_line(subpad, 0)
+    subpad.addstr(0, 0, tip3[0], color_pair | curses.A_BOLD | curses.A_REVERSE)
 
+def display_servo_num(subpad, color_pair, color_pair_select):
+    subpad.addstr(0, 0, "Current Servo:", color_pair | curses.A_BOLD)
+    subpad.addstr(0, 15, f"{current_servo}", color_pair_select | curses.A_BOLD)
 
-def display_servo_num(subpad, color=1):
-    subpad.addstr(0, 0, "Current Servo:", curses.color_pair(4)| curses.A_BOLD)
-    subpad.addstr(0, 15, f"{current_servo}", curses.color_pair(3)| curses.A_BOLD)
-
-def display_offsets(subpad, servo="1", color=1):
+def display_offsets(subpad, color_pair, color_pair_select):
     servo_num = "1234567890-="
     comma = ""
-    clear_line(subpad, 0)
-    subpad.addstr(0, 0, f"leg_offsets:", curses.color_pair(4)| curses.A_BOLD)
+    curses_utils.clear_line(subpad, 0)
+    subpad.addstr(0, 0, f"leg_offsets:", color_pair | curses.A_BOLD)
     for i, x in enumerate(leg_offsets):
         comma = "," if i < len(leg_offsets)-1 else ""
         if servo_num[i] == current_servo:
-            subpad.addstr(f' {x:.2f}{comma}', curses.color_pair(3)| curses.A_BOLD)
+            subpad.addstr(f' {x:.2f}{comma}', color_pair_select | curses.A_BOLD)
         else:
-            subpad.addstr(f' {x:.2f}{comma}', curses.color_pair(color)| curses.A_BOLD)
+            subpad.addstr(f' {x:.2f}{comma}', color_pair | curses.A_BOLD)
     # 
-    clear_line(subpad, 1)
-    subpad.addstr(1, 0, f"head_offsets:", curses.color_pair(4)| curses.A_BOLD)
+    curses_utils.clear_line(subpad, 1)
+    subpad.addstr(1, 0, f"head_offsets:", color_pair | curses.A_BOLD)
     for i, x in enumerate(head_offsets):
         comma = "," if i < len(head_offsets)-1 else ""
         if servo_num[i+8] == current_servo:
-            subpad.addstr(f' {x:.2f}{comma}', curses.color_pair(3)| curses.A_BOLD)
+            subpad.addstr(f' {x:.2f}{comma}', color_pair_select | curses.A_BOLD)
         else:
-            subpad.addstr(f' {x:.2f}{comma}', curses.color_pair(color)| curses.A_BOLD)
+            subpad.addstr(f' {x:.2f}{comma}', color_pair | curses.A_BOLD)
     #
-    clear_line(subpad, 2)
-    subpad.addstr(2, 0, f"tail_offset:", curses.color_pair(4)| curses.A_BOLD)
+    curses_utils.clear_line(subpad, 2)
+    subpad.addstr(2, 0, f"tail_offset:", color_pair | curses.A_BOLD)
     for i, x in enumerate(tail_offset):
         if servo_num[i+11] == current_servo:
-            subpad.addstr(f' {x:.2f}', curses.color_pair(3)| curses.A_BOLD)
+            subpad.addstr(f' {x:.2f}', color_pair_select | curses.A_BOLD)
         else:
-            subpad.addstr(f' {x:.2f}', curses.color_pair(color)| curses.A_BOLD)
+            subpad.addstr(f' {x:.2f}', color_pair | curses.A_BOLD)
 
 
 def main(stdscr):
     # global winlines, wincols
-    global pad_ypos, pad_xpos, current_servo
+    global current_servo
     global is_save
     
     inc = 1  # 1 or -1, angle increase direction
@@ -221,50 +180,37 @@ def main(stdscr):
     # set colors
     curses.start_color()
     curses.use_default_colors()
-    # curses.init_color(8, 192, 192, 192)
-    # curses.init_pair(1, curses.COLOR_WHITE, -1)
-    # curses.init_pair(2, curses.COLOR_GREEN, -1)
-    # curses.init_pair(3, curses.COLOR_CYAN, -1)
-    # # curses.init_pair(3, curses.COLOR_BLUE, -1)
-    # curses.init_pair(4, 8, -1)
-
-    # curses.init_color(8, 192, 192, 192)
-    curses.init_pair(1, curses.COLOR_WHITE, -1)
-    curses.init_pair(2, curses.COLOR_GREEN, -1)
-    curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
-    # curses.init_pair(3, curses.COLOR_BLUE, -1)
-    curses.init_pair(4, curses.COLOR_WHITE, -1)
-
+    curses_utils.init_preset_color_pairs()
 
     # init pad    
-    pad = curses.newpad(PAD_Y, PAD_X)
+    pad = curses.newpad(curses_utils.PAD_Y, curses_utils.PAD_X)
     # pad.box()
 
     # get the offset
     get_real_values()
 
     # init subpad
-    title_pad = pad.subpad(1, PAD_X, 0, 0)
+    title_pad = pad.subpad(1, curses_utils.PAD_X, 0, 0)
     tip1_pad = pad.subpad(len(tip1), len(tip1[0]), 1, 0)
     # tip2_pad = pad.subpad(len(tip2), len(tip2[0]), 1, PAD_X-len(tip2[0])-1)
     tip2_pad = pad.subpad(len(tip2), len(tip2[0]), len(tip1)+2, 0)
     # body_pad = pad.subpad(len(body), len(body[0]), 2, int((PAD_X-len(body[0]))/2)-2)
-    body_pad = pad.subpad(len(body), len(body[0]), 2, PAD_X-len(body[0])-20)
-    if curses.COLS < PAD_X - 20:
+    body_pad = pad.subpad(len(body), len(body[0]), 2, curses_utils.PAD_X-len(body[0])-20)
+    if curses.COLS < curses_utils.PAD_X - 20:
         body_pad.move(2, 1)
-    tip3_pad = pad.subpad(len(tip3), PAD_X, len(body)+3, 0)
-    servo_num_pad = pad.subpad(1, PAD_X, len(body)+4, 0)
-    offsets_pad = pad.subpad(3, PAD_X, len(body)+5, 0)
+    tip3_pad = pad.subpad(len(tip3), curses_utils.PAD_X, len(body)+3, 0)
+    servo_num_pad = pad.subpad(1, curses_utils.PAD_X, len(body)+4, 0)
+    offsets_pad = pad.subpad(3, curses_utils.PAD_X, len(body)+5, 0)
 
-    display_title(title_pad)
-    display_tip1(tip1_pad)
-    display_tip2(tip2_pad)
-    display_dog_body(body_pad, current_servo)
-    display_tip3(tip3_pad)
-    display_servo_num(servo_num_pad)
-    display_offsets(offsets_pad)
+    display_title(title_pad, curses_utils.CYAN| curses.A_REVERSE)
+    display_tip1(tip1_pad, curses_utils.WHITE)
+    display_tip2(tip2_pad, curses_utils.WHITE)
+    display_dog_body(body_pad, curses_utils.WHITE, curses_utils.CYAN)
+    display_tip3(tip3_pad, curses_utils.WHITE)
+    display_servo_num(servo_num_pad, curses_utils.WHITE, curses_utils.CYAN)
+    display_offsets(offsets_pad, curses_utils.WHITE, curses_utils.CYAN)
 
-    pad_refresh(pad)
+    curses_utils.pad_refresh(pad)
 
     stdscr.nodelay(True) # set non-blocking mode for getch()
     stdscr.timeout(50) # set timeout when no key is pressed
@@ -276,22 +222,22 @@ def main(stdscr):
                 continue
             # ---- resize window ----
             if key == curses.KEY_RESIZE:
-                pad_ypos = 0
-                pad_xpos = 0
+                curses_utils.pad_ypos = 0
+                curses_utils.pad_xpos = 0
                 curses.update_lines_cols()
                 # if curses.COLS < PAD_X - 20:
                     # body_pad.refresh(2, curses.COLS-1-len(body[0]))
                 # body_pad.erase() # ok
-                pad_refresh(pad)
+                curses_utils.pad_refresh(pad)
                 sleep(0.5)
             # ---- select the servo ----
             elif chr(key) in ('1234567890-='):
                 current_servo = chr(key)
-                display_dog_body(body_pad, current_servo)
-                display_servo_num(servo_num_pad)
-                display_offsets(offsets_pad)
-                clear_line(pad, 17)
-                pad_refresh(pad)
+                display_dog_body(body_pad, curses_utils.WHITE, curses_utils.CYAN)
+                display_servo_num(servo_num_pad, curses_utils.WHITE, curses_utils.CYAN)
+                display_offsets(offsets_pad, curses_utils.WHITE, curses_utils.CYAN)
+                curses_utils.clear_line(pad, 17)
+                curses_utils.pad_refresh(pad)
             # ---- move ----
             elif chr(key) in ('wsadWSAD'):
                 if chr(key) in ('wWdD'):
@@ -334,14 +280,14 @@ def main(stdscr):
                     #
                     my_dog.tail_move([tail_angle], True, 80) 
                 # display offsets 
-                display_offsets(offsets_pad)
-                clear_line(pad, 17)
-                pad_refresh(pad)
+                display_offsets(offsets_pad, curses_utils.WHITE, curses_utils.CYAN)
+                curses_utils.clear_line(pad, 17)
+                curses_utils.pad_refresh(pad)
             # ---- save calibration ----
             elif key == 32: # space key
-                clear_line(pad, 17)
-                pad.addstr(17, 0, ' Confirm save ? (y/n)  ', curses.color_pair(3) | curses.A_REVERSE)
-                pad_refresh(pad)
+                curses_utils.clear_line(pad, 17)
+                pad.addstr(17, 0, ' Confirm save ? (y/n)  ', curses_utils.CYAN | curses.A_REVERSE)
+                curses_utils.pad_refresh(pad)
                 while True:
                     key = stdscr.getch()
                     if key == curses.ERR:
@@ -352,28 +298,28 @@ def main(stdscr):
                         my_dog.set_tail_offset(tail_offset)
                         sleep(0.5)
                         get_real_values()
-                        display_offsets(offsets_pad)
-                        clear_line(pad, 17)
-                        pad.addstr(17, 0, ' Offsets saved.  ', curses.color_pair(3) | curses.A_REVERSE)
-                        pad_refresh(pad)
+                        display_offsets(offsets_pad, curses_utils.WHITE, curses_utils.CYAN)
+                        curses_utils.clear_line(pad, 17)
+                        pad.addstr(17, 0, ' Offsets saved.  ', curses_utils.CYAN | curses.A_REVERSE)
+                        curses_utils.pad_refresh(pad)
                         is_save = True
                         break
                     elif chr(key) in ('nN'):
-                        display_offsets(offsets_pad)
-                        clear_line(pad, 17)
-                        pad_refresh(pad)
+                        display_offsets(offsets_pad, curses_utils.WHITE, curses_utils.CYAN)
+                        curses_utils.clear_line(pad, 17)
+                        curses_utils.pad_refresh(pad)
                         break
             else:
-                pad.addstr(17, 0, ' Invalid Key  ', curses.color_pair(3) | curses.A_REVERSE)
-                pad_refresh(pad)
+                pad.addstr(17, 0, ' Invalid Key  ', curses_utils.YELLOW | curses.A_REVERSE)
+                curses_utils.pad_refresh(pad)
 
         except KeyboardInterrupt:
             # ---- exit and remind to save calibration ----
             if is_save:
                 break
             else:
-                pad.addstr(17, 0, ' Change not saved, whether to exit? (y/n)  ', curses.color_pair(4) | curses.A_BOLD |curses.A_REVERSE)
-                pad_refresh(pad)
+                pad.addstr(17, 0, ' Change not saved, whether to exit? (y/n)  ', curses_utils.WHITE | curses.A_BOLD |curses.A_REVERSE)
+                curses_utils.pad_refresh(pad)
                 key = None
                 while True:
                     key = stdscr.getch()
@@ -384,8 +330,8 @@ def main(stdscr):
                 if chr(key) in 'yY':
                     break
                 else:
-                    clear_line(pad, 17)
-                    pad_refresh(pad)
+                    curses_utils.clear_line(pad, 17)
+                    curses_utils.pad_refresh(pad)
                     continue
 
 if __name__ == '__main__':
