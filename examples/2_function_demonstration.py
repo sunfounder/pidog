@@ -172,6 +172,9 @@ def main(stdscr):
     curses.curs_set(0)
     curses.echo()
 
+    stdscr.nodelay(True) # set non-blocking mode for getch()
+    stdscr.timeout(10)
+
     while True:
         # draw bottom bar
         display_bottom(bottom_pad)
