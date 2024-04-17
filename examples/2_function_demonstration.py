@@ -104,9 +104,9 @@ def display_actions(subpad):
     for i in range(sound_len):
         subpad.addstr(i, 30, f"{i+actions_len+1}. {sound_effects[i]}", curses_utils.WHITE | curses.A_DIM)
 
-def display_bottom(subpad):
+def display_bottom(subpad, num=''):
     curses_utils.clear_line(subpad, 0, color_pair=curses_utils.WHITE | curses.A_DIM)
-    subpad.addstr(0, 0, "Enter function number: ", curses_utils.WHITE | curses.A_DIM)
+    subpad.addstr(0, 0, f"Enter function number: {num}", curses_utils.WHITE | curses.A_DIM)
     subpad.addstr(0, curses_utils.PAD_X-16, "Ctrl^C to quit", curses_utils.WHITE | curses.A_DIM)
 
 
@@ -172,27 +172,43 @@ def main(stdscr):
     curses.curs_set(0)
     curses.echo()
 
-    stdscr.nodelay(True) # set non-blocking mode for getch()
-    stdscr.timeout(10)
+    # stdscr.nodelay(True) # set non-blocking mode for getch()
+    # stdscr.timeout(10)
+    # curses.cbreak()
+
+    index_str = ''
+    index = -1
+
+    display_bottom(bottom_pad)
+    curses_utils.pad_refresh(bottom_pad)
 
     while True:
         # draw bottom bar
-        display_bottom(bottom_pad)
-        curses_utils.pad_refresh(bottom_pad)
+        # display_bottom(bottom_pad)
+        # display_bottom(bottom_pad, f'{index+1}')
+        # curses_utils.pad_refresh(bottom_pad)
         # reset cursor
         stdscr.move(actions_len+4, 23)
         stdscr.refresh()
         # red key
-        key = stdscr.getstr()
-        try:
-            index = int(key) - 1
-        except ValueError:
-            index = -1
-        # display selection
-        display_selection(selection_pad, index)
-        curses_utils.pad_refresh(selection_pad)
-        # do fuction
-        do_function(index)
+        key = stdscr.getch()
+        key = curses.unctrl(key)
+
+        if key in b'0123456789':
+            index_str += str(int(key))
+            display_bottom(bottom_pad, index_str)
+            curses_utils.pad_refresh(bottom_pad)
+        elif key == b'^J': # enter
+            index = int(index_str)-1
+            # display selection
+            display_selection(selection_pad, index)
+            curses_utils.pad_refresh(selection_pad)
+            # do fuction
+            do_function(index)
+            # reset display
+            index_str = ''
+            display_bottom(bottom_pad, index_str)
+            curses_utils.pad_refresh(bottom_pad)
 
         sleep(0.2)
 
