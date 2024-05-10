@@ -11,6 +11,7 @@ from .sh3001 import Sh3001
 from .rgb_strip import RGBStrip
 from .sound_direction import SoundDirection
 from .dual_touch import DualTouch
+from vilib import Vilib
 import warnings
 warnings.filterwarnings("ignore") # ignore warnings for pygame # not work
 
@@ -85,6 +86,7 @@ class Pidog():
         [-BODY_WIDTH / 2,  BODY_LENGTH / 2,  0],
         [BODY_WIDTH / 2,  BODY_LENGTH / 2,  0]]).T
     SOUND_DIR = f"{UserHome}/pidog/sounds/"
+    IMG_DIR = f"{UserHome}/pidog/images/"
     # Servo Speed
     # HEAD_DPS = 300
     # LEGS_DPS = 350
@@ -602,6 +604,23 @@ class Pidog():
             sleep(0.1)
         except Exception as e:
             error(f'\rstop_and_lie error:{e}')
+
+    def take_pic(self, filename):
+        try:
+            # start camera
+            Vilib.camera_start(vflip=False,hflip=False) # vflip: image vertical flip, hflip:horizontal flip
+            # display camera screen
+            Vilib.display(local=True,web=True) # local: desktop window display, web: webcam display
+            _time = time.strftime("%y-%m-%d_%H-%M-%S", time.localtime())
+            Vilib.take_photo(str(_time),IMG_DIR)
+        except KeyboardInterrupt:
+            pass
+        except Exception as e:
+            print(f"\033[31mERROR: {e}\033[m")
+        finally:
+            print("")
+            Vilib.camera_close()
+
 
     def speak(self, name, volume=100):
         """
