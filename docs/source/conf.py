@@ -105,6 +105,10 @@ rst_epilog = """
 #links
 rst_epilog += """
 
+.. |link_sf_facebook| raw:: html
+
+    <a href="https://bit.ly/4arqbqG" target="_blank">ここ</a>
+
 .. |link_code_10_balance| raw:: html
 
     <a href="https://github.com/sunfounder/pidog/blob/master/examples/10_balance.py" target="_blank">10_balance.py - Github</a>
