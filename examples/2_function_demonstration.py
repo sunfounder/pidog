@@ -28,8 +28,7 @@ actions = [
     ['push_up', -30, 50],
     ['shake_head', -1, 90],
     ['tilting_head', -1, 60],
-    ['wag_tail', -1, 100],
-]
+    ['wag_tail', -1, 100]]
 actions_len = len(actions)
 
 sound_effects = []
@@ -132,6 +131,7 @@ def do_function(index):
         last_index = index
     elif index < actions_len + sound_len:
         my_dog.speak(sound_effects[index - len(actions)], volume=80)
+        my_dog.take_pic()
         last_index = index
 
 def main(stdscr):
