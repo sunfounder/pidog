@@ -605,14 +605,14 @@ class Pidog():
         except Exception as e:
             error(f'\rstop_and_lie error:{e}')
 
-    def take_pic(self, filename):
+    def take_pic(self):
         try:
             # start camera
             Vilib.camera_start(vflip=False,hflip=False) # vflip: image vertical flip, hflip:horizontal flip
             # display camera screen
             Vilib.display(local=True,web=True) # local: desktop window display, web: webcam display
             _time = time.strftime("%y-%m-%d_%H-%M-%S", time.localtime())
-            Vilib.take_photo(str(_time),IMG_DIR)
+            Vilib.take_photo(str(_time),self.IMG_DIR)
         except KeyboardInterrupt:
             pass
         except Exception as e:
