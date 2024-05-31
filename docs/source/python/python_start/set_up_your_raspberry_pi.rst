@@ -37,9 +37,11 @@ Having a screen simplifies the process of working with your Raspberry Pi.
 
 #. Use the HDMI cable to connect the screen to the Raspberry Pi's HDMI port. Ensure the screen is plugged into a power source and turned on.
 
-#. Power the Raspberry Pi using the power adapter. The Raspberry Pi OS desktop should appear on the screen after a few seconds.
+#. Power the Raspberry Pi using the power adapter.
 
-    .. image:: img/bullseye_desktop.png
+#. After a few seconds, the Raspberry Pi OS desktop will be displayed. Now you can open the Terminal to start entering commands.
+
+    .. image:: img/bookwarm.png
         :align: center
 
 Setting Up Without a Screen
