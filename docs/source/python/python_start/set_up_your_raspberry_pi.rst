@@ -37,9 +37,11 @@
 
 #. HDMIケーブルを使用して、画面をRaspberry PiのHDMIポートに接続します。画面が電源に接続され、オンになっていることを確認します。
 
-#. 電源アダプターを使用してRaspberry Piに電源を供給します。数秒後にRaspberry Pi OSのデスクトップが画面に表示されるはずです。
+#. 電源アダプターを使用してRaspberry Piに電源を供給します。
 
-    .. image:: img/bullseye_desktop.png
+#. 数秒後にRaspberry Pi OSのデスクトップが画面に表示されるはずです。これでターミナルを開いてコマンドの入力を開始できます。
+
+    .. image:: img/bookwarm.png
         :align: center
 
 画面がない場合の設定

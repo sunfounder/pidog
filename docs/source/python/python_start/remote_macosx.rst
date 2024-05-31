@@ -23,7 +23,7 @@ Mac OS Xユーザーにとって、SSH（Secure Shell）はRaspberry Piへのリ
 
         ssh pi@raspberrypi.local
 
-    .. image:: img/mac_vnc14.png
+    .. image:: img/mac-ping.png
 
 #. 初めてログインする際にセキュリティメッセージが表示されます。 **yes** と応答して進行します。
 

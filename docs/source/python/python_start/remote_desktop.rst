@@ -64,7 +64,13 @@ VNCサービスはRaspberry Pi OSにプリインストールされています�
     .. image:: img/vnc_viewer2.png
         :align: center
 
-#. これで、Raspberry Piのデスクトップインターフェースにアクセスできます。
+#. 数秒後にRaspberry Pi OSのデスクトップが画面に表示されるはずです。これでターミナルを開いてコマンドの入力を開始できます。
 
-    .. image:: img/bullseye_desktop.png
+    .. image:: img/bookwarm.png
+        :align: center
+    
+#. Raspberry Pi OSで設定されたSDカードをRaspberry Piの底面にあるmicroSDカードスロットに挿入します。
+
+    .. image:: img/insert_sd_card.png
+        :width: 500
         :align: center
