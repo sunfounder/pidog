@@ -64,7 +64,7 @@ Der VNC-Dienst ist in Raspberry Pi OS vorinstalliert, aber standardmäßig deakt
     .. image:: img/vnc_viewer2.png
         :align: center
 
-#. Sie haben jetzt Zugriff auf die Desktop-Oberfläche Ihres Raspberry Pi.
+#. Nach einigen Sekunden wird der Desktop von Raspberry Pi OS angezeigt. Nun können Sie das Terminal öffnen, um mit der Eingabe von Befehlen zu beginnen.
 
-    .. image:: img/bullseye_desktop.png
+    .. image:: img/bookwarm.png
         :align: center

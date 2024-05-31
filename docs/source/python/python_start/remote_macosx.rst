@@ -23,7 +23,7 @@ Für Mac OS X-Benutzer bietet SSH (Secure Shell) eine sichere und bequeme Method
 
         ssh pi@raspberrypi.local
 
-    .. image:: img/mac_vnc14.png
+    .. image:: img/mac-ping.png
 
 #. Bei Ihrer ersten Anmeldung erscheint eine Sicherheitsmeldung. Antworten Sie mit **yes**, um fortzufahren.
 

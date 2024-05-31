@@ -37,9 +37,11 @@ Mit einem Bildschirm wird das Arbeiten mit Ihrem Raspberry Pi erheblich vereinfa
 
 #. Verwenden Sie das HDMI-Kabel, um den Bildschirm mit dem HDMI-Port des Raspberry Pi zu verbinden. Stellen Sie sicher, dass der Bildschirm an eine Stromquelle angeschlossen und eingeschaltet ist.
 
-#. Versorgen Sie den Raspberry Pi mit Strom über den Stromadapter. Der Desktop des Raspberry Pi OS sollte nach einigen Sekunden auf dem Bildschirm erscheinen.
+#. Versorgen Sie den Raspberry Pi mit Strom über den Stromadapter. 
 
-    .. image:: img/bullseye_desktop.png
+#. Nach einigen Sekunden wird der Desktop von Raspberry Pi OS angezeigt. Nun können Sie das Terminal öffnen, um mit der Eingabe von Befehlen zu beginnen.
+
+    .. image:: img/bookwarm.png
         :align: center
 
 Einrichten ohne Bildschirm
