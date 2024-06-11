@@ -616,13 +616,38 @@ class Pidog():
             self.speak_first = True
             warn("Play sound needs to be run with sudo.")
         status, _ = utils.run_command('sudo killall pulseaudio') # Solve the problem that there is no sound when running in the vnc environment
-        for filename in os.listdir(self.SOUND_DIR):
-            if filename.startswith(name):
-                self.music.sound_play_threading(self.SOUND_DIR+filename, volume)
-                break
+
+        if os.path.isfile(name):
+            self.music.sound_play_threading(name, volume)
+        elif os.path.isfile(self.SOUND_DIR+name):
+            self.music.sound_play_threading(self.SOUND_DIR+name, volume)
         else:
             warn(f'No sound found for {name}')
             return False
+
+    def speak_block(self, name, volume=100):
+        """
+        speak, play audio with block
+
+        :param name: the file name int the folder(SOUND_DIR)
+        :type name: str
+        :param volume: volume, 0-100
+        :type volume: int
+        """
+        if not is_run_with_root and not hasattr(self, "speak_first"):
+            self.speak_first = True
+            warn("Play sound needs to be run with sudo.")
+        _status, _ = utils.run_command('sudo killall pulseaudio') # Solve the problem that there is no sound when running in the vnc environment
+        
+        if os.path.isfile(name):
+            self.music.sound_play(name, volume)
+        elif os.path.isfile(self.SOUND_DIR+name):
+            self.music.sound_play(self.SOUND_DIR+name, volume)
+        else:
+            warn(f'No sound found for {name}')
+            return False
+
+
     # calibration
     def set_leg_offsets(self, cali_list):
         self.legs.set_offset(cali_list)
