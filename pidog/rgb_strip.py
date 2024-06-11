@@ -458,6 +458,9 @@ class RGBStrip():
             self.display(self.frames[self.current_frame])
             self.current_frame += 1
             time.sleep(self.MIN_DELAY)
+        # --- close ---
+        else: 
+            time.sleep(self.MIN_DELAY)
 
     def close(self):
         self.style = None
