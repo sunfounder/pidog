@@ -300,7 +300,8 @@ class Pidog():
         except Exception as e:
             error(f'Close error: {e}')
         finally:
-            # signal.alarm(0)
+            signal.signal(signal.SIGINT, signal.SIG_DFL)
+            signal.alarm(0)
             sys.exit(0)
 
     def legs_simple_move(self, angles_list, speed=90):
@@ -619,8 +620,10 @@ class Pidog():
 
         if os.path.isfile(name):
             self.music.sound_play_threading(name, volume)
-        elif os.path.isfile(self.SOUND_DIR+name):
-            self.music.sound_play_threading(self.SOUND_DIR+name, volume)
+        elif os.path.isfile(self.SOUND_DIR+name+'.mp3'):
+            self.music.sound_play_threading(self.SOUND_DIR+name+'.mp3', volume)
+        elif os.path.isfile(self.SOUND_DIR+name+'.wav'):
+            self.music.sound_play_threading(self.SOUND_DIR+name+'.wav', volume)
         else:
             warn(f'No sound found for {name}')
             return False
@@ -641,12 +644,13 @@ class Pidog():
         
         if os.path.isfile(name):
             self.music.sound_play(name, volume)
-        elif os.path.isfile(self.SOUND_DIR+name):
-            self.music.sound_play(self.SOUND_DIR+name, volume)
+        elif os.path.isfile(self.SOUND_DIR+name+'.mp3'):
+            self.music.sound_play(self.SOUND_DIR+name+'.mp3', volume)
+        elif os.path.isfile(self.SOUND_DIR+name+'.wav'):
+            self.music.sound_play(self.SOUND_DIR+name+'.wav', volume)
         else:
             warn(f'No sound found for {name}')
             return False
-
 
     # calibration
     def set_leg_offsets(self, cali_list):
