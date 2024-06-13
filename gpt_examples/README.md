@@ -65,7 +65,7 @@ Fill your ASSISTANT_ID into the `keys.py` file.
 
 - Select gpt model
 
-    The Example program will submit the current picture taken by the camera when sending the question, so as to use the image analysis function of gpt-4o. Of course, you can also choose gpt3.5-tubro or other models
+    The Example program will submit the current picture taken by the camera when sending the question, so as to use the image analysis function of gpt-4o. Of course, you can also choose gpt3.5-turbo or other models
 
 ----------------------------------------------------------------
 
