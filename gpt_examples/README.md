@@ -27,11 +27,15 @@
 
 <https://platform.openai.com/api-keys>
 
+Fill your OPENAI_API_KEY into the `keys.py` file.
+
 ![tutorial_1](./tutorial_1.png)
 
 ### Create assistant and set Assistant ID
 
 <https://platform.openai.com/assistants>
+
+Fill your ASSISTANT_ID into the `keys.py` file.
 
 ![tutorial_2](./tutorial_2.png)
 
@@ -67,7 +71,7 @@
 
 ## Set Key for example
 
-Fill your OPENAI_API_KEY and ASSISTANT_ID into the `keys.py` file, example:
+Confirm that `keys.py` is configured correctly
 
 ## Run
 
