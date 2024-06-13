@@ -9,6 +9,7 @@ Quick Links:
   - [Installation](#installation)
   - [About SunFounder](#about-sunfounder)
   - [Contact us](#contact-us)
+  - [Credit](#credit)
 
 ----------------------------------------------
 
