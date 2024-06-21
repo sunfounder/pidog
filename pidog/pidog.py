@@ -72,6 +72,12 @@ def error(msg, end='\n', file=sys.stdout, flush=False):
     print_color(msg, end=end, file=file, flush=flush, color=RED)
 
 
+def numpy_mat(data):
+    if np.__version__ >= '2.0.0':
+        return np.asmatrix(data)
+    else:
+        return numpy_mat(data)
+
 class Pidog():
 
     # structure constants
@@ -79,7 +85,7 @@ class Pidog():
     FOOT = 76
     BODY_LENGTH = 117
     BODY_WIDTH = 98
-    BODY_STRUCT = np.mat([
+    BODY_STRUCT = numpy_mat([
         [-BODY_WIDTH / 2, -BODY_LENGTH / 2,  0],
         [BODY_WIDTH / 2, -BODY_LENGTH / 2,  0],
         [-BODY_WIDTH / 2,  BODY_LENGTH / 2,  0],
@@ -123,9 +129,9 @@ class Pidog():
         self.actions_dict = ActionDict()
 
         self.body_height = 80
-        self.pose = np.mat([0.0,  0.0,  self.body_height]).T  # target position vector
+        self.pose = numpy_mat([0.0,  0.0,  self.body_height]).T  # target position vector
         self.rpy = np.array([0.0,  0.0,  0.0]) * pi / 180  # Euler angle, converted to radian value
-        self.leg_point_struc = np.mat([
+        self.leg_point_struc = numpy_mat([
             [-self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2,  0],
             [self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2,  0],
             [-self.BODY_WIDTH / 2,  self.BODY_LENGTH / 2,  0],
@@ -712,7 +718,7 @@ class Pidog():
             self.rpy[2] = yaw / 180. * pi
 
     def set_legs(self, legs_list):
-        self.legpoint_struc = np.mat([
+        self.legpoint_struc = numpy_mat([
             [-self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2 +
                 legs_list[0][0], self.body_height - legs_list[0][1]],
             [self.BODY_WIDTH / 2, -self.BODY_LENGTH / 2 +
@@ -729,20 +735,20 @@ class Pidog():
         pitch = self.rpy[1]
         yaw = self.rpy[2]
 
-        rotx = np.mat([
+        rotx = numpy_mat([
             [cos(roll), 0, -sin(roll)],
             [0, 1,           0],
             [sin(roll), 0,  cos(roll)]])
-        roty = np.mat([
+        roty = numpy_mat([
             [1,         0,          0],
             [0, cos(-pitch), -sin(-pitch)],
             [0, sin(-pitch),  cos(-pitch)]])
-        rotz = np.mat([
+        rotz = numpy_mat([
             [cos(yaw), -sin(yaw), 0],
             [sin(yaw),  cos(yaw), 0],
             [0,         0, 1]])
         rot_mat = rotx * roty * rotz
-        AB = np.mat(np.zeros((3, 4)))
+        AB = numpy_mat(np.zeros((3, 4)))
         for i in range(4):
             AB[:, i] = - self.pose - rot_mat * \
                 self.BODY_STRUCT[:, i] + self.legpoint_struc[:, i]
