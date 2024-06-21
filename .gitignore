@@ -2,4 +2,4 @@
 dev/*
 photo
 test/photo*
-test/scene
+test/scene/*
