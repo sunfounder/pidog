@@ -18,7 +18,7 @@ def delay(time):
 def ball_track():
     Vilib.camera_start(vflip=False, hflip=False)
     Vilib.display(local=True, web=True)
-    Vilib.color_detect_switch(True)
+    Vilib.color_detect(color="red")  # close, red, green, blue, yellow , orange, purple
     sleep(0.2)
     print('start')
     yaw = 0
