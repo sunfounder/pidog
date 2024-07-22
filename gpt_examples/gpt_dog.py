@@ -1,7 +1,7 @@
 from openai_helper import OpenAiHelper
 from keys import OPENAI_API_KEY, OPENAI_ASSISTANT_ID
 from action_flow import ActionFlow
-from utils import redirect_error_2_null, cancel_redirect_error, gray_print
+from utils import *
 
 import speech_recognition as sr
 from vilib import Vilib
@@ -12,9 +12,24 @@ import time
 import threading
 import random
 
+import os
+import sys
+
+input_mode = None 
+args = sys.argv[1:]
+if '--keyboard' in args:
+    input_mode = 'keyboard'
+else:
+    input_mode = 'voice'
+
 # openai assistant init
 # =================================================================
 openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'PiDog')
+
+# VOLUME_DB = 5
+VOLUME_DB = 2
+VOICE_ACTIONS = ["bark", "bark harder", "pant",  "howling"]
+
 
 # dog init 
 # =================================================================
@@ -54,24 +69,23 @@ self.non_speaking_duration = 0.5  # seconds of non-speaking audio to keep on bot
 
 '''
 recognizer = sr.Recognizer()
-recognizer.dynamic_energy_adjustment_damping = 0.3
-recognizer.dynamic_energy_ratio = 2.2
-
+recognizer.dynamic_energy_adjustment_damping = 0.16
+recognizer.dynamic_energy_ratio = 1.6
 
 # speak_hanlder
 # =================================================================
 speech_loaded = False
 speech_lock = threading.Lock()
+tts_file = None
 
 def speak_hanlder():
-    global speech_loaded
+    global speech_loaded, tts_file
     while True:
         with speech_lock:
             _isloaded = speech_loaded
         if _isloaded:
             gray_print('speak start')
-            # sound_play(openai_helper.TTS_OUTPUT_FILE)
-            my_dog.speak_block(openai_helper.TTS_OUTPUT_FILE)
+            my_dog.speak_block(tts_file)
             gray_print('speak done')
             with speech_lock:
                 speech_loaded = False
@@ -104,11 +118,10 @@ def action_handler():
                 choice = random.choices(standby_actions, standby_weights)[0]
                 action_flow.run(choice)
                 last_action_time = time.time()
-                action_interval = random.randint(3, 8)
+                action_interval = random.randint(2, 6)
         elif _state == 'think':
-            # my_dog.do_action('tilting_head_left', speed=80)
+            # action_flow.run('think')
             # last_action_time = time.time()
-            # action_interval = random.randint(3, 8)
             pass
         elif _state == 'actions':
             with action_lock:
@@ -129,12 +142,14 @@ def action_handler():
 action_thread = threading.Thread(target=action_handler)
 action_thread.daemon = True
 
+
 # main
 # =================================================================
 def main():
     global current_feeling, last_feeling
     global speech_loaded
     global action_state, actions_to_be_done
+    global tts_file
 
     my_dog.rgb_strip.close()
     action_flow.change_status(action_flow.STATUS_SIT)
@@ -143,33 +158,50 @@ def main():
     action_thread.start()
 
     while True:
-        # listen
-        # ----------------------------------------------------------------
-        gray_print("listening ...")
+        if input_mode == 'voice':
+            # listen
+            # ----------------------------------------------------------------
+            gray_print("listening ...")
 
-        with action_lock:
-            action_state = 'standby'
-        my_dog.rgb_strip.set_mode('listen', 'cyan', 1)
+            with action_lock:
+                action_state = 'standby'
+            my_dog.rgb_strip.set_mode('listen', 'cyan', 1)
 
-        _stderr_back = redirect_error_2_null() # ignore error print to ignore ALSA errors
-        # If the chunk_size is set too small (default_size=1024), it may cause the program to freeze
-        with sr.Microphone(chunk_size=8192) as source:
-            cancel_redirect_error(_stderr_back) # restore error print
-            recognizer.adjust_for_ambient_noise(source)
-            audio = recognizer.listen(source)
-        # stt
-        # ----------------------------------------------------------------
-        with action_lock:
-            action_state = 'think'
-        my_dog.rgb_strip.set_mode('boom', 'yellow', 0.5)
+            _stderr_back = redirect_error_2_null() # ignore error print to ignore ALSA errors
+            # If the chunk_size is set too small (default_size=1024), it may cause the program to freeze
+            with sr.Microphone(chunk_size=8192) as source:
+                cancel_redirect_error(_stderr_back) # restore error print
+                recognizer.adjust_for_ambient_noise(source)
+                audio = recognizer.listen(source)
 
-        st = time.time()
-        _result = openai_helper.stt(audio, language=['zh', 'en'])
-        gray_print(f"stt takes: {time.time() - st:.3f} s")
+            # stt
+            # ----------------------------------------------------------------
+            my_dog.rgb_strip.set_mode('boom', 'yellow', 0.5)
 
-        if _result == False or _result == "":
-            print() # new line
-            continue
+            st = time.time()
+            _result = openai_helper.stt(audio, language=['zh', 'en'])
+            gray_print(f"stt takes: {time.time() - st:.3f} s")
+
+            if _result == False or _result == "":
+                print() # new line
+                continue
+
+        elif input_mode == 'keyboard':
+            gray_print("intput: ", end='')
+            with action_lock:
+                action_state = 'standby'
+            my_dog.rgb_strip.set_mode('listen', 'cyan', 1)
+
+            _result = input().encode(sys.stdin.encoding).decode('utf-8')
+
+            if _result == False or _result == "":
+                print() # new line
+                continue
+
+            my_dog.rgb_strip.set_mode('boom', 'yellow', 0.5)
+
+        else:
+            raise ValueError("Invalid input mode")
 
         # chat-gpt
         # ---------------------------------------------------------------- 
@@ -177,7 +209,10 @@ def main():
         # response = openai_helper.dialogue(_result)
 
         img_path = './img_imput.jpg'
-        cv2.imwrite(img_path, Vilib.img_array[0])
+        cv2.imwrite(img_path, Vilib.img)
+
+        with action_lock:
+            action_state = 'think'
 
         st = time.time()
         response = openai_helper.dialogue_with_img(_result, img_path)
@@ -201,6 +236,14 @@ def main():
                 current_feeling = feeling
             else:
                 answer = ''
+
+
+            if len(answer) > 0:
+                _actions = list.copy(actions)
+                for _action in _actions:
+                    if _action in VOICE_ACTIONS:
+                        actions.remove(_action)
+
         except:
             feeling = 'calm'
             actions = ['stop']
@@ -211,7 +254,12 @@ def main():
             _status = False
             if answer != '':
                 st = time.time()
-                _status = openai_helper.text_to_speech(answer, openai_helper.TTS_OUTPUT_FILE, 'shimmer') # onyx
+                _time = time.strftime("%y-%m-%d_%H-%M-%S", time.localtime())
+                _tts_f = f"./tts/{_time}_raw.wav"
+                _status = openai_helper.text_to_speech(answer, _tts_f, 'shimmer', response_format='wav') # onyx
+                if _status:
+                    tts_file = f"./tts/{_time}_{VOLUME_DB}dB.wav"
+                    _status = sox_volume(_tts_f, tts_file, VOLUME_DB)
                 gray_print(f'tts takes: {time.time() - st:.3f} s')
 
                 if _status:
@@ -223,7 +271,6 @@ def main():
 
             # ---- actions ----
             with action_lock:
-                # actions_to_be_done = ['bark', 'howling']
                 actions_to_be_done = actions
                 gray_print(f'actions: {actions_to_be_done}')
                 action_state = 'actions'
@@ -261,4 +308,3 @@ if __name__ == "__main__":
     finally:
         Vilib.camera_close()
         my_dog.close()
-
