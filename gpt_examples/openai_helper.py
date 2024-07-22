@@ -1,6 +1,7 @@
 from openai import OpenAI
 import time
 import shutil
+import os
 
 # utils
 # =================================================================
@@ -71,14 +72,15 @@ class OpenAiHelper():
             transcript = self.client.audio.transcriptions.create(
                 model="whisper-1", 
                 file=wav_data,
-                language=language
+                language="en",
+                prompt="this is the conversation between me and a robot"
             )
 
-            # output_file = "./stt_output.wav"
-            # with wave.open(output_file, "wb") as wf:
+            # file = "./stt_output.wav"
+            # with wave.open(file, "wb") as wf:
             #     wf.write(audio.get_wav_data())
 
-            # with open(output_file, 'rb') as f:
+            # with open(file, 'rb') as f:
             #     transcript = client.audio.transcriptions.create(
             #         model="whisper-1", 
             #         file=f
@@ -197,15 +199,25 @@ class OpenAiHelper():
             print(run.status)
 
 
-    def text_to_speech(self, text, output_file, voice='alloy'):
+    def text_to_speech(self, text, output_file, voice='alloy', response_format="mp3", speed=1):
         '''
         voice: alloy, echo, fable, onyx, nova, and shimmer
         '''
         try:
+            # check dir
+            dir = os.path.dirname(output_file)
+            if not os.path.exists(dir):
+                os.mkdir(dir)
+            elif not os.path.isdir(dir):
+                raise FileExistsError(f"\'{dir}\' is not a directory")
+
+            # tts
             with self.client.audio.speech.with_streaming_response.create(
                 model="tts-1",
                 voice=voice,
                 input=text,
+                response_format=response_format,
+                speed=speed,
             ) as response:
                 response.stream_to_file(output_file)
 
@@ -213,3 +225,4 @@ class OpenAiHelper():
         except Exception as e:
             print(f'tts err: {e}')
             return False
+
