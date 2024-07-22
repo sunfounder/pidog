@@ -1,7 +1,7 @@
 from preset_actions import *
 
 class ActionFlow():
-    SIT_HEAD_PITCH = -40
+    SIT_HEAD_PITCH = -35
     STAND_HEAD_PITCH = 0
     STATUS_STAND = 0
     STATUS_SIT = 1
@@ -14,43 +14,37 @@ class ActionFlow():
     head_yrp = [0, 0, 0]
     head_pitch_init = 0
     current_status = -1
+    last_actions = None
 
     OPERATIONS = {
         "forward": {
             "function": lambda self: self.dog_obj.do_action('forward', speed=98),
             "status": STATUS_STAND,
-            "head_pitch": STAND_HEAD_PITCH,
         },
         "backward": {
             "function": lambda self: self.dog_obj.do_action('backward', speed=98),
             "status": STATUS_STAND,
-            "head_pitch": STAND_HEAD_PITCH,
         },
         "turn left": {
             "function": lambda self: self.dog_obj.do_action('turn_left', speed=98),
             "status": STATUS_STAND,
-            "head_pitch": STAND_HEAD_PITCH,
         },
         "turn right": {
             "function": lambda self: self.dog_obj.do_action('turn_right', speed=98),
             "status": STATUS_STAND,
-            "head_pitch": STAND_HEAD_PITCH,
         },
         "stop": {
         },
         "lie": {
             "function": lambda self: self.dog_obj.do_action('lie', speed=70),
-            "head_pitch": STAND_HEAD_PITCH,
             "status": STATUS_LIE,
         },
         "stand": {
             "function": lambda self: self.dog_obj.do_action('stand', speed=65),
-            "head_pitch": STAND_HEAD_PITCH,
             "status": STATUS_STAND,
         },
         "sit": {
             "function": lambda self: self.dog_obj.do_action('sit', speed=70),
-            "head_pitch": SIT_HEAD_PITCH,
             "status": STATUS_SIT,
         },
         "bark": {
@@ -60,7 +54,6 @@ class ActionFlow():
             # "before": "stand",
             "before": lambda self: attack_posture(self.dog_obj),
             "function": lambda self: bark_action(self.dog_obj, self.head_yrp, 'single_bark_1'),
-            "head_pitch": STATUS_STAND,
             "status": STATUS_STAND,
         },
         "pant": {
@@ -74,9 +67,9 @@ class ActionFlow():
             "function": lambda self: shake_head(self.dog_obj, [self.head_yrp[0], self.head_yrp[1], self.head_yrp[2]+self.head_pitch_init]),
         },
         "stretch": {
-            "function": lambda self: self.dog_obj.do_action('stretch', speed=50),
-            "after": lambda self: sleep(0.5),
-            "status": STATUS_STAND,
+            "function": lambda self: stretch(self.dog_obj),
+            "after": "sit",
+            "status": STATUS_SIT,
         },
         "doze off": {
             "function": lambda self: self.dog_obj.do_action('doze_off', speed=95),
@@ -94,31 +87,26 @@ class ActionFlow():
         },
         "twist body": {
             "function": lambda self:body_twisting(self.dog_obj),
-            "before": "stretch",
             "after": "sit",
             "status": STATUS_STAND,
         },
         "scratch": {
             "function": lambda self:scratch(self.dog_obj),
             "after": "sit",
-            "head_pitch": SIT_HEAD_PITCH,
             "status": STATUS_SIT,
         },
         "handshake": {
             "function": lambda self:hand_shake(self.dog_obj),
             "after": "sit",
-            "head_pitch": SIT_HEAD_PITCH,
             "status": STATUS_SIT,
         },
         "high five": {
             "function": lambda self:high_five(self.dog_obj),
             "after": "sit",
-            "head_pitch": SIT_HEAD_PITCH,
             "status": STATUS_SIT,
         },
         "lick hand": {
             "function": lambda self:lick_hand(self.dog_obj),
-            "head_pitch": SIT_HEAD_PITCH,
             "status": STATUS_SIT,
         },
         "waiting": {
@@ -126,7 +114,31 @@ class ActionFlow():
         },
         "feet shake": {
             "function": lambda self:feet_shake(self.dog_obj),
+            "status": STATUS_SIT,
+        },
+        "relax neck": {
+            "function": lambda self:relax_neck(self.dog_obj, pitch_comp=self.head_pitch_init),
+            "status": STATUS_SIT,
+        },
+        "nod": {
+            "function": lambda self:nod(self.dog_obj, pitch_comp=self.head_pitch_init),
             "head_pitch": SIT_HEAD_PITCH,
+            "status": STATUS_SIT,
+        },
+        "think": {
+            "function": lambda self:think(self.dog_obj, pitch_comp=self.head_pitch_init),
+            "status": STATUS_SIT,
+        },
+        "recall": {
+            "function": lambda self:recall(self.dog_obj, pitch_comp=self.head_pitch_init),
+            "status": STATUS_SIT,
+        },
+        "fluster": {
+            "function": lambda self:fluster(self.dog_obj, pitch_comp=self.head_pitch_init),
+            "status": STATUS_SIT,
+        },
+        "surprise": {
+            "function": lambda self:surprise(self.dog_obj, pitch_comp=self.head_pitch_init),
             "status": STATUS_SIT,
         },
     }
@@ -170,7 +182,9 @@ class ActionFlow():
                 operation = self.OPERATIONS[action]
                 # status
                 if "status" in operation and operation["status"] != None:
-                    if self.current_status != operation["status"]:
+                    # if self.current_status != operation["status"]:
+                    if self.last_actions != action:
+                        self.last_actions = action 
                         self.change_status(operation["status"])
                 # before
                 if "before" in operation and operation["before"] != None:
@@ -201,6 +215,8 @@ class ActionFlow():
 def test(my_dog):
     action_flow = ActionFlow(my_dog)
     action_flow.change_status(action_flow.STATUS_SIT)
+    # action_flow.change_status(action_flow.STATUS_STAND)
+
 
     actions = list(action_flow.OPERATIONS.keys())
     for i, key in enumerate(actions):
@@ -228,6 +244,8 @@ if __name__ == '__main__':
         import time
         my_dog = Pidog()
         time.sleep(1)
+        my_dog.rgb_strip.set_mode('listen', 'cyan', 1)
+
         test(my_dog)
     except KeyboardInterrupt:
         pass
