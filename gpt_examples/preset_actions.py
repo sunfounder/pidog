@@ -1,6 +1,8 @@
 
 from time import sleep
 import random
+from math import sin, cos, pi
+
 
 def scratch(my_dog):
     h1 = [[0, 0, -40]]
@@ -40,13 +42,23 @@ def hand_shake(my_dog):
 
     my_dog.legs_move(f_up, immediately=False, speed=80)
     my_dog.wait_all_done()
+    sleep(0.1)
 
-    for _ in range(5):
+    for _ in range(8):
         my_dog.legs_move(f_handshake, immediately=False, speed=90)
         my_dog.wait_all_done()
 
     my_dog.legs_move(f_withdraw, immediately=False, speed=80)
-    my_dog.do_action('sit', speed=80)
+
+    hand_down_angs = [
+        [30, 60, -30, -40, 80, -45, -80, 45],
+        [30, 60, -30, -50, 80, -45, -80, 45],
+        [30, 60, -30, -58, 80, -45, -80, 45],
+        [30, 60, -30, -60, 80, -45, -80, 45],
+    ]
+
+    my_dog.legs_move(hand_down_angs, immediately=False, speed=80)
+    my_dog.head_move([[0, 0, -35]], speed=80)
     my_dog.wait_all_done()
 
 
@@ -68,7 +80,16 @@ def high_five(my_dog):
     sleep(0.5)
 
     my_dog.legs_move(f_withdraw, immediately=False, speed=80)
-    my_dog.do_action('sit', speed=80)
+
+    hand_down_angs = [
+        [30, 60, -30, -40, 80, -45, -80, 45],
+        [30, 60, -30, -50, 80, -45, -80, 45],
+        [30, 60, -30, -58, 80, -45, -80, 45],
+        [30, 60, -30, -60, 80, -45, -80, 45],
+    ]
+
+    my_dog.legs_move(hand_down_angs, immediately=False, speed=80)
+    my_dog.head_move([[0, 0, -35]], speed=80)
     my_dog.wait_all_done()
 
 
@@ -92,6 +113,15 @@ def body_twisting(my_dog):
     f = [f2] + [f1] + [f3] + [f1]
 
     my_dog.legs_move(f, immediately=False, speed=50)
+    my_dog.wait_all_done()
+    sleep(.3)
+    _2_sit_angs = [
+        [40, 35, -40, -35, 60, 5, -60, -5],
+        [30, 60, -30, -60, 80, -45, -80, 45]
+    ]
+    my_dog.legs_move(_2_sit_angs, immediately=False, speed=68)
+    my_dog.head_move_raw([[0, 0, -35]], immediately=False, speed=68)
+    my_dog.wait_all_done()
 
 
 def bark_action(my_dog, yrp=None, speak=None, volume=100):
@@ -126,6 +156,22 @@ def shake_head(my_dog, yrp=None):
     my_dog.head_move(h1, immediately=False, speed=92)
     my_dog.head_move(h2, immediately=False, speed=92)
     my_dog.head_move(h3, immediately=False, speed=92)
+    my_dog.wait_all_done()
+
+
+def shake_head_smooth(my_dog, pitch_comp=0, amplitude=40, speed=90):
+    y = 0
+    r = 0
+    p = 0
+    angs = []
+
+    for i in range(0, 31, 2):
+        y = round(amplitude*sin(pi/10*i), 2)
+        r = 0
+        p = pitch_comp
+        angs.append([y, r, p])
+
+    my_dog.head_move_raw(angs, speed=speed)
     my_dog.wait_all_done()
 
 
@@ -213,8 +259,15 @@ def lick_hand(my_dog):
         my_dog.wait_head_done()
         my_dog.wait_legs_done()
 
-    my_dog.do_action('sit', speed=80)
-    my_dog.head_move([[0, 0, -40]], speed=80)
+    hand_down_angs = [
+        [30, 60, -30, -40, 80, -45, -80, 45],
+        [30, 60, -30, -50, 80, -45, -80, 45],
+        [30, 60, -30, -58, 80, -45, -80, 45],
+        [30, 60, -30, -60, 80, -45, -80, 45],
+    ]
+
+    my_dog.legs_move(hand_down_angs, immediately=False, speed=80)
+    my_dog.head_move([[0, 0, -35]], speed=80)
     my_dog.wait_all_done()
 
 def waiting(my_dog, pitch_comp):
@@ -230,21 +283,6 @@ def waiting(my_dog, pitch_comp):
     my_dog.wait_head_done()
 
 def feet_shake(my_dog, step=None):
-    # leg1 =  [
-    #     [40, 35, -30, -60, 80, -45, -80, 45],
-    #     [40, 35, -30, -60, 80, -45, -80, 45],
-
-    #     [30, 60, -40, -35, 80, -45, -80, 45],
-    #     [30, 60, -40, -35, 80, -45, -80, 45],
-    # ]
-    # leg2 =  [
-    #     [40, 35, -30, -60, 80, -45, -80, 45],
-    #     [30, 60, -30, -60, 80, -45, -80, 45],
-    # ]
-    # leg3 =  [
-    #     [30, 60, -40, -35, 80, -45, -80, 45],
-    #     [30, 60, -30, -60, 80, -45, -80, 45],
-    # ]
     current_legs = list.copy(my_dog.leg_current_angles)
 
     L1 = list.copy(current_legs)
@@ -276,16 +314,9 @@ def feet_shake(my_dog, step=None):
     if step == None:
         step = random.randint(1, 2)
 
-    # my_dog.do_action('sit', speed=60)
-    # my_dog.head_move([[0, 0, -40]], speed=80)
-    # my_dog.wait_all_done()
-
     for _ in range(step):
         my_dog.legs_move(legs_action, immediately=False, speed=45)
         my_dog.wait_legs_done()
-
-    # my_dog.legs_move([current_legs], immediately=False, speed=45)
-    # my_dog.wait_legs_done()
 
     my_dog.do_action('sit', speed=60)
     my_dog.head_move([[0, 0, -40]], speed=80)
@@ -297,20 +328,7 @@ def sit_2_stand(my_dog, speed=75):
     sit_angles = my_dog.actions_dict['sit'][0][0]
     stand_angles = my_dog.actions_dict['stand'][0][0]
 
-    # for i, x in enumerate(sit_angles):
-    #     sit_angles[i] = round(x, 2)
-    # for i, x in enumerate(stand_angles):
-    #     stand_angles[i] = round(x, 2)
-
-    # print(f'sit: {sit_angles}')
-    # print(f'stand: {stand_angles}')
-
-    # sit = [30, 60, -30, -60, 80, -45, -80, 45]
-    # stand = [40.61, 15.54, -40.61, -15.54, 60.28, 5.26, -60.28, -5.26]
-
     L1 = [25, 25, -25, -25, 70, -25, -70, 25]
-
-    # L1 = [30, 35, -35, -35, 70, -25, -70, 25]
 
     legs_action = [
         # sit_angles,
@@ -321,6 +339,217 @@ def sit_2_stand(my_dog, speed=75):
     my_dog.legs_move(legs_action, immediately=False, speed=speed)
     my_dog.wait_legs_done()
 
+def relax_neck(my_dog, pitch_comp=-35):
+
+    y_ang = 0
+    r_ang = 0
+    p_ang = 0
+    turn_neck_angs = []
+
+    for i in range(21):
+        y_ang = round(10*sin(pi/10*i), 2)
+        r_ang = round(45*sin(pi/10*i), 2)
+        p_ang = round(20*sin(pi/10*i-pi/2) + pitch_comp, 2)
+        turn_neck_angs.append([y_ang, r_ang, p_ang])
+
+    my_dog.head_move_raw(turn_neck_angs, speed=80)
+    
+    my_dog.wait_all_done()
+    sleep(0.3)
+
+    stretch_neck_angs = [
+        [0, 0, 5+pitch_comp],
+        # [0, 35, 5+pitch_comp],
+        [0, 45, 5+pitch_comp],
+        [0, 25, 5+pitch_comp],
+        [0, 45, 5+pitch_comp],
+        [0, 25, 5+pitch_comp],
+
+        [0, 0, 5+pitch_comp],
+        [0, 0, 5+pitch_comp],
+
+        [0, 0, 5+pitch_comp],
+        # [0, -35, 5+pitch_comp],
+        [0, -45, 5+pitch_comp],
+        [0, -25, 5+pitch_comp],
+        [0, -45, 5+pitch_comp],
+        [0, -25, 5+pitch_comp],
+        [0, 0, pitch_comp],
+    ]
+
+
+    # my_dog.head_move(stretch_neck_angs, speed=80, pitch_comp=-35)
+    my_dog.head_move_raw(stretch_neck_angs, speed=80)
+
+    my_dog.wait_all_done()
+
+
+def nod(my_dog, pitch_comp=-35, amplitude=20, step=2, speed=90):
+    y = 0
+    r = 0
+    p = 0
+    angs = []
+
+    for i in range(0, 20*step+1, 2):
+        y = 0
+        r = 0
+        p = round(amplitude*cos(pi/10*i) - amplitude + pitch_comp, 2)
+        angs.append([y, r, p])
+
+    my_dog.head_move_raw(angs, speed=speed)
+    my_dog.wait_all_done()
+
+def think(my_dog, pitch_comp=0):
+    h_l = [
+        [20, -15, 15+pitch_comp]
+    ]
+
+    my_dog.head_move_raw(h_l, speed=80)
+    my_dog.wait_all_done()
+
+
+def recall(my_dog, pitch_comp=0):
+    h_l = [
+        [-20, 15, 15+pitch_comp]
+    ]
+
+    my_dog.head_move_raw(h_l, speed=80)
+    my_dog.wait_all_done()
+
+
+def head_down_left(my_dog, pitch_comp=0):
+    h_l = [
+        [25, 0, -35+pitch_comp]
+    ]
+
+    my_dog.head_move_raw(h_l, speed=80)
+    my_dog.wait_all_done()
+
+
+def head_down_right(my_dog, pitch_comp=0):
+    h_l = [
+        [-25, 0, -35+pitch_comp]
+    ]
+
+    my_dog.head_move_raw(h_l, speed=80)
+    my_dog.wait_all_done()
+
+def fluster(my_dog, pitch_comp=0):
+    h_l = [
+        [-10, 0, pitch_comp],
+        [0, 0, pitch_comp],
+        [10, 0, pitch_comp],
+        [0, 0, pitch_comp],
+    ]
+
+    # current_legs = list.copy(my_dog.leg_current_angles)
+    current_legs = [30, 60, -30, -60, 80, -45, -80, 45]
+    L1 = list.copy(current_legs)
+    L2 = list.copy(current_legs)
+    L1[0] += 10
+    L1[1] -= 25
+    L2[2] -= 10
+
+    leg1 = [
+        L1,
+        L1,
+        L2,
+        L2,
+    ]
+
+    for _ in range(5):
+        # my_dog.legs_move(leg1, immediately=False, speed=100)
+        my_dog.head_move_raw(h_l, speed=100)
+        my_dog.wait_all_done()
+
+def alert(my_dog, pitch_comp=0):
+    legs_angs = [
+        [30, 50, -30, -50, 80, -45, -80, 45],
+        [30, 60, -30, -60, 88, -45, -88, 45],
+    ]
+    head_angs = [
+        [0, 0, -5+pitch_comp],
+        [0, 0, 10+pitch_comp]
+    ]
+    my_dog.legs_move(legs_angs, immediately=False, speed=100)
+    my_dog.head_move_raw(head_angs, immediately=False, speed=100)
+    my_dog.wait_all_done()
+
+    my_dog.head_move_raw([[30, 0, pitch_comp]], speed=100)
+    my_dog.wait_all_done()
+    sleep(1)
+    my_dog.head_move_raw([[-30, 0, pitch_comp]], speed=100)
+    my_dog.wait_all_done()
+    sleep(1)
+
+    my_dog.head_move_raw([[0, 0, pitch_comp]], speed=100)
+    my_dog.wait_all_done()
+
+
+def surprise(my_dog, pitch_comp=0, status='sit'):
+    if status == 'sit':
+        legs_angs = [
+            [30, 50, -30, -50, 80, -45, -80, 45],
+            [30, 80, -30, -80, 88, -45, -88, 45],
+        ]
+        head_angs = [
+            [0, 0, -5+pitch_comp],
+            [0, 0, 10+pitch_comp]
+        ]
+        my_dog.legs_move(legs_angs, immediately=False, speed=100)
+        my_dog.head_move_raw(head_angs, immediately=False, speed=100)
+        my_dog.wait_all_done()
+
+        sleep(1)
+
+        my_dog.legs_move([[30, 60, -30, -60, 80, -45, -80, 45]], immediately=False, speed=80)
+        my_dog.head_move_raw([[0, 0, pitch_comp]], immediately=False, speed=80)
+        my_dog.wait_all_done()
+
+    elif status == 'stand':
+        legs_angs = [
+            [40, 10, -40, -10, 60, -5, -60, 5],
+            [40, 25, -40, -25, 60, 0, -60, 0],
+        ]
+        head_angs = [
+            [0, 0, pitch_comp],
+            [0, 0, 10+pitch_comp]
+        ]
+        my_dog.legs_move(legs_angs, immediately=False, speed=80)
+        my_dog.head_move_raw(head_angs, immediately=False, speed=80)
+        my_dog.wait_all_done()
+
+        sleep(1)
+
+        my_dog.legs_move([[40, 15, -40, -15, 60, 5, -60, -5]], immediately=False, speed=80)
+        my_dog.head_move_raw([[0, 0, pitch_comp]], immediately=False, speed=80)
+        my_dog.wait_all_done()
+
+
+def stretch(my_dog):
+
+    head_angs = [
+        [0, 0, 25],
+    ]
+    leg_angs = [
+        [-80, 70, 80, -70, -20, 64, 20, -64],
+        [-80, 70, 80, -70, -20, 64, 20, -64],
+        [-65, 70, 65, -70, -20, 64, 20, -64],
+        [-80, 70, 80, -70, -20, 64, 20, -64],
+        [-65, 70, 65, -70, -20, 64, 20, -64],
+    ]
+
+    my_dog.legs_move(leg_angs, immediately=False, speed=55)
+    my_dog.head_move_raw(head_angs, immediately=False, speed=55)
+    my_dog.wait_all_done()
+    sleep(.3)
+    _2_sit_angs = [
+        [40, 35, -40, -35, 60, 5, -60, -5],
+        [30, 60, -30, -60, 80, -45, -80, 45]
+    ]
+    my_dog.legs_move(_2_sit_angs, immediately=False, speed=68)
+    my_dog.head_move_raw([[0, 0, -35]], immediately=False, speed=68)
+    my_dog.wait_all_done()
 
 if __name__ == "__main__":
     from pidog import Pidog
@@ -328,13 +557,99 @@ if __name__ == "__main__":
 
     yrp = [0, 0, -40]
     my_dog = Pidog()
+    my_dog.rgb_strip.set_mode('listen', 'cyan', 1)
     my_dog.do_action('sit', speed=80)
+    my_dog.head_move_raw([[0, 0, -25]], immediately=False, speed=68)
+    my_dog.wait_all_done()
+    sleep(.5)
+    
     # scratch(my_dog)
     # my_dog.close()
 
-    while True:
-        # my_dog.do_action('lie', speed=80)
-        my_dog.do_action('sit', speed=80)
-        sleep(2)
-        sit_2_stand(my_dog, 75)
-        sleep(2)
+    # while True:
+    #     # my_dog.do_action('lie', speed=80)
+    #     my_dog.do_action('sit', speed=80)
+    #     sleep(2)
+    #     sit_2_stand(my_dog, 75)
+    #     sleep(2)
+
+    # # --- nod ---
+    # while True:
+    #     nod(my_dog, pitch_comp=-35, amplitude=30, step=2, speed=95)
+    #     # break
+    #     sleep(2)
+
+    # # --- think ---
+    # while True:
+    #     # my_dog.do_action('tilting_head_left', speed=50)
+    #     think(my_dog, -30)
+    #     # break
+    #     sleep(2)
+
+    # # --- recall ---
+    # while True:
+    #     # my_dog.do_action('tilting_head_left', speed=50)
+    #     recall(my_dog, -30)
+    #     # break
+    #     sleep(2)
+
+
+    # # --- head_down_left ---
+    # while True:
+    #     # my_dog.do_action('tilting_head_left', speed=50)
+    #     head_down_left(my_dog, -30)
+    #     # break
+    #     sleep(2)
+
+    # # --- head_down_right---
+    # while True:
+    #     # my_dog.do_action('tilting_head_left', speed=50)
+    #     head_down_right(my_dog, -30)
+    #     # break
+    #     sleep(2)
+
+    # # --- shake_head ---
+    # while True:
+    #     # my_dog.do_action('shake_head', speed=50)
+    #     # shake_head(my_dog)
+    #     shake_head_smooth(my_dog, pitch_comp=-35, amplitude=20, speed=95)
+    #     # break
+    #     sleep(2)
+
+    # --- relax_neck ---
+    # while True:
+    #     # my_dog.do_action('nod_lethargy', speed=50)
+    #     relax_neck(my_dog)
+    #     # break
+    #     sleep(2)
+
+
+    # # --- fluster ---
+    # while True:
+    #     # my_dog.do_action('nod_lethargy', speed=50)
+    #     fluster(my_dog, pitch_comp=-35)
+    #     # break
+    #     sleep(2)
+
+    # --- surprise ---
+    # while True:
+    #     # my_dog.do_action('nod_lethargy', speed=50)
+    #     # surprise(my_dog, pitch_comp=-35, status='sit')
+    #     surprise(my_dog, pitch_comp=0, status='stand')
+    #     # break
+    #     sleep(2)
+
+
+    # # --- stretch ---
+    # while True:
+    #     stretch(my_dog)
+    #     # break
+    #     sleep(2)
+
+    # --- alert ---
+    # while True:
+    #     alert(my_dog, pitch_comp=-35)
+    #     # break
+    #     sleep(2)
+
+
