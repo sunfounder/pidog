@@ -30,3 +30,16 @@ def cancel_redirect_error(old_stderr):
     os.dup2(old_stderr, 2)
     os.close(old_stderr)
 
+def sox_volume(input_file, output_file, volume):
+    import sox
+
+    try:
+        transform = sox.Transformer()
+        transform.vol(volume)
+
+        transform.build(input_file, output_file)
+
+        return True
+    except Exception as e:
+        print(f"sox_volume err: {e}")
+        return False
