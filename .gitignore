@@ -3,3 +3,4 @@ dev/*
 photo
 test/photo*
 test/scene/*
+backups/*
