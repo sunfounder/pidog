@@ -8,10 +8,20 @@ from time import sleep
 # ======================================
 my_dog = Pidog()
 
-my_dog.legs_move([[0]*8], immediately=True, speed=60)
+# my_dog.legs_move([[0]*8], immediately=True, speed=60)
+# my_dog.head_move([[0]*3], immediately=True, speed=60)
+# my_dog.tail_move([[0]], immediately=True, speed=60)
+# my_dog.wait_all_done()
+
+LEGS_ORIGIN_ANGLES  = [30, -30, -30, 30, 30, -30, -30, 30]
+
+my_dog.legs_move([LEGS_ORIGIN_ANGLES], immediately=True, speed=60)
 my_dog.head_move([[0]*3], immediately=True, speed=60)
 my_dog.tail_move([[0]], immediately=True, speed=60)
 my_dog.wait_all_done()
+
+# while True:
+#     sleep(1)
 
 # global variables
 # ======================================
@@ -22,6 +32,8 @@ leg_offsets = [0.0]*8
 head_offsets = [0.0]*3
 tail_offset = [0.0]*1
 current_servo = "1"
+
+leg_offset_temp = [0.0] * 8
 
 OFFSET_STEP = (180 / 2000) * (20000 / 4095)  # actual precision of steering gear
 
@@ -48,6 +60,15 @@ def get_real_values():
     for i, x in enumerate(head_offsets):
         head_offsets[i] = round(x, 2)
     tail_offset[0] = round(tail_offset[0], 2)
+
+#     print(f'''
+# leg_angles: {leg_angles}
+# head_angles: {head_angles}
+# tail_angle: {tail_angle}
+# leg_offsets: {leg_offsets}
+# head_offsets: {head_offsets}
+# tail_offset:{tail_offset}
+#     ''')
 
 # constrain(), constrain value range
 # ======================================
@@ -189,6 +210,7 @@ def main(stdscr):
     # get the offset
     get_real_values()
 
+
     # init subpad
     title_pad = pad.subpad(1, curses_utils.PAD_X, 0, 0)
     tip1_pad = pad.subpad(len(tip1), len(tip1[0]), 1, 0)
@@ -249,13 +271,24 @@ def main(stdscr):
                     # get index
                     index = ('12345678').index(current_servo)
                     # 
-                    leg_angles[index] += inc*OFFSET_STEP
-                    offset_temp = leg_angles[index] + my_dog.legs.offset[index]
-                    offset_temp = constrain(offset_temp, -20, 20)
+                    # leg_angles[index] += inc*OFFSET_STEP
+                    # offset_temp = leg_angles[index] + my_dog.legs.offset[index]
+                    # offset_temp = constrain(offset_temp, -20, 20)
+
                     #
-                    leg_angles[index] = offset_temp - my_dog.legs.offset[index]
-                    leg_offsets[index] = offset_temp
+                    # leg_angles[index] = offset_temp - my_dog.legs.offset[index]
+                    # leg_offsets[index] = offset_temp
+
+        
+                    leg_offset_temp[index] += inc*OFFSET_STEP
+                    leg_offset_temp[index] = constrain(leg_offset_temp[index], -20, 20)
+
+                    leg_angles[index] = LEGS_ORIGIN_ANGLES[index] + leg_offset_temp[index]
+                    leg_offsets[index] = leg_offset_temp[index] + my_dog.legs.offset[index]
+
                     # move servos
+                    # print(f'leg_angles: {leg_angles}. leg_offsets:{leg_offsets}')
+
                     my_dog.legs_simple_move(leg_angles)
                 # control head
                 elif current_servo in ('90-'):
@@ -293,7 +326,7 @@ def main(stdscr):
                     if key == curses.ERR:
                         continue
                     if chr(key) in ('yY'):
-                        my_dog.set_leg_offsets(leg_offsets)
+                        my_dog.set_leg_offsets(leg_offsets, reset_list=LEGS_ORIGIN_ANGLES)
                         my_dog.set_head_offsets(head_offsets)
                         my_dog.set_tail_offset(tail_offset)
                         sleep(0.5)
