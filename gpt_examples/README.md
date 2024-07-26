@@ -18,6 +18,7 @@
 
     sudo apt install python3-pyaudio
     sudo apt install sox
+    sudo pip3 install -U sox --break-system-packages
     ```
 
 ----------------------------------------------------------------
