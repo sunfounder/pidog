@@ -3,6 +3,8 @@ from keys import OPENAI_API_KEY, OPENAI_ASSISTANT_ID
 from action_flow import ActionFlow
 from utils import *
 
+import readline # optimize keyboard input, only need to import
+
 import speech_recognition as sr
 from vilib import Vilib
 import cv2
@@ -187,12 +189,11 @@ def main():
                 continue
 
         elif input_mode == 'keyboard':
-            gray_print("intput: ", end='')
             with action_lock:
                 action_state = 'standby'
             my_dog.rgb_strip.set_mode('listen', 'cyan', 1)
 
-            _result = input().encode(sys.stdin.encoding).decode('utf-8')
+            _result = input(f'\033[1;30m{"intput: "}\033[0m').encode(sys.stdin.encoding).decode('utf-8')
 
             if _result == False or _result == "":
                 print() # new line
@@ -221,31 +222,29 @@ def main():
         # actions & TTS
         # ---------------------------------------------------------------- 
         try:
-            if 'Feeling' in response:
-                feeling = response['Feeling']
+            if isinstance(response, dict):
+                if 'actions' in response:
+                    actions = list(response['actions'])
+                else:
+                    actions = ['stop']
+
+                if 'answer' in response:
+                    answer = response['answer']
+                else:
+                    answer = ''
+
+                if len(answer) > 0:
+                    _actions = list.copy(actions)
+                    for _action in _actions:
+                        if _action in VOICE_ACTIONS:
+                            actions.remove(_action)
             else:
-                feeling = 'calm'
-
-            if 'actions' in response:
-                actions = list(response['actions'])
-            else:
-                actions = ['stop']
-
-            if 'answer' in response:
-                answer = response['answer']
-                current_feeling = feeling
-            else:
-                answer = ''
-
-
-            if len(answer) > 0:
-                _actions = list.copy(actions)
-                for _action in _actions:
-                    if _action in VOICE_ACTIONS:
-                        actions.remove(_action)
+                response = str(response)
+                if len(response) > 0:
+                    actions = ['stop']
+                    answer = response
 
         except:
-            feeling = 'calm'
             actions = ['stop']
             answer = ''
     
