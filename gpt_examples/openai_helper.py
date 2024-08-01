@@ -47,14 +47,16 @@ def chat_print(label, message):
 class OpenAiHelper():
     STT_OUT = "stt_output.wav"
     TTS_OUTPUT_FILE = 'tts_output.mp3'
+    TIMEOUT = 30 # seconds
 
-    def __init__(self, api_key, assistant_id, assistant_name) -> None:
+    def __init__(self, api_key, assistant_id, assistant_name, timeout=TIMEOUT) -> None:
 
         self.api_key = api_key
         self.assistant_id = assistant_id
         self.assistant_name = assistant_name
 
-        self.client = OpenAI(api_key=api_key)
+
+        self.client = OpenAI(api_key=api_key, timeout=timeout)
         self.thread = self.client.beta.threads.create()
         self.run = self.client.beta.threads.runs.create_and_poll(
             thread_id=self.thread.id,
@@ -142,7 +144,7 @@ class OpenAiHelper():
                                 value = eval(value) # convert to dict
                                 return value
                             except Exception as e:
-                                print(e)
+                                return str(value)
                 break # only last reply
         else:
             print(run.status)
@@ -193,7 +195,7 @@ class OpenAiHelper():
                                 value = eval(value) # convert to dict
                                 return value
                             except Exception as e:
-                                print(e)
+                                return str(value)
                 break # only last reply
         else:
             print(run.status)
