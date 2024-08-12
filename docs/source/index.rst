@@ -52,7 +52,8 @@ If you have any questions, please send an email to service@sunfounder.com and we
 
     About This Kit <self>
     assemble_video
-    python/play_with_python 
+    python/play_with_python
+    openai 
     hardware/cpn_hardware
     appendix/appendix
 
