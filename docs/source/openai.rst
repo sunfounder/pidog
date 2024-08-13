@@ -167,7 +167,8 @@ In this section, we will create and activate a virtual environment, installing t
 
 4. Running the Example
 ----------------------------------
-**Text Communication**
+Text Communication
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If your Pidog does not have a microphone, you can use keyboard input text to interact with it by running the following commands.
 
@@ -220,7 +221,8 @@ If your Pidog does not have a microphone, you can use keyboard input text to int
 
 #. If you are using the GPT-4O model, you can also ask questions based on what Pidog sees.
 
-**Voice Communication**
+Voice Communication
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 If your Pidog is equipped with a microphone, you can interact with it using voice commands.
 
