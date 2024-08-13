@@ -105,6 +105,10 @@ rst_epilog = """
 #links
 rst_epilog += """
 
+.. |link_microphone| raw:: html
+
+    <a href="https://www.sunfounder.com/products/mini-usb-microphone?_pos=2&_sid=d05c80026&_ss=r" target="_blank">Microphone link</a>
+
 .. |link_openai_platform| raw:: html
 
     <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI API</a>
