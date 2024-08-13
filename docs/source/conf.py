@@ -33,9 +33,12 @@ release = '1.0'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.intersphinx','sphinx.ext.autosectionlabel'
-]
 
+extensions = [
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.autosectionlabel',
+    'sphinx_copybutton'
+]
 
 # Link to other projects' documentation with intersphinx. Use the intersphinx_mapping configuration to indicate the name and link of the projects you want to use
 intersphinx_mapping = {
@@ -60,7 +63,7 @@ language = 'en'
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
-
+html_static_path = ['_static']
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -104,6 +107,11 @@ rst_epilog = """
 
 #links
 rst_epilog += """
+
+.. |link_openai_platform| raw:: html
+
+    <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI Platform</a>
+
 
 .. |link_sf_facebook| raw:: html
 
