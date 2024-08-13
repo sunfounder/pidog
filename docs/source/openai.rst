@@ -224,7 +224,7 @@ If your Pidog does not have a microphone, you can use keyboard input text to int
 Voice Communication
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-If your Pidog is equipped with a microphone, you can interact with it using voice commands.
+If your Pidog is equipped with a microphone, or you can purchase one by clicking |link_microphone|, you can interact with Pidog using voice commands.
 
 #. First, verify that the Raspberry Pi has detected the microphone.
 
