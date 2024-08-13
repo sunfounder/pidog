@@ -20,6 +20,10 @@ Additionally, we offer three programming languages. MicroPython, C/C++ (Arduino)
 
 <a id="update"></a>
 ## Update:
+
+2024-08-12:
+- Add the project of interact using GPT-4O.
+
 2024-01-24:
 - First Release of the German Version
 

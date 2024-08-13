@@ -53,7 +53,8 @@ Wenn Sie Fragen haben, senden Sie bitte eine E-Mail an service@sunfounder.com, u
 
     Über dieses Kit <self>
     assemble_video
-    python/play_with_python 
+    python/play_with_python
+    openai  
     hardware/cpn_hardware
     appendix/appendix
 
