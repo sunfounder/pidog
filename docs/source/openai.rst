@@ -1,17 +1,24 @@
 AI Interaction Using GPT-4O
 =====================================================
-In our previous projects, we used programming to direct Pidog in predetermined tasks, which could seem a bit tedious. This project, "Smart Interaction Using GPT-4O," introduces a thrilling leap towards dynamic engagement. Beware of trying to outsmart our mechanical dog—as it's now equipped to understand far more than ever before!
+In our previous projects, we used programming to direct Pidog in predetermined tasks, which could seem a bit tedious. This project introduces a thrilling leap towards dynamic engagement. Beware of trying to outsmart our mechanical dog—as it's now equipped to understand far more than ever before!
 
 This initiative details all the technical steps needed to integrate the GPT-4O into your system, including configuring the necessary virtual environments, installing crucial libraries, and setting up API keys and assistant IDs.
+
+.. note::
+
+   This project requires the use of |link_openai_platform|, and you need to pay for OpenAI. Additionally, the OpenAI API is billed separately from ChatGPT, with its own pricing available at https://openai.com/api/pricing/.
+
+   Therefore, you need to decide whether to continue with this project or ensure you have funded the OpenAI API.
 
 Whether you have a microphone to communicate directly or prefer typing into a command window, Pidog's responses powered by GPT-4O will surely astonish you!
 
 Let's dive into this project and unleash a new level of interaction with Pidog!
 
+
 .. raw:: html
 
    <video controls style = "max-width:90%">
-     <source src="../_static/video/chatgpt4o.mp4" type="video/mp4">
+     <source src="_static/video/chatgpt4o.mp4" type="video/mp4">
      Your browser does not support the video tag.
    </video>
 
@@ -123,7 +130,12 @@ In this section, we will create and activate a virtual environment, installing t
       :width: 700
       :align: center
 
-#. Now, let's run a test to see if your account is functioning properly.
+#. Now, click **Playground** to see if your account is functioning properly.
+
+   .. image:: img/apt_playground.png
+
+#. If your messages or uploaded images are sent successfully and you receive replies, it means your account has not reached the usage limit.
+
 
    .. image:: img/apt_playground_40.png
       :width: 700
@@ -153,101 +165,13 @@ In this section, we will create and activate a virtual environment, installing t
 
 #. Press ``Ctrl + X``, ``Y``, and then ``Enter`` to save the file and exit.
 
-4. Running the Code
+4. Running the Example
 ----------------------------------
+**Text Communication**
 
-**Voice Control**
+If your Pidog does not have a microphone, you can use keyboard input text to interact with it by running the following commands.
 
-If your Pidog is equipped with a microphone, you can interact with it using voice commands.
-
-#. First, verify that the Raspberry Pi has detected the microphone.
-
-   .. code-block:: shell
-
-      arecord -l
-
-   If successful, you will receive the following information, indicating that your microphone has been detected.
-
-   .. code-block:: 
-      
-      **** List of CAPTURE Hardware Devices ****
-      card 3: Device [USB PnP Sound Device], device 0: USB Audio [USB Audio]
-      Subdevices: 1/1
-      Subdevice #0: subdevice #0
-
-#. Run the following command, then speak to Pidog or make some sounds. The microphone will record the sounds into the ``op.wav`` file. Press Ctrl + C to stop recording.
-
-   .. code-block:: shell
-
-      rec op.wav
-
-#. Finally, use the command below to play back the recorded sound, confirming that the microphone is functioning properly.
-
-   .. code-block:: shell
-
-      sudo play op.wav
-
-#. Now, run the following commands. The process will take some time to complete.
-
-   .. code-block:: shell
-
-      cd ~/pidog/gpt_examples/
-      sudo ~/my_venv/bin/python3 gpt_dog.py
-
-#. Once the commands have executed successfully, you will see the following output, indicating that all components of Pidog are ready.
-
-   .. code-block:: shell
-      
-      vilib 0.3.8 launching ...
-      picamera2 0.3.19
-      config_file: /home/pi2/.config/pidog/pidog.conf
-      robot_hat init ... done
-      imu_sh3001 init ... done
-      rgb_strip init ... done
-      dual_touch init ... done
-      sound_direction init ... done
-      sound_effect init ... done
-      ultrasonic init ... done
-
-      Web display on:
-         http://rpi_ip:9000/mjpg
-
-      Starting web streaming ...
-      * Serving Flask app 'vilib.vilib'
-      * Debug mode: off
-
-      listening ...
-
-#. You will also be provided with a link to view Pidog’s camera feed on your web browser: ``http://rpi_ip:9000/mjpg``.
-
-   .. image:: img/apt_ip_camera.png
-      :width: 700
-      :align: center
-
-#. You can now speak to Pidog, and its responses may surprise you.
-
-   .. note::
-      
-      Pidog needs to receive your input, convert it to text, send it to GPT for processing, receive the response, and then play it back via speech synthesis. This entire process takes some time, so please be patient.
-
-   .. image:: img/apt_speech_input.png
-      :width: 700
-      :align: center
-
-#. If you are using the GPT-4O model, you can also ask questions based on what Pidog sees.
-
-.. raw:: html
-
-   <video controls style = "max-width:90%">
-     <source src="../_static/video/chatgpt4o.mp4" type="video/mp4">
-     Your browser does not support the video tag.
-   </video>
-
-**Keyboard Control**
-
-If your Pidog does not have a microphone, you can use keyboard input to interact with it by running the following commands.
-
-#. Execute the following commands.
+#. Now, run the following commands using sudo, as Pidog's speaker will not function without it. The process will take some time to complete.
 
    .. code-block:: shell
 
@@ -278,7 +202,7 @@ If your Pidog does not have a microphone, you can use keyboard input to interact
 
       input:
 
-#. You will also be provided with a link to view Pidog’s camera feed on your web browser: ``http://rpi_ip:9000/mjpg``.
+#. You will also be provided with a link to view Pidog's camera feed on your web browser: ``http://rpi_ip:9000/mjpg``.
 
    .. image:: img/apt_ip_camera.png
       :width: 700
@@ -295,3 +219,93 @@ If your Pidog does not have a microphone, you can use keyboard input to interact
       :align: center
 
 #. If you are using the GPT-4O model, you can also ask questions based on what Pidog sees.
+
+**Voice Communication**
+
+If your Pidog is equipped with a microphone, you can interact with it using voice commands.
+
+#. First, verify that the Raspberry Pi has detected the microphone.
+
+   .. code-block:: shell
+
+      arecord -l
+
+   If successful, you will receive the following information, indicating that your microphone has been detected.
+
+   .. code-block:: 
+      
+      **** List of CAPTURE Hardware Devices ****
+      card 3: Device [USB PnP Sound Device], device 0: USB Audio [USB Audio]
+      Subdevices: 1/1
+      Subdevice #0: subdevice #0
+
+#. Run the following command, then speak to Pidog or make some sounds. The microphone will record the sounds into the ``op.wav`` file. Press ``Ctrl + C`` to stop recording.
+
+   .. code-block:: shell
+
+      rec op.wav
+
+#. Finally, use the command below to play back the recorded sound, confirming that the microphone is functioning properly.
+
+   .. code-block:: shell
+
+      sudo play op.wav
+
+#. Now, run the following commands using sudo, as Pidog's speaker will not function without it. The process will take some time to complete.
+
+   .. code-block:: shell
+
+      cd ~/pidog/gpt_examples/
+      sudo ~/my_venv/bin/python3 gpt_dog.py
+
+#. Once the commands have executed successfully, you will see the following output, indicating that all components of Pidog are ready.
+
+   .. code-block:: shell
+      
+      vilib 0.3.8 launching ...
+      picamera2 0.3.19
+      config_file: /home/pi2/.config/pidog/pidog.conf
+      robot_hat init ... done
+      imu_sh3001 init ... done
+      rgb_strip init ... done
+      dual_touch init ... done
+      sound_direction init ... done
+      sound_effect init ... done
+      ultrasonic init ... done
+
+      Web display on:
+         http://rpi_ip:9000/mjpg
+
+      Starting web streaming ...
+      * Serving Flask app 'vilib.vilib'
+      * Debug mode: off
+
+      listening ...
+
+#. You will also be provided with a link to view Pidog's camera feed on your web browser: ``http://rpi_ip:9000/mjpg``.
+
+   .. image:: img/apt_ip_camera.png
+      :width: 700
+      :align: center
+
+#. You can now speak to Pidog, and its responses may surprise you.
+
+   .. note::
+      
+      Pidog needs to receive your input, convert it to text, send it to GPT for processing, receive the response, and then play it back via speech synthesis. This entire process takes some time, so please be patient.
+
+   .. image:: img/apt_speech_input.png
+      :width: 700
+      :align: center
+
+#. If you are using the GPT-4O model, you can also ask questions based on what Pidog sees.
+
+.. raw:: html
+
+   <video controls style = "max-width:90%">
+     <source src="_static/video/chatgpt4o.mp4" type="video/mp4">
+     Your browser does not support the video tag.
+   </video>
+
+
+

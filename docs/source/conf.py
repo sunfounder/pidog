@@ -107,7 +107,7 @@ rst_epilog += """
 
 .. |link_openai_platform| raw:: html
 
-    <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI Platform</a>
+    <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI API</a>
 
 .. |link_sf_facebook| raw:: html
 
