@@ -215,7 +215,7 @@ Wenn Ihr Pidog kein Mikrofon hat, können Sie durch Eingabe von Text über die T
 Sprachkommunikation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wenn Ihr Pidog mit einem Mikrofon ausgestattet ist, können Sie mit ihm mittels Sprachbefehlen interagieren.
+Wenn Ihr Pidog mit einem Mikrofon ausgestattet ist, oder Sie können eines kaufen, indem Sie auf |link_microphone| klicken, können Sie mit Pidog mittels Sprachbefehlen interagieren.
 
 #. Überprüfen Sie zunächst, ob das Raspberry Pi das Mikrofon erkannt hat.
 
