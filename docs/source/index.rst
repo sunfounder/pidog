@@ -12,15 +12,16 @@
 
     👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
 
-SunFounder Raspberry Pi Robot - PiDog
-=============================================
+SunFounder Raspberry Pi Robot - |link_Pi_Dog|
+=================================================
 
+* |link_PiDog|
 
 .. image:: img/pidog.jpg
     :width: 400
     :align: center
 
-Thank you for choosing our PiDog.
+Thank you for choosing our |link_Pi_Dog|.
 
 .. note::
     This document is available in the following languages.
