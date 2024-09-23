@@ -7,11 +7,7 @@ from time import sleep
 # init pidog
 # ======================================
 my_dog = Pidog()
-
-my_dog.legs_move([[0]*8], immediately=True, speed=60)
-my_dog.head_move([[0]*3], immediately=True, speed=60)
-my_dog.tail_move([[0]], immediately=True, speed=60)
-my_dog.wait_all_done()
+sleep(.1)
 
 # global variables
 # ======================================
@@ -23,9 +19,16 @@ head_offsets = [0.0]*3
 tail_offset = [0.0]*1
 current_servo = "1"
 
+leg_offset_temp = [0.0] * 8
+
 OFFSET_STEP = (180 / 2000) * (20000 / 4095)  # actual precision of steering gear
 
 is_save = False
+
+LEGS_ORIGNAL_ANGLES_60 = [30, -30, -30, 30, 30, -30, -30, 30]
+LEGS_ORIGNAL_ANGLES_90 = [0]*8
+
+legs_orignal_angles = list.copy(LEGS_ORIGNAL_ANGLES_60)
 
 # get_real_values()
 # ======================================
@@ -49,6 +52,15 @@ def get_real_values():
         head_offsets[i] = round(x, 2)
     tail_offset[0] = round(tail_offset[0], 2)
 
+#     print(f'''
+# leg_angles: {leg_angles}
+# head_angles: {head_angles}
+# tail_angle: {tail_angle}
+# leg_offsets: {leg_offsets}
+# head_offsets: {head_offsets}
+# tail_offset:{tail_offset}
+#     ''')
+
 # constrain(), constrain value range
 # ======================================
 def constrain(val, min_val, max_val):
@@ -64,7 +76,7 @@ def display_title(subpad, color_pair):
     subpad.addstr(0, int((curses_utils.PAD_X-len(title))/2), title, color_pair)
 
 tip1 = [
-    "Press key to select servo:",
+    "Press key to select servo:  ",
     "1 ~ 8 : Leg servos",
     "9 : Head yaw    ",
     "0 : Head roll   ",
@@ -77,7 +89,7 @@ def display_tip1(subpad, color_pair):
         subpad.addstr(i, 0, tip1[i], color_pair | curses.A_BOLD)
 
 tip2 = [
-    "Press key to adjust servo:",
+    "Press key to adjust servo:  ",
     "W or A: increase angle ",
     "S or D: decreases angle",
 ]
@@ -119,7 +131,7 @@ def display_dog_body(subpad, color_pair, color_pair_select):
         subpad.addstr(servo_pos[servo][0], servo_pos[servo][1], f"[{servo}]", color_pair_select | curses.A_BOLD)
 
 tip3 = [
-    "Ctrl+C: Quit    Space: Save",
+    "Ctrl+C: Quit    Space: Save  ",
 ]
 def display_tip3(subpad, color_pair):
     curses_utils.clear_line(subpad, 0)
@@ -158,17 +170,53 @@ def display_offsets(subpad, color_pair, color_pair_select):
         else:
             subpad.addstr(f' {x:.2f}', color_pair | curses.A_BOLD)
 
+MAX_CALI_TYPE = 2
+cali_type = 0
+selecet_cali_ruler = [
+    "Selecet your calibration ruler type:  ",
+    " ",
+    "   90 degree calibration ruler   ",
+    "   60 degree calibration ruler   ",
+]
+
+cali_ruler_tip = [
+    "[↑]      Select Up  ",
+    "[↓]      Select Down",
+    "[Enter]  OK",
+]
+
+
+def display_selecet_cali_ruler(subpad, color_pair, color_pair_select):
+    # subpad.box()
+    subpad.addstr(0, 0, selecet_cali_ruler[0], color_pair | curses.A_BOLD)
+    subpad.addstr(1, 0, selecet_cali_ruler[1], color_pair | curses.A_BOLD )
+    for i in range(len(selecet_cali_ruler)-2):
+        if i == cali_type:
+            subpad.addstr(i+2, 2, selecet_cali_ruler[i+2], color_pair_select | curses.A_BOLD)
+        else:
+            subpad.addstr(i+2, 2, selecet_cali_ruler[i+2], color_pair | curses.A_BOLD)
+
+def display_selecet_cali_tip(subpad, color_pair):
+    for i in range(len(cali_ruler_tip)):
+        subpad.addstr(i, 2, cali_ruler_tip[i], color_pair)
+
+
+def resize_window(pad):
+    curses_utils.pad_ypos = 0
+    curses_utils.pad_xpos = 0
+    curses.update_lines_cols()
+    # if curses.COLS < PAD_X - 20:
+        # body_pad.refresh(2, curses.COLS-1-len(body[0]))
+    # body_pad.erase() # ok
+    curses_utils.pad_refresh(pad)
+    sleep(0.5)
 
 def main(stdscr):
-    # global winlines, wincols
-    global current_servo
-    global is_save
+    global current_servo, cali_type, is_save
     
     inc = 1  # 1 or -1, angle increase direction
 
-    # winlines = curses.LINES
-    # wincols = curses.LINES
-
+    # ---------------- init stdscr ----------------
     # reset screen
     stdscr.clear()
     stdscr.move(0, 0)
@@ -177,43 +225,91 @@ def main(stdscr):
     # disable cursor 
     curses.curs_set(0)
 
+    # set keyboard mode
+    stdscr.nodelay(True) # set non-blocking mode for getch()
+    stdscr.keypad(True)
+    stdscr.timeout(50) # set timeout when no key is pressed
+
     # set colors
     curses.start_color()
     curses.use_default_colors()
     curses_utils.init_preset_color_pairs()
 
-    # init pad    
+    # -------------------- init pad --------------------
     pad = curses.newpad(curses_utils.PAD_Y, curses_utils.PAD_X)
     # pad.box()
 
-    # get the offset
-    get_real_values()
-
     # init subpad
     title_pad = pad.subpad(1, curses_utils.PAD_X, 0, 0)
+    cali_ruler_pad = pad.subpad(len(selecet_cali_ruler), len(selecet_cali_ruler[0])+2+10, 2, 0)
+    cali_ruler_tip_pad = pad.subpad(len(cali_ruler_tip), len(cali_ruler_tip[0])+2, 2, len(selecet_cali_ruler[0])+2+10+2)
     tip1_pad = pad.subpad(len(tip1), len(tip1[0]), 1, 0)
-    # tip2_pad = pad.subpad(len(tip2), len(tip2[0]), 1, PAD_X-len(tip2[0])-1)
     tip2_pad = pad.subpad(len(tip2), len(tip2[0]), len(tip1)+2, 0)
-    # body_pad = pad.subpad(len(body), len(body[0]), 2, int((PAD_X-len(body[0]))/2)-2)
     body_pad = pad.subpad(len(body), len(body[0]), 2, curses_utils.PAD_X-len(body[0])-20)
     if curses.COLS < curses_utils.PAD_X - 20:
         body_pad.move(2, 1)
     tip3_pad = pad.subpad(len(tip3), curses_utils.PAD_X, len(body)+3, 0)
-    servo_num_pad = pad.subpad(1, curses_utils.PAD_X, len(body)+4, 0)
-    offsets_pad = pad.subpad(3, curses_utils.PAD_X, len(body)+5, 0)
+    servo_num_pad = pad.subpad(1, curses_utils.PAD_X, len(body)+5, 0)
+    offsets_pad = pad.subpad(3, curses_utils.PAD_X, len(body)+6, 0)
 
-    display_title(title_pad, curses_utils.CYAN| curses.A_REVERSE)
+    # ------- select calibration ruler interface -------
+    display_title(title_pad, curses_utils.CYAN | curses.A_REVERSE)
+    display_selecet_cali_ruler(cali_ruler_pad, curses_utils.WHITE, curses_utils.CYAN | curses.A_REVERSE)
+    display_selecet_cali_tip(cali_ruler_tip_pad, curses_utils.WHITE)
+    curses_utils.pad_refresh(pad)
+
+    # select the calibration ruler type
+    while True:
+        try:
+            key = stdscr.getch()
+            if key == curses.ERR: # if no key
+                continue
+            # ---- resize window ----
+            if key == curses.KEY_RESIZE:
+                resize_window(pad)
+            # ---- select calibration type ----
+            elif key == curses.KEY_UP:
+                cali_type += 1
+                if cali_type > MAX_CALI_TYPE - 1:
+                    cali_type = 0
+                display_selecet_cali_ruler(cali_ruler_pad, curses_utils.WHITE, curses_utils.CYAN | curses.A_REVERSE)
+                curses_utils.pad_refresh(pad)
+            elif key == curses.KEY_DOWN:
+                cali_type -= 1
+                if cali_type < 0:
+                    cali_type = MAX_CALI_TYPE - 1
+                display_selecet_cali_ruler(cali_ruler_pad, curses_utils.WHITE, curses_utils.CYAN | curses.A_REVERSE)
+                curses_utils.pad_refresh(pad)
+            elif key in (curses.KEY_ENTER, 10, 13):
+                # 90 degree calibration ruler
+                if cali_type == 0: 
+                    legs_orignal_angles = list.copy(LEGS_ORIGNAL_ANGLES_90)
+                # 60 degree calibration ruler
+                elif cali_type == 1:
+                    legs_orignal_angles = list.copy(LEGS_ORIGNAL_ANGLES_60)
+
+                my_dog.legs_move([legs_orignal_angles], immediately=True, speed=60)
+                my_dog.head_move([[0]*3], immediately=True, speed=60)
+                my_dog.tail_move([[0]], immediately=True, speed=60)
+                my_dog.wait_all_done()
+                break
+        except KeyboardInterrupt:
+            quit()
+
+    # ---------------- calibration interface ----------------
+    pad.clear()
+
+    # get the offset
+    get_real_values()
+
+    display_title(title_pad, curses_utils.CYAN | curses.A_REVERSE)
     display_tip1(tip1_pad, curses_utils.WHITE)
     display_tip2(tip2_pad, curses_utils.WHITE)
     display_dog_body(body_pad, curses_utils.WHITE, curses_utils.CYAN)
     display_tip3(tip3_pad, curses_utils.WHITE)
     display_servo_num(servo_num_pad, curses_utils.WHITE, curses_utils.CYAN)
     display_offsets(offsets_pad, curses_utils.WHITE, curses_utils.CYAN)
-
     curses_utils.pad_refresh(pad)
-
-    stdscr.nodelay(True) # set non-blocking mode for getch()
-    stdscr.timeout(50) # set timeout when no key is pressed
 
     while True:
         try:
@@ -249,12 +345,11 @@ def main(stdscr):
                     # get index
                     index = ('12345678').index(current_servo)
                     # 
-                    leg_angles[index] += inc*OFFSET_STEP
-                    offset_temp = leg_angles[index] + my_dog.legs.offset[index]
-                    offset_temp = constrain(offset_temp, -20, 20)
+                    leg_offset_temp[index] += inc*OFFSET_STEP
+                    leg_offset_temp[index] = constrain(leg_offset_temp[index], -20, 20)
                     #
-                    leg_angles[index] = offset_temp - my_dog.legs.offset[index]
-                    leg_offsets[index] = offset_temp
+                    leg_angles[index] = legs_orignal_angles[index] + leg_offset_temp[index]
+                    leg_offsets[index] = leg_offset_temp[index] + my_dog.legs.offset[index]
                     # move servos
                     my_dog.legs_simple_move(leg_angles)
                 # control head
@@ -293,7 +388,7 @@ def main(stdscr):
                     if key == curses.ERR:
                         continue
                     if chr(key) in ('yY'):
-                        my_dog.set_leg_offsets(leg_offsets)
+                        my_dog.set_leg_offsets(leg_offsets, reset_list=legs_orignal_angles)
                         my_dog.set_head_offsets(head_offsets)
                         my_dog.set_tail_offset(tail_offset)
                         sleep(0.5)
