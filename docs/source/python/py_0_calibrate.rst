@@ -58,7 +58,17 @@ The specific steps are as follows:
         
     Upon running the script, a user interface will appear in your terminal.
 
-    .. image:: img/calibration_1.png
+    .. image:: img/CALI.slt.1.png
+
+#. Here, you need to select your calibration ruler (60° or 90°).If your kit has a 90° calibration ruler, select the first option; if it is a 60° one, select the second option. After selecting, you will enter the following interface:
+
+.. image:: img/CALI.slt.2.png
+
+
+
+90° Ruler
+------------------------------
+
 
 #. Position the **Calibration Ruler** (Acrylic C) as shown in the provided image. In the terminal, press ``1``, followed by ``w`` and ``s`` keys to align the edges as indicated in the image.
 
@@ -68,4 +78,21 @@ The specific steps are as follows:
 
     .. image:: img/CALI-2.2.png
 
-5. Repeat the calibration process for the remaining servos (3 to 8). Ensure all four legs of the PiDog are calibrated.
+#. Repeat the calibration process for the remaining servos (3 to 8). Ensure all four legs of the PiDog are calibrated.
+
+
+
+60° Ruler
+------------------------------
+
+#. Position the **Calibration Ruler** (Acrylic C) as shown in the provided image. Place its long side on a level surface. In the terminal, press ``1``, followed by ``w`` and ``s`` keys to align the edges as indicated in the image.
+
+    .. image:: img/CALI.60.1.JPG
+
+#. Reposition the **Calibration Ruler** (Acrylic C) as illustrated in the next image. Press ``2`` in the terminal, then use ``w`` and ``s`` to align the edges as shown.
+
+    .. image:: img/CALI.60.2.JPG
+
+#. Repeat the calibration process for the remaining servos (3 to 8). Ensure all four legs of the PiDog are calibrated.
+
+
