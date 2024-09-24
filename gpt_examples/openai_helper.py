@@ -74,7 +74,7 @@ class OpenAiHelper():
             transcript = self.client.audio.transcriptions.create(
                 model="whisper-1", 
                 file=wav_data,
-                language="en",
+                language=language,
                 prompt="this is the conversation between me and a robot"
             )
 

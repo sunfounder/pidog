@@ -6,8 +6,6 @@ from utils import *
 import readline # optimize keyboard input, only need to import
 
 import speech_recognition as sr
-from vilib import Vilib
-import cv2
 from pidog import Pidog
 
 import time
@@ -17,21 +15,34 @@ import random
 import os
 import sys
 
-input_mode = None 
+os.popen("pinctrl set 20 op dh") # enable robot_hat speake switch
+current_path = os.path.dirname(os.path.abspath(__file__))
+os.chdir(current_path) # ch
+
+input_mode = None
+with_img = True
 args = sys.argv[1:]
 if '--keyboard' in args:
     input_mode = 'keyboard'
 else:
     input_mode = 'voice'
 
+if '--no-img' in args:
+    with_img = False
+else:
+    with_img = True
+
 # openai assistant init
 # =================================================================
 openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'PiDog')
 
-# VOLUME_DB = 5
-VOLUME_DB = 2
-VOICE_ACTIONS = ["bark", "bark harder", "pant",  "howling"]
+LANGUAGE = []
+# LANGUAGE = ['zh', 'en'] # config stt language code, https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
 
+# VOLUME_DB = 5
+VOLUME_DB = 3
+
+VOICE_ACTIONS = ["bark", "bark harder", "pant",  "howling"]
 
 # dog init 
 # =================================================================
@@ -45,16 +56,20 @@ action_flow = ActionFlow(my_dog)
 
 # Vilib start
 # =================================================================
-Vilib.camera_start(vflip=False,hflip=False)
-Vilib.display(local=False,web=True)
+if with_img:
+    from vilib import Vilib
+    import cv2
 
-while True:
-    if Vilib.flask_start:
-        break
-    time.sleep(0.01)
+    Vilib.camera_start(vflip=False,hflip=False)
+    Vilib.display(local=False,web=True)
 
-time.sleep(.5)
-print('\n')
+    while True:
+        if Vilib.flask_start:
+            break
+        time.sleep(0.01)
+
+    time.sleep(.5)
+    print('\n')
 
 # speech_recognition init
 # =================================================================
@@ -181,7 +196,7 @@ def main():
             my_dog.rgb_strip.set_mode('boom', 'yellow', 0.5)
 
             st = time.time()
-            _result = openai_helper.stt(audio, language=['zh', 'en'])
+            _result = openai_helper.stt(audio, language=LANGUAGE)
             gray_print(f"stt takes: {time.time() - st:.3f} s")
 
             if _result == False or _result == "":
@@ -305,5 +320,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\033[31mERROR: {e}\033[m")
     finally:
-        Vilib.camera_close()
+        if with_img:
+            Vilib.camera_close()
         my_dog.close()

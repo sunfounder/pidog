@@ -9,6 +9,7 @@
 
 - Install openai and speech processing libraries
 
+    > **Note:**\
     When using pip install outside of a virtual environment you may need to use the "--break-system-packages" option.
 
     ```bash
@@ -70,7 +71,7 @@ Fill your ASSISTANT_ID into the `keys.py` file.
 
 - Select gpt model
 
-    The Example program will submit the current picture taken by the camera when sending the question, so as to use the image analysis function of gpt-4o. Of course, you can also choose gpt3.5-turbo or other models
+    The Example program will submit the current picture taken by the camera when sending the question, so as to use the image analysis function of `gpt-4o` or `gpt-4o-mini`. Of course, you can also choose `gpt3.5-turbo` or other models
 
 ----------------------------------------------------------------
 
@@ -90,4 +91,33 @@ sudo python3 gpt_dog.py
 
 ```bash
 sudo python3 gpt_dog.py --keyboard
+```
+
+- Run without image analysis
+
+```bash
+sudo python3 gpt_dog.py --keyboard --no-img
+```
+
+## Modify parameters [optional]
+
+- Set language of STT
+
+    Config `LANGUAGE` variable in the file `gpt_car.py` to improve STT accuracy and latency, `"LANGUAGE = []"`means supporting all languages, but it may affect the accuracy and latency of the speech-to-text (STT) system.
+    <https://platform.openai.com/docs/api-reference/audio/createTranscription#audio-createtranscription-language>
+
+- Set TTS volume gain
+
+    After TTS, the audio volume will be increased using sox, and the gain can be set through the `"VOLUME_DB"` parameter, preferably not exceeding `5`, as going beyond this might result in audio distortion.
+
+```python
+# openai assistant init
+# =================================================================
+openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'PiDog')
+
+LANGUAGE = []
+# LANGUAGE = ['zh', 'en'] # config stt language code, https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
+
+# VOLUME_DB = 5
+VOLUME_DB = 3
 ```
