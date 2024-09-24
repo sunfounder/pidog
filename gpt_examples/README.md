@@ -103,7 +103,7 @@ sudo python3 gpt_dog.py --keyboard --no-img
 
 - Set language of STT
 
-    Config `LANGUAGE` variable in the file `gpt_car.py` to improve STT accuracy and latency, `"LANGUAGE = []"`means supporting all languages, but it may affect the accuracy and latency of the speech-to-text (STT) system.
+    Config `LANGUAGE` variable in the file `gpt_dog.py` to improve STT accuracy and latency, `"LANGUAGE = []"`means supporting all languages, but it may affect the accuracy and latency of the speech-to-text (STT) system.
     <https://platform.openai.com/docs/api-reference/audio/createTranscription#audio-createtranscription-language>
 
 - Set TTS volume gain
