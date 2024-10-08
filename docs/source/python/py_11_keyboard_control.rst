@@ -1,103 +1,100 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez plus profondément dans l'univers du Raspberry Pi, d'Arduino et de l'ESP32 avec d'autres passionnés.
 
-    **Why Join?**
+    **Pourquoi nous rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et les défis techniques grâce à l'aide de notre communauté et de notre équipe.
+    - **Apprendre & Partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d'un accès anticipé aux annonces de nouveaux produits et aux avant-premières.
+    - **Réductions spéciales** : Profitez de réductions exclusives sur nos produits les plus récents.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales pendant les fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-11. Play PiDog with Keyboard
-======================================
+11. Jouer avec PiDog en Utilisant le Clavier
+===============================================
 
-
-In this example, we will use the keyboard to control PiDog. You can press these keys in the terminal to make it act.
-
+Dans cet exemple, nous utiliserons le clavier pour contrôler PiDog. Vous pouvez appuyer sur ces touches dans le terminal pour le faire agir.
 
 .. list-table:: 
     :widths: 25 50 25 50 25 50
     :header-rows: 1
 
-    * - Keys
-      - Function
-      - Keys
-      - Function
-      - Keys
-      - Function  
+    * - Touches
+      - Fonction
+      - Touches
+      - Fonction
+      - Touches
+      - Fonction  
     * - 1
-      - doze off
+      - S'assoupir
       - q
-      - bark harder
+      - Aboyer plus fort
       - a
-      - turn left
+      - Tourner à gauche
     * - 2
-      - push-up
+      - Pompes
       - w
-      - forward
+      - Avancer
       - s
-      - backward
+      - Reculer
     * - 3
-      - howling
+      - Hurler
       - e
-      - pant
+      - Haleter
       - d
-      - turn right
+      - Tourner à droite
     * - 4
-      - twist body
+      - Se tordre
       - r
-      - wag tail
+      - Remuer la queue
       - f
-      - shake head
+      - Secouer la tête
     * - 5
-      - scratch
+      - Se gratter
       - t
-      - hake head
+      - Incliner la tête
       - g
-      - high five
+      - High five
     * - u
-      - head roll
+      - Rouler la tête
       - U
-      - head roll+
+      - Rouler la tête+
       - z
-      - lie
+      - S'allonger
     * - i
-      - head pitch
+      - Inclinaison de la tête
       - I
-      - head pitch+
+      - Inclinaison de la tête+
       - x
-      - stand up
+      - Se lever
     * - o
-      - head roll
+      - Rouler la tête
       - O
-      - head roll+
+      - Rouler la tête+
       - c
-      - sit
+      - S'asseoir
     * - j
-      - head yaw
+      - Rotation de la tête
       - J
-      - head yaw+
+      - Rotation de la tête+
       - v
-      - stretch
+      - S'étirer
     * - k
-      - head pitch
+      - Inclinaison de la tête
       - K
-      - head pitch+
+      - Inclinaison de la tête+
       - m
-      - head reset
+      - Réinitialiser la tête
     * - l
-      - head yaw
+      - Rotation de la tête
       - L
-      - head yaw+
+      - Rotation de la tête+
       - W
-      - trot
+      - Trottiner
 
-
-**Run the Code**
+**Exécuter le Code**
 
 .. raw:: html
 
@@ -108,10 +105,8 @@ In this example, we will use the keyboard to control PiDog. You can press these 
     cd ~/pidog/examples
     sudo python3 11_keyboard_control.py
 
-After the program runs, you will see a printed keyboard on the terminal. Now you can control PiDog with keyboard in terminal.
-
-
+Une fois le programme lancé, un clavier virtuel s'affichera dans le terminal. Vous pouvez maintenant contrôler PiDog en utilisant les touches du clavier.
 
 **Code**
 
-Please find the code in |link_code_11_keyboard_control|.
+Vous pouvez consulter le code sur |link_code_11_keyboard_control|.

@@ -1,47 +1,44 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez plus profondément dans l’univers de Raspberry Pi, Arduino et ESP32 avec d’autres passionnés.
 
-    **Why Join?**
+    **Pourquoi rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et relevez les défis techniques avec l'aide de notre communauté et de notre équipe.
+    - **Apprendre et partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d’un accès anticipé aux annonces de nouveaux produits et à des avant-premières.
+    - **Réductions spéciales** : Profitez de remises exclusives sur nos produits les plus récents.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales lors des fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-Sound Direction Sensor
+Capteur de Direction Sonore
 =====================================
 
 .. image:: img/cpn_sound.png
    :width: 400
    :align: center
 
-This is a sound direction recognition module. It is equipped with 3 microphones, which can detect sound sources from all directions, and is equipped with a TR16F064B, which is used to process sound signals and calculate the sound source direction. The minimum reconnaissance unit of this module is 20 degrees, and the data range is 0~360.
+Il s'agit d'un module de reconnaissance de direction sonore. Il est équipé de 3 microphones capables de détecter les sources sonores provenant de toutes les directions, et utilise un TR16F064B pour traiter les signaux acoustiques et calculer la direction de la source sonore. L'unité de détection minimale de ce module est de 20 degrés, et la plage de données est de 0 à 360°.
 
-Data transmission process: the main controller pulls up the BUSY pin, and TR16F064B starts to monitor the direction. When 064B recognizes the direction, it will pull down the BUSY pin;
-When the main control detects that BUSY is low, it will send 16bit arbitrary data to 064B (follow the MSB transmission), and accept 16bit data, which is the sound direction data processed by 064B.
-After completion, the main control will pull the BUSY pin high to detect the direction again.
+Processus de transmission des données : le contrôleur principal active la broche BUSY, et le TR16F064B commence à surveiller la direction. Lorsque le 064B reconnaît la direction, il abaisse la broche BUSY ;
+Lorsque le contrôleur principal détecte que BUSY est bas, il envoie des données arbitraires de 16 bits au 064B (en suivant la transmission MSB), puis reçoit des données de 16 bits, qui correspondent aux informations de direction sonore traitées par le 064B.
+Une fois terminé, le contrôleur principal remet la broche BUSY à l'état haut pour détecter de nouveau la direction.
 
+**Spécifications**
 
-**Specifications**
+* Alimentation : 3,3V
+* Communication : SPI
+* Connecteur : PH2.0 7P
+* Plage d'angle de reconnaissance sonore : 360°
+* Précision de l'angle de reconnaissance vocale : ~10°
 
-* Power supply: 3.3V
-* Communication: SPI
-* Connector: PH2.0 7P
-* Sound recognition angle range 360°
-* Voice recognition angular accuracy ~10°
+**Brochage**
 
-
-**Pin Out**
-
-
-* GND - Ground Input
-* VCC - 3.3V Power Supply Input
+* GND - Entrée de masse
+* VCC - Entrée d'alimentation 3,3V
 * MOSI - SPI MOSI
 * MISO - SPI MISO
-* SCLK - SPI clock
-* CS - SPI Chip Select
-* BUSY - busy detection
+* SCLK - Horloge SPI
+* CS - Sélection de la puce SPI
+* BUSY - Détection d'occupation

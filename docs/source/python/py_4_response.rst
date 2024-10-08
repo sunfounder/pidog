@@ -1,30 +1,28 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez dans l'univers du Raspberry Pi, Arduino et ESP32 avec d'autres passionnés.
 
-    **Why Join?**
+    **Pourquoi nous rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et les défis techniques avec l'aide de notre communauté et de notre équipe.
+    - **Apprendre & Partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d'un accès anticipé aux annonces de nouveaux produits et aux avant-premières.
+    - **Réductions spéciales** : Profitez de réductions exclusives sur nos nouveaux produits.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales pendant les fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-4. Response
+4. Réaction
 ================
 
-In this project, PiDog will interact with you in an interesting way.
+Dans ce projet, PiDog interagit avec vous de manière amusante.
 
-If you reach out and grab PiDog's head from the front, it will bark vigilantly.
-
+Si vous approchez la tête de PiDog par l'avant, il aboiera de manière vigilante.
 
 .. image:: img/py_4-2.gif
     :width: 430
 
-
-But if you reach out from behind it and pet its head, it will enjoy it very much.
+Mais si vous l'approchez par derrière et lui caressez la tête, il montrera des signes d'appréciation.
 
 .. raw:: html
 
@@ -33,7 +31,7 @@ But if you reach out from behind it and pet its head, it will enjoy it very much
       Your browser does not support the video tag.
    </video>
 
-**Run the Code**
+**Exécuter le Code**
 
 .. raw:: html
 
@@ -44,26 +42,23 @@ But if you reach out from behind it and pet its head, it will enjoy it very much
     cd ~/pidog/examples
     sudo python3 4_response.py
 
-After running this example, PiDog's ultrasonic module will detect whether there is an obstacle ahead,
-If it detects your hand, it makes the breathing light glow red, takes a step back, and barks.
+Après avoir exécuté cet exemple, le module ultrasonique de PiDog détectera s'il y a un obstacle devant lui.  
+S'il détecte votre main, la lumière respiratoire devient rouge, il recule et aboie.
 
-At the same time, the touch sensor will also work. If the touch sensor is stroked (not just touched), 
-PiDog will shake its head, wag its tail, and show a comfortable look.
-
-
+En même temps, le capteur tactile se met en marche. Si le capteur est caressé (et non simplement touché),  
+PiDog secouera la tête, remuera la queue et affichera une expression de plaisir.
 
 
 **Code**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Vous pouvez **Modifier/Réinitialiser/Copier/Exécuter/Arrêter** le code ci-dessous. Avant cela, vous devez vous rendre dans le répertoire source comme ``pidog\examples``. Après avoir modifié le code, vous pouvez l'exécuter directement pour voir le résultat.
 
 .. raw:: html
 
     <run></run>
 
 .. code-block:: python
-
 
     #!/usr/bin/env python3
     from pidog import Pidog

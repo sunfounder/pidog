@@ -1,29 +1,28 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez plus profondément dans l'univers du Raspberry Pi, Arduino et ESP32 avec d'autres passionnés.
 
-    **Why Join?**
+    **Pourquoi nous rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et les défis techniques avec l'aide de notre communauté et de notre équipe.
+    - **Apprendre & Partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d'un accès anticipé aux annonces de nouveaux produits et aux avant-premières.
+    - **Réductions spéciales** : Profitez de réductions exclusives sur nos nouveaux produits.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales pendant les fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-13. More
-==============
+13. Plus de fonctionnalités
+================================
 
-The following address will explain the use of PiDog's more basic functions:
+L'adresse suivante vous fournira des explications sur l'utilisation des fonctions de base de PiDog :
 
 * `Vilib Library <https://vilib-rpi.readthedocs.io/en/latest/>`_
 
-    Vilib is a library developed by SunFounder for Raspberry Pi camera.
+    Vilib est une bibliothèque développée par SunFounder pour la caméra Raspberry Pi.
 
-    It contains some practical functions, such as taking pictures, video recording, pose detection, face detection, motion detection, image classification and so on.
-
+    Elle propose des fonctions pratiques telles que la prise de photos, l'enregistrement vidéo, la détection de pose, la reconnaissance faciale, la détection de mouvements, la classification d'images, et bien plus encore.
 
 * `SunFounder Controller <https://docs.sunfounder.com/projects/sf-controller/en/latest/index.html>`_
 
-    SunFounder Controller is an application that allows users to customize the controller for controlling their robot or as an IoT platform.
+    SunFounder Controller est une application permettant aux utilisateurs de personnaliser le contrôleur pour piloter leur robot ou l'utiliser comme plateforme IoT.

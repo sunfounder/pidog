@@ -1,31 +1,31 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez plus profondément dans l'univers du Raspberry Pi, Arduino et ESP32 avec d'autres passionnés.
 
-    **Why Join?**
+    **Pourquoi nous rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et les défis techniques avec l'aide de notre communauté et de notre équipe.
+    - **Apprendre & Partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d'un accès anticipé aux annonces de nouveaux produits et aux avant-premières.
+    - **Réductions spéciales** : Profitez de réductions exclusives sur nos nouveaux produits.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales pendant les fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-8. Read Distance
-==================
+8. Lecture de la Distance
+============================
 
-Through the Ultrasonic Module in its head, PiDog can detect obstacles ahead.
+Grâce au module ultrasonique situé dans sa tête, PiDog peut détecter les obstacles devant lui.
 
-An ultrasonic module can detect objects between 2 and 400 cm away.
+Un module ultrasonique peut détecter des objets situés entre 2 et 400 cm de distance.
 
-With the following function, you can read the distance as a floating point number.
+Avec la fonction suivante, vous pouvez lire la distance sous forme de nombre à virgule flottante.
 
 .. code-block:: python
 
     Pidog.ultrasonic.read_distance()
 
-**Here is an example of usage:**
+**Voici un exemple d'utilisation :**
 
 .. code-block:: python
 
@@ -37,4 +37,4 @@ With the following function, you can read the distance as a floating point numbe
         distance = my_dog.ultrasonic.read_distance()
         distance = round(distance,2)
         print(f"Distance: {distance} cm")
-        time.sleep(0.5)    
+        time.sleep(0.5)

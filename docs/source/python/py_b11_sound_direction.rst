@@ -1,37 +1,37 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez plus profondément dans l'univers du Raspberry Pi, Arduino et ESP32 avec d'autres passionnés.
 
-    **Why Join?**
+    **Pourquoi nous rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et les défis techniques avec l'aide de notre communauté et de notre équipe.
+    - **Apprendre & Partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d'un accès anticipé aux annonces de nouveaux produits et aux avant-premières.
+    - **Réductions spéciales** : Profitez de réductions exclusives sur nos nouveaux produits.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales pendant les fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-11. Sound Direction Detect
-================================
+11. Détection de la Direction du Son
+=======================================
 
-The PiDog has a Sound Direction Sensor Module that detects where sound is coming from, and we can trigger it by clapping near it.
+PiDog est équipé d'un module de détection de direction sonore capable de déterminer d'où provient le son, et nous pouvons le déclencher en applaudissant près de lui.
 
-**Using this module is as simple as calling these functions.**
+**L'utilisation de ce module est très simple, il suffit d'appeler les fonctions suivantes :**
 
 .. code-block:: python
 
     Pidog.ears.isdetected()
 
-Returns ``True`` if sound is detected, ``False`` otherwise.
+Renvoie ``True`` si un son est détecté, ``False`` sinon.
 
 .. code-block:: python
 
     Pidog.ears.read()
 
-This function returns the direction of the sound source, with a range of 0 to 359; if the sound comes from the front, it returns 0; if it comes from the right, it returns 90.
+Cette fonction renvoie la direction de la source sonore, avec une plage allant de 0 à 359 ; si le son provient de l'avant, la fonction renverra 0 ; s'il provient de la droite, elle renverra 90.
 
-**An example of how to use this module is as follows:**
+**Voici un exemple d'utilisation de ce module :**
 
 .. code-block:: python
 

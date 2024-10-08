@@ -1,21 +1,21 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez dans l'univers du Raspberry Pi, Arduino et ESP32 avec d'autres passionnés.
 
-    **Why Join?**
+    **Pourquoi nous rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et les défis techniques avec l'aide de notre communauté et de notre équipe.
+    - **Apprendre & Partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d'un accès anticipé aux annonces de nouveaux produits et aux avant-premières.
+    - **Réductions spéciales** : Profitez de réductions exclusives sur nos nouveaux produits.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales pendant les fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-7. Face Track
+7. Suivi de Visage
 ======================
 
-PiDog will sit quietly in place. You applaud it, it looks your way, and if it sees you, it says hello.
+PiDog s'assiéra tranquillement en place. Si vous applaudissez, il tournera la tête dans votre direction et, s'il vous voit, il vous saluera.
 
 .. raw:: html
 
@@ -24,7 +24,7 @@ PiDog will sit quietly in place. You applaud it, it looks your way, and if it se
       Your browser does not support the video tag.
    </video>
 
-**Run the Code**
+**Exécuter le Code**
 
 .. raw:: html
 
@@ -35,22 +35,19 @@ PiDog will sit quietly in place. You applaud it, it looks your way, and if it se
     cd ~/pidog/examples
     sudo python3 7_face_track.py
 
+Après avoir exécuté ce code, PiDog activera la caméra et la fonction de détection de visage.  
+Vous pouvez visiter ``http://+ l'IP de PiDog +/mjpg`` (par exemple, ``http://192.168.18.138:9000/mjpg``) dans votre navigateur pour voir l'image de la caméra.
 
-After running this code, PiDog will start the camera and enable the face detection function.
-You can visit ``http://+ PiDog's IP +/mjpg`` (like mine is ``http://192.168.18.138:9000/mjpg``) in your browser to view the camera's picture.
+Ensuite, PiDog s'assiéra et activera le module de détection de direction sonore pour capter l'origine de vos applaudissements.  
+Quand PiDog entend des applaudissements (ou tout autre bruit), il tournera la tête vers la source sonore pour tenter de vous repérer.
 
-Then PiDog will sit down and activate the Sound Direction Sensor Module to detect the direction of your clapping.
-When PiDog hears clapping (or other noise), it turns its head toward the sound source, trying to find you.
-
-If it sees you (face detection finds an object), it will wag its tail and let out a bark.
-
-
+S'il vous voit (la détection faciale identifie un objet), il agitera la queue et aboiera pour vous saluer.
 
 
 **Code**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Vous pouvez **Modifier/Réinitialiser/Copier/Exécuter/Arrêter** le code ci-dessous. Avant cela, vous devez vous rendre dans le répertoire source comme ``pidog\examples``. Après avoir modifié le code, vous pouvez l'exécuter directement pour voir le résultat.
 
 .. raw:: html
 
@@ -83,7 +80,7 @@ If it sees you (face detection finds an object), it will wag its tail and let ou
         my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-40, immediately=True, speed=80)
         my_dog.wait_all_done()
         sleep(0.5)
-        # Cleanup sound detection by servos moving
+
         if my_dog.ears.isdetected():    
             direction = my_dog.ears.read()
 

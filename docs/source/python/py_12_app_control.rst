@@ -1,21 +1,21 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez plus profondément dans l'univers du Raspberry Pi, d'Arduino et de l'ESP32 avec d'autres passionnés.
 
-    **Why Join?**
+    **Pourquoi nous rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et les défis techniques grâce à l'aide de notre communauté et de notre équipe.
+    - **Apprendre & Partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d'un accès anticipé aux annonces de nouveaux produits et aux avant-premières.
+    - **Réductions spéciales** : Profitez de réductions exclusives sur nos produits les plus récents.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales pendant les fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-12. Play PiDog with APP
-=============================
+12. Jouer avec PiDog à l'aide de l'APP
+==========================================
 
-In this example, we will use SunFounder Controller APP to control PiDog.
+Dans cet exemple, nous allons utiliser l'application SunFounder Controller pour contrôler PiDog.
 
 .. raw:: html
 
@@ -24,18 +24,16 @@ In this example, we will use SunFounder Controller APP to control PiDog.
       Your browser does not support the video tag.
    </video>
 
+Vous devez d'abord télécharger l'application sur votre téléphone ou tablette, puis vous connecter au hotspot émis par PiDog et, enfin, créer votre propre télécommande sur SunFounder Controller pour contrôler PiDog.
 
-You need to download the APP on your phone/tablet first, then connect to the hotspot sent by PiDog, and finally create your own remote control on SunFounder Controller to control PiDog.
+Contrôler PiDog avec l'APP
+-----------------------------
 
-Control Pidog with app
-----------------------------
+#. Installez `SunFounder Controller <https://docs.sunfounder.com/projects/sf-controller/en/latest/>`_ depuis **APP Store (iOS)** ou **Google Play (Android)**.
 
+#. Installez le module ``sunfounder-controller``.
 
-#. Install `SunFounder Controller <https://docs.sunfounder.com/projects/sf-controller/en/latest/>`_ from **APP Store(iOS)** or **Google Play(Android)**.
-
-#. Install ``sunfounder-controller`` module.
-
-    The ``robot-hat``, ``vilib``, and ``picar-x`` modules need to be installed first, for details see: :ref:`install_all_modules`.
+    Les modules ``robot-hat``, ``vilib`` et ``picar-x`` doivent être installés au préalable. Pour plus de détails, voir :ref:`install_all_modules`.
 
     .. raw:: html
 
@@ -48,7 +46,7 @@ Control Pidog with app
         cd ~/sunfounder-controller
         sudo python3 setup.py install
 
-#. Run the Code.
+#. Exécutez le code.
 
     .. raw:: html
 
@@ -59,7 +57,7 @@ Control Pidog with app
         cd ~/pidog/examples
         sudo python3 12_app_control.py
 
-    After the code runs, you will see the following prompt, which means your PiDog has successfully started network communication.
+    Après l'exécution du code, vous verrez l'invite suivante, indiquant que PiDog a bien démarré la communication réseau.
 
     .. code-block:: 
 
@@ -70,54 +68,51 @@ Control Pidog with app
         * Debug mode: off
         * Running on http://0.0.0.0:9000/ (Press CTRL+C to quit)       
 
-#. Connect ``PiDog`` and ``Sunfounder Controller``.
+#. Connectez ``PiDog`` et ``Sunfounder Controller``.
 
-    * Connect your tablet/phone to the WLAN where PiDog is located.
+    * Connectez votre tablette ou téléphone au réseau WLAN de PiDog.
 
-    * Open the ``Sunfounder Controller`` APP. Click the + icon to add a controller.
+    * Ouvrez l'application ``Sunfounder Controller``. Cliquez sur l'icône + pour ajouter une télécommande.
 
         .. image:: img/app1.png
-      
-
-    * Preset controllers are available for some products, here we choose **PiDog**. Give it a name, or simply tap **Confirm**.
+       
+    * Des télécommandes prédéfinies sont disponibles pour certains produits. Ici, nous choisissons **PiDog**. Donnez-lui un nom ou appuyez simplement sur **Confirmer**.
 
         .. image:: img/app_preset.jpg
 
-
-    * Once inside, the app will automatically search for the **Mydog**. After a moment, you will see a prompt saying “Connected Successfully.”
+    * Une fois à l'intérieur, l'application recherchera automatiquement **Mydog**. Après quelques instants, vous verrez un message indiquant "Connecté avec succès".
 
         .. image:: img/app_auto_connect.jpg
 
     .. note::
 
-        * You can also manually click the |app_connect| button. Wait a few seconds, MyDog(IP) will appear, click it to connect.
+        * Vous pouvez également cliquer manuellement sur le bouton |app_connect|. Attendez quelques secondes, MyDog(IP) apparaîtra. Cliquez dessus pour vous connecter.
 
             .. image:: img/sc_mydog.jpg
 
-#. Run the Controller.
+#. Lancer le contrôleur.
 
-    * When the "Connected Successfully" prompt appears, tap the ▶ button in the upper right corner.
+    * Lorsque le message "Connecté avec succès" apparaît, appuyez sur le bouton ▶ dans le coin supérieur droit.
 
-    * The picture taken by the camera will appear on the APP, and now you can control your PiDog with these widgets.
+    * L'image capturée par la caméra s'affichera dans l'application, et vous pourrez désormais contrôler PiDog avec ces widgets.
 
         .. image:: img/sc_run.jpg
-    
 
-Here are the functions of the widgets.
+Voici les fonctions des widgets :
 
-* A: Detect the obstacle distance, that is, the reading of the ultrasonic module.
-* C: Turn on/off face detection.
-* D: Control PiDog's head tilt angle (tilt head).
-* E: Sit.
-* F: Stand.
-* G: Lie.
-* I: Scratch PiDog's head.
-* N: Bark.
-* O: Wag tail.
-* P: Pant.
-* K: Control PiDog's movement (forward, backward, left and right).
-* Q: Controls the orientation of PiDog's head.
-* J: Switch to voice control mode. It supports the following voice commands: 
+* A : Détection de distance des obstacles, c'est-à-dire la lecture du module à ultrasons.
+* C : Activer/désactiver la détection faciale.
+* D : Contrôle de l'inclinaison de la tête de PiDog.
+* E : Assis.
+* F : Debout.
+* G : Allongé.
+* I : Gratter la tête de PiDog.
+* N : Aboyer.
+* O : Remuer la queue.
+* P : Haleter.
+* K : Contrôler les mouvements de PiDog (avant, arrière, gauche et droite).
+* Q : Contrôler l'orientation de la tête de PiDog.
+* J : Passer en mode commande vocale. Les commandes vocales prises en charge sont :
 
     * ``forward``
     * ``backward``
@@ -125,7 +120,7 @@ Here are the functions of the widgets.
     * ``turn right``
     * ``trot``
     * ``stop``
-    * ``lie down`` 
+    * ``lie down``
     * ``stand up``
     * ``sit``
     * ``bark``
@@ -142,15 +137,16 @@ Here are the functions of the widgets.
     * ``handshake``
     * ``high five``
 
-Autostart on Boot
------------------
-When controlling PiDog via the APP, you wouldn't want to first log into the Raspberry Pi and keep ``12_app_control.py`` running before connecting with the APP.
+Démarrage automatique au démarrage
+----------------------------------------
 
-There's a more streamlined approach. You can set PiDog to automatically run ``12_app_control.py`` every time it's powered on. After this, you can directly connect to PiDog using the APP and control your robotic dog with ease.
+Lors du contrôle de PiDog via l'application, il n'est pas pratique de se connecter au Raspberry Pi et d'exécuter manuellement ``12_app_control.py`` à chaque fois avant de se connecter à l'APP.
 
-How to set this up?
+Il existe une solution plus simple : vous pouvez configurer PiDog pour qu'il exécute automatiquement ``12_app_control.py`` à chaque démarrage. Ainsi, vous pourrez vous connecter directement à PiDog depuis l'APP et le contrôler sans effort.
 
-#. Execute the following commands to install and configure the ``pidog_app`` application and set up WiFi for PiDog.
+Comment configurer cela ?
+
+#. Exécutez les commandes suivantes pour installer et configurer l'application ``pidog_app`` et configurer le WiFi pour PiDog.
 
     .. raw:: html
 
@@ -161,35 +157,34 @@ How to set this up?
         cd ~/pidog/bin
         sudo bash pidog_app_install.sh
 
-#. At the end, input ``y`` to reboot PiDog.
+#. À la fin, entrez ``y`` pour redémarrer PiDog.
 
     .. image:: img/auto_start.png
 
-#. From then on, you can simply power on PiDog and control it directly using the APP.
+#. Par la suite, vous pourrez simplement allumer PiDog et le contrôler directement depuis l'APP.
 
 .. warning::
 
-    If you wish to run other scripts, first execute ``pidog_app disable`` to turn off the autostart feature.
+    Si vous souhaitez exécuter d'autres scripts, exécutez d'abord la commande ``pidog_app disable`` pour désactiver la fonctionnalité de démarrage automatique.
 
 
-APP Program Configuration
------------------------------
+Configuration de l'application
+----------------------------------
 
-You can input the following commands to modify the APP mode's settings.
+Vous pouvez entrer les commandes suivantes pour modifier les paramètres de l'APP.
 
 .. code-block::
 
     pidog_app <OPTION> [input]
 
 **OPTION**
-    * ``-h`` ``help``: help, show this message
-    * ``start`` ``restart``: restart ``pidog_app`` service
-    * ``stop``: stop ``pidog_app`` service
-    * ``disable``: disable auto-start ``app_controller`` program on bootstrap
-    * ``enable``: enable auto-start ``app_controller`` program on bootstrap
-    * ``close_ap``: close hotspot, disable auto-start hotspot on boot and switch to sta mode
-    * ``open_ap``: open hotspot, enable auto-start hotspot on boot
-    * ``ssid``: set the ssid (network name) of the hotspot
-    * ``psk``: set the password of the hotspot
-    * ``country``: set the country code of the hotspot
-
+    * ``-h`` ``help`` : aide, afficher ce message
+    * ``start`` ``restart`` : redémarrer le service ``pidog_app``
+    * ``stop`` : arrêter le service ``pidog_app``
+    * ``disable`` : désactiver le démarrage automatique du programme ``app_controller`` au démarrage
+    * ``enable`` : activer le démarrage automatique du programme ``app_controller`` au démarrage
+    * ``close_ap`` : fermer le hotspot, désactiver le démarrage automatique du hotspot au démarrage et passer en mode ``sta``
+    * ``open_ap`` : ouvrir le hotspot, activer le démarrage automatique du hotspot au démarrage
+    * ``ssid`` : définir le nom du réseau (SSID) du hotspot
+    * ``psk`` : définir le mot de passe du hotspot
+    * ``country`` : définir le code de pays pour le hotspot

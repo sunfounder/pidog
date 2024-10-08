@@ -1,29 +1,29 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez plus profondément dans l'univers du Raspberry Pi, Arduino et ESP32 avec d'autres passionnés.
 
-    **Why Join?**
+    **Pourquoi nous rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et les défis techniques avec l'aide de notre communauté et de notre équipe.
+    - **Apprendre & Partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d'un accès anticipé aux annonces de nouveaux produits et aux avant-premières.
+    - **Réductions spéciales** : Profitez de réductions exclusives sur nos nouveaux produits.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales pendant les fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-7. PiDog Speak
+7. PiDog Parle
 ==========================
 
-PiDog can make sound, it is actually playing a piece of audio.
+PiDog peut émettre des sons, en jouant en fait un fichier audio.
 
-These audios are saved under ``pidog\sounds`` path, you can call the following function to play them.
+Ces fichiers audio sont enregistrés sous le chemin ``pidog\sounds``, vous pouvez appeler la fonction suivante pour les lire.
 
 .. code-block:: python
 
    Pidog.speak(name)
 
-* ``name`` : Filename (without suffix), such as ``"angry"``. ``Pidog`` provides the following audio.
+* ``name`` : Nom de fichier (sans suffixe), tel que ``"angry"``. ``Pidog`` propose les fichiers audio suivants.
 
   * ``"angry"``
   * ``"confused_1"``
@@ -38,7 +38,7 @@ These audios are saved under ``pidog\sounds`` path, you can call the following f
   * ``"snoring"``
   * ``"woohoo"``
 
-**Here is an example of usage:**
+**Voici un exemple d'utilisation :**
 
 .. code-block:: python
 
@@ -55,7 +55,7 @@ These audios are saved under ``pidog\sounds`` path, you can call the following f
     import os
     import time
 
-    # change working directory
+    # changer de répertoire de travail
     abspath = os.path.abspath(os.path.dirname(__file__))
     # print(abspath)
     os.chdir(abspath)
@@ -68,10 +68,10 @@ These audios are saved under ``pidog\sounds`` path, you can call the following f
     # time.sleep(2)
 
     for name in os.listdir('../sounds'):
-        name = name.split('.')[0] # remove suffix
+        name = name.split('.')[0] # supprimer le suffixe
         print(name)
         my_dog.speak(name)
         # my_dog.speak(name, volume=50)
-        time.sleep(3) # Note that the duration of each sound effect is different
+        time.sleep(3) # Notez que la durée de chaque effet sonore est différente
     print("closing ...")
     my_dog.close()

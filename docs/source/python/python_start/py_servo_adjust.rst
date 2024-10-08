@@ -1,33 +1,32 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez plus profondément dans l’univers de Raspberry Pi, Arduino et ESP32 avec d’autres passionnés.
 
-    **Why Join?**
+    **Pourquoi rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et relevez les défis techniques avec l'aide de notre communauté et de notre équipe.
+    - **Apprendre et partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d’un accès anticipé aux annonces de nouveaux produits et à des avant-premières.
+    - **Réductions spéciales** : Profitez de remises exclusives sur nos produits les plus récents.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales lors des fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
 .. _py_servo_adjust:
 
-7. Servo Adjust(Important)
+7. Réglage des Servomoteurs (Important)
 ===========================================
 
-The angle range of the servo is -90~90, but the angle set at the factory is random, maybe 0°, maybe 45°; if we assemble it with such an angle directly, it will lead to a chaotic state after the robot runs the code, or worse, it will cause the servo to block and burn out.
+La plage d'angle du servomoteur est de -90 à 90°, mais l'angle défini en usine est aléatoire : il peut être de 0°, de 45° ou autre. Si nous l’assemblons avec cet angle par défaut, cela peut entraîner un comportement chaotique lorsque le robot exécute le code, voire pire, bloquer le servomoteur et provoquer sa surchauffe.
 
-So here we need to set all the servo angles to 0° and then install them, so that the servo angle is in the middle, no matter which direction to turn.
+Nous devons donc régler tous les angles des servomoteurs à 0° avant de les installer, afin que l’angle de chaque servo soit au centre, quelle que soit la direction de rotation.
 
-#. To ensure that the servo has been properly set to 0°, first insert the servo arm into the servo shaft and then gently rotate the rocker arm to a different angle. This servo arm is just to allow you to clearly see that the servo is rotating.
+#. Pour vous assurer que le servomoteur est bien réglé à 0°, insérez d'abord le bras du servomoteur dans l'arbre du servo, puis tournez doucement le bras du servomoteur à différents angles. Ce bras n’est là que pour vous permettre de visualiser clairement la rotation du servo.
 
     .. image:: img/servo_arm.png
         :align: center
 
-
-#. Now, run ``servo_zeroing.py`` in the ``examples/`` folder.
+#. Lancez maintenant ``servo_zeroing.py`` dans le dossier ``examples/``.
 
     .. raw:: html
 
@@ -38,20 +37,17 @@ So here we need to set all the servo angles to 0° and then install them, so tha
         cd ~/pidog/examples
         sudo python3 servo_zeroing.py
 
-
     .. note::
-        If you get an error, try re-enabling the Raspberry Pi's I2C port, see: :ref:`i2c_spi_config`.
+        Si une erreur se produit, essayez de réactiver le port I2C du Raspberry Pi, consultez : :ref:`i2c_spi_config`.
 
-#. Next, plug the servo cable into the P11 port as follows, at the same time you will see the servo arm rotate to a position(This is the 0° position, which is a random location and may not be vertical or parallel.).
+#. Ensuite, branchez le câble du servomoteur sur le port P11 comme suit. Vous verrez le bras du servomoteur se déplacer vers une position (il s'agit de la position 0°, qui est aléatoire et peut ne pas être verticale ou parallèle).
 
     .. image:: img/servo_pin11.jpg
 
-
-#. Now, remove the servo arm, ensuring the servo wire remains connected, and do not turn off the power. Then continue the assembly following the paper instructions.
+#. Retirez maintenant le bras du servomoteur tout en veillant à ce que le câble reste connecté, et ne coupez pas l'alimentation. Continuez ensuite l'assemblage en suivant les instructions du manuel.
 
 .. note::
 
-    * Do not unplug this servo cable before fixing it with the servo screw, you can unplug it after fixing it.
-    * Do not rotate the servo while it is powered on to avoid damage; if the servo shaft is not inserted at the right angle, pull the servo out and reinsert it.
-    * Before assembling each servo, you need to plug the servo cable into PWM pin and turn on the power to set its angle to 0°.
-
+    * Ne débranchez pas ce câble de servomoteur avant de l'avoir fixé avec la vis de servo ; vous pourrez le débrancher après l'avoir fixé.
+    * Ne faites pas tourner le servomoteur lorsqu'il est sous tension pour éviter tout dommage ; si l'axe du servomoteur n'est pas inséré dans le bon angle, retirez le servo et réinsérez-le.
+    * Avant d'assembler chaque servomoteur, branchez le câble du servomoteur sur la broche PWM et allumez l'alimentation pour régler son angle à 0°.

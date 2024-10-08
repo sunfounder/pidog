@@ -1,65 +1,65 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez plus profondément dans l’univers de Raspberry Pi, Arduino et ESP32 avec d’autres passionnés.
 
-    **Why Join?**
+    **Pourquoi rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et relevez les défis techniques avec l'aide de notre communauté et de notre équipe.
+    - **Apprendre et partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d’un accès anticipé aux annonces de nouveaux produits et à des avant-premières.
+    - **Réductions spéciales** : Profitez de remises exclusives sur nos produits les plus récents.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales lors des fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-4. Setting Up Your Raspberry Pi
-=====================================
+4. Configuration de votre Raspberry Pi
+===========================================
 
-Setting Up with a Screen
----------------------------
+Configuration avec un écran
+-----------------------------
 
-Having a screen simplifies the process of working with your Raspberry Pi.
+Utiliser un écran simplifie le processus de configuration et de travail avec votre Raspberry Pi.
 
-**Required Components**
+**Composants nécessaires**
 
-* Raspberry Pi 5 Model B
-* Power Adapter
-* Micro SD card
-* Screen Power Adapter
-* HDMI cable
-* Screen
-* Mouse
-* Keyboard
+* Raspberry Pi 5 Modèle B
+* Adaptateur d'alimentation
+* Carte Micro SD
+* Adaptateur d'alimentation de l'écran
+* Câble HDMI
+* Écran
+* Souris
+* Clavier
 
-**Steps**:
+**Étapes** :
 
-#. Connect the Mouse and Keyboard to the Raspberry Pi.
+#. Connectez la souris et le clavier au Raspberry Pi.
 
-#. Use the HDMI cable to connect the screen to the Raspberry Pi's HDMI port. Ensure the screen is plugged into a power source and turned on.
+#. Utilisez le câble HDMI pour relier l’écran au port HDMI du Raspberry Pi. Assurez-vous que l’écran est branché à une source d’alimentation et allumé.
 
-#. Power the Raspberry Pi using the power adapter.
+#. Alimentez le Raspberry Pi avec l’adaptateur d’alimentation.
 
-#. After a few seconds, the Raspberry Pi OS desktop will be displayed. Now you can open the Terminal to start entering commands.
+#. Après quelques secondes, le bureau de Raspberry Pi OS s'affichera. Vous pouvez maintenant ouvrir le Terminal pour commencer à entrer des commandes.
 
     .. image:: img/bookwarm.png
         :align: center
 
-Setting Up Without a Screen
-------------------------------
+Configuration sans écran
+---------------------------
 
-If you don't have a monitor, remote login is a viable option.
+Si vous n'avez pas de moniteur, la connexion à distance est une option viable.
 
-**Required Components**
+**Composants nécessaires**
 
-* Raspberry Pi 5 Model B 
-* Power Adapter
-* Micro SD card
+* Raspberry Pi 5 Modèle B 
+* Adaptateur d'alimentation
+* Carte Micro SD
 
-Using SSH, you can access the Raspberry Pi's Bash shell, which is the default Linux shell. Bash offers a command-line interface for performing various tasks.
+En utilisant SSH, vous pouvez accéder au shell Bash de votre Raspberry Pi, qui est le shell par défaut de Linux. Bash propose une interface en ligne de commande pour effectuer diverses tâches.
 
-For those preferring a graphical user interface (GUI), the remote desktop feature is a convenient alternative for managing files and operations.
+Pour ceux qui préfèrent une interface graphique (GUI), la fonctionnalité de bureau à distance est une alternative pratique pour gérer les fichiers et les opérations.
 
-For detailed setup tutorials based on your operating system, refer to the following sections:
+Pour des tutoriels de configuration détaillés selon votre système d'exploitation, référez-vous aux sections suivantes :
 
 .. toctree::
 

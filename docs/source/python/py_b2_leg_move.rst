@@ -1,35 +1,35 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez plus profondément dans l'univers du Raspberry Pi, Arduino et ESP32 avec d'autres passionnés.
 
-    **Why Join?**
+    **Pourquoi nous rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et les défis techniques avec l'aide de notre communauté et de notre équipe.
+    - **Apprendre & Partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d'un accès anticipé aux annonces de nouveaux produits et aux avant-premières.
+    - **Réductions spéciales** : Profitez de réductions exclusives sur nos nouveaux produits.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales pendant les fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
 .. _py_b2_leg_move:
 
-2. Leg Move
-=================
+2. Mouvement des pattes
+===========================
 
-PiDog's leg movements are implemented by the following functions.
+Les mouvements des pattes de PiDog sont implémentés par les fonctions suivantes.
 
 .. code-block:: python
 
     Pidog.legs_move(target_angles, immediately=True, speed=50)
 
-* ``target_angles``: It is a two-dimensional array composed of an array of 8 servo angles (referred to as angle group) as elements. These angle groups will be used to control the angles of the 8 foot servos. If multiple angle groups are written, the unexecuted angle groups will be stored in the cache.
-* ``immediately`` : When calling the function, set this parameter to ``True``, the cache will be cleared immediately to execute the newly written angle group; if the parameter is set to ``False``, the newly written The incoming angular group is added to the execution queue.
-* ``speed`` : The speed at which the angular group is executed.
+* ``target_angles`` : C'est un tableau bidimensionnel composé de plusieurs groupes de 8 angles de servomoteurs (appelés groupes d'angles). Ces groupes seront utilisés pour contrôler les angles des 8 servos des pattes. Si plusieurs groupes d'angles sont définis, ceux qui n'ont pas été exécutés seront stockés dans le cache.
+* ``immediately`` : Lorsque ce paramètre est défini sur ``True``, le cache est immédiatement vidé pour exécuter le nouveau groupe d'angles ; si le paramètre est défini sur ``False``, le nouveau groupe d'angles est ajouté à la file d'attente d'exécution.
+* ``speed`` : La vitesse à laquelle le groupe d'angles est exécuté.
 
-**Some common usages are listed below:**
+**Quelques utilisations courantes sont listées ci-dessous :**
 
-1.  Take action immediately.
+1. Exécution immédiate de l'action.
 
 .. code-block:: python
 
@@ -38,11 +38,11 @@ PiDog's leg movements are implemented by the following functions.
 
     my_dog = Pidog()
 
-    # half stand
+    # demi-position debout
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], speed=50)   
 
 
-2. Add some angular groups to the execution queue.
+2. Ajouter des groupes d'angles à la file d'attente d'exécution.
 
 .. code-block:: python
 
@@ -51,16 +51,15 @@ PiDog's leg movements are implemented by the following functions.
 
     my_dog = Pidog()
 
-    # half stand
+    # demi-position debout
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], speed=50)  
 
-    # multiple actions
+    # actions multiples
     my_dog.legs_move([[45, 35, -45, -35, 80, 70, -80, -70],
                         [90, -30, -90, 30, 80, 70, -80, -70],
                         [45, 35, -45, -35, 80, 70, -80, -70]],  immediately=False, speed=30)   
 
-3. Perform repetitions within 10 seconds.
-
+3. Effectuer des répétitions pendant 10 secondes.
 
 .. code-block:: python
 
@@ -69,40 +68,40 @@ PiDog's leg movements are implemented by the following functions.
 
     my_dog = Pidog()
 
-    # half stand
+    # demi-position debout
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], speed=50)  
 
-    # pushup preparation
+    # préparation pour les pompes
     my_dog.legs_move([[45, 35, -45, -35, 80, 70, -80, -70]], immediately=False, speed=20)
 
-    # pushup
+    # exécution des pompes
     for _ in range(99):
         my_dog.legs_move([[90, -30, -90, 30, 80, 70, -80, -70],
                             [45, 35, -45, -35, 80, 70, -80, -70]],  immediately=False, speed=30)   
 
-    # keep 10s
+    # maintien pendant 10 secondes
     time.sleep(10)
 
-    # stop and half stand
+    # arrêt et demi-position debout
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], immediately=True, speed=50)  
 
 
-**PiDog's leg control also has the following functions that can be used together:**
+**Le contrôle des pattes de PiDog dispose également des fonctions suivantes, utilisables conjointement :**
 
 .. code-block:: python
 
     Pidog.is_legs_done()
 
-This function is used to determine whether the angle group in the cache has been executed. If yes, return ``True``; otherwise, return ``False``.
+Cette fonction permet de déterminer si les groupes d'angles dans le cache ont été exécutés. Si oui, retourne ``True`` ; sinon, retourne ``False``.
 
 .. code-block:: python
 
     Pidog.wait_legs_done()
 
-Suspends the program until the angle groups in the cache have been executed.
+Suspend le programme jusqu'à ce que les groupes d'angles dans le cache soient exécutés.
 
 .. code-block:: python
 
     Pidog.legs_stop() 
 
-Empty the angular group in the cache.
+Vide le cache des groupes d'angles.

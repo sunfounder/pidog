@@ -1,24 +1,24 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez plus profondément dans l'univers du Raspberry Pi, Arduino et ESP32 avec d'autres passionnés.
 
-    **Why Join?**
+    **Pourquoi nous rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et les défis techniques grâce à l'aide de notre communauté et de notre équipe.
+    - **Apprendre & Partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d'un accès anticipé aux annonces de nouveaux produits et aux avant-premières.
+    - **Réductions spéciales** : Profitez de réductions exclusives sur nos produits les plus récents.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales pendant les fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
 .. _py_ball_track:
 
-13. Ball Track
-======================
+13. Suivi de la balle
+==========================
 
-PiDog will sit quietly in place.
-You put a red ball in front of it, it will stand, and then chase the ball.
+PiDog reste tranquillement assis sur place.  
+Placez une balle rouge devant lui, il se lèvera et commencera à la suivre.
 
 .. raw:: html
 
@@ -27,8 +27,7 @@ You put a red ball in front of it, it will stand, and then chase the ball.
       Your browser does not support the video tag.
    </video>
 
-
-**Run the Code**
+**Exécuter le Code**
 
 .. raw:: html
 
@@ -39,15 +38,13 @@ You put a red ball in front of it, it will stand, and then chase the ball.
     cd ~/pidog/examples
     sudo python3 13_ball_track.py
 
-
-After running this code, PiDog will start the camera.
-You can visit ``http://+ PiDog's IP +/mjpg`` (like mine is ``http://192.168.18.138:9000/mjpg``) in your browser to view the camera's picture.
-
+Après avoir exécuté ce code, PiDog démarrera la caméra.  
+Vous pouvez visiter ``http://+ PiDog's IP +/mjpg`` (par exemple, ``http://192.168.18.138:9000/mjpg``) dans votre navigateur pour voir l'image de la caméra.
 
 **Code**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Vous pouvez **Modifier/Réinitialiser/Copier/Exécuter/Arrêter** le code ci-dessous. Avant cela, vous devez vous rendre dans le répertoire source comme ``pidog\examples``. Après avoir modifié le code, vous pouvez l'exécuter directement pour observer le résultat.
 
 .. raw:: html
 

@@ -1,16 +1,16 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez plus profondément dans l’univers de Raspberry Pi, Arduino et ESP32 avec d’autres passionnés.
 
-    **Why Join?**
+    **Pourquoi rejoindre ?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Support d'experts** : Résolvez les problèmes après-vente et relevez les défis techniques avec l'aide de notre communauté et de notre équipe.
+    - **Apprendre et partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
+    - **Aperçus exclusifs** : Bénéficiez d’un accès anticipé aux annonces de nouveaux produits et à des avant-premières.
+    - **Réductions spéciales** : Profitez de remises exclusives sur nos produits les plus récents.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales lors des fêtes.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
 6-DOF IMU
 ==========================
@@ -19,26 +19,22 @@
    :width: 200
    :align: center
 
+L'IMU 6-DOF est basé sur le SH3001.
 
-The 6-DOF IMU is based on the SH3001.
+Le SH3001 est une unité de mesure inertielle (IMU) à six axes. Il intègre un gyroscope à trois axes et un accéléromètre à trois axes. Il est de petite taille et consomme peu d'énergie. Il est adapté aux applications du marché de l’électronique grand public et peut fournir des données de vitesse angulaire et d'accélération linéaire en temps réel avec une grande précision. Le SH3001 offre une excellente stabilité thermique et maintient une haute résolution dans une plage de fonctionnement allant de -40°C à 85°C.
 
-SH3001 is a six-axis IMU (Inertial measurement unit). It integrates a three-axis gyroscope and a three-axis accelerometer. It is small in size and low in power consumption. It is suitable for consumer electronics market applications and can provide high-precision real-time angular velocity and linear acceleration data. The SH3001 has excellent temperature stability and can maintain high resolution within the operating range of -40°C to 85°C.
+Il est couramment utilisé dans les smartphones, tablettes, drones multi-rotors, aspirateurs intelligents, pointeurs laser, AR/VR, télécommandes intelligentes, bracelets connectés et d'autres produits.
 
-It is typically used in smartphones, tablet computers, multi-rotor drones, smart sweepers, page-turning laser pointers, AR/VR, smart remote controls, smart bracelets and other products.
+**Caractéristiques**
 
+* Alimentation : 3,3V
+* Communication : IIC
+* Connecteur : SH1.0 4P
 
+**Brochage**
 
-**Specifications**
-
-
-* Power Supply: 3.3V
-* Communication: IIC
-* Connector: SH1.0 4P
-
-**Pin Out**
-
-* GND - Ground Input
-* VCC - Power Supply Input
+* GND - Entrée Masse
+* VCC - Entrée Alimentation
 * SDA - IIC SDA
 * SCL - IIC SCL
 
