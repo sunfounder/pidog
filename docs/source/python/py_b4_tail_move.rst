@@ -1,57 +1,54 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Ciao, benvenuto nella Community di SunFounder per gli appassionati di Raspberry Pi, Arduino ed ESP32 su Facebook! Approfondisci le tue conoscenze su Raspberry Pi, Arduino ed ESP32 insieme ad altri appassionati come te.
 
-    **Why Join?**
+    **Perché Unirsi a Noi?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Supporto Esperto**: Risolvi problemi post-vendita e affronta le sfide tecniche con l'aiuto della nostra community e del nostro team.
+    - **Impara e Condividi**: Scambia consigli e tutorial per migliorare le tue competenze.
+    - **Anteprime Esclusive**: Ottieni accesso anticipato ai nuovi annunci di prodotto e alle anteprime.
+    - **Sconti Esclusivi**: Approfitta di sconti riservati sui nostri prodotti più recenti.
+    - **Promozioni e Concorsi Speciali**: Partecipa a giveaway e promozioni durante le festività.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Pronto a esplorare e creare con noi? Clicca su [|link_sf_facebook|] e unisciti oggi stesso!
 
-4. Tail Move
-===================
+4. Movimento della Coda
+============================
 
-Following are the functions that control PiDog's tail. This function is similar to :ref:`py_b2_leg_move`.
-
+Di seguito sono riportate le funzioni che controllano il movimento della coda di PiDog. Questo metodo è simile a :ref:`py_b2_leg_move`.
 
 .. code-block:: python
 
     Pidog.tail_move(target_angles, immediately=True, speed=50)
 
-* ``target_angles`` : It is a two-dimensional array composed of an array of 1 servo angles (referred to as angle group) as elements. These angle groups will be used to control the angles of the 8 foot servos. If multiple angle groups are written, the unexecuted angle groups will be stored in the cache.
-* ``immediately`` : When calling the function, set this parameter to ``True``, the cache will be cleared immediately to execute the newly written angle group; if the parameter is set to ``False``, the newly written The incoming angular group is added to the execution queue.
-* ``speed`` : The speed at which the angular group is executed.
+* ``target_angles`` : È un array bidimensionale composto da un array di 1 angolo del servo (definito gruppo di angoli) come elemento. Questi gruppi di angoli verranno utilizzati per controllare il movimento della coda. Se vengono definiti più gruppi di angoli, quelli non eseguiti verranno memorizzati nella cache.
+* ``immediately`` : Quando si chiama la funzione, impostare questo parametro su ``True``, la cache verrà svuotata immediatamente per eseguire il nuovo gruppo di angoli; se impostato su ``False``, il nuovo gruppo di angoli viene aggiunto alla coda di esecuzione.
+* ``speed`` : Velocità di esecuzione del gruppo di angoli.
 
-
-**PiDog's tail servo control also has some supporting functions:**
+**Il controllo del servo della coda di PiDog dispone anche di alcune funzioni di supporto:**
 
 .. code-block:: python
 
     Pidog.is_tail_done()
 
-whether all the tail actions in the buffer to be executed
+Verifica se tutte le azioni della coda presenti nel buffer sono state eseguite.
 
 .. code-block:: python
 
     Pidog.wait_tail_done()
 
-wait for all the tail actions in the buffer to be executed
+Attende che tutte le azioni della coda nel buffer siano state completate.
 
 .. code-block:: python
 
     Pidog.tail_stop()
 
-clear all the tail actions of leg in the buffer, to make tail servo stop
+Elimina tutte le azioni della coda nel buffer, fermando così il servomotore della coda.
 
 
-**Here are some common usages:**
+**Ecco alcuni casi d'uso comuni:**
 
-
-1. Wag tail for 10 seconds.
+1. Scuotere la coda per 10 secondi.
 
 .. code-block:: python
 
@@ -63,7 +60,7 @@ clear all the tail actions of leg in the buffer, to make tail servo stop
     for _ in range(99):
         my_dog.tail_move([[30],[-30]], immediately=False, speed=30)
 
-    # keep 10s
+    # mantenere per 10s
     time.sleep(10)
 
     my_dog.tail_stop()

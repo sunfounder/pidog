@@ -1,21 +1,21 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Ciao, benvenuto nella Community di SunFounder per gli appassionati di Raspberry Pi, Arduino ed ESP32 su Facebook! Approfondisci le tue conoscenze su Raspberry Pi, Arduino ed ESP32 insieme a noi e ad altri appassionati.
 
-    **Why Join?**
+    **Perché Unirsi a Noi?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Supporto Esperto**: Risolvi problemi post-vendita e affronta sfide tecniche con l'aiuto della nostra community e del nostro team.
+    - **Impara e Condividi**: Scambia consigli e tutorial per migliorare le tue competenze.
+    - **Anteprime Esclusive**: Ottieni accesso anticipato ai nuovi annunci di prodotti e alle anteprime.
+    - **Sconti Esclusivi**: Approfitta di sconti esclusivi sui nostri prodotti più recenti.
+    - **Promozioni e Concorsi Speciali**: Partecipa a giveaway e promozioni durante le festività.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Sei pronto a esplorare e creare con noi? Clicca su [|link_sf_facebook|] e unisciti oggi stesso!
 
-1. PiDog Initialization
-============================
+1. Inizializzazione di PiDog
+===============================
 
-The functions of PiDog are written in the ``Pidog`` class, and the prototype of this class is shown below.
+Le funzionalità di PiDog sono implementate nella classe ``Pidog``, il cui prototipo è mostrato qui di seguito.
 
 .. code-block:: python
 
@@ -29,48 +29,47 @@ The functions of PiDog are written in the ``Pidog`` class, and the prototype of 
             tail_init_angle=None)
 
 
-PiDog must be instantiated in one of several ways, as shown below.
+PiDog deve essere istanziato in uno dei seguenti modi, come illustrato di seguito.
 
-1. Following are the simplest steps of initialization.
+1. Ecco i passaggi più semplici per inizializzare PiDog.
 
 .. code-block:: python
 
-    # Import Pidog class
+    # Importa la classe Pidog
     from pidog import Pidog
 
-    # instantiate a Pidog
+    # Istanzia un oggetto Pidog
     my_dog = Pidog()
 
-2. PiDog has 12 servos, which can be initialized when we instantiate it.
+2. PiDog è dotato di 12 servomotori, i cui angoli possono essere inizializzati durante l'istanza.
 
 .. code-block:: python
 
-    # Import Pidog class
+    # Importa la classe Pidog
     from pidog import Pidog
 
-    # instantiate a Pidog with custom initialized servo angles
+    # Istanzia un oggetto Pidog con angoli di servo personalizzati
     my_dog = Pidog(leg_init_angles = [25, 25, -25, -25, 70, -45, -70, 45],
                     head_init_angles = [0, 0, -25],
                     tail_init_angle= [0]
                 )
 
-In the ``Pidog`` class, the servos are divided into three groups.
+Nella classe ``Pidog``, i servomotori sono suddivisi in tre gruppi.
 
-* ``leg_init_angles`` : In this array, 8 values determine the angles of eight servos, with the servos (pin numbers) they control being ``2, 3, 7, 8, 0, 1, 10, 11``. From the foldout, you can see where these servos are located.
+* ``leg_init_angles``: In questo array, 8 valori definiscono gli angoli di otto servomotori, associati ai pin ``2, 3, 7, 8, 0, 1, 10, 11``. Dal diagramma, è possibile vedere la loro posizione esatta sul robot.
 
-* ``head_init_angles`` : There is an array with 3 values, controllers for PiDog-head yaw, roll, pitch servos (``no. 4, 6, 5``) which react to yaw, roll, pitch, or Deflection of the body.
+* ``head_init_angles``: Un array con 3 valori che controlla i servomotori della testa di PiDog per yaw, roll e pitch (``n. 4, 6, 5``), che reagiscono ai movimenti di rotazione, inclinazione o deflessione del corpo.
 
-* ``tail_init_angle`` : In this array, there is only one value, which is dedicated to controlling the tail servo, which is ``9``.
+* ``tail_init_angle``: In questo array è presente un solo valore, dedicato al controllo del servomotore della coda (``n. 9``).
 
-
-3. ``Pidog`` allows you to redefine the serial number of the servos when instantiating the robot if your servo order is different.
+3. La classe ``Pidog`` permette di ridefinire i numeri seriali dei servomotori durante l'istanza, se l'ordine dei tuoi servo è diverso da quello predefinito.
 
 .. code-block:: python
 
-    # Import Pidog class
+    # Importa la classe Pidog
     from pidog import Pidog
 
-    # instantiate a Pidog with custom initialized pins & servo angles
+    # Istanzia un oggetto Pidog con pin personalizzati e angoli dei servomotori definiti
     my_dog = Pidog(leg_pins=[2, 3, 7, 8, 0, 1, 10, 11], 
                     head_pins=[4, 6, 5],
                     tail_pin=[9],

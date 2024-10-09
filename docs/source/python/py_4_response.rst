@@ -1,30 +1,30 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Ciao, benvenuto nella Community di SunFounder per gli appassionati di Raspberry Pi, Arduino ed ESP32 su Facebook! Approfondisci le tue conoscenze su Raspberry Pi, Arduino ed ESP32 insieme a noi e ad altri appassionati.
 
-    **Why Join?**
+    **Perché Unirsi a Noi?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Supporto Esperto**: Risolvi problemi post-vendita e affronta sfide tecniche con l'aiuto della nostra community e del nostro team.
+    - **Impara e Condividi**: Scambia consigli e tutorial per migliorare le tue competenze.
+    - **Anteprime Esclusive**: Ottieni accesso anticipato ai nuovi annunci di prodotti e alle anteprime.
+    - **Sconti Esclusivi**: Approfitta di sconti esclusivi sui nostri prodotti più recenti.
+    - **Promozioni e Concorsi Speciali**: Partecipa a giveaway e promozioni durante le festività.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Sei pronto a esplorare e creare con noi? Clicca su [|link_sf_facebook|] e unisciti oggi stesso!
 
-4. Response
-================
+4. Risposta
+==============
 
-In this project, PiDog will interact with you in an interesting way.
+In questo progetto, PiDog interagirà con te in modo divertente.
 
-If you reach out and grab PiDog's head from the front, it will bark vigilantly.
+Se allunghi la mano e tocchi la testa di PiDog dal davanti, abbaiarà in modo vigile.
 
 
 .. image:: img/py_4-2.gif
     :width: 430
 
 
-But if you reach out from behind it and pet its head, it will enjoy it very much.
+Ma se lo accarezzi da dietro, apprezzerà molto la tua attenzione.
 
 .. raw:: html
 
@@ -33,7 +33,7 @@ But if you reach out from behind it and pet its head, it will enjoy it very much
       Your browser does not support the video tag.
    </video>
 
-**Run the Code**
+**Esegui il Codice**
 
 .. raw:: html
 
@@ -44,19 +44,19 @@ But if you reach out from behind it and pet its head, it will enjoy it very much
     cd ~/pidog/examples
     sudo python3 4_response.py
 
-After running this example, PiDog's ultrasonic module will detect whether there is an obstacle ahead,
-If it detects your hand, it makes the breathing light glow red, takes a step back, and barks.
+Dopo aver avviato questo esempio, il modulo ultrasonico di PiDog rileverà se c'è un ostacolo di fronte.
+Se rileva la tua mano, la luce respiratoria diventerà rossa, farà un passo indietro e abbaiarà.
 
-At the same time, the touch sensor will also work. If the touch sensor is stroked (not just touched), 
-PiDog will shake its head, wag its tail, and show a comfortable look.
-
-
+Allo stesso tempo, il sensore tattile entrerà in funzione. Se accarezzi il sensore (non solo toccandolo), 
+PiDog scuoterà la testa, scodinzolerà e mostrerà un'espressione di piacere.
 
 
-**Code**
+
+
+**Codice**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Puoi **Modificare/Resettare/Copiare/Eseguire/Interrompere** il codice riportato qui sotto. Ma prima, devi accedere al percorso del codice sorgente come ``pidog\examples``. Dopo aver modificato il codice, puoi eseguirlo direttamente per vedere l'effetto.
 
 .. raw:: html
 
@@ -100,7 +100,7 @@ PiDog will shake its head, wag its tail, and show a comfortable look.
         while True:
             print(
                 f'distance.value: {round(my_dog.ultrasonic.read_distance(), 2)} cm, touch {my_dog.dual_touch.read()}')
-            # alert
+            # allerta
             if my_dog.ultrasonic.read_distance() < 15 and my_dog.ultrasonic.read_distance() > 1:
                 my_dog.head_move([[0, 0, 0]], immediately=True, speed=90)
                 my_dog.tail_move([[0]], immediately=True, speed=90)
@@ -112,13 +112,13 @@ PiDog will shake its head, wag its tail, and show a comfortable look.
                     sleep(0.1)
                 my_dog.do_action('stand', step_count=1, speed=90)
                 sleep(0.5)
-            # relax
+            # rilassato
             if my_dog.dual_touch.read() != 'N':
                 if len(my_dog.head_action_buffer) < 2:
                     head_nod(1)
                     my_dog.do_action('wag_tail', step_count=10, speed=80)
                     my_dog.rgb_strip.set_mode('listen', color="#8A2BE2", bps=0.35, brightness=0.8)
-            # calm
+            # calma
             else:
                 my_dog.rgb_strip.set_mode('breath', color='pink', bps=1, brightness=0.8)
                 my_dog.tail_stop()

@@ -1,25 +1,25 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Ciao, benvenuto nella Community di SunFounder per gli appassionati di Raspberry Pi, Arduino ed ESP32 su Facebook! Approfondisci le tue conoscenze su Raspberry Pi, Arduino ed ESP32 insieme a noi e a tanti altri appassionati.
 
-    **Why Join?**
+    **Perché Unirsi a Noi?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Supporto Esperto**: Risolvi problemi post-vendita e affronta sfide tecniche con l'aiuto della nostra community e del nostro team.
+    - **Impara e Condividi**: Scambia consigli e tutorial per migliorare le tue competenze.
+    - **Anteprime Esclusive**: Ottieni accesso anticipato ai nuovi annunci di prodotti e alle anteprime.
+    - **Sconti Esclusivi**: Approfitta di sconti esclusivi sui nostri prodotti più recenti.
+    - **Promozioni e Concorsi Speciali**: Partecipa a giveaway e promozioni durante le festività.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Sei pronto a esplorare e creare con noi? Clicca su [|link_sf_facebook|] e unisciti oggi stesso!
 
-2. Function Demonstration
-===============================
+2. Dimostrazione delle Funzioni
+====================================
 
-This project shows you all of PiDog's usual actions and sounds.
+Questo progetto ti mostra tutte le azioni e i suoni abituali del PiDog.
 
-You can make PiDog make actions or make sounds by entering the serial number.
+Puoi far eseguire al PiDog movimenti o effetti sonori inserendo il numero corrispondente.
 
-The motion/sound effects currently included in this example are listed below.
+Di seguito sono elencati i movimenti/gli effetti sonori attualmente inclusi in questo esempio.
 
 .. image:: img/py_2.gif
 
@@ -62,7 +62,7 @@ The motion/sound effects currently included in this example are listed below.
 
 
 
-**Run the Code**
+**Esegui il Codice**
 
 .. raw:: html
 
@@ -73,16 +73,16 @@ The motion/sound effects currently included in this example are listed below.
     cd ~/pidog/examples
     sudo python3 2_function_demonstration.py
 
-After running this example, you input ``1`` and press ``ENTER``, PiDog will stand; input ``2``, PiDog will sit down; input ``27``, PiDog will issue "woohoo~ ".
+Dopo aver eseguito l'esempio, inserisci ``1`` e premi ``ENTER``, PiDog si metterà in piedi; inserisci ``2``, e PiDog si siederà; inserisci ``27``, e PiDog emetterà il suono "woohoo~ ".
 
-Press ``Ctrl+C`` to exit the program.
+Premi ``Ctrl+C`` per uscire dal programma.
 
 
 
-**Code**
+**Codice**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Puoi **Modificare/Resettare/Copiare/Eseguire/Interrompere** il codice riportato qui sotto. Ma prima, devi accedere al percorso del codice sorgente come ``pidog\examples``. Dopo aver modificato il codice, puoi eseguirlo direttamente per vedere l'effetto.
 
 .. raw:: html
 
@@ -97,15 +97,15 @@ Press ``Ctrl+C`` to exit the program.
     import curses
     import curses_utils
 
-    # init pidog
+    # inizializzazione del pidog
     # ======================================
     my_dog = Pidog()
     sleep(0.5)
 
-    # global variables
+    # variabili globali
     # ======================================
     actions = [
-        # name, head_pitch_adjust(-1, use last_pitch), speed
+        # nome, head_pitch_adjust(-1, usa last_pitch), velocità
         ['stand', 0, 50],
         ['sit', -30, 50],
         ['lie', 0, 20],
@@ -125,7 +125,7 @@ Press ``Ctrl+C`` to exit the program.
     actions_len = len(actions)
 
     sound_effects = []
-    # change working directory
+    # cambio directory di lavoro
     abspath = os.path.abspath(os.path.dirname(__file__))
     # print(abspath)
     os.chdir(abspath)
@@ -133,7 +133,7 @@ Press ``Ctrl+C`` to exit the program.
         sound_effects.append(name.split('.')[0])
     sound_effects.sort()
     sound_len = len(sound_effects)
-    # limit sound quantity
+    # limitazione della quantità di suoni
     if sound_len > actions_len:
         sound_len = actions_len
         sound_effects = sound_effects[:actions_len]
@@ -145,12 +145,12 @@ Press ``Ctrl+C`` to exit the program.
 
     STANDUP_ACTIONS = ['trot', 'forward', 'backward', 'turn_left', 'turn_right']
 
-    # define pad size
+    # dimensioni del pad
     # ======================================
     curses_utils.PAD_Y = 22
     curses_utils.PAD_X = 70
 
-    # display fuctions
+    # funzioni di visualizzazione
     # ======================================
     def display_head(subpad):
         title = "Function Demonstration"
@@ -171,7 +171,7 @@ Press ``Ctrl+C`` to exit the program.
 
     def display_selection(subpad, index):
         global last_display_index
-        # reset last selection
+        # resetta ultima selezione
         if last_display_index > actions_len + sound_len-1 or last_display_index < 0:
             last_display_index = 0
         if last_display_index != index:
@@ -181,7 +181,7 @@ Press ``Ctrl+C`` to exit the program.
                 sound_index = last_display_index-actions_len
                 subpad.addstr(sound_index, 30, f"{last_display_index+1}. {sound_effects[sound_index]}", curses_utils.LIGHT_GRAY)
             last_display_index = index
-        # highlight currernt selection
+        # evidenzia selezione corrente
         if index > actions_len + sound_len-1 or index < 0:
             pass
         elif index < actions_len:
@@ -209,11 +209,11 @@ Press ``Ctrl+C`` to exit the program.
             return
         if index < actions_len:
             name, head_pitch_adjust, speed = actions[index]
-            # If last action is push_up, then lie down first
+            # Se l'ultima azione è push_up, esegui prima il comando "lie"
             if last_index < len(actions) and actions[last_index][0] in ('push_up'):
                 last_head_pitch = 0
                 my_dog.do_action('lie', speed=60)
-            # If this action is trot, forward, turn left, turn right and backward, and, last action is not, then stand up
+            # Se l'azione corrente è "trot", "forward", "turn left", "turn right" o "backward", e l'ultima non lo è, allora esegui il comando "stand"
             if name in STANDUP_ACTIONS and last_index < len(actions) and actions[last_index][0] not in STANDUP_ACTIONS:
                 last_head_pitch = 0
                 my_dog.do_action('stand', speed=60)
@@ -227,28 +227,28 @@ Press ``Ctrl+C`` to exit the program.
             last_index = index
 
     def main(stdscr):
-        # reset screen
+        # resetta schermo
         stdscr.clear()
         stdscr.move(4, 0)
         stdscr.refresh()
 
-        # disable cursor 
+        # disabilita cursore 
         curses.curs_set(0)
 
-        # init color 
+        # inizializza colori 
         curses.start_color()
         curses.use_default_colors()
         curses_utils.init_preset_colors()
         curses_utils.init_preset__color_pairs()
 
-        # init pad    
+        # inizializza pad    
         pad = curses.newpad(curses_utils.PAD_Y, curses_utils.PAD_X)   
 
-        # init subpad
+        # inizializza subpad
         head_pad = pad.subpad(4, curses_utils.PAD_X, 0, 0)
         selection_pad = pad.subpad(actions_len, curses_utils.PAD_X, 4, 0)
         bottom_pad = pad.subpad(1, curses_utils.PAD_X, actions_len+4, 0)
-        # add content to a
+        # aggiungi contenuto a
         display_head(head_pad)
         display_actions(selection_pad)
         display_head(head_pad)
@@ -266,22 +266,22 @@ Press ``Ctrl+C`` to exit the program.
         curses.echo()
 
         while True:
-            # draw bottom bar
+            # visualizza barra inferiore
             display_bottom(bottom_pad)
             curses_utils.pad_refresh(bottom_pad)
-            # reset cursor
+            # resetta cursore
             stdscr.move(actions_len+4, 23)
             stdscr.refresh()
-            # red key
+            # leggi input
             key = stdscr.getstr()
             try:
                 index = int(key) - 1
             except ValueError:
                 index = -1
-            # display selection
+            # visualizza selezione
             display_selection(selection_pad, index)
             curses_utils.pad_refresh(selection_pad)
-            # do fuction
+            # esegui funzione
             do_function(index)
 
             sleep(0.2)

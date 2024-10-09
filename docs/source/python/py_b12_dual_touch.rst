@@ -1,33 +1,33 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Ciao, benvenuto nella Community SunFounder per gli appassionati di Raspberry Pi, Arduino ed ESP32 su Facebook! Approfondisci le tue conoscenze su Raspberry Pi, Arduino ed ESP32 insieme ad altri appassionati.
 
-    **Why Join?**
+    **Perché Unirsi a Noi?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Supporto Esperto**: Risolvi i problemi post-vendita e le sfide tecniche con l'aiuto della nostra community e del nostro team.
+    - **Impara e Condividi**: Scambia consigli e tutorial per migliorare le tue competenze.
+    - **Anteprime Esclusive**: Ottieni accesso anticipato agli annunci di nuovi prodotti e alle anteprime.
+    - **Sconti Speciali**: Godi di sconti esclusivi sui nostri prodotti più recenti.
+    - **Promozioni e Giveaway Festivi**: Partecipa a concorsi e promozioni durante le festività.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Pronto a esplorare e creare con noi? Clicca su [|link_sf_facebook|] e unisciti oggi stesso!
 
-12. Pat the PiDog's Head
-=========================
+12. Accarezza la Testa del PiDog
+======================================
 
-The Touch Swich on the head of PiDog can detect how you touch it. You can call the following functions to use it.
+Il modulo touch presente sulla testa di PiDog può rilevare come lo tocchi. Puoi utilizzare le seguenti funzioni per interagire con esso.
 
 .. code-block:: python
 
    Pidog.dual_touch.read()
 
-* Touch the module from left to right (front to back for PiDog's orientation), it will return ``"LS"``.
-* Touch the module from right to left, it will return ``"RS"``.
-* Touch the module If the left side of the module is touched, it will return ``"L"``.
-* If the right side of the module is touched, it will return ``"R"``.
-* If the module is not touched, it will return ``"N"``.
+* Se tocchi il modulo da sinistra a destra (da davanti a dietro rispetto all'orientamento di PiDog), restituirà ``"LS"``.
+* Se tocchi il modulo da destra a sinistra, restituirà ``"RS"``.
+* Se tocchi il lato sinistro del modulo, restituirà ``"L"``.
+* Se tocchi il lato destro del modulo, restituirà ``"R"``.
+* Se il modulo non viene toccato, restituirà ``"N"``.
 
-**Here is an example of its use:**
+**Ecco un esempio di utilizzo:**
 
 .. code-block:: python
 

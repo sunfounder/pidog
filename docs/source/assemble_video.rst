@@ -1,59 +1,58 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Ciao, benvenuto nella Community SunFounder per gli appassionati di Raspberry Pi, Arduino ed ESP32 su Facebook! Approfondisci le tue conoscenze su Raspberry Pi, Arduino ed ESP32 insieme ad altri appassionati.
 
-    **Why Join?**
+    **Perché Unirsi a Noi?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Supporto Esperto**: Risolvi problemi post-vendita e affronta le sfide tecniche con l'aiuto della nostra community e del nostro team.
+    - **Impara e Condividi**: Scambia suggerimenti e tutorial per migliorare le tue competenze.
+    - **Anteprime Esclusive**: Ottieni accesso anticipato agli annunci di nuovi prodotti e alle anteprime.
+    - **Sconti Esclusivi**: Approfitta di offerte esclusive sui nostri prodotti più recenti.
+    - **Promozioni Festive e Giveaway**: Partecipa a concorsi e promozioni speciali durante le festività.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Pronto a esplorare e creare con noi? Clicca su [|link_sf_facebook|] e unisciti oggi stesso!
 
-Assemble Videos
-==============================================
+Video di Assemblaggio
+========================
 
-Before assembling the PiDog, please first verify that all parts and components have been included. If there are any missing or damaged components, please contact SunFounder immediately at service@sunfounder.com to resolve the issue as soon as possible.
+Prima di procedere con l'assemblaggio del PiDog, verifica che tutti i componenti e le parti siano presenti. Se noti l'assenza o il danneggiamento di qualche componente, contatta immediatamente SunFounder all'indirizzo service@sunfounder.com per risolvere il problema nel più breve tempo possibile.
 
-Please follow the steps on the following PDF for assembly instructions: 
+Segui i passaggi indicati nel seguente PDF per le istruzioni di assemblaggio:
 
 * :Download:`Component List and Assembly Instructions <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
 
-**Mount Raspberry Pi Zero W on PiDog**
+**Montare il Raspberry Pi Zero W sul PiDog**
 
-If your mainboard is a Raspberry Pi Zero W, here are the steps to install it on the PiDog. 
+Se la tua scheda principale è un Raspberry Pi Zero W, segui i passaggi riportati di seguito per installarlo su PiDog.
 
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/Zfv-8O_Sq9s?si=ZT_6cy9uvupJ0Y_d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-Afterward, you can continue following the instructions in the video below from **2:28** onwards to assemble it.
+Successivamente, continua a seguire le istruzioni nel video qui sotto a partire dal **minuto 2:28** per completare l'assemblaggio.
+
+**Video Tutorial di Assemblaggio (Modello Raspberry Pi 4/3/1)**
+
+Questo video ti guiderà passo dopo passo attraverso il processo di assemblaggio del tuo robot.
+
+In questo tutorial imparerai:
+
+* **Preparazione**: Ti presenteremo tutti gli strumenti e le parti necessarie, assicurandoti di avere tutto ciò che serve prima di iniziare.
+
+* **Passaggi di Assemblaggio**: Mostreremo ogni passaggio di montaggio in modo sistematico.
+
+* **Suggerimenti e Consigli Utili**: Durante il processo, condivideremo suggerimenti essenziali per evitare errori comuni e garantire che il tuo robot funzioni senza intoppi.
+
+* **Zero di un Servo**: Prima di fissare ogni servo, è necessario azzerarlo. I passaggi per azzerare un servo sono: installare Raspberry Pi OS, installare i moduli necessari e poi eseguire uno script (impostare l'angolo di tutti i pin PWM a 0). Dopo di che, collega il cavo del servo per azzerarlo.
 
 
-**Assembly Tutorial Video(Raspberry Pi 4/3/1 Model)**
-
-This video will walk you through the process of assembling your robot from scratch.
-
-In this tutorial, you will learn:
-
-* **Preparation**: We'll introduce you to all the tools and parts needed, ensuring you're fully equipped before starting the assembly.
-
-* **Assembly Steps**: We'll demonstrate each assembly step in a systematic manner.
-
-* **Tips and Considerations**: Throughout the process, we'll share essential tips and tricks to help you avoid common mistakes and ensure your robot operates smoothly.
-
-* **Zeroing a Servo**: Before fixing each servo, it needs to be zeroed first. The steps for zeroing are to first install the Raspberry Pi OS, then install the required modules, and then run a script (set the angle of all PWM pins to 0). After that, plug in the servo wire to zero the servo.
-
-
-The assembly process for Pidog is quite long, so we have divided it into two videos. The first video covers assembling Pidog's body and four legs.
+Il processo di assemblaggio del PiDog è piuttosto lungo, quindi lo abbiamo suddiviso in due video. Il primo video copre l'assemblaggio del corpo e delle quattro zampe del PiDog.
 
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/Gskge1fDR30?si=FTFTjqg1kayH42Od" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-The second video covers assembling the head and calibration.
+Il secondo video si concentra sull'assemblaggio della testa e sulla calibrazione.
 
 .. raw:: html
 

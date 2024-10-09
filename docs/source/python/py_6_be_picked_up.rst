@@ -1,25 +1,25 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Ciao, benvenuto nella Community di SunFounder per gli appassionati di Raspberry Pi, Arduino ed ESP32 su Facebook! Approfondisci le tue conoscenze su Raspberry Pi, Arduino ed ESP32 insieme a noi e ad altri appassionati.
 
-    **Why Join?**
+    **Perché Unirsi a Noi?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Supporto Esperto**: Risolvi problemi post-vendita e affronta sfide tecniche con l'aiuto della nostra community e del nostro team.
+    - **Impara e Condividi**: Scambia consigli e tutorial per migliorare le tue competenze.
+    - **Anteprime Esclusive**: Ottieni accesso anticipato ai nuovi annunci di prodotti e alle anteprime.
+    - **Sconti Esclusivi**: Approfitta di sconti esclusivi sui nostri prodotti più recenti.
+    - **Promozioni e Concorsi Speciali**: Partecipa a giveaway e promozioni durante le festività.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 Sei pronto a esplorare e creare con noi? Clicca su [|link_sf_facebook|] e unisciti oggi stesso!
 
-6. Be Picked Up
-===================
+6. Essere Sollevato
+========================
 
-Try lifting your PiDog from the ground, PiDog will feel like it can fly, and it will cheer in a superman pose.
+Prova a sollevare il tuo PiDog da terra: PiDog avrà la sensazione di poter volare e si esibirà in una posa da supereroe.
 
 .. image:: img/py_6.gif
 
-**Run the Code**
+**Esegui il Codice**
 
 .. raw:: html
 
@@ -30,16 +30,16 @@ Try lifting your PiDog from the ground, PiDog will feel like it can fly, and it 
     cd ~/pidog/examples
     sudo python3 6_be_picked_up.py
 
-After the program runs, the 6-DOF IMU Module will always calculate the acceleration in the vertical direction.
-If PiDog is calculated to be in a state of weightlessness, PiDog assumes a superman pose and cheers.
-Otherwise, consider PiDog to be on flat ground and make a standing pose.
+Dopo aver avviato il programma, il modulo IMU a 6 DOF calcolerà costantemente l'accelerazione nella direzione verticale.
+Se il calcolo rileva che PiDog è in uno stato di assenza di peso, PiDog assumerà una posa da supereroe ed emetterà un grido di gioia.
+In caso contrario, PiDog resterà in posizione eretta a terra.
 
 
 
-**Code**
+**Codice**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Puoi **Modificare/Resettare/Copiare/Eseguire/Interrompere** il codice riportato qui sotto. Ma prima, devi accedere al percorso del codice sorgente come ``pidog\examples``. Dopo aver modificato il codice, puoi eseguirlo direttamente per vedere l'effetto.
 
 .. raw:: html
 
@@ -80,8 +80,8 @@ Otherwise, consider PiDog to be on flat ground and make a standing pose.
             ax = my_dog.accData[0]
             print('ax: %s, is up: %s' % (ax, isUp))
 
-            # gravity : 1G = -16384
-            if ax < -18000: # if down, acceleration is in the same direction as gravity, ax < -1G
+            # gravità : 1G = -16384
+            if ax < -18000: # se verso il basso, l'accelerazione è nella stessa direzione della gravità, ax < -1G
                 my_dog.body_stop()
                 if upflag == False:
                     upflag = True
@@ -90,7 +90,7 @@ Otherwise, consider PiDog to be on flat ground and make a standing pose.
                     downflag = False
                     stand()
 
-            if ax > -13000: # if up, acceleration is the opposite of gravity, ax will > -1G
+            if ax > -13000: # se verso l'alto, l'accelerazione è opposta alla gravità, ax sarà > -1G
                 my_dog.body_stop()
                 if upflag == True:
                     isUp = True
