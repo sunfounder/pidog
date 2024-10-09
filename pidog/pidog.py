@@ -665,10 +665,15 @@ class Pidog():
             return False
 
     # calibration
-    def set_leg_offsets(self, cali_list):
+    def set_leg_offsets(self, cali_list, reset_list=None):
         self.legs.set_offset(cali_list)
-        self.legs.reset()
-        self.leg_current_angles = [0]*8
+        if reset_list is None:
+            self.legs.reset()
+            self.leg_current_angles = [0]*8
+        else:
+            self.legs.servo_positions = list.copy(reset_list)
+            self.legs.leg_current_angles = list.copy(reset_list)
+            self.legs.servo_write_all(reset_list)
 
     def set_head_offsets(self, cali_list):
         self.head.set_offset(cali_list)
