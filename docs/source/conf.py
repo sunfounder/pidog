@@ -145,6 +145,18 @@ rst_epilog += """
 
     <a href="https://docs.sunfounder.com/projects/pidog/en/latest/" target="_blank">English Online-tutorials</a>
 
+.. |link_fr_tutorials| raw:: html
+
+    <a href="https://docs.sunfounder.com/projects/pidog/fr/latest/" target="_blank">Didacticiels en ligne en français</a>
+
+.. |link_it_tutorials| raw:: html
+
+    <a href="https://docs.sunfounder.com/projects/pidog/it/latest/" target="_blank">Tutorial online in italiano</a>
+
+.. |link_es_tutorials| raw:: html
+
+    <a href="https://docs.sunfounder.com/projects/pidog/es/latest/" target="_blank">Tutoriales en línea en español</a>
+
 .. |link_PiDog| raw:: html
 
     <a href="https://www.sunfounder.com/products/sunfounder-pidog-robot-dog-kit-for-raspberry-pi?_pos=1&_sid=313a4c894&_ss=r&variant=44517213896939" target="_blank">Purchase Link for PiDog</a>
