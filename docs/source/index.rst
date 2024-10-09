@@ -29,6 +29,9 @@ Thank you for choosing our |link_Pi_Dog|.
         * |link_german_tutorials|
         * |link_jp_tutorials|
         * |link_en_tutorials|
+        * |link_fr_tutorials|
+        * |link_es_tutorials|
+        * |link_it_tutorials|
     
     Please click on the respective links to access the document in your preferred language.
 
