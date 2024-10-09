@@ -54,7 +54,6 @@ After the program runs, PiDog will perform a plank, then cycle through push-ups 
 
     sleep(0.5)
 
-
     def main():
         my_dog.legs_move([[45, -25, -45, 25, 80, 70, -80, -70]], speed=50)
         my_dog.head_move([[0, 0, -20]], speed=90)
