@@ -1,19 +1,19 @@
-AI Interaction Using GPT-4O
-=====================================================
-In our previous projects, we used programming to direct Pidog in predetermined tasks, which could seem a bit tedious. This project introduces a thrilling leap towards dynamic engagement. Beware of trying to outsmart our mechanical dog—as it's now equipped to understand far more than ever before!
+Interacción con IA Usando GPT-4O
+======================================
 
-This initiative details all the technical steps needed to integrate the GPT-4O into your system, including configuring the necessary virtual environments, installing crucial libraries, and setting up API keys and assistant IDs.
+En nuestros proyectos anteriores, utilizamos la programación para dirigir a PiDog en tareas predefinidas, lo cual podía resultar un poco tedioso. Este proyecto introduce un emocionante salto hacia una interacción más dinámica. ¡No intentes engañar a nuestro perro mecánico, ya que ahora está equipado para entender mucho más que nunca!
+
+Esta iniciativa detalla todos los pasos técnicos necesarios para integrar GPT-4O en tu sistema, incluyendo la configuración de entornos virtuales, la instalación de bibliotecas esenciales, y la configuración de claves API e identificadores de asistente.
 
 .. note::
 
-   This project requires the use of |link_openai_platform|, and you need to pay for OpenAI. Additionally, the OpenAI API is billed separately from ChatGPT, with its own pricing available at https://openai.com/api/pricing/.
+   Este proyecto requiere el uso de |link_openai_platform|, y es necesario pagar por el servicio de OpenAI. Además, la API de OpenAI se factura por separado de ChatGPT, y puedes consultar los precios en https://openai.com/api/pricing/.
 
-   Therefore, you need to decide whether to continue with this project or ensure you have funded the OpenAI API.
+   Por lo tanto, deberás decidir si continuar con este proyecto o asegurarte de que tienes fondos suficientes en la API de OpenAI.
 
-Whether you have a microphone to communicate directly or prefer typing into a command window, Pidog's responses powered by GPT-4O will surely astonish you!
+Tanto si tienes un micrófono para comunicarte directamente como si prefieres escribir en una ventana de comandos, ¡las respuestas de PiDog, potenciadas por GPT-4O, te dejarán asombrado!
 
-Let's dive into this project and unleash a new level of interaction with Pidog!
-
+¡Vamos a sumergirnos en este proyecto y a desatar un nuevo nivel de interacción con PiDog!
 
 .. raw:: html
 
@@ -23,25 +23,25 @@ Let's dive into this project and unleash a new level of interaction with Pidog!
    </video>
 
 
-1. Setting up the Virtual Environment
---------------------------------------------------------------
+1. Configuración del Entorno Virtual
+-----------------------------------------
 
-In this section, we will create and activate a virtual environment, installing the required packages and dependencies within it. This ensures that the installed packages do not interfere with the rest of the system, maintaining project dependency isolation and preventing conflicts with other projects or system packages.
+En esta sección, crearemos y activaremos un entorno virtual, instalando los paquetes y dependencias requeridos dentro de él. Esto asegura que los paquetes instalados no interfieran con el resto del sistema, manteniendo la independencia de las dependencias del proyecto y evitando conflictos con otros proyectos o paquetes del sistema.
 
-#. Use the ``python -m venv`` command to create a virtual environment named ``my_venv``, including system-level packages. The ``--system-site-packages`` option allows the virtual environment to access packages installed system-wide, which is useful when system-level libraries are needed.
+#. Utiliza el comando ``python -m venv`` para crear un entorno virtual llamado ``my_venv``, incluyendo paquetes a nivel de sistema. La opción ``--system-site-packages`` permite que el entorno virtual acceda a los paquetes instalados a nivel de sistema, lo cual es útil cuando se necesitan bibliotecas de este nivel.
 
    .. code-block:: shell
 
       python -m venv --system-site-packages my_venv
 
-#. Switch to the ``my_venv`` directory and activate the virtual environment using the ``source bin/activate`` command. The command prompt will change to indicate that the virtual environment is active.
+#. Cambia al directorio ``my_venv`` y activa el entorno virtual usando el comando ``source bin/activate``. El indicador del sistema cambiará para mostrar que el entorno virtual está activo.
 
    .. code-block:: shell
 
       cd my_venv
       source bin/activate
 
-#. Now, install the required Python packages within the activated virtual environment. These packages will be isolated to the virtual environment and will not affect other system packages.
+#. Ahora, instala los paquetes de Python necesarios dentro del entorno virtual activado. Estos paquetes estarán aislados al entorno virtual y no afectarán otros paquetes del sistema.
 
    .. code-block:: shell
 
@@ -50,7 +50,7 @@ In this section, we will create and activate a virtual environment, installing t
       pip3 install SpeechRecognition
       pip3 install -U sox
        
-#. Finally, use the ``apt`` command to install system-level dependencies, which require administrator privileges.
+#. Finalmente, utiliza el comando ``apt`` para instalar dependencias a nivel del sistema, las cuales requieren privilegios de administrador.
 
    .. code-block:: shell
 
@@ -58,44 +58,44 @@ In this section, we will create and activate a virtual environment, installing t
       sudo apt install sox
 
 
-2. Obtain API Key and Assistant ID
------------------------------------------
+2. Obtención de la Clave API y el ID del Asistente
+----------------------------------------------------------
 
-**Get API Key**
+**Obtener Clave API**
 
-#. Visit |link_openai_platform| and click the **Create new secret key** button in the top right corner.
+#. Visita |link_openai_platform| y haz clic en el botón **Create new secret key** en la esquina superior derecha.
 
    .. image:: img/apt_create_api_key.png
       :width: 700
       :align: center
 
-#. Select the Owner, Name, Project, and permissions as needed, and then click **Create secret key**.
+#. Selecciona el Propietario, Nombre, Proyecto y permisos según sea necesario, y luego haz clic en **Create secret key**.
 
    .. image:: img/apt_create_api_key2.png
       :width: 700
       :align: center
 
-#. Once generated, save this secret key in a safe and accessible location. For security reasons, you will not be able to view it again through your OpenAI account. If you lose this secret key, you will need to generate a new one.
+#. Una vez generada, guarda esta clave secreta en un lugar seguro y accesible. Por razones de seguridad, no podrás verla de nuevo en tu cuenta de OpenAI. Si pierdes esta clave, deberás generar una nueva.
 
    .. image:: img/apt_create_api_key_copy.png
       :width: 700
       :align: center
 
-**Get Assistant ID**
+**Obtener ID del Asistente**
 
-#. Next, click on **Assistants**, then click **Create**, making sure you are on the **Dashboard** page.
+#. A continuación, haz clic en **Assistants**, luego selecciona **Create**, asegurándote de estar en la página de **Dashboard**.
 
    .. image:: img/apt_create_assistant.png
       :width: 700
       :align: center
 
-#. Move your cursor here to copy the **assistant ID**, then paste it into a text box or elsewhere. This is the unique identifier for this Assistant.
+#. Mueve el cursor aquí para copiar el **ID del Asistente**, y pégalo en un cuadro de texto o en otro lugar seguro. Este es el identificador único de tu Asistente.
 
    .. image:: img/apt_create_assistant_id.png
       :width: 700
       :align: center
 
-#. Randomly set a name, then copy the following content into the **Instructions** box to describe your Assistant.
+#. Asigna un nombre aleatorio, luego copia el siguiente contenido en el cuadro de **Instructions** para describir a tu Asistente.
 
    .. image:: img/apt_create_assistant_instructions.png
       :width: 700
@@ -124,62 +124,62 @@ In this section, we will create and activate a virtual environment, installing t
       c. Sometimes you will report on your system and sensor status.
       d. You know you're a machine.
 
-#. Pidog is equipped with a camera module that you can enable to capture images of what it sees and upload them to GPT using our example code. Therefore, we recommend choosing GPT-4O, which has image analysis capabilities. Of course, you can also choose gpt-3.5-turbo or other models.
+#. PiDog está equipado con un módulo de cámara que puedes habilitar para capturar imágenes de lo que ve y subirlas a GPT usando nuestro código de ejemplo. Por ello, recomendamos elegir GPT-4O, que tiene capacidades de análisis de imágenes. Por supuesto, también puedes optar por gpt-3.5-turbo u otros modelos.
 
    .. image:: img/apt_create_assistant_model.png
       :width: 700
       :align: center
 
-#. Now, click **Playground** to see if your account is functioning properly.
+#. Ahora, haz clic en **Playground** para verificar si tu cuenta está funcionando correctamente.
 
    .. image:: img/apt_playground.png
 
-#. If your messages or uploaded images are sent successfully and you receive replies, it means your account has not reached the usage limit.
-
+#. Si tus mensajes o imágenes subidas se envían con éxito y recibes respuestas, significa que tu cuenta no ha alcanzado el límite de uso.
 
    .. image:: img/apt_playground_40.png
       :width: 700
       :align: center
 
-#. If you encounter an error message after inputting information, you may have reached your usage limit. Please check your usage dashboard or billing settings.
+#. Si encuentras un mensaje de error tras introducir información, es posible que hayas alcanzado tu límite de uso. Revisa tu panel de uso o las configuraciones de facturación.
 
    .. image:: img/apt_playground_40mini_3.5.png
       :width: 700
       :align: center
 
-3. Fill in API Key and Assistant ID
---------------------------------------------------
+3. Introducir la Clave API y el ID del Asistente
+----------------------------------------------------
 
-#. Use the command to open the ``keys.py`` file.
+#. Utiliza el siguiente comando para abrir el archivo ``keys.py``.
 
    .. code-block:: shell
 
       nano ~/pidog/gpt_examples/keys.py
 
-#. Fill in the API Key and Assistant ID you just copied.
+#. Rellena los campos con la Clave API y el ID del Asistente que acabas de copiar.
 
    .. code-block:: shell
 
       OPENAI_API_KEY = "sk-proj-vEBo7Ahxxxx-xxxxx-xxxx"
       OPENAI_ASSISTANT_ID = "asst_ulxxxxxxxxx"
 
-#. Press ``Ctrl + X``, ``Y``, and then ``Enter`` to save the file and exit.
+#. Presiona ``Ctrl + X``, ``Y`` y luego ``Enter`` para guardar el archivo y salir.
 
-4. Running the Example
-----------------------------------
-Text Communication
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+4. Ejecución del Ejemplo
+----------------------------
 
-If your Pidog does not have a microphone, you can use keyboard input text to interact with it by running the following commands.
+Comunicación por Texto
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Now, run the following commands using sudo, as Pidog's speaker will not function without it. The process will take some time to complete.
+Si tu PiDog no cuenta con un micrófono, puedes usar el teclado para interactuar con él ingresando texto mediante los siguientes comandos.
+
+#. Ahora, ejecuta los siguientes comandos con privilegios de sudo, ya que el altavoz de PiDog no funcionará sin estos permisos. El proceso tomará un poco de tiempo en completarse.
 
    .. code-block:: shell
 
       cd ~/pidog/gpt_examples/
       sudo ~/my_venv/bin/python3 gpt_dog.py --keyboard
 
-#. Once the commands have executed successfully, you will see the following output, indicating that all components of Pidog are ready.
+#. Una vez que los comandos se hayan ejecutado correctamente, verás la siguiente salida, indicando que todos los componentes de PiDog están listos.
 
    .. code-block:: shell
 
@@ -203,36 +203,36 @@ If your Pidog does not have a microphone, you can use keyboard input text to int
 
       input:
 
-#. You will also be provided with a link to view Pidog's camera feed on your web browser: ``http://rpi_ip:9000/mjpg``.
+#. También se te proporcionará un enlace para ver el video en tiempo real de la cámara de PiDog a través de tu navegador: ``http://rpi_ip:9000/mjpg``.
 
    .. image:: img/apt_ip_camera.png
       :width: 700
       :align: center
 
-#. You can now type your commands into the terminal window, and press Enter to send them. Pidog's responses may surprise you.
+#. Ahora puedes escribir tus comandos en la ventana del terminal y presionar Enter para enviarlos. Las respuestas de PiDog podrían sorprenderte.
 
    .. note::
       
-      Pidog needs to receive your input, send it to GPT for processing, receive the response, and then play it back via speech synthesis. This entire process takes some time, so please be patient.
+      PiDog necesita recibir tu entrada, enviarla a GPT para su procesamiento, recibir la respuesta y luego reproducirla mediante síntesis de voz. Todo este proceso lleva tiempo, así que ten paciencia.
 
    .. image:: img/apt_keyboard_input.png
       :width: 700
       :align: center
 
-#. If you are using the GPT-4O model, you can also ask questions based on what Pidog sees.
+#. Si estás utilizando el modelo GPT-4O, también puedes hacer preguntas basadas en lo que PiDog observa.
 
-Voice Communication
+Comunicación por Voz
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-If your Pidog is equipped with a microphone, or you can purchase one by clicking |link_microphone|, you can interact with Pidog using voice commands.
+Si tu PiDog está equipado con un micrófono, o si has adquirido uno haciendo clic en |link_microphone|, puedes interactuar con PiDog usando comandos de voz.
 
-#. First, verify that the Raspberry Pi has detected the microphone.
+#. Primero, verifica que la Raspberry Pi haya detectado el micrófono.
 
    .. code-block:: shell
 
       arecord -l
 
-   If successful, you will receive the following information, indicating that your microphone has been detected.
+   Si tiene éxito, recibirás la siguiente información, indicando que tu micrófono ha sido detectado.
 
    .. code-block:: 
       
@@ -241,26 +241,26 @@ If your Pidog is equipped with a microphone, or you can purchase one by clicking
       Subdevices: 1/1
       Subdevice #0: subdevice #0
 
-#. Run the following command, then speak to Pidog or make some sounds. The microphone will record the sounds into the ``op.wav`` file. Press ``Ctrl + C`` to stop recording.
+#. Ejecuta el siguiente comando y luego háblale a PiDog o emite algún sonido. El micrófono grabará los sonidos en el archivo ``op.wav``. Presiona ``Ctrl + C`` para detener la grabación.
 
    .. code-block:: shell
 
       rec op.wav
 
-#. Finally, use the command below to play back the recorded sound, confirming that the microphone is functioning properly.
+#. Finalmente, utiliza el comando a continuación para reproducir el sonido grabado y confirmar que el micrófono está funcionando correctamente.
 
    .. code-block:: shell
 
       sudo play op.wav
 
-#. Now, run the following commands using sudo, as Pidog's speaker will not function without it. The process will take some time to complete.
+#. Ahora, ejecuta los siguientes comandos con sudo, ya que el altavoz de PiDog no funcionará sin estos permisos. El proceso tomará un poco de tiempo en completarse.
 
    .. code-block:: shell
 
       cd ~/pidog/gpt_examples/
       sudo ~/my_venv/bin/python3 gpt_dog.py
 
-#. Once the commands have executed successfully, you will see the following output, indicating that all components of Pidog are ready.
+#. Una vez que los comandos se hayan ejecutado correctamente, verás la siguiente salida, indicando que todos los componentes de PiDog están listos.
 
    .. code-block:: shell
       
@@ -284,23 +284,23 @@ If your Pidog is equipped with a microphone, or you can purchase one by clicking
 
       listening ...
 
-#. You will also be provided with a link to view Pidog's camera feed on your web browser: ``http://rpi_ip:9000/mjpg``.
+#. También se te proporcionará un enlace para ver el video en tiempo real de la cámara de PiDog a través de tu navegador: ``http://rpi_ip:9000/mjpg``.
 
    .. image:: img/apt_ip_camera.png
       :width: 700
       :align: center
 
-#. You can now speak to Pidog, and its responses may surprise you.
+#. Ahora puedes hablarle a PiDog, y sus respuestas podrían sorprenderte.
 
    .. note::
       
-      Pidog needs to receive your input, convert it to text, send it to GPT for processing, receive the response, and then play it back via speech synthesis. This entire process takes some time, so please be patient.
+      PiDog necesita recibir tu entrada, convertirla en texto, enviarla a GPT para su procesamiento, recibir la respuesta y luego reproducirla mediante síntesis de voz. Todo este proceso lleva tiempo, así que ten paciencia.
 
    .. image:: img/apt_speech_input.png
       :width: 700
       :align: center
 
-#. If you are using the GPT-4O model, you can also ask questions based on what Pidog sees.
+#. Si estás utilizando el modelo GPT-4O, también puedes hacer preguntas basadas en lo que PiDog observa.
 
 .. raw:: html
 

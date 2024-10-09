@@ -1,41 +1,40 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Hola, ¡bienvenido a la comunidad de entusiastas de SunFounder Raspberry Pi & Arduino & ESP32 en Facebook! Sumérgete más en el mundo de Raspberry Pi, Arduino y ESP32 con otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte de expertos**: Resuelve problemas post-venta y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a los anuncios de nuevos productos y vistas previas.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? Haz clic en [|link_sf_facebook|] y únete hoy mismo.
 
-Dual Touch Sensor
-==================================
+Sensor Táctil Dual
+==============================
 
 .. image:: img/cpn_touchswitch.png
    :width: 200
    :align: center
 
-Dual channel touch sensor, based on two ttp223 touch sensors.
-When a touch signal is detected, the corresponding pin level will be pulled low.
+Sensor táctil de doble canal, basado en dos sensores táctiles TTP223.
+Cuando se detecta una señal táctil, el nivel del pin correspondiente se pondrá en estado bajo.
 
-TTP223 is a touch pad detector IC that provides 1 touch key.
-The touch detection IC is specially designed to replace the traditional direct keys with different pad sizes.
-It features low power consumption and wide operating voltage.
+El TTP223 es un IC detector de teclas táctiles que proporciona 1 tecla táctil.
+El IC de detección táctil está diseñado específicamente para reemplazar los botones directos tradicionales con diferentes tamaños de almohadilla.
+Presenta un bajo consumo de energía y un amplio rango de voltaje de operación.
 
+**Especificaciones**
 
-**Specifications**
+* Fuente de alimentación: 2.0V~5.5V
+* Salida de señal: Señal digital
+* Conector: SH1.0 4P
 
-* Power Supply: 2.0V~5.5V
-* Signal Output: Digital signal
-* Connector: SH1.0 4P
+**Asignación de Pines**
 
-**Pin Out**
-
-* GND - Ground Input
-* VCC - Power Supply Input
-* SIG1 - Touch signal 1, low level means touch
-* SIG2 - Touch signal 2, low level means touch
+* GND - Entrada de tierra
+* VCC - Entrada de alimentación
+* SIG1 - Señal táctil 1, nivel bajo indica toque
+* SIG2 - Señal táctil 2, nivel bajo indica toque

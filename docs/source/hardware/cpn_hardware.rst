@@ -1,23 +1,23 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Hola, ¡bienvenido a la comunidad de entusiastas de SunFounder Raspberry Pi & Arduino & ESP32 en Facebook! Sumérgete más en el mundo de Raspberry Pi, Arduino y ESP32 con otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte de expertos**: Resuelve problemas post-venta y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a los anuncios de nuevos productos y vistas previas.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? Haz clic en [|link_sf_facebook|] y únete hoy mismo.
 
 Hardware
 ==================
 
-When you are writing code, you may need to know how each module works or the role of each pin, then please see this chapter.
+Cuando estés escribiendo código, es posible que necesites conocer cómo funciona cada módulo o el papel que desempeña cada pin; en ese caso, consulta este capítulo.
 
-In this chapter you will find a description of each module's function, technical parameters and working principle.
+En esta sección, encontrarás una descripción detallada de la función de cada módulo, sus parámetros técnicos y el principio de funcionamiento.
 
 .. toctree::
     :maxdepth: 1

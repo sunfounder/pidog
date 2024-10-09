@@ -1,23 +1,23 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la comunidad de entusiastas de SunFounder para Raspberry Pi, Arduino y ESP32 en Facebook. Sumérgete en el mundo de Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte experto**: Resuelve problemas postventa y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a nuevos anuncios de productos y adelantos exclusivos.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-2. Calibrate the PiDog
+2. Calibrar el PiDog
 =============================
 
-**Introduction**
+**Introducción**
 
-Calibrating your PiDog is an essential step to ensure its stable and efficient operation. This process helps correct any imbalances or inaccuracies that might have arisen during assembly or from structural issues. Follow these steps carefully to ensure your PiDog walks steadily and performs as expected.
+Calibrar tu PiDog es un paso esencial para garantizar su operación estable y eficiente. Este proceso ayuda a corregir cualquier desequilibrio o imprecisión que pueda haber surgido durante el ensamblaje o por problemas estructurales. Sigue estos pasos con cuidado para asegurarte de que tu PiDog camine de manera firme y funcione como se espera.
 
 .. raw:: html
 
@@ -27,25 +27,26 @@ Calibrating your PiDog is an essential step to ensure its stable and efficient o
    </video>
 
 
-But if the deviation angle is too big, you still have to go back to :ref:`py_servo_adjust` to set the servo angle to 0°, and then follow the instructions to reassemble the PiDog.
+Si el ángulo de desviación es demasiado grande, deberás volver a :ref:`py_servo_adjust` para ajustar el ángulo del servomotor a 0° y luego seguir las instrucciones para volver a ensamblar el PiDog.
 
-**Calibrate Video**
 
-For a comprehensive guide, refer to the full calibration video. It provides a visual step-by-step process to accurately calibrate your PiDog.
+**Video de calibración**
+
+Para obtener una guía completa, consulta el video de calibración. Este proporciona un proceso visual detallado para calibrar con precisión tu PiDog.
 
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=g8_RZDUkfjdwbLZu&amp;start=871&end=1160" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**Steps**
+**Pasos**
 
-The specific steps are as follows:
+Los pasos específicos son los siguientes:
 
-#. Put the PiDog on the base.
+#. Coloca el PiDog sobre la base.
 
     .. image:: img/place-pidog.JPG
 
-#. Navigate to the PiDog examples directory and run the ``0_calibration.py`` script.
+#. Navega al directorio de ejemplos de PiDog y ejecuta el script ``0_calibration.py``.
 
     .. raw:: html
 
@@ -56,43 +57,39 @@ The specific steps are as follows:
         cd ~/pidog/examples
         sudo python3 0_calibration.py
         
-    Upon running the script, a user interface will appear in your terminal.
+    Al ejecutar el script, aparecerá una interfaz de usuario en tu terminal.
 
     .. image:: img/CALI.slt.1.png
 
-#. Here, you need to select your calibration ruler (60° or 90°).If your kit has a 90° calibration ruler, select the first option; if it is a 60° one, select the second option. After selecting, you will enter the following interface:
+#. Aquí debes seleccionar tu regla de calibración (60° o 90°). Si tu kit tiene una regla de calibración de 90°, selecciona la primera opción; si es una de 60°, selecciona la segunda opción. Después de seleccionar, ingresarás a la siguiente interfaz:
 
 .. image:: img/CALI.slt.2.png
 
 
-
-90° Ruler
+Regla de 90°
 ------------------------------
 
-
-#. Position the **Calibration Ruler** (Acrylic C) as shown in the provided image. In the terminal, press ``1``, followed by ``w`` and ``s`` keys to align the edges as indicated in the image.
+#. Coloca la **Regla de Calibración** (Acrílico C) como se muestra en la imagen proporcionada. En la terminal, presiona ``1``, seguido de las teclas ``w`` y ``s`` para alinear los bordes como se indica en la imagen.
 
     .. image:: img/CALI-1.2.png
 
-#. Reposition the **Calibration Ruler** (Acrylic C) as illustrated in the next image. Press ``2`` in the terminal, then use ``w`` and ``s`` to align the edges as shown.
+#. Reposiciona la **Regla de Calibración** (Acrílico C) como se ilustra en la siguiente imagen. Presiona ``2`` en la terminal, luego usa ``w`` y ``s`` para alinear los bordes como se muestra.
 
     .. image:: img/CALI-2.2.png
 
-#. Repeat the calibration process for the remaining servos (3 to 8). Ensure all four legs of the PiDog are calibrated.
+#. Repite el proceso de calibración para los servomotores restantes (del 3 al 8). Asegúrate de calibrar las cuatro patas del PiDog.
 
 
-
-60° Ruler
+Regla de 60°
 ------------------------------
 
-#. Position the **Calibration Ruler** (Acrylic C) as shown in the provided image. Place its long side on a level surface. In the terminal, press ``1``, followed by ``w`` and ``s`` keys to align the edges as indicated in the image.
+#. Coloca la **Regla de Calibración** (Acrílico C) como se muestra en la imagen proporcionada. Coloca su lado largo sobre una superficie nivelada. En la terminal, presiona ``1``, seguido de las teclas ``w`` y ``s`` para alinear los bordes como se indica en la imagen.
 
     .. image:: img/CALI.60.1.JPG
 
-#. Reposition the **Calibration Ruler** (Acrylic C) as illustrated in the next image. Press ``2`` in the terminal, then use ``w`` and ``s`` to align the edges as shown.
+#. Reposiciona la **Regla de Calibración** (Acrílico C) como se ilustra en la siguiente imagen. Presiona ``2`` en la terminal, luego usa ``w`` y ``s`` para alinear los bordes como se muestra.
 
     .. image:: img/CALI.60.2.JPG
 
-#. Repeat the calibration process for the remaining servos (3 to 8). Ensure all four legs of the PiDog are calibrated.
-
+#. Repite el proceso de calibración para los servomotores restantes (del 3 al 8). Asegúrate de calibrar las cuatro patas del PiDog.
 

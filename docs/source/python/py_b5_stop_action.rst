@@ -1,53 +1,52 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la Comunidad de Entusiastas de Raspberry Pi, Arduino y ESP32 de SunFounder en Facebook. Sumérgete en el mundo de Raspberry Pi, Arduino y ESP32 con otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirte?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte de Expertos**: Resuelve problemas postventa y supera desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y Compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Avances Exclusivos**: Accede de forma anticipada a anuncios de nuevos productos y adelantos exclusivos.
+    - **Descuentos Especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y Sorteos Festivos**: Participa en sorteos y promociones durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-5. Stop All Actions
-======================
+5. Detener Todas las Acciones
+===================================
 
-After the previous chapters, you can find that the servo control of PiDog is divided into three threads.
-This allows PiDog's head and body to move at the same time, even with two lines of code.
+Después de los capítulos anteriores, habrás notado que el control de los servos de PiDog se divide en tres hilos.
+Esto permite que la cabeza y el cuerpo de PiDog se muevan simultáneamente, incluso con solo dos líneas de código.
 
-**Here are a few functions that work with the three servo threads:**
+**Aquí hay algunas funciones que gestionan estos tres hilos de servos:**
+
 
 .. code-block:: python
 
     Pidog.wait_all_done()
-    
-Wait for all the actions in the leg actions buffer, head buffer and tail buffer to be executed
+
+Espera a que se ejecuten todas las acciones en los búferes de las patas, la cabeza y la cola.
 
 .. code-block:: python
 
     Pidog.body_stop()
-    
-Stop all the actions of legs, head and tail
+
+Detiene todas las acciones de las patas, la cabeza y la cola.
 
 .. code-block:: python
 
     Pidog.stop_and_lie()
-    
-Stop all the actions of legs, head and tail, then reset to "lie" pose
+
+Detiene todas las acciones de las patas, la cabeza y la cola, y luego resetea a la pose de "acostado".
 
 .. code-block:: python
 
     Pidog.close()
-    
-Stop all the actions, reset to "lie" pose, and  close all the threads, usually used when exiting a program
+
+Detiene todas las acciones, restablece a la pose de "acostado" y cierra todos los hilos, generalmente usado al salir de un programa.
 
 
-**Here are some common usages:**
-
-
+**A continuación, se presentan algunos casos de uso comunes:**
 
 .. code-block:: python
     :emphasize-lines: 10,36,45
@@ -58,13 +57,13 @@ Stop all the actions, reset to "lie" pose, and  close all the threads, usually u
     my_dog = Pidog()
 
     try:
-        # pushup prepare
+        # preparar para flexiones
         my_dog.legs_move([[45, 35, -45, -35, 80, 70, -80, -70]], speed=30)
         my_dog.head_move([[0, 0, 0]], pitch_comp=-10, speed=80) 
-        my_dog.wait_all_done() # wait all the actions to be done
+        my_dog.wait_all_done()  # esperar a que todas las acciones se completen
         time.sleep(0.5)
 
-        # pushup 
+        # flexiones 
         leg_pushup_action = [
             [90, -30, -90, 30, 80, 70, -80, -70],
             [45, 35, -45, -35, 80, 70, -80, -70],       
@@ -74,19 +73,19 @@ Stop all the actions, reset to "lie" pose, and  close all the threads, usually u
             [0, 0, 20],
         ]
         
-        # fill action buffers
+        # llenar los búferes de acción
         for _ in range(50):
             my_dog.legs_move(leg_pushup_action, immediately=False, speed=50)
             my_dog.head_move(head_pushup_action, pitch_comp=-10, immediately=False, speed=50)
         
-        # show buffer length
+        # mostrar longitud del búfer
         print(f"legs buffer length (start): {len(my_dog.legs_action_buffer)}")
         
-        # keep 5 second & show buffer length
+        # mantener durante 5 segundos y mostrar longitud del búfer
         time.sleep(5)
         print(f"legs buffer length (5s): {len(my_dog.legs_action_buffer)}")
         
-        # stop action & show buffer length
+        # detener acciones y mostrar longitud del búfer
         my_dog.stop_and_lie()
         print(f"legs buffer length (stop): {len(my_dog.legs_action_buffer)}")
 
@@ -96,4 +95,4 @@ Stop all the actions, reset to "lie" pose, and  close all the threads, usually u
         print(f"\033[31mERROR: {e}\033[m")
     finally:
         print("closing ...")
-        my_dog.close() # close all the servo threads
+        my_dog.close()  # cerrar todos los hilos de servos

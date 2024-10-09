@@ -1,29 +1,27 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la comunidad de entusiastas de SunFounder para Raspberry Pi, Arduino y ESP32 en Facebook. Sumérgete en el mundo de Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte experto**: Resuelve problemas postventa y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a nuevos anuncios de productos y adelantos exclusivos.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-10. Balance
-=============
+10. Equilibrio
+===================
 
+Gracias a su módulo IMU de 6 grados de libertad (DOF), PiDog tiene un gran sentido del equilibrio.
 
-Because PiDog is equipped with a 6-DOF IMU module, it has a great sense of balance.
-
-In this example, you can make PiDog walk smoothly on the table, even if you lift one side of the table, PiDog will walk smoothly on the gentle slope.
-
+En este ejemplo, puedes hacer que PiDog camine de manera estable sobre una mesa, e incluso si levantas un lado de la mesa, PiDog caminará sin problemas por la suave pendiente.
 
 .. image:: img/py_10.gif
 
-**Run the Code**
+**Ejecutar el Código**
 
 .. raw:: html
 
@@ -34,33 +32,33 @@ In this example, you can make PiDog walk smoothly on the table, even if you lift
     cd ~/pidog/examples
     sudo python3 10_balance.py
 
-After the program is running, you will see a printed keyboard on the terminal.
-You can control PiDog to walk smoothly on the ramp by typing the below keys.
+Después de ejecutar el programa, verás un teclado impreso en el terminal.
+Puedes controlar a PiDog para que camine con estabilidad en la rampa utilizando las siguientes teclas:
 
 
 .. list-table:: 
     :widths: 25 25
     :header-rows: 1
 
-    * - Keys
-      - Function
-    * -  W
-      -  Forward 
-    * -  E
-      -  Stand 
-    * -  A
-      -  Turn Left 
-    * -  S
-      -  Backward 
-    * -  D
-      -  Turn Right 
-    * -  R
-      -  Each press slightly lifts the body; multiple presses are needed for a noticeable rise.     
-    * -  F
-      -  Each press lowers the body a bit; it takes multiple presses for a noticeable descent.
-    
-
-**Code**
+    * - Teclas
+      - Función
+    * - W
+      - Avanzar 
+    * - E
+      - Estar de pie 
+    * - A
+      - Girar a la izquierda 
+    * - S
+      - Retroceder 
+    * - D
+      - Girar a la derecha 
+    * - R
+      - Cada pulsación eleva ligeramente el cuerpo; se requieren varias pulsaciones para una subida notable.     
+    * - F
+      - Cada pulsación baja el cuerpo un poco; se necesitan varias pulsaciones para notar un descenso.
 
 
-Please find the code in |link_code_10_balance|.
+**Código**
+
+Puedes encontrar el código en |link_code_10_balance|.
+

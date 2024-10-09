@@ -1,42 +1,40 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Hola, ¡bienvenido a la comunidad de entusiastas de SunFounder Raspberry Pi & Arduino & ESP32 en Facebook! Sumérgete más en el mundo de Raspberry Pi, Arduino y ESP32 con otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte de expertos**: Resuelve problemas post-venta y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a los anuncios de nuevos productos y vistas previas.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? Haz clic en [|link_sf_facebook|] y únete hoy mismo.
 
-11-channel Light Board
-=============================
+Placa de Luces de 11 Canales
+================================
 
 .. image:: img/cpn_lightboard.png
    :width: 500
    :align: center
 
+Este es un módulo de LED RGB de 11 canales, que está equipado con 11 LEDs RGB controlados por el chip SLED1735.
 
-This is an 11-channel RGB LED module, which is equipped with 11 RGB LEDs controlled by the SLED1735 chip.
+El SLED1734 puede controlar hasta 256 LEDs y 75 LEDs RGB. 
+En la matriz de LED controlada por el SLED1734, cada LED cuenta con funciones de encendido/apagado, parpadeo, luz de respiración, sincronización automática y muchas otras características. 
+El chip incorpora la tecnología PWM (modulación por ancho de pulso), que permite 256 niveles de ajuste de brillo. También tiene una función de corrección de puntos con 16 niveles.
 
-SLED1734 can drive up to 256 LEDs and 75 RGB LEDs.
-In the LED matrix controlled by SLED1734, each LED has on/off, blinking, breathing light and automatic synchronization and many other functions.
-The chip has built-in PWM (pulse width modulation) technology, which can provide 256 levels of brightness adjustment. It also has a 16-level dot correction function.
+**Especificaciones**
 
+* Fuente de alimentación: 3.3V
+* Comunicación: IIC
+* Conector: SH1.0 4P
+* LEDs: LEDs RGB 3535
 
-**Specifications**
+**Distribución de Pines**
 
-* Power supply: 3.3V
-* Communication: IIC
-* Connector: SH1.0 4P
-* LEDs: 3535 RGB LEDs
-
-**Pin Out**
-
-* GND - Ground Input
-* VCC - Power Supply Input
+* GND - Entrada de tierra
+* VCC - Entrada de alimentación
 * SDA - IIC SDA
 * SCL - IIC SCL

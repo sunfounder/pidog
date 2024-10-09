@@ -1,28 +1,28 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la Comunidad de Entusiastas de Raspberry Pi, Arduino y ESP32 de SunFounder en Facebook. Sumérgete más a fondo en Raspberry Pi, Arduino y ESP32 junto a otros entusiastas.
 
-    **Why Join?**
+    **¿Por qué unirte?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte de Expertos**: Resuelve problemas postventa y supera desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y Compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Avances Exclusivos**: Accede de forma anticipada a anuncios de nuevos productos y adelantos exclusivos.
+    - **Descuentos Especiales**: Aprovecha descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y Sorteos Festivos**: Participa en sorteos y promociones durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-6. Do Preset Action
-=======================
+6. Realizar Acciones Predefinidas
+=================================
 
-Some commonly used actions have been pre-written in PiDog's library.
-You can call the following function to make PiDog do these actions directly.
+Algunas de las acciones más utilizadas ya han sido preescritas en la biblioteca de PiDog.
+Puedes usar la siguiente función para hacer que PiDog realice estas acciones directamente.
 
 .. code-block:: python
 
     Pidog.do_action(action_name, step_count=1, speed=50)
 
-* ``action_name`` : Action name, the following strings can be written.
+* ``action_name`` : Nombre de la acción. Se pueden utilizar las siguientes cadenas:
 
     * ``"sit"``
     * ``"half_sit"``
@@ -46,12 +46,12 @@ You can call the following function to make PiDog do these actions directly.
     * ``"head_up_down"``
     * ``"wag_tail"``
 
-* ``step_count`` : How many times to perform this action.
-* ``speed`` : How fast to perform the action.
+* ``step_count`` : Número de veces que se repetirá la acción.
+* ``speed`` : Velocidad a la que se ejecutará la acción.
 
-**Here is an example of usage:**
+**Aquí tienes un ejemplo de uso:**
 
-1. Do ten push-ups, then sit on the floor and act cute.
+1. Realizar diez flexiones, luego sentarse en el suelo y hacer una pose adorable.
 
 .. code-block:: python
 
@@ -61,12 +61,12 @@ You can call the following function to make PiDog do these actions directly.
     my_dog = Pidog()
 
     try:
-        # pushup
+        # flexiones
         my_dog.do_action("half_sit", speed=60)
         my_dog.do_action("pushup", step_count=10, speed=60)
         my_dog.wait_all_done()
         
-        # act cute
+        # pose adorable
         my_dog.do_action("sit", speed=60)
         my_dog.do_action("wag_tail", step_count=100,speed=90)
         my_dog.do_action("tilting_head", step_count=5, speed=20)
@@ -80,4 +80,4 @@ You can call the following function to make PiDog do these actions directly.
         print(f"\033[31mERROR: {e}\033[m")
     finally:
         print("closing ...")
-        my_dog.close()    
+        my_dog.close()

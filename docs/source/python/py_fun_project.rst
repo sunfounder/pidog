@@ -1,24 +1,22 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la Comunidad de Entusiastas de Raspberry Pi, Arduino y ESP32 de SunFounder en Facebook. Sumérgete más a fondo en Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirte?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte de Expertos**: Resuelve problemas postventa y supera desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y Compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Avances Exclusivos**: Accede de forma anticipada a anuncios de nuevos productos y vistas previas exclusivas.
+    - **Descuentos Especiales**: Aprovecha descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y Sorteos Festivos**: Participa en sorteos y promociones durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-3. Fun Python Projects
-=========================
+3. Proyectos Divertidos con Python
+=======================================
 
-
-Here, we delve into an exciting assortment of projects that showcase the versatility and capabilities of the PiDog. 
-From the basics of setting a wakeup routine in :ref:`py_wake_up` to the advanced dynamics of ball tracking in :ref:`py_ball_track`, each project offers a unique glimpse into the world of Python programming for robotics. Whether you're keen on making your PiDog patrol an area, respond to commands, execute pushups, or even howl on command, there's a project tailored for you. Furthermore, for those looking to extend their PiDog's capabilities to computer interfaces, we have tutorials on keyboard and app control as well. Dive in, and embark on a journey of discovery and fun with these hands-on Python projects for your PiDog!
-
+Aquí exploramos una variedad de proyectos emocionantes que muestran la versatilidad y las capacidades de PiDog. 
+Desde lo básico, como establecer una rutina de despertar en :ref:`py_wake_up`, hasta la dinámica avanzada de rastreo de pelotas en :ref:`py_ball_track`, cada proyecto te brinda una perspectiva única del mundo de la programación en Python para robótica. Ya sea que quieras que tu PiDog patrulle un área, responda a comandos, haga flexiones o incluso aúlle a la orden, encontrarás un proyecto adaptado a tus intereses. Además, para quienes deseen ampliar las capacidades de su PiDog a interfaces informáticas, también disponemos de tutoriales para el control por teclado y aplicaciones. ¡Sumérgete y emprende un viaje de descubrimiento y diversión con estos proyectos prácticos de Python para tu PiDog!
 
 .. toctree::
     :maxdepth: 2

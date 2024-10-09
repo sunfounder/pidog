@@ -1,57 +1,60 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Hola, ¡bienvenido a la comunidad de entusiastas de SunFounder Raspberry Pi & Arduino & ESP32 en Facebook! Sumérgete aún más en el mundo de Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte de expertos**: Resuelve problemas post-venta y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a los anuncios de nuevos productos y a vistas previas.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? Haz clic en [|link_sf_facebook|] y únete hoy mismo.
 
 .. _login_windows:
 
 PuTTY
 =========================
 
-If you are a Windows user, you can use some applications of SSH. Here, we recommend `PuTTY <https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html>`_.
+Si eres un usuario de Windows, puedes utilizar algunas aplicaciones de SSH. Aquí te recomendamos `PuTTY <https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html>`_.
 
-**Step 1**
+**Paso 1**
 
-Download PuTTY.
+Descarga PuTTY.
 
-**Step 2**
+**Paso 2**
 
-Open PuTTY and click **Session** on the left tree-alike structure. Enter
-the IP address of the RPi in the text box under **Host Name (or IP
-address)** and **22** under **Port** (by default it is 22).
+Abre PuTTY y haz clic en **Session** en la estructura de árbol a la izquierda. Ingresa la dirección IP de la Raspberry Pi en el cuadro de texto bajo **Host Name (or IP address)** y **22** en **Port** (por defecto es 22).
 
 .. image:: img/image25.png
     :align: center
 
-**Step 3**
+**Paso 3**
 
-Click **Open**. Note that when you first log in to the Raspberry Pi with
-the IP address, there prompts a security reminder. Just click **Yes**.
+Haz clic en **Open**. Ten en cuenta que cuando inicies sesión por primera vez 
+en la Raspberry Pi con la dirección IP, aparecerá un recordatorio de seguridad. 
+Solo haz clic en **Yes**.
 
-**Step 4**
+**Paso 4**
 
-When the PuTTY window prompts \"**login as:**\", type in
-\"**pi**\" (the user name of the RPi), and **password**: \"raspberry\"
-(the default one, if you haven't changed it).
+Cuando la ventana de PuTTY muestre \"**login as:**\", escribe \"**pi**\" (el nombre 
+de usuario de la Raspberry Pi), y **contraseña**: \"raspberry\" (la predeterminada, 
+si no la has cambiado).
 
 .. note::
 
-    When you input the password, the characters do not display on window accordingly, which is normal. What you need is to input the correct password.
+    Cuando introduces la contraseña, los caracteres no se muestran en la ventana, lo 
+    cual es normal. Solo necesitas ingresar la contraseña correcta.
     
-    If inactive appears next to PuTTY, it means that the connection has been broken and needs to be reconnected.
+    Si al lado de PuTTY aparece "inactive", significa que la conexión se ha interrumpido 
+    y debe ser restablecida.
     
 .. image:: img/image26.png
     :align: center
 
-**Step 5**
+**Paso 5**
 
-Here, we get the Raspberry Pi connected and it is time to conduct the next steps.
+
+
+Ahora tenemos la Raspberry Pi conectada y es el momento de continuar con los siguientes pasos.

@@ -1,25 +1,25 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la comunidad de entusiastas de SunFounder para Raspberry Pi, Arduino y ESP32 en Facebook. Sumérgete en el mundo de Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte experto**: Resuelve problemas postventa y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a nuevos anuncios de productos y adelantos exclusivos.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-2. Function Demonstration
+2. Demostración de Funciones
 ===============================
 
-This project shows you all of PiDog's usual actions and sounds.
+Este proyecto te muestra todas las acciones y sonidos habituales de PiDog.
 
-You can make PiDog make actions or make sounds by entering the serial number.
+Puedes hacer que PiDog realice acciones o emita sonidos ingresando el número correspondiente.
 
-The motion/sound effects currently included in this example are listed below.
+Los movimientos y efectos de sonido incluidos en este ejemplo se detallan a continuación:
 
 .. image:: img/py_2.gif
 
@@ -27,42 +27,42 @@ The motion/sound effects currently included in this example are listed below.
     :widths: 25 25
     :header-rows: 1
 
-    * - Actions: 
-      - Sound Effect: 
-    * - 1.stand
-      - 16.angry
-    * - 2.sit
-      - 17.confused_1  
-    * - 3.lie
-      - 18.confused_2
-    * - 4.lie_with_hands_out 
-      - 19.confused_3 
-    * - 5.trot
-      - 20.growl_1 
-    * - 6.forward
-      - 21.growl_2 
-    * - 7.backward
-      - 22.howling 
-    * - 8.turn_left
-      - 23.pant 
-    * - 9.turn_right
-      - 24.single_bark_1 
-    * - 10.doze_off
-      - 25.single_bark_2 
-    * - 11.stretch
-      - 26.snoring 
-    * - 12.pushup
-      - 27.woohoo 
-    * - 13.shake_head
+    * - Acciones: 
+      - Efectos de Sonido: 
+    * - 1. de pie
+      - 16. enojado
+    * - 2. sentado
+      - 17. confundido_1  
+    * - 3. acostado
+      - 18. confundido_2
+    * - 4. acostado con manos extendidas 
+      - 19. confundido_3 
+    * - 5. trotar
+      - 20. gruñido_1 
+    * - 6. avanzar
+      - 21. gruñido_2 
+    * - 7. retroceder
+      - 22. aullido 
+    * - 8. girar a la izquierda
+      - 23. jadear 
+    * - 9. girar a la derecha
+      - 24. ladrido_simple_1 
+    * - 10. dormitar
+      - 25. ladrido_simple_2 
+    * - 11. estirarse
+      - 26. ronquido 
+    * - 12. flexiones
+      - 27. woohoo 
+    * - 13. sacudir la cabeza
       -
-    * - 14.tilting_head
+    * - 14. inclinar la cabeza
       -
-    * - 15.wag_tail    
+    * - 15. mover la cola    
       -
 
 
 
-**Run the Code**
+**Ejecutar el Código**
 
 .. raw:: html
 
@@ -73,16 +73,15 @@ The motion/sound effects currently included in this example are listed below.
     cd ~/pidog/examples
     sudo python3 2_function_demonstration.py
 
-After running this example, you input ``1`` and press ``ENTER``, PiDog will stand; input ``2``, PiDog will sit down; input ``27``, PiDog will issue "woohoo~ ".
+Después de ejecutar este ejemplo, si ingresas ``1`` y presionas ``ENTER``, PiDog se pondrá de pie; si ingresas ``2``, PiDog se sentará; si ingresas ``27``, PiDog emitirá un sonido de "woohoo~ ".
 
-Press ``Ctrl+C`` to exit the program.
+Presiona ``Ctrl+C`` para salir del programa.
 
 
-
-**Code**
+**Código**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Puedes **Modificar/Restablecer/Copiar/Ejecutar/Detener** el código a continuación. Pero antes de eso, necesitas ir a la ruta del código fuente como ``pidog\examples``. Después de modificar el código, puedes ejecutarlo directamente para ver el efecto.
 
 .. raw:: html
 
@@ -97,12 +96,12 @@ Press ``Ctrl+C`` to exit the program.
     import curses
     import curses_utils
 
-    # init pidog
+    # Inicializar pidog
     # ======================================
     my_dog = Pidog()
     sleep(0.5)
 
-    # global variables
+    # Variables globales
     # ======================================
     actions = [
         # name, head_pitch_adjust(-1, use last_pitch), speed
@@ -125,15 +124,14 @@ Press ``Ctrl+C`` to exit the program.
     actions_len = len(actions)
 
     sound_effects = []
-    # change working directory
+    # Cambiar directorio de trabajo
     abspath = os.path.abspath(os.path.dirname(__file__))
-    # print(abspath)
     os.chdir(abspath)
     for name in os.listdir('../sounds'):
         sound_effects.append(name.split('.')[0])
     sound_effects.sort()
     sound_len = len(sound_effects)
-    # limit sound quantity
+    # Limitar la cantidad de sonidos
     if sound_len > actions_len:
         sound_len = actions_len
         sound_effects = sound_effects[:actions_len]
@@ -145,12 +143,12 @@ Press ``Ctrl+C`` to exit the program.
 
     STANDUP_ACTIONS = ['trot', 'forward', 'backward', 'turn_left', 'turn_right']
 
-    # define pad size
+    # Definir tamaño del pad
     # ======================================
     curses_utils.PAD_Y = 22
     curses_utils.PAD_X = 70
 
-    # display fuctions
+    # Funciones de visualización
     # ======================================
     def display_head(subpad):
         title = "Function Demonstration"
@@ -171,7 +169,6 @@ Press ``Ctrl+C`` to exit the program.
 
     def display_selection(subpad, index):
         global last_display_index
-        # reset last selection
         if last_display_index > actions_len + sound_len-1 or last_display_index < 0:
             last_display_index = 0
         if last_display_index != index:
@@ -181,7 +178,6 @@ Press ``Ctrl+C`` to exit the program.
                 sound_index = last_display_index-actions_len
                 subpad.addstr(sound_index, 30, f"{last_display_index+1}. {sound_effects[sound_index]}", curses_utils.LIGHT_GRAY)
             last_display_index = index
-        # highlight currernt selection
         if index > actions_len + sound_len-1 or index < 0:
             pass
         elif index < actions_len:

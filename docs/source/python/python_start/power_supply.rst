@@ -1,64 +1,61 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Hola, bienvenido a la comunidad de entusiastas de SunFounder para Raspberry Pi, Arduino y ESP32 en Facebook. Sumérgete en el mundo de Raspberry Pi, Arduino y ESP32 con otros entusiastas.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte experto**: Resuelve problemas postventa y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprende y comparte**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a nuevos anuncios de productos y adelantos exclusivos.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-3. Power Supply for Raspberry Pi (Important)
-===============================================
+3. Fuente de alimentación para Raspberry Pi (Importante)
+===============================================================
 
-Charge
+Carga
 -------------------
 
-Insert the battery cable. Next, insert the USB-C cable to charge the battery.
-You will need to provide your own charger; we recommend a 5V 3A charger, or your commonly used smartphone charger will suffice.
+Conecta el cable de la batería. A continuación, conecta el cable USB-C para cargar la batería. Deberás usar tu propio cargador; recomendamos un cargador de 5V 3A o, en su defecto, puedes utilizar el cargador de tu smartphone habitual.
 
 .. image:: img/BTR_IMG_1096.png
 
 .. note::
-    Connect an external Type-C power source to the Type-C port on the robot hat; it will immediately start charging the battery, and a red indicator light will illuminate.\
-    When the battery is fully charged, the red light will automatically turn off.
+    Conecta una fuente de alimentación externa Type-C al puerto Type-C en el robot HAT; la batería comenzará a cargarse de inmediato, y se encenderá un indicador rojo.
+    Cuando la batería esté completamente cargada, la luz roja se apagará automáticamente.
 
 
-Power ON
+Encendido
 ----------------------
 
-Turn on the power switch. The Power indicator light and the battery level indicator light will illuminate.
+Enciende el interruptor de alimentación. Se iluminarán el indicador de energía y el indicador de nivel de batería.
 
 .. image:: img/BTR_IMG_1097.png
 
-
-Wait for a few seconds, and you will hear a slight beep, indicating that the Raspberry Pi has successfully booted.
+Espera unos segundos y escucharás un pequeño pitido, lo que indica que la Raspberry Pi se ha iniciado con éxito.
 
 .. note::
-    If both battery level indicator lights are off, please charge the battery.
-    When you need extended programming or debugging sessions, you can keep the Raspberry Pi operational by inserting the USB-C cable to charge the battery simultaneously.
+    Si ambos indicadores de nivel de batería están apagados, por favor carga la batería.
+    Si necesitas realizar sesiones prolongadas de programación o depuración, puedes mantener la Raspberry Pi en funcionamiento conectando simultáneamente el cable USB-C para cargar la batería.
 
-18650 Battery
+Batería 18650
 -----------------------------------
 
 .. image:: img/5pin_battery.jpg
 
-* VCC: Battery positive terminal, here there are two sets of VCC and GND is to increase the current and reduce the resistance.
-* Middle: To balance the voltage between the two cells and thus protect the battery.
-* GND: Negative battery terminal.
+* VCC: Terminal positivo de la batería; aquí hay dos conjuntos de VCC y GND para aumentar la corriente y reducir la resistencia.
+* Medio: Para equilibrar el voltaje entre las dos celdas y así proteger la batería.
+* GND: Terminal negativo de la batería.
 
-This is a custom battery pack made by SunFounder consisting of two 18650 batteries with a capacity of 2000mAh. The connector is XH2.54 5P, which can be charged directly after being inserted into the shield.
+Este es un paquete de baterías personalizado fabricado por SunFounder, compuesto por dos baterías 18650 con una capacidad de 2000mAh. El conector es XH2.54 5P, lo que permite cargarlo directamente al insertarlo en la tarjeta de expansión.
 
-**Features**
+**Características**
 
-* Battery charge: 5V/2A
-* Battery output: 5V/5A
-* Battery capacity: 3.7V 2000mAh x 2
-* Battery life: 90min
-* Battery charge time: 130min
-* Connector:XH2.54 5P
-
+* Carga de la batería: 5V/2A
+* Salida de la batería: 5V/5A
+* Capacidad de la batería: 3.7V 2000mAh x 2
+* Duración de la batería: 90 min
+* Tiempo de carga de la batería: 130 min
+* Conector: XH2.54 5P

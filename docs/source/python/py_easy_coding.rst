@@ -1,24 +1,24 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la Comunidad de Entusiastas de Raspberry Pi, Arduino y ESP32 de SunFounder en Facebook. Sumérgete más a fondo en Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirte?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte de Expertos**: Resuelve problemas postventa y supera desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y Compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Avances Exclusivos**: Accede de forma anticipada a anuncios de nuevos productos y vistas previas exclusivas.
+    - **Descuentos Especiales**: Aprovecha descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y Sorteos Festivos**: Participa en sorteos y promociones durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-4. Easy Coding
-======================
-Here, we delve into various functions, breaking them down for a comprehensive understanding. 
-Each sub-topic is dedicated to a specific function, making it easier for you to grasp and implement them. 
-Whether it's initiating parameters, controlling specific movements, or incorporating sensory inputs, we've covered them all. 
-Navigate through the sub-topics below to kickstart your coding journey with Pidog.
+4. Programación Fácil
+=========================
 
+Aquí profundizamos en diversas funciones, desglosándolas para proporcionar una comprensión detallada. 
+Cada subtema está dedicado a una función específica, facilitando su comprensión e implementación. 
+Ya sea para iniciar parámetros, controlar movimientos específicos o integrar entradas sensoriales, hemos cubierto cada aspecto. 
+Navega a través de los subtemas a continuación para comenzar tu aventura de programación con PiDog.
 
 .. toctree::
     :maxdepth: 2

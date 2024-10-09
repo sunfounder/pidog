@@ -1,35 +1,35 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la Comunidad de Entusiastas de Raspberry Pi, Arduino y ESP32 de SunFounder en Facebook. Sumérgete más a fondo en Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirte?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte de Expertos**: Resuelve problemas postventa y supera desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y Compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Avances Exclusivos**: Accede de forma anticipada a anuncios de nuevos productos y vistas previas exclusivas.
+    - **Descuentos Especiales**: Aprovecha descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y Sorteos Festivos**: Participa en sorteos y promociones durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-9. PiDog RGB Strip
-========================
+9. Tira RGB de PiDog
+=======================
 
-There is an RGB Strip on PiDog's chest, which PiDog can use to express emotions.
+PiDog cuenta con una tira RGB en su pecho, la cual puede usar para expresar diferentes emociones.
 
-You can call the following function to control it.
+Puedes controlarla usando la siguiente función.
 
 .. code-block:: python
 
     Pidog.rgb_strip.set_mode(style='breath', color='white', bps=1, brightness=1):
 
-* ``style`` : The lighting display mode of RGB Strip, the following are its available values.
+* ``style`` : El modo de visualización de la tira RGB. Los valores disponibles son:
 
   * ``breath``
   * ``boom``
   * ``bark``
 
-* ``color`` : The lights of the RGB Strip show the colors. You can enter 16-bit RGB values, such as ``#a10a0a``, or the following color names.
+* ``color`` : Color que mostrará la tira RGB. Puedes ingresar valores RGB de 16 bits, como ``#a10a0a``, o usar los siguientes nombres de colores:
 
   * ``"white"``
   * ``"black"``
@@ -42,18 +42,17 @@ You can call the following function to control it.
   * ``"magenta"``
   * ``"pink"``
 
-* ``brightness`` : RGB Strip lights display brightness, you can enter a floating-point value from 0 to 1, such as ``0.5``.
+* ``brightness`` : Brillo de la tira RGB. Puedes ingresar un valor de punto flotante de 0 a 1, como ``0.5``.
 
-* ``delay`` : Float, display animation speed, the smaller the value, the faster the change.
+* ``delay`` : Velocidad de la animación, cuanto menor sea el valor, más rápida será la transición.
 
-Use the following statement to disable RGB Striping.
+Usa la siguiente instrucción para desactivar la tira RGB.
 
 .. code-block:: python
 
     Pidog.rgb_strip.close()
 
-
-Here are examples of their use:
+A continuación, algunos ejemplos de uso
 
 .. code-block:: python
 
@@ -67,15 +66,15 @@ Here are examples of their use:
         my_dog.rgb_strip.set_mode(style="breath", color='pink')
         time.sleep(3)
 
-        # style:"boom", color="#a10a0a"
+        # style="bark", color="#a10a0a"
         my_dog.rgb_strip.set_mode(style="bark", color="#a10a0a")
         time.sleep(3)
 
-        # style:"boom", color="#a10a0a", brightness=0.5, bps=2.5
+        # style="boom", color="#a10a0a", brightness=0.5, bps=2.5
         my_dog.rgb_strip.set_mode(style="boom", color="#a10a0a", bps=2.5, brightness=0.5)
         time.sleep(3)
 
-        # close
+        # cerrar
         my_dog.rgb_strip.close()
         time.sleep(2)
 

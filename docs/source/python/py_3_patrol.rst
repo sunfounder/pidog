@@ -1,28 +1,27 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la comunidad de entusiastas de SunFounder para Raspberry Pi, Arduino y ESP32 en Facebook. Sumérgete en el mundo de Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte experto**: Resuelve problemas postventa y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a nuevos anuncios de productos y adelantos exclusivos.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-3. Patrol
-==============
+3. Patrullaje
+=================
 
-In this project, PiDog makes a vivid behavior: patrolling.
+En este proyecto, PiDog ejecuta un comportamiento dinámico: patrullar.
 
-PiDog will walk forward, if there is an obstacle in front of it, it will stop and bark.
-
+PiDog caminará hacia adelante y, si hay un obstáculo frente a él, se detendrá y ladrará.
 
 .. image:: img/py_3.gif
 
-**Run the Code**
+**Ejecutar el Código**
 
 .. raw:: html
 
@@ -33,16 +32,13 @@ PiDog will walk forward, if there is an obstacle in front of it, it will stop an
     cd ~/pidog/examples
     sudo python3 3_patrol.py
 
-After running this example, PiDog will wag its tail, scan left and right, and walk forward.
+Después de ejecutar este ejemplo, PiDog moverá su cola, escaneará a la izquierda y a la derecha, y comenzará a caminar hacia adelante.
 
 
-
-
-
-**Code**
+**Código**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Puedes **Modificar/Restablecer/Copiar/Ejecutar/Detener** el código a continuación. Pero antes de eso, necesitas ir a la ruta del código fuente como ``pidog\examples``. Después de modificar el código, puedes ejecutarlo directamente para ver el efecto.
 
 .. raw:: html
 
@@ -70,7 +66,7 @@ After running this example, PiDog will wag its tail, scan left and right, and wa
         distance = round(my_dog.ultrasonic.read_distance(), 2)
         print(f"distance: {distance} cm", end="", flush=True)
 
-        # danger
+        # peligro
         if distance < DANGER_DISTANCE:
             print("\033[0;31m DANGER !\033[m")
             my_dog.body_stop()
@@ -90,7 +86,7 @@ After running this example, PiDog will wag its tail, scan left and right, and wa
                 else:
                     print(f"distance: {distance} cm", end="", flush=True)
                 time.sleep(0.01)
-        # safe
+        # seguro
         else:
             print("")
             my_dog.rgb_strip.set_mode('breath', 'white', bps=0.5)

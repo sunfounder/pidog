@@ -1,50 +1,49 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la Comunidad de Entusiastas de Raspberry Pi, Arduino y ESP32 de SunFounder en Facebook. Sumérgete más a fondo en Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirte?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte de Expertos**: Resuelve problemas postventa y supera desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y Compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Avances Exclusivos**: Accede de forma anticipada a anuncios de nuevos productos y vistas previas exclusivas.
+    - **Descuentos Especiales**: Aprovecha descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y Sorteos Festivos**: Participa en sorteos y promociones durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-10. IMU Read
-==============
+10. Lectura del IMU
+=======================
 
+A través del Módulo IMU de 6 grados de libertad (6-DOF), PiDog puede detectar si está en una pendiente o si ha sido levantado.
 
-Through the 6-DOF IMU Module, PiDog can determine if it's standing on a slope, or if it's being picked up.
-
-The 6-DOF IMU Module is equipped with a 3-axis accelerometer and a 3-axis gyroscope, allowing acceleration and angular velocity to be measured in three directions.
+El Módulo IMU de 6-DOF está equipado con un acelerómetro de 3 ejes y un giroscopio de 3 ejes, lo que permite medir la aceleración y la velocidad angular en tres direcciones.
 
 .. note::
 
-    Before using the module, make sure that it is correctly assembled. The label on the module will let you know if it is reversed.
+    Antes de utilizar el módulo, asegúrate de que esté correctamente ensamblado. La etiqueta en el módulo te indicará si está colocado al revés.
 
-**You can read their acceleration with:**
+**Puedes leer su aceleración con:**
 
 .. code-block:: python
 
    ax, ay, az = Pidog.accData
 
-With the PiDog placed horizontally, the acceleration on the x-axis (ie ax) should be close to the acceleration of gravity (1g), with a value of -16384.
-The values of the y-axis and x-axis are close to 0.
+Si PiDog está colocado horizontalmente, la aceleración en el eje x (es decir, ax) debería ser cercana a la aceleración de la gravedad (1g), con un valor de -16384.
+Los valores de los ejes y y z estarán cerca de 0.
 
-**Use the following way to read their angular velocity:**
+**Usa el siguiente método para leer la velocidad angular:**
 
 .. code-block:: python
 
    gx, gy, gz = my_dog.gyroData
 
-In the case where PiDog is placed horizontally, all three values are close to 0.
+En el caso de que PiDog esté colocado horizontalmente, los tres valores deberían estar cerca de 0.
 
 
-**Here are some examples of how 6-DOF Module is used:**
+**A continuación, algunos ejemplos de cómo utilizar el módulo de 6-DOF:**
 
-1. Read real-time acceleration, angular velocity
+1. Leer aceleración y velocidad angular en tiempo real.
 
 .. code-block:: python
 
@@ -67,7 +66,7 @@ In the case where PiDog is placed horizontally, all three values are close to 0.
 
     my_dog.close()
 
-2. Calculate the lean angle of PiDog's body.
+2. Calcular el ángulo de inclinación del cuerpo de PiDog.
 
 .. code-block:: python
 
@@ -85,7 +84,7 @@ In the case where PiDog is placed horizontally, all three values are close to 0.
 
     my_dog.close()
 
-3. While leaning, PiDog keeps its eyes level.
+3. Mantener la cabeza nivelada mientras PiDog está inclinado.
 
 .. code-block:: python
 

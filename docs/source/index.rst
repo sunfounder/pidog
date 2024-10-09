@@ -1,19 +1,19 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la Comunidad de Entusiastas de Raspberry Pi, Arduino y ESP32 de SunFounder en Facebook. Sumérgete más a fondo en Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirte?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte de Expertos**: Resuelve problemas postventa y supera desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y Compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Avances Exclusivos**: Accede de forma anticipada a anuncios de nuevos productos y vistas previas exclusivas.
+    - **Descuentos Especiales**: Aprovecha descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y Sorteos Festivos**: Participa en sorteos y promociones durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
 SunFounder Raspberry Pi Robot - |link_Pi_Dog|
-=================================================
+==================================================
 
 * |link_PiDog|
 
@@ -21,32 +21,33 @@ SunFounder Raspberry Pi Robot - |link_Pi_Dog|
     :width: 400
     :align: center
 
-Thank you for choosing our |link_Pi_Dog|.
+Gracias por elegir nuestro |link_Pi_Dog|.
 
 .. note::
-    This document is available in the following languages.
+    Este documento está disponible en los siguientes idiomas:
 
         * |link_german_tutorials|
         * |link_jp_tutorials|
         * |link_en_tutorials|
+        * |link_fr_tutorials|
+        * |link_es_tutorials|
+        * |link_it_tutorials|
     
-    Please click on the respective links to access the document in your preferred language.
+    Por favor, haz clic en los enlaces correspondientes para acceder al documento en el idioma de tu preferencia.
 
 
-PiDog is a Raspberry Pi pet robot with aluminum alloy structure. It can act as a mechanical pet, show cuteness to you, and interact with you.
+PiDog es un robot mascota para Raspberry Pi con una estructura de aleación de aluminio. Puede comportarse como una mascota mecánica, mostrarte ternura e interactuar contigo.
 
-It is equipped with a camera module, which can perform color recognition, face detection and other projects;
-12 metal gear servos support it to walk, stand, sit, shake its head, and pose in various poses;
-The ultrasonic module on the head enables it to quickly detect obstacles ahead;
-Special touch sensors allow it to respond to your touch;
-The Light Board on the chest can emit colorful light effects, and with the speaker equipped with the robot HAT, PiDog can express emotions such as happiness and excitement.
-In addition, PiDog is also equipped with a sound direction sensor and a 6-DOF IMU module to realize more complex and interesting usage scenarios.
+Está equipado con un módulo de cámara, lo que le permite realizar proyectos de reconocimiento de colores, detección facial y otras funciones similares.
+Sus 12 servos de engranajes metálicos le permiten caminar, pararse, sentarse, mover la cabeza y adoptar diferentes posturas.
+El módulo ultrasónico en su cabeza le permite detectar obstáculos con rapidez.
+Los sensores táctiles especiales le permiten responder a tu toque.
+La placa de luces en su pecho puede emitir efectos de luz coloridos, y con el altavoz integrado en el HAT del robot, PiDog puede expresar emociones como alegría y entusiasmo.
+Además, PiDog está equipado con un sensor de dirección de sonido y un módulo IMU de 6 grados de libertad (6-DOF) para realizar escenarios de uso más complejos e interesantes.
 
+Si tienes alguna pregunta, envía un correo a service@sunfounder.com y te responderemos lo antes posible.
 
-If you have any questions, please send an email to service@sunfounder.com and we will respond as soon as possible.
-
-
-**Content**
+**Contenido**
 
 .. toctree::
     :maxdepth: 2
@@ -58,8 +59,7 @@ If you have any questions, please send an email to service@sunfounder.com and we
     hardware/cpn_hardware
     appendix/appendix
 
-Copyright Notice
---------------------------
+Aviso de Copyright
+------------------------
 
-All contents including but not limited to texts, images, and code in this manual are owned by the SunFounder Company. You should only use it for personal study,investigation, enjoyment, or other non-commercial or nonprofit purposes, under therelated regulations and copyrights laws, without infringing the legal rights of the author and relevant right holders. For any individual or organization that uses these for commercial profit without permission, the Company reserves the right to take legal action.
-
+Todos los contenidos de este manual, incluyendo pero no limitándose a textos, imágenes y código, son propiedad de la compañía SunFounder. Debes usarlos únicamente para estudio personal, investigación, disfrute u otros propósitos no comerciales o sin ánimo de lucro, conforme a las normativas y leyes de derechos de autor, sin infringir los derechos legales del autor y de los titulares correspondientes. Para cualquier individuo u organización que use estos contenidos con fines comerciales sin autorización, la compañía se reserva el derecho de emprender acciones legales.

@@ -1,57 +1,56 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la comunidad de entusiastas de SunFounder para Raspberry Pi, Arduino y ESP32 en Facebook. Sumérgete en el mundo de Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte experto**: Resuelve problemas postventa y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a nuevos anuncios de productos y adelantos exclusivos.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
 .. _play_python:
 
-Play with Python
+Juega con Python
 ====================
 
-If you want to program in python, 
-then you will need to learn some basic Python programming skills and basic knowledge of Raspberry Pi, 
-please configure the Raspberry Pi first according to :ref:`quick_guide_python`.
-
+Si deseas programar en Python, necesitas aprender algunas habilidades básicas de 
+programación en Python y adquirir conocimientos fundamentales de Raspberry Pi. Primero, 
+configura la Raspberry Pi de acuerdo con la guía proporcionada en :ref:`quick_guide_python`.
 
 .. toctree::
     :maxdepth: 2
 
     python_start/quick_guide_on_python
 
-As soon as the assembly is completed, you need to calibrate the PiDog to prevent it from damaging the servo if there is a slight deviation in the assembly.
+Una vez completado el ensamblaje, es necesario calibrar el PiDog para evitar dañar el servomotor si hay una ligera desviación en el montaje.
 
 .. toctree::
     :maxdepth: 2
 
     py_0_calibrate
 
-.. Once calibrated, you can follow the tutorial to play PiDog with the APP.
+.. Después de la calibración, puedes seguir el tutorial para jugar con PiDog usando la APP.
 
 .. .. toctree::
 ..     :maxdepth: 2
 
 ..     auto_run_app
 
-You can also have PiDog achieve the following project effects.
+También puedes hacer que PiDog logre los siguientes efectos del proyecto.
 
 .. toctree::
 
     py_fun_project
-    
-Then you may want to master its basic functions, or write some fun examples.
 
-If you are familiar with Python programming, you can find examples of PiDog's basic functions in the ``~/pidog/basic_examples`` directory.
+Luego, es posible que desees dominar sus funciones básicas o escribir algunos ejemplos divertidos.
 
-If you prefer, you can master them in a step-by-step fashion using the lessons provided below.
+Si ya estás familiarizado con la programación en Python, puedes encontrar ejemplos de las funciones básicas de PiDog en el directorio ``~/pidog/basic_examples``.
+
+Si prefieres, también puedes dominarlas paso a paso utilizando las lecciones proporcionadas a continuación.
 
 .. toctree::
     :maxdepth: 2

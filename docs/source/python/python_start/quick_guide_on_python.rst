@@ -1,27 +1,25 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    Hola, bienvenido a la comunidad de entusiastas de SunFounder para Raspberry Pi, Arduino y ESP32 en Facebook. Sumérgete en el mundo de Raspberry Pi, Arduino y ESP32 con otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte experto**: Resuelve problemas postventa y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprende y comparte**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a nuevos anuncios de productos y adelantos exclusivos.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
 .. _quick_guide_python:
 
-1. Quick Guide on Python
-==========================
+1. Guía Rápida de Python
+===========================
 
-This section is to teach you how to install Raspberry Pi OS, configure wifi to Raspberry Pi, remote access to Raspberry Pi to run the corresponding code.
+Esta sección está diseñada para enseñarte a instalar el sistema operativo Raspberry Pi OS, configurar la red Wi-Fi en la Raspberry Pi, acceder de forma remota a la Raspberry Pi y ejecutar el código correspondiente.
 
-If you are familiar with Raspberry Pi and can open the command line successfully, then you can skip the first 3 parts and then complete the last part. 
-
-
+Si ya estás familiarizado con Raspberry Pi y puedes abrir la línea de comandos correctamente, puedes omitir las primeras 3 partes y pasar directamente a la última sección.
 
 .. toctree::
     :maxdepth: 1
@@ -36,7 +34,7 @@ If you are familiar with Raspberry Pi and can open the command line successfully
 
 **Video**
 
-In our assembly video from **3:40 to 7:23**, there is also a detailed tutorial for this chapter. You can follow the video instructions directly.
+En nuestro video de ensamblaje, desde el minuto **3:40 hasta el 7:23**, también hay un tutorial detallado para este capítulo. Puedes seguir directamente las instrucciones del video.
 
 .. raw:: html
 

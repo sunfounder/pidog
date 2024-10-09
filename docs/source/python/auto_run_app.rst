@@ -1,25 +1,25 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la comunidad de entusiastas de SunFounder para Raspberry Pi, Arduino y ESP32 en Facebook. Sumérgete en el mundo de Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte experto**: Resuelve problemas postventa y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a nuevos anuncios de productos y adelantos exclusivos.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-3. Quick Play with the App
+3. Juego Rápido con la Aplicación
 =================================================
 
-Now that your PiDog is all set up and raring to go, this section is perfect for those eager to dive in and explore all its features in a jiffy. We'll walk you through the process of installing the app, seamlessly connecting your PiDog with your mobile device, and unleashing the myriad of fun functionalities it offers, all at your fingertips. By the end of this chapter, you'll be confidently navigating and playing with your PiDog using your device. Let's get started and immerse ourselves in the world of interactive robotics!
+Ahora que tu PiDog está configurado y listo para funcionar, esta sección es perfecta para quienes desean explorar rápidamente todas sus funciones. Te guiaremos en el proceso de instalación de la aplicación, la conexión de tu PiDog con tu dispositivo móvil y la activación de las múltiples funcionalidades divertidas que ofrece, todo al alcance de tu mano. Al final de este capítulo, podrás controlar y disfrutar de tu PiDog desde tu dispositivo con total confianza. ¡Empecemos a sumergirnos en el mundo de la robótica interactiva!
 
-#. Install ``sunfounder-controller`` module.
+#. Instala el módulo ``sunfounder-controller``.
 
-    The robot-hat, vilib, and picar-x modules need to be installed first, for details see: :ref:`install_all_modules`.
+    Los módulos robot-hat, vilib y picar-x deben estar instalados previamente; para más detalles, consulta: :ref:`install_all_modules`.
 
     .. raw:: html
 
@@ -32,8 +32,7 @@ Now that your PiDog is all set up and raring to go, this section is perfect for 
         cd ~/sunfounder-controller
         sudo python3 setup.py install
 
-#. Run the following commands:
-
+#. Ejecuta los siguientes comandos:
 
     .. raw:: html
 
@@ -45,66 +44,61 @@ Now that your PiDog is all set up and raring to go, this section is perfect for 
         sudo bash pidog_app_install.sh
 
 
-#. Restart PiDog.
+#. Reinicia PiDog.
 
-#. Install `SunFounder Controller <https://docs.sunfounder.com/projects/sf-controller/en/latest/>`_ from **APP Store(iOS)** or **Google Play(Android)**.
+#. Instala `SunFounder Controller <https://docs.sunfounder.com/projects/sf-controller/en/latest/>`_ desde la **App Store (iOS)** o **Google Play (Android)**.
 
-#. Connect to ``pidog`` WLAN.
+#. Conéctate a la red WLAN ``pidog``.
 
-    Now, connect your mobile device to the local area network (LAN) broadcast by the PiDog. This way, your mobile device and the PiDog will be on the same network, which will facilitate communication between the applications on your mobile device and the PiDog.
+    Conecta tu dispositivo móvil a la red de área local (LAN) generada por PiDog. De esta manera, tu dispositivo móvil y PiDog estarán en la misma red, lo que facilitará la comunicación entre las aplicaciones y el PiDog.
 
-    * Find ``pidog`` on the WLAN of the mobile phone (tablet), enter the password ``12345678`` and connect to it.
+    * Encuentra ``pidog`` en las redes WLAN de tu dispositivo móvil (tablet), ingresa la contraseña ``12345678`` y conéctate.
 
-    * The default connection mode is AP mode. So after you connect, there will be a prompt telling you that there is no Internet access on this WLAN network, please choose to continue connecting.
+    * El modo de conexión predeterminado es AP. Después de conectarte, aparecerá un mensaje indicando que no hay acceso a Internet en esta red; elige continuar con la conexión.
 
         .. image:: img/app_no_internet.png
 
+#. Abre la aplicación ``Sunfounder Controller``. Haz clic en el icono + para agregar un control remoto.
 
+    .. image:: img/app1.png
 
+#. Hay controles preconfigurados para algunos productos; selecciona **PiDog**, asígnale un nombre o simplemente toca **Confirmar**.
 
-#. Open the ``Sunfounder Controller`` APP. Click the + icon to add a remote.
+    .. image:: img/app_preset.jpg
 
-        .. image:: img/app1.png
+#. Una vez dentro, la aplicación buscará automáticamente el **Mydog**. Después de unos segundos, aparecerá un mensaje indicando “Conectado con éxito”.
 
-#. Preset controllers are available for some products, here we choose **PiDog**. Give it a name, or simply tap **Confirm**.
-
-        .. image:: img/app_preset.jpg
-
-
-#. Once inside, the app will automatically search for the **Mydog**. After a moment, you will see a prompt saying “Connected Successfully.”
-
-        .. image:: img/app_auto_connect.jpg
+    .. image:: img/app_auto_connect.jpg
 
     .. note::
 
-        * You can also manually click the |app_connect| button. Wait a few seconds, MyDog(IP) will appear, click it to connect.
+        * También puedes hacer clic manualmente en el botón |app_connect|. Espera unos segundos y aparecerá MyDog (IP); haz clic para conectarte.
 
             .. image:: img/sc_mydog.jpg
 
-        * 
-#. Run the Controller.
+#. Ejecuta el Controlador.
 
-    * When the "Connected Successfully" prompt appears, tap the ▶ button in the upper-right corner.
+    * Cuando veas el mensaje "Conectado con éxito", toca el botón ▶ en la esquina superior derecha.
 
-    * The camera feed will appear on the APP, and now you can control your PiDog with these widgets.
+    * La transmisión de la cámara aparecerá en la aplicación, y ahora podrás controlar tu PiDog con los widgets disponibles.
 
         .. image:: img/sc_run.jpg
 
-Here are the functions of the widgets.
+Aquí tienes las funciones de los widgets:
 
-* A: Detect the obstacle distance, that is, the reading of the ultrasonic module.
-* C: Turn on/off face detection.
-* D: Control PiDog's head tilt angle (tilt head).
-* E: Sit.
-* F: Stand.
-* G: Lie down.
-* I: Scratch PiDog's head.
-* N: Bark.
-* O: Wag tail.
-* P: Pant.
-* K: Control PiDog's movement (forward, backward, left, and right).
-* Q: Controls the orientation of PiDog's head.
-* J: Switch to voice control mode. It supports the following voice commands:
+* A: Detectar la distancia de obstáculos, es decir, la lectura del módulo ultrasónico.
+* C: Activar/desactivar la detección facial.
+* D: Controlar el ángulo de inclinación de la cabeza de PiDog.
+* E: Sentarse.
+* F: Pararse.
+* G: Acostarse.
+* I: Rascar la cabeza de PiDog.
+* N: Ladrar.
+* O: Mover la cola.
+* P: Jadear.
+* K: Controlar el movimiento de PiDog (adelante, atrás, izquierda y derecha).
+* Q: Controlar la orientación de la cabeza de PiDog.
+* J: Cambiar al modo de control por voz. Se admiten los siguientes comandos de voz:
 
     * ``forward``
     * ``backward``
@@ -129,24 +123,24 @@ Here are the functions of the widgets.
     * ``handshake``
     * ``high five``
 
-APP Program Configuration
------------------------------
+Configuración del Programa de la APP
+--------------------------------------------
 
-You can input the following commands to modify the APP mode's settings.
+Puedes introducir los siguientes comandos para modificar la configuración del modo de la APP.
 
 .. code-block::
 
     pidog_app <OPTION> [input]
 
-**OPTION**
-    * ``-h`` ``help`` : help, show this message
-    * ``start`` ``restart`` : restart pidog_app service
-    * ``stop`` : stop pidog_app service
-    * ``disable`` : disable auto-start app_controller program on bootstrap
-    * ``enable`` : enable auto-start app_controller program on bootstrap
-    * ``close_ap`` : close hotspot, disable auto-start hotspot on boot and switch to sta mode
-    * ``open_ap`` : open hotspot, enable auto-start hotspot on boot
-    * ``ssid`` : set the ssid (network name) of the hotspot
-    * ``psk`` : set the password of the hotspot
-    * ``country`` : set the country code of the hotspot
+**OPCIÓN**
+    * ``-h`` ``help`` : ayuda, mostrar este mensaje.
+    * ``start`` ``restart`` : reiniciar el servicio pidog_app.
+    * ``stop`` : detener el servicio pidog_app.
+    * ``disable`` : deshabilitar el programa app_controller en el arranque.
+    * ``enable`` : habilitar el programa app_controller en el arranque.
+    * ``close_ap`` : cerrar el punto de acceso, deshabilitar el arranque automático del hotspot y cambiar a modo STA.
+    * ``open_ap`` : abrir el punto de acceso, habilitar el arranque automático del hotspot.
+    * ``ssid`` : establecer el nombre de la red del hotspot.
+    * ``psk`` : establecer la contraseña del hotspot.
+    * ``country`` : establecer el código de país del hotspot.
 

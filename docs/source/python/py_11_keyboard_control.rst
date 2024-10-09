@@ -1,103 +1,100 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la comunidad de entusiastas de SunFounder para Raspberry Pi, Arduino y ESP32 en Facebook. Sumérgete en el mundo de Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte experto**: Resuelve problemas postventa y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a nuevos anuncios de productos y adelantos exclusivos.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-11. Play PiDog with Keyboard
-======================================
+11. Juega con PiDog usando el Teclado
+==========================================
 
-
-In this example, we will use the keyboard to control PiDog. You can press these keys in the terminal to make it act.
-
+En este ejemplo, utilizaremos el teclado para controlar a PiDog. Puedes presionar las siguientes teclas en el terminal para que realice diferentes acciones.
 
 .. list-table:: 
     :widths: 25 50 25 50 25 50
     :header-rows: 1
 
-    * - Keys
-      - Function
-      - Keys
-      - Function
-      - Keys
-      - Function  
+    * - Teclas
+      - Función
+      - Teclas
+      - Función
+      - Teclas
+      - Función  
     * - 1
-      - doze off
+      - Dormitar
       - q
-      - bark harder
+      - Ladrar fuerte
       - a
-      - turn left
+      - Girar a la izquierda
     * - 2
-      - push-up
+      - Flexiones
       - w
-      - forward
+      - Avanzar
       - s
-      - backward
+      - Retroceder
     * - 3
-      - howling
+      - Aullido
       - e
-      - pant
+      - Jadear
       - d
-      - turn right
+      - Girar a la derecha
     * - 4
-      - twist body
+      - Torcer el cuerpo
       - r
-      - wag tail
+      - Mover la cola
       - f
-      - shake head
+      - Sacudir la cabeza
     * - 5
-      - scratch
+      - Rascarse
       - t
-      - hake head
+      - Sacudir la cabeza
       - g
-      - high five
+      - Chocar los cinco
     * - u
-      - head roll
+      - Rodar la cabeza
       - U
-      - head roll+
+      - Rodar la cabeza+
       - z
-      - lie
+      - Acostarse
     * - i
-      - head pitch
+      - Inclinar la cabeza
       - I
-      - head pitch+
+      - Inclinar la cabeza+
       - x
-      - stand up
+      - Levantarse
     * - o
-      - head roll
+      - Girar la cabeza
       - O
-      - head roll+
+      - Girar la cabeza+
       - c
-      - sit
+      - Sentarse
     * - j
-      - head yaw
+      - Rotar la cabeza (yaw)
       - J
-      - head yaw+
+      - Rotar la cabeza (yaw)+
       - v
-      - stretch
+      - Estirarse
     * - k
-      - head pitch
+      - Inclinar la cabeza
       - K
-      - head pitch+
+      - Inclinar la cabeza+
       - m
-      - head reset
+      - Resetear cabeza
     * - l
-      - head yaw
+      - Rotar la cabeza (yaw)
       - L
-      - head yaw+
+      - Rotar la cabeza (yaw)+
       - W
-      - trot
+      - Trote
 
-
-**Run the Code**
+**Ejecutar el Código**
 
 .. raw:: html
 
@@ -108,10 +105,10 @@ In this example, we will use the keyboard to control PiDog. You can press these 
     cd ~/pidog/examples
     sudo python3 11_keyboard_control.py
 
-After the program runs, you will see a printed keyboard on the terminal. Now you can control PiDog with keyboard in terminal.
+Después de ejecutar el programa, verás un teclado impreso en el terminal. Ahora puedes controlar a PiDog usando el teclado desde la terminal.
 
 
+**Código**
 
-**Code**
+Puedes encontrar el código en |link_code_11_keyboard_control|.
 
-Please find the code in |link_code_11_keyboard_control|.

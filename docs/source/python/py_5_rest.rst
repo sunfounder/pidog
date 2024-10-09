@@ -1,25 +1,25 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la comunidad de entusiastas de SunFounder para Raspberry Pi, Arduino y ESP32 en Facebook. Sumérgete en el mundo de Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte experto**: Resuelve problemas postventa y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a nuevos anuncios de productos y adelantos exclusivos.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
-5. Rest
-=========
+5. Descanso
+================
 
-PiDog will doze off on the ground, and when it hears sounds around it, it will stand up in confusion to see who woke it up.
+En este proyecto, PiDog se acostará en el suelo y, cuando escuche sonidos a su alrededor, se levantará confundido para ver quién lo despertó.
 
 .. image:: img/py_5.gif
 
-**Run the Code**
+**Ejecutar el Código**
 
 .. raw:: html
 
@@ -30,16 +30,14 @@ PiDog will doze off on the ground, and when it hears sounds around it, it will s
     cd ~/pidog/examples
     sudo python3 5_rest.py
 
-After the program runs, PiDog will get down on the ground, shake its head and tail as if dozing off.
-At the same time, its sound direction sensor module is working. If PiDog hears noise, it will stand up, look around, and then make a confused look.
-Then it'll doze off again.
+Después de ejecutar el programa, PiDog se acostará en el suelo, moverá la cabeza y la cola como si estuviera adormilado. Al mismo tiempo, su módulo de detección de dirección de sonido estará activo. Si PiDog escucha un ruido, se levantará, mirará a su alrededor y luego mostrará una expresión de confusión.
+Después, se volverá a dormir.
 
 
-
-**Code**
+**Código**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    Puedes **Modificar/Restablecer/Copiar/Ejecutar/Detener** el código a continuación. Pero antes de eso, necesitas ir a la ruta del código fuente como ``pidog\examples``. Después de modificar el código, puedes ejecutarlo directamente para ver el efecto.
 
 .. raw:: html
 
@@ -81,30 +79,30 @@ Then it'll doze off again.
         my_dog.wait_all_done()
 
         while True:
-            # Sleeping
+            # Durmiendo
             my_dog.rgb_strip.set_mode('breath', 'pink', bps=0.3)
             my_dog.head_move([[0,0,-40]], immediately=True, speed=5)
             my_dog.do_action('doze_off', speed=92)
-            # Cleanup sound detection
+            # Limpieza de detección de sonido
             sleep(1)
             is_sound()
 
-            # keep sleeping
+            # seguir durmiendo
             while is_sound() is False:
                 my_dog.do_action('doze_off', speed=92)
                 sleep(0.2)
 
-            # If heard anything, wake up
-            # Set light to yellow and stand up
+            # Si escuchó algo, despertarse
+            # Cambiar luz a amarillo y levantarse
             my_dog.rgb_strip.set_mode('boom', 'yellow', bps=1)
             my_dog.body_stop()
             my_dog.do_action('stand', speed=90)
             my_dog.head_move([[0, 0, 0]], immediately=True, speed=80)
             my_dog.wait_all_done()
-            # Look arround
+            # Mirar alrededor
             loop_around(60, 1, 60)
             sleep(0.5)
-            # tilt head and being confused
+            # Inclinar la cabeza y mostrar confusión
             my_dog.speak('confused_3', volume=80)
             my_dog.do_action('tilting_head_left', speed=80)
             my_dog.wait_all_done()
@@ -112,11 +110,11 @@ Then it'll doze off again.
             my_dog.head_move([[0, 0, -10]], immediately=True, speed=80)
             my_dog.wait_all_done()
             sleep(0.4)
-            # Shake head , mean to ignore it
+            # Mover la cabeza, como para ignorar
             shake_head(my_dog)
             sleep(0.2)
 
-            # Lay down again
+            # Volver a acostarse
             my_dog.rgb_strip.set_mode('breath', 'pink', bps=1)
             my_dog.do_action('lie', speed=50)
             my_dog.wait_all_done()

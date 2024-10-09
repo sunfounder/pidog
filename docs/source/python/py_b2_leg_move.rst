@@ -1,35 +1,35 @@
 .. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    ¡Hola! Bienvenido a la comunidad de entusiastas de SunFounder para Raspberry Pi, Arduino y ESP32 en Facebook. Sumérgete en el fascinante mundo de Raspberry Pi, Arduino y ESP32 junto a otros apasionados.
 
-    **Why Join?**
+    **¿Por qué unirse?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Soporte experto**: Resuelve problemas postventa y desafíos técnicos con la ayuda de nuestra comunidad y equipo.
+    - **Aprender y compartir**: Intercambia consejos y tutoriales para mejorar tus habilidades.
+    - **Preestrenos exclusivos**: Obtén acceso anticipado a nuevos anuncios de productos y adelantos exclusivos.
+    - **Descuentos especiales**: Disfruta de descuentos exclusivos en nuestros productos más recientes.
+    - **Promociones y sorteos festivos**: Participa en sorteos y promociones especiales durante las festividades.
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 ¿Listo para explorar y crear con nosotros? ¡Haz clic en [|link_sf_facebook|] y únete hoy mismo!
 
 .. _py_b2_leg_move:
 
-2. Leg Move
-=================
+2. Movimiento de las patas
+===============================
 
-PiDog's leg movements are implemented by the following functions.
+Los movimientos de las patas de PiDog se implementan mediante las siguientes funciones.
 
 .. code-block:: python
 
     Pidog.legs_move(target_angles, immediately=True, speed=50)
 
-* ``target_angles``: It is a two-dimensional array composed of an array of 8 servo angles (referred to as angle group) as elements. These angle groups will be used to control the angles of the 8 foot servos. If multiple angle groups are written, the unexecuted angle groups will be stored in the cache.
-* ``immediately`` : When calling the function, set this parameter to ``True``, the cache will be cleared immediately to execute the newly written angle group; if the parameter is set to ``False``, the newly written The incoming angular group is added to the execution queue.
-* ``speed`` : The speed at which the angular group is executed.
+* ``target_angles``: Es un array bidimensional compuesto por un array de 8 ángulos de servos (conocido como grupo de ángulos). Estos grupos de ángulos se utilizan para controlar los 8 servos de las patas. Si se escriben varios grupos de ángulos, los que no se han ejecutado se almacenan en la memoria temporal.
+* ``immediately``: Al llamar la función, si este parámetro se establece en ``True``, la memoria temporal se borrará de inmediato para ejecutar el nuevo grupo de ángulos; si se establece en ``False``, el nuevo grupo de ángulos se añadirá a la cola de ejecución.
+* ``speed``: La velocidad a la que se ejecuta el grupo de ángulos.
 
-**Some common usages are listed below:**
+**A continuación, se presentan algunos usos comunes:**
 
-1.  Take action immediately.
+1. Ejecutar la acción de inmediato.
 
 .. code-block:: python
 
@@ -38,11 +38,11 @@ PiDog's leg movements are implemented by the following functions.
 
     my_dog = Pidog()
 
-    # half stand
+    # medio apoyo
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], speed=50)   
 
 
-2. Add some angular groups to the execution queue.
+2. Añadir varios grupos de ángulos a la cola de ejecución.
 
 .. code-block:: python
 
@@ -51,16 +51,16 @@ PiDog's leg movements are implemented by the following functions.
 
     my_dog = Pidog()
 
-    # half stand
+    # medio apoyo
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], speed=50)  
 
-    # multiple actions
+    # múltiples acciones
     my_dog.legs_move([[45, 35, -45, -35, 80, 70, -80, -70],
                         [90, -30, -90, 30, 80, 70, -80, -70],
                         [45, 35, -45, -35, 80, 70, -80, -70]],  immediately=False, speed=30)   
 
-3. Perform repetitions within 10 seconds.
 
+3. Realizar repeticiones durante 10 segundos.
 
 .. code-block:: python
 
@@ -69,40 +69,40 @@ PiDog's leg movements are implemented by the following functions.
 
     my_dog = Pidog()
 
-    # half stand
+    # medio apoyo
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], speed=50)  
 
-    # pushup preparation
+    # preparación para flexiones
     my_dog.legs_move([[45, 35, -45, -35, 80, 70, -80, -70]], immediately=False, speed=20)
 
-    # pushup
+    # flexiones
     for _ in range(99):
         my_dog.legs_move([[90, -30, -90, 30, 80, 70, -80, -70],
                             [45, 35, -45, -35, 80, 70, -80, -70]],  immediately=False, speed=30)   
 
-    # keep 10s
+    # mantener durante 10 segundos
     time.sleep(10)
 
-    # stop and half stand
+    # detenerse y medio apoyo
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], immediately=True, speed=50)  
 
 
-**PiDog's leg control also has the following functions that can be used together:**
+**El control de las patas de PiDog también cuenta con las siguientes funciones que se pueden utilizar conjuntamente:**
 
 .. code-block:: python
 
     Pidog.is_legs_done()
 
-This function is used to determine whether the angle group in the cache has been executed. If yes, return ``True``; otherwise, return ``False``.
+Esta función se utiliza para determinar si el grupo de ángulos en la memoria temporal ha sido ejecutado. Si es así, devuelve ``True``; de lo contrario, devuelve ``False``.
 
 .. code-block:: python
 
     Pidog.wait_legs_done()
 
-Suspends the program until the angle groups in the cache have been executed.
+Suspende el programa hasta que los grupos de ángulos en la memoria temporal se hayan ejecutado.
 
 .. code-block:: python
 
     Pidog.legs_stop() 
 
-Empty the angular group in the cache.
+Vacía el grupo de ángulos en la memoria temporal.
