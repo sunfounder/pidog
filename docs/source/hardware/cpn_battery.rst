@@ -12,7 +12,7 @@
 
     👉 Sind Sie bereit, mit uns zu erkunden und zu erschaffen? Klicken Sie auf [|link_sf_facebook|] und treten Sie heute bei!
 
-18650 Batterie
+5p Batterie
 =================
 
 .. image:: img/2battery.jpg
@@ -27,9 +27,9 @@ Dies ist ein speziell von SunFounder angefertigtes Batteriepack, bestehend aus z
 
 **Merkmale**
 
-* Batterieladung: 5V/2A
-* Batterieausgang: 5V/3A
-* Batteriekapazität: 3,7V 2000mAh x 2
-* Batterielebensdauer: <90min
-* Ladezeit der Batterie: >130min
-* Anschluss: PH2.0, 5P
+* **Zusammensetzung**: Li-Ion
+* **Batteriekapazität**: 2000mAh, 14,8Wh
+* **Batteriegewicht**: 90,8g
+* **Anzahl der Zellen**: 2
+* **Anschluss**: PH2.0-5P
+* **Tiefentladeschutz**: 6,0V

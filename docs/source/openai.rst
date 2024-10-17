@@ -21,9 +21,12 @@ Lassen Sie uns in dieses Projekt eintauchen und eine neue Ebene der Interaktion 
      Ihr Browser unterstützt das Video-Tag nicht.
    </video>
 
-1. Einrichtung der virtuellen Umgebung
+1. Installation der erforderlichen Pakete und Abhängigkeiten
 --------------------------------------------------------------
+.. note::
 
+   Sie müssen zuerst die erforderlichen Module für PiCar-X installieren. Weitere Details finden Sie unter: :ref:`install_all_modules`.
+   
 In diesem Abschnitt werden wir eine virtuelle Umgebung erstellen und aktivieren, in der die erforderlichen Pakete und Abhängigkeiten installiert werden. Dies stellt sicher, dass die installierten Pakete nicht mit dem Rest des Systems interagieren, die Isolation der Projekt-Abhängigkeiten aufrechterhalten und Konflikte mit anderen Projekten oder Systempaketen verhindern.
 
 #. Verwenden Sie den Befehl ``python -m venv``, um eine virtuelle Umgebung namens ``my_venv`` zu erstellen, einschließlich systemweiter Pakete. Die Option ``--system-site-packages`` ermöglicht es der virtuellen Umgebung, auf systemweit installierte Pakete zuzugreifen, was nützlich ist, wenn systemweite Bibliotheken benötigt werden.
@@ -300,5 +303,35 @@ Wenn Ihr Pidog mit einem Mikrofon ausgestattet ist, oder Sie können eines kaufe
      Your browser does not support the video tag.
    </video>
 
+5. Parameter ändern [optional]
+-------------------------------------------
+Im ``gpt_dog.py``-Datei finden Sie die folgenden Zeilen. Sie können diese Parameter ändern, um die STT-Sprache, die TTS-Lautstärkeregelung und die Sprachrolle zu konfigurieren.
 
+* **STT (Speech to Text)** bezieht sich auf den Prozess, bei dem das PiCar-X-Mikrofon Sprache erfasst und in Text umwandelt, der an GPT gesendet wird. Sie können die Sprache für eine bessere Genauigkeit und Latenz in dieser Umwandlung festlegen.
+* **TTS (Text to Speech)** ist der Prozess der Umwandlung der Textantworten von GPT in Sprache, die über den PiCar-X-Lautsprecher wiedergegeben wird. Sie können die Lautstärkeregelung anpassen und eine Sprachrolle für die TTS-Ausgabe auswählen.
+
+.. code-block:: python
+
+   # openai assistant init
+   # =================================================================
+   openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'picrawler')
+   # LANGUAGE = ['zh', 'en'] # STT Sprachcode konfigurieren, https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
+   LANGUAGE = []
+   VOLUME_DB = 3 # TTS-Lautstärkeregelung, vorzugsweise unter 5 dB
+   # TTS Sprachrolle auswählen, kann "alloy, echo, fable, onyx, nova und shimmer" sein
+   # https://platform.openai.com/docs/guides/text-to-speech/supported-languages
+   TTS_VOICE = 'nova'
+
+
+* ``LANGUAGE``-Variable:
+   * Verbessert die Genauigkeit und Reaktionszeit von Speech-to-Text (STT).
+   * ``LANGUAGE = []`` bedeutet, dass alle Sprachen unterstützt werden, was jedoch die Genauigkeit verringern und die Latenz erhöhen kann.
+   * Es wird empfohlen, bestimmte Sprache(n) mit den Sprachcodes von |link_iso_language_code| festzulegen, um die Leistung zu verbessern.
+* ``VOLUME_DB``-Variable:
+   * Steuert die Verstärkung der Text-to-Speech (TTS)-Ausgabe.
+   * Die Erhöhung des Werts erhöht die Lautstärke, es wird jedoch empfohlen, den Wert unter 5 dB zu halten, um eine Audioverzerrung zu vermeiden.
+* ``TTS_VOICE``-Variable:
+   * Wählen Sie die Sprachrolle für die Text-to-Speech (TTS)-Ausgabe.
+   * Verfügbare Optionen: ``alloy, echo, fable, onyx, nova, shimmer``.
+   * Sie können mit verschiedenen Stimmen von |link_voice_options| experimentieren, um eine zu finden, die zu Ihrem gewünschten Ton und Publikum passt. Die verfügbaren Stimmen sind derzeit für Englisch optimiert.
 

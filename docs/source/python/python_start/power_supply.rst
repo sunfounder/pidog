@@ -41,23 +41,3 @@ Warten Sie einige Sekunden, und Sie werden einen leichten Piepton hören, der da
 .. note::
     Wenn beide Batteriestandanzeigeleuchten ausgeschaltet sind, laden Sie bitte die Batterie auf.
     Wenn Sie längere Programmier- oder Debugging-Sitzungen benötigen, können Sie den Raspberry Pi operational halten, indem Sie gleichzeitig das USB-C-Kabel einstecken, um die Batterie aufzuladen.
-
-18650 Batterie
------------------------------------
-
-.. image:: img/5pin_battery.jpg
-
-* VCC: Batteriepositivpol, hier gibt es zwei Sätze von VCC und GND, um den Strom zu erhöhen und den Widerstand zu verringern.
-* Mittel: Zur Spannungsausgleich zwischen den beiden Zellen und somit zum Schutz der Batterie.
-* GND: Negativer Batteriepol.
-
-Dies ist ein maßgefertigtes Batteriepaket von SunFounder, bestehend aus zwei 18650 Batterien mit einer Kapazität von 2000mAh. Der Stecker ist XH2.54 5P, der direkt nach dem Einsetzen in den Schild aufgeladen werden kann.
-
-**Merkmale**
-
-* Batterieladung: 5V/2A
-* Batterieausgang: 5V/5A
-* Batteriekapazität: 3.7V 2000mAh x 2
-* Batterielebensdauer: 90 Minuten
-* Batterieladezeit: 130 Minuten
-* Stecker: XH2.54 5P

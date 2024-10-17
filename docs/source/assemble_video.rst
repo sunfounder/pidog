@@ -18,13 +18,17 @@ Videos zusammenstellen
 
 Bevor Sie den PiDog zusammenbauen, überprüfen Sie bitte zunächst, ob alle Teile und Komponenten enthalten sind. Wenn Teile fehlen oder beschädigt sind, wenden Sie sich bitte umgehend an SunFounder unter service@sunfounder.com, um das Problem so schnell wie möglich zu lösen.
 
-Bitte folgen Sie den Schritten in der folgenden PDF-Datei für die Montageanleitung:
+.. Bitte folgen Sie den Schritten in der folgenden PDF-Datei für die Montageanleitung:
 
-* :Download:`Komponentenliste und Montageanleitung <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
+.. * :Download:`Komponentenliste und Montageanleitung <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
 
 **Befestigen Sie Raspberry Pi Zero 2 W an PiDog**
 
 Wenn Ihr Hauptplatinencomputer ein Raspberry Pi Zero 2 W ist, sind hier die Schritte zur Installation auf dem PiDog.
+
+.. note::
+
+    Die Montageschritte im Video können geringfügig von den gedruckten Anweisungen abweichen, die Sie haben. Bitte folgen Sie vorrangig den gedruckten Anweisungen. Sollten einige Schritte unklar sein, können Sie sich zur weiteren Klärung das Video ansehen.
 
 .. raw:: html
 
@@ -36,6 +40,11 @@ Danach können Sie den Anweisungen im Video unten ab **2:28** folgen, um ihn zus
 **Montageanleitungsvideo (Raspberry Pi 4/3/1 Modell)**
 
 In diesem Video wird der Prozess der Montage Ihres Roboters von Grund auf erklärt.
+
+.. note::
+    
+    Die Montageschritte im Video können geringfügig von den gedruckten Anweisungen abweichen, die Sie haben. Bitte folgen Sie vorrangig den gedruckten Anweisungen. Sollten einige Schritte unklar sein, können Sie sich zur weiteren Klärung das Video ansehen.
+
 
 In diesem Tutorial erfahren Sie:
 
