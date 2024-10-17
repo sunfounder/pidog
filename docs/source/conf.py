@@ -34,9 +34,10 @@ release = '1.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.intersphinx',
     'sphinx.ext.autosectionlabel',
-    'sphinx_copybutton'
+    'sphinx_copybutton',
+    'sphinx_rtd_theme',
+    'sphinx.ext.intersphinx',
 ]
 
 # Link to other projects' documentation with intersphinx. Use the intersphinx_mapping configuration to indicate the name and link of the projects you want to use
@@ -63,6 +64,10 @@ exclude_patterns = []
 html_static_path = ['_static']
 # -- Options for HTML output -------------------------------------------------
 
+# -- sphinx_rtd_theme Theme options -----------------------------------------------------
+html_theme_options = {
+    'flyout_display': 'attached'
+}
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
@@ -104,6 +109,14 @@ rst_epilog = """
 
 #links
 rst_epilog += """
+
+.. |link_voice_options| raw:: html
+
+    <a href="https://platform.openai.com/docs/guides/text-to-speech/voice-options" target="_blank">Voice options</a>
+
+.. |link_iso_language_code| raw:: html
+
+    <a href="https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes" target="_blank">ISO-639</a>
 
 .. |link_microphone| raw:: html
 

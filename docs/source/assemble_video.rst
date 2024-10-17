@@ -17,13 +17,18 @@ Assemble Videos
 
 Before assembling the PiDog, please first verify that all parts and components have been included. If there are any missing or damaged components, please contact SunFounder immediately at service@sunfounder.com to resolve the issue as soon as possible.
 
-Please follow the steps on the following PDF for assembly instructions: 
+.. Please follow the steps on the following PDF for assembly instructions: 
 
-* :Download:`Component List and Assembly Instructions <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
+.. * :Download:`Component List and Assembly Instructions <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
 
 **Mount Raspberry Pi Zero W on PiDog**
 
 If your mainboard is a Raspberry Pi Zero W, here are the steps to install it on the PiDog. 
+
+.. note::
+
+    The assembly steps in the video may differ slightly from the printed instructions you have. Please prioritize following the printed instructions. If any steps are unclear, you can refer to the video for further clarification.
+
 
 .. raw:: html
 
@@ -35,6 +40,10 @@ Afterward, you can continue following the instructions in the video below from *
 **Assembly Tutorial Video(Raspberry Pi 4/3/1 Model)**
 
 This video will walk you through the process of assembling your robot from scratch.
+
+.. note::
+
+    The assembly steps in the video may differ slightly from the printed instructions you have. Please prioritize following the printed instructions. If any steps are unclear, you can refer to the video for further clarification.
 
 In this tutorial, you will learn:
 
@@ -48,6 +57,7 @@ In this tutorial, you will learn:
 
 
 The assembly process for Pidog is quite long, so we have divided it into two videos. The first video covers assembling Pidog's body and four legs.
+
 
 .. raw:: html
 

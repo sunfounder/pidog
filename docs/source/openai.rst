@@ -23,8 +23,12 @@ Let's dive into this project and unleash a new level of interaction with Pidog!
    </video>
 
 
-1. Setting up the Virtual Environment
+1. Installing Required Packages and Dependencies
 --------------------------------------------------------------
+.. note::
+
+   You need to install the necessary modules for PiCar-X first. For details, please refer to: :ref:`install_all_modules`.
+   
 
 In this section, we will create and activate a virtual environment, installing the required packages and dependencies within it. This ensures that the installed packages do not interfere with the rest of the system, maintaining project dependency isolation and preventing conflicts with other projects or system packages.
 
@@ -309,5 +313,46 @@ If your Pidog is equipped with a microphone, or you can purchase one by clicking
      Your browser does not support the video tag.
    </video>
 
+5. Modify parameters [optional]
+-------------------------------------------
+
+In the ``gpt_dog.py`` file, locate the following lines. You can modify these parameters to configure the STT language, TTS volume gain, and voice role.
+
+* **STT (Speech to Text)** refers to the process where the PiCar-X microphone captures speech and converts it into text to be sent to GPT. You can specify the language for better accuracy and latency in this conversion.
+
+* **TTS (Text to Speech)** is the process of converting GPT's text responses into speech, which is played through the PiCar-X speaker. You can adjust the volume gain and select a voice role for the TTS output.
+
+.. code-block:: python
+
+   # openai assistant init
+   # =================================================================
+   openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'picrawler')
+
+   # LANGUAGE = ['zh', 'en'] # config stt language code, https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
+   LANGUAGE = []
+
+   VOLUME_DB = 3 # tts voloume gain, preferably less than 5db
+
+   # select tts voice role, counld be "alloy, echo, fable, onyx, nova, and shimmer"
+   # https://platform.openai.com/docs/guides/text-to-speech/supported-languages
+   TTS_VOICE = 'nova'
+
+
+* ``LANGUAGE`` variable: 
+
+   * Improves Speech-to-Text (STT) accuracy and response time.
+   * ``LANGUAGE = []`` means supporting all languages, but this may reduce STT accuracy and increase latency.
+   * It's recommended to set the specific language(s) using |link_iso_language_code| language codes to improve performance.
+
+* ``VOLUME_DB`` variable:
+
+  * Controls the gain applied to Text-to-Speech (TTS) output.
+  * Increasing the value will boost the volume, but it's best to keep the value below 5dB to prevent audio distortion.
+
+* ``TTS_VOICE`` variable:
+
+  * Select the voice role for the Text-to-Speech (TTS) output.
+  * Available options: ``alloy, echo, fable, onyx, nova, shimmer``.
+  * You can experiment with different voices from |link_voice_options| to find one that suits your desired tone and audience. The available voices are currently optimized for English.
 
 
