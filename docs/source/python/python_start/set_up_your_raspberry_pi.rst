@@ -22,7 +22,7 @@ Having a screen simplifies the process of working with your Raspberry Pi.
 
 **Required Components**
 
-* Raspberry Pi 5 Model B
+* Raspberry Pi 5 
 * Power Adapter
 * Micro SD card
 * Screen Power Adapter
@@ -51,7 +51,7 @@ If you don't have a monitor, remote login is a viable option.
 
 **Required Components**
 
-* Raspberry Pi 5 Model B 
+* Raspberry Pi 5 
 * Power Adapter
 * Micro SD card
 
