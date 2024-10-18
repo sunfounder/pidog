@@ -324,14 +324,19 @@ Im ``gpt_dog.py``-Datei finden Sie die folgenden Zeilen. Sie können diese Param
 
 
 * ``LANGUAGE``-Variable:
-   * Verbessert die Genauigkeit und Reaktionszeit von Speech-to-Text (STT).
-   * ``LANGUAGE = []`` bedeutet, dass alle Sprachen unterstützt werden, was jedoch die Genauigkeit verringern und die Latenz erhöhen kann.
-   * Es wird empfohlen, bestimmte Sprache(n) mit den Sprachcodes von |link_iso_language_code| festzulegen, um die Leistung zu verbessern.
+
+  * Verbessert die Genauigkeit und Reaktionszeit von Speech-to-Text (STT).
+  * ``LANGUAGE = []`` bedeutet, dass alle Sprachen unterstützt werden, was jedoch die Genauigkeit verringern und die Latenz erhöhen kann.
+  * Es wird empfohlen, bestimmte Sprache(n) mit den Sprachcodes von |link_iso_language_code| festzulegen, um die Leistung zu verbessern.
+
 * ``VOLUME_DB``-Variable:
-   * Steuert die Verstärkung der Text-to-Speech (TTS)-Ausgabe.
-   * Die Erhöhung des Werts erhöht die Lautstärke, es wird jedoch empfohlen, den Wert unter 5 dB zu halten, um eine Audioverzerrung zu vermeiden.
+
+  * Steuert die Verstärkung der Text-to-Speech (TTS)-Ausgabe.
+  * Die Erhöhung des Werts erhöht die Lautstärke, es wird jedoch empfohlen, den Wert unter 5 dB zu halten, um eine Audioverzerrung zu vermeiden.
+
 * ``TTS_VOICE``-Variable:
-   * Wählen Sie die Sprachrolle für die Text-to-Speech (TTS)-Ausgabe.
-   * Verfügbare Optionen: ``alloy, echo, fable, onyx, nova, shimmer``.
-   * Sie können mit verschiedenen Stimmen von |link_voice_options| experimentieren, um eine zu finden, die zu Ihrem gewünschten Ton und Publikum passt. Die verfügbaren Stimmen sind derzeit für Englisch optimiert.
+
+  * Wählen Sie die Sprachrolle für die Text-to-Speech (TTS)-Ausgabe.
+  * Verfügbare Optionen: ``alloy, echo, fable, onyx, nova, shimmer``.
+  * Sie können mit verschiedenen Stimmen von |link_voice_options| experimentieren, um eine zu finden, die zu Ihrem gewünschten Ton und Publikum passt. Die verfügbaren Stimmen sind derzeit für Englisch optimiert.
 

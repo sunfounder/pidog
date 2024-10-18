@@ -26,8 +26,9 @@ Es ist ein leistungsfähiges kleines Gerät, das es Menschen jeden Alters ermög
 Computertechnik zu erkunden und zu lernen, wie man in Sprachen wie Scratch und
 Python programmiert.
 
-.. image:: img/image10.jpeg
-   :align: center
+.. image:: img/compitable_pi_nopi5.jpg
+    :width: 600
+    :align: center
 
 **Stromadapter**
 

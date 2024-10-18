@@ -22,7 +22,7 @@ Mit einem Bildschirm wird das Arbeiten mit Ihrem Raspberry Pi erheblich vereinfa
 
 **Benötigte Komponenten**
 
-* Raspberry Pi 5
+* Raspberry Pi
 * Stromadapter
 * Micro-SD-Karte
 * Stromadapter für den Bildschirm
@@ -51,7 +51,7 @@ Wenn Sie keinen Monitor haben, ist der Fernzugriff eine praktikable Option.
 
 **Benötigte Komponenten**
 
-* Raspberry Pi 5
+* Raspberry Pi
 * Stromadapter
 * Micro-SD-Karte
 
