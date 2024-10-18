@@ -340,9 +340,9 @@ In the ``gpt_dog.py`` file, locate the following lines. You can modify these par
 
 * ``LANGUAGE`` variable: 
 
-   * Improves Speech-to-Text (STT) accuracy and response time.
-   * ``LANGUAGE = []`` means supporting all languages, but this may reduce STT accuracy and increase latency.
-   * It's recommended to set the specific language(s) using |link_iso_language_code| language codes to improve performance.
+  * Improves Speech-to-Text (STT) accuracy and response time.
+  * ``LANGUAGE = []`` means supporting all languages, but this may reduce STT accuracy and increase latency.
+  * It's recommended to set the specific language(s) using |link_iso_language_code| language codes to improve performance.
 
 * ``VOLUME_DB`` variable:
 

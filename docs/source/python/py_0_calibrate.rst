@@ -33,6 +33,10 @@ But if the deviation angle is too big, you still have to go back to :ref:`py_ser
 
 For a comprehensive guide, refer to the full calibration video. It provides a visual step-by-step process to accurately calibrate your PiDog.
 
+.. note::
+
+   The Pidog kit may come with a 90° or 60° ruler. Our calibration video uses the 90° ruler, but the 60° version follows a similar process. You can also refer to the detailed steps below.
+ 
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=g8_RZDUkfjdwbLZu&amp;start=871&end=1160" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -43,24 +47,24 @@ The specific steps are as follows:
 
 #. Put the PiDog on the base.
 
-    .. image:: img/place-pidog.JPG
+   .. image:: img/place-pidog.JPG
 
 #. Navigate to the PiDog examples directory and run the ``0_calibration.py`` script.
 
-    .. raw:: html
+   .. raw:: html
 
         <run></run>
 
-    .. code-block::
+   .. code-block::
 
         cd ~/pidog/examples
         sudo python3 0_calibration.py
         
-    Upon running the script, a user interface will appear in your terminal.
+#. Upon running the script, a user interface will appear in your terminal. Here, you need to select your calibration ruler (60° or 90°).If your kit has a 90° calibration ruler, select the first option; if it is a 60° one, select the second option.
 
     .. image:: img/CALI.slt.1.png
 
-#. Here, you need to select your calibration ruler (60° or 90°).If your kit has a 90° calibration ruler, select the first option; if it is a 60° one, select the second option. After selecting, you will enter the following interface:
+#. After selecting, you will enter the following interface:
 
 .. image:: img/CALI.slt.2.png
 

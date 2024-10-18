@@ -23,7 +23,7 @@
 * **Middle**: To balance the voltage between the two cells and thus protect the battery.
 * **GND**: Negative battery terminal.
 
-This is a custom battery pack made by SunFounder consisting of two 18650 batteries with a capacity of 2000mAh. The connector is PH2.0-5P, which can be charged directly after being inserted into the shield.
+This is a custom battery pack made by SunFounder consisting of two 18650 batteries with a capacity of 2000mAh. The connector is PH2.0-5P, which can be charged directly after being inserted into the Robot HAT.
 
 **Features**
 
