@@ -22,8 +22,9 @@
 
 Raspberry Piは、低コストでクレジットカードサイズのコンピュータで、コンピュータモニターやテレビに接続し、標準のキーボードとマウスを使用します。この小さなデバイスを使えば、あらゆる年齢の人々がコンピューティングを探求し、ScratchやPythonなどの言語でプログラミングを学ぶことができます。
 
-.. image:: img/image10.jpeg
-   :align: center
+.. image:: img/compitable_pi_nopi5.jpg
+    :width: 600
+    :align: center
 
 **電源アダプター**
 

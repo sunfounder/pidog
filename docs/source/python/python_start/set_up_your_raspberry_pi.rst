@@ -22,7 +22,7 @@
 
 **必要なコンポーネント**
 
-* Raspberry Pi 5
+* Raspberry Pi
 * 電源アダプター
 * マイクロSDカード
 * 画面用電源アダプター
@@ -51,7 +51,7 @@
 
 **必要なコンポーネント**
 
-* Raspberry Pi 5
+* Raspberry Pi
 * 電源アダプター
 * マイクロSDカード
 

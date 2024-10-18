@@ -17,9 +17,9 @@
 
 PiDogを組み立てる前に、すべての部品とコンポーネントが含まれていることを確認してください。欠品や破損したコンポーネントがある場合は、できるだけ早く問題を解決するために、すぐにSunFounderのservice@sunfounder.comに連絡してください。
 
-組み立て指示については、以下のPDFの手順に従ってください：
+.. 組み立て指示については、以下のPDFの手順に従ってください：
 
-* :Download:`コンポーネントリストと組み立て指示書 <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`。
+.. * :Download:`コンポーネントリストと組み立て指示書 <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`。
 
 **Raspberry Pi Zero WをPiDogに取り付ける**
 
