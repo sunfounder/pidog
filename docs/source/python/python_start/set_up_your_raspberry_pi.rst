@@ -22,7 +22,7 @@ Contar con una pantalla facilita el proceso de trabajo con tu Raspberry Pi.
 
 **Componentes necesarios**
 
-* Raspberry Pi 5 Modelo B
+* Raspberry Pi 5
 * Adaptador de corriente
 * Tarjeta Micro SD
 * Adaptador de corriente para la pantalla
@@ -51,7 +51,7 @@ Si no cuentas con un monitor, la opción de inicio de sesión remoto es viable.
 
 **Componentes necesarios**
 
-* Raspberry Pi 5 Modelo B
+* Raspberry Pi 5
 * Adaptador de corriente
 * Tarjeta Micro SD
 
