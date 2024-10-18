@@ -21,9 +21,13 @@ Segui i passaggi indicati nel seguente PDF per le istruzioni di assemblaggio:
 
 * :Download:`Component List and Assembly Instructions <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
 
-**Montare il Raspberry Pi Zero W sul PiDog**
+**Montare il Raspberry Pi Zero 2 W sul PiDog**
 
-Se la tua scheda principale è un Raspberry Pi Zero W, segui i passaggi riportati di seguito per installarlo su PiDog.
+Se la tua scheda principale è un Raspberry Pi Zero 2 W, segui i passaggi riportati di seguito per installarlo su PiDog.
+
+.. note::
+
+    I passaggi di assemblaggio nel video possono differire leggermente dalle istruzioni stampate che hai. Si prega di dare la priorità a seguire le istruzioni stampate. Se qualche passaggio non è chiaro, puoi fare riferimento al video per ulteriori chiarimenti.
 
 .. raw:: html
 
@@ -34,6 +38,11 @@ Successivamente, continua a seguire le istruzioni nel video qui sotto a partire 
 **Video Tutorial di Assemblaggio (Modello Raspberry Pi 4/3/1)**
 
 Questo video ti guiderà passo dopo passo attraverso il processo di assemblaggio del tuo robot.
+
+.. note::
+
+    I passaggi di assemblaggio nel video possono differire leggermente dalle istruzioni stampate che hai. Si prega di dare la priorità a seguire le istruzioni stampate. Se qualche passaggio non è chiaro, puoi fare riferimento al video per ulteriori chiarimenti.
+
 
 In questo tutorial imparerai:
 

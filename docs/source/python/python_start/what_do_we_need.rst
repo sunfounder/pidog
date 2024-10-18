@@ -25,8 +25,9 @@ che si collega a un monitor o TV e utilizza una tastiera e un mouse standard. È
 dispositivo versatile che permette a persone di tutte le età di esplorare il mondo 
 dell'informatica e di imparare a programmare in linguaggi come Scratch e Python.
 
-.. image:: img/image10.jpeg
-   :align: center
+.. image:: img/compitable_pi_nopi5.jpg
+    :width: 600
+    :align: center
 
 **Alimentatore**
 

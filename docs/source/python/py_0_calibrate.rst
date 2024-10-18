@@ -34,6 +34,10 @@ Se l'angolo di deviazione è troppo grande, è necessario tornare alla sezione :
 
 Per una guida completa, consulta il video dettagliato sulla calibrazione. Ti guiderà passo dopo passo attraverso il processo per calibrare accuratamente il tuo PiDog.
 
+.. note::
+
+    Il kit Pidog può includere un righello da 90° o da 60°. Il nostro video di calibrazione utilizza il righello da 90°, ma la versione da 60° segue un processo simile. Puoi anche fare riferimento ai passaggi dettagliati di seguito.
+
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=g8_RZDUkfjdwbLZu&amp;start=871&end=1160" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -44,26 +48,26 @@ I passaggi specifici sono i seguenti:
 
 #. Posiziona il PiDog sulla base.
 
-    .. image:: img/place-pidog.JPG
+   .. image:: img/place-pidog.JPG
 
 #. Naviga nella directory degli esempi di PiDog e avvia lo script ``0_calibration.py``.
 
-    .. raw:: html
+   .. raw:: html
 
         <run></run>
 
-    .. code-block::
+   .. code-block::
 
         cd ~/pidog/examples
         sudo python3 0_calibration.py
         
-    All'avvio dello script, apparirà un'interfaccia utente nel tuo terminale.
+#. All'avvio dello script, apparirà un'interfaccia utente nel tuo terminale. Qui devi selezionare il calibro di misurazione (60° o 90°). Se il kit include un calibro di 90°, seleziona la prima opzione; se invece è da 60°, seleziona la seconda opzione.
 
-    .. image:: img/CALI.slt.1.png
+   .. image:: img/CALI.slt.1.png
 
-#. Qui devi selezionare il calibro di misurazione (60° o 90°). Se il kit include un calibro di 90°, seleziona la prima opzione; se invece è da 60°, seleziona la seconda opzione. Dopo aver scelto, entrerai nell'interfaccia seguente:
+#. Dopo aver scelto, entrerai nell'interfaccia seguente:
 
-.. image:: img/CALI.slt.2.png
+   .. image:: img/CALI.slt.2.png
 
 
 

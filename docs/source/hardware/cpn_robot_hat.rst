@@ -25,62 +25,8 @@ La scheda include un altoparlante, che può essere utilizzato per riprodurre mus
 di sottofondo, effetti sonori e implementare funzioni TTS (text-to-speech), rendendo 
 il tuo progetto più interessante.
 
-Accetta un input di alimentazione PH2.0 a 5 pin da 7-12V con 2 indicatori di batteria, 
+Accetta un input di alimentazione da 7-12V con 2 indicatori di batteria, 
 1 indicatore di carica e 1 indicatore di alimentazione. La scheda dispone inoltre di un 
 LED utilizzabile e di un pulsante che puoi utilizzare per testare rapidamente alcuni effetti.
 
-.. image:: img/O1902V40RobotHAT.png
-
-**Porta di Alimentazione**
-    * Ingresso di alimentazione PH2.0 a 3 pin da 7-12V.
-    * Alimenta contemporaneamente il Raspberry Pi e il Robot HAT.
-
-**Interruttore di Alimentazione**
-    * Accendi/spegni l'alimentazione del Robot HAT.
-    * Quando si collega l'alimentazione alla porta di ingresso, il Raspberry Pi si avvia. Tuttavia, è necessario impostare l'interruttore di alimentazione su ON per abilitare il Robot HAT.
-
-**Porta USB di Tipo-C**
-    * Inserisci il cavo Type-C per caricare la batteria.
-    * L'indicatore di carica si accende di colore rosso.
-    * Quando la batteria è completamente carica, l'indicatore di carica si spegne.
-    * Se il cavo USB rimane collegato per circa 4 ore dopo la ricarica completa, l'indicatore di carica lampeggerà come promemoria.
-
-**Pin Digitali**
-    * 4 canali di pin digitali, D0-D3.
-
-**Pin ADC**
-    * 4 canali di pin ADC, A0-A3.
-
-**Pin PWM**
-    * 12 canali di pin PWM, P0-P11.
-
-**Porta Motore Sinistra/Destra**
-    * 2 porte motore XH2.54.
-    * La porta sinistra è collegata a GPIO 4 e la porta destra è collegata a GPIO 5.
-
-**Pin e Porta I2C**
-    * **Pin I2C**: Interfaccia a 4 pin P2.54.
-    * **Porta I2C**: Interfaccia a 4 pin SH1.0, compatibile con QWIIC e STEMMA QT.
-    * Queste interfacce I2C sono collegate all'interfaccia I2C del Raspberry Pi tramite GPIO2 (SDA) e GPIO3 (SCL).
-
-**Pin SPI**
-    * Interfaccia SPI a 7 pin P2.54.
-
-**Pin UART**
-    * Interfaccia a 4 pin P2.54.
-
-**Pulsante RST**
-    * Quando si utilizza Ezblock, il pulsante RST serve per riavviare il programma Ezblock.
-    * Se non si utilizza Ezblock, il pulsante RST non ha una funzione predefinita e può essere personalizzato in base alle proprie esigenze.
-
-**Pulsante USR**
-    * Le funzioni del pulsante USR possono essere impostate tramite la programmazione. (Premendo si genera un input "0"; rilasciando si genera un input "1".)
-
-**Indicatore di Batteria**
-    * Due LED si accendono quando la tensione è superiore a 7,6V.
-    * Un LED si accende nel range di 7,15V - 7,6V.
-    * Sotto i 7,15V, entrambi i LED si spengono.
-
-**Altoparlante e Porta Altoparlante**
-    * **Altoparlante**: Questo è un altoparlante a camera acustica 2030.
-    * **Porta Altoparlante**: Il Robot HAT è dotato di uscita audio I2S integrata e di un altoparlante 2030, fornendo un'uscita audio mono.
+Per istruzioni dettagliate, fare riferimento a: |link_robot_hat_v4|.

@@ -22,7 +22,7 @@ L'uso di uno schermo semplifica il processo di lavoro con il tuo Raspberry Pi.
 
 **Componenti Necessari**
 
-* Raspberry Pi 5 Modello B
+* Raspberry Pi
 * Alimentatore
 * Scheda Micro SD
 * Alimentatore per lo schermo
@@ -51,7 +51,7 @@ Se non hai un monitor, puoi accedere al Raspberry Pi in remoto.
 
 **Componenti Necessari**
 
-* Raspberry Pi 5 Modello B
+* Raspberry Pi
 * Alimentatore
 * Scheda Micro SD
 
