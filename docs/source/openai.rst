@@ -22,8 +22,13 @@ AIとのインタラクション：GPT-4Oの活用
      お使いのブラウザはビデオタグをサポートしていません。
    </video>
 
-1. 仮想環境の設定
+1. 必要なパッケージと依存関係のインストール
 --------------------------------------------------------------
+
+.. note::
+
+   まず、PiCar-X用の必要なモジュールをインストールする必要があります。詳細については、:ref:`install_all_modules` を参照してください。
+   
 
 このセクションでは、仮想環境を作成してアクティブにし、必要なパッケージと依存関係をインストールします。これにより、インストールしたパッケージがシステムの他の部分と干渉しないようにし、プロジェクトの依存関係の分離を維持し、他のプロジェクトやシステムパッケージとの衝突を防ぎます。
 
@@ -128,7 +133,7 @@ AIとのインタラクション：GPT-4Oの活用
       :width: 700
       :align: center
 
-#. 今すぐ**Playground**をクリックして、アカウントが正常に機能しているか確認してください。
+#. 今すぐ **Playground** をクリックして、アカウントが正常に機能しているか確認してください。
 
    .. image:: img/apt_playground.png
 
@@ -304,3 +309,39 @@ Pidogにマイクが装備されている場合、または |link_microphone| �
      <source src="_static/video/chatgpt4o.mp4" type="video/mp4">
      Your browser does not support the video tag.
    </video>
+
+5. パラメータの変更 [オプション]
+-------------------------------------------
+``gpt_dog.py`` ファイル内で、以下の行を見つけてください。STT 言語、TTS 音量ゲイン、音声役割を設定するためにこれらのパラメータを変更できます。
+
+* **STT（音声からテキストへの変換）** は、PiCar-Xのマイクが音声をキャプチャしてテキストに変換し、GPTに送信するプロセスを指します。この変換の精度と待機時間を向上させるために、言語を指定できます。
+* **TTS（テキストから音声への変換）** は、GPTのテキスト応答を音声に変換し、PiCar-Xのスピーカーから再生するプロセスです。TTS出力の音量ゲインを調整し、音声役割を選択できます。
+
+.. code-block:: python
+
+   # openai assistant init
+   # =================================================================
+   openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'picrawler')
+   # LANGUAGE = ['zh', 'en'] # STT 言語コードを設定します, https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
+   LANGUAGE = []
+   VOLUME_DB = 3 # TTS 音量ゲインは、5dB未満が推奨されます
+   # TTS 音声役割を選択、"alloy, echo, fable, onyx, nova, shimmer" から選べます
+   # https://platform.openai.com/docs/guides/text-to-speech/supported-languages
+   TTS_VOICE = 'nova'
+
+* ``LANGUAGE`` 変数:
+
+   * 音声からテキストへの変換（STT）の精度と応答時間を向上させます。
+   * ``LANGUAGE = []`` はすべての言語に対応しますが、STTの精度が低下し、待機時間が増加する可能性があります。
+   * |link_iso_language_code| の言語コードを使用して、特定の言語を設定することをお勧めします。
+
+* ``VOLUME_DB`` 変数:
+
+   * テキストから音声への変換（TTS）の出力音量を制御します。
+   * 値を増やすと音量が上がりますが、音声の歪みを避けるために5dB以下にすることをお勧めします。
+
+* ``TTS_VOICE`` 変数:
+
+   * テキストから音声への変換（TTS）の音声役割を選択します。
+   * 利用可能なオプション: ``alloy, echo, fable, onyx, nova, shimmer``。
+   * |link_voice_options| からさまざまな声を試して、目的のトーンや対象に合ったものを見つけることができます。現在、利用可能な声は英語用に最適化されています。

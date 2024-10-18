@@ -25,6 +25,10 @@ PiDogを組み立てる前に、すべての部品とコンポーネントが含
 
 メインボードがRaspberry Pi Zero Wの場合、以下の手順でPiDogに取り付けてください。
 
+.. note::
+
+    ビデオ内の組み立て手順は、お手元の印刷された説明書と若干異なる場合があります。印刷された説明書を優先的に参照してください。不明な点があれば、ビデオを参考にして確認できます。
+
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/Zfv-8O_Sq9s?si=ZT_6cy9uvupJ0Y_d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -36,6 +40,10 @@ PiDogを組み立てる前に、すべての部品とコンポーネントが含
 
 この動画では、ロボットを一から組み立てるプロセスを案内します。
 
+.. note::
+
+    ビデオ内の組み立て手順は、お手元の印刷された説明書と若干異なる場合があります。印刷された説明書を優先的に参照してください。不明な点があれば、ビデオを参考にして確認できます。
+    
 このチュートリアルでは、以下の内容を学びます：
 
 * **準備**：必要なツールと部品を紹介し、組み立てを開始する前に完全に準備が整っていることを確認します。
