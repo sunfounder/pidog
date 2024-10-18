@@ -533,6 +533,7 @@ echo "We can now test your $productname"
 warning "Set your speakers if possible!"
 if confirm "Do you wish to test your system now?"; then
     echo "Testing..."
+    pinctrl set 20 op dh
     speaker-test -l5 -c2 -t wav
 fi
 newline
