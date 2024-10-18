@@ -12,7 +12,7 @@
 
     👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-Batterie 18650
+5P Batterie
 =================
 
 .. image:: img/2battery.jpg
@@ -27,9 +27,9 @@ Il s'agit d'un pack de batteries personnalisé fabriqué par SunFounder, compos�
 
 **Caractéristiques**
 
-* Charge de la batterie : 5V/2A
-* Sortie de la batterie : 5V/3A
-* Capacité de la batterie : 3,7V 2000mAh x 2
-* Autonomie de la batterie : <90 min
-* Temps de charge de la batterie : >130 min
-* Connecteur : PH2.0, 5P
+* **Composition**: Li-ion
+* **Capacité de la batterie**: 2000mAh, 14,8Wh
+* **Poids de la batterie**: 90,8g
+* **Nombre de cellules**: 2
+* **Connecteur**: PH2.0-5P
+* **Protection contre la décharge excessive**: 6,0V

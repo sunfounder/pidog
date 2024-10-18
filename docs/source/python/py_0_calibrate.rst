@@ -32,6 +32,10 @@ Cependant, si l'angle de déviation est trop important, il est nécessaire de re
 
 Pour un guide complet, consultez la vidéo de calibration. Elle fournit une procédure visuelle pas-à-pas pour calibrer votre PiDog avec précision.
 
+.. note::
+
+    Le kit Pidog peut être fourni avec une règle de 90° ou de 60°. Notre vidéo de calibration utilise la règle de 90°, mais la version 60° suit un processus similaire. Vous pouvez également vous référer aux étapes détaillées ci-dessous.
+
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=g8_RZDUkfjdwbLZu&amp;start=871&end=1160" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -42,26 +46,30 @@ Les étapes spécifiques sont les suivantes :
 
 #. Placez le PiDog sur la base.
 
-    .. image:: img/place-pidog.JPG
+   .. image:: img/place-pidog.JPG
 
 #. Naviguez vers le répertoire des exemples de PiDog et lancez le script ``0_calibration.py``.
 
-    .. raw:: html
+   
+   .. raw:: html   
 
-        <run></run>
-
-    .. code-block::
-
-        cd ~/pidog/examples
-        sudo python3 0_calibration.py
+       <run></run>   
+       
+   
+   .. code-block::   
+    
+       cd ~/pidog/examples
+   
+       sudo python3 0_calibration.py
         
-    Après avoir exécuté le script, une interface utilisateur apparaîtra dans votre terminal.
 
-    .. image:: img/CALI.slt.1.png
+#. Après avoir exécuté le script, une interface utilisateur apparaîtra dans votre terminal. Sélectionnez ici votre équerre de calibration (60° ou 90°). Si votre kit contient une équerre de calibration à 90°, choisissez la première option ; s'il s'agit d'une équerre de 60°, choisissez la seconde option. Après avoir sélectionné, vous verrez l'interface suivante :
+   
+   .. image:: img/CALI.slt.1.png
 
-#. Sélectionnez ici votre équerre de calibration (60° ou 90°). Si votre kit contient une équerre de calibration à 90°, choisissez la première option ; s'il s'agit d'une équerre de 60°, choisissez la seconde option. Après avoir sélectionné, vous verrez l'interface suivante :
-
-.. image:: img/CALI.slt.2.png
+#. Après avoir sélectionné, vous verrez l'interface suivante :
+   
+   .. image:: img/CALI.slt.2.png
 
 
 
@@ -70,11 +78,11 @@ Calibrage avec une équerre de 90°
 
 #. Positionnez l'**Équerre de Calibration** (Acrylique C) comme indiqué dans l'image fournie. Dans le terminal, appuyez sur ``1``, puis utilisez les touches ``w`` et ``s`` pour aligner les bords comme illustré.
 
-    .. image:: img/CALI-1.2.png
+   .. image:: img/CALI-1.2.png
 
 #. Repositionnez l'**Équerre de Calibration** (Acrylique C) comme illustré dans l'image suivante. Appuyez sur ``2`` dans le terminal, puis utilisez ``w`` et ``s`` pour aligner les bords comme montré.
 
-    .. image:: img/CALI-2.2.png
+   .. image:: img/CALI-2.2.png
 
 #. Répétez le processus de calibration pour les servos restants (3 à 8). Assurez-vous que les quatre pattes du PiDog sont correctement calibrées.
 
@@ -85,10 +93,10 @@ Calibrage avec une équerre de 60°
 
 #. Placez l'**Équerre de Calibration** (Acrylique C) comme montré dans l'image fournie. Posez son côté long sur une surface plane. Dans le terminal, appuyez sur ``1``, puis utilisez les touches ``w`` et ``s`` pour aligner les bords comme illustré.
 
-    .. image:: img/CALI.60.1.JPG
+   .. image:: img/CALI.60.1.JPG
 
 #. Repositionnez l'**Équerre de Calibration** (Acrylique C) comme illustré dans l'image suivante. Appuyez sur ``2`` dans le terminal, puis utilisez ``w`` et ``s`` pour aligner les bords comme montré.
 
-    .. image:: img/CALI.60.2.JPG
+   .. image:: img/CALI.60.2.JPG
 
 #. Répétez le processus de calibration pour les servos restants (3 à 8). Assurez-vous que les quatre pattes du PiDog sont correctement calibrées.

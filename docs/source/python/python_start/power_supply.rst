@@ -40,23 +40,3 @@ Attendez quelques secondes et vous entendrez un léger bip, indiquant que le Ras
 .. note::
     Si les deux voyants de niveau de batterie sont éteints, veuillez recharger la batterie.
     Lorsque vous effectuez des sessions de programmation ou de débogage prolongées, vous pouvez maintenir le Raspberry Pi en fonctionnement en connectant le câble USB-C pour charger simultanément la batterie.
-
-Batterie 18650
------------------------------------
-
-.. image:: img/5pin_battery.jpg
-
-* **VCC** : Pôle positif de la batterie. Il y a ici deux ensembles de VCC et de GND pour augmenter le courant et réduire la résistance.
-* **Middle** : Équilibre la tension entre les deux cellules pour protéger la batterie.
-* **GND** : Pôle négatif de la batterie.
-
-Il s'agit d'un pack de batteries personnalisé par SunFounder, composé de deux batteries 18650 d'une capacité de 2000 mAh. Le connecteur est de type XH2.54 5P, qui peut être chargé directement après avoir été inséré dans le module.
-
-**Caractéristiques**
-
-* Charge de la batterie : 5V/2A
-* Sortie de la batterie : 5V/5A
-* Capacité de la batterie : 3,7V 2000mAh x 2
-* Autonomie de la batterie : 90 min
-* Temps de charge de la batterie : 130 min
-* Connecteur : XH2.54 5P

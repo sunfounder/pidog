@@ -26,8 +26,9 @@ un clavier et une souris standards. C’est un petit appareil polyvalent qui per
 aux personnes de tout âge d'explorer l'informatique et d'apprendre à programmer dans 
 des langages comme Scratch et Python.
 
-.. image:: img/image10.jpeg
-   :align: center
+.. image:: img/compitable_pi_nopi5.jpg
+    :width: 600
+    :align: center
 
 **Adaptateur d'alimentation**
 
