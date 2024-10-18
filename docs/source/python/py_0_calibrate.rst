@@ -34,6 +34,10 @@ Si el ángulo de desviación es demasiado grande, deberás volver a :ref:`py_ser
 
 Para obtener una guía completa, consulta el video de calibración. Este proporciona un proceso visual detallado para calibrar con precisión tu PiDog.
 
+.. note::
+
+    El kit de Pidog puede venir con una regla de 90° o 60°. Nuestro video de calibración utiliza la regla de 90°, pero la versión de 60° sigue un proceso similar. También puedes consultar los pasos detallados a continuación.
+
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=g8_RZDUkfjdwbLZu&amp;start=871&end=1160" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -44,26 +48,26 @@ Los pasos específicos son los siguientes:
 
 #. Coloca el PiDog sobre la base.
 
-    .. image:: img/place-pidog.JPG
+   .. image:: img/place-pidog.JPG
 
 #. Navega al directorio de ejemplos de PiDog y ejecuta el script ``0_calibration.py``.
 
-    .. raw:: html
+   .. raw:: html
+   
+       <run></run>
+   
+   .. code-block::
+   
+       cd ~/pidog/examples
+       sudo python3 0_calibration.py
+       
+#. Al ejecutar el script, aparecerá una interfaz de usuario en tu terminal. Aquí debes seleccionar tu regla de calibración (60° o 90°). Si tu kit tiene una regla de calibración de 90°, selecciona la primera opción; si es una de 60°, selecciona la segunda opción.
 
-        <run></run>
+   .. image:: img/CALI.slt.1.png
 
-    .. code-block::
+#. Después de seleccionar, ingresarás a la siguiente interfaz:
 
-        cd ~/pidog/examples
-        sudo python3 0_calibration.py
-        
-    Al ejecutar el script, aparecerá una interfaz de usuario en tu terminal.
-
-    .. image:: img/CALI.slt.1.png
-
-#. Aquí debes seleccionar tu regla de calibración (60° o 90°). Si tu kit tiene una regla de calibración de 90°, selecciona la primera opción; si es una de 60°, selecciona la segunda opción. Después de seleccionar, ingresarás a la siguiente interfaz:
-
-.. image:: img/CALI.slt.2.png
+   .. image:: img/CALI.slt.2.png
 
 
 Regla de 90°
@@ -71,11 +75,11 @@ Regla de 90°
 
 #. Coloca la **Regla de Calibración** (Acrílico C) como se muestra en la imagen proporcionada. En la terminal, presiona ``1``, seguido de las teclas ``w`` y ``s`` para alinear los bordes como se indica en la imagen.
 
-    .. image:: img/CALI-1.2.png
+   .. image:: img/CALI-1.2.png
 
 #. Reposiciona la **Regla de Calibración** (Acrílico C) como se ilustra en la siguiente imagen. Presiona ``2`` en la terminal, luego usa ``w`` y ``s`` para alinear los bordes como se muestra.
 
-    .. image:: img/CALI-2.2.png
+   .. image:: img/CALI-2.2.png
 
 #. Repite el proceso de calibración para los servomotores restantes (del 3 al 8). Asegúrate de calibrar las cuatro patas del PiDog.
 
@@ -85,11 +89,11 @@ Regla de 60°
 
 #. Coloca la **Regla de Calibración** (Acrílico C) como se muestra en la imagen proporcionada. Coloca su lado largo sobre una superficie nivelada. En la terminal, presiona ``1``, seguido de las teclas ``w`` y ``s`` para alinear los bordes como se indica en la imagen.
 
-    .. image:: img/CALI.60.1.JPG
+   .. image:: img/CALI.60.1.JPG
 
 #. Reposiciona la **Regla de Calibración** (Acrílico C) como se ilustra en la siguiente imagen. Presiona ``2`` en la terminal, luego usa ``w`` y ``s`` para alinear los bordes como se muestra.
 
-    .. image:: img/CALI.60.2.JPG
+   .. image:: img/CALI.60.2.JPG
 
 #. Repite el proceso de calibración para los servomotores restantes (del 3 al 8). Asegúrate de calibrar las cuatro patas del PiDog.
 

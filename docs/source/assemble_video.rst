@@ -17,13 +17,17 @@ Videos de Ensamblaje
 
 Antes de ensamblar el PiDog, verifica que todas las piezas y componentes estén incluidos. Si faltara alguna parte o estuviera dañada, contacta a SunFounder de inmediato en service@sunfounder.com para resolver el problema lo antes posible.
 
-Por favor, sigue los pasos indicados en el siguiente PDF para las instrucciones de ensamblaje:
+.. Por favor, sigue los pasos indicados en el siguiente PDF para las instrucciones de ensamblaje:
 
-* :Download:`Component List and Assembly Instructions <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
+.. * :Download:`Component List and Assembly Instructions <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
 
 **Montaje de la Raspberry Pi Zero W en PiDog**
 
 Si tu placa principal es una Raspberry Pi Zero W, sigue estos pasos para instalarla en el PiDog.
+
+.. note::
+
+    Los pasos de ensamblaje en el video pueden diferir ligeramente de las instrucciones impresas que tienes. Por favor, da prioridad a seguir las instrucciones impresas. Si algunos pasos no son claros, puedes consultar el video para obtener más aclaraciones.
 
 .. raw:: html
 
@@ -36,6 +40,10 @@ Después, puedes continuar con las instrucciones en el video a partir del **minu
 
 Este video te guiará a través del proceso de ensamblaje del robot desde cero.
 
+.. note::
+
+    Los pasos de ensamblaje en el video pueden diferir ligeramente de las instrucciones impresas que tienes. Por favor, da prioridad a seguir las instrucciones impresas. Si algunos pasos no son claros, puedes consultar el video para obtener más aclaraciones.
+    
 En este tutorial aprenderás:
 
 * **Preparación**: Te presentamos todas las herramientas y piezas necesarias para asegurarte de que estás completamente listo antes de empezar el ensamblaje.

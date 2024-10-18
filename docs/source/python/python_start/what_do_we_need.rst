@@ -25,8 +25,9 @@ costo que se conecta a un monitor o TV y utiliza un teclado y un ratón estánda
 Es un pequeño pero potente dispositivo que permite a personas de todas las edades 
 explorar la informática y aprender a programar en lenguajes como Scratch y Python.
 
-.. image:: img/image10.jpeg
-   :align: center
+.. image:: img/compitable_pi_nopi5.jpg
+    :width: 600
+    :align: center
 
 **Adaptador de corriente**
 

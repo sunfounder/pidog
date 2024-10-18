@@ -18,7 +18,7 @@ SunFounder Raspberry Pi Robot - |link_Pi_Dog|
 * |link_PiDog|
 
 .. image:: img/pidog.jpg
-    :width: 400
+    :width: 300
     :align: center
 
 Gracias por elegir nuestro |link_Pi_Dog|.
