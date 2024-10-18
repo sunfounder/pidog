@@ -22,7 +22,7 @@ Utiliser un écran simplifie le processus de configuration et de travail avec vo
 
 **Composants nécessaires**
 
-* Raspberry Pi 5 Modèle B
+* Raspberry Pi 5
 * Adaptateur d'alimentation
 * Carte Micro SD
 * Adaptateur d'alimentation de l'écran
@@ -51,7 +51,7 @@ Si vous n'avez pas de moniteur, la connexion à distance est une option viable.
 
 **Composants nécessaires**
 
-* Raspberry Pi 5 Modèle B 
+* Raspberry Pi 5
 * Adaptateur d'alimentation
 * Carte Micro SD
 
