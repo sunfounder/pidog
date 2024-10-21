@@ -27,7 +27,7 @@ Let's dive into this project and unleash a new level of interaction with Pidog!
 --------------------------------------------------------------
 .. note::
 
-   You need to install the necessary modules for PiCar-X first. For details, please refer to: :ref:`install_all_modules`.
+   You need to install the necessary modules for PiDog first. For details, please refer to: :ref:`install_all_modules`.
    
 
 In this section, we will create and activate a virtual environment, installing the required packages and dependencies within it. This ensures that the installed packages do not interfere with the rest of the system, maintaining project dependency isolation and preventing conflicts with other projects or system packages.
@@ -318,9 +318,9 @@ If your Pidog is equipped with a microphone, or you can purchase one by clicking
 
 In the ``gpt_dog.py`` file, locate the following lines. You can modify these parameters to configure the STT language, TTS volume gain, and voice role.
 
-* **STT (Speech to Text)** refers to the process where the PiCar-X microphone captures speech and converts it into text to be sent to GPT. You can specify the language for better accuracy and latency in this conversion.
+* **STT (Speech to Text)** refers to the process where the PiDog microphone captures speech and converts it into text to be sent to GPT. You can specify the language for better accuracy and latency in this conversion.
 
-* **TTS (Text to Speech)** is the process of converting GPT's text responses into speech, which is played through the PiCar-X speaker. You can adjust the volume gain and select a voice role for the TTS output.
+* **TTS (Text to Speech)** is the process of converting GPT's text responses into speech, which is played through the PiDog speaker. You can adjust the volume gain and select a voice role for the TTS output.
 
 .. code-block:: python
 
