@@ -42,6 +42,10 @@ LANGUAGE = []
 # VOLUME_DB = 5
 VOLUME_DB = 3
 
+# select tts voice role, counld be "alloy, echo, fable, onyx, nova, and shimmer"
+# https://platform.openai.com/docs/guides/text-to-speech/supported-languages
+TTS_VOICE = 'shimmer'
+
 VOICE_ACTIONS = ["bark", "bark harder", "pant",  "howling"]
 
 # dog init 
@@ -270,7 +274,7 @@ def main():
                 st = time.time()
                 _time = time.strftime("%y-%m-%d_%H-%M-%S", time.localtime())
                 _tts_f = f"./tts/{_time}_raw.wav"
-                _status = openai_helper.text_to_speech(answer, _tts_f, 'shimmer', response_format='wav') # onyx
+                _status = openai_helper.text_to_speech(answer, _tts_f, TTS_VOICE, response_format='wav') # onyx
                 if _status:
                     tts_file = f"./tts/{_time}_{VOLUME_DB}dB.wav"
                     _status = sox_volume(_tts_f, tts_file, VOLUME_DB)
