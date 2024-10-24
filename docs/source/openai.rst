@@ -321,7 +321,7 @@ Pidogにマイクが装備されている場合、または |link_microphone| �
 
    # openai assistant init
    # =================================================================
-   openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'picrawler')
+   openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'PiDog')
    # LANGUAGE = ['zh', 'en'] # STT 言語コードを設定します, https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
    LANGUAGE = []
    VOLUME_DB = 3 # TTS 音量ゲインは、5dB未満が推奨されます
