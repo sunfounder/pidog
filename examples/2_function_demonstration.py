@@ -194,21 +194,30 @@ def main(stdscr):
         key = stdscr.getch()
         key = curses.unctrl(key)
 
+        # print(f'key: {key}')
+
         if key in b'0123456789':
             index_str += str(int(key))
             display_bottom(bottom_pad, index_str)
             curses_utils.pad_refresh(bottom_pad)
         elif key == b'^J': # enter
-            index = int(index_str)-1
-            # display selection
-            display_selection(selection_pad, index)
-            curses_utils.pad_refresh(selection_pad)
-            # do fuction
-            do_function(index)
-            # reset display
-            index_str = ''
-            display_bottom(bottom_pad, index_str)
-            curses_utils.pad_refresh(bottom_pad)
+            if index_str == '':
+                if index == -1 or index > 26:
+                    continue
+                else:
+                    do_function(index)
+            else:
+                index = int(index_str)-1
+                # display selection
+                display_selection(selection_pad, index)
+                curses_utils.pad_refresh(selection_pad)
+                # do fuction
+                do_function(index)
+                # reset display
+                index_str = ''
+                display_bottom(bottom_pad, index_str)
+                curses_utils.pad_refresh(bottom_pad)
+
 
         sleep(0.2)
 

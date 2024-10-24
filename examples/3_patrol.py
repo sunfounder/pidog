@@ -18,7 +18,7 @@ def patrol():
     print(f"distance: {distance} cm", end="", flush=True)
 
     # danger
-    if distance < DANGER_DISTANCE:
+    if distance > 0 and distance < DANGER_DISTANCE:
         print("\033[0;31m DANGER !\033[m")
         my_dog.body_stop()
         head_yaw = my_dog.head_current_angles[0]
