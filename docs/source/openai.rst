@@ -314,7 +314,7 @@ Im ``gpt_dog.py``-Datei finden Sie die folgenden Zeilen. Sie können diese Param
 
    # openai assistant init
    # =================================================================
-   openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'picrawler')
+   openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'PiDog')
    # LANGUAGE = ['zh', 'en'] # STT Sprachcode konfigurieren, https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
    LANGUAGE = []
    VOLUME_DB = 3 # TTS-Lautstärkeregelung, vorzugsweise unter 5 dB
