@@ -323,7 +323,7 @@ En el archivo ``gpt_dog.py``, localice las siguientes líneas. Puede modificar e
 
    # openai assistant init
    # =================================================================
-   openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'picrawler')
+   openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'PiDog')
    # LANGUAGE = ['zh', 'en'] # configurar código de idioma STT, https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
    LANGUAGE = []
    VOLUME_DB = 3 # ganancia de volumen TTS, preferentemente menos de 5db
