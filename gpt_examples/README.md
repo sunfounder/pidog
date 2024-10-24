@@ -110,6 +110,10 @@ sudo python3 gpt_dog.py --keyboard --no-img
 
     After TTS, the audio volume will be increased using sox, and the gain can be set through the `"VOLUME_DB"` parameter, preferably not exceeding `5`, as going beyond this might result in audio distortion.
 
+- Select TTS voice role
+
+    Config `TTS_VOICE` variable in the file `gpt_dog.py` to select the TTS voice role counld be `"alloy, echo, fable, onyx, nova, and shimmer"`
+
 ```python
 # openai assistant init
 # =================================================================
@@ -120,4 +124,9 @@ LANGUAGE = []
 
 # VOLUME_DB = 5
 VOLUME_DB = 3
+
+# select tts voice role, counld be "alloy, echo, fable, onyx, nova, and shimmer"
+# https://platform.openai.com/docs/guides/text-to-speech/supported-languages
+TTS_VOICE = 'shimmer'
+
 ```
