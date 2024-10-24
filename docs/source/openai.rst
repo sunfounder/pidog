@@ -326,7 +326,7 @@ In the ``gpt_dog.py`` file, locate the following lines. You can modify these par
 
    # openai assistant init
    # =================================================================
-   openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'picrawler')
+   openai_helper = OpenAiHelper(OPENAI_API_KEY, OPENAI_ASSISTANT_ID, 'PiDog')
 
    # LANGUAGE = ['zh', 'en'] # config stt language code, https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
    LANGUAGE = []
