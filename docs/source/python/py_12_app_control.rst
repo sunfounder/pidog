@@ -24,7 +24,9 @@ En este ejemplo, usaremos la aplicación **SunFounder Controller** para controla
       Your browser does not support the video tag.
    </video>
 
-Primero, debes descargar la aplicación en tu teléfono o tablet, luego conectarte al punto de acceso creado por PiDog y, finalmente, configurar tu propio control remoto en **SunFounder Controller** para manipular a PiDog.
+Primero necesitas descargar la APP en tu teléfono/tableta, luego conectarte a la red WLAN como PiDog y, finalmente, crear tu propio control remoto en el SunFounder Controller para controlar PiDog.
+
+.. _app_control:
 
 Controla a PiDog con la aplicación
 ----------------------------------------
@@ -161,31 +163,31 @@ Hay una forma más práctica de hacerlo. Puedes configurar a PiDog para que ejec
 
     .. image:: img/auto_start.png
 
-#. A partir de ahora, puedes encender PiDog y controlarlo directamente usando la aplicación.
+#. #. Después de reiniciar, PiDog iniciará automáticamente el script de control. Luego podrás :ref:`app_control`.
 
 .. warning::
 
     Si deseas ejecutar otros scripts, primero ejecuta ``pidog_app disable`` para desactivar la función de inicio automático.
 
 
-Configuración del Programa de la APP
-----------------------------------------
+.. Configuración del Programa de la APP
+.. ----------------------------------------
 
-Puedes usar los siguientes comandos para modificar la configuración del modo APP.
+.. Puedes usar los siguientes comandos para modificar la configuración del modo APP.
 
-.. code-block::
+.. .. code-block::
 
-    pidog_app <OPCIÓN> [input]
+..     pidog_app <OPCIÓN> [input]
 
-**OPCIÓN**
-    * ``-h`` ``help``: ayuda, muestra este mensaje
-    * ``start`` ``restart``: reiniciar el servicio ``pidog_app``
-    * ``stop``: detener el servicio ``pidog_app``
-    * ``disable``: desactivar el inicio automático del programa ``app_controller`` al arrancar
-    * ``enable``: activar el inicio automático del programa ``app_controller`` al arrancar
-    * ``close_ap``: cerrar el punto de acceso, desactivar el inicio automático del hotspot al arrancar y cambiar al modo ``sta``
-    * ``open_ap``: abrir el punto de acceso, activar el inicio automático del hotspot al arrancar
-    * ``ssid``: configurar el ssid (nombre de red) del punto de acceso
-    * ``psk``: configurar la contraseña del punto de acceso
-    * ``country``: configurar el código de país del punto de acceso
+.. **OPCIÓN**
+..     * ``-h`` ``help``: ayuda, muestra este mensaje
+..     * ``start`` ``restart``: reiniciar el servicio ``pidog_app``
+..     * ``stop``: detener el servicio ``pidog_app``
+..     * ``disable``: desactivar el inicio automático del programa ``app_controller`` al arrancar
+..     * ``enable``: activar el inicio automático del programa ``app_controller`` al arrancar
+..     * ``close_ap``: cerrar el punto de acceso, desactivar el inicio automático del hotspot al arrancar y cambiar al modo ``sta``
+..     * ``open_ap``: abrir el punto de acceso, activar el inicio automático del hotspot al arrancar
+..     * ``ssid``: configurar el ssid (nombre de red) del punto de acceso
+..     * ``psk``: configurar la contraseña del punto de acceso
+..     * ``country``: configurar el código de país del punto de acceso
 
