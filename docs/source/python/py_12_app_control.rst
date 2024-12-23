@@ -24,8 +24,9 @@ In questo esempio, utilizzeremo l'app SunFounder Controller per controllare PiDo
       Your browser does not support the video tag.
    </video>
 
-Prima di tutto, devi scaricare l'APP sul tuo telefono/tablet, quindi collegarti all'hotspot trasmesso da PiDog e infine creare il tuo telecomando su SunFounder Controller per controllare PiDog.
+Devi prima scaricare l'APP sul tuo telefono/tablet, quindi connetterti alla WLAN come PiDog e infine creare il tuo telecomando sul SunFounder Controller per controllare PiDog.
 
+.. _app_control:
 
 Controlla PiDog con l'app
 ----------------------------
@@ -162,31 +163,31 @@ Come configurarlo?
 
     .. image:: img/auto_start.png
 
-#. Da quel momento in poi, sarà sufficiente accendere PiDog e controllarlo direttamente con l'APP.
+#. Dopo il riavvio, PiDog avvierà automaticamente lo script di controllo. Poi potrai :ref:`app_control`.
 
 .. warning::
 
     Se desideri eseguire altri script, prima esegui ``pidog_app disable`` per disattivare la funzione di avvio automatico.
 
 
-Configurazione del Programma APP
-------------------------------------
+.. Configurazione del Programma APP
+.. ------------------------------------
 
-Puoi inserire i seguenti comandi per modificare le impostazioni della modalità APP.
+.. Puoi inserire i seguenti comandi per modificare le impostazioni della modalità APP.
 
-.. code-block::
+.. .. code-block::
 
-    pidog_app <OPTION> [input]
+..     pidog_app <OPTION> [input]
 
-**OPTION**
-    * ``-h`` ``help``: guida, mostra questo messaggio
-    * ``start`` ``restart``: riavvia il servizio ``pidog_app``
-    * ``stop``: ferma il servizio ``pidog_app``
-    * ``disable``: disabilita l'avvio automatico del programma ``app_controller``
-    * ``enable``: abilita l'avvio automatico del programma ``app_controller``
-    * ``close_ap``: disabilita l'hotspot, disattiva l'avvio automatico dell'hotspot all'avvio e passa alla modalità ``sta``
-    * ``open_ap``: abilita l'hotspot, attiva l'avvio automatico dell'hotspot all'avvio
-    * ``ssid``: imposta l'SSID (nome della rete) dell'hotspot
-    * ``psk``: imposta la password dell'hotspot
-    * ``country``: imposta il codice paese dell'hotspot
+.. **OPTION**
+..     * ``-h`` ``help``: guida, mostra questo messaggio
+..     * ``start`` ``restart``: riavvia il servizio ``pidog_app``
+..     * ``stop``: ferma il servizio ``pidog_app``
+..     * ``disable``: disabilita l'avvio automatico del programma ``app_controller``
+..     * ``enable``: abilita l'avvio automatico del programma ``app_controller``
+..     * ``close_ap``: disabilita l'hotspot, disattiva l'avvio automatico dell'hotspot all'avvio e passa alla modalità ``sta``
+..     * ``open_ap``: abilita l'hotspot, attiva l'avvio automatico dell'hotspot all'avvio
+..     * ``ssid``: imposta l'SSID (nome della rete) dell'hotspot
+..     * ``psk``: imposta la password dell'hotspot
+..     * ``country``: imposta il codice paese dell'hotspot
 
