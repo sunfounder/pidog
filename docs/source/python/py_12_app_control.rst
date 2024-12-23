@@ -24,7 +24,9 @@ Dans cet exemple, nous allons utiliser l'application SunFounder Controller pour 
       Your browser does not support the video tag.
    </video>
 
-Vous devez d'abord télécharger l'application sur votre téléphone ou tablette, puis vous connecter au hotspot émis par PiDog et, enfin, créer votre propre télécommande sur SunFounder Controller pour contrôler PiDog.
+Vous devez d'abord télécharger l'application sur votre téléphone/tablette, puis vous connecter au WLAN en tant que PiDog, et enfin créer votre propre télécommande sur le SunFounder Controller pour contrôler PiDog.
+
+.. _app_control:
 
 Contrôler PiDog avec l'APP
 -----------------------------
@@ -161,30 +163,30 @@ Comment configurer cela ?
 
     .. image:: img/auto_start.png
 
-#. Par la suite, vous pourrez simplement allumer PiDog et le contrôler directement depuis l'APP.
+#. Après le redémarrage, PiDog lancera automatiquement le script de contrôle. Ensuite, vous pourrez :ref:`app_control`.
 
 .. warning::
 
     Si vous souhaitez exécuter d'autres scripts, exécutez d'abord la commande ``pidog_app disable`` pour désactiver la fonctionnalité de démarrage automatique.
 
 
-Configuration de l'application
-----------------------------------
+.. Configuration de l'application
+.. ----------------------------------
 
-Vous pouvez entrer les commandes suivantes pour modifier les paramètres de l'APP.
+.. Vous pouvez entrer les commandes suivantes pour modifier les paramètres de l'APP.
 
-.. code-block::
+.. .. code-block::
 
-    pidog_app <OPTION> [input]
+..     pidog_app <OPTION> [input]
 
-**OPTION**
-    * ``-h`` ``help`` : aide, afficher ce message
-    * ``start`` ``restart`` : redémarrer le service ``pidog_app``
-    * ``stop`` : arrêter le service ``pidog_app``
-    * ``disable`` : désactiver le démarrage automatique du programme ``app_controller`` au démarrage
-    * ``enable`` : activer le démarrage automatique du programme ``app_controller`` au démarrage
-    * ``close_ap`` : fermer le hotspot, désactiver le démarrage automatique du hotspot au démarrage et passer en mode ``sta``
-    * ``open_ap`` : ouvrir le hotspot, activer le démarrage automatique du hotspot au démarrage
-    * ``ssid`` : définir le nom du réseau (SSID) du hotspot
-    * ``psk`` : définir le mot de passe du hotspot
-    * ``country`` : définir le code de pays pour le hotspot
+.. **OPTION**
+..     * ``-h`` ``help`` : aide, afficher ce message
+..     * ``start`` ``restart`` : redémarrer le service ``pidog_app``
+..     * ``stop`` : arrêter le service ``pidog_app``
+..     * ``disable`` : désactiver le démarrage automatique du programme ``app_controller`` au démarrage
+..     * ``enable`` : activer le démarrage automatique du programme ``app_controller`` au démarrage
+..     * ``close_ap`` : fermer le hotspot, désactiver le démarrage automatique du hotspot au démarrage et passer en mode ``sta``
+..     * ``open_ap`` : ouvrir le hotspot, activer le démarrage automatique du hotspot au démarrage
+..     * ``ssid`` : définir le nom du réseau (SSID) du hotspot
+..     * ``psk`` : définir le mot de passe du hotspot
+..     * ``country`` : définir le code de pays pour le hotspot
