@@ -24,7 +24,9 @@ In diesem Beispiel verwenden wir die SunFounder Controller APP, um PiDog zu steu
       Ihr Browser unterstützt das Video-Tag nicht.
    </video>
 
-Sie müssen zuerst die APP auf Ihrem Telefon/Tablet herunterladen, dann eine Verbindung zum von PiDog gesendeten Hotspot herstellen und schließlich Ihren eigenen Fernbedienung auf SunFounder Controller erstellen, um PiDog zu steuern.
+Sie müssen zunächst die APP auf Ihrem Handy/Tablet herunterladen, sich dann mit dem WLAN „PiDog“ verbinden und schließlich Ihre eigene Fernbedienung auf dem SunFounder Controller erstellen, um PiDog zu steuern.
+
+.. _app_control:
 
 PiDog mit der App steuern
 ----------------------------
@@ -163,30 +165,30 @@ Wie richten Sie das ein?
 
     .. image:: img/auto_start.png
 
-#. Ab dann können Sie PiDog einfach einschalten und direkt mit der APP steuern.
+#. Nach dem Neustart wird PiDog das Steuerungsskript automatisch starten. Anschließend können Sie :ref:`app_control`.
 
 .. warning::
 
     Wenn Sie andere Skripte ausführen möchten, führen Sie zuerst ``pidog_app disable`` aus, um die Autostart-Funktion auszuschalten.
 
 
-APP-Programmkonfiguration
------------------------------
+.. APP-Programmkonfiguration
+.. -----------------------------
 
-Sie können die folgenden Befehle eingeben, um die Einstellungen des APP-Modus zu ändern.
+.. Sie können die folgenden Befehle eingeben, um die Einstellungen des APP-Modus zu ändern.
 
-.. code-block::
+.. .. code-block::
 
-    pidog_app <OPTION> [input]
+..     pidog_app <OPTION> [input]
 
-**OPTION**
-    * ``-h`` ``help``: Hilfe, diese Nachricht anzeigen
-    * ``start`` ``restart``: ``pidog_app``-Dienst neu starten
-    * ``stop``: ``pidog_app``-Dienst stoppen
-    * ``disable``: Autostart-Programm ``app_controller`` beim Booten deaktivieren
-    * ``enable``: Autostart-Programm ``app_controller`` beim Booten aktivieren
-    * ``close_ap``: Hotspot schließen, Autostart-Hotspot beim Booten deaktivieren und in den STA-Modus wechseln
-    * ``open_ap``: Hotspot öffnen, Autostart-Hotspot beim Booten aktivieren
-    * ``ssid``: SSID (Netzwerkname) des Hotspots festlegen
-    * ``psk``: Passwort des Hotspots festlegen
-    * ``country``: Ländercode des Hotspots festlegen
+.. **OPTION**
+..     * ``-h`` ``help``: Hilfe, diese Nachricht anzeigen
+..     * ``start`` ``restart``: ``pidog_app``-Dienst neu starten
+..     * ``stop``: ``pidog_app``-Dienst stoppen
+..     * ``disable``: Autostart-Programm ``app_controller`` beim Booten deaktivieren
+..     * ``enable``: Autostart-Programm ``app_controller`` beim Booten aktivieren
+..     * ``close_ap``: Hotspot schließen, Autostart-Hotspot beim Booten deaktivieren und in den STA-Modus wechseln
+..     * ``open_ap``: Hotspot öffnen, Autostart-Hotspot beim Booten aktivieren
+..     * ``ssid``: SSID (Netzwerkname) des Hotspots festlegen
+..     * ``psk``: Passwort des Hotspots festlegen
+..     * ``country``: Ländercode des Hotspots festlegen
