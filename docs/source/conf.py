@@ -112,7 +112,7 @@ rst_epilog += """
 
 .. |link_voice_options| raw:: html
 
-    <a href="https://platform.openai.com/docs/guides/text-to-speech/voice-options" target="_blank">Voice options</a>
+    <a href="https://platform.openai.com/docs/guides/text-to-speech/voice-options" target="_blank">Options de voix</a>
 
 .. |link_iso_language_code| raw:: html
 
@@ -120,7 +120,7 @@ rst_epilog += """
 
 .. |link_microphone| raw:: html
 
-    <a href="https://www.sunfounder.com/products/mini-usb-microphone?_pos=2&_sid=d05c80026&_ss=r" target="_blank">Microphone link</a>
+    <a href="https://www.sunfounder.com/products/mini-usb-microphone?_pos=2&_sid=d05c80026&_ss=r" target="_blank">Lien du microphone</a>
 
 .. |link_openai_platform| raw:: html
 
@@ -128,7 +128,7 @@ rst_epilog += """
 
 .. |link_sf_facebook| raw:: html
 
-    <a href="https://bit.ly/raphaelkit" target="_blank">here</a>
+    <a href="https://bit.ly/raphaelkit" target="_blank">ici</a>
 
 .. |link_code_10_balance| raw:: html
 
@@ -168,7 +168,7 @@ rst_epilog += """
 
 .. |link_PiDog| raw:: html
 
-    <a href="https://www.sunfounder.com/products/sunfounder-pidog-robot-dog-kit-for-raspberry-pi?_pos=1&_sid=313a4c894&_ss=r&variant=44517213896939" target="_blank">Purchase Link for PiDog</a>
+    <a href="https://www.sunfounder.com/products/sunfounder-pidog-robot-dog-kit-for-raspberry-pi?_pos=1&_sid=313a4c894&_ss=r&variant=44517213896939" target="_blank">Lien d'achat pour PiDog</a>
 
 .. |link_Pi_Dog| raw:: html
 
