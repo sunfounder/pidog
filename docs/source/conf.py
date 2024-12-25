@@ -115,7 +115,7 @@ rst_epilog += """
 
 .. |link_voice_options| raw:: html
 
-    <a href="https://platform.openai.com/docs/guides/text-to-speech/voice-options" target="_blank">Voice options</a>
+    <a href="https://platform.openai.com/docs/guides/text-to-speech/voice-options" target="_blank">音声オプション</a>
 
 .. |link_iso_language_code| raw:: html
     
@@ -127,7 +127,7 @@ rst_epilog += """
     
 .. |link_openai_platform| raw:: html
 
-    <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI Platform</a>
+    <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI プラットフォーム</a>
 
 
 .. |link_sf_facebook| raw:: html
@@ -172,7 +172,7 @@ rst_epilog += """
 
 .. |link_PiDog| raw:: html
 
-    <a href="https://www.sunfounder.com/products/sunfounder-pidog-robot-dog-kit-for-raspberry-pi?_pos=1&_sid=313a4c894&_ss=r&variant=44517213896939" target="_blank">Purchase Link for PiDog</a>
+    <a href="https://www.sunfounder.com/products/sunfounder-pidog-robot-dog-kit-for-raspberry-pi?_pos=1&_sid=313a4c894&_ss=r&variant=44517213896939" target="_blank">購入リンク PiDog</a>
 
 .. |link_Pi_Dog| raw:: html
 
