@@ -29,7 +29,7 @@
     .. image:: img/os_install_imager.png
         :align: center
 
-#. インストール中にセキュリティプロンプトが表示される場合があります。例えば、Windowsでは警告メッセージが表示されることがあります。その場合は、**詳細情報** を選択し、次に **実行** を選択します。画面の指示に従って、Raspberry Pi Imagerのインストールを完了します。
+#. インストール中にセキュリティプロンプトが表示される場合があります。例えば、Windowsでは警告メッセージが表示されることがあります。その場合は、 **詳細情報** を選択し、次に **実行** を選択します。画面の指示に従って、Raspberry Pi Imagerのインストールを完了します。
 
     .. image:: img/os_info.png
         :align: center
@@ -44,7 +44,7 @@
 
 #. リーダーを使用して、SDカードをコンピュータまたはラップトップに挿入します。
 
-#. Imager内で、**Raspberry Pi Device** をクリックし、ドロップダウンリストからRaspberry Piのモデルを選択します。
+#. Imager内で、 **Raspberry Pi Device** をクリックし、ドロップダウンリストからRaspberry Piのモデルを選択します。
 
     .. image:: img/os_choose_device.png
         :align: center

@@ -165,7 +165,7 @@ AIとのインタラクション：GPT-4Oの活用
       OPENAI_API_KEY = "sk-proj-vEBo7Ahxxxx-xxxxx-xxxx"
       OPENAI_ASSISTANT_ID = "asst_ulxxxxxxxxx"
 
-#. ``Ctrl + X``、 ``Y``、そして ``Enter`` を押してファイルを保存して終了します。
+#. ``Ctrl + X``、 ``Y`` 、そして ``Enter`` を押してファイルを保存して終了します。
 
 4. 実行例
 ----------------------------------
@@ -204,7 +204,7 @@ Pidogにマイクがない場合、以下のコマンドを実行してキーボ
 
       input:
 
-#. また、ウェブブラウザでPidogのカメラフィードを見るためのリンクが提供されます: ``http://rpi_ip:9000/mjpg``。
+#. また、ウェブブラウザでPidogのカメラフィードを見るためのリンクが提供されます: ``http://rpi_ip:9000/mjpg`` 。
 
    .. image:: img/apt_ip_camera.png
       :width: 700
@@ -285,7 +285,7 @@ Pidogにマイクが装備されている場合、または |link_microphone| �
 
       listening ...
 
-#. また、ウェブブラウザでPidogのカメラフィードを見るためのリンクが提供されます: ``http://rpi_ip:9000/mjpg``。
+#. また、ウェブブラウザでPidogのカメラフィードを見るためのリンクが提供されます: ``http://rpi_ip:9000/mjpg`` 。
 
    .. image:: img/apt_ip_camera.png
       :width: 700
