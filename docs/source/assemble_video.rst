@@ -58,7 +58,7 @@ Le processus de montage du PiDog est assez long, nous l'avons donc divisé en de
 
 .. raw:: html
 
-    <iframe width="700" height="500" src="https://www.youtube.com/embed/Gskge1fDR30?si=FTFTjqg1kayH42Od" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe width="700" height="500" src="https://www.youtube.com/embed/PTo6smSIlDY?si=60haxNltV0-3PK7k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 La seconde vidéo se concentre sur l'assemblage de la tête et la calibration.
 
