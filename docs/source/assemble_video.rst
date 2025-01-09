@@ -59,7 +59,7 @@ Pidogの組み立てプロセスはかなり長いので、2つの動画に分�
 
 .. raw:: html
 
-    <iframe width="700" height="500" src="https://www.youtube.com/embed/Gskge1fDR30?si=FTFTjqg1kayH42Od" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe width="700" height="500" src="https://www.youtube.com/embed/PTo6smSIlDY?si=60haxNltV0-3PK7k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 2つ目の動画では、頭部の組み立てとキャリブレーションをカバーしています。
 
