@@ -59,7 +59,7 @@ El proceso de ensamblaje de PiDog es bastante extenso, por lo que lo hemos divid
 
 .. raw:: html
 
-   <iframe width="700" height="500" src="https://www.youtube.com/embed/PTo6smSIlDY?si=60haxNltV0-3PK7k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/PTo6smSIlDY?si=60haxNltV0-3PK7k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 El segundo video abarca el ensamblaje de la cabeza y la calibración.
 
