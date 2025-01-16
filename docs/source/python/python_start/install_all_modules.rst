@@ -85,7 +85,7 @@
     .. code-block::
 
         cd ~/
-        git clone https://github.com/sunfounder/pidog.git
+        git clone https://github.com/sunfounder/pidog.git --depth 1
 
 #. Install ``pidog`` module.
 
