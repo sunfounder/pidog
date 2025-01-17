@@ -40,7 +40,7 @@ In our assembly video from **3:40 to 7:23**, there is also a detailed tutorial f
 
 .. raw:: html
 
-    <iframe width="700" height="500" src="https://www.youtube.com/embed/Gskge1fDR30?si=Yo12Teo6N_2NOkz2&amp;start=220&end=443" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/PTo6smSIlDY?si=qpk-nN7ATGT6zfSX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 

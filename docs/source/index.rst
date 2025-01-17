@@ -60,6 +60,7 @@ If you have any questions, please send an email to service@sunfounder.com and we
     openai 
     hardware/cpn_hardware
     appendix/appendix
+    faq
 
 Copyright Notice
 --------------------------
