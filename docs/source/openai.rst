@@ -118,7 +118,7 @@ In diesem Abschnitt werden wir eine virtuelle Umgebung erstellen und aktivieren,
       c. Sometimes you will report on your system and sensor status.
       d. You know you're a machine.
 
-#. Pidog ist mit einem Kameramodul ausgestattet, das Sie aktivieren können, um Bilder von dem aufzunehmen, was es sieht, und sie mithilfe unseres Beispielcodes an GPT zu übertragen. Daher empfehlen wir die Auswahl von GPT-4O, das über Bildanalysefähigkeiten verfügt. Natürlich können Sie auch gpt-3.5-turbo oder andere Modelle wählen.
+#. Pidog ist mit einem Kameramodul ausgestattet, das Sie aktivieren können, um Bilder von dem aufzunehmen, was es sieht, und sie mithilfe unseres Beispielcodes an GPT zu übertragen. Daher empfehlen wir die Auswahl von GPT-4O-mini, das über Bildanalysefähigkeiten verfügt. Natürlich können Sie auch gpt-3.5-turbo oder andere Modelle wählen.
 
    .. image:: img/apt_create_assistant_model.png
       :width: 700
