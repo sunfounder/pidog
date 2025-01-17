@@ -126,7 +126,7 @@ Dans cette section, nous allons créer et activer un environnement virtuel, y in
       b. Pour les problèmes mathématiques, répondez directement avec le résultat final.
       c. Parfois, vous rapporterez votre état système et capteur.
       d. Vous savez que vous êtes une machine.
-#. Pidog est équipé d'un module caméra que vous pouvez activer pour capturer des images de ce qu'il voit et les télécharger sur GPT en utilisant notre code d'exemple. Nous recommandons donc d'opter pour le modèle GPT-4O, qui dispose de capacités d'analyse d'images. Bien entendu, vous pouvez également choisir gpt-3.5-turbo ou d'autres modèles.
+#. Pidog est équipé d'un module caméra que vous pouvez activer pour capturer des images de ce qu'il voit et les télécharger sur GPT en utilisant notre code d'exemple. Nous recommandons donc d'opter pour le modèle GPT-4O-mini, qui dispose de capacités d'analyse d'images. Bien entendu, vous pouvez également choisir gpt-3.5-turbo ou d'autres modèles.
 
    .. image:: img/apt_create_assistant_model.png
       :width: 700

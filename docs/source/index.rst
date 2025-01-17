@@ -58,6 +58,7 @@ Si vous avez des questions, veuillez envoyer un e-mail à service@sunfounder.com
     openai 
     hardware/cpn_hardware
     appendix/appendix
+    faq
 
 Mention de droits d'auteur
 -------------------------------
