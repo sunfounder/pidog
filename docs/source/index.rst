@@ -60,6 +60,7 @@ PiDogは、アルミニウム合金構造のRaspberry Piペットロボットで
     openai  
     hardware/cpn_hardware
     appendix/appendix
+    faq
 
 著作権に関するお知らせ
 --------------------------
