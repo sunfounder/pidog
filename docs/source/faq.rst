@@ -26,3 +26,16 @@ Se incontri l'errore seguente:
     pinctrl: not found
 
 Significa che hai installato il sistema Bullseye. Si consiglia di installare il sistema **Bookworm** al suo posto.
+
+Q2: Informazioni sul caricabatterie
+-------------------------------------------------------------------
+
+Per caricare la batteria, collega semplicemente un alimentatore Type-C da 5V/2A alla porta di alimentazione del Robot Hat. Non è necessario accendere l'interruttore di alimentazione del Robot Hat durante la ricarica.
+Puoi anche utilizzare il dispositivo mentre la batteria è in carica.
+
+.. image:: img/robot_hat_pic.png
+    :align: center
+    :width: 500
+
+Durante la ricarica, l'energia in ingresso viene amplificata dal chip di ricarica per caricare la batteria e contemporaneamente alimentare il convertitore DC-DC per uso esterno, con una potenza di ricarica di circa 10W.
+Se il consumo di energia esterna rimane elevato per un periodo prolungato, la batteria potrebbe integrare l'alimentazione, in modo simile all'uso di un telefono mentre è in carica. Tuttavia, fai attenzione alla capacità della batteria per evitare che si esaurisca completamente durante l'uso e la ricarica simultanei.
