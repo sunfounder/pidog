@@ -14,23 +14,52 @@ sleep(.1)
 leg_angles = [0.0]*8
 head_angles = [0.0]*3
 tail_angle = [0.0]*1
-
-leg_offset = list.copy(my_dog.legs.offset)
-head_offset = list.copy(my_dog.head.offset)
-tail_offset = list.copy(my_dog.tail.offset)
-
+leg_offsets = [0.0]*8
+head_offsets = [0.0]*3
+tail_offset = [0.0]*1
 current_servo = "1"
+
+leg_offset_temp = [0.0] * 8
 
 OFFSET_STEP = (180 / 2000) * (20000 / 4095)  # actual precision of steering gear
 
 is_save = False
 
 LEGS_ORIGNAL_ANGLES_60 = [30, -30, -30, 30, 30, -30, -30, 30]
-LEGS_ORIGNAL_ANGLES_90 = [0 for _ in range(8)]
+LEGS_ORIGNAL_ANGLES_90 = [0]*8
 
-legs_orignal_angles = [0 for _ in range(8)]
-head_orignal_angles = [0, 0, my_dog.HEAD_PITCH_OFFSET]
-tail_orignal_angles = [0]
+legs_orignal_angles = list.copy(LEGS_ORIGNAL_ANGLES_60)
+
+# get_real_values()
+# ======================================
+def get_real_values():
+    global leg_angles, head_angles, tail_angle
+    global leg_offsets, head_offsets, tail_offset
+    leg_angles = list.copy(my_dog.leg_current_angles)
+    head_angles = list.copy(my_dog.head_current_angles)
+    tail_angle = list.copy(my_dog.tail_current_angles)
+    leg_offsets = list.copy(my_dog.legs.offset)
+    head_offsets = list.copy(my_dog.head.offset)
+    tail_offset = list.copy(my_dog.tail.offset)
+    for i, x in enumerate(leg_angles):
+        leg_angles[i] = round(x, 2)
+    for i, x in enumerate(head_angles):
+        head_angles[i] = round(x, 2)
+    tail_angle[0] = round(tail_angle[0], 2)
+    for i, x in enumerate(leg_offsets):
+        leg_offsets[i] = round(x, 2)
+    for i, x in enumerate(head_offsets):
+        head_offsets[i] = round(x, 2)
+    tail_offset[0] = round(tail_offset[0], 2)
+
+#     print(f'''
+# leg_angles: {leg_angles}
+# head_angles: {head_angles}
+# tail_angle: {tail_angle}
+# leg_offsets: {leg_offsets}
+# head_offsets: {head_offsets}
+# tail_offset:{tail_offset}
+#     ''')
 
 # constrain(), constrain value range
 # ======================================
@@ -89,7 +118,7 @@ servo_pos = { # servo_pos in body
     "6": [6, 0],
     "7": [6, 11],
     "8": [6, 14],
-    "9": [0, 8],
+    "9": [0, 10],
     "0": [1, 12],
     "-": [1, 3],
     "=": [7, 7],
@@ -116,18 +145,18 @@ def display_offsets(subpad, color_pair, color_pair_select):
     servo_num = "1234567890-="
     comma = ""
     curses_utils.clear_line(subpad, 0)
-    subpad.addstr(0, 0, f"leg_offset:", color_pair | curses.A_BOLD)
-    for i, x in enumerate(leg_offset):
-        comma = "," if i < len(leg_offset)-1 else ""
+    subpad.addstr(0, 0, f"leg_offsets:", color_pair | curses.A_BOLD)
+    for i, x in enumerate(leg_offsets):
+        comma = "," if i < len(leg_offsets)-1 else ""
         if servo_num[i] == current_servo:
             subpad.addstr(f' {x:.2f}{comma}', color_pair_select | curses.A_BOLD)
         else:
             subpad.addstr(f' {x:.2f}{comma}', color_pair | curses.A_BOLD)
     # 
     curses_utils.clear_line(subpad, 1)
-    subpad.addstr(1, 0, f"head_offset:", color_pair | curses.A_BOLD)
-    for i, x in enumerate(head_offset):
-        comma = "," if i < len(head_offset)-1 else ""
+    subpad.addstr(1, 0, f"head_offsets:", color_pair | curses.A_BOLD)
+    for i, x in enumerate(head_offsets):
+        comma = "," if i < len(head_offsets)-1 else ""
         if servo_num[i+8] == current_servo:
             subpad.addstr(f' {x:.2f}{comma}', color_pair_select | curses.A_BOLD)
         else:
@@ -183,9 +212,7 @@ def resize_window(pad):
     sleep(0.5)
 
 def main(stdscr):
-    global current_servo, cali_type, is_save, legs_orignal_angles
-    global leg_offset, head_offset, tail_offset
-    global leg_angles, head_angles, tail_angles
+    global current_servo, cali_type, is_save
     
     inc = 1  # 1 or -1, angle increase direction
 
@@ -257,13 +284,9 @@ def main(stdscr):
                 # 90 degree calibration ruler
                 if cali_type == 0: 
                     legs_orignal_angles = list.copy(LEGS_ORIGNAL_ANGLES_90)
-                    leg_angles = list.copy(LEGS_ORIGNAL_ANGLES_90)
-                    head_angles = list.copy(head_orignal_angles)
                 # 60 degree calibration ruler
                 elif cali_type == 1:
                     legs_orignal_angles = list.copy(LEGS_ORIGNAL_ANGLES_60)
-                    leg_angles = list.copy(LEGS_ORIGNAL_ANGLES_60)
-                    head_angles = list.copy(head_orignal_angles)
 
                 my_dog.legs_move([legs_orignal_angles], immediately=True, speed=60)
                 my_dog.head_move([[0]*3], immediately=True, speed=60)
@@ -277,6 +300,7 @@ def main(stdscr):
     pad.clear()
 
     # get the offset
+    get_real_values()
 
     display_title(title_pad, curses_utils.CYAN | curses.A_REVERSE)
     display_tip1(tip1_pad, curses_utils.WHITE)
@@ -321,30 +345,35 @@ def main(stdscr):
                     # get index
                     index = ('12345678').index(current_servo)
                     # 
-                    leg_offset[index] += inc*OFFSET_STEP
-                    leg_offset[index] = constrain(leg_offset[index], -20, 20)
+                    leg_offset_temp[index] += inc*OFFSET_STEP
+                    leg_offset_temp[index] = constrain(leg_offset_temp[index], -20, 20)
                     #
-                    leg_angles[index] = legs_orignal_angles[index] + leg_offset[index]
+                    leg_angles[index] = legs_orignal_angles[index] + leg_offset_temp[index]
+                    leg_offsets[index] = leg_offset_temp[index] + my_dog.legs.offset[index]
                     # move servos
-                    my_dog.legs.servo_write_raw(leg_angles)
+                    my_dog.legs_simple_move(leg_angles)
                 # control head
                 elif current_servo in ('90-'):
                     index = ('90-').index(current_servo)
+                    # 
+                    head_angles[index] += inc*OFFSET_STEP
+                    offset_temp = my_dog.head.offset[index] + head_angles[index]
+                    offset_temp = constrain(offset_temp, -20, 20)
                     #
-                    head_offset[index] += inc*OFFSET_STEP
-                    head_offset[index] = constrain(head_offset[index], -20, 20)
+                    head_offsets[index] = offset_temp
+                    head_angles[index] = offset_temp - my_dog.head.offset[index]
                     #
-                    head_angles[index] = head_orignal_angles[index] + head_offset[index]
-                    #
-                    my_dog.head.servo_write_raw(head_angles)
+                    my_dog.head_move_raw([head_angles], True, 80)
                 # control tail
                 elif current_servo == '=':
-                    tail_offset[0] += inc*OFFSET_STEP
-                    tail_offset[0] = constrain(tail_offset[0], -20, 20)
+                    tail_angle[0] += inc*OFFSET_STEP
+                    offset_temp = my_dog.tail.offset[0] + tail_angle[0]
+                    offset_temp = constrain(offset_temp, -20, 20)
                     #
-                    tail_angle[0] = tail_orignal_angles[0] + head_offset[index]
+                    tail_offset[0] = offset_temp
+                    tail_angle[0] = offset_temp - my_dog.tail.offset[0]
                     #
-                    my_dog.tail.servo_write_raw(tail_angle)
+                    my_dog.tail_move([tail_angle], True, 80) 
                 # display offsets 
                 display_offsets(offsets_pad, curses_utils.WHITE, curses_utils.CYAN)
                 curses_utils.clear_line(pad, 17)
@@ -359,10 +388,11 @@ def main(stdscr):
                     if key == curses.ERR:
                         continue
                     if chr(key) in ('yY'):
-                        my_dog.set_leg_offsets(leg_offset, reset_list=legs_orignal_angles)
-                        my_dog.set_head_offsets(head_offset)
+                        my_dog.set_leg_offsets(leg_offsets, reset_list=legs_orignal_angles)
+                        my_dog.set_head_offsets(head_offsets)
                         my_dog.set_tail_offset(tail_offset)
                         sleep(0.5)
+                        get_real_values()
                         display_offsets(offsets_pad, curses_utils.WHITE, curses_utils.CYAN)
                         curses_utils.clear_line(pad, 17)
                         pad.addstr(17, 0, ' Offsets saved.  ', curses_utils.CYAN | curses.A_REVERSE)
@@ -400,11 +430,9 @@ def main(stdscr):
                     continue
 
 if __name__ == '__main__':
-    curses.wrapper(main)
-
-    # try:
-    #     curses.wrapper(main)
-    # # except Exception as e:
-    #     # print(f"\033[31mERROR: {e}\033[m")
-    # finally:
-    #     my_dog.close()
+    try:
+        curses.wrapper(main)
+    except Exception as e:
+        print(f"\033[31mERROR: {e}\033[m")
+    finally:
+        my_dog.close()
