@@ -92,6 +92,7 @@ self.non_speaking_duration = 0.5  # seconds of non-speaking audio to keep on bot
 recognizer = sr.Recognizer()
 recognizer.dynamic_energy_adjustment_damping = 0.16
 recognizer.dynamic_energy_ratio = 1.6
+recognizer.pause_threshold = 1.0
 
 # speak_hanlder
 # =================================================================
