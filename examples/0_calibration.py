@@ -342,7 +342,7 @@ def main(stdscr):
                     tail_offset[0] += inc*OFFSET_STEP
                     tail_offset[0] = constrain(tail_offset[0], -20, 20)
                     #
-                    tail_angle[0] = tail_orignal_angles[0] + head_offset[index]
+                    tail_angle[0] = tail_orignal_angles[0] + tail_offset[0]
                     #
                     my_dog.tail.servo_write_raw(tail_angle)
                 # display offsets 
