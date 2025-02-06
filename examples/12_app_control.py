@@ -317,6 +317,7 @@ def main():
         # Voice Control
         voice_command = sc.get('J')
         if voice_command != None:
+            print(f'voice command: {voice_command}')
             if voice_command in COMMANDS:
                 command = voice_command
             else:
