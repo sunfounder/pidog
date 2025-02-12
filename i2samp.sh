@@ -2,7 +2,7 @@
 
 # global variables
 # =================================================================
-VERSION="0.0.3"
+VERSION="0.0.4"
 USERNAME=${SUDO_USER:-$LOGNAME}
 USER_RUN="sudo -u ${USERNAME} env XDG_RUNTIME_DIR=/run/user/$(id -u ${USERNAME})"
 
@@ -497,17 +497,40 @@ install_soundcard_driver() {
 
     # --- add dtoverlay to config.txt ---
     newline
-    info "add dtoverlay ${dtoverlay_name} in ${CONFIG} ..."
-    if [ -e "${CONFIG}" ]; then
-        if grep -q -e ".*dtoverlay=${dtoverlay_name}.*" "${CONFIG}"; then
-            echo "activated dtoverlay ${dtoverlay_name} ..."
-            sudo sed -i -e "s:.*dtoverlay=${dtoverlay_name}.*:dtoverlay=${dtoverlay_name}:g" "${CONFIG}"
+    if $_is_with_mic; then
+        info "add dtoverlay ${DTOVERLAY_WITH_MIC} in ${CONFIG} ..."
+        if [ -e "${CONFIG}" ]; then
+            # dtoverlay=googlevoicehat-soundcard
+            # #dtoverlay=hifiberry-dac
+            if grep -q -e ".*dtoverlay=${DTOVERLAY_WITH_MIC}.*" "${CONFIG}"; then
+                echo "activated dtoverlay ${DTOVERLAY_WITH_MIC} ..."
+                sudo sed -i -e "s:.*dtoverlay=${DTOVERLAY_WITH_MIC}.*:dtoverlay=${DTOVERLAY_WITH_MIC}:g" "${CONFIG}"
+                sudo sed -i -e "s:.*dtoverlay=${DTOVERLAY_WITHOUT_MIC}.*:#dtoverlay=${DTOVERLAY_WITHOUT_MIC}:g" "${CONFIG}"
+            else
+                echo "add dtoverlay ${DTOVERLAY_WITH_MIC} ..."
+                echo "dtoverlay=${DTOVERLAY_WITH_MIC}" | sudo tee -a $CONFIG
+                sudo sed -i -e "s:.*dtoverlay=${DTOVERLAY_WITHOUT_MIC}.*:#dtoverlay=${DTOVERLAY_WITHOUT_MIC}:g" "${CONFIG}"
+            fi
         else
-            echo "add dtoverlay ${dtoverlay_name} ..."
-            echo "dtoverlay=${dtoverlay_name}" | sudo tee -a $CONFIG
+            error "${CONFIG} not found"
         fi
     else
-        error "${CONFIG} not found"
+        info "add dtoverlay ${DTOVERLAY_WITHOUT_MIC} in ${CONFIG} ..."
+        if [ -e "${CONFIG}" ]; then
+            # dtoverlay=googlevoicehat-soundcard
+            # #dtoverlay=hifiberry-dac
+            if grep -q -e ".*dtoverlay=${DTOVERLAY_WITHOUT_MIC}.*" "${CONFIG}"; then
+                echo "activated dtoverlay ${DTOVERLAY_WITHOUT_MIC} ..."
+                sudo sed -i -e "s:.*dtoverlay=${DTOVERLAY_WITHOUT_MIC}.*:dtoverlay=${DTOVERLAY_WITHOUT_MIC}:g" "${CONFIG}"
+                sudo sed -i -e "s:.*dtoverlay=${DTOVERLAY_WITH_MIC}.*:#dtoverlay=${DTOVERLAY_WITH_MIC}:g" "${CONFIG}"
+            else
+                echo "add dtoverlay ${DTOVERLAY_WITHOUT_MIC} ..."
+                echo "dtoverlay=${DTOVERLAY_WITHOUT_MIC}" | sudo tee -a $CONFIG
+                sudo sed -i -e "s:.*dtoverlay=${DTOVERLAY_WITH_MIC}.*:#dtoverlay=${DTOVERLAY_WITH_MIC}:g" "${CONFIG}"
+            fi
+        else
+            error "${CONFIG} not found"
+        fi
     fi
 
     # --- load dtoverlay ---
