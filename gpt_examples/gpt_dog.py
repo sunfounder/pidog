@@ -15,9 +15,8 @@ import random
 import os
 import sys
 
-os.popen("pinctrl set 20 op dh") # enable robot_hat speake switch
 current_path = os.path.dirname(os.path.abspath(__file__))
-os.chdir(current_path) # ch
+os.chdir(current_path)
 
 input_mode = None
 with_img = True
@@ -119,12 +118,12 @@ speak_thread.daemon = True
 
 # actions thread
 # =================================================================
-action_state = 'standby' # 'standby', 'think', 'actions', 'actions_done'
+action_status = 'standby' # 'standby', 'think', 'actions', 'actions_done'
 actions_to_be_done = []
 action_lock = threading.Lock()
 
 def action_handler():
-    global action_state, actions_to_be_done
+    global action_status, actions_to_be_done
 
     standby_actions = ['waiting', 'feet_left_right']
     standby_weights = [1, 0.3]
@@ -134,7 +133,7 @@ def action_handler():
 
     while True:
         with action_lock:
-            _state = action_state
+            _state = action_status
         if _state == 'standby':
             if time.time() - last_action_time > action_interval:
                 choice = random.choices(standby_actions, standby_weights)[0]
@@ -156,7 +155,7 @@ def action_handler():
                 time.sleep(0.5)
 
             with action_lock:
-                action_state = 'actions_done'
+                action_status = 'actions_done'
             last_action_time = time.time()
 
         time.sleep(0.01)
@@ -170,7 +169,7 @@ action_thread.daemon = True
 def main():
     global current_feeling, last_feeling
     global speech_loaded
-    global action_state, actions_to_be_done
+    global action_status, actions_to_be_done
     global tts_file
 
     my_dog.rgb_strip.close()
@@ -186,7 +185,7 @@ def main():
             gray_print("listening ...")
 
             with action_lock:
-                action_state = 'standby'
+                action_status = 'standby'
             my_dog.rgb_strip.set_mode('listen', 'cyan', 1)
 
             _stderr_back = redirect_error_2_null() # ignore error print to ignore ALSA errors
@@ -210,7 +209,7 @@ def main():
 
         elif input_mode == 'keyboard':
             with action_lock:
-                action_state = 'standby'
+                action_status = 'standby'
             my_dog.rgb_strip.set_mode('listen', 'cyan', 1)
 
             _result = input(f'\033[1;30m{"intput: "}\033[0m').encode(sys.stdin.encoding).decode('utf-8')
@@ -227,16 +226,18 @@ def main():
         # chat-gpt
         # ---------------------------------------------------------------- 
         response = {}
-        # response = openai_helper.dialogue(_result)
-
-        img_path = './img_imput.jpg'
-        cv2.imwrite(img_path, Vilib.img)
+        st = time.time()
 
         with action_lock:
-            action_state = 'think'
+            action_status = 'think'
 
-        st = time.time()
-        response = openai_helper.dialogue_with_img(_result, img_path)
+        if with_img:
+            img_path = './img_imput.jpg'
+            cv2.imwrite(img_path, Vilib.img)
+            response = openai_helper.dialogue_with_img(_result, img_path)
+        else:
+            response = openai_helper.dialogue(_result)
+
         gray_print(f'chat takes: {time.time() - st:.3f} s')
 
         # actions & TTS
@@ -292,7 +293,7 @@ def main():
             with action_lock:
                 actions_to_be_done = actions
                 gray_print(f'actions: {actions_to_be_done}')
-                action_state = 'actions'
+                action_status = 'actions'
 
             # ---- wait speak done ----
             if _status:
@@ -306,7 +307,7 @@ def main():
             # ---- wait actions done ----
             while True:
                 with action_lock:
-                    if action_state != 'actions':
+                    if action_status != 'actions':
                         break
                 time.sleep(.01)
 
