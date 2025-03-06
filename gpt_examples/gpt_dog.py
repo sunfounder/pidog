@@ -41,8 +41,8 @@ LANGUAGE = []
 # VOLUME_DB = 5
 VOLUME_DB = 3
 
-# select tts voice role, counld be "alloy, echo, fable, onyx, nova, and shimmer"
-# https://platform.openai.com/docs/guides/text-to-speech/supported-languages
+# select tts voice role, counld be "alloy, ash, coral, echo, fable, onyx, nova, sage, shimmer"
+# https://platform.openai.com/docs/guides/text-to-speech/supported-languages#voice-options
 TTS_VOICE = 'shimmer'
 
 VOICE_ACTIONS = ["bark", "bark harder", "pant",  "howling"]
