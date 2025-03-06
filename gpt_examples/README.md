@@ -112,7 +112,7 @@ sudo python3 gpt_dog.py --keyboard --no-img
 
 - Select TTS voice role
 
-    Config `TTS_VOICE` variable in the file `gpt_dog.py` to select the TTS voice role counld be `"alloy, echo, fable, onyx, nova, and shimmer"`
+    Config `TTS_VOICE` variable in the file `gpt_dog.py` to select the TTS voice role counld be `alloy, ash, coral, echo, fable, onyx, nova, sage, shimmer"`
 
 ```python
 # openai assistant init
@@ -125,8 +125,8 @@ LANGUAGE = []
 # VOLUME_DB = 5
 VOLUME_DB = 3
 
-# select tts voice role, counld be "alloy, echo, fable, onyx, nova, and shimmer"
-# https://platform.openai.com/docs/guides/text-to-speech/supported-languages
+# select tts voice role, counld be "alloy, ash, coral, echo, fable, onyx, nova, sage, shimmer"
+# https://platform.openai.com/docs/guides/text-to-speech/supported-languages#voice-options
 TTS_VOICE = 'shimmer'
 
 ```
