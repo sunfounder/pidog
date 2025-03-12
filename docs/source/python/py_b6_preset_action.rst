@@ -35,7 +35,7 @@ PiDogのライブラリには、よく使われるアクションが予め記述
     * ``"turn_right"``
     * ``"trot"``
     * ``"stretch"``
-    * ``"pushup"``
+    * ``"push_up"``
     * ``"doze_off"``
     * ``"nod_lethargy"``
     * ``"shake_head"``
@@ -64,7 +64,7 @@ PiDogのライブラリには、よく使われるアクションが予め記述
     try:
         # pushup
         my_dog.do_action("half_sit", speed=60)
-        my_dog.do_action("pushup", step_count=10, speed=60)
+        my_dog.do_action("push_up", step_count=10, speed=60)
         my_dog.wait_all_done()
         
         # act cute
