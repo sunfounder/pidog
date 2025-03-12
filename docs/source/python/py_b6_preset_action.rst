@@ -35,7 +35,7 @@ Sie können die folgende Funktion aufrufen, um PiDog diese Aktionen direkt ausf�
     * ``"turn_right"``
     * ``"trot"``
     * ``"stretch"``
-    * ``"pushup"``
+    * ``"push_up"``
     * ``"doze_off"``
     * ``"nod_lethargy"``
     * ``"shake_head"``
@@ -61,15 +61,15 @@ Sie können die folgende Funktion aufrufen, um PiDog diese Aktionen direkt ausf�
     my_dog = Pidog()
 
     try:
-        # Liegestütze
-        my_dog.do_action("halb_sitzen", speed=60)
-        my_dog.do_action("liegestütze", step_count=10, speed=60)
+        # pushup
+        my_dog.do_action("half_sit", speed=60)
+        my_dog.do_action("push_up", step_count=10, speed=60)
         my_dog.wait_all_done()
         
-        # süß wirken
-        my_dog.do_action("sitzen", speed=60)
-        my_dog.do_action("schwanz_wedeln", step_count=100, speed=90)
-        my_dog.do_action("kopf_neigen", step_count=5, speed=20)
+        # act cute
+        my_dog.do_action("sit", speed=60)
+        my_dog.do_action("wag_tail", step_count=100,speed=90)
+        my_dog.do_action("tilting_head", step_count=5, speed=20)
         my_dog.wait_head_done()
         
         my_dog.stop_and_lie()
@@ -77,7 +77,7 @@ Sie können die folgende Funktion aufrufen, um PiDog diese Aktionen direkt ausf�
     except KeyboardInterrupt:
         pass
     except Exception as e:
-        print(f"\033[31mFEHLER: {e}\033[m")
+        print(f"\033[31mERROR: {e}\033[m")
     finally:
-        print("Schließe ...")
+        print("closing ...")
         my_dog.close()    
