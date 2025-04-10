@@ -34,8 +34,8 @@ For detailed instructions, please refer to: |link_robot_hat_v4|.
 
 **For V2 Version:**
 
-|link_robot_hat_v2| is a multifunctional expansion board that allows Raspberry Pi to be quickly turned into a robot.
+|link_robot_hat_v5| is a multifunctional expansion board that allows Raspberry Pi to be quickly turned into a robot.
 The V2 Robot HAT integrates a microphone into the Standard version's architecture, enabling audio recording and voice recognition capabilities.
 
-For detailed instructions, please refer to: |link_robot_hat_v2|.
+For detailed instructions, please refer to: |link_robot_hat_v5|.
 

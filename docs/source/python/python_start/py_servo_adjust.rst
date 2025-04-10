@@ -17,6 +17,12 @@
 7. Servo Adjust(Important)
 ===========================================
 
+
+.. warning::
+
+    If your PiDog is V2 version, please skip this section, because the servo angles are already adjusted during assembly.
+
+
 The angle range of the servo is -90~90, but the angle set at the factory is random, maybe 0°, maybe 45°; if we assemble it with such an angle directly, it will lead to a chaotic state after the robot runs the code, or worse, it will cause the servo to block and burn out.
 
 So here we need to set all the servo angles to 0° and then install them, so that the servo angle is in the middle, no matter which direction to turn.
