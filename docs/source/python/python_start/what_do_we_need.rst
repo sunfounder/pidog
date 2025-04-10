@@ -30,6 +30,8 @@ Python.
     :width: 600
     :align: center
 
+For V2 version, you can also use Raspberry Pi 5.
+
 **Power Adapter**
 
 To connect to a power socket, the Raspberry Pi has a micro USB port (the

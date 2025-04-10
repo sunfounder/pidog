@@ -50,6 +50,21 @@ If you have any questions, please send an email to service@sunfounder.com and we
 
 
 
+The product is available in two versions: Standard and V2.
+
+**Standard Version**
+
+Designed for compatibility with most Raspberry Pi models, this version offers full functionality of the kit. Notably, its servo motors and Robot HAT are not compatible with Raspberry Pi 5, making the standard version unsuitable for use with this model.
+
+**V2 Version**
+
+This upgraded iteration features an updated Robot HAT and servo configuration, enabling compatibility with Raspberry Pi 3/4/5 and Zero W. The enhancements allow expanded creative applications on Raspberry Pi 5 while maintaining backward compatibility with earlier models.
+
+Key technical distinctions:
+
+* Hardware iteration: V2 redesigns servo drivers and HAT circuitry for RPi5's GPIO voltage requirements
+* Model coverage: Standard supports RPi 3B+/4B/Zero 2W; V2 adds RPi5 support
+* Power management: V2 optimizes power delivery for RPi5's higher current demands
 
 
 

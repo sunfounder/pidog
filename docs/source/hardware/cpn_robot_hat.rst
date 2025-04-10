@@ -14,6 +14,10 @@
 
 Robot HAT
 ==================
+
+
+**For Standard Version:**
+
 |link_robot_hat_v4| is a multifunctional expansion board that allows Raspberry Pi to be quickly turned into a robot. 
 An MCU is on board to extend the PWM output and ADC input for the Raspberry Pi, 
 as well as a motor driver chip, I2S audio module and mono speaker. 
@@ -26,4 +30,12 @@ Accepts 7-12V power input with 2 battery indicators, 1 charge indicator and 1 po
 The board also has a user available LED and a button for you to quickly test some effects.
 
 For detailed instructions, please refer to: |link_robot_hat_v4|.
+
+
+**For V2 Version:**
+
+|link_robot_hat_v2| is a multifunctional expansion board that allows Raspberry Pi to be quickly turned into a robot.
+The V2 Robot HAT integrates a microphone into the Standard version's architecture, enabling audio recording and voice recognition capabilities.
+
+For detailed instructions, please refer to: |link_robot_hat_v2|.
 
