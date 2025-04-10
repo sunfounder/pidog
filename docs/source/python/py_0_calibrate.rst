@@ -73,6 +73,7 @@ The specific steps are as follows:
 90° Ruler
 ------------------------------
 
+If you have a 90° calibration ruler, follow these steps:
 
 #. Position the **Calibration Ruler** (Acrylic C) as shown in the provided image. In the terminal, press ``1``, followed by ``w`` and ``s`` keys to align the edges as indicated in the image.
 
@@ -88,6 +89,8 @@ The specific steps are as follows:
 
 60° Ruler
 ------------------------------
+
+If you have a 60° calibration ruler, follow these steps:
 
 #. Position the **Calibration Ruler** (Acrylic C) as shown in the provided image. Place its long side on a level surface. In the terminal, press ``1``, followed by ``w`` and ``s`` keys to align the edges as indicated in the image.
 
