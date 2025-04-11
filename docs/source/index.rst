@@ -32,6 +32,7 @@ SunFounder Raspberry Pi ロボット - |link_Pi_Dog|
         * |link_fr_tutorials|
         * |link_es_tutorials|
         * |link_it_tutorials|
+        * |link_zh_tutorials|
 
     希望する言語で文書にアクセスするには、それぞれのリンクをクリックしてください。
 
