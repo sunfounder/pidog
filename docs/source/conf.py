@@ -158,6 +158,10 @@ rst_epilog += """
 
     <a href="https://docs.sunfounder.com/projects/pidog/en/latest/" target="_blank">English Online-tutorials</a>
 
+.. |link_zh_tutorials| raw:: html
+
+    <a href="https://docs.sunfounder.com/projects/pidog/zh-cn/latest/" target="_blank">中文在线教程</a>
+
 .. |link_fr_tutorials| raw:: html
 
     <a href="https://docs.sunfounder.com/projects/pidog/fr/latest/" target="_blank">Didacticiels en ligne en français</a>
