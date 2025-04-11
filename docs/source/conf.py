@@ -162,7 +162,7 @@ rst_epilog += """
 
 .. |link_zh_tutorials| raw:: html
 
-    <a href="https://docs.sunfounder.com/projects/pidog/zh/latest/" target="_blank">中文在线教程</a>
+    <a href="https://docs.sunfounder.com/projects/pidog/zh-cn/latest/" target="_blank">中文在线教程</a>
 
 .. |link_fr_tutorials| raw:: html
 
