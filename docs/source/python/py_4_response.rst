@@ -1,30 +1,17 @@
-.. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-4. Response
+4. 互动反馈
 ================
 
-In this project, PiDog will interact with you in an interesting way.
+在本项目中，PiDog 将以有趣的方式与你进行互动。
 
-If you reach out and grab PiDog's head from the front, it will bark vigilantly.
+当你从正前方伸手摸它的头时，它会警觉地吠叫。
 
 
 .. image:: img/py_4-2.gif
     :width: 430
 
 
-But if you reach out from behind it and pet its head, it will enjoy it very much.
+但如果你从后方轻抚它的头顶，它则会露出享受的神情。
 
 .. raw:: html
 
@@ -33,7 +20,7 @@ But if you reach out from behind it and pet its head, it will enjoy it very much
       Your browser does not support the video tag.
    </video>
 
-**Run the Code**
+**运行代码**
 
 .. raw:: html
 
@@ -44,19 +31,19 @@ But if you reach out from behind it and pet its head, it will enjoy it very much
     cd ~/pidog/examples
     sudo python3 4_response.py
 
-After running this example, PiDog's ultrasonic module will detect whether there is an obstacle ahead,
-If it detects your hand, it makes the breathing light glow red, takes a step back, and barks.
+运行此示例后，PiDog 的超声波模块会检测前方是否有障碍物，
+当检测到你的手靠近时，它会点亮红色呼吸灯，后退一步并发出吠叫声。
 
-At the same time, the touch sensor will also work. If the touch sensor is stroked (not just touched), 
-PiDog will shake its head, wag its tail, and show a comfortable look.
-
-
+同时，触摸传感器也会开始工作。如果你轻抚（而非轻触）其头部，
+PiDog 会摇头、摇尾巴，展现出一副非常享受的样子。
 
 
-**Code**
+
+
+**代码**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    您可以对以下代码进行 **修改/重置/复制/运行/停止**。但请确保已进入代码路径（如 ``pidog\examples``）后再进行操作。修改后可直接运行查看效果。
 
 .. raw:: html
 
@@ -100,7 +87,7 @@ PiDog will shake its head, wag its tail, and show a comfortable look.
         while True:
             print(
                 f'distance.value: {round(my_dog.ultrasonic.read_distance(), 2)} cm, touch {my_dog.dual_touch.read()}')
-            # alert
+            # 警觉状态
             if my_dog.ultrasonic.read_distance() < 15 and my_dog.ultrasonic.read_distance() > 1:
                 my_dog.head_move([[0, 0, 0]], immediately=True, speed=90)
                 my_dog.tail_move([[0]], immediately=True, speed=90)
@@ -112,13 +99,13 @@ PiDog will shake its head, wag its tail, and show a comfortable look.
                     sleep(0.1)
                 my_dog.do_action('stand', step_count=1, speed=90)
                 sleep(0.5)
-            # relax
+            # 放松状态
             if my_dog.dual_touch.read() != 'N':
                 if len(my_dog.head_action_buffer) < 2:
                     head_nod(1)
                     my_dog.do_action('wag_tail', step_count=10, speed=80)
                     my_dog.rgb_strip.set_mode('listen', color="#8A2BE2", bps=0.35, brightness=0.8)
-            # calm
+            # 平静状态
             else:
                 my_dog.rgb_strip.set_mode('breath', color='pink', bps=1, brightness=0.8)
                 my_dog.tail_stop()

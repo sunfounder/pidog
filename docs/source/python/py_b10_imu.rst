@@ -1,50 +1,35 @@
-.. note::
+10. 读取 IMU 数据
+====================
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+通过 6 自由度 IMU 模块，PiDog 能够判断自己是否处于倾斜状态，或是否被提起。
 
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-10. IMU Read
-==============
-
-
-Through the 6-DOF IMU Module, PiDog can determine if it's standing on a slope, or if it's being picked up.
-
-The 6-DOF IMU Module is equipped with a 3-axis accelerometer and a 3-axis gyroscope, allowing acceleration and angular velocity to be measured in three directions.
+该模块集成了三轴加速度计与三轴陀螺仪，可用于测量三个方向的加速度与角速度。
 
 .. note::
 
-    Before using the module, make sure that it is correctly assembled. The label on the module will let you know if it is reversed.
+    在使用该模块前，请确保模块安装方向正确。模块上的标签可用于判断是否装反。
 
-**You can read their acceleration with:**
+**使用以下方式读取加速度：**
 
 .. code-block:: python
 
    ax, ay, az = Pidog.accData
 
-With the PiDog placed horizontally, the acceleration on the x-axis (ie ax) should be close to the acceleration of gravity (1g), with a value of -16384.
-The values of the y-axis and x-axis are close to 0.
+当 PiDog 水平放置时，x 轴方向（即 ax）上的加速度应接近重力加速度（1g），其值大约为 -16384。
+而 y 轴与 z 轴方向的加速度应接近 0。
 
-**Use the following way to read their angular velocity:**
+**使用以下方式读取角速度：**
 
 .. code-block:: python
 
    gx, gy, gz = my_dog.gyroData
 
-In the case where PiDog is placed horizontally, all three values are close to 0.
+当 PiDog 静置在水平面时，三个方向的角速度值应接近 0。
 
 
-**Here are some examples of how 6-DOF Module is used:**
+**以下是一些 6 自由度模块的典型用法示例：**
 
-1. Read real-time acceleration, angular velocity
+1. 实时读取加速度和角速度
 
 .. code-block:: python
 
@@ -67,7 +52,7 @@ In the case where PiDog is placed horizontally, all three values are close to 0.
 
     my_dog.close()
 
-2. Calculate the lean angle of PiDog's body.
+2. 计算 PiDog 身体的倾斜角度
 
 .. code-block:: python
 
@@ -85,7 +70,7 @@ In the case where PiDog is placed horizontally, all three values are close to 0.
 
     my_dog.close()
 
-3. While leaning, PiDog keeps its eyes level.
+3. 当身体倾斜时，PiDog 保持头部水平
 
 .. code-block:: python
 

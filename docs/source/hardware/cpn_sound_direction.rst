@@ -1,47 +1,30 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-Sound Direction Sensor
+声向传感器
 =====================================
 
 .. image:: img/cpn_sound.png
    :width: 400
    :align: center
 
-This is a sound direction recognition module. It is equipped with 3 microphones, which can detect sound sources from all directions, and is equipped with a TR16F064B, which is used to process sound signals and calculate the sound source direction. The minimum reconnaissance unit of this module is 20 degrees, and the data range is 0~360.
+这是一个声向识别模块，配备了3个麦克风，能够检测来自各个方向的声源，并配备了TR16F064B芯片，用于处理声音信号并计算声源方向。该模块的最小侦测单元为20度，数据范围为0~360度。
 
-Data transmission process: the main controller pulls up the BUSY pin, and TR16F064B starts to monitor the direction. When 064B recognizes the direction, it will pull down the BUSY pin;
-When the main control detects that BUSY is low, it will send 16bit arbitrary data to 064B (follow the MSB transmission), and accept 16bit data, which is the sound direction data processed by 064B.
-After completion, the main control will pull the BUSY pin high to detect the direction again.
+数据传输过程：主控制器拉高BUSY引脚，TR16F064B开始监测方向。当064B识别出方向后，它将拉低BUSY引脚；
+当主控检测到BUSY为低电平时，将向064B发送16位任意数据（遵循MSB传输），并接受16位数据，即064B处理的声向数据。
+完成后，主控将拉高BUSY引脚，以再次检测方向。
 
+**规格**
 
-**Specifications**
+* 电源供应：3.3V
+* 通讯方式：SPI
+* 连接器：PH2.0 7P
+* 声音识别角度范围：360°
+* 声音识别角度精度：约10°
 
-* Power supply: 3.3V
-* Communication: SPI
-* Connector: PH2.0 7P
-* Sound recognition angle range 360°
-* Voice recognition angular accuracy ~10°
+**管脚定义**
 
-
-**Pin Out**
-
-
-* GND - Ground Input
-* VCC - 3.3V Power Supply Input
+* GND - 地线输入
+* VCC - 3.3V电源输入
 * MOSI - SPI MOSI
 * MISO - SPI MISO
-* SCLK - SPI clock
-* CS - SPI Chip Select
-* BUSY - busy detection
+* SCLK - SPI时钟
+* CS - SPI片选
+* BUSY - 忙碌检测

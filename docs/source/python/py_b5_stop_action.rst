@@ -1,51 +1,37 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-5. Stop All Actions
+5. 停止所有动作  
 ======================
 
-After the previous chapters, you can find that the servo control of PiDog is divided into three threads.
-This allows PiDog's head and body to move at the same time, even with two lines of code.
+通过前几章的学习，你应该已经注意到，PiDog 的舵机控制被划分为三个独立的线程。  
+这意味着即使只有两行代码，也能实现 PiDog 的头部和身体同时运动。
 
-**Here are a few functions that work with the three servo threads:**
+**以下是一些与三组舵机控制线程配合使用的重要函数：**
 
 .. code-block:: python
 
     Pidog.wait_all_done()
     
-Wait for all the actions in the leg actions buffer, head buffer and tail buffer to be executed
+等待腿部、头部和尾部的所有动作缓冲执行完毕。
 
 .. code-block:: python
 
     Pidog.body_stop()
     
-Stop all the actions of legs, head and tail
+停止腿部、头部和尾部的所有动作。
 
 .. code-block:: python
 
     Pidog.stop_and_lie()
     
-Stop all the actions of legs, head and tail, then reset to "lie" pose
+停止腿部、头部和尾部的所有动作，并将 PiDog 重置为“趴下”姿态。
 
 .. code-block:: python
 
     Pidog.close()
     
-Stop all the actions, reset to "lie" pose, and  close all the threads, usually used when exiting a program
+停止所有动作，重置为“趴下”姿态，并关闭所有舵机控制线程，通常用于程序退出时调用。
 
 
-**Here are some common usages:**
+**以下是一些常见用法示例：**
 
 
 
@@ -58,13 +44,13 @@ Stop all the actions, reset to "lie" pose, and  close all the threads, usually u
     my_dog = Pidog()
 
     try:
-        # pushup prepare
+        # 俯卧撑准备动作
         my_dog.legs_move([[45, 35, -45, -35, 80, 70, -80, -70]], speed=30)
         my_dog.head_move([[0, 0, 0]], pitch_comp=-10, speed=80) 
-        my_dog.wait_all_done() # wait all the actions to be done
+        my_dog.wait_all_done()  # 等待所有动作完成
         time.sleep(0.5)
 
-        # pushup 
+        # 俯卧撑动作
         leg_pushup_action = [
             [90, -30, -90, 30, 80, 70, -80, -70],
             [45, 35, -45, -35, 80, 70, -80, -70],       
@@ -74,19 +60,19 @@ Stop all the actions, reset to "lie" pose, and  close all the threads, usually u
             [0, 0, 20],
         ]
         
-        # fill action buffers
+        # 填充动作缓冲区
         for _ in range(50):
             my_dog.legs_move(leg_pushup_action, immediately=False, speed=50)
             my_dog.head_move(head_pushup_action, pitch_comp=-10, immediately=False, speed=50)
         
-        # show buffer length
+        # 显示缓冲区长度
         print(f"legs buffer length (start): {len(my_dog.legs_action_buffer)}")
         
-        # keep 5 second & show buffer length
+        # 保持 5 秒后显示缓冲区长度
         time.sleep(5)
         print(f"legs buffer length (5s): {len(my_dog.legs_action_buffer)}")
         
-        # stop action & show buffer length
+        # 停止动作并显示缓冲区长度
         my_dog.stop_and_lie()
         print(f"legs buffer length (stop): {len(my_dog.legs_action_buffer)}")
 
@@ -96,4 +82,4 @@ Stop all the actions, reset to "lie" pose, and  close all the threads, usually u
         print(f"\033[31mERROR: {e}\033[m")
     finally:
         print("closing ...")
-        my_dog.close() # close all the servo threads
+        my_dog.close()  # 关闭所有舵机线程

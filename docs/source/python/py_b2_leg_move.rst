@@ -1,35 +1,21 @@
-.. note::
+.. _py_b2_leg_move: 
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-.. _py_b2_leg_move:
-
-2. Leg Move
+2. 腿部动作
 =================
 
-PiDog's leg movements are implemented by the following functions.
+PiDog 的腿部动作是通过以下函数实现的：
 
 .. code-block:: python
 
     Pidog.legs_move(target_angles, immediately=True, speed=50)
 
-* ``target_angles``: It is a two-dimensional array composed of an array of 8 servo angles (referred to as angle group) as elements. These angle groups will be used to control the angles of the 8 foot servos. If multiple angle groups are written, the unexecuted angle groups will be stored in the cache.
-* ``immediately`` : When calling the function, set this parameter to ``True``, the cache will be cleared immediately to execute the newly written angle group; if the parameter is set to ``False``, the newly written The incoming angular group is added to the execution queue.
-* ``speed`` : The speed at which the angular group is executed.
+* ``target_angles``：这是一个二维数组，其中的每个元素是包含 8 个舵机角度的数组（称为角度组）。这些角度组用于控制 PiDog 的 8 个腿部舵机。如果写入多个角度组，未立即执行的部分将存入缓存中。
+* ``immediately`` ：当调用该函数时，若该参数为 ``True``，则会立即清除缓存并执行新写入的角度组；若设置为 ``False``，新写入的角度组将被加入到执行队列中。
+* ``speed`` ：设定角度组动作的执行速度。
 
-**Some common usages are listed below:**
+**以下列出了一些常见的用法：**
 
-1.  Take action immediately.
+1.  立即执行动作
 
 .. code-block:: python
 
@@ -38,11 +24,11 @@ PiDog's leg movements are implemented by the following functions.
 
     my_dog = Pidog()
 
-    # half stand
+    # 半站立姿态
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], speed=50)   
 
 
-2. Add some angular groups to the execution queue.
+2. 向执行队列中添加多个角度组
 
 .. code-block:: python
 
@@ -51,16 +37,16 @@ PiDog's leg movements are implemented by the following functions.
 
     my_dog = Pidog()
 
-    # half stand
+    # 半站立
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], speed=50)  
 
-    # multiple actions
+    # 连续动作
     my_dog.legs_move([[45, 35, -45, -35, 80, 70, -80, -70],
-                        [90, -30, -90, 30, 80, 70, -80, -70],
-                        [45, 35, -45, -35, 80, 70, -80, -70]],  immediately=False, speed=30)   
+                      [90, -30, -90, 30, 80, 70, -80, -70],
+                      [45, 35, -45, -35, 80, 70, -80, -70]],  immediately=False, speed=30)   
 
-3. Perform repetitions within 10 seconds.
 
+3. 在 10 秒内循环动作
 
 .. code-block:: python
 
@@ -69,40 +55,40 @@ PiDog's leg movements are implemented by the following functions.
 
     my_dog = Pidog()
 
-    # half stand
+    # 半站立
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], speed=50)  
 
-    # pushup preparation
+    # 俯卧撑准备姿势
     my_dog.legs_move([[45, 35, -45, -35, 80, 70, -80, -70]], immediately=False, speed=20)
 
-    # pushup
+    # 俯卧撑循环
     for _ in range(99):
         my_dog.legs_move([[90, -30, -90, 30, 80, 70, -80, -70],
-                            [45, 35, -45, -35, 80, 70, -80, -70]],  immediately=False, speed=30)   
+                          [45, 35, -45, -35, 80, 70, -80, -70]],  immediately=False, speed=30)   
 
-    # keep 10s
+    # 保持姿势 10 秒
     time.sleep(10)
 
-    # stop and half stand
+    # 停止并恢复半站立
     my_dog.legs_move([[45, 10, -45, -10, 45, 10, -45, -10]], immediately=True, speed=50)  
 
 
-**PiDog's leg control also has the following functions that can be used together:**
+**PiDog 的腿部控制还支持以下配套函数：**
 
 .. code-block:: python
 
     Pidog.is_legs_done()
 
-This function is used to determine whether the angle group in the cache has been executed. If yes, return ``True``; otherwise, return ``False``.
+用于判断缓存中的角度组是否已全部执行完毕。若执行完毕，返回 ``True``；否则返回 ``False``。
 
 .. code-block:: python
 
     Pidog.wait_legs_done()
 
-Suspends the program until the angle groups in the cache have been executed.
+挂起程序，直到缓存中的所有角度组执行完毕后才继续。
 
 .. code-block:: python
 
     Pidog.legs_stop() 
 
-Empty the angular group in the cache.
+清空缓存中的角度组。

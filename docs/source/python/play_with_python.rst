@@ -1,25 +1,11 @@
-.. note::
+.. _play_python: 
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-.. _play_python:
-
-Play with Python
+玩转 Python
 ====================
 
-If you want to program in python, 
-then you will need to learn some basic Python programming skills and basic knowledge of Raspberry Pi, 
-please configure the Raspberry Pi first according to :ref:`quick_guide_python`.
+如果您希望使用 Python 进行编程，  
+那么您需要掌握一些基础的 Python 编程技能以及 Raspberry Pi 的基础知识，  
+请首先根据 :ref:`quick_guide_python` 配置好您的 Raspberry Pi。
 
 
 .. toctree::
@@ -27,31 +13,32 @@ please configure the Raspberry Pi first according to :ref:`quick_guide_python`.
 
     python_start/quick_guide_on_python
 
-As soon as the assembly is completed, you need to calibrate the PiDog to prevent it from damaging the servo if there is a slight deviation in the assembly.
+组装完成后，您需要对 PiDog 进行校准，以防因组装时的细微偏差而损坏舵机。
 
 .. toctree::
     :maxdepth: 2
 
     py_0_calibrate
 
-.. Once calibrated, you can follow the tutorial to play PiDog with the APP.
+.. 一旦校准完成，您也可以按照教程使用 APP 来玩转 PiDog。
 
-.. .. toctree::
+.. 
+    .. toctree::
 ..     :maxdepth: 2
 
 ..     auto_run_app
 
-You can also have PiDog achieve the following project effects.
+您还可以让 PiDog 实现以下趣味项目效果。
 
 .. toctree::
 
     py_fun_project
     
-Then you may want to master its basic functions, or write some fun examples.
+接下来，您也许希望掌握它的基础功能，或编写一些有趣的示例程序。
 
-If you are familiar with Python programming, you can find examples of PiDog's basic functions in the ``~/pidog/basic_examples`` directory.
+如果您已熟悉 Python 编程，可以直接在 ``~/pidog/basic_examples`` 目录中找到 PiDog 的基础功能示例。
 
-If you prefer, you can master them in a step-by-step fashion using the lessons provided below.
+如果您喜欢循序渐进的学习方式，也可以参考以下课程内容逐步掌握。
 
 .. toctree::
     :maxdepth: 2

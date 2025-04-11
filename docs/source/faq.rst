@@ -1,40 +1,27 @@
-.. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-FAQ
+FAQ  
 ===========================
 
-Q1: Regarding the "pinctrl: not found" error.
+Q1: 关于 "pinctrl: not found" 错误。  
 -------------------------------------------------------------------
 
-If you encounter the error:
+如果你遇到以下错误：
 
 .. code-block::
 
     pinctrl: not found
 
-It indicates that you have installed the Bullseye system. It is recommended to install the **Bookworm system** instead.
+这表明你安装了 Bullseye 系统。建议改为安装 **Bookworm 系统**。
 
-Q2: About the Battery Charger?
+Q2: 关于电池充电器？  
 -------------------------------------------------------------------
 
-To charge the battery, simply connect a 5V/2A Type-C power supply to the Robot Hat's power port. There's no need to turn on the Robot Hat's power switch during charging.
-You can also use the device while charging the battery. 
+充电时，只需将 5V/2A Type-C 电源连接到 Robot Hat 的电源端口即可。在充电过程中，无需打开 Robot Hat 的电源开关。
+在充电时，你也可以同时使用设备。
 
-.. image:: img/robot_hat_pic.png
-    :align: center
-    :width: 500
+.. image:: img/robot_hat_pic.png  
+    :align: center  
+    :width: 500  
 
-During charging, the input power is boosted by the charging chip to charge the battery and simultaneously supply the DC-DC converter for external use, with a charging power of approximately 10W. 
-If external power consumption remains high for an extended period, the battery may supplement the power supply, similar to using a phone while charging. However, be mindful of the battery's capacity to avoid completely depleting it during simultaneous charging and usage.
+在充电过程中，充电芯片将输入的电力提升，用于为电池充电，同时为外部使用的 DC-DC 转换器供电，充电功率约为 10W。  
+如果外部电力消耗在长时间内保持较高水平，电池可能会补充电源，类似于在充电时使用手机。然而，请注意电池的容量，避免在同时充电和使用时将电池完全耗尽。

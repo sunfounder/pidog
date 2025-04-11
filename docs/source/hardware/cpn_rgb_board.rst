@@ -1,18 +1,18 @@
-.. note::
+.. note:: 
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+    您好，欢迎加入SunFounder Raspberry Pi & Arduino & ESP32爱好者Facebook社群！在这里，您可以与其他爱好者一起深入探讨Raspberry Pi、Arduino和ESP32的世界。
 
     **Why Join?**
 
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
+    - **Expert Support**：解决售后问题及技术挑战，我们的社区和团队将提供帮助。
+    - **Learn & Share**：交流技巧和教程，提升您的技能。
+    - **Exclusive Previews**：抢先获取新产品公告和预览。
+    - **Special Discounts**：享受我们最新产品的独家折扣。
+    - **Festive Promotions and Giveaways**：参与节日促销和赠品活动。
 
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
+    👉 准备好与我们一起探索和创造了吗？点击[|link_sf_facebook|]，立即加入！
 
-11-channel Light Board
+11通道光板
 =============================
 
 .. image:: img/cpn_lightboard.png
@@ -20,23 +20,24 @@
    :align: center
 
 
-This is an 11-channel RGB LED module, which is equipped with 11 RGB LEDs controlled by the SLED1735 chip.
+这是一个11通道RGB LED模块，配备了11个由SLED1735芯片控制的RGB LED。
 
-SLED1734 can drive up to 256 LEDs and 75 RGB LEDs.
-In the LED matrix controlled by SLED1734, each LED has on/off, blinking, breathing light and automatic synchronization and many other functions.
-The chip has built-in PWM (pulse width modulation) technology, which can provide 256 levels of brightness adjustment. It also has a 16-level dot correction function.
+SLED1734可以驱动多达256个LED和75个RGB LED。
+在由SLED1734控制的LED阵列中，每个LED都具有开/关、闪烁、呼吸灯以及自动同步等多种功能。
+该芯片内置了PWM（脉冲宽度调制）技术，可提供256级亮度调节。它还具有16级点校正功能。
 
 
-**Specifications**
 
-* Power supply: 3.3V
-* Communication: IIC
-* Connector: SH1.0 4P
-* LEDs: 3535 RGB LEDs
+**规格**
 
-**Pin Out**
+* 电源供应：3.3V
+* 通讯方式：IIC
+* 连接器：SH1.0 4P
+* LED类型：3535 RGB LED
 
-* GND - Ground Input
-* VCC - Power Supply Input
+**管脚定义**
+
+* GND - 地线输入
+* VCC - 电源输入
 * SDA - IIC SDA
 * SCL - IIC SCL

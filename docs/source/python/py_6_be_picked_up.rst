@@ -1,25 +1,11 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-6. Be Picked Up
+6. 被举起来啦！
 ===================
 
-Try lifting your PiDog from the ground, PiDog will feel like it can fly, and it will cheer in a superman pose.
+尝试将 PiDog 从地面抱起，PiDog 会仿佛感觉自己飞起来了一样，摆出“超人”姿势，并兴奋地欢呼！
 
 .. image:: img/py_6.gif
 
-**Run the Code**
+**运行代码**
 
 .. raw:: html
 
@@ -30,16 +16,16 @@ Try lifting your PiDog from the ground, PiDog will feel like it can fly, and it 
     cd ~/pidog/examples
     sudo python3 6_be_picked_up.py
 
-After the program runs, the 6-DOF IMU Module will always calculate the acceleration in the vertical direction.
-If PiDog is calculated to be in a state of weightlessness, PiDog assumes a superman pose and cheers.
-Otherwise, consider PiDog to be on flat ground and make a standing pose.
+程序运行后，6-DOF IMU 模块会持续检测竖直方向的加速度。
+当判断 PiDog 处于失重状态时，它会摆出超人姿势并发出欢呼声；
+否则，则认为它处于地面上，并做出站立动作。
 
 
 
-**Code**
+**代码**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    您可以对以下代码进行 **修改/重置/复制/运行/停止**。请确保已进入源码路径（如 ``pidog\examples``）进行操作。修改后可直接运行查看效果。
 
 .. raw:: html
 
@@ -80,8 +66,8 @@ Otherwise, consider PiDog to be on flat ground and make a standing pose.
             ax = my_dog.accData[0]
             print('ax: %s, is up: %s' % (ax, isUp))
 
-            # gravity : 1G = -16384
-            if ax < -18000: # if down, acceleration is in the same direction as gravity, ax < -1G
+            # 重力加速度参考值：1G = -16384
+            if ax < -18000: # 向下加速，与重力方向一致，加速度 < -1G
                 my_dog.body_stop()
                 if upflag == False:
                     upflag = True
@@ -90,7 +76,7 @@ Otherwise, consider PiDog to be on flat ground and make a standing pose.
                     downflag = False
                     stand()
 
-            if ax > -13000: # if up, acceleration is the opposite of gravity, ax will > -1G
+            if ax > -13000: # 向上加速，与重力方向相反，加速度 > -1G
                 my_dog.body_stop()
                 if upflag == True:
                     isUp = True

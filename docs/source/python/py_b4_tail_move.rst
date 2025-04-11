@@ -1,57 +1,42 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-4. Tail Move
+4. 尾巴控制  
 ===================
 
-Following are the functions that control PiDog's tail. This function is similar to :ref:`py_b2_leg_move`.
+以下是控制 PiDog 尾巴的相关函数，使用方法与 :ref:`py_b2_leg_move` 类似。
 
 
 .. code-block:: python
 
     Pidog.tail_move(target_angles, immediately=True, speed=50)
 
-* ``target_angles`` : It is a two-dimensional array composed of an array of 1 servo angles (referred to as angle group) as elements. These angle groups will be used to control the angles of the 8 foot servos. If multiple angle groups are written, the unexecuted angle groups will be stored in the cache.
-* ``immediately`` : When calling the function, set this parameter to ``True``, the cache will be cleared immediately to execute the newly written angle group; if the parameter is set to ``False``, the newly written The incoming angular group is added to the execution queue.
-* ``speed`` : The speed at which the angular group is executed.
+* ``target_angles``：这是一个二维数组，每个元素包含一个舵机角度值（即角度组），用于控制尾巴的舵机角度。如果传入多个角度组，未执行的部分将会被存入缓存队列。
+* ``immediately``：调用函数时设为 ``True``，表示立即清空缓存并执行当前角度组；设为 ``False`` 时，当前角度组会加入执行队列。
+* ``speed``：执行该角度组时的速度。
 
-
-**PiDog's tail servo control also has some supporting functions:**
+**PiDog 的尾舵控制还提供以下辅助函数：**
 
 .. code-block:: python
 
     Pidog.is_tail_done()
 
-whether all the tail actions in the buffer to be executed
+判断尾巴动作缓存是否已执行完毕。
 
 .. code-block:: python
 
     Pidog.wait_tail_done()
 
-wait for all the tail actions in the buffer to be executed
+等待尾巴动作缓存执行完成。
 
 .. code-block:: python
 
     Pidog.tail_stop()
 
-clear all the tail actions of leg in the buffer, to make tail servo stop
+清空缓存中的所有尾部动作，使尾舵停止运动。
 
 
-**Here are some common usages:**
+**以下是一些常见用法：**
 
 
-1. Wag tail for 10 seconds.
+1. 摇尾巴持续 10 秒
 
 .. code-block:: python
 
@@ -63,7 +48,7 @@ clear all the tail actions of leg in the buffer, to make tail servo stop
     for _ in range(99):
         my_dog.tail_move([[30],[-30]], immediately=False, speed=30)
 
-    # keep 10s
+    # 保持摇尾动作 10 秒
     time.sleep(10)
 
     my_dog.tail_stop()

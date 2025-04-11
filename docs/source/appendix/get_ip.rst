@@ -1,32 +1,19 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
 
 .. _get_ip:
 
-Get the IP address
+获取 IP 地址
 =========================
 
-There are many ways to know the IP address, and two of them are listed as follows.
+有多种方式可以获取 IP 地址，这里列出两种方法。
 
-**Checking via the router**
+**通过路由器检查**
 
-If you have permission to log in the router(such as a home network), you can check the addresses assigned to Raspberry Pi on the admin interface of router.
+如果您有权限登录路由器（如家庭网络），可以在路由器的管理界面查看分配给 Raspberry Pi 的地址。
 
-The default hostname of the Raspberry Pi OS is raspberrypi, and you need to find it. (If you are using ArchLinuxARM system, please find alarmpi.)
+Raspberry Pi OS 的默认主机名是 raspberrypi，您需要找到它。（如果您使用的是 ArchLinuxARM 系统，请找 alarmpi。）
 
-**Network Segment Scanning**
+**网络段扫描**
 
-You can also use network scanning to look up the IP address of Raspberry Pi. You can apply the software, **Advanced IP scanner** and so on.
+您也可以使用网络扫描来查询 Raspberry Pi 的 IP 地址。可以使用 **Advanced IP Scanner** 等软件进行操作。
 
-Scan the IP range set, and the name of all connected devices will be displayed. Similarly, the default hostname of the Raspberry Pi OS is raspberrypi, if you haven't modified it.
+扫描设置的 IP 范围，所有连接设备的名称将会显示出来。同样，如果您没有修改过，Raspberry Pi OS 的默认主机名是 raspberrypi。

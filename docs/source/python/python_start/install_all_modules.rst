@@ -1,25 +1,12 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
 
 .. _install_all_modules:
 
-5. Install All the Modules(Important)
+5. 安装所有模块（重要）
 ==============================================
 
-#. Update your system.
+#. 更新您的系统。
 
-    Make sure you are connected to the Internet and update your system:
+    确保您已连接到互联网并更新您的系统：
 
     .. raw:: html
 
@@ -32,7 +19,7 @@
 
     .. note::
 
-        Python3 related packages must be installed if you are installing the Lite version OS.
+        如果您正在安装 Lite 版本的操作系统，必须安装与 Python3 相关的包。
 
         .. raw:: html
 
@@ -43,7 +30,7 @@
             sudo apt install git python3-pip python3-setuptools python3-smbus
 
 
-#. Install ``robot-hat`` module.
+#. 安装 ``robot-hat`` 模块。
 
 
     .. raw:: html
@@ -59,7 +46,7 @@
 
 
 
-#. Install ``vilib`` module.
+#. 安装 ``vilib`` 模块。
 
 
     .. raw:: html
@@ -76,7 +63,7 @@
 
 
 
-#. Download the code.
+#. 下载代码。
 
     .. raw:: html
 
@@ -87,7 +74,7 @@
         cd ~/
         git clone https://github.com/sunfounder/pidog.git --depth 1
 
-#. Install ``pidog`` module.
+#. 安装 ``pidog`` 模块。
 
     .. raw:: html
 
@@ -98,11 +85,11 @@
         cd pidog
         sudo python3 setup.py install
 
-    This step will take a little time, so please be patient.
+    这一步骤可能需要一些时间，请耐心等待。
 
-#. Run the script ``i2samp.sh``.
+#. 运行脚本 ``i2samp.sh``。
 
-    Finally, you need to run the script ``i2samp.sh`` to install the components required by the i2s amplifier, otherwise the robot will have no sound.
+    最后，您需要运行脚本 ``i2samp.sh`` 以安装 i2s 放大器所需的组件，否则机器人将没有声音。
 
     .. raw:: html
 
@@ -115,15 +102,15 @@
         
     .. image:: img/i2s.png
 
-    Type ``y`` and press ``Enter`` to continue running the script.
+    输入 ``y`` 并按 ``Enter`` 继续运行脚本。
 
     .. image:: img/i2s2.png
 
-    Type ``y`` and press ``Enter`` to run ``/dev/zero`` in the background.
+    输入 ``y`` 并按 ``Enter`` 在后台运行 ``/dev/zero``。
 
     .. image:: img/i2s3.png
 
-    Type ``y`` and press ``Enter`` to restart the machine.
+    输入 ``y`` 并按 ``Enter`` 重启机器。
 
     .. note::
-        If there is no sound after restarting, you may need to run the ``i2samp.sh`` script multiple times.
+        如果重启后没有声音，您可能需要多次运行 ``i2samp.sh`` 脚本。

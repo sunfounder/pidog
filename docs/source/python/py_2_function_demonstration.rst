@@ -1,25 +1,11 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-2. Function Demonstration
+2. 功能演示
 ===============================
 
-This project shows you all of PiDog's usual actions and sounds.
+本项目将展示 PiDog 所有常用的动作和声音效果。
 
-You can make PiDog make actions or make sounds by entering the serial number.
+您可以通过输入对应的编号，让 PiDog 执行动作或播放声音。
 
-The motion/sound effects currently included in this example are listed below.
+以下是本示例当前支持的动作与声音效果列表：
 
 .. image:: img/py_2.gif
 
@@ -27,42 +13,42 @@ The motion/sound effects currently included in this example are listed below.
     :widths: 25 25
     :header-rows: 1
 
-    * - Actions: 
-      - Sound Effect: 
-    * - 1.stand
-      - 16.angry
-    * - 2.sit
-      - 17.confused_1  
-    * - 3.lie
-      - 18.confused_2
-    * - 4.lie_with_hands_out 
-      - 19.confused_3 
-    * - 5.trot
-      - 20.growl_1 
-    * - 6.forward
-      - 21.growl_2 
-    * - 7.backward
-      - 22.howling 
-    * - 8.turn_left
-      - 23.pant 
-    * - 9.turn_right
-      - 24.single_bark_1 
-    * - 10.doze_off
-      - 25.single_bark_2 
-    * - 11.stretch
-      - 26.snoring 
-    * - 12.pushup
-      - 27.woohoo 
-    * - 13.shake_head
-      -
-    * - 14.tilting_head
-      -
-    * - 15.wag_tail    
-      -
+    * - 动作（Actions）: 
+      - 音效（Sound Effect）: 
+    * - 1. stand（站立）
+      - 16. angry（生气）
+    * - 2. sit（坐下）
+      - 17. confused_1（困惑1）  
+    * - 3. lie（趴下）
+      - 18. confused_2（困惑2）
+    * - 4. lie_with_hands_out（四脚趴）
+      - 19. confused_3（困惑3） 
+    * - 5. trot（小跑）
+      - 20. growl_1（低吼1） 
+    * - 6. forward（前进）
+      - 21. growl_2（低吼2） 
+    * - 7. backward（后退）
+      - 22. howling（嚎叫） 
+    * - 8. turn_left（左转）
+      - 23. pant（喘气） 
+    * - 9. turn_right（右转）
+      - 24. single_bark_1（叫声1） 
+    * - 10. doze_off（打瞌睡）
+      - 25. single_bark_2（叫声2） 
+    * - 11. stretch（伸展）
+      - 26. snoring（打鼾） 
+    * - 12. pushup（俯卧撑）
+      - 27. woohoo（欢呼） 
+    * - 13. shake_head（摇头）
+      - 
+    * - 14. tilting_head（歪头）
+      - 
+    * - 15. wag_tail（摇尾巴）    
+      - 
 
 
 
-**Run the Code**
+**运行代码**
 
 .. raw:: html
 
@@ -73,22 +59,22 @@ The motion/sound effects currently included in this example are listed below.
     cd ~/pidog/examples
     sudo python3 2_function_demonstration.py
 
-After running this example, you input ``1`` and press ``ENTER``, PiDog will stand; input ``2``, PiDog will sit down; input ``27``, PiDog will issue "woohoo~ ".
+运行此示例后，输入 ``1`` 并按 ``ENTER``，PiDog 将站立；输入 ``2``，PiDog 将坐下；输入 ``27``，PiDog 会发出 “woohoo~” 的欢呼声。
 
-Press ``Ctrl+C`` to exit the program.
+按下 ``Ctrl+C`` 可退出程序。
 
 
 
-**Code**
+**代码**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    您可以对以下代码进行 **修改 / 重置 / 复制 / 运行 / 停止**。但在此之前，请先切换到源码路径，例如 ``pidog\examples``。修改后可直接运行查看效果。
 
 .. raw:: html
 
     <run></run>
 
-.. code-block:: python
+.. code-block:: python 
 
     #!/usr/bin/env python3
     from time import sleep
@@ -97,15 +83,15 @@ Press ``Ctrl+C`` to exit the program.
     import curses
     import curses_utils
 
-    # init pidog
+    # 初始化 PiDog
     # ======================================
     my_dog = Pidog()
     sleep(0.5)
 
-    # global variables
+    # 全局变量
     # ======================================
     actions = [
-        # name, head_pitch_adjust(-1, use last_pitch), speed
+        # 名称, 头部俯仰调整（-1 表示使用上一次值）, 动作速度
         ['stand', 0, 50],
         ['sit', -30, 50],
         ['lie', 0, 20],
@@ -125,7 +111,7 @@ Press ``Ctrl+C`` to exit the program.
     actions_len = len(actions)
 
     sound_effects = []
-    # change working directory
+    # 更改当前工作目录
     abspath = os.path.abspath(os.path.dirname(__file__))
     # print(abspath)
     os.chdir(abspath)
@@ -133,7 +119,7 @@ Press ``Ctrl+C`` to exit the program.
         sound_effects.append(name.split('.')[0])
     sound_effects.sort()
     sound_len = len(sound_effects)
-    # limit sound quantity
+    # 限制声音数量
     if sound_len > actions_len:
         sound_len = actions_len
         sound_effects = sound_effects[:actions_len]
@@ -145,12 +131,12 @@ Press ``Ctrl+C`` to exit the program.
 
     STANDUP_ACTIONS = ['trot', 'forward', 'backward', 'turn_left', 'turn_right']
 
-    # define pad size
+    # 设置界面尺寸
     # ======================================
     curses_utils.PAD_Y = 22
     curses_utils.PAD_X = 70
 
-    # display fuctions
+    # 显示相关函数
     # ======================================
     def display_head(subpad):
         title = "Function Demonstration"
@@ -171,7 +157,7 @@ Press ``Ctrl+C`` to exit the program.
 
     def display_selection(subpad, index):
         global last_display_index
-        # reset last selection
+        # 清除上一次高亮
         if last_display_index > actions_len + sound_len-1 or last_display_index < 0:
             last_display_index = 0
         if last_display_index != index:
@@ -181,7 +167,7 @@ Press ``Ctrl+C`` to exit the program.
                 sound_index = last_display_index-actions_len
                 subpad.addstr(sound_index, 30, f"{last_display_index+1}. {sound_effects[sound_index]}", curses_utils.LIGHT_GRAY)
             last_display_index = index
-        # highlight currernt selection
+        # 高亮当前选择
         if index > actions_len + sound_len-1 or index < 0:
             pass
         elif index < actions_len:
@@ -209,11 +195,11 @@ Press ``Ctrl+C`` to exit the program.
             return
         if index < actions_len:
             name, head_pitch_adjust, speed = actions[index]
-            # If last action is push_up, then lie down first
+            # 若上一个动作是 push_up，先执行 lie
             if last_index < len(actions) and actions[last_index][0] in ('push_up'):
                 last_head_pitch = 0
                 my_dog.do_action('lie', speed=60)
-            # If this action is trot, forward, turn left, turn right and backward, and, last action is not, then stand up
+            # 若当前为站立类动作且上一个不是，则先站立
             if name in STANDUP_ACTIONS and last_index < len(actions) and actions[last_index][0] not in STANDUP_ACTIONS:
                 last_head_pitch = 0
                 my_dog.do_action('stand', speed=60)
@@ -227,28 +213,27 @@ Press ``Ctrl+C`` to exit the program.
             last_index = index
 
     def main(stdscr):
-        # reset screen
+        # 初始化界面
         stdscr.clear()
         stdscr.move(4, 0)
         stdscr.refresh()
 
-        # disable cursor 
+        # 禁用光标
         curses.curs_set(0)
 
-        # init color 
+        # 初始化颜色
         curses.start_color()
         curses.use_default_colors()
         curses_utils.init_preset_colors()
         curses_utils.init_preset__color_pairs()
 
-        # init pad    
+        # 初始化 pad    
         pad = curses.newpad(curses_utils.PAD_Y, curses_utils.PAD_X)   
 
-        # init subpad
+        # 初始化子区域
         head_pad = pad.subpad(4, curses_utils.PAD_X, 0, 0)
         selection_pad = pad.subpad(actions_len, curses_utils.PAD_X, 4, 0)
         bottom_pad = pad.subpad(1, curses_utils.PAD_X, actions_len+4, 0)
-        # add content to a
         display_head(head_pad)
         display_actions(selection_pad)
         display_head(head_pad)

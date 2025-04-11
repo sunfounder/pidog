@@ -1,65 +1,52 @@
-.. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-4. Setting Up Your Raspberry Pi
+4. 设置您的 Raspberry Pi
 =====================================
 
-Setting Up with a Screen
+使用屏幕设置
 ---------------------------
 
-Having a screen simplifies the process of working with your Raspberry Pi.
+有了屏幕，操作您的 Raspberry Pi 的过程会更简单。
 
-**Required Components**
+**所需组件**
 
 * Raspberry Pi 
-* Power Adapter
-* Micro SD card
-* Screen Power Adapter
-* HDMI cable
-* Screen
-* Mouse
-* Keyboard
+* 电源适配器
+* 微型SD卡
+* 屏幕电源适配器
+* HDMI线
+* 屏幕
+* 鼠标
+* 键盘
 
-**Steps**:
+**步骤**：
 
-#. Connect the Mouse and Keyboard to the Raspberry Pi.
+#. 将鼠标和键盘连接到 Raspberry Pi。
 
-#. Use the HDMI cable to connect the screen to the Raspberry Pi's HDMI port. Ensure the screen is plugged into a power source and turned on.
+#. 使用 HDMI 线将屏幕连接到 Raspberry Pi 的 HDMI 端口。确保屏幕插入电源并开启。
 
-#. Power the Raspberry Pi using the power adapter.
+#. 使用电源适配器为 Raspberry Pi 供电。
 
-#. After a few seconds, the Raspberry Pi OS desktop will be displayed. Now you can open the Terminal to start entering commands.
+#. 几秒钟后，将显示 Raspberry Pi OS 桌面。现在您可以打开终端开始输入命令。
 
     .. image:: img/bookwarm.png
         :align: center
 
-Setting Up Without a Screen
+不使用屏幕的设置
 ------------------------------
 
-If you don't have a monitor, remote login is a viable option.
+如果您没有显示器，远程登录是一个可行的选择。
 
-**Required Components**
+**所需组件**
 
 * Raspberry Pi 
-* Power Adapter
-* Micro SD card
+* 电源适配器
+* 微型SD卡
 
-Using SSH, you can access the Raspberry Pi's Bash shell, which is the default Linux shell. Bash offers a command-line interface for performing various tasks.
+使用 SSH，您可以访问 Raspberry Pi 的 Bash shell，这是默认的 Linux shell。Bash 提供了一个命令行界面，用于执行各种任务。
 
-For those preferring a graphical user interface (GUI), the remote desktop feature is a convenient alternative for managing files and operations.
+对于偏好图形用户界面（GUI）的用户来说，远程桌面功能是管理文件和操作的便捷选择。
 
-For detailed setup tutorials based on your operating system, refer to the following sections:
+有关基于您的操作系统的详细设置教程，请参阅以下部分：
 
 .. toctree::
 

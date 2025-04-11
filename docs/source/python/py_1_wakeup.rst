@@ -1,28 +1,14 @@
-.. note::
+.. _py_wake_up: 
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-.. _py_wake_up:
-
-1. Wake Up
+1. 唤醒
 ===============
 
-This is PiDog's first project. It will wake your PiDog from a deep sleep.
+这是 PiDog 的第一个项目，它将唤醒沉睡中的 PiDog。
 
 .. image:: img/py_wakeup.gif
 
 
-**Run the Code**
+**运行代码**
 
 .. raw:: html
 
@@ -33,17 +19,17 @@ This is PiDog's first project. It will wake your PiDog from a deep sleep.
     cd ~/pidog/examples
     sudo python3 1_wake_up.py
 
-After the code is executed, 
-PiDog will perform the following actions in sequence: 
+执行代码后，  
+PiDog 将依次完成以下动作：
 
-Stretch, twist, sit, wag its tail, pant.
+伸展、扭动身体、坐下、摇尾巴、喘气
 
 
 
-**Code**
+**代码**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    您可以对以下代码进行 **修改 / 重置 / 复制 / 运行 / 停止**。但在此之前，请先切换到源码路径，例如 ``pidog\examples``。修改代码后可直接运行以查看效果。
 
 .. raw:: html
 

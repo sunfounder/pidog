@@ -1,137 +1,123 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
 .. _install_os_sd:
 
-2. Installing the OS
+2. 安装操作系统
 ============================================================
 
 
-**Required Components**
+**所需组件**
 
-* A Personal Computer
-* A Micro SD card and Reader
+* 个人电脑
+* 微型SD卡及读卡器
 
-1. Install Raspberry Pi Imager
+1. 安装 Raspberry Pi Imager
 ----------------------------------
 
-#. Visit the Raspberry Pi software download page at `Raspberry Pi Imager <https://www.raspberrypi.org/software/>`_. Choose the Imager version compatible with your operating system. Download and open the file to initiate installation.
+#. 访问 Raspberry Pi 软件下载页面 `Raspberry Pi Imager <https://www.raspberrypi.org/software/>`_。选择与您的操作系统兼容的 Imager 版本。下载并打开文件开始安装。
 
     .. image:: img/os_install_imager.png
         :align: center
 
-#. A security prompt may appear during installation, depending on your operating system. For example, Windows might display a warning message. In such cases, select **More info** and then **Run anyway**. Follow the on-screen guidance to complete the installation of the Raspberry Pi Imager.
+#. 安装过程中可能会出现安全提示，具体取决于您的操作系统。例如，Windows 可能会显示警告消息。在这种情况下，选择 **More info** 然后 **Run anyway** 。按照屏幕上的指导完成 Raspberry Pi Imager 的安装。
 
     .. image:: img/os_info.png
         :align: center
 
-#. Launch the Raspberry Pi Imager application by clicking its icon or typing ``rpi-imager`` in your terminal.
+#. 通过点击其图标或在终端输入 ``rpi-imager`` 来启动 Raspberry Pi Imager 应用程序。
 
     .. image:: img/os_open_imager.png
         :align: center
 
-2. Install OS to Micro SD Card
+2. 将操作系统安装到微型SD卡
 --------------------------------
 
-#. Insert your SD card into your computer or laptop using a Reader.
+#. 使用读卡器将您的SD卡插入计算机或笔记本电脑。
 
-#. Within the Imager, click **Raspberry Pi Device** and select the Raspberry Pi model from the dropdown list.
+#. 在 Imager 中，点击 **Raspberry Pi Device** 并从下拉列表中选择 Raspberry Pi 型号。
 
-    .. image:: img/os_choose_device.png
+    .. image:: img/os_choose_device.jpg
         :align: center
 
-#. Select **Operating System** and opt for the recommended operating system version.
+#. 选择 **Operating System** 并选择推荐的操作系统版本。
 
-    .. image:: img/os_choose_os.png
+    .. image:: img/os_choose_os1.png
         :align: center
 
-#. Click **Choose Storage** and select the appropriate storage device for the installation.
+#. 点击 **Choose Storage** 并选择适当的存储设备进行安装。
 
     .. note::
 
-        Ensure you select the correct storage device. To avoid confusion, disconnect any additional storage devices if multiple ones are connected.
+        确保选择正确的存储设备。为避免混淆，如果连接了多个存储设备，请断开其他存储设备。
 
     .. image:: img/os_choose_sd.png
         :align: center
 
-#. Click **NEXT** and then **EDIT SETTINGS** to tailor your OS settings. 
+#. 点击 **NEXT** 然后 **EDIT SETTINGS** 来定制您的操作系统设置。
 
     .. note::
 
-        If you have a monitor for your Raspberry Pi, you can skip the next steps and click 'Yes' to begin the installation. Adjust other settings later on the monitor.
+        如果您有 Raspberry Pi 的显示器，您可以跳过接下来的步骤并点击 'Yes' 开始安装。稍后可以在显示器上调整其他设置。
 
-    .. image:: img/os_enter_setting.png
+    .. image:: img/os_enter_setting.jpg
         :align: center
 
-#. Define a **hostname** for your Raspberry Pi.
+#. 为您的 Raspberry Pi 定义一个 **hostname**。
 
     .. note::
 
-        The hostname is your Raspberry Pi's network identifier. You can access your Pi using ``<hostname>.local`` or ``<hostname>.lan``.
+        Hostname 是您的 Raspberry Pi 的网络标识符。您可以使用 ``<hostname>.local`` 或 ``<hostname>.lan`` 访问您的 Pi。
 
-    .. image:: img/os_set_hostname.png
+    .. image:: img/os_set_hostname.jpg
         :align: center
 
-#. Create a **Username** and **Password** for the Raspberry Pi's administrator account.
+#. 为 Raspberry Pi 的管理员账户创建一个 **Username** 和 **Password**。
 
     .. note::
 
-        Establishing a unique username and password is vital for securing your Raspberry Pi, which lacks a default password.
+        为您的 Raspberry Pi 设定独特的用户名和密码对于安全至关重要，因为它没有默认密码。
 
-    .. image:: img/os_set_username.png
+    .. image:: img/os_set_username.jpg
         :align: center
 
-#. Configure the wireless LAN by providing your network's **SSID** and **Password**.
+#. 通过提供您网络的 **SSID** 和 **Password** 配置无线局域网。
 
     .. note::
 
-        Set the ``Wireless LAN country`` to the two-letter `ISO/IEC alpha2 code <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements>`_ corresponding to your location.
+        设置 ``Wireless LAN country`` 为与您所在地相对应的两个字母 `ISO/IEC alpha2 code <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements>`_。
 
-    .. image:: img/os_set_wifi.png
+    .. image:: img/os_set_wifi.jpg
         :align: center
 
 
-#. To remotely connect to your Raspberry Pi, enable SSH in the Services tab.
+#. 要远程连接到您的 Raspberry Pi，请在 Services 标签中启用 SSH。
 
-    * For **password authentication**, use the username and password from the General tab.
-    * For public-key authentication, choose "Allow public-key authentication only". If you have an RSA key, it will be used. If not, click "Run SSH-keygen" to generate a new key pair.
+    * 对于 **password authentication**，使用 General 标签中的用户名和密码。
+    * 对于公钥认证，请选择 "Allow public-key authentication only"。如果您有 RSA 密钥，将会使用该密钥。如果没有，请点击 "Run SSH-keygen" 生成新的密钥对。
 
     .. image:: img/os_enable_ssh.png
         :align: center
 
-#. The **Options** menu lets you configure Imager's behavior during a write, including playing sound when finished, ejecting media when finished, and enabling telemetry.
+#. **Options** 菜单让您可以配置 Imager 在写入过程中的行为，包括写入完成时播放声音、完成时弹出媒体和启用遥测。
 
     .. image:: img/os_options.png
         :align: center
 
-    
-#. When you've finished entering OS customisation settings, click **Save** to save your customisation. Then, click **Yes** to apply them when writing the image.
 
-    .. image:: img/os_click_yes.png
+#. 完成输入操作系统定制设置后，点击 **Save** 保存您的定制。然后点击 **Yes** 在写入映像时应用它们。
+
+    .. image:: img/os_click_yes.jpg
         :align: center
 
-#. If the SD card contains existing data, ensure you back it up to prevent data loss. Proceed by clicking **Yes** if no backup is needed.
+#. 如果 SD 卡中包含现有数据，请确保备份以防数据丢失。如果不需要备份，点击 **Yes** 继续。
 
     .. image:: img/os_continue.png
         :align: center
 
-#. When you see the "Write Successful" popup, your image has been completely written and verified. You're now ready to boot a Raspberry Pi from the Micro SD Card!
+#. 当您看到 "Write Successful" 弹窗时，您的映像已经完全写入并验证。您现在可以准备使用微型SD卡启动 Raspberry Pi 了！
 
     .. image:: img/os_finish.png
         :align: center
 
-#. Now you can insert the SD card set up with Raspberry Pi OS into the microSD card slot located on the underside of the Raspberry Pi.
+#. 现在您可以将设置了 Raspberry Pi OS 的 SD 卡插入位于 Raspberry Pi 底部的微型SD卡插槽中。
 
     .. image:: img/insert_sd_card.png
         :width: 500

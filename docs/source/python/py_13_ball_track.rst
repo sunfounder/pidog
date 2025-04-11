@@ -1,24 +1,11 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
 
 .. _py_ball_track:
 
-13. Ball Track
+13. 追踪红球
 ======================
 
-PiDog will sit quietly in place.
-You put a red ball in front of it, it will stand, and then chase the ball.
+PiDog 会安静地坐在原地。
+当你在它面前放一个红球时，它会站起来，然后开始追逐这个红球。
 
 .. raw:: html
 
@@ -28,7 +15,7 @@ You put a red ball in front of it, it will stand, and then chase the ball.
    </video>
 
 
-**Run the Code**
+**运行代码**
 
 .. raw:: html
 
@@ -40,14 +27,14 @@ You put a red ball in front of it, it will stand, and then chase the ball.
     sudo python3 13_ball_track.py
 
 
-After running this code, PiDog will start the camera.
-You can visit ``http://+ PiDog's IP +/mjpg`` (like mine is ``http://192.168.18.138:9000/mjpg``) in your browser to view the camera's picture.
+运行代码后，PiDog 将启动摄像头。
+您可以在浏览器中访问 ``http://+ PiDog's IP +/mjpg``（例如 ``http://192.168.18.138:9000/mjpg``）查看摄像头画面。
 
 
-**Code**
+**代码**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    您可以 **修改 / 重置 / 复制 / 运行 / 停止** 下方的代码。但在此之前，请确保您已经进入源码路径，例如 ``pidog\examples``。修改后即可直接运行查看效果。
 
 .. raw:: html
 

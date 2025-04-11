@@ -1,23 +1,10 @@
-.. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-2. Calibrate the PiDog
+2. 校准 PiDog
 =============================
 
-**Introduction**
+**简介**
 
-Calibrating your PiDog is an essential step to ensure its stable and efficient operation. This process helps correct any imbalances or inaccuracies that might have arisen during assembly or from structural issues. Follow these steps carefully to ensure your PiDog walks steadily and performs as expected.
+校准您的 PiDog 是确保其稳定高效运行的关键步骤。该过程有助于修正因组装或结构误差造成的不平衡或不准确。请仔细按照以下步骤操作，以确保 PiDog 行走平稳，表现如预期。
 
 .. raw:: html
 
@@ -27,29 +14,29 @@ Calibrating your PiDog is an essential step to ensure its stable and efficient o
    </video>
 
 
-But if the deviation angle is too big, you still have to go back to :ref:`py_servo_adjust` to set the servo angle to 0°, and then follow the instructions to reassemble the PiDog.
+但如果偏差角度过大，请返回 :ref:`py_servo_adjust`，将舵机角度设为 0°，然后按照说明重新组装 PiDog。
 
-**Calibrate Video**
+**校准视频**
 
-For a comprehensive guide, refer to the full calibration video. It provides a visual step-by-step process to accurately calibrate your PiDog.
+如需详细指南，请参考完整的校准教学视频。视频将以直观的方式逐步展示如何准确校准您的 PiDog。
 
 .. note::
 
-   The Pidog kit may come with a 90° or 60° ruler. Our calibration video uses the 90° ruler, but the 60° version follows a similar process. You can also refer to the detailed steps below.
- 
+   PiDog 套件中可能附带 90° 或 60° 校准尺。我们的视频中使用的是 90° 尺，但 60° 的校准过程也大致相同。您也可以参考下方的详细图文步骤。
+
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=g8_RZDUkfjdwbLZu&amp;start=871&end=1160" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**Steps**
+**步骤**
 
-The specific steps are as follows:
+具体操作如下：
 
-#. Put the PiDog on the base.
+#. 将 PiDog 放置在平台上。
 
    .. image:: img/place-pidog.JPG
 
-#. Navigate to the PiDog examples directory and run the ``0_calibration.py`` script.
+#. 进入 PiDog 示例代码目录，并运行 ``0_calibration.py`` 脚本。
 
    .. raw:: html
 
@@ -60,43 +47,43 @@ The specific steps are as follows:
         cd ~/pidog/examples
         sudo python3 0_calibration.py
         
-#. Upon running the script, a user interface will appear in your terminal. Here, you need to select your calibration ruler (60° or 90°).If your kit has a 90° calibration ruler, select the first option; if it is a 60° one, select the second option.
+#. 运行脚本后，终端会出现交互界面。请根据您手中的校准尺类型选择：若为 90°，选第一项；若为 60°，选第二项。
 
     .. image:: img/CALI.slt.1.png
 
-#. After selecting, you will enter the following interface:
+#. 选择后，您将进入以下校准界面：
 
-.. image:: img/CALI.slt.2.png
+    .. image:: img/CALI.slt.2.png
 
 
 
-90° Ruler
+90° 校准尺
 ------------------------------
 
 
-#. Position the **Calibration Ruler** (Acrylic C) as shown in the provided image. In the terminal, press ``1``, followed by ``w`` and ``s`` keys to align the edges as indicated in the image.
+#. 按图示放置 **校准尺（亚克力C板）**。在终端中按 ``1``，然后使用 ``w`` 和 ``s`` 键调整，使边缘对齐图示位置。
 
     .. image:: img/CALI-1.2.png
 
-#. Reposition the **Calibration Ruler** (Acrylic C) as illustrated in the next image. Press ``2`` in the terminal, then use ``w`` and ``s`` to align the edges as shown.
+#. 重新摆放 **校准尺（亚克力C板）**，如图所示。终端按 ``2``，再使用 ``w`` 和 ``s`` 调整边缘对齐。
 
     .. image:: img/CALI-2.2.png
 
-#. Repeat the calibration process for the remaining servos (3 to 8). Ensure all four legs of the PiDog are calibrated.
+#. 重复第 3 至第 8 舵机的校准操作，确保 PiDog 的四条腿都已完成校准。
 
 
 
-60° Ruler
+60° 校准尺
 ------------------------------
 
-#. Position the **Calibration Ruler** (Acrylic C) as shown in the provided image. Place its long side on a level surface. In the terminal, press ``1``, followed by ``w`` and ``s`` keys to align the edges as indicated in the image.
+#. 如图所示摆放 **校准尺（亚克力C板）**，将其长边置于水平面上。在终端按 ``1``，使用 ``w`` 和 ``s`` 键调整边缘对齐。
 
     .. image:: img/CALI.60.1.JPG
 
-#. Reposition the **Calibration Ruler** (Acrylic C) as illustrated in the next image. Press ``2`` in the terminal, then use ``w`` and ``s`` to align the edges as shown.
+#. 根据下图重新放置 **校准尺**。在终端按 ``2``，再通过 ``w`` 和 ``s`` 键进行微调。
 
     .. image:: img/CALI.60.2.JPG
 
-#. Repeat the calibration process for the remaining servos (3 to 8). Ensure all four legs of the PiDog are calibrated.
+#. 重复第 3 至第 8 舵机的校准过程，确保 PiDog 四条腿均已完成校准。
 
 

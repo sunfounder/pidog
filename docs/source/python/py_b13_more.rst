@@ -1,29 +1,15 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-13. More
+13. 更多  
 ==============
 
-The following address will explain the use of PiDog's more basic functions:
+以下地址将介绍 PiDog 更基本功能的使用：
 
 * `Vilib Library <https://vilib-rpi.readthedocs.io/en/latest/>`_
 
-    Vilib is a library developed by SunFounder for Raspberry Pi camera.
+    Vilib 是 SunFounder 为 Raspberry Pi 相机开发的一个库。
 
-    It contains some practical functions, such as taking pictures, video recording, pose detection, face detection, motion detection, image classification and so on.
+    它包含一些实用功能，如拍照、视频录制、姿势检测、人脸检测、运动检测、图像分类等。
 
 
 * `SunFounder Controller <https://docs.sunfounder.com/projects/sf-controller/en/latest/index.html>`_
 
-    SunFounder Controller is an application that allows users to customize the controller for controlling their robot or as an IoT platform.
+    SunFounder 控制器是一个应用程序，允许用户自定义控制器来控制他们的机器人或作为物联网平台。

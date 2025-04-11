@@ -1,21 +1,7 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-7. Face Track
+7. 人脸跟踪
 ======================
 
-PiDog will sit quietly in place. You applaud it, it looks your way, and if it sees you, it says hello.
+在本项目中，PiDog 将安静地坐在原地。当你鼓掌时，它会转头看你，并在识别到你后和你打招呼。
 
 .. raw:: html
 
@@ -24,7 +10,7 @@ PiDog will sit quietly in place. You applaud it, it looks your way, and if it se
       Your browser does not support the video tag.
    </video>
 
-**Run the Code**
+**运行代码**
 
 .. raw:: html
 
@@ -35,22 +21,20 @@ PiDog will sit quietly in place. You applaud it, it looks your way, and if it se
     cd ~/pidog/examples
     sudo python3 7_face_track.py
 
+代码运行后，PiDog 会启动摄像头并打开人脸检测功能。
+你可以在浏览器中访问 ``http://+ PiDog's IP +/mjpg``（例如： ``http://192.168.18.138:9000/mjpg`` ）以查看摄像头画面。
 
-After running this code, PiDog will start the camera and enable the face detection function.
-You can visit ``http://+ PiDog's IP +/mjpg`` (like mine is ``http://192.168.18.138:9000/mjpg``) in your browser to view the camera's picture.
+接着，PiDog 将坐下并启用声音方向传感器模块来监听你的鼓掌方向。
+当 PiDog 听到掌声（或其他响声）时，它会转头朝声源方向寻找你。
 
-Then PiDog will sit down and activate the Sound Direction Sensor Module to detect the direction of your clapping.
-When PiDog hears clapping (or other noise), it turns its head toward the sound source, trying to find you.
-
-If it sees you (face detection finds an object), it will wag its tail and let out a bark.
-
+如果它检测到人脸（识别到目标），就会摇尾巴并发出汪汪叫声向你问好。
 
 
 
-**Code**
+**代码**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    你可以对以下代码进行 **修改/重置/复制/运行/停止**。请确保进入源码路径（如 ``pidog\examples``）后进行操作。修改后可直接运行查看效果。
 
 .. raw:: html
 
@@ -83,14 +67,14 @@ If it sees you (face detection finds an object), it will wag its tail and let ou
         my_dog.head_move([[yaw, 0, pitch]], pitch_comp=-40, immediately=True, speed=80)
         my_dog.wait_all_done()
         sleep(0.5)
-        # Cleanup sound detection by servos moving
+        # 清除伺服器动作造成的声音干扰
         if my_dog.ears.isdetected():    
             direction = my_dog.ears.read()
 
         while True:
             if flag == False:
                 my_dog.rgb_strip.set_mode('breath', 'pink', bps=1)
-            # If heard somthing, turn to face it
+            # 如果检测到声音，则转向
             if my_dog.ears.isdetected():
                 flag = False
                 direction = my_dog.ears.read()
@@ -111,7 +95,7 @@ If it sees you (face detection finds an object), it will wag its tail and let ou
             ey = Vilib.detect_obj_parameter['human_y'] - 240
             people = Vilib.detect_obj_parameter['human_n']
 
-            # If see someone, bark at him/her
+            # 如果识别到人脸，向其打招呼
             if people > 0 and flag == False:
                 flag = True
                 my_dog.do_action('wag_tail', step_count=2, speed=100)

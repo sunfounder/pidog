@@ -1,25 +1,11 @@
-.. note::
+.. _quick_guide_python: 
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-.. _quick_guide_python:
-
-1. Quick Guide on Python
+1. Python 快速指南
 ==========================
 
-This section is to teach you how to install Raspberry Pi OS, configure wifi to Raspberry Pi, remote access to Raspberry Pi to run the corresponding code.
+本节将教您如何安装 Raspberry Pi OS、配置 Raspberry Pi 的 wifi，以及远程访问 Raspberry Pi 运行相应代码。
 
-If you are familiar with Raspberry Pi and can open the command line successfully, then you can skip the first 3 parts and then complete the last part. 
+如果您已熟悉 Raspberry Pi 并能成功打开命令行，那么可以跳过前三部分，直接完成最后一部分。
 
 
 
@@ -33,12 +19,11 @@ If you are familiar with Raspberry Pi and can open the command line successfully
     install_all_modules
     enable_i2c_spi
     py_servo_adjust
-
-**Video**
-
-In our assembly video from **3:40 to 7:23**, there is also a detailed tutorial for this chapter. You can follow the video instructions directly.
-
-.. raw:: html
+.. 
+    **视频**
+.. 我们的组装视频 **3:40 到 7:23** 部分，还有本章的详细教程。您可以直接按照视频指导操作。
+..
+    .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/PTo6smSIlDY?si=qpk-nN7ATGT6zfSX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 

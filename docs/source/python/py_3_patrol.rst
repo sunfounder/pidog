@@ -1,28 +1,15 @@
-.. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-3. Patrol
+3. 巡逻
 ==============
 
-In this project, PiDog makes a vivid behavior: patrolling.
+在本项目中，PiDog 将展现一个生动的行为——巡逻。
 
-PiDog will walk forward, if there is an obstacle in front of it, it will stop and bark.
+PiDog 会向前行走，当遇到障碍物时会停止并发出吠叫声。
 
 
 .. image:: img/py_3.gif
 
-**Run the Code**
+**运行代码**
 
 .. raw:: html
 
@@ -33,16 +20,16 @@ PiDog will walk forward, if there is an obstacle in front of it, it will stop an
     cd ~/pidog/examples
     sudo python3 3_patrol.py
 
-After running this example, PiDog will wag its tail, scan left and right, and walk forward.
+运行此示例后，PiDog 会摇尾巴、左右张望并向前移动。
 
 
 
 
 
-**Code**
+**代码**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    您可以对以下代码进行 **修改/重置/复制/运行/停止**。但请确保您已进入代码路径（如 ``pidog\examples``）后再进行操作。修改后可直接运行查看效果。
 
 .. raw:: html
 
@@ -70,7 +57,7 @@ After running this example, PiDog will wag its tail, scan left and right, and wa
         distance = round(my_dog.ultrasonic.read_distance(), 2)
         print(f"distance: {distance} cm", end="", flush=True)
 
-        # danger
+        # 危险情况
         if distance < DANGER_DISTANCE:
             print("\033[0;31m DANGER !\033[m")
             my_dog.body_stop()
@@ -90,7 +77,7 @@ After running this example, PiDog will wag its tail, scan left and right, and wa
                 else:
                     print(f"distance: {distance} cm", end="", flush=True)
                 time.sleep(0.01)
-        # safe
+        # 安全情况
         else:
             print("")
             my_dog.rgb_strip.set_mode('breath', 'white', bps=0.5)

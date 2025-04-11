@@ -1,44 +1,30 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-3. Power Supply for Raspberry Pi (Important)
+3. Raspberry Pi 供电（重要）
 ===============================================
 
-Charge
+充电
 -------------------
 
-Insert the battery cable. Next, insert the USB-C cable to charge the battery.
-You will need to provide your own charger; we recommend a 5V 3A charger, or your commonly used smartphone charger will suffice.
+连接电池电缆。接着，插入 USB-C 电缆以充电。
+您需要自备充电器；我们推荐使用 5V 3A 充电器，或您通常使用的智能手机充电器也足够。
 
 .. image:: img/BTR_IMG_1096.png
 
 .. note::
-    Connect an external Type-C power source to the Type-C port on the robot hat; it will immediately start charging the battery, and a red indicator light will illuminate.\
-    When the battery is fully charged, the red light will automatically turn off.
+    将外部 Type-C 电源连接到机器人帽的 Type-C 端口；它将立即开始充电电池，红色指示灯将点亮。\
+    当电池充满电时，红灯将自动熄灭。
 
 
-Power ON
+开机
 ----------------------
 
-Turn on the power switch. The Power indicator light and the battery level indicator light will illuminate.
+打开电源开关。电源指示灯和电池电量指示灯将亮起。
 
 .. image:: img/BTR_IMG_1097.png
 
 
-Wait for a few seconds, and you will hear a slight beep, indicating that the Raspberry Pi has successfully booted.
+等待几秒钟，您将听到轻微的哔声，表明 Raspberry Pi 已成功启动。
 
 .. note::
-    If both battery level indicator lights are off, please charge the battery.
-    When you need extended programming or debugging sessions, you can keep the Raspberry Pi operational by inserting the USB-C cable to charge the battery simultaneously.
+    如果两个电池电量指示灯都熄灭，请充电。
+    当您需要进行长时间的编程或调试时，可以插入 USB-C 电缆同时为电池充电，以保持 Raspberry Pi 运行。
 

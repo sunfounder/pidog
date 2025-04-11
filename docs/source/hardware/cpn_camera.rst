@@ -1,57 +1,43 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-Camera Module
+摄像头模块
 ====================================
 
 
-**Description**
+**描述**
 
 .. image:: img/camera_module_pic.png
    :width: 200
    :align: center
 
-This is a 5MP Raspberry Pi camera module with OV5647 sensor. It's plug and play, connect the included ribbon cable to the CSI (Camera Serial Interface) port on your Raspberry Pi and you're ready to go.
+这是一款5MP的Raspberry Pi摄像头模块，配备了OV5647传感器。它支持即插即用，将附带的排线连接到您的Raspberry Pi的CSI（Camera Serial Interface）端口即可开始使用。
 
-The board is small, about 25mm x 23mm x 9mm, and weighs 3g, making it ideal for mobile or other size and weight-critical applications. The camera module has a native resolution of 5 megapixels and has an on-board fixed focus lens that captures still images at 2592 x 1944 pixels, and also supports 1080p30, 720p60 and 640x480p90 video.
+该模块体积小巧，大约25mm x 23mm x 9mm，重量为3g，非常适合移动或其他对尺寸和重量要求严格的应用。摄像头模块具有500万像素的原生分辨率，并配备了一个固定焦点镜头，能够拍摄2592 x 1944像素的静态图像，同时支持1080p30、720p60和640x480p90视频。
 
 .. note:: 
 
-   The module is only capable of capturing pictures and videos, not sound.
+   该模块仅能捕捉图像和视频，不能录制声音。
 
 
 
-**Specification**
+**规格**
 
-* **Static Images Resolution**: 2592×1944 
-* **Supported Video Resolution**: 1080p/30 fps, 720p/ 60fps and 640 x480p 60/90 video recording 
-* **Aperture (F)**: 1.8 
-* **Visual Angle**: 65 degree 
-* **Dimension**: 24mmx23.5mmx8mm 
-* **Weight**: 3g 
-* **Interface**: CSI connector 
-* **Supported OS**: Raspberry Pi OS(latest version recommended) 
-
-
-
-**Assemble the Camera Module**
+* **静态图像分辨率**：2592×1944
+* **支持的视频分辨率**：1080p/30 fps、720p/ 60fps 以及 640 x480p 60/90 视频录制
+* **光圈（F）**：1.8
+* **视角**：65度
+* **尺寸**：24mmx23.5mmx8mm
+* **重量**：3g
+* **接口**：CSI连接器
+* **支持的操作系统**：推荐使用最新版本的Raspberry Pi OS
 
 
-On the camera module or Raspberry Pi, you will find a flat plastic connector. Carefully pull out the black fixing switch until the fixing switch is partially pulled out. Insert the FFC cable into the plastic connector in the direction shown and push the fixing switch back into place.
 
-If the FFC wire is installed correctly, it will be straight and will not pull out when you gently pull on it. If not, reinstall it again.
 
+
+**组装摄像头模块**
+
+在摄像头模块或Raspberry Pi上，您会找到一个扁平的塑料连接器。小心地拉出黑色固定开关，直到固定开关部分拉出。按照显示的方向将FFC线缆插入塑料连接器中，然后将固定开关推回原位。
+
+如果FFC线缆安装正确，它应该是直的，并且当您轻轻拉动时不会脱落。如果不是，请重新安装。
 
 .. image:: img/connect_ffc.png
 .. image:: img/1.10_camera.png
@@ -59,17 +45,18 @@ If the FFC wire is installed correctly, it will be straight and will not pull ou
 
 .. warning::
 
-   Do not install the camera with the power on, it may damage your camera.
+   安装摄像头时，请确保电源关闭，否则可能会损坏您的摄像头。
 
-.. **Enable the Camera Interface**
+.. **启用摄像头接口**
 
-.. Run the following command to enable the camera interface of your Raspberry Pi. If you have enabled it, skip this; if you do not know whether you have done that or not, please continue.
+.. 运行以下命令以启用您的Raspberry Pi的摄像头接口。如果您已经启用了它，跳过这步；如果您不确定是否已经启用，继续操作。
 
 .. .. raw:: html
 
 ..    <run></run>
 
-.. .. code-block:: 
+.. 
+   .. code-block:: 
 
 ..    sudo raspi-config
 
@@ -88,12 +75,13 @@ If the FFC wire is installed correctly, it will be straight and will not pull ou
 .. .. image:: img/camera_config2.png
 ..    :align: center
 
-.. After the configuration is complete, it is recommended to reboot the Raspberry Pi.
+.. 配置完成后，建议重新启动Raspberry Pi。
 
 .. .. raw:: html
 
 ..    <run></run>
 
-.. .. code-block:: 
+..
+    .. code-block:: 
 
 ..    sudo reboot

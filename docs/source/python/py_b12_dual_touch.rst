@@ -1,31 +1,17 @@
-.. note::
+12. 抚摸 PiDog 的头部  
+===========================
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-12. Pat the PiDog's Head
-=========================
-
-The Touch Swich on the head of PiDog can detect how you touch it. You can call the following functions to use it.
+PiDog 头部的触摸开关能够感应你的触摸方式。你可以调用以下函数来使用它。
 
 .. code-block:: python
 
    Pidog.dual_touch.read()
 
-* Touch the module from left to right (front to back for PiDog's orientation), it will return ``"LS"``.
-* Touch the module from right to left, it will return ``"RS"``.
-* Touch the module If the left side of the module is touched, it will return ``"L"``.
-* If the right side of the module is touched, it will return ``"R"``.
-* If the module is not touched, it will return ``"N"``.
+* 从左向右触摸模块（以 PiDog 的朝向来看是从前到后），返回 ``"LS"``。
+* 从右向左触摸模块，返回 ``"RS"``。
+* 如果触摸模块的左侧，返回 ``"L"``。
+* 如果触摸模块的右侧，返回 ``"R"``。
+* 如果没有触摸模块，返回 ``"N"``。
 
 **Here is an example of its use:**
 
@@ -39,4 +25,4 @@ The Touch Swich on the head of PiDog can detect how you touch it. You can call t
         touch_status = my_dog.dual_touch.read()
         print(f"touch_status: {touch_status}")
         time.sleep(0.5)
-
+    

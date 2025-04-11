@@ -1,23 +1,10 @@
-.. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-For Mac OS X Users
+针对 Mac OS X 用户
 ==========================
 
-For Mac OS X users, SSH (Secure Shell) offers a secure and convenient method to remotely access and control a Raspberry Pi. This is particularly handy for working with the Raspberry Pi remotely or when it's not connected to a monitor. Using the Terminal application on a Mac, you can establish this secure connection. The process involves an SSH command incorporating the Raspberry Pi's username and hostname. During the initial connection, a security prompt will ask for confirmation of the Raspberry Pi's authenticity.
+对于 Mac OS X 用户，SSH（安全壳）提供了一种安全且便捷的方式，用于远程访问和控制 Raspberry Pi。这在远程工作或 Raspberry Pi 未连接显示器时尤为方便。使用 Mac 上的 Terminal 应用程序，您可以建立这种安全连接。此过程涉及使用 Raspberry Pi 的用户名和主机名的 SSH 命令。在初次连接时，安全提示将要求确认 Raspberry Pi 的真实性。
 
-#. To connect to the Raspberry Pi, type the following SSH command:
+#. 要连接到 Raspberry Pi，请输入以下 SSH 命令：
 
     .. code-block::
 
@@ -25,7 +12,7 @@ For Mac OS X users, SSH (Secure Shell) offers a secure and convenient method to 
 
     .. image:: img/mac-ping.png
 
-#. A security message will appear during your first login. Respond with **yes** to proceed.
+#. 首次登录时将出现安全消息。回答 **yes** 继续。
 
     .. code-block::
 
@@ -33,7 +20,7 @@ For Mac OS X users, SSH (Secure Shell) offers a secure and convenient method to 
         ED25519 key fingerprint is SHA256:oo7x3ZSgAo032wD1tE8eW0fFM/kmewIvRwkBys6XRwg.
         Are you sure you want to continue connecting (yes/no/[fingerprint])?
 
-#. Input the password for the Raspberry Pi. Be aware that the password won’t display on the screen as you type, which is a standard security feature.
+#. 输入 Raspberry Pi 的密码。请注意，出于安全考虑，输入密码时不会在屏幕上显示。
 
     .. code-block::
 
@@ -49,3 +36,4 @@ For Mac OS X users, SSH (Secure Shell) offers a secure and convenient method to 
         Last login: Thu Sep 22 12:18:22 2022
         pi@raspberrypi:~ $ 
 
+        

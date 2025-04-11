@@ -114,7 +114,7 @@ rst_epilog += """
 
 .. |link_voice_options| raw:: html
 
-    <a href="https://platform.openai.com/docs/guides/text-to-speech/voice-options" target="_blank">Voice options</a>
+    <a href="https://platform.openai.com/docs/guides/text-to-speech/voice-options" target="_blank">语音选项</a>
 
 .. |link_iso_language_code| raw:: html
 
@@ -122,7 +122,7 @@ rst_epilog += """
 
 .. |link_microphone| raw:: html
 
-    <a href="https://www.sunfounder.com/products/mini-usb-microphone?_pos=2&_sid=d05c80026&_ss=r" target="_blank">Microphone link</a>
+    <a href="https://www.sunfounder.com/products/mini-usb-microphone?_pos=2&_sid=d05c80026&_ss=r" target="_blank">麦克风链接</a>
 
 .. |link_openai_platform| raw:: html
 
@@ -144,6 +144,10 @@ rst_epilog += """
 
     <a href="https://docs.sunfounder.com/projects/robot-hat-v4/en/latest/hardware_introduction.html" target="_blank">Robot HAT</a>
 
+.. |link_robot_hat_v5| raw:: html
+ 
+     <a href="https://docs.sunfounder.com/projects/robot-hat-v4/en/latest/hardware_introduction.html" target="_blank">Robot HAT</a>
+ 
 .. |link_german_tutorials| raw:: html
 
     <a href="https://docs.sunfounder.com/projects/pidog/de/latest/index.html" target="_blank">Deutsch Online-Kurs</a>
@@ -155,6 +159,10 @@ rst_epilog += """
 .. |link_en_tutorials| raw:: html
 
     <a href="https://docs.sunfounder.com/projects/pidog/en/latest/" target="_blank">English Online-tutorials</a>
+
+.. |link_zh_tutorials| raw:: html
+
+    <a href="https://docs.sunfounder.com/projects/pidog/zh/latest/" target="_blank">中文在线教程</a>
 
 .. |link_fr_tutorials| raw:: html
 
@@ -170,7 +178,7 @@ rst_epilog += """
 
 .. |link_PiDog| raw:: html
 
-    <a href="https://www.sunfounder.com/products/sunfounder-pidog-robot-dog-kit-for-raspberry-pi?_pos=1&_sid=313a4c894&_ss=r&variant=44517213896939" target="_blank">Purchase Link for PiDog</a>
+    <a href="https://www.sunfounder.com/products/sunfounder-pidog-robot-dog-kit-for-raspberry-pi?_pos=1&_sid=313a4c894&_ss=r&variant=44517213896939" target="_blank">PiDog 购买链接</a>
 
 .. |link_Pi_Dog| raw:: html
 

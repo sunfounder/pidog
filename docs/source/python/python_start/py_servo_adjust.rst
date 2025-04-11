@@ -1,33 +1,23 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
 .. _py_servo_adjust:
 
-7. Servo Adjust(Important)
+7. 伺服电机调整（重要）
 ===========================================
 
-The angle range of the servo is -90~90, but the angle set at the factory is random, maybe 0°, maybe 45°; if we assemble it with such an angle directly, it will lead to a chaotic state after the robot runs the code, or worse, it will cause the servo to block and burn out.
+.. warning::
 
-So here we need to set all the servo angles to 0° and then install them, so that the servo angle is in the middle, no matter which direction to turn.
+    如果您的 PiDog 是 V2 版，请跳过本节，因为伺服电机角度已在组装过程中进行调整。
 
-#. To ensure that the servo has been properly set to 0°, first insert the servo arm into the servo shaft and then gently rotate the rocker arm to a different angle. This servo arm is just to allow you to clearly see that the servo is rotating.
+伺服电机的角度范围为 -90° 到 90°，但出厂时的角度是随机的，可能是 0°，也可能是 45°；如果我们直接用这种角度进行组装，机器人运行代码后可能会导致混乱，甚至更糟糕的情况——伺服电机卡住或烧毁。
 
-    .. image:: img/servo_arm.png
+因此，我们需要先将所有伺服电机的角度设置为 0°，然后再进行安装，这样无论伺服电机转向哪个方向，角度都处于中间位置。
+
+#. 为确保伺服电机已经正确设置为 0°，首先将伺服臂插入伺服轴中，然后轻轻旋转摇臂到不同角度。这个伺服臂是为了让你清楚地看到伺服电机的旋转情况。
+
+    .. image:: img/servo_arm.png  
         :align: center
 
 
-#. Now, run ``servo_zeroing.py`` in the ``examples/`` folder.
+#. 现在，在 ``examples/`` 文件夹中运行 ``servo_zeroing.py``。
 
     .. raw:: html
 
@@ -40,18 +30,19 @@ So here we need to set all the servo angles to 0° and then install them, so tha
 
 
     .. note::
-        If you get an error, try re-enabling the Raspberry Pi's I2C port, see: :ref:`i2c_spi_config`.
+        如果遇到错误，请尝试重新启用 Raspberry Pi 的 I2C 端口，参考： :ref:`i2c_spi_config` 。
 
-#. Next, plug the servo cable into the P11 port as follows, at the same time you will see the servo arm rotate to a position(This is the 0° position, which is a random location and may not be vertical or parallel.).
+#. 接下来，将伺服电机电缆插入 P11 端口，如下图所示，同时您将看到伺服臂旋转到某个位置（这是 0° 位置，可能是一个随机的位置，可能不垂直或平行）。
 
     .. image:: img/servo_pin11.jpg
 
 
-#. Now, remove the servo arm, ensuring the servo wire remains connected, and do not turn off the power. Then continue the assembly following the paper instructions.
+#. 现在，移除伺服臂，确保伺服电机线仍然连接，且不要关闭电源。然后继续按照纸质说明进行组装。
+
 
 .. note::
 
-    * Do not unplug this servo cable before fixing it with the servo screw, you can unplug it after fixing it.
-    * Do not rotate the servo while it is powered on to avoid damage; if the servo shaft is not inserted at the right angle, pull the servo out and reinsert it.
-    * Before assembling each servo, you need to plug the servo cable into PWM pin and turn on the power to set its angle to 0°.
+    * 在用伺服螺丝固定之前，请勿拔掉伺服电机电缆，固定后可以拔掉电缆。
+    * 请勿在伺服电机通电时旋转伺服电机，以免损坏；如果伺服轴未以正确角度插入，请将伺服电机拔出并重新插入。
+    * 在组装每个伺服电机之前，您需要将伺服电机电缆插入 PWM 引脚并打开电源，将其角度设置为 0°。
 

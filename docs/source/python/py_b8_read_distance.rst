@@ -1,31 +1,17 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-8. Read Distance
+8. 读取距离  
 ==================
 
-Through the Ultrasonic Module in its head, PiDog can detect obstacles ahead.
+PiDog 通过其头部的超声波模块可以探测前方的障碍物。
 
-An ultrasonic module can detect objects between 2 and 400 cm away.
+该超声波模块的测量范围为 2 至 400 厘米。
 
-With the following function, you can read the distance as a floating point number.
+你可以使用以下函数读取距离值，返回的是浮点型数字：
 
 .. code-block:: python
 
     Pidog.ultrasonic.read_distance()
 
-**Here is an example of usage:**
+**以下是一个使用示例：**
 
 .. code-block:: python
 
@@ -37,4 +23,4 @@ With the following function, you can read the distance as a floating point numbe
         distance = my_dog.ultrasonic.read_distance()
         distance = round(distance,2)
         print(f"Distance: {distance} cm")
-        time.sleep(0.5)    
+        time.sleep(0.5)

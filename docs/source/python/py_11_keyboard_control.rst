@@ -1,103 +1,89 @@
-.. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-11. Play PiDog with Keyboard
+11. 使用键盘操控 PiDog
 ======================================
 
 
-In this example, we will use the keyboard to control PiDog. You can press these keys in the terminal to make it act.
+在本示例中，我们将使用键盘来控制 PiDog。在终端中按下下列按键，即可让它执行相应动作。
 
 
 .. list-table:: 
     :widths: 25 50 25 50 25 50
     :header-rows: 1
 
-    * - Keys
-      - Function
-      - Keys
-      - Function
-      - Keys
-      - Function  
+    * - 按键
+      - 功能
+      - 按键
+      - 功能
+      - 按键
+      - 功能  
     * - 1
-      - doze off
+      - 打瞌睡
       - q
-      - bark harder
+      - 激烈吠叫
       - a
-      - turn left
+      - 左转
     * - 2
-      - push-up
+      - 俯卧撑
       - w
-      - forward
+      - 前进
       - s
-      - backward
+      - 后退
     * - 3
-      - howling
+      - 嚎叫
       - e
-      - pant
+      - 喘气
       - d
-      - turn right
+      - 右转
     * - 4
-      - twist body
+      - 扭动身体
       - r
-      - wag tail
+      - 摇尾巴
       - f
-      - shake head
+      - 摇头
     * - 5
-      - scratch
+      - 抓挠
       - t
-      - hake head
+      - 摇头
       - g
-      - high five
+      - 击掌
     * - u
-      - head roll
+      - 头部横滚
       - U
-      - head roll+
+      - 增加头部横滚角度
       - z
-      - lie
+      - 躺下
     * - i
-      - head pitch
+      - 头部俯仰
       - I
-      - head pitch+
+      - 增加头部俯仰角度
       - x
-      - stand up
+      - 站起来
     * - o
-      - head roll
+      - 头部横滚
       - O
-      - head roll+
+      - 增加头部横滚角度
       - c
-      - sit
+      - 坐下
     * - j
-      - head yaw
+      - 头部偏航
       - J
-      - head yaw+
+      - 增加头部偏航角度
       - v
-      - stretch
+      - 伸展
     * - k
-      - head pitch
+      - 头部俯仰
       - K
-      - head pitch+
+      - 增加头部俯仰角度
       - m
-      - head reset
+      - 头部复位
     * - l
-      - head yaw
+      - 头部偏航
       - L
-      - head yaw+
+      - 增加头部偏航角度
       - W
-      - trot
+      - 小跑
 
-
-**Run the Code**
+**运行代码**
 
 .. raw:: html
 
@@ -108,10 +94,10 @@ In this example, we will use the keyboard to control PiDog. You can press these 
     cd ~/pidog/examples
     sudo python3 11_keyboard_control.py
 
-After the program runs, you will see a printed keyboard on the terminal. Now you can control PiDog with keyboard in terminal.
+运行程序后，您将在终端中看到一张按键说明图。现在，您可以直接通过键盘在终端中操控 PiDog 了。
 
 
+**代码**
 
-**Code**
 
-Please find the code in |link_code_11_keyboard_control|.
+请在 |link_code_11_keyboard_control| 查看完整源代码。

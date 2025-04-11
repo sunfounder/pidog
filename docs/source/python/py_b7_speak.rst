@@ -1,44 +1,31 @@
-.. note::
-
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-7. PiDog Speak
+7. PiDog 发声  
 ==========================
 
-PiDog can make sound, it is actually playing a piece of audio.
+PiDog 可以发出声音，实际上是播放一段音频文件。
 
-These audios are saved under ``pidog\sounds`` path, you can call the following function to play them.
+这些音频文件保存在 ``pidog\sounds`` 路径下，你可以调用以下函数进行播放：
 
 .. code-block:: python
 
    Pidog.speak(name)
 
-* ``name`` : Filename (without suffix), such as ``"angry"``. ``Pidog`` provides the following audio.
+* ``name``：音频文件名（不带后缀），如 ``"angry"``。  
+  ``Pidog`` 目前提供以下音效文件：
 
-  * ``"angry"``
-  * ``"confused_1"``
-  * ``"confused_2"``
-  * ``"confused_3"``
-  * ``"growl_1"``
-  * ``"growl_2"``
-  * ``"howling"``
-  * ``"pant"``
-  * ``"single_bark_1"``
-  * ``"single_bark_2"``
-  * ``"snoring"``
-  * ``"woohoo"``
+  * ``"angry"``          —— 愤怒
+  * ``"confused_1"``     —— 疑惑1
+  * ``"confused_2"``     —— 疑惑2
+  * ``"confused_3"``     —— 疑惑3
+  * ``"growl_1"``        —— 低吼1
+  * ``"growl_2"``        —— 低吼2
+  * ``"howling"``        —— 嚎叫
+  * ``"pant"``           —— 喘气
+  * ``"single_bark_1"``  —— 吠叫1
+  * ``"single_bark_2"``  —— 吠叫2
+  * ``"snoring"``        —— 打鼾
+  * ``"woohoo"``         —— 欢呼
 
-**Here is an example of usage:**
+**以下是一个使用示例：**
 
 .. code-block:: python
 
@@ -55,7 +42,7 @@ These audios are saved under ``pidog\sounds`` path, you can call the following f
     import os
     import time
 
-    # change working directory
+    # 切换工作目录
     abspath = os.path.abspath(os.path.dirname(__file__))
     # print(abspath)
     os.chdir(abspath)
@@ -68,10 +55,10 @@ These audios are saved under ``pidog\sounds`` path, you can call the following f
     # time.sleep(2)
 
     for name in os.listdir('../sounds'):
-        name = name.split('.')[0] # remove suffix
+        name = name.split('.')[0] # 去除文件后缀
         print(name)
         my_dog.speak(name)
         # my_dog.speak(name, volume=50)
-        time.sleep(3) # Note that the duration of each sound effect is different
+        time.sleep(3) # 每段音效的时长不同，建议适当等待
     print("closing ...")
     my_dog.close()

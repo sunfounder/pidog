@@ -1,25 +1,11 @@
-.. note::
+5. 休息状态
+================
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-5. Rest
-=========
-
-PiDog will doze off on the ground, and when it hears sounds around it, it will stand up in confusion to see who woke it up.
+在本项目中，PiDog 会趴在地上打盹，当它听到周围的声音时，会迷迷糊糊地站起来，看看是谁打扰了它的美梦。
 
 .. image:: img/py_5.gif
 
-**Run the Code**
+**运行代码**
 
 .. raw:: html
 
@@ -30,16 +16,16 @@ PiDog will doze off on the ground, and when it hears sounds around it, it will s
     cd ~/pidog/examples
     sudo python3 5_rest.py
 
-After the program runs, PiDog will get down on the ground, shake its head and tail as if dozing off.
-At the same time, its sound direction sensor module is working. If PiDog hears noise, it will stand up, look around, and then make a confused look.
-Then it'll doze off again.
+程序运行后，PiDog 会趴在地上，摇头摆尾，仿佛在打瞌睡。
+此时，声音方向传感器模块开始工作。
+如果 PiDog 听到响动，它会立刻站起来，环顾四周，露出一副迷惑的表情，
+然后再次进入打盹状态。
 
 
-
-**Code**
+**代码**
 
 .. note::
-    You can **Modify/Reset/Copy/Run/Stop** the code below. But before that, you need to go to source code path like ``pidog\examples``. After modifying the code, you can run it directly to see the effect.
+    您可以对以下代码进行 **修改/重置/复制/运行/停止**。但请确保已进入源码路径（如 ``pidog\examples``）后操作。修改后可直接运行查看效果。
 
 .. raw:: html
 
@@ -81,30 +67,30 @@ Then it'll doze off again.
         my_dog.wait_all_done()
 
         while True:
-            # Sleeping
+            # 进入睡眠状态
             my_dog.rgb_strip.set_mode('breath', 'pink', bps=0.3)
             my_dog.head_move([[0,0,-40]], immediately=True, speed=5)
             my_dog.do_action('doze_off', speed=92)
-            # Cleanup sound detection
+            # 清除之前的声音检测
             sleep(1)
             is_sound()
 
-            # keep sleeping
+            # 持续休息，直到检测到声音
             while is_sound() is False:
                 my_dog.do_action('doze_off', speed=92)
                 sleep(0.2)
 
-            # If heard anything, wake up
+            # 听到声音后唤醒
             # Set light to yellow and stand up
             my_dog.rgb_strip.set_mode('boom', 'yellow', bps=1)
             my_dog.body_stop()
             my_dog.do_action('stand', speed=90)
             my_dog.head_move([[0, 0, 0]], immediately=True, speed=80)
             my_dog.wait_all_done()
-            # Look arround
+            # 环顾四周
             loop_around(60, 1, 60)
             sleep(0.5)
-            # tilt head and being confused
+            # 歪头迷惑
             my_dog.speak('confused_3', volume=80)
             my_dog.do_action('tilting_head_left', speed=80)
             my_dog.wait_all_done()
@@ -112,11 +98,11 @@ Then it'll doze off again.
             my_dog.head_move([[0, 0, -10]], immediately=True, speed=80)
             my_dog.wait_all_done()
             sleep(0.4)
-            # Shake head , mean to ignore it
+            # 摇头，表示不在意
             shake_head(my_dog)
             sleep(0.2)
 
-            # Lay down again
+            # 再次趴下休息
             my_dog.rgb_strip.set_mode('breath', 'pink', bps=1)
             my_dog.do_action('lie', speed=50)
             my_dog.wait_all_done()

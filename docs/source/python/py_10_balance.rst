@@ -1,29 +1,13 @@
-.. note::
+10. 平衡力展示
+==================
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
+由于 PiDog 配备了六自由度惯性测量单元（6-DOF IMU 模块），它拥有出色的动态平衡能力。
 
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-10. Balance
-=============
-
-
-Because PiDog is equipped with a 6-DOF IMU module, it has a great sense of balance.
-
-In this example, you can make PiDog walk smoothly on the table, even if you lift one side of the table, PiDog will walk smoothly on the gentle slope.
-
+在本示例中，你可以让 PiDog 在桌面上平稳行走。即使你抬起桌子的一侧形成缓坡，PiDog 依然能够稳定地在上面行走。
 
 .. image:: img/py_10.gif
 
-**Run the Code**
+**运行代码**
 
 .. raw:: html
 
@@ -34,33 +18,33 @@ In this example, you can make PiDog walk smoothly on the table, even if you lift
     cd ~/pidog/examples
     sudo python3 10_balance.py
 
-After the program is running, you will see a printed keyboard on the terminal.
-You can control PiDog to walk smoothly on the ramp by typing the below keys.
+程序运行后，终端上会显示一张虚拟键盘说明。
+你可以通过按下以下按键，控制 PiDog 在斜坡上平稳行走：
 
 
 .. list-table:: 
     :widths: 25 25
     :header-rows: 1
 
-    * - Keys
-      - Function
+    * - 按键
+      - 功能说明
     * -  W
-      -  Forward 
+      -  前进 
     * -  E
-      -  Stand 
+      -  站立 
     * -  A
-      -  Turn Left 
+      -  左转 
     * -  S
-      -  Backward 
+      -  后退 
     * -  D
-      -  Turn Right 
+      -  右转 
     * -  R
-      -  Each press slightly lifts the body; multiple presses are needed for a noticeable rise.     
+      -  每按一次，机身略微升高；多次按压可看到明显抬升效果     
     * -  F
-      -  Each press lowers the body a bit; it takes multiple presses for a noticeable descent.
-    
-
-**Code**
+      -  每按一次，机身略微降低；多次按压可看到明显下降效果
 
 
-Please find the code in |link_code_10_balance|.
+**代码**
+
+
+请访问 |link_code_10_balance| 查看完整代码内容。

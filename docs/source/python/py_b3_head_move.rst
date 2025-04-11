@@ -1,58 +1,45 @@
-.. note::
 
-    Hello, welcome to the SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts Community on Facebook! Dive deeper into Raspberry Pi, Arduino, and ESP32 with fellow enthusiasts.
-
-    **Why Join?**
-
-    - **Expert Support**: Solve post-sale issues and technical challenges with help from our community and team.
-    - **Learn & Share**: Exchange tips and tutorials to enhance your skills.
-    - **Exclusive Previews**: Get early access to new product announcements and sneak peeks.
-    - **Special Discounts**: Enjoy exclusive discounts on our newest products.
-    - **Festive Promotions and Giveaways**: Take part in giveaways and holiday promotions.
-
-    👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
-
-3. Head Move
+3. 头部控制
 ================
 
-The control of PiDog's head servo is implemented by the following functions.
+PiDog 的头部舵机控制是通过以下函数实现的：
 
 .. code-block:: python
 
     Pidog.head_move(target_yrps, roll_comp=0, pitch_comp=0, immediately=True, speed=50)
 
-* ``target_angles`` : It is a two-dimensional array composed of an array of 3 servo angles (referred to as angle group) as elements. These angle groups will be used to control the angles of the 8 foot servos. If multiple angle groups are written, the unexecuted angle groups will be stored in the cache.
-* ``roll_comp`` : Provides angular compensation on the roll axis.
-* ``pitch_comp`` : Provides angle compensation on the pitch axis.
-* ``immediately`` : When calling the function, set this parameter to ``True``, the cache will be cleared immediately to execute the newly written angle group; if the parameter is set to ``False``, the newly written The incoming angular group is added to the execution queue.
-* ``speed`` : The speed at which the angular group is executed.
+* ``target_angles``：这是一个二维数组，每个元素包含三个舵机角度值（即角度组）。这些角度组用于控制 PiDog 的三个头部舵机。如果写入多个角度组，未立即执行的部分将会进入缓存队列。
+* ``roll_comp``：对横滚轴进行角度补偿。
+* ``pitch_comp``：对俯仰轴进行角度补偿。
+* ``immediately``：设为 ``True`` 时立即清除缓存并执行当前角度组；设为 ``False`` 时角度组将加入到待执行队列中。
+* ``speed``：角度组动作的执行速度。
 
 
-**PiDog's head servo control also has some supporting functions:**
 
+**PiDog 的头部控制还提供了以下辅助函数：**
 
 .. code-block:: python
 
     Pidog.is_head_done()
 
-Whether all the head actions in the buffer to be executed
+判断头部动作缓存是否已执行完毕。
 
 .. code-block:: python
 
     Pidog.wait_head_done()
 
-Wait for all the head actions in the buffer to be executed
+等待缓存中的头部动作执行完成。
 
 .. code-block:: python
 
     Pidog.head_stop()
 
-Clear all the head actions of leg in the buffer, to make head servos stop
+清空缓存中的所有头部动作，使头部舵机停止运动。
 
 
-**Here are some common use cases:**
+**以下是一些常见的使用示例：**
 
-1. Nod five times.
+1. 点头五次
 
 .. code-block:: python
 
@@ -66,7 +53,7 @@ Clear all the head actions of leg in the buffer, to make head servos stop
         my_dog.wait_head_done()
         time.sleep(0.5)
 
-2. Shake your head for 10 seconds.
+2. 摇头十秒
 
 .. code-block:: python
 
@@ -78,12 +65,12 @@ Clear all the head actions of leg in the buffer, to make head servos stop
     for _ in range(99):
         my_dog.head_move([[30, 0, 0],[-30, 0, 0]], immediately=False, speed=30)
 
-    # keep 10s
+    # 持续摇头 10 秒
     time.sleep(10)
 
     my_dog.head_move([[0, 0, 0]], immediately=True, speed=80)
 
-3. Whether sitting or half standing, PiDog keeps its head level when shaking its head.
+3. 无论坐着或半蹲，PiDog 都能在摇头时保持头部水平
 
 .. code-block:: python
 
@@ -92,20 +79,20 @@ Clear all the head actions of leg in the buffer, to make head servos stop
 
     my_dog = Pidog()
 
-    # action list
+    # 动作预设
     shake_head = [[30, 0, 0],[-30, 0, 0]]
     half_stand_leg = [[45, 10, -45, -10, 45, 10, -45, -10]]
     sit_leg = [[30, 60, -30, -60, 80, -45, -80, 45]]
 
     while True:
-        # shake head in half stand
+        # 半蹲状态下摇头
         my_dog.legs_move(half_stand_leg, speed=30)
         for _ in range(5):
             my_dog.head_move(shake_head, pitch_comp=0, speed=50)
         my_dog.wait_head_done()
         time.sleep(0.5)
 
-        # shake head in sit
+        # 坐姿状态下摇头
         my_dog.legs_move(sit_leg, speed=30)
         for _ in range(5):
             my_dog.head_move(shake_head, pitch_comp=-30, speed=50)
