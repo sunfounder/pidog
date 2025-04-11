@@ -17,7 +17,8 @@ SunFounder Raspberry Pi 机器人 - |link_Pi_Dog|
         * |link_en_tutorials|  
         * |link_fr_tutorials|  
         * |link_es_tutorials|  
-        * |link_it_tutorials|  
+        * |link_it_tutorials| 
+        * |link_zh_tutorials| 
     
     请点击相应的链接，以便以您偏好的语言查看文档。  
 
