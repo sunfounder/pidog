@@ -32,6 +32,7 @@ Gracias por elegir nuestro |link_Pi_Dog|.
         * |link_fr_tutorials|
         * |link_es_tutorials|
         * |link_it_tutorials|
+        * |link_zh_tutorials|
     
     Por favor, haz clic en los enlaces correspondientes para acceder al documento en el idioma de tu preferencia.
 
