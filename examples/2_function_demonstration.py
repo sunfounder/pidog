@@ -200,7 +200,7 @@ def main(stdscr):
             index_str += str(int(key))
             display_bottom(bottom_pad, index_str)
             curses_utils.pad_refresh(bottom_pad)
-        elif key == b'^J': # enter
+        elif key == b'^J' or key == b'^M': # enter or return
             if index_str == '':
                 if index == -1 or index > 26:
                     continue
