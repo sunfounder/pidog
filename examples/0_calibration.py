@@ -11,10 +11,6 @@ sleep(.1)
 
 # global variables
 # ======================================
-leg_angles = [0.0]*8
-head_angles = [0.0]*3
-tail_angle = [0.0]*1
-
 leg_offset = list.copy(my_dog.legs.offset)
 head_offset = list.copy(my_dog.head.offset)
 tail_offset = list.copy(my_dog.tail.offset)
@@ -31,6 +27,10 @@ LEGS_ORIGNAL_ANGLES_90 = [0 for _ in range(8)]
 legs_orignal_angles = [0 for _ in range(8)]
 head_orignal_angles = [0, 0, my_dog.HEAD_PITCH_OFFSET]
 tail_orignal_angles = [0]
+
+leg_angles = list.copy(legs_orignal_angles)
+head_angles = list.copy(head_orignal_angles)
+tail_angle = list.copy(tail_orignal_angles)
 
 # constrain(), constrain value range
 # ======================================
@@ -258,13 +258,22 @@ def main(stdscr):
                 if cali_type == 0: 
                     legs_orignal_angles = list.copy(LEGS_ORIGNAL_ANGLES_90)
                     leg_angles = list.copy(LEGS_ORIGNAL_ANGLES_90)
-                    head_angles = list.copy(head_orignal_angles)
                 # 60 degree calibration ruler
                 elif cali_type == 1:
+                    #
                     legs_orignal_angles = list.copy(LEGS_ORIGNAL_ANGLES_60)
                     leg_angles = list.copy(LEGS_ORIGNAL_ANGLES_60)
-                    head_angles = list.copy(head_orignal_angles)
 
+                # ----------------
+                for i in range(len(leg_angles)):
+                    leg_angles[i] += leg_offset[i]
+                #
+                for i in range(len(head_angles)):
+                    head_angles[i] += head_offset[i]
+                #
+                for i in range(len(tail_angle)):
+                    tail_angle[i] += tail_offset[i]
+                #
                 my_dog.legs_move([legs_orignal_angles], immediately=True, speed=60)
                 my_dog.head_move([[0]*3], immediately=True, speed=60)
                 my_dog.tail_move([[0]], immediately=True, speed=60)
