@@ -140,13 +140,18 @@ rst_epilog += """
 
     <a href="https://github.com/sunfounder/pidog/blob/master/examples/11_keyboard_control.py" target="_blank">11_keyboard_control.py - Github</a>
 
+
+.. |link_robot_hat| raw:: html
+
+    <a href="https://docs.sunfounder.com/projects/robot-hat-v4/en/latest/index.html" target="_blank">SunFounder Robot HAT Series</a>
+
 .. |link_robot_hat_v4| raw:: html
 
-    <a href="https://docs.sunfounder.com/projects/robot-hat-v4/en/latest/hardware_introduction.html" target="_blank">Robot HAT</a>
+    <a href="https://docs.sunfounder.com/projects/robot-hat-v4/en/latest/robot_hat_v4/hardware_introduction.html" target="_blank">SunFounder Robot HAT V4</a>
 
 .. |link_robot_hat_v5| raw:: html
 
-    <a href="https://docs.sunfounder.com/projects/robot-hat-v4/en/latest/hardware_introduction.html" target="_blank">Robot HAT</a>
+    <a href="https://docs.sunfounder.com/projects/robot-hat-v4/en/latest/robot_hat_v5/hardware_introduction.html" target="_blank">SunFounder Robot HAT V5</a>
 
 
 .. |link_german_tutorials| raw:: html
@@ -160,6 +165,10 @@ rst_epilog += """
 .. |link_en_tutorials| raw:: html
 
     <a href="https://docs.sunfounder.com/projects/pidog/en/latest/" target="_blank">English Online-tutorials</a>
+
+.. |link_zh_tutorials| raw:: html
+
+    <a href="https://docs.sunfounder.com/projects/pidog/zh-cn/latest/" target="_blank">中文在线教程</a>
 
 .. |link_fr_tutorials| raw:: html
 
