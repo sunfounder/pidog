@@ -153,7 +153,7 @@ COMMANDS = {
         "status": STATUS_LIE,
     },
     "push-up": {
-        "commands": ["push up"],
+        "commands": ["push up", "push-up"],
         "function": lambda: push_up(my_dog),
         "after": "push-up",
         "status": STATUS_STAND,
