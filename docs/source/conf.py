@@ -142,7 +142,7 @@ rst_epilog += """
 
 .. |link_robot_hat_v4| raw:: html
 
-    <a href="https://docs.sunfounder.com/projects/robot-hat-v4/en/latest/hardware_introduction.html" target="_blank">Robot HAT</a>
+    <a href="https://docs.sunfounder.com/projects/robot-hat-v4/en/latest/robot_hat_v4/hardware_introduction.html" target="_blank">Robot HAT</a>
 
 .. |link_robot_hat_v5| raw:: html
 
