@@ -48,6 +48,34 @@ Además, PiDog está equipado con un sensor de dirección de sonido y un módulo
 
 Si tienes alguna pregunta, envía un correo a service@sunfounder.com y te responderemos lo antes posible.
 
+El producto está disponible en dos versiones: Standard y V2.
+
+
+**Versión Standard**
+
+
+    .. image:: img/pidog_v1_box.png
+     :width: 500
+
+
+Diseñada para ser compatible con la mayoría de los modelos de Raspberry Pi, esta versión ofrece todas las funciones del kit. Cabe destacar que sus servomotores y el Robot HAT no son compatibles con la Raspberry Pi 5, lo que hace que la versión Standard no sea adecuada para su uso con este modelo.
+
+ 
+**Versión V2**
+
+
+    .. image:: img/pidog_v2_box.png
+     :width: 500
+
+
+Esta versión mejorada incorpora un Robot HAT actualizado y una nueva configuración de servos, lo que permite su compatibilidad con Raspberry Pi 3/4/5 y Zero W. Las mejoras amplían las posibilidades creativas en Raspberry Pi 5, manteniendo al mismo tiempo la compatibilidad con los modelos anteriores.
+
+Principales diferencias técnicas:
+
+* Iteración de hardware: la V2 rediseña los controladores de servos y el circuito del HAT para adaptarse a los requisitos de voltaje GPIO de la RPi5  
+* Cobertura de modelos: la Standard es compatible con RPi 3B+/4B/Zero 2W; la V2 añade soporte para RPi5  
+* Gestión de energía: la V2 optimiza la entrega de energía para las mayores demandas de corriente de la RPi5
+
 **Contenido**
 
 .. toctree::
