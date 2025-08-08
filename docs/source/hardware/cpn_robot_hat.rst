@@ -15,15 +15,28 @@
 Robot HAT
 =================
 
-|link_robot_hat_v4| ist eine multifunktionale Erweiterungsplatine, die es ermöglicht, den Raspberry Pi schnell in einen Roboter zu verwandeln. 
-Ein MCU ist an Bord, um die PWM-Ausgabe und ADC-Eingabe für den Raspberry Pi zu erweitern, 
-sowie ein Motor-Treiber-Chip, ein I2S-Audio-Modul und ein Monolautsprecher. 
-Zusätzlich zu den GPIOs, die vom Raspberry Pi selbst herausgeführt werden.
+**For Standard Version:**
 
-Es kommt auch mit einem Lautsprecher, 
-der verwendet werden kann, um Hintergrundmusik, Soundeffekte und TTS-Funktionen zu spielen, um Ihr Projekt interessanter zu machen.
+|link_robot_hat_v4| ist eine multifunktionale Erweiterungsplatine, mit der sich ein Raspberry Pi im Handumdrehen in einen Roboter verwandeln lässt. 
+Ein integrierter Mikrocontroller (MCU) erweitert den PWM-Ausgang und den ADC-Eingang des Raspberry Pi und bietet zudem einen Motortreiberchip, 
+ein I2S-Audiomodul sowie einen Monolautsprecher. 
+Darüber hinaus werden die GPIO-Pins des Raspberry Pi herausgeführt.
 
-Akzeptiert 7-12V PH2.0 5pin-Stromversorgungseingang mit 2 Batterieanzeigen, 1 Ladeanzeige und 1 Stromversorgungsanzeige. 
-Die Platine verfügt auch über eine benutzerfreundliche LED und einen Knopf, um schnell einige Effekte zu testen.
+Zum Lieferumfang gehört außerdem ein Lautsprecher, 
+der zur Wiedergabe von Hintergrundmusik, Soundeffekten oder zur Realisierung von TTS-Funktionen genutzt werden kann, 
+um Ihr Projekt noch interessanter zu gestalten.
 
-Für detaillierte Anweisungen beachten Sie bitte: |link_robot_hat_v4|.
+Die Platine akzeptiert eine Spannungsversorgung von 7–12 V und verfügt über zwei Batterieanzeigen, 
+eine Ladeanzeige sowie eine Betriebsanzeige. 
+Zusätzlich gibt es eine frei nutzbare LED und eine Taste, mit der sich bestimmte Funktionen schnell testen lassen.
+
+Ausführliche Anleitungen finden Sie unter: |link_robot_hat_v4|.
+
+
+**For V2 Version:**
+
+|link_robot_hat_v5| ist eine multifunktionale Erweiterungsplatine, mit der sich ein Raspberry Pi schnell in einen Roboter verwandeln lässt.
+Das V2 Robot HAT integriert ein Mikrofon in die Architektur der Standardversion und ermöglicht so Audioaufnahmen 
+sowie Sprachsteuerungs- und Spracherkennungsfunktionen.
+
+Ausführliche Anleitungen finden Sie unter: |link_robot_hat_v5|.
