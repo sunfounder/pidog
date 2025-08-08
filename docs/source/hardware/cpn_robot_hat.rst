@@ -15,18 +15,25 @@
 Robot HAT
 ==============
 
-|link_robot_hat_v4| è una scheda di espansione multifunzionale che permette al 
-Raspberry Pi di trasformarsi rapidamente in un robot. La scheda integra un MCU 
-per estendere l'uscita PWM e l'ingresso ADC per il Raspberry Pi, oltre a un chip 
-driver per motori, un modulo audio I2S e un altoparlante mono. Sono inoltre presenti 
-i GPIO derivati direttamente dal Raspberry Pi.
+**Per la Versione Standard:**
 
-La scheda include un altoparlante, che può essere utilizzato per riprodurre musica 
-di sottofondo, effetti sonori e implementare funzioni TTS (text-to-speech), rendendo 
-il tuo progetto più interessante.
+|link_robot_hat_v4| è una scheda di espansione multifunzionale che consente di trasformare rapidamente un Raspberry Pi in un robot. 
+Integra un MCU per ampliare l’uscita PWM e l’ingresso ADC del Raspberry Pi, 
+oltre a un chip driver per motori, un modulo audio I2S e un altoparlante mono. 
+Dispone inoltre dei GPIO derivati direttamente dal Raspberry Pi.
 
-Accetta un input di alimentazione da 7-12V con 2 indicatori di batteria, 
-1 indicatore di carica e 1 indicatore di alimentazione. La scheda dispone inoltre di un 
-LED utilizzabile e di un pulsante che puoi utilizzare per testare rapidamente alcuni effetti.
+Include anche un altoparlante, 
+che può essere utilizzato per riprodurre musica di sottofondo, effetti sonori e implementare funzioni TTS, rendendo il progetto più interessante.
 
-Per istruzioni dettagliate, fare riferimento a: |link_robot_hat_v4|.
+Supporta un ingresso di alimentazione da 7 a 12V, con 2 indicatori di batteria, 1 indicatore di carica e 1 indicatore di alimentazione. 
+La scheda è inoltre dotata di un LED utilizzabile dall’utente e di un pulsante per testare rapidamente alcuni effetti.
+
+Per istruzioni dettagliate, consultare: |link_robot_hat_v4|.
+
+
+**Per la Versione V2:**
+
+|link_robot_hat_v5| è una scheda di espansione multifunzionale che consente di trasformare rapidamente un Raspberry Pi in un robot.
+La versione V2 del Robot HAT integra un microfono nell’architettura della versione Standard, abilitando funzionalità di registrazione audio e riconoscimento vocale.
+
+Per istruzioni dettagliate, consultare: |link_robot_hat_v5|.
