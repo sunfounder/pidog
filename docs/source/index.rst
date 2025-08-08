@@ -49,6 +49,34 @@ PiDogは、アルミニウム合金構造のRaspberry Piペットロボットで
 
 ご質問がある場合は、service@sunfounder.comまでメールを送ってください。できるだけ早く対応いたします。
 
+The product is available in two versions: Standard and V2.
+
+
+**Standard Version**
+
+
+    .. image:: img/pidog_v1_box.png
+     :width: 500
+
+
+このバージョンは、ほとんどのRaspberry Piモデルとの互換性を考慮して設計されており、キットの全機能を提供します。特に、搭載されているサーボモーターとRobot HATはRaspberry Pi 5とは互換性がなく、このモデルでの使用には適していません。
+
+ 
+**V2 Version**
+
+
+    .. image:: img/pidog_v2_box.png
+     :width: 500
+
+
+この改良版では、更新されたRobot HATとサーボ構成を採用し、Raspberry Pi 3/4/5およびZero Wに対応可能となりました。これにより、Raspberry Pi 5での創造的な応用範囲が拡大すると同時に、従来モデルとの後方互換性も維持されています。
+
+主な技術的相違点:
+
+* ハードウェア改良: V2ではRPi5のGPIO電圧要件に対応するため、サーボドライバーとHAT回路を再設計
+* モデル対応範囲: StandardはRPi 3B+/4B/Zero 2Wをサポート、V2は新たにRPi5に対応
+* 電源管理: V2はRPi5の高い電流需要に合わせて電源供給を最適化
+
 
 **内容**
 
