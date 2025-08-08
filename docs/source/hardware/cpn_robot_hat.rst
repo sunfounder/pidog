@@ -15,9 +15,9 @@ Robot HAT
 
 详细说明请参考：|link_robot_hat_v4| 。
 
-.. **V2 版：**
+**V2 版：**
 
-.. .. |link_robot_hat_v5| 是一款多功能扩展板，可以让 Raspberry Pi 快速变身为机器人。  
-.. V2 版 Robot HAT 在标准版的架构中集成了麦克风，具备了音频录制和语音识别功能。
+|link_robot_hat_v5| 是一款多功能扩展板，可以让 Raspberry Pi 快速变身为机器人。  
+V2 版 Robot HAT 在标准版的架构中集成了麦克风，具备了音频录制和语音识别功能。
 
-.. 详细说明请参考：|link_robot_hat_v5| 。
+详细说明请参考：|link_robot_hat_v5| 。

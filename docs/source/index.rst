@@ -33,21 +33,34 @@ PiDog 是一款 Raspberry Pi 宠物机器人，采用铝合金结构。它可以
 
 如有任何问题，请发送电子邮件至 service@sunfounder.com，我们将尽快回复。  
 
-.. 该产品有两个版本：标准版和 V2 版。
+该产品提供两个版本：Standard 和 V2。
 
-.. **标准版**
 
-.. 此版本设计与大多数 Raspberry Pi 模型兼容，提供完整的套件功能。需要注意的是，它的伺服电机和机器人 HAT 与 Raspberry Pi 5 不兼容，因此标准版不适用于该型号。
+**标准版**
 
-.. **V2 版**
 
-.. 此升级版具有更新的 Robot HAT 和伺服配置，支持 Raspberry Pi 3/4/5 和 Zero W。增强功能使其能够在 Raspberry Pi 5 上实现更广泛的创意应用，同时保持向下兼容早期型号。
+    .. image:: img/pidog_v1_box.png
+     :width: 500
 
-.. 主要技术区别：
 
-.. * 硬件迭代：V2 重新设计了伺服驱动和 HAT 电路，以适应 RPi5 的 GPIO 电压要求  
-.. * 支持型号：标准版支持 RPi 3B+/4B/Zero 2W；V2 版增加了对 RPi5 的支持  
-.. * 电源管理：V2 优化了对 RPi5 更高电流需求的电源供给  
+此版本专为兼容大多数 Raspberry Pi 型号而设计，可完整发挥套件的全部功能。需要注意的是，其舵机和 Robot HAT 与 Raspberry Pi 5 不兼容，因此 Standard 版本不适用于该型号。
+
+
+**V2版**
+
+
+    .. image:: img/pidog_v2_box.png
+     :width: 500
+
+
+这一升级版本配备了全新设计的 Robot HAT 和舵机配置，可兼容 Raspberry Pi 3/4/5 以及 Zero W。升级后的硬件不仅支持在 Raspberry Pi 5 上实现更丰富的创意应用，同时也保持了对早期型号的向下兼容性。
+
+主要技术区别：
+
+* 硬件迭代：V2 重新设计了舵机驱动和 HAT 电路，以适配 RPi5 的 GPIO 电压需求
+* 型号支持范围：Standard 版本支持 RPi 3B+/4B/Zero 2W；V2 新增对 RPi5 的支持
+* 电源管理：V2 优化了电源供给，以满足 RPi5 更高的电流需求
+
 
 **内容**  
 
