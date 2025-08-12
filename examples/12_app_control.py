@@ -1,3 +1,4 @@
+from zoneinfo import available_timezones
 from sunfounder_controller import SunFounderController
 from pidog import Pidog
 from time import sleep
@@ -194,6 +195,9 @@ COMMANDS = {
     },
 }
 
+AVAILABLE_COMMANDS = []
+for command_name in COMMANDS:
+    AVAILABLE_COMMANDS.extend(COMMANDS[command_name]["commands"])
 
 def set_head_pitch_init(pitch):
     global head_pitch_init
@@ -259,7 +263,7 @@ def main():
     Vilib.display(local=False, web=True)
 
     print("Voice Command: ")
-    for command_name in COMMANDS:
+    for command_name in AVAILABLE_COMMANDS:
         print(command_name)
 
     last_kx = 0
@@ -318,7 +322,7 @@ def main():
         voice_command = sc.get('J')
         if voice_command != None:
             print(f'voice command: {voice_command}')
-            if voice_command in COMMANDS:
+            if voice_command in AVAILABLE_COMMANDS:
                 command = voice_command
             else:
                 print("\033[0;31m no this voice command\033[m")
