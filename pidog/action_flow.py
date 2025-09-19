@@ -1,4 +1,4 @@
-from preset_actions import *
+from .preset_actions import *
 
 class ActionFlow():
     SIT_HEAD_PITCH = -35
