@@ -2,7 +2,7 @@
 from pidog import Pidog
 from time import sleep
 from vilib import Vilib
-from preset_actions import bark
+from pidog.preset_actions import bark
 
 my_dog = Pidog()
 sleep(0.1)

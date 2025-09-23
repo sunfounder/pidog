@@ -2,7 +2,7 @@
 from pidog import Pidog
 from time import sleep
 from math import sin
-from preset_actions import bark_action
+from pidog.preset_actions import bark_action
 
 my_dog = Pidog()
 sleep(0.1)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from pidog import Pidog
 from time import sleep
-from preset_actions import howling
+from pidog.preset_actions import howling
 
 my_dog = Pidog()
 

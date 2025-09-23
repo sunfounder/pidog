@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from pidog import Pidog
 from time import sleep
-from preset_actions import shake_head
+from pidog.preset_actions import shake_head
 
 my_dog = Pidog()
 sleep(0.1)

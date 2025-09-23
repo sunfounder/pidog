@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 from pidog import Pidog
 from time import sleep
-from preset_actions import pant
-from preset_actions import body_twisting
+from pidog.preset_actions import pant
+from pidog.preset_actions import body_twisting
 
 my_dog = Pidog(head_init_angles=[0, 0, -30])
 sleep(1)

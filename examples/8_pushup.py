@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from pidog import Pidog
 from time import sleep
-from preset_actions import push_up, bark
+from pidog.preset_actions import push_up, bark
 
 my_dog = Pidog()
 
