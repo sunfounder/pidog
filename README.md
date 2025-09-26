@@ -7,6 +7,12 @@ Quick Links:
 - [Pidog](#pidog)
   - [Docs](#docs)
   - [Installation](#installation)
+    - [install tool](#install-tool)
+    - [robot-hat library](#robot-hat-library)
+    - [vilib library](#vilib-library)
+    - [pidog library](#pidog-library)
+    - [i2samp](#i2samp)
+  - [Debug records](#debug-records)
   - [About SunFounder](#about-sunfounder)
   - [Contact us](#contact-us)
   - [Credit](#credit)
@@ -62,6 +68,15 @@ sudo python3 setup.py install
 ```
 cd ~/pidog
 sudo bash i2samp.sh
+```
+
+## Debug records
+
+```bash
+cd ~/pidog && sudo pip3 install . --break-system-packages --no-deps --no-build-isolation
+cd ~/robot-hat && sudo pip3 install . --break-system-packages --no-deps --no-build-isolation
+sudo python3 ~/pidog/examples/14_voice_interact_gpt.py
+sudo pip3 uninstall robot_hat --break-system-packages -y && cd ~/robot-hat && sudo pip3 install . --break-system-packages --no-deps --no-build-isolation
 ```
 
 ----------------------------------------------

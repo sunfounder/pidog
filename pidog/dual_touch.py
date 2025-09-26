@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 from robot_hat import Pin
 import time
+from enum import StrEnum
 
+class TouchStyle(StrEnum):
+    NONE = 'N'
+    REAR = 'L'
+    FRONT = 'R'
+    REAR_TO_FRONT = 'LS'
+    FRONT_TO_REAR = 'RS'
 
 class DualTouch():
 
@@ -14,23 +21,8 @@ class DualTouch():
         self.last_touch = 'N'
         self.last_touch_time = 0
 
-    # def read(self):
-    #     if self.touch_L.value() == 1:
-    #         time.sleep(0.1)
-    #         if self.touch_R.value() == 1:
-    #             return 'LS'
-    #         else:
-    #             return 'L'
-    #     elif self.touch_R.value() == 1:
-    #         time.sleep(0.1)
-    #         if self.touch_L.value() == 1:
-    #             return 'RS'
-    #         else:
-    #             return 'R'
-    #     return 'N'
-
     def read(self):
-        if self.touch_L.value() == 1:
+        if self.touch_L.value() == 0:
             if self.last_touch == 'R' and\
                 time.time() - self.last_touch_time <= self.SLIDE_MAX_INTERVAL:
                 val = 'RS'
@@ -39,7 +31,7 @@ class DualTouch():
             self.last_touch_time = time.time()
             self.last_touch = 'L'
             return val
-        elif self.touch_R.value() == 1:
+        elif self.touch_R.value() == 0:
             if self.last_touch == 'L' and\
                 time.time() - self.last_touch_time <= self.SLIDE_MAX_INTERVAL:
                 val = 'LS'
@@ -49,3 +41,7 @@ class DualTouch():
             self.last_touch = 'R'
             return val
         return 'N'
+
+    def close(self):
+        self.touch_L.close()
+        self.touch_R.close()

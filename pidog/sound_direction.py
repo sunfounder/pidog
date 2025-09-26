@@ -60,6 +60,9 @@ class SoundDirection():
     def isdetected(self):
         return self.busy.value == 0
 
+    def close(self):
+        self.spi.close()
+        self.busy.close()
 
 if __name__ == '__main__':
     from time import sleep

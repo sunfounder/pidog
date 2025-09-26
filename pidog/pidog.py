@@ -308,6 +308,12 @@ class Pidog():
             if self.sensory_process != None:
                 self.sensory_process.terminate()
 
+            if self.dual_touch:
+                self.dual_touch.close()
+            if self.ears:
+                self.ears.close()
+            if hasattr(self, 'ultrasonic') and self.ultrasonic:
+                self.ultrasonic.close()
             info('Quit')
         except Exception as e:
             error(f'Close error: {e}')
