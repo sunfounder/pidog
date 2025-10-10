@@ -22,7 +22,7 @@ class DualTouch():
         self.last_touch_time = 0
 
     def read(self):
-        if self.touch_L.value() == 0:
+        if self.touch_L.value() == 1:
             if self.last_touch == 'R' and\
                 time.time() - self.last_touch_time <= self.SLIDE_MAX_INTERVAL:
                 val = 'RS'
@@ -31,7 +31,7 @@ class DualTouch():
             self.last_touch_time = time.time()
             self.last_touch = 'L'
             return val
-        elif self.touch_R.value() == 0:
+        elif self.touch_R.value() == 1:
             if self.last_touch == 'L' and\
                 time.time() - self.last_touch_time <= self.SLIDE_MAX_INTERVAL:
                 val = 'LS'
