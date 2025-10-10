@@ -76,7 +76,6 @@ sudo bash i2samp.sh
 sudo pip3 uninstall pidog --break -y && cd ~/pidog && sudo pip3 install . --break --no-deps --no-build-isolation
 sudo pip3 uninstall robot_hat --break -y && cd ~/robot-hat && sudo pip3 install . --break --no-deps --no-build-isolation
 sudo python3 ~/pidog/examples/14_voice_active_dog_gpt.py
-sudo pip3 uninstall robot_hat --break -y && cd ~/robot-hat && sudo pip3 install . --break --no-deps --no-build-isolation
 ```
 
 ----------------------------------------------

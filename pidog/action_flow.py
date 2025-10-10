@@ -167,8 +167,6 @@ class ActionFlow():
         self.thread_running = False
         self.thread_action_state = 'standby'
         self.action_queue = queue.Queue()
-        self.thread_action_lock = threading.Lock()
-
 
     def set_head_pitch_init(self, pitch):
         self.head_pitch_init = pitch
