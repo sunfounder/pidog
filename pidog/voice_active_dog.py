@@ -1,8 +1,8 @@
-from voice_assistant import VoiceAssistant
+from robot_hat.voice_assistant import VoiceAssistant
 
-from pidog import Pidog
-from pidog.dual_touch import TouchStyle
-from pidog.action_flow import ActionFlow, ActionStatus, Posetures
+from .pidog import Pidog
+from .dual_touch import TouchStyle
+from .action_flow import ActionFlow, ActionStatus, Posetures
 
 import time
 import threading
@@ -126,7 +126,6 @@ class VoiceActiveDog(VoiceAssistant):
     def on_wake(self):
         if len(self.answer_on_wake) > 0:
             self.dog.rgb_strip.set_mode('breath', 'pink', 1)
-            self.tts.say(self.answer_on_wake)
 
     def on_heard(self, text):
         self.action_flow.set_status(ActionStatus.THINK)
