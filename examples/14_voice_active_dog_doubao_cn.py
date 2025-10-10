@@ -2,7 +2,7 @@ from pidog.llm import Doubao as LLM
 from secret import DOUBAO_API_KEY as API_KEY
 
 from pidog.dual_touch import TouchStyle
-from voice_active_dog import VoiceActiveDog
+from pidog.voice_active_dog import VoiceActiveDog
 
 llm = LLM(
     api_key=API_KEY,
@@ -30,6 +30,9 @@ WITH_IMAGE = True
 # 设置模型和语言
 TTS_MODEL = "zh_CN-huayan-x_low"
 STT_LANGUAGE = "cn"
+
+# 是否开启键盘输入
+KEYBOARD_ENABLE = True
 
 # 是否开启唤醒词
 WAKE_ENABLE = True
@@ -91,6 +94,7 @@ vad = VoiceActiveDog(
     with_image=WITH_IMAGE,
     stt_language=STT_LANGUAGE,
     tts_model=TTS_MODEL,
+    keyboard_enable=KEYBOARD_ENABLE,
     wake_enable=WAKE_ENABLE,
     wake_word=WAKE_WORD,
     answer_on_wake=ANSWER_ON_WAKE,

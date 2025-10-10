@@ -30,6 +30,9 @@ WITH_IMAGE = False
 TTS_MODEL = "en_US-ryan-low"
 STT_LANGUAGE = "en-us"
 
+# Enable keyboard input
+KEYBOARD_ENABLE = True
+
 # Enable wake word
 WAKE_ENABLE = True
 WAKE_WORD = [f"hey {NAME.lower()}"]
@@ -93,6 +96,7 @@ vad = VoiceActiveDog(
     with_image=WITH_IMAGE,
     stt_language=STT_LANGUAGE,
     tts_model=TTS_MODEL,
+    keyboard_enable=KEYBOARD_ENABLE,
     wake_enable=WAKE_ENABLE,
     wake_word=WAKE_WORD,
     answer_on_wake=ANSWER_ON_WAKE,

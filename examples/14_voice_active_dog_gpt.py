@@ -2,7 +2,7 @@ from pidog.llm import OpenAI as LLM
 from secret import OPENAI_API_KEY as API_KEY
 
 from pidog.dual_touch import TouchStyle
-from voice_active_dog import VoiceActiveDog
+from pidog.voice_active_dog import VoiceActiveDog
 
 llm = LLM(
     api_key=API_KEY,
@@ -30,6 +30,9 @@ WITH_IMAGE = True
 # Set models and languages
 TTS_MODEL = "en_US-ryan-low"
 STT_LANGUAGE = "en-us"
+
+# Enable keyboard input
+KEYBOARD_ENABLE = True
 
 # Enable wake word
 WAKE_ENABLE = True
@@ -94,6 +97,7 @@ vad = VoiceActiveDog(
     with_image=WITH_IMAGE,
     stt_language=STT_LANGUAGE,
     tts_model=TTS_MODEL,
+    keyboard_enable=KEYBOARD_ENABLE,
     wake_enable=WAKE_ENABLE,
     wake_word=WAKE_WORD,
     answer_on_wake=ANSWER_ON_WAKE,
