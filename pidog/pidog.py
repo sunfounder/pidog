@@ -273,7 +273,6 @@ class Pidog():
         import signal
         import sys
 
-
         def handler(signal, frame):
             info('Please wait')
         signal.signal(signal.SIGINT, handler)
@@ -295,6 +294,13 @@ class Pidog():
             self.stop_and_lie()
             self.close_all_thread()
 
+            if hasattr(self, 'dual_touch') and self.dual_touch:
+                self.dual_touch.close()
+            if hasattr(self, 'ears') and self.ears:
+                self.ears.close()
+            if hasattr(self, 'ultrasonic') and self.ultrasonic:
+                self.ultrasonic.close()
+
             self.legs_thread.join()
             self.head_thread.join()
             self.tail_thread.join()
@@ -308,19 +314,14 @@ class Pidog():
             if self.sensory_process != None:
                 self.sensory_process.terminate()
 
-            if self.dual_touch:
-                self.dual_touch.close()
-            if self.ears:
-                self.ears.close()
-            if hasattr(self, 'ultrasonic') and self.ultrasonic:
-                self.ultrasonic.close()
             info('Quit')
+
         except Exception as e:
             error(f'Close error: {e}')
-        finally:
-            signal.signal(signal.SIGINT, signal.SIG_DFL)
-            signal.alarm(0)
-            sys.exit(0)
+        # finally:
+            # signal.signal(signal.SIGINT, signal.SIG_DFL)
+            # signal.alarm(0)
+            # sys.exit(0)
 
     def legs_simple_move(self, angles_list, speed=90):
 
