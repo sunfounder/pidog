@@ -261,7 +261,6 @@ class ActionFlow():
             time.sleep(0.01)
 
     def add_action(self, *actions):
-        print(f"Add actions: {', '.join(actions)}")
         for action in actions:
             self.action_queue.put(action)
         self.thread_action_state = ActionStatus.ACTIONS
