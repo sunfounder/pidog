@@ -1,11 +1,23 @@
 from .preset_actions import *
+import threading
+import time
+from enum import Enum, StrEnum
+import queue
+
+class Posetures(Enum):
+    STAND = 0
+    SIT = 1
+    LIE = 2
+
+class ActionStatus(StrEnum):
+    STANDBY = 'standby'
+    THINK = 'think'
+    ACTIONS = 'actions'
+    ACTIONS_DONE = 'actions_done'
 
 class ActionFlow():
     SIT_HEAD_PITCH = -35
     STAND_HEAD_PITCH = 0
-    STATUS_STAND = 0
-    STATUS_SIT = 1
-    STATUS_LIE = 2
     HEAD_SPEED = 80
     HEAD_ANGLE = 20
     CHANGE_STATUS_SPEED = 60
@@ -13,39 +25,39 @@ class ActionFlow():
     dog_obj = None
     head_yrp = [0, 0, 0]
     head_pitch_init = 0
-    current_status = -1
+    posture = Posetures.STAND
     last_actions = None
 
     OPERATIONS = {
         "forward": {
             "function": lambda self: self.dog_obj.do_action('forward', speed=98),
-            "status": STATUS_STAND,
+            "poseture": Posetures.STAND,
         },
         "backward": {
             "function": lambda self: self.dog_obj.do_action('backward', speed=98),
-            "status": STATUS_STAND,
+            "poseture": Posetures.STAND,
         },
         "turn left": {
             "function": lambda self: self.dog_obj.do_action('turn_left', speed=98),
-            "status": STATUS_STAND,
+            "poseture": Posetures.STAND,
         },
         "turn right": {
             "function": lambda self: self.dog_obj.do_action('turn_right', speed=98),
-            "status": STATUS_STAND,
+            "poseture": Posetures.STAND,
         },
         "stop": {
         },
         "lie": {
             "function": lambda self: self.dog_obj.do_action('lie', speed=70),
-            "status": STATUS_LIE,
+            "poseture": Posetures.LIE,
         },
         "stand": {
             "function": lambda self: self.dog_obj.do_action('stand', speed=65),
-            "status": STATUS_STAND,
+            "poseture": Posetures.STAND,
         },
         "sit": {
             "function": lambda self: self.dog_obj.do_action('sit', speed=70),
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
         "bark": {
             "function": lambda self: bark(self.dog_obj, self.head_yrp, pitch_comp=self.head_pitch_init),
@@ -54,7 +66,7 @@ class ActionFlow():
             # "before": "stand",
             "before": lambda self: attack_posture(self.dog_obj),
             "function": lambda self: bark_action(self.dog_obj, self.head_yrp, 'single_bark_1'),
-            "status": STATUS_STAND,
+            "poseture": Posetures.STAND,
         },
         "pant": {
             "function": lambda self: pant(self.dog_obj, self.head_yrp, pitch_comp=self.head_pitch_init),
@@ -69,77 +81,77 @@ class ActionFlow():
         "stretch": {
             "function": lambda self: stretch(self.dog_obj),
             "after": "sit",
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
         "doze off": {
             "function": lambda self: self.dog_obj.do_action('doze_off', speed=95),
             "after": "doze off",
-            "status": STATUS_LIE,
+            "poseture": Posetures.LIE,
         },
         "push up": {
             "function": lambda self:push_up(self.dog_obj),
-            "status": STATUS_STAND,
+            "poseture": Posetures.STAND,
         },
         "howling": {
             "function": lambda self:howling(self.dog_obj),
             "after": "sit",
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
         "twist body": {
             "function": lambda self:body_twisting(self.dog_obj),
             "after": "sit",
-            "status": STATUS_STAND,
+            "poseture": Posetures.STAND,
         },
         "scratch": {
             "function": lambda self:scratch(self.dog_obj),
             "after": "sit",
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
         "handshake": {
             "function": lambda self:hand_shake(self.dog_obj),
             "after": "sit",
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
         "high five": {
             "function": lambda self:high_five(self.dog_obj),
             "after": "sit",
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
         "lick hand": {
             "function": lambda self:lick_hand(self.dog_obj),
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
         "waiting": {
             "function": lambda self:waiting(self.dog_obj, pitch_comp=self.head_pitch_init),
         },
         "feet shake": {
             "function": lambda self:feet_shake(self.dog_obj),
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
         "relax neck": {
             "function": lambda self:relax_neck(self.dog_obj, pitch_comp=self.head_pitch_init),
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
         "nod": {
             "function": lambda self:nod(self.dog_obj, pitch_comp=self.head_pitch_init),
             "head_pitch": SIT_HEAD_PITCH,
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
         "think": {
             "function": lambda self:think(self.dog_obj, pitch_comp=self.head_pitch_init),
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
         "recall": {
             "function": lambda self:recall(self.dog_obj, pitch_comp=self.head_pitch_init),
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
         "fluster": {
             "function": lambda self:fluster(self.dog_obj, pitch_comp=self.head_pitch_init),
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
         "surprise": {
             "function": lambda self:surprise(self.dog_obj, pitch_comp=self.head_pitch_init),
-            "status": STATUS_SIT,
+            "poseture": Posetures.SIT,
         },
     }
 
@@ -149,7 +161,13 @@ class ActionFlow():
 
         self.head_yrp = [0, 0, 0]
         self.head_pitch_init = 0
-        self.current_status = self.STATUS_LIE
+        self.posture = Posetures.LIE
+
+        self.thread = None
+        self.thread_running = False
+        self.thread_action_state = 'standby'
+        self.action_queue = queue.Queue()
+        self.thread_action_lock = threading.Lock()
 
 
     def set_head_pitch_init(self, pitch):
@@ -157,21 +175,21 @@ class ActionFlow():
         self.dog_obj.head_move([self.head_yrp], pitch_comp=pitch,
                         immediately=True, speed=self.HEAD_SPEED)
                      
-    def change_status(self, status):
-        if status == self.STATUS_STAND:
+    def change_poseture(self, poseture):
+        if poseture == Posetures.STAND:
             self.set_head_pitch_init(self.STAND_HEAD_PITCH)
-            if self.current_status != self.STATUS_STAND:
+            if self.posture != Posetures.STAND:
                 sit_2_stand(self.dog_obj, speed=75) # speed > 70
             else:
                self.dog_obj.do_action('stand', speed=self.CHANGE_STATUS_SPEED) 
-        elif status == self.STATUS_SIT:
+        elif poseture == Posetures.SIT:
             self.set_head_pitch_init(self.SIT_HEAD_PITCH)
             self.dog_obj.do_action('sit', speed=self.CHANGE_STATUS_SPEED)
-        elif status == self.STATUS_LIE:
+        elif poseture == Posetures.LIE:
             self.set_head_pitch_init(self.STAND_HEAD_PITCH)
             self.dog_obj.do_action('lie', speed=self.CHANGE_STATUS_SPEED)
         
-        self.current_status = status
+        self.posture = poseture
         self.dog_obj.wait_all_done()
 
 
@@ -180,12 +198,12 @@ class ActionFlow():
             # print(f'run: {action}')
             if action in self.OPERATIONS:
                 operation = self.OPERATIONS[action]
-                # status
-                if "status" in operation and operation["status"] != None:
-                    # if self.current_status != operation["status"]:
+                # poseture
+                if "poseture" in operation and operation["poseture"] != None:
+                    # if self.posture != operation["poseture"]:
                     if self.last_actions != action:
                         self.last_actions = action 
-                        self.change_status(operation["status"])
+                        self.change_poseture(operation["poseture"])
                 # before
                 if "before" in operation and operation["before"] != None:
                     before = operation["before"]
@@ -210,47 +228,59 @@ class ActionFlow():
                         self.dog_obj.wait_all_done()
         except Exception as e:
             print(f'action error: {e}')
+    
+    def action_handler(self):
+        standby_actions = ['waiting', 'feet_left_right']
+        standby_weights = [1, 0.3]
 
+        action_interval = 5 # seconds
+        last_action_time = time.time()
 
-def test(my_dog):
-    action_flow = ActionFlow(my_dog)
-    action_flow.change_status(action_flow.STATUS_SIT)
-    # action_flow.change_status(action_flow.STATUS_STAND)
+        while self.thread_running:
+            if self.thread_action_state == ActionStatus.STANDBY:
+                if time.time() - last_action_time > action_interval:
+                    choice = random.choices(standby_actions, standby_weights)[0]
+                    self.run(choice)
+                    last_action_time = time.time()
+                    action_interval = random.randint(2, 6)
+            elif self.thread_action_state == ActionStatus.THINK:
+                pass
+            elif self.thread_action_state == ActionStatus.ACTIONS:
+                _action = self.action_queue.get()
+                try:
+                    self.run(_action)
+                except Exception as e:
+                    print(f'action error: {e}')
 
+                if self.action_queue.empty():
+                    self.thread_action_state = ActionStatus.STANDBY
+                    last_action_time = time.time()
 
-    actions = list(action_flow.OPERATIONS.keys())
-    for i, key in enumerate(actions):
-        print(f'{i} {key}')
+                time.sleep(0.5)
 
-    last_key = None
+            time.sleep(0.01)
 
-    while True:
-        key = input()
-        try:
-            if key == '':
-                print(actions[last_key])
-                action_flow.run(actions[last_key])
-            else:
-                key = int(key)
-                last_key = key
-                print(actions[key])
-                action_flow.run(actions[key])
-        except:
-            print('Invalid input')
+    def add_action(self, *actions):
+        print(f"Add actions: {', '.join(actions)}")
+        for action in actions:
+            self.action_queue.put(action)
+        self.thread_action_state = ActionStatus.ACTIONS
 
-if __name__ == '__main__':
-    try:
-        from pidog import Pidog
-        import time
-        my_dog = Pidog()
-        time.sleep(1)
-        my_dog.rgb_strip.set_mode('listen', 'cyan', 1)
+    def set_status(self, status):
+        self.thread_action_state = status
 
-        test(my_dog)
-    except KeyboardInterrupt:
-        pass
-    except Exception as e:
-        print(f"\033[31mERROR: {e}\033[m")
-    finally:
-        my_dog.close()
+    def wait_actions_done(self):
+        while self.thread_action_state != ActionStatus.STANDBY:
+            time.sleep(0.01)
 
+    def start(self):
+        self.thread_running = True
+        self.thread_action_state = ActionStatus.STANDBY
+        self.action_queue = queue.Queue()
+        self.thread = threading.Thread(name="action_handler", target=self.action_handler)
+        self.thread.start()
+
+    def stop(self):
+        self.thread_running = False
+        if self.thread != None:
+            self.thread.join()
