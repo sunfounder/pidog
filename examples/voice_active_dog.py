@@ -1,8 +1,8 @@
-from robot_hat.voice_assistant import VoiceAssistant
+from pidog.voice_assistant import VoiceAssistant
 
-from .pidog import Pidog
-from .dual_touch import TouchStyle
-from .action_flow import ActionFlow, ActionStatus, Posetures
+from pidog.pidog import Pidog
+from pidog.dual_touch import TouchStyle
+from pidog.action_flow import ActionFlow, ActionStatus, Posetures
 
 import time
 import threading

@@ -2,7 +2,7 @@ from pidog.llm import OpenAI as LLM
 from secret import OPENAI_API_KEY as API_KEY
 
 from pidog.dual_touch import TouchStyle
-from pidog.voice_active_dog import VoiceActiveDog
+from voice_active_dog import VoiceActiveDog
 
 llm = LLM(
     api_key=API_KEY,
