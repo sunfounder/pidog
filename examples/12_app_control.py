@@ -121,11 +121,11 @@ COMMANDS = {
         "status": STATUS_SIT,
     },
     "bark": {
-        "commands": ["bark", "park", "fuck"],
+        "commands": ["bark", "park"],
         "function": lambda: bark(my_dog, head_yrp, pitch_comp=head_pitch_init),
     },
     "bark harder": {
-        "commands": ["bark harder", "park harder", "fuck harder", "bark harbor", "park harbor", "fuck harbor"],
+        "commands": ["bark harder", "park harder", "bark harbor", "park harbor"],
         "function": lambda: bark_action(my_dog, head_yrp, 'single_bark_1'),
     },
     "pant": {
