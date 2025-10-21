@@ -40,11 +40,11 @@ To control PiDog via the SunFounder Controller App, follow these steps:
 
 #. Set Up Required Modules.
 
-   * The ``robot-hat``, ``vilib``, and ``picar-x`` modules need to be installed first, for details see: :ref:`install_all_modules` section.
+   * The ``robot-hat``, ``vilib``, and ``pidog`` modules need to be installed first, for details see: :ref:`install_all_modules` section.
 
      *  ``robot-hat``
      *  ``vilib``
-     *  ``picar-x``
+     *  ``pidog``
 
    * Then, install the ``sunfounder-controller`` module:
 

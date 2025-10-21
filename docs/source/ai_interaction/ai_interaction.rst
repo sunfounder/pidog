@@ -12,22 +12,19 @@
 
     👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
 
-3-pin Battery
-=================
+Think · Talk · Drive —  AI-Powered with Multi-LLMs
+------------------------------------------------------------
 
-.. image:: img/3pin_battery.jpg
+Go beyond movement and vision by adding **speech** and **AI**.  
+Here you will explore text-to-speech (TTS), speech-to-text (STT), and large language models (LLMs) to make your Fusion HAT talk, listen, and even chat with you like a smart robot.
 
-* **VCC**: Battery positive terminal, here there are two sets of VCC and GND is to increase the current and reduce the resistance.
-* **Middle**: To balance the voltage between the two cells and thus protect the battery.
-* **GND**: Negative battery terminal.
+.. toctree:: 
+    :maxdepth: 1
 
-This is a custom battery pack made by SunFounder consisting of two 18650 batteries with a capacity of 2000mAh. The connector is XH2.54 3P, which can be charged directly after being inserted into the Robot HAT.
-
-**Features**
-
-* Composition: Li-ion
-* Battery Capacity: 2000mAh, 14.8Wh
-* Battery Weight: 90.8g
-* Number of Cells: 2
-* Connector: XH2.54 3P
-* Over-discharge protection: 6.0V
+    python_tts_espeak_pico2wave
+    python_tts_piper_openai
+    python_stt_vosk
+    python_llm_ollama
+    python_online_llms
+    python_local_chatbot
+    python_ai_robot

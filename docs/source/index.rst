@@ -89,7 +89,7 @@ Key technical distinctions:
     About This Kit <self>
     assemble_video
     python/play_with_python
-    openai 
+    ai_interaction/ai_interaction
     hardware/cpn_hardware
     appendix/appendix
 

@@ -17,30 +17,18 @@
 5. Install All the Modules(Important)
 ==============================================
 
-#. Update your system.
 
-    Make sure you are connected to the Internet and update your system:
+.. note::
+
+    Python3 related packages must be installed if you are installing the Lite version OS.
 
     .. raw:: html
 
         <run></run>
 
     .. code-block::
-
-        sudo apt update
-        sudo apt upgrade
-
-    .. note::
-
-        Python3 related packages must be installed if you are installing the Lite version OS.
-
-        .. raw:: html
-
-            <run></run>
-
-        .. code-block::
-        
-            sudo apt install git python3-pip python3-setuptools python3-smbus
+    
+        sudo apt install git python3-pip python3-setuptools python3-smbus
 
 
 #. Install ``robot-hat`` module.
@@ -53,7 +41,7 @@
     .. code-block::
 
         cd ~/
-        git clone -b v2.0 https://github.com/sunfounder/robot-hat.git
+        git clone -b 2.5.x https://github.com/sunfounder/robot-hat.git --depth 1
         cd robot-hat
         sudo python3 install.py
 
@@ -69,23 +57,9 @@
     .. code-block::
 
         cd ~/
-        git clone -b picamera2 https://github.com/sunfounder/vilib.git
+        git clone https://github.com/sunfounder/vilib.git
         cd vilib
         sudo python3 install.py
-
-
-
-
-#. Download the code.
-
-    .. raw:: html
-
-        <run></run>
-
-    .. code-block::
-
-        cd ~/
-        git clone https://github.com/sunfounder/pidog.git --depth 1
 
 #. Install ``pidog`` module.
 
@@ -93,8 +67,10 @@
 
         <run></run>
 
-    .. code-block::
+    .. code-block:: bash
 
+        cd ~/
+        git clone https://github.com/sunfounder/pidog.git --depth 1
         cd pidog
         sudo python3 setup.py install
 
@@ -110,7 +86,7 @@
 
     .. code-block::
 
-        cd ~/pidog
+        cd ~/robot-hat
         sudo bash i2samp.sh
         
     .. image:: img/i2s.png
