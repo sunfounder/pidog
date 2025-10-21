@@ -12,7 +12,7 @@
 
     👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
 
-.. _ai_voice_assistant_car:
+.. _ai_voice_assistant_robot:
 
 20. AI Voice Assistant Dog
 ===========================

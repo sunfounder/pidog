@@ -12,7 +12,7 @@
 
     👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
 
-16. Voice Controlled Car with Vosk (Offline)
+16. STT with Vosk (Offline)
 ==============================================
 
 Vosk is a lightweight speech-to-text (STT) engine that supports many languages and runs fully **offline** on Raspberry Pi.  

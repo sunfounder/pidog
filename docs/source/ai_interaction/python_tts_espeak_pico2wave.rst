@@ -12,7 +12,7 @@
 
     👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
 
-14. Voice Prompt Car with Espeak and Pico2Wave
+14. TTS with Espeak and Pico2Wave
 =================================================
 
 In this lesson, we'll use two built-in text-to-speech (TTS) engines on Raspberry Pi — **Espeak** and **Pico2Wave** — to make the Pidog talk.  

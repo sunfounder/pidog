@@ -12,7 +12,7 @@
 
     👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
 
-15. AI Storytelling Robot with Piper and OpenAI
+15. TTS with Piper and OpenAI
 ========================================================
 
 In the previous lesson, we tried two built-in TTS engines on Raspberry Pi (**Espeak** and **Pico2Wave**). Now let's explore two more powerful options: **Piper** (offline, neural network-based) and **OpenAI TTS** (online, cloud-based).
