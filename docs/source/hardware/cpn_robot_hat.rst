@@ -15,6 +15,13 @@
 Robot HAT
 ==================
 
+**Para la Versión V2:**
+
+|link_robot_hat_v5| es una placa de expansión multifuncional que permite convertir rápidamente una Raspberry Pi en un robot.  
+La V2 Robot HAT integra un micrófono en la arquitectura de la versión Standard, lo que habilita funciones de grabación de audio y reconocimiento de voz.
+
+Para obtener instrucciones detalladas, consulta: |link_robot_hat_v5|.
+
 **Para la Versión Standard:**
 
 |link_robot_hat_v4| es una placa de expansión multifuncional que permite convertir rápidamente una Raspberry Pi en un robot.  
@@ -31,9 +38,3 @@ La placa también incluye un LED disponible para el usuario y un botón que perm
 Para obtener instrucciones detalladas, consulta: |link_robot_hat_v4|.
 
 
-**Para la Versión V2:**
-
-|link_robot_hat_v5| es una placa de expansión multifuncional que permite convertir rápidamente una Raspberry Pi en un robot.  
-La V2 Robot HAT integra un micrófono en la arquitectura de la versión Standard, lo que habilita funciones de grabación de audio y reconocimiento de voz.
-
-Para obtener instrucciones detalladas, consulta: |link_robot_hat_v5|.

@@ -17,9 +17,9 @@
 5. Instalar Todos los Módulos (Importante)
 ==============================================
 
-#. Actualiza tu sistema.
+.. note::
 
-    Asegúrate de estar conectado a Internet y actualiza tu sistema:
+    Si estás utilizando la versión Lite del sistema operativo, debes instalar los paquetes relacionados con Python3.
 
     .. raw:: html
 
@@ -27,21 +27,7 @@
 
     .. code-block::
 
-        sudo apt update
-        sudo apt upgrade
-
-    .. note::
-
-        Los paquetes relacionados con Python3 deben estar instalados si estás utilizando la versión Lite del sistema operativo.
-
-        .. raw:: html
-
-            <run></run>
-
-        .. code-block::
-        
-            sudo apt install git python3-pip python3-setuptools python3-smbus
-
+        sudo apt install git python3-pip python3-setuptools python3-smbus
 
 #. Instalar el módulo ``robot-hat``.
 
@@ -52,10 +38,9 @@
     .. code-block::
 
         cd ~/
-        git clone -b v2.0 https://github.com/sunfounder/robot-hat.git
+        git clone -b 2.5.x https://github.com/sunfounder/robot-hat.git --depth 1
         cd robot-hat
-        sudo python3 setup.py install
-
+        sudo python3 install.py
 
 #. Instalar el módulo ``vilib``.
 
@@ -66,21 +51,9 @@
     .. code-block::
 
         cd ~/
-        git clone -b picamera2 https://github.com/sunfounder/vilib.git
+        git clone https://github.com/sunfounder/vilib.git
         cd vilib
         sudo python3 install.py
-
-
-#. Descargar el código.
-
-    .. raw:: html
-
-        <run></run>
-
-    .. code-block::
-
-        cd ~/
-        git clone https://github.com/sunfounder/pidog.git --depth 1
 
 #. Instalar el módulo ``pidog``.
 
@@ -88,8 +61,10 @@
 
         <run></run>
 
-    .. code-block::
+    .. code-block:: bash
 
+        cd ~/
+        git clone https://github.com/sunfounder/pidog.git --depth 1
         cd pidog
         sudo python3 setup.py install
 
@@ -97,7 +72,7 @@
 
 #. Ejecutar el script ``i2samp.sh``.
 
-    Finalmente, debes ejecutar el script ``i2samp.sh`` para instalar los componentes necesarios para el amplificador i2s; de lo contrario, el robot no emitirá sonido.
+    Finalmente, necesitas ejecutar el script ``i2samp.sh`` para instalar los componentes necesarios para el amplificador i2s; de lo contrario, el robot no tendrá sonido.
 
     .. raw:: html
 
@@ -105,9 +80,9 @@
 
     .. code-block::
 
-        cd ~/pidog
+        cd ~/robot-hat
         sudo bash i2samp.sh
-        
+
     .. image:: img/i2s.png
 
     Escribe ``y`` y presiona ``Enter`` para continuar ejecutando el script.
@@ -121,4 +96,4 @@
     Escribe ``y`` y presiona ``Enter`` para reiniciar la máquina.
 
     .. note::
-        Si no hay sonido después de reiniciar, es posible que necesites ejecutar el script ``i2samp.sh`` varias veces.
+        Si no hay sonido después de reiniciar, puede que necesites ejecutar el script ``i2samp.sh`` varias veces.

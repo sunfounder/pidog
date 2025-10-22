@@ -12,24 +12,23 @@
 
     👉 ¿Listo para explorar y crear con nosotros? Haz clic en [|link_sf_facebook|] y únete hoy mismo.
 
-5P Batería
-=================
+Batería de 3 pines
+=======================
 
-.. image:: img/2battery.jpg
-    :width: 300
-    :align: center
+.. image:: img/3pin_battery.jpg
 
-* **VCC**: Terminal positivo de la batería, aquí hay dos conjuntos de VCC y GND para aumentar la corriente y reducir la resistencia.
-* **Medio**: Equilibra el voltaje entre las dos celdas para proteger la batería.
+* **VCC**: Terminal positivo de la batería. Aquí hay dos conjuntos de VCC y GND para aumentar la corriente y reducir la resistencia.  
+* **Medio**: Para equilibrar el voltaje entre las dos celdas y así proteger la batería.  
 * **GND**: Terminal negativo de la batería.
 
-Este es un paquete de baterías personalizado hecho por SunFounder que consta de dos baterías 18650 con una capacidad de 2000mAh. El conector es PH2.0-5P, y se puede cargar directamente después de conectarlo al Robot HAT.
+Este es un paquete de baterías personalizado fabricado por SunFounder, compuesto por dos baterías 18650 con una capacidad de 2000 mAh.  
+El conector es **XH2.54 3P**, que se puede cargar directamente después de insertarse en el Robot HAT.
 
 **Características**
 
-* **Composición**: Li-ion
-* **Capacidad de la batería**: 2000mAh, 14.8Wh
-* **Peso de la batería**: 90.8g
-* **Número de celdas**: 2
-* **Conector**: PH2.0-5P
-* **Protección contra sobredescarga**: 6.0V
+* Composición: Li-ion  
+* Capacidad de la batería: 2000 mAh, 14.8 Wh  
+* Peso de la batería: 90.8 g  
+* Número de celdas: 2  
+* Conector: XH2.54 3P  
+* Protección contra sobredescarga: 6.0 V
