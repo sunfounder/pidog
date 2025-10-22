@@ -53,7 +53,7 @@ PiDog 是一款 Raspberry Pi 宠物机器人，采用铝合金结构。它可以
      :width: 500
 
 
-这一升级版本配备了全新设计的 Robot HAT 和舵机配置，可兼容 Raspberry Pi 3/4/5 以及 Zero W。升级后的硬件不仅支持在 Raspberry Pi 5 上实现更丰富的创意应用，同时也保持了对早期型号的向下兼容性。
+这一升级版本配备了全新设计的 Robot HAT 和舵机配置，可兼容 Raspberry Pi 3/4/5 以及 Zero 2W。升级后的硬件不仅支持在 Raspberry Pi 5 上实现更丰富的创意应用，同时也保持了对早期型号的向下兼容性。
 
 主要技术区别：
 
@@ -70,8 +70,10 @@ PiDog 是一款 Raspberry Pi 宠物机器人，采用铝合金结构。它可以
     About This Kit <self>
     assemble_video
     python/play_with_python
+    ai_interaction/ai_interaction
     hardware/cpn_hardware
     appendix/appendix
+    faq
 
 版权声明  
 --------------------------

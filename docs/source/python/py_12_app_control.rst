@@ -27,11 +27,11 @@
 
 #. 配置所需模块。
 
-   * 首先需要安装 ``robot-hat``、 ``vilib`` 和 ``picar-x`` 模块，具体请参考 :ref:`install_all_modules` 部分。
+   * 首先需要安装 ``robot-hat``、 ``vilib`` 和 ``pidog`` 模块，具体请参考 :ref:`install_all_modules` 部分。
 
      * ``robot-hat``
      * ``vilib``
-     * ``picar-x``
+     * ``pidog``
 
    * 然后，安装 ``sunfounder-controller`` 模块：
 

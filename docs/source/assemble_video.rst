@@ -7,9 +7,9 @@
 
 * :Download:`部件清单和组装说明 <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`。  
 
-.. **将 Raspberry Pi Zero W 安装到 PiDog 上**
+.. **将 Raspberry Pi Zero 2W 安装到 PiDog 上**
 
-.. 如果你的主板是 Raspberry Pi Zero W，以下是将其安装到 PiDog 上的步骤。
+.. 如果你的主板是 Raspberry Pi Zero 2W，以下是将其安装到 PiDog 上的步骤。
 
 .. 
     .. note::  
