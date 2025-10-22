@@ -71,7 +71,7 @@ Designed for compatibility with most Raspberry Pi models, this version offers fu
      :width: 500
 
 
-This upgraded iteration features an updated Robot HAT and servo configuration, enabling compatibility with Raspberry Pi 3/4/5 and Zero W. The enhancements allow expanded creative applications on Raspberry Pi 5 while maintaining backward compatibility with earlier models.
+This upgraded iteration features an updated Robot HAT and servo configuration, enabling compatibility with Raspberry Pi 3/4/5 and Zero 2W. The enhancements allow expanded creative applications on Raspberry Pi 5 while maintaining backward compatibility with earlier models.
 
 Key technical distinctions:
 
@@ -92,6 +92,7 @@ Key technical distinctions:
     ai_interaction/ai_interaction
     hardware/cpn_hardware
     appendix/appendix
+    faq
 
 Copyright Notice
 --------------------------
