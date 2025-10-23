@@ -35,7 +35,7 @@ Contrôler PiDog avec l'APP
 
 #. Installez le module ``sunfounder-controller``.
 
-    Les modules ``robot-hat``, ``vilib`` et ``picar-x`` doivent être installés au préalable. Pour plus de détails, voir :ref:`install_all_modules`.
+    Les modules ``robot-hat``, ``vilib`` et ``pidog`` doivent être installés au préalable. Pour plus de détails, voir :ref:`install_all_modules`.
 
     .. raw:: html
 

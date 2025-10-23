@@ -21,9 +21,9 @@ Avant de commencer l'assemblage de votre PiDog, assurez-vous que toutes les piè
 
 .. * :Download:`Component List and Assembly Instructions <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
 
-**Installer le Raspberry Pi Zero W sur le PiDog**
+**Installer le Raspberry Pi Zero 2W sur le PiDog**
 
-Si votre carte mère est un Raspberry Pi Zero W, voici les étapes pour l'installer sur le PiDog.
+Si votre carte mère est un Raspberry Pi Zero 2W, voici les étapes pour l'installer sur le PiDog.
 
 .. note::
 

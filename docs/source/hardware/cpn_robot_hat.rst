@@ -15,6 +15,14 @@
 Robot HAT
 ==================
 
+**Pour la version V2 :**
+
+|link_robot_hat_v5| est une carte d’extension multifonctionnelle qui permet de transformer rapidement un Raspberry Pi en robot.  
+Le Robot HAT V2 intègre un microphone à l’architecture de la version Standard, offrant ainsi des capacités d’enregistrement audio et de reconnaissance vocale.
+
+Pour des instructions détaillées, veuillez consulter : |link_robot_hat_v5|.
+
+
 **Pour la version Standard :**
 
 |link_robot_hat_v4| est une carte d’extension multifonctionnelle qui permet de transformer rapidement un Raspberry Pi en robot.  
@@ -30,11 +38,4 @@ La carte est aussi équipée d’une LED utilisable par l’utilisateur et d’u
 
 Pour des instructions détaillées, veuillez consulter : |link_robot_hat_v4|.
 
-
-**Pour la version V2 :**
-
-|link_robot_hat_v5| est une carte d’extension multifonctionnelle qui permet de transformer rapidement un Raspberry Pi en robot.  
-Le Robot HAT V2 intègre un microphone à l’architecture de la version Standard, offrant ainsi des capacités d’enregistrement audio et de reconnaissance vocale.
-
-Pour des instructions détaillées, veuillez consulter : |link_robot_hat_v5|.
 

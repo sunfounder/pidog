@@ -12,23 +12,19 @@
 
     👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-Batterie à 3 broches
-=======================
+See · Hear · Respond — Alimenté par l’IA avec Multi-LLMs
+------------------------------------------------------------
 
-.. image:: img/3pin_battery.jpg
+Allez au-delà du mouvement et de la vision en ajoutant **la parole** et **l’IA**.  
+Ici, vous explorerez la synthèse vocale (TTS), la reconnaissance vocale (STT) et les grands modèles de langage (LLMs) pour permettre à votre Fusion HAT de parler, d’écouter et même de discuter avec vous comme un robot intelligent.
 
-* **VCC** : Borne positive de la batterie. Ici, il y a deux ensembles de VCC et GND pour augmenter le courant et réduire la résistance.  
-* **Milieu** : Sert à équilibrer la tension entre les deux cellules afin de protéger la batterie.  
-* **GND** : Borne négative de la batterie.
+.. toctree:: 
+    :maxdepth: 1
 
-Il s’agit d’un pack batterie personnalisé fabriqué par SunFounder, composé de deux batteries 18650 d’une capacité de 2000 mAh.  
-Le connecteur est un **XH2.54 3P**, qui peut être chargé directement après avoir été branché sur le Robot HAT.
-
-**Caractéristiques**
-
-* Composition : Li-ion  
-* Capacité : 2000 mAh, 14,8 Wh  
-* Poids : 90,8 g  
-* Nombre de cellules : 2  
-* Connecteur : XH2.54 3P  
-* Protection contre la décharge excessive : 6,0 V
+    python_tts_espeak_pico2wave
+    python_tts_piper_openai
+    python_stt_vosk
+    python_llm_ollama
+    python_online_llms
+    python_local_chatbot
+    python_ai_robot

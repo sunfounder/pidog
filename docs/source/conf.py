@@ -45,10 +45,6 @@ intersphinx_mapping = {
     'ezblock': ('https://docs.sunfounder.com/projects/ezblock3/en/latest/', None),
 }
 
-# -- sphinx_rtd_theme Theme options -----------------------------------------------------
-html_theme_options = {
-    'flyout_display': 'attached'
-}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -68,6 +64,10 @@ exclude_patterns = []
 html_static_path = ['_static']
 # -- Options for HTML output -------------------------------------------------
 
+# -- sphinx_rtd_theme Theme options -----------------------------------------------------
+html_theme_options = {
+    'flyout_display': 'attached'
+}
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
@@ -78,6 +78,8 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 html_js_files = [
     'https://ezblock.cc/readDocFile/custom.js',
     'https://ezblock.cc/readDocFile/readTheDoc/src/js/ace.js',
+    'https://ezblock.cc/readDocFile/readTheDoc/src/js/ext-language_tools.js',
+    'https://ezblock.cc/readDocFile/readTheDoc/src/js/theme-chrome.js',
     'https://ezblock.cc/readDocFile/readTheDoc/src/js/mode-python.js',
     'https://ezblock.cc/readDocFile/readTheDoc/src/js/mode-sh.js',
     'https://ezblock.cc/readDocFile/readTheDoc/src/js/monokai.js',
@@ -107,28 +109,51 @@ rst_epilog = """
 
 """
 
-#links
+# Language links
+
 rst_epilog += """
 
-.. |link_voice_options| raw:: html
+.. |link_german_tutorials| raw:: html
 
-    <a href="https://platform.openai.com/docs/guides/text-to-speech/voice-options" target="_blank">Options de voix</a>
+    <a href="https://docs.sunfounder.com/projects/pidog/de/latest/index.html" target="_blank">Deutsch Online-Kurs</a>
 
-.. |link_iso_language_code| raw:: html
+.. |link_jp_tutorials| raw:: html
 
-    <a href="https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes" target="_blank">ISO-639</a>
+    <a href="https://docs.sunfounder.com/projects/pidog/ja/latest/" target="_blank">日本語オンライン教材</a>
 
-.. |link_microphone| raw:: html
+.. |link_en_tutorials| raw:: html
 
-    <a href="https://www.sunfounder.com/products/mini-usb-microphone?_pos=2&_sid=d05c80026&_ss=r" target="_blank">Lien du microphone</a>
+    <a href="https://docs.sunfounder.com/projects/pidog/en/latest/" target="_blank">English Online-tutorials</a>
 
-.. |link_openai_platform| raw:: html
+.. |link_zh_tutorials| raw:: html
 
-    <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI API</a>
+    <a href="https://docs.sunfounder.com/projects/pidog/zh-cn/latest/" target="_blank">中文在线教程</a>
 
-.. |link_sf_facebook| raw:: html
+.. |link_fr_tutorials| raw:: html
 
-    <a href="https://bit.ly/raphaelkit" target="_blank">ici</a>
+    <a href="https://docs.sunfounder.com/projects/pidog/fr/latest/" target="_blank">Didacticiels en ligne en français</a>
+
+.. |link_es_tutorials| raw:: html
+
+    <a href="https://docs.sunfounder.com/projects/pidog/es/latest/" target="_blank">Tutoriales en línea en español</a>
+
+.. |link_it_tutorials| raw:: html
+
+    <a href="https://docs.sunfounder.com/projects/pidog/it/latest/" target="_blank">Tutorial online in italiano</a>
+
+"""
+
+# Open on a new page
+
+rst_epilog += """
+
+.. |link_PiDog| raw:: html
+
+    <a href="https://www.sunfounder.com/products/sunfounder-pidog-robot-dog-kit-for-raspberry-pi?_pos=1&_sid=313a4c894&_ss=r&variant=44517213896939" target="_blank">Purchase Link for PiDog</a>
+
+.. |link_Pi_Dog| raw:: html
+
+    <a href="https://www.sunfounder.com/products/sunfounder-pidog-robot-dog-kit-for-raspberry-pi?_pos=1&_sid=313a4c894&_ss=r&variant=44517213896939" target="_blank">PiDog</a>
 
 .. |link_code_10_balance| raw:: html
 
@@ -146,40 +171,73 @@ rst_epilog += """
 
     <a href="https://docs.sunfounder.com/projects/robot-hat-v4/en/latest/robot_hat_v5/hardware_introduction.html" target="_blank">SunFounder Robot HAT V5</a>
 
-.. |link_german_tutorials| raw:: html
+.. |link_aliyun| raw:: html
 
-    <a href="https://docs.sunfounder.com/projects/pidog/de/latest/index.html" target="_blank">Deutsch Online-Kurs</a>
+    <a href="https://bailian.console.aliyun.com/?spm=5176.29597918.J_SEsSjsNv72yRuRFS2VknO.2.40a37b08ic1XHy&tab=model#/api-key" target="_blank">Bailian console</a>
 
-.. |link_jp_tutorials| raw:: html
+.. |link_rpi_connect| raw:: html
 
-    <a href="https://docs.sunfounder.com/projects/pidog/ja/latest/" target="_blank">日本語オンライン教材</a>
+    <a href="https://www.raspberrypi.com/documentation/services/connect.html" target="_blank">Raspberry Pi Connect</a>
 
-.. |link_en_tutorials| raw:: html
+.. |link_qwen_inter| raw:: html
 
-    <a href="https://docs.sunfounder.com/projects/pidog/en/latest/" target="_blank">English Online-tutorials</a>
+    <a href="https://www.alibabacloud.com/help/en/model-studio/get-api-key" target="_blank">Get API Key</a>
+
+.. |link_ollama_hub| raw:: html
+
+    <a href="https://ollama.com/library" target="_blank">Ollama Hub</a>
+
+.. |link_ollama| raw:: html
+
+    <a href="https://ollama.com/download" target="_blank">Ollama Download Page</a>
+
+
+.. |link_piper_voice| raw:: html
+
+    <a href="https://github.com/rhasspy/piper/blob/master/VOICES.md" target="_blank">Piper Voices</a>
     
-.. |link_zh_tutorials| raw:: html
+.. |link_grok_ai| raw:: html
 
-    <a href="https://docs.sunfounder.com/projects/pidog/zh-cn/latest/" target="_blank">中文在线教程</a>
+    <a href="https://console.x.ai/team/f424aae2-94c8-4602-91bf-af8452fda9a2/models" target="_blank">xAI Cloud Console</a>
+    
+.. |link_deepseek| raw:: html
 
-.. |link_fr_tutorials| raw:: html
+    <a href="https://platform.deepseek.com/sign_in" target="_blank">Deepseek Platform</a>
 
-    <a href="https://docs.sunfounder.com/projects/pidog/fr/latest/" target="_blank">Tutoriels en ligne en français</a>
+.. |link_doubao| raw:: html
 
-.. |link_es_tutorials| raw:: html
+    <a href="https://console.volcengine.com/auth/login" target="_blank">Volcengine</a>
 
-    <a href="https://docs.sunfounder.com/projects/pidog/es/latest/" target="_blank">Tutoriales en línea en español</a>
+.. |link_openai_platform| raw:: html
 
-.. |link_it_tutorials| raw:: html
+    <a href="https://platform.openai.com/settings/organization/api-keys" target="_blank">OpenAI Platform</a>
 
-    <a href="https://docs.sunfounder.com/projects/pidog/it/latest/" target="_blank">Tutorial online in italiano</a>
+.. |link_gemini_model| raw:: html
 
-.. |link_PiDog| raw:: html
+    <a href="https://ai.google.dev/gemini-api/docs/models#model-variations" target="_blank">Gemini Models</a>
 
-    <a href="https://www.sunfounder.com/products/sunfounder-pidog-robot-dog-kit-for-raspberry-pi?_pos=1&_sid=313a4c894&_ss=r&variant=44517213896939" target="_blank">Lien d'achat pour PiDog</a>
+.. |link_google_ai| raw:: html
 
-.. |link_Pi_Dog| raw:: html
+    <a href="https://aistudio.google.com/" target="_blank">Google AI Studio</a>
 
-    <a href="https://www.sunfounder.com/products/sunfounder-pidog-robot-dog-kit-for-raspberry-pi?_pos=1&_sid=313a4c894&_ss=r&variant=44517213896939" target="_blank">PiDog</a>
+.. |link_voice_options| raw:: html
+
+    <a href="https://platform.openai.com/docs/guides/text-to-speech/voice-options" target="_blank">Voice options</a>
+
+.. |link_iso_language_code| raw:: html
+
+    <a href="https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes" target="_blank">ISO-639</a>
+
+.. |link_microphone| raw:: html
+
+    <a href="https://www.sunfounder.com/products/mini-usb-microphone?_pos=2&_sid=d05c80026&_ss=r" target="_blank">Microphone link</a>
+
+.. |link_sf_facebook| raw:: html
+
+    <a href="https://bit.ly/raphaelkit " target="_blank">here</a>
+
+.. |link_robot_hat| raw:: html
+
+    <a href="https://docs.sunfounder.com/projects/robot-hat-v4/en/latest/robot_hat_v4/hardware_introduction.html" target="_blank">SunFounder Robot HAT V4</a>
 
 """
