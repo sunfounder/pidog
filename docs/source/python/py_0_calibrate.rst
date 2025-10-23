@@ -12,91 +12,95 @@
 
     👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-2. Calibrer le PiDog
+2. Calibration de PiDog
 =============================
 
 **Introduction**
 
-La calibration de votre PiDog est une étape essentielle pour garantir son fonctionnement stable et efficace. Ce processus permet de corriger tout déséquilibre ou inexactitude pouvant survenir lors de l'assemblage ou en raison de problèmes structurels. Suivez attentivement ces étapes pour vous assurer que votre PiDog marche de manière fluide et fonctionne comme prévu.
+La calibration de votre PiDog est une étape essentielle pour garantir son fonctionnement stable et efficace. Ce processus permet de corriger les déséquilibres ou imprécisions dus à des erreurs d’assemblage ou structurelles. Suivez attentivement les étapes ci-dessous afin d’assurer une marche fluide et des performances optimales.
 
 .. raw:: html
 
    <video width="600" loop autoplay muted>
       <source src="../_static/video/calibrate_before.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      Votre navigateur ne supporte pas la balise vidéo.
    </video>
 
-Cependant, si l'angle de déviation est trop important, il est nécessaire de revenir à la section :ref:`py_servo_adjust` pour régler l'angle du servo à 0°, puis de suivre les instructions pour réassembler le PiDog.
+Si l’angle de déviation est trop important, retournez à :ref:`py_servo_adjust` pour régler l’angle du servo à 0°, puis réassemblez le PiDog en suivant les instructions.
 
 **Vidéo de calibration**
 
-Pour un guide complet, consultez la vidéo de calibration. Elle fournit une procédure visuelle pas-à-pas pour calibrer votre PiDog avec précision.
+Pour un guide détaillé, consultez la vidéo complète de calibration. Elle montre de manière visuelle et étape par étape comment calibrer précisément votre PiDog.
 
 .. note::
 
-    Le kit Pidog peut être fourni avec une règle de 90° ou de 60°. Notre vidéo de calibration utilise la règle de 90°, mais la version 60° suit un processus similaire. Vous pouvez également vous référer aux étapes détaillées ci-dessous.
+   Le kit PiDog comprend une règle de calibration de 90° ou de 60°. La vidéo utilise une règle de 90°, mais la procédure avec une règle de 60° est très similaire. Vous pouvez également vous référer aux étapes illustrées ci-dessous.
+    
+    .. image:: img/cali_ruler.png
+         :width: 400
+         :align: center
 
 .. raw:: html
 
-    <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=g8_RZDUkfjdwbLZu&amp;start=871&end=1160" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=g8_RZDUkfjdwbLZu&amp;start=871&end=1160" title="Lecteur vidéo YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 **Étapes**
 
-Les étapes spécifiques sont les suivantes :
+Voici les étapes à suivre :
 
-#. Placez le PiDog sur la base.
+#. Placez le PiDog sur une surface plane.
 
    .. image:: img/place-pidog.JPG
 
-#. Naviguez vers le répertoire des exemples de PiDog et lancez le script ``0_calibration.py``.
+#. Accédez au répertoire des exemples PiDog et exécutez le script ``0_calibration.py``.
 
-   
-   .. raw:: html   
+   .. raw:: html
 
-       <run></run>   
-       
-   
-   .. code-block::   
-    
-       cd ~/pidog/examples
-   
-       sudo python3 0_calibration.py
-        
+        <run></run>
 
-#. Après avoir exécuté le script, une interface utilisateur apparaîtra dans votre terminal. Sélectionnez ici votre équerre de calibration (60° ou 90°). Si votre kit contient une équerre de calibration à 90°, choisissez la première option ; s'il s'agit d'une équerre de 60°, choisissez la seconde option. Après avoir sélectionné, vous verrez l'interface suivante :
-   
-   .. image:: img/CALI.slt.1.png
+   .. code-block::
 
-#. Après avoir sélectionné, vous verrez l'interface suivante :
-   
-   .. image:: img/CALI.slt.2.png
+        cd ~/pidog/examples
+        sudo python3 0_calibration.py
 
+#. Une fois le script lancé, une interface interactive s’affichera dans le terminal. Sélectionnez le type de règle de calibration : 1 pour 90°, 2 pour 60°.
 
+    .. image:: img/CALI.slt.1.png
 
-Calibrage avec une équerre de 90°
----------------------------------------
+#. Après votre sélection, vous accéderez à l’écran de calibration suivant :
 
-#. Positionnez l'**Équerre de Calibration** (Acrylique C) comme indiqué dans l'image fournie. Dans le terminal, appuyez sur ``1``, puis utilisez les touches ``w`` et ``s`` pour aligner les bords comme illustré.
+    .. image:: img/CALI.slt.2.png
 
-   .. image:: img/CALI-1.2.png
+**Si vous utilisez la règle de 60°**
 
-#. Repositionnez l'**Équerre de Calibration** (Acrylique C) comme illustré dans l'image suivante. Appuyez sur ``2`` dans le terminal, puis utilisez ``w`` et ``s`` pour aligner les bords comme montré.
+#. Positionnez la **règle de calibration (plaque acrylique en C)** comme illustré, avec le grand côté sur la surface horizontale. Appuyez sur ``1`` dans le terminal, puis utilisez les touches ``w`` et ``s`` pour aligner les bords.
 
-   .. image:: img/CALI-2.2.png
+    .. image:: img/CALI.60.1.JPG
 
-#. Répétez le processus de calibration pour les servos restants (3 à 8). Assurez-vous que les quatre pattes du PiDog sont correctement calibrées.
+#. Replacez la **règle de calibration** selon l’illustration suivante. Appuyez sur ``2`` dans le terminal, puis ajustez avec ``w`` et ``s`` pour affiner l’alignement.
 
+    .. image:: img/CALI.60.2.JPG
 
+#. Répétez la procédure de calibration pour les servos 3 à 8 afin d’assurer que les quatre pattes du PiDog soient bien calibrées.
 
-Calibrage avec une équerre de 60°
---------------------------------------
+**Si vous utilisez la règle de 90°**
 
-#. Placez l'**Équerre de Calibration** (Acrylique C) comme montré dans l'image fournie. Posez son côté long sur une surface plane. Dans le terminal, appuyez sur ``1``, puis utilisez les touches ``w`` et ``s`` pour aligner les bords comme illustré.
+#. Positionnez la **règle de calibration (plaque acrylique en C)** comme montré. Appuyez sur ``1`` dans le terminal, puis utilisez ``w`` et ``s`` pour aligner les bords.
 
-   .. image:: img/CALI.60.1.JPG
+    .. image:: img/CALI-1.2.png
 
-#. Repositionnez l'**Équerre de Calibration** (Acrylique C) comme illustré dans l'image suivante. Appuyez sur ``2`` dans le terminal, puis utilisez ``w`` et ``s`` pour aligner les bords comme montré.
+#. Replacez la **règle de calibration (plaque acrylique en C)** selon l’illustration. Appuyez sur ``2`` dans le terminal, puis ajustez avec ``w`` et ``s``.
 
-   .. image:: img/CALI.60.2.JPG
+    .. image:: img/CALI-2.2.png
 
-#. Répétez le processus de calibration pour les servos restants (3 à 8). Assurez-vous que les quatre pattes du PiDog sont correctement calibrées.
+#. Répétez la procédure de calibration pour les servos 3 à 8 afin d’assurer que les quatre pattes du PiDog soient bien calibrées.
+
+**Fin de la calibration**
+
+- Une fois la calibration de tous les servos terminée, exécutez à nouveau les exemples de marche ou de posture du PiDog pour vérifier la fluidité des mouvements.  
+- Si vous constatez une déviation, relancez le programme de calibration pour effectuer des ajustements.  
+- Il est fortement recommandé d’effectuer cette étape après le premier assemblage pour garantir une stabilité optimale lors du fonctionnement.
+
+.. tip::
+
+   Pour éviter de refaire la calibration, vous pouvez enregistrer les angles des servos ou exporter le fichier de configuration une fois la calibration terminée, afin de pouvoir les restaurer rapidement plus tard.
