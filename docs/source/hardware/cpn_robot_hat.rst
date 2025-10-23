@@ -15,6 +15,15 @@
 Robot HAT
 =================
 
+**For V2 Version:**
+
+|link_robot_hat_v5| ist eine multifunktionale Erweiterungsplatine, mit der sich ein Raspberry Pi schnell in einen Roboter verwandeln lässt.
+Das V2 Robot HAT integriert ein Mikrofon in die Architektur der Standardversion und ermöglicht so Audioaufnahmen 
+sowie Sprachsteuerungs- und Spracherkennungsfunktionen.
+
+Ausführliche Anleitungen finden Sie unter: |link_robot_hat_v5|.
+
+
 **For Standard Version:**
 
 |link_robot_hat_v4| ist eine multifunktionale Erweiterungsplatine, mit der sich ein Raspberry Pi im Handumdrehen in einen Roboter verwandeln lässt. 
@@ -31,12 +40,3 @@ eine Ladeanzeige sowie eine Betriebsanzeige.
 Zusätzlich gibt es eine frei nutzbare LED und eine Taste, mit der sich bestimmte Funktionen schnell testen lassen.
 
 Ausführliche Anleitungen finden Sie unter: |link_robot_hat_v4|.
-
-
-**For V2 Version:**
-
-|link_robot_hat_v5| ist eine multifunktionale Erweiterungsplatine, mit der sich ein Raspberry Pi schnell in einen Roboter verwandeln lässt.
-Das V2 Robot HAT integriert ein Mikrofon in die Architektur der Standardversion und ermöglicht so Audioaufnahmen 
-sowie Sprachsteuerungs- und Spracherkennungsfunktionen.
-
-Ausführliche Anleitungen finden Sie unter: |link_robot_hat_v5|.

@@ -12,24 +12,19 @@
 
     👉 Sind Sie bereit, mit uns zu erkunden und zu erschaffen? Klicken Sie auf [|link_sf_facebook|] und treten Sie heute bei!
 
-3-poliger Akku
-=================
+Sieh · Höre · Antworte — KI-gestützt mit Multi-LLMs  
+------------------------------------------------------------
 
-.. image:: img/3pin_battery.jpg
+Geh über Bewegung und Sicht hinaus, indem du **Sprache** und **KI** hinzufügst.  
+Hier wirst du Text-zu-Sprache (TTS), Sprache-zu-Text (STT) und große Sprachmodelle (LLMs) erkunden, um deinen Fusion HAT sprechen, zuhören und wie ein intelligenter Roboter mit dir chatten zu lassen.
 
-* **VCC**: Positiver Batteriepol. Hier gibt es zwei Sätze von VCC und GND, um den Strom zu erhöhen und den Widerstand zu verringern.  
-* **Mitte**: Dient zum Ausgleichen der Spannung zwischen den beiden Zellen und schützt so die Batterie.  
-* **GND**: Negativer Batteriepol.
+.. toctree:: 
+    :maxdepth: 1
 
-Dies ist ein kundenspezifischer Akku von SunFounder, der aus zwei 18650-Zellen mit einer Kapazität von 2000 mAh besteht.  
-Der Anschluss ist ein **XH2.54 3P**-Stecker, der direkt in den Robot HAT eingesteckt und dort geladen werden kann.
-
-**Technische Daten**
-
-* Zusammensetzung: Li-Ion  
-* Batteriekapazität: 2000 mAh, 14,8 Wh  
-* Batteriegewicht: 90,8 g  
-* Anzahl der Zellen: 2  
-* Anschluss: XH2.54 3P  
-* Tiefentladeschutz: 6,0 V
-
+    python_tts_espeak_pico2wave
+    python_tts_piper_openai
+    python_stt_vosk
+    python_llm_ollama
+    python_online_llms
+    python_local_chatbot
+    python_ai_robot

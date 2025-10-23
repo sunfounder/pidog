@@ -70,7 +70,7 @@ Diese Version ist für die Kompatibilität mit den meisten Raspberry-Pi-Modellen
      :width: 500
 
 
-Diese überarbeitete Variante verfügt über ein aktualisiertes Robot HAT und eine angepasste Servokonfiguration, wodurch sie mit Raspberry Pi 3/4/5 und Zero W kompatibel ist. Die Verbesserungen ermöglichen erweiterte kreative Anwendungen auf dem Raspberry Pi 5 und gewährleisten gleichzeitig die Abwärtskompatibilität mit früheren Modellen.
+Diese überarbeitete Variante verfügt über ein aktualisiertes Robot HAT und eine angepasste Servokonfiguration, wodurch sie mit Raspberry Pi 3/4/5 und Zero 2W kompatibel ist. Die Verbesserungen ermöglichen erweiterte kreative Anwendungen auf dem Raspberry Pi 5 und gewährleisten gleichzeitig die Abwärtskompatibilität mit früheren Modellen.
 
 Wesentliche technische Unterschiede:
 
@@ -83,10 +83,10 @@ Wesentliche technische Unterschiede:
 .. toctree::
     :maxdepth: 2
 
-    Über dieses Kit <self>
+    About This Kit <self>
     assemble_video
     python/play_with_python
-    openai  
+    ai_interaction/ai_interaction
     hardware/cpn_hardware
     appendix/appendix
     faq
