@@ -12,12 +12,12 @@
 
     👉 Ready to explore and create with us? Click [|link_sf_facebook|] and join today!
 
-2. Calibrate the PiDog
+2. Calibrating PiDog
 =============================
 
 **Introduction**
 
-Calibrating your PiDog is an essential step to ensure its stable and efficient operation. This process helps correct any imbalances or inaccuracies that might have arisen during assembly or from structural issues. Follow these steps carefully to ensure your PiDog walks steadily and performs as expected.
+Calibrating your PiDog is a crucial step to ensure its stable and efficient operation. This process helps correct any imbalance or inaccuracy caused by assembly or structural errors. Follow the steps below carefully to make sure your PiDog walks smoothly and performs as expected.
 
 .. raw:: html
 
@@ -26,30 +26,33 @@ Calibrating your PiDog is an essential step to ensure its stable and efficient o
       Your browser does not support the video tag.
    </video>
 
+If the deviation angle is too large, return to :ref:`py_servo_adjust`, set the servo angle to 0°, and then reassemble PiDog according to the instructions.
 
-But if the deviation angle is too big, you still have to go back to :ref:`py_servo_adjust` to set the servo angle to 0°, and then follow the instructions to reassemble the PiDog.
+**Calibration Video**
 
-**Calibrate Video**
-
-For a comprehensive guide, refer to the full calibration video. It provides a visual step-by-step process to accurately calibrate your PiDog.
+For a detailed guide, refer to the full calibration tutorial video. It will visually and step by step demonstrate how to accurately calibrate your PiDog.
 
 .. note::
 
-   The Pidog kit may come with a 90° or 60° ruler. Our calibration video uses the 90° ruler, but the 60° version follows a similar process. You can also refer to the detailed steps below.
- 
+   The PiDog kit includes either a 90° or 60° calibration ruler. The video uses the 90° ruler, but the 60° calibration process is very similar. You can also refer to the illustrated step-by-step guide below.
+    
+    .. image:: img/cali_ruler.png
+         :width: 400
+         :align: center
+
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=g8_RZDUkfjdwbLZu&amp;start=871&end=1160" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 **Steps**
 
-The specific steps are as follows:
+Follow these steps:
 
-#. Put the PiDog on the base.
+#. Place the PiDog on a flat platform.
 
    .. image:: img/place-pidog.JPG
 
-#. Navigate to the PiDog examples directory and run the ``0_calibration.py`` script.
+#. Navigate to the PiDog example code directory and run the ``0_calibration.py`` script.
 
    .. raw:: html
 
@@ -59,47 +62,46 @@ The specific steps are as follows:
 
         cd ~/pidog/examples
         sudo python3 0_calibration.py
-        
-#. Upon running the script, a user interface will appear in your terminal. Here, you need to select your calibration ruler (60° or 90°).If your kit has a 90° calibration ruler, select the first option; if it is a 60° one, select the second option.
+
+#. After running the script, an interactive interface will appear in the terminal. Choose the type of calibration ruler you have:  
+   select option 1 for 90°, or option 2 for 60°.
 
     .. image:: img/CALI.slt.1.png
 
-#. After selecting, you will enter the following interface:
+#. After making your selection, the following calibration interface will appear:
 
-.. image:: img/CALI.slt.2.png
+    .. image:: img/CALI.slt.2.png
 
+**If you are using the 60° calibration ruler**
 
-
-90° Ruler
-------------------------------
-
-If you have a 90° calibration ruler, follow these steps:
-
-#. Position the **Calibration Ruler** (Acrylic C) as shown in the provided image. In the terminal, press ``1``, followed by ``w`` and ``s`` keys to align the edges as indicated in the image.
-
-    .. image:: img/CALI-1.2.png
-
-#. Reposition the **Calibration Ruler** (Acrylic C) as illustrated in the next image. Press ``2`` in the terminal, then use ``w`` and ``s`` to align the edges as shown.
-
-    .. image:: img/CALI-2.2.png
-
-#. Repeat the calibration process for the remaining servos (3 to 8). Ensure all four legs of the PiDog are calibrated.
-
-
-
-60° Ruler
-------------------------------
-
-If you have a 60° calibration ruler, follow these steps:
-
-#. Position the **Calibration Ruler** (Acrylic C) as shown in the provided image. Place its long side on a level surface. In the terminal, press ``1``, followed by ``w`` and ``s`` keys to align the edges as indicated in the image.
+#. Position the **calibration ruler (acrylic C-board)** as shown, with the long edge on the horizontal surface. Press ``1`` in the terminal and use the ``w`` and ``s`` keys to adjust the alignment.
 
     .. image:: img/CALI.60.1.JPG
 
-#. Reposition the **Calibration Ruler** (Acrylic C) as illustrated in the next image. Press ``2`` in the terminal, then use ``w`` and ``s`` to align the edges as shown.
+#. Reposition the **calibration ruler** as shown in the figure below. Press ``2`` in the terminal and fine-tune the alignment using the ``w`` and ``s`` keys.
 
     .. image:: img/CALI.60.2.JPG
 
-#. Repeat the calibration process for the remaining servos (3 to 8). Ensure all four legs of the PiDog are calibrated.
+#. Repeat the calibration process for servos 3 to 8 to ensure all four legs of the PiDog are properly calibrated.
 
+**If you are using the 90° calibration ruler**
 
+#. Position the **calibration ruler (acrylic C-board)** as shown. Press ``1`` in the terminal, then use ``w`` and ``s`` to align the edges with the illustration.
+
+    .. image:: img/CALI-1.2.png
+
+#. Reposition the **calibration ruler (acrylic C-board)** as shown. Press ``2`` in the terminal, then adjust again with ``w`` and ``s``.
+
+    .. image:: img/CALI-2.2.png
+
+#. Repeat the calibration procedure for servos 3 to 8 to ensure all four legs of the PiDog are properly calibrated.
+
+**Completing the Calibration**
+
+- Once all servos are calibrated, rerun the PiDog walking or posture example code to check if the movements are smooth.  
+- If there is still deviation, return to the calibration program for fine-tuning.  
+- It is highly recommended to complete this step after your initial assembly to ensure stable performance during operation.
+
+.. tip::
+
+   To avoid recalibrating in the future, you can record the servo angles or export the configuration file after calibration. This makes it easy to restore settings quickly next time.
