@@ -12,8 +12,8 @@
 
     👉 Sei pronto a esplorare e creare con noi? Clicca su [|link_sf_facebook|] e unisciti oggi stesso!
 
-Pensa · Parla · Guida —  Potenziato dall’IA con Multi-LLM
-------------------------------------------------------------
+Vedere · Ascoltare · Rispondere — Alimentato dall’IA con Multi-LLM  
+----------------------------------------------------------------------------
 
 Vai oltre il movimento e la visione aggiungendo **voce** e **intelligenza artificiale**.  
 Qui esplorerai la sintesi vocale (TTS), il riconoscimento vocale (STT) e i modelli linguistici di grandi dimensioni (LLM) per far parlare, ascoltare e persino chattare il tuo Fusion HAT come un robot intelligente.
