@@ -15,11 +15,11 @@
 .. _install_all_modules:
 
 5. すべてのモジュールをインストールする（重要）
-================================================
+=========================================================
 
-#. システムを更新します。
+.. note::
 
-    インターネットに接続していることを確認し、システムを更新してください：
+    Lite バージョンの OS をインストールしている場合は、Python3 関連のパッケージをインストールする必要があります。
 
     .. raw:: html
 
@@ -27,20 +27,8 @@
 
     .. code-block::
 
-        sudo apt update
-        sudo apt upgrade
+        sudo apt install git python3-pip python3-setuptools python3-smbus
 
-    .. note::
-
-        LiteバージョンのOSをインストールする場合は、Python3関連のパッケージがインストールされている必要があります。
-
-        .. raw:: html
-
-            <run></run>
-
-        .. code-block::
-        
-            sudo apt install git python3-pip python3-setuptools python3-smbus
 
 #. ``robot-hat`` モジュールをインストールします。
 
@@ -51,9 +39,11 @@
     .. code-block::
 
         cd ~/
-        git clone -b v2.0 https://github.com/sunfounder/robot-hat.git
+        git clone -b 2.5.x https://github.com/sunfounder/robot-hat.git --depth 1
         cd robot-hat
-        sudo python3 setup.py install
+        sudo python3 install.py
+
+
 
 #. ``vilib`` モジュールをインストールします。
 
@@ -64,20 +54,9 @@
     .. code-block::
 
         cd ~/
-        git clone -b picamera2 https://github.com/sunfounder/vilib.git
+        git clone https://github.com/sunfounder/vilib.git
         cd vilib
         sudo python3 install.py
-
-#. コードをダウンロードします。
-
-    .. raw:: html
-
-        <run></run>
-
-    .. code-block::
-
-        cd ~/
-        git clone https://github.com/sunfounder/pidog.git --depth 1
 
 #. ``pidog`` モジュールをインストールします。
 
@@ -85,16 +64,18 @@
 
         <run></run>
 
-    .. code-block::
+    .. code-block:: bash
 
+        cd ~/
+        git clone https://github.com/sunfounder/pidog.git --depth 1
         cd pidog
         sudo python3 setup.py install
 
-    このステップには少し時間がかかるので、気長にお待ちください。
+    このステップには少し時間がかかるため、しばらくお待ちください。
 
 #. スクリプト ``i2samp.sh`` を実行します。
 
-    最後に、i2sアンプに必要なコンポーネントをインストールするためのスクリプト ``i2samp.sh`` を実行する必要があります。そうしないと、ロボットに音が出ません。
+    最後に、i2s アンプに必要なコンポーネントをインストールするために ``i2samp.sh`` スクリプトを実行する必要があります。これを行わないとロボットから音が出ません。
 
     .. raw:: html
 
@@ -102,20 +83,20 @@
 
     .. code-block::
 
-        cd ~/pidog
+        cd ~/robot-hat
         sudo bash i2samp.sh
         
     .. image:: img/i2s.png
 
-    ``y`` と入力し、 ``Enter`` を押してスクリプトの実行を続行します。
+    ``y`` を入力して ``Enter`` を押し、スクリプトの実行を続けます。
 
     .. image:: img/i2s2.png
 
-    ``y`` と入力し、 ``Enter`` を押して ``/dev/zero`` をバックグラウンドで実行します。
+    ``y`` を入力して ``Enter`` を押し、バックグラウンドで ``/dev/zero`` を実行します。
 
     .. image:: img/i2s3.png
 
-    ``y`` と入力し、 ``Enter`` を押してマシンを再起動します。
+    ``y`` を入力して ``Enter`` を押して、マシンを再起動します。
 
     .. note::
         再起動後に音が出ない場合は、 ``i2samp.sh`` スクリプトを複数回実行する必要があるかもしれません。

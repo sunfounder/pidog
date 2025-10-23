@@ -69,7 +69,7 @@ The product is available in two versions: Standard and V2.
      :width: 500
 
 
-この改良版では、更新されたRobot HATとサーボ構成を採用し、Raspberry Pi 3/4/5およびZero Wに対応可能となりました。これにより、Raspberry Pi 5での創造的な応用範囲が拡大すると同時に、従来モデルとの後方互換性も維持されています。
+この改良版では、更新されたRobot HATとサーボ構成を採用し、Raspberry Pi 3/4/5およびZero 2Wに対応可能となりました。これにより、Raspberry Pi 5での創造的な応用範囲が拡大すると同時に、従来モデルとの後方互換性も維持されています。
 
 主な技術的相違点:
 
@@ -86,7 +86,7 @@ The product is available in two versions: Standard and V2.
     このキットについて <self>
     assemble_video
     python/play_with_python
-    openai  
+    ai_interaction/ai_interaction
     hardware/cpn_hardware
     appendix/appendix
     faq

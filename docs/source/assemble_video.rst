@@ -21,9 +21,9 @@ PiDogを組み立てる前に、すべての部品とコンポーネントが含
 
 .. * :Download:`コンポーネントリストと組み立て指示書 <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`。
 
-**Raspberry Pi Zero WをPiDogに取り付ける**
+**Raspberry Pi Zero 2WをPiDogに取り付ける**
 
-メインボードがRaspberry Pi Zero Wの場合、以下の手順でPiDogに取り付けてください。
+メインボードがRaspberry Pi Zero 2Wの場合、以下の手順でPiDogに取り付けてください。
 
 .. note::
 

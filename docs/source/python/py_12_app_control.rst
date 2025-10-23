@@ -35,7 +35,7 @@
 
 #. ``sunfounder-controller`` モジュールをインストールします。
 
-    最初に ``robot-hat`` 、 ``vilib`` 、 ``picar-x`` モジュールをインストールする必要があります。詳細は :ref:`install_all_modules` を参照してください。
+    最初に ``robot-hat`` 、 ``vilib`` 、 ``pidog`` モジュールをインストールする必要があります。詳細は :ref:`install_all_modules` を参照してください。
 
     .. raw:: html
 
