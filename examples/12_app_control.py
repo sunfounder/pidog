@@ -3,7 +3,7 @@ from sunfounder_controller import SunFounderController
 from pidog import Pidog
 from time import sleep
 from vilib import Vilib
-from preset_actions import *
+from pidog.preset_actions import *
 import os
 from time import sleep
 from math import pi, atan2, sqrt

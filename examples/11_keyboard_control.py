@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import time
 from pidog import Pidog
-from preset_actions import *
+from pidog.preset_actions import *
 import curses
 import curses_utils
 

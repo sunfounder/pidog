@@ -7,6 +7,12 @@ Quick Links:
 - [Pidog](#pidog)
   - [Docs](#docs)
   - [Installation](#installation)
+    - [install tool](#install-tool)
+    - [robot-hat library](#robot-hat-library)
+    - [vilib library](#vilib-library)
+    - [pidog library](#pidog-library)
+    - [i2samp](#i2samp)
+  - [Debug records](#debug-records)
   - [About SunFounder](#about-sunfounder)
   - [Contact us](#contact-us)
   - [Credit](#credit)
@@ -62,6 +68,14 @@ sudo python3 setup.py install
 ```
 cd ~/pidog
 sudo bash i2samp.sh
+```
+
+## Debug records
+
+```bash
+sudo pip3 uninstall pidog --break -y && cd ~/pidog && sudo pip3 install . --break --no-deps --no-build-isolation
+sudo pip3 uninstall robot_hat --break -y && cd ~/robot-hat && sudo pip3 install . --break --no-deps --no-build-isolation
+sudo python3 ~/pidog/examples/14_voice_active_dog_gpt.py
 ```
 
 ----------------------------------------------

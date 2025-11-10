@@ -1,0 +1,39 @@
+
+[build-system]
+requires = ["setuptools >= 61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pidog"
+authors = [
+  { name="sunfounder", email="service@sunfounder.com" },
+]
+description = "Python library for SunFounder Pidog"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: POSIX :: Linux",
+]
+keywords = ["pidog", "sunfounder"]
+dynamic = ["version"]
+
+dependencies = []
+
+[project.scripts]
+pidog = "pidog:__main__"
+
+[project.urls]
+Repository = "https://github.com/sunfounder/pidog"
+Issues = "https://github.com/sunfounder/pidog/issues"
+
+[tool.setuptools]
+packages = [
+  "pidog",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "pidog.version.__version__"}
+
+

@@ -4,3 +4,4 @@ photo
 test/photo*
 test/scene/*
 backups/*
+**secret*
