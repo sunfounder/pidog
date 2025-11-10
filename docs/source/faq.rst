@@ -27,7 +27,7 @@ Q2: 如何安装依赖模块？
 
     # PiDog
     git clone https://github.com/sunfounder/pidog.git --depth 1
-    cd pidog && sudo python3 setup.py install
+    cd pidog && sudo pip3 install . --break
 
 如果没有声音，请执行：
 
