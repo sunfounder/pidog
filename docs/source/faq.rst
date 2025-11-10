@@ -25,7 +25,7 @@ Q2: How do I install the required modules?
 
     # PiDog
     git clone https://github.com/sunfounder/pidog.git --depth 1
-    cd pidog && sudo python3 setup.py install
+    cd pidog && sudo pip3 install . --break
 
 If there's no sound:
 
