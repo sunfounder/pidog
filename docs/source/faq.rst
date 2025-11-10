@@ -39,7 +39,7 @@ Q2: 必要なモジュールはどのようにインストールしますか？
 
     # PiDog
     git clone https://github.com/sunfounder/pidog.git --depth 1
-    cd pidog && sudo python3 setup.py install
+    cd pidog && sudo pip3 install . --break
 
 音声が出ない場合は以下を実行してください：
 
