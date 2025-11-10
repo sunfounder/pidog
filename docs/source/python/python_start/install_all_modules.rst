@@ -66,7 +66,7 @@
         cd ~/
         git clone https://github.com/sunfounder/pidog.git --depth 1
         cd pidog
-        sudo python3 setup.py install
+        sudo pip3 install . --break
 
     Este paso tomará un poco de tiempo, así que ten paciencia.
 
