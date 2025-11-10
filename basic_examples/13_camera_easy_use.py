@@ -19,7 +19,7 @@ try:
     # start camera
     Vilib.camera_start(vflip=False,hflip=False) # vflip: image vertical flip, hflip:horizontal flip
     # display camera screen
-    Vilib.display(local=True,web=True) # local: desktop window display, web: webcam display
+    Vilib.display(local=False,web=True) # local: desktop window display, web: webcam display
     # enable face detection
     Vilib.face_detect_switch(True)
     # wait for vilib launch

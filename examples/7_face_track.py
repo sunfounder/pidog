@@ -9,7 +9,7 @@ sleep(0.1)
 
 def face_track():
     Vilib.camera_start(vflip=False, hflip=False)
-    Vilib.display(local=True, web=True)
+    Vilib.display(local=False, web=True)
     Vilib.face_detect_switch(True)
     sleep(0.2)
     print('start')
