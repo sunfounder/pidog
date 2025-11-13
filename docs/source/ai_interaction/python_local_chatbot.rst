@@ -66,7 +66,7 @@ Esegui il Codice
    .. code-block:: bash
 
       cd ~/pidog/examples
-      sudo python3 19_voice_active_dog_ollama_with_image.py
+      sudo python3 19_voice_active_dog_ollama.py
 
 Parola di attivazione:
 
