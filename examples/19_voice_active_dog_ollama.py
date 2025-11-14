@@ -5,7 +5,7 @@ from voice_active_dog import VoiceActiveDog
 
 # If Ollama runs on the same Raspberry Pi, use "localhost".
 # If it runs on another computer in your LAN, replace with that computer's IP address.
-llm = Ollama(
+llm = LLM(
     ip="localhost",
     model="llama3.2:3b"   # you can replace with any model
 )
