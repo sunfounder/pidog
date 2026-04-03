@@ -39,7 +39,7 @@ sudo apt install git python3-pip python3-setuptools python3-smbus
 
 ```bash
 cd ~/
-git clone -b v2.0 https://github.com/sunfounder/robot-hat.git
+git clone -b 2.5.x --depth=1 https://github.com/sunfounder/robot-hat.git
 cd robot-hat
 sudo pip3 install . --break-system-packages
 ```
@@ -48,7 +48,7 @@ sudo pip3 install . --break-system-packages
 
 ```bash
 cd ~/
-git clone -b picamera2 https://github.com/sunfounder/vilib.git
+git clone --depth=1 https://github.com/sunfounder/vilib.git
 cd vilib
 sudo pip3 install . --break-system-packages
 ```
@@ -57,7 +57,7 @@ sudo pip3 install . --break-system-packages
 
 ```bash
 cd ~/
-git clone https://github.com/sunfounder/pidog.git
+git clone --depth=1 https://github.com/sunfounder/pidog.git
 cd pidog
 sudo pip3 install . --break-system-packages
 ```
