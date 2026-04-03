@@ -41,7 +41,7 @@ sudo apt install git python3-pip python3-setuptools python3-smbus
 cd ~/
 git clone -b 2.5.x --depth=1 https://github.com/sunfounder/robot-hat.git
 cd robot-hat
-sudo pip3 install . --break-system-packages
+sudo python3 install.py
 ```
 
 ### vilib library
@@ -50,7 +50,7 @@ sudo pip3 install . --break-system-packages
 cd ~/
 git clone --depth=1 https://github.com/sunfounder/vilib.git
 cd vilib
-sudo pip3 install . --break-system-packages
+sudo python3 install.py
 ```
 
 ### pidog library
@@ -58,8 +58,7 @@ sudo pip3 install . --break-system-packages
 ```bash
 cd ~/
 git clone --depth=1 https://github.com/sunfounder/pidog.git
-cd pidog
-sudo pip3 install . --break-system-packages
+sudo pip3 install ~/pidog --break-system-packages
 ```
 
 ### i2samp
