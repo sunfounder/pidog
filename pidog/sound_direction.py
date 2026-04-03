@@ -30,7 +30,7 @@
 '''
 
 import spidev
-from gpiozero import OutputDevice, InputDevice
+from robot_hat.pin import Pin
 
 
 class SoundDirection():
@@ -41,24 +41,33 @@ class SoundDirection():
         self.spi = spidev.SpiDev()
         self.spi.open(0, 0)
         #
-        self.busy = InputDevice(busy_pin, pull_up=False)
+        self.busy_pin = busy_pin
+        self.busy = None
+        self.busy_reset()
+
+    def busy_reset(self):
+        if self.busy != None:
+            self.busy.high()
+            sleep(0.1)
+            self.busy.close()
+            sleep(0.1)
+        self.busy = Pin(self.busy_pin, mode=Pin.IN, pull=Pin.PULL_NONE, active_state=1)
 
     def read(self):
         result = self.spi.xfer2([0, 0, 0, 0, 0, 0], self.CLOCK_SPEED,
                                 self.CS_DELAY_US)
 
-
         l_val, h_val = result[4:]  # ignore the fist two values
         # print([h_val, l_val])
-        if h_val == 255:
-            return -1
-        else:
-            val = (h_val << 8) + l_val
-            val = (360 + 160 - val) % 360  # Convert zero
-            return val
+        dir = -1
+        if h_val != 255:
+            dir = (h_val << 8) + l_val
+            dir = (360 + 160 - dir) % 360  # Convert zero
+        self.busy_reset()
+        return dir
 
     def isdetected(self):
-        return self.busy.value == 0
+        return self.busy.value() == 0
 
     def close(self):
         self.spi.close()
