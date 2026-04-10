@@ -21,9 +21,9 @@ Before assembling the PiDog, please first verify that all parts and components h
 
 .. * :Download:`Component List and Assembly Instructions <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
 
-**Mount Raspberry Pi Zero W on PiDog**
+**Mount Raspberry Pi Zero 2W on PiDog**
 
-If your mainboard is a Raspberry Pi Zero W, here are the steps to install it on the PiDog. 
+If your mainboard is a Raspberry Pi Zero 2W, here are the steps to install it on the PiDog. 
 
 .. note::
 

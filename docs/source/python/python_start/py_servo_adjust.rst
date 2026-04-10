@@ -14,7 +14,7 @@
 
 .. _py_servo_adjust:
 
-7. Servo Adjust(Important)
+Servo Adjust(Important)
 ===========================================
 
 
@@ -43,10 +43,6 @@ So here we need to set all the servo angles to 0° and then install them, so tha
 
         cd ~/pidog/examples
         sudo python3 servo_zeroing.py
-
-
-    .. note::
-        If you get an error, try re-enabling the Raspberry Pi's I2C port, see: :ref:`i2c_spi_config`.
 
 #. Next, plug the servo cable into the P11 port as follows, at the same time you will see the servo arm rotate to a position(This is the 0° position, which is a random location and may not be vertical or parallel.).
 
