@@ -259,6 +259,7 @@ class Pidog():
         self.sensory_lock = Lock()
 
         self.exit_flag = False
+        self._sensory_exit_flag = False
         self.action_threads_start()
         self.sensory_process_start()
 
@@ -312,10 +313,8 @@ class Pidog():
             if 'imu' in self.thread_list:
                 self.imu_thread.join()
             if self.sensory_process != None:
-                self.sensory_process.terminate()
-                self.sensory_process.join(timeout=1) # Wait for the process to terminate
-                if self.sensory_process.is_alive():
-                    self.sensory_process.kill() # If it's still alive, force kill
+                self._sensory_exit_flag = True  # Signal thread to exit
+                self.sensory_process.join(timeout=1)  # Wait for thread to finish
 
 
             info('Quit')
@@ -575,7 +574,7 @@ class Pidog():
         
     # ultrasonic
     def _ultrasonic_thread(self, distance_addr, lock):
-        while True:
+        while not self._sensory_exit_flag:
             try:
                 with lock:
                     val = round(float(self.ultrasonic.read()), 2)
@@ -609,8 +608,11 @@ class Pidog():
 
     def sensory_process_start(self):
         if self.sensory_process != None:
-            self.sensory_process.terminate()
-        self.sensory_process = Process(name='sensory_process',
+            # For threading, we use a flag to signal exit instead of terminate()
+            self._sensory_exit_flag = True
+            self.sensory_process.join(timeout=1)
+        self._sensory_exit_flag = False
+        self.sensory_process = threading.Thread(name='sensory_thread',
                                          target=self.sensory_process_work,
                                          args=(self.distance, self.sensory_lock))
         self.sensory_process.start()
