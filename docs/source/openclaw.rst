@@ -2,7 +2,7 @@
 
 .. start_using_pidog
 
-Using OpenClaw to Control PiDog
+21. Using OpenClaw to Control PiDog
 ========================================
 
 

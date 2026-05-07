@@ -28,3 +28,4 @@ Here you will explore text-to-speech (TTS), speech-to-text (STT), and large lang
     python_online_llms
     python_local_chatbot
     python_ai_robot
+    ../openclaw
