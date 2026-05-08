@@ -640,7 +640,7 @@ class Pidog():
         """
         if not is_run_with_root and not hasattr(self, "speak_first"):
             self.speak_first = True
-            warn("Play sound needs to be run with sudo.")
+            # warn("Play sound needs to be run with sudo.")
         status, _ = utils.run_command('sudo killall pulseaudio') # Solve the problem that there is no sound when running in the vnc environment
 
         if os.path.isfile(name):
@@ -664,7 +664,7 @@ class Pidog():
         """
         if not is_run_with_root and not hasattr(self, "speak_first"):
             self.speak_first = True
-            warn("Play sound needs to be run with sudo.")
+            # warn("Play sound needs to be run with sudo.")
         _status, _ = utils.run_command('sudo killall pulseaudio') # Solve the problem that there is no sound when running in the vnc environment
         
         if os.path.isfile(name):
