@@ -18,6 +18,10 @@ Here are some fantastic application scenarios:
 * **Hardware "Playmate":** This is a very interesting use case. You can have OpenClaw control hardware connected to a Raspberry Pi. For example, a developer used it to control a robotic vacuum cleaner with a mechanical arm, or even had it help analyze racing simulator data and display it on an LED screen. The official Raspberry Pi team even used it to build an automatic photo booth for a wedding, just through conversation, without writing a single line of code!
 
 
+.. important::
+
+   The Raspberry Pi Zero 2W has only 512MB of RAM, while OpenClaw requires a minimum of 1GB. Therefore, it cannot run properly. A Raspberry Pi 4/5 or higher is recommended.
+
 Quick Start OpenClaw
 ------------------------------
 
