@@ -47,10 +47,12 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=sudo python3 $user_home/pidog/examples/12_app_control.py &
+ExecStart=/usr/bin/python3 $user_home/pidog/examples/12_app_control.py
 PrivateTmp=True
-User=$user
-Group=$user
+User=root
+Group=root
+Restart=always
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
