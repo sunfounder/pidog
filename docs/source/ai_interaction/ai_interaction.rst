@@ -31,3 +31,4 @@ See · Hear · Respond— AI搭載のマルチLLM対応
     python_online_llms
     python_local_chatbot
     python_ai_robot
+    ../openclaw
