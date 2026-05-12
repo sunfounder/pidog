@@ -28,3 +28,4 @@ Hier wirst du Text-zu-Sprache (TTS), Sprache-zu-Text (STT) und große Sprachmode
     python_online_llms
     python_local_chatbot
     python_ai_robot
+    ../openclaw
