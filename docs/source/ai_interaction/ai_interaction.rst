@@ -1,4 +1,4 @@
-.. note::
+﻿.. note::
 
     Ciao! Benvenuto nella Community di appassionati di Raspberry Pi, Arduino e ESP32 di SunFounder su Facebook! Approfondisci il mondo di Raspberry Pi, Arduino ed ESP32 insieme ad altri entusiasti.
 
@@ -28,3 +28,4 @@ Qui esplorerai la sintesi vocale (TTS), il riconoscimento vocale (STT) e i model
     python_online_llms
     python_local_chatbot
     python_ai_robot
+    ../openclaw
