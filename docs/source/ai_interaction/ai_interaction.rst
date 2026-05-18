@@ -29,3 +29,4 @@ Aquí explorarás texto a voz (TTS), voz a texto (STT) y grandes modelos de leng
     python_online_llms
     python_local_chatbot
     python_ai_robot
+    ../openclaw
