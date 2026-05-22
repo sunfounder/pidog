@@ -1,50 +1,50 @@
 .. note::
 
-    Bonjour, bienvenue dans la communauté SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts sur Facebook ! Plongez plus profondément dans l’univers de Raspberry Pi, Arduino et ESP32 avec d’autres passionnés.
+    Bonjour et bienvenue sur la communauté Facebook SunFounder Raspberry Pi & Arduino & ESP32 Enthusiasts ! Plongez plus profondément dans Raspberry Pi, Arduino et ESP32 avec d'autres passionnés.
 
     **Pourquoi rejoindre ?**
 
-    - **Support d'experts** : Résolvez les problèmes après-vente et relevez les défis techniques avec l'aide de notre communauté et de notre équipe.
+    - **Support d'experts** : Résolvez les problèmes après-vente et les défis techniques grâce à l'aide de notre communauté et de notre équipe.
     - **Apprendre et partager** : Échangez des astuces et des tutoriels pour améliorer vos compétences.
-    - **Aperçus exclusifs** : Bénéficiez d’un accès anticipé aux annonces de nouveaux produits et à des avant-premières.
-    - **Réductions spéciales** : Profitez de remises exclusives sur nos produits les plus récents.
-    - **Promotions festives et concours** : Participez à des concours et à des promotions spéciales lors des fêtes.
+    - **Aperçus exclusifs** : Accédez en avant-première aux annonces de nouveaux produits et à des aperçus confidentiels.
+    - **Remises spéciales** : Profitez de remises exclusives sur nos tout nouveaux produits.
+    - **Promotions festives et concours** : Participez à des concours et à des promotions de vacances.
 
     👉 Prêt à explorer et à créer avec nous ? Cliquez sur [|link_sf_facebook|] et rejoignez-nous dès aujourd'hui !
 
-19. Chatbot Vocal Local avec Ollama
-===================================
+19. Chatbot vocal local avec Ollama
+===============================================
 
-Dans cette leçon, vous allez combiner tout ce que vous avez appris — **reconnaissance vocale (STT)**,  
-**synthèse vocale (TTS)** et un **LLM local (Ollama)** — pour créer un **chatbot vocal entièrement hors ligne**  
-fonctionnant sur votre système Pidog.
+Dans cette leçon, vous allez combiner tout ce que vous avez appris — **la reconnaissance vocale (STT)**,
+la **synthèse vocale (TTS)** et un **LLM local (Ollama)** — pour construire un **chatbot vocal** entièrement hors ligne
+qui fonctionne sur votre système Pidog.
 
 Le flux de travail est simple :
 
-#. **Écouter** — Le microphone capte votre voix et la transcrit avec **Vosk**.  
-#. **Réfléchir** — Le texte est envoyé à un **LLM local** exécuté sur Ollama (par ex. ``llama3.2:3b``).  
-#. **Parler** — Le chatbot répond à voix haute grâce à **Piper TTS**.
+#. **Écouter** — Le microphone capture votre parole et la retranscrit avec **Vosk**.
+#. **Réfléchir** — Le texte est envoyé à un **LLM** local fonctionnant sur Ollama (ex. ``llama3.2:3b``).
+#. **Parler** — Le chatbot répond à voix haute en utilisant **Piper TTS**.
 
 Cela crée un **robot conversationnel mains libres** capable de comprendre et de répondre en temps réel.
 
 ----
 
-Avant de Commencer
+Avant de commencer
 ------------------
 
-Assurez-vous d’avoir préparé les éléments suivants :
+Assurez-vous d'avoir préparé les éléments suivants :
 
-* :ref:`install_all_modules` — Installer les modules ``robot-hat``, ``vilib``, ``Pidog``, puis exécuter le script ``i2samp.sh``.  
-* Avoir testé **Piper TTS** (:ref:`test_piper`) et choisi un modèle vocal fonctionnel.  
-* Avoir testé **Vosk STT** (:ref:`test_vosk`) et sélectionné le bon pack de langue (par ex. ``en-us``).  
-* Avoir installé **Ollama** (:ref:`download_ollama`) sur votre Pi ou un autre ordinateur, et téléchargé un modèle comme ``llama3.2:3b`` (ou un modèle plus petit comme ``moondream:1.8b`` si la mémoire est limitée).
+* :ref:`install_all_modules` — Installez les modules ``robot-hat``, ``vilib``, ``Pidog``, puis exécutez le script ``i2samp.sh``.
+* Testez **Piper TTS** (:ref:`test_piper`) et choisissez un modèle vocal fonctionnel.
+* Testez **Vosk STT** (:ref:`test_vosk`) et choisissez le pack de langue approprié (ex. ``en-us``).
+* Installez **Ollama** (:ref:`download_ollama`) sur votre Pi ou un autre ordinateur, et téléchargez un modèle tel que ``llama3.2:3b`` (ou un plus petit comme ``moondream:1.8b`` si la mémoire est limitée).
 
 ----
 
-Exécuter le Code
+Exécuter le code
 ----------------
 
-#. Ouvrez le script d’exemple :
+#. Ouvrez le script d'exemple :
 
    .. code-block:: bash
 
@@ -53,14 +53,13 @@ Exécuter le Code
 
 #. Mettez à jour les paramètres selon vos besoins :
 
-   * Mettez à jour ``ip`` et ``model`` pour correspondre à votre configuration.
+   * Mettez à jour ``ip`` et ``model`` avec votre propre configuration.
 
-     * ``ip`` : Si Ollama s’exécute sur le **même Pi**, utilisez ``localhost``.  
-       Si Ollama fonctionne sur un autre ordinateur de votre réseau local, activez **Expose to network** dans Ollama et indiquez l’adresse IP LAN de cet ordinateur.  
+     * ``ip`` : Si Ollama fonctionne sur le **même Pi**, utilisez ``localhost``. Si Ollama fonctionne sur un autre ordinateur de votre réseau local, activez **Exposer au réseau** dans Ollama et définissez ``ip`` sur l'adresse IP locale de cet ordinateur.
      * ``model`` : Doit correspondre exactement au nom du modèle que vous avez téléchargé/activé dans Ollama.
 
-   * ``TTS_MODEL = "en_US-ryan-low"`` : Remplacez par le modèle vocal Piper que vous avez validé dans :ref:`test_piper`.  
-   * ``STT_LANGUAGE = "en-us"`` : Modifiez pour correspondre à votre accent/langue (par ex. ``en-us``, ``zh-cn``, ``es``).
+   * ``TTS_MODEL = "en_US-ryan-low"`` : Remplacez par le modèle vocal Piper que vous avez vérifié dans :ref:`test_piper`.
+   * ``STT_LANGUAGE = "en-us"`` : Modifiez-le pour correspondre à votre accent / pack de langue (ex. ``en-us``, ``zh-cn``, ``es``).
 
 #. Exécutez le script :
 
@@ -80,84 +79,82 @@ Mot de réveil :
    Vous pouvez modifier le **mot de réveil** et le **nom du robot** dans le code :
    ``NAME = "Buddy"``
 
-
 ----
 
-Ce qui va se Passer
+Ce qui va se passer
 -------------------
 
 Lorsque vous exécutez cet exemple avec succès :
 
-* Le robot **attend le mot de réveil** (par ex. « Hey Buddy »).  
-* Lorsqu’il entend le mot de réveil :
+* Le robot **attend le mot de réveil** (ex. « Hey Buddy »).
+* Lorsqu'il entend le mot de réveil :
 
-  * La bande LED devient **rose (effet de respiration)** comme signal de réveil.  
-  * Le robot vous salue avec la réponse de réveil définie —  
-    par ex. « Salut ! » (via Piper TTS).
+  * La bande LED devient **rose (respirante)** comme signal de réveil.
+  * Le robot vous salue avec la réponse de réveil définie —
+    ex. « Hi there! » (via Piper TTS).
 
-* Il commence ensuite à **écouter votre voix** grâce à Vosk STT (ou accepte une saisie clavier si activé).
+* Il commence ensuite à **écouter votre voix** via Vosk STT (ou accepte une saisie clavier si activée).
 
 * Après avoir reconnu ce que vous avez dit, le système :
 
-  * Envoie votre message au **LLM** (Ollama avec ``llama3.2:3b``).  
-  * La LED passe en **jaune (écoute)** pendant le traitement.  
+  * Envoie votre message au **LLM** (Ollama avec ``llama3.2:3b``).
+  * La LED passe au **jaune (écoute)** pendant le traitement.
   * La réponse du modèle est divisée en deux parties :
 
-    - Texte avant ``ACTIONS:`` → prononcé à voix haute.  
-    - Mots-clés après ``ACTIONS:`` → associés aux mouvements du robot.
+    - Texte avant ``ACTIONS:`` → prononcé à voix haute.
+    - Mots-clés après ``ACTIONS:`` → associés à des mouvements du robot.
 
-  * Le robot **exécute ces actions** via ``ActionFlow``.  
-  * Lorsque les actions sont terminées, le robot **revient en posture ASSISE** et éteint les LEDs.
+  * Le robot **exécute ces actions** via ``ActionFlow``.
+  * Lorsque les actions sont terminées, le robot **revient à la posture ASSISE** et éteint les LED.
 
-* Si le **capteur ultrason détecte un obstacle** à moins de 10 cm :
+* Si le **capteur ultrasonique détecte un obstacle** à moins de 10 cm :
 
-  - Un message est injecté : ``<<<Détection ultrason trop proche : {distance}cm>>>``  
-  - Le robot recule automatiquement : ``ACTIONS: backward``  
-  - L’entrée image est désactivée pour ce tour.
+  - Un message est injecté : ``<<<Ultrasonic sense too close: {distance}cm>>>``
+  - Le robot recule automatiquement : ``ACTIONS: backward``
+  - L'entrée image est désactivée pour ce tour.
 
 * Si le **capteur tactile est déclenché** :
 
-  - Pour un **TOUCHER AIMÉ** (par ex. FRONT_TO_REAR) :
+  - Pour un toucher **AIMÉ** (ex. FRONT_TO_REAR) :
 
-    - Injection : ``<<<Style de toucher apprécié : FRONT_TO_REAR>>>``  
+    - Injection : ``<<<Touch style you like: FRONT_TO_REAR>>>``
     - ``ACTIONS: nod`` (réponse positive)
 
-  - Pour un **TOUCHER DÉTESTÉ** (par ex. REAR_TO_FRONT) :
+  - Pour un toucher **DÉTESTÉ** (ex. REAR_TO_FRONT) :
 
-    - Injection : ``<<<Style de toucher détesté : REAR_TO_FRONT>>>``  
-    - ``ACTIONS: backward`` (réaction d’évitement)
+    - Injection : ``<<<Touch style you hate: REAR_TO_FRONT>>>``
+    - ``ACTIONS: backward`` (réaction d'évitement)
 
-* **Cycle de vie des LEDs :**
+* **Cycle de vie des LED :**
 
-  - ``on_start`` → posture ASSISE, LEDs éteintes  
-  - ``before_listen`` → cyan (prêt)  
-  - ``before_think`` → jaune (traitement)  
-  - ``before_say`` → rose (parole)  
-  - ``after_say`` / ``on_finish_a_round`` → posture ASSISE, LEDs éteintes  
-  - ``on_stop`` → arrêter le flux d’actions et fermer les périphériques
+  - ``on_start`` → posture ASSISE, LED éteintes
+  - ``before_listen`` → cyan (prêt)
+  - ``before_think`` → jaune (traitement)
+  - ``before_say`` → rose (parle)
+  - ``after_say`` / ``on_finish_a_round`` → posture ASSISE, LED éteintes
+  - ``on_stop`` → arrête le flux d'actions et ferme les périphériques
 
-**Exemple d’interaction**
+**Exemple d'interaction**
 
 .. code-block:: text
 
-   You: Hey Buddy
-   Robot: Hi there!
+   Vous : Hey Buddy
+   Robot : Hi there!
 
-   You: Do a little nod for me.
-   Robot: Of course. Watch my majestic nod.
+   Vous : Fais un petit hochement de tête pour moi.
+   Robot : Bien sûr. Admirez mon hochement majestueux.
    ACTIONS: nod
 
-   (Front-to-rear touch on the head)
-   Robot: Ooooh, that’s nice!
+   (Toucher avant vers arrière sur la tête)
+   Robot : Ooooh, c'est agréable !
    ACTIONS: nod
 
-   (Moving too close)
-   Robot: Hey hey—too close! Backing up for safety.
+   (Trop près)
+   Robot : Hé hé—trop près ! Je recule pour plus de sécurité.
    ACTIONS: backward
 
 Code
 ----
-
 
 .. code-block:: python
 
@@ -273,16 +270,16 @@ Code
     if __name__ == '__main__':
         vad.run()
 
-Utiliser Ollama avec des Images
+Utiliser Ollama avec des images
 -------------------------------
 
-Par défaut, cet exemple utilise un modèle **texte uniquement** (par ex. ``llama3.2:3b``).  
-Si vous souhaitez que le robot **analyse ce qu’il voit via la caméra** (par ex. décrire ou raisonner sur la scène),  
+Par défaut, cet exemple utilise un modèle **texte seul** (ex. ``llama3.2:3b``).
+Si vous souhaitez que le robot **analyse ce qu'il voit via la caméra** (ex. décrire ou raisonner sur la scène),
 vous devez utiliser un **modèle multimodal** et activer le mode image.
 
-Pour cela :
+Pour ce faire :
 
-1. Dans l’application **Ollama**, sélectionnez un **modèle multimodal** comme ``llava:7b``.  
+1. Dans l'**application Ollama**, sélectionnez un **modèle multimodal** tel que ``llava:7b``.
 2. Dans votre code, définissez le même modèle et activez ``WITH_IMAGE = True``.
 
 Exemple :
@@ -293,41 +290,40 @@ Exemple :
 
    llm = LLM(
        ip="localhost",
-       model="llava:7b"   # modèle multimodal capable d’analyser les images
+       model="llava:7b"   # multimodal model that can analyze images
    )
 
    ...
 
-   WITH_IMAGE = True     # active la capture d’image depuis la caméra
+   WITH_IMAGE = True     # enable camera frame input
 
 .. note::
 
-   - Seuls les **modèles multimodaux** comme ``llava:7b`` peuvent traiter les images en entrée.  
-   - Les modèles texte uniquement (par ex. ``llama3.2:3b``) **ignoreront les images** même si ``WITH_IMAGE`` est activé.  
-   - L’image est automatiquement capturée par la caméra du robot et envoyée au LLM en même temps que votre commande vocale.
+   - Seuls les **modèles multimodaux** comme ``llava:7b`` peuvent traiter une entrée image.
+   - Les modèles texte seul (ex. ``llama3.2:3b``) **ignoreront les images** même si ``WITH_IMAGE`` est défini sur ``True``.
+   - L'image est automatiquement capturée depuis la caméra du robot et envoyée au LLM avec votre commande vocale.
 
 ----
 
-Dépannage & FAQ
----------------
+Dépannage et FAQ
+----------------
 
-* **Modèle trop volumineux (erreur mémoire)**
+* **Le modèle est trop volumineux (erreur mémoire)**
 
-  Utilisez un modèle plus petit comme ``moondream:1.8b`` ou exécutez Ollama sur une machine plus puissante.
+  Utilisez un modèle plus petit comme ``moondream:1.8b`` ou exécutez Ollama sur un ordinateur plus puissant.
 
-* **Aucune réponse d’Ollama**
+* **Pas de réponse d'Ollama**
 
-  Assurez-vous qu’Ollama est en cours d’exécution (``ollama serve`` ou application de bureau ouverte).  
-  Si vous utilisez un ordinateur distant, activez **Expose to network** et vérifiez l’adresse IP.
+  Assurez-vous qu'Ollama est en cours d'exécution (``ollama serve`` ou l'application de bureau ouverte). Si à distance, activez **Exposer au réseau** et vérifiez l'adresse IP.
 
-* **Vosk ne reconnaît pas la voix**
+* **Vosk ne reconnaît pas la parole**
 
   Vérifiez que votre microphone fonctionne. Essayez un autre pack de langue (``zh-cn``, ``es``, etc.) si nécessaire.
 
-* **Piper muet ou erreurs**
+* **Piper silencieux ou erreurs**
 
-  Assurez-vous que le modèle vocal choisi est bien téléchargé et testé dans :ref:`test_piper`.
+  Confirmez que le modèle vocal choisi est téléchargé et testé dans :ref:`test_piper`.
 
 * **Réponses trop longues ou hors sujet**
 
-  Modifiez ``INSTRUCTIONS`` pour ajouter : **« Reste concis et va droit au but. »**
+  Modifiez ``INSTRUCTIONS`` pour ajouter : **« Gardez les réponses courtes et précises. »**

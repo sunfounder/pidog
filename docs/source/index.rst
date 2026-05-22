@@ -33,7 +33,7 @@ Merci d'avoir choisi notre |link_Pi_Dog|.
         * |link_es_tutorials|
         * |link_it_tutorials|
         * |link_zh_tutorials|
-    
+
     Veuillez cliquer sur les liens correspondants pour accéder au document dans la langue de votre choix.
 
 PiDog est un robot de compagnie équipé d'une structure en alliage d'aluminium. Il peut agir comme un animal de compagnie mécanique, montrer de l'affection et interagir avec vous.
@@ -50,30 +50,30 @@ Si vous avez des questions, veuillez envoyer un e-mail à service@sunfounder.com
 Le produit est proposé en deux versions : Standard et V2.
 
 
-**Standard Version**
+**Version Standard**
 
 
     .. image:: img/pidog_v1_box.png
      :width: 500
 
 
-Conçue pour être compatible avec la plupart des modèles de Raspberry Pi, cette version offre l’ensemble des fonctionnalités du kit. Toutefois, ses servomoteurs et le Robot HAT ne sont pas compatibles avec le Raspberry Pi 5, ce qui rend la version standard inadaptée à ce modèle.
+Conçue pour être compatible avec la plupart des modèles de Raspberry Pi, cette version offre l'ensemble des fonctionnalités du kit. Toutefois, ses servomoteurs et le Robot HAT ne sont pas compatibles avec le Raspberry Pi 5, ce qui rend la version standard inadaptée à ce modèle.
 
 
-**V2 Version**
+**Version V2**
 
 
     .. image:: img/pidog_v2_box.png
      :width: 500
 
 
-Cette version améliorée intègre un Robot HAT et une configuration de servomoteurs mis à jour, assurant la compatibilité avec les Raspberry Pi 3/4/5 et Zero 2W. Les améliorations permettent d’élargir les possibilités créatives sur Raspberry Pi 5 tout en conservant la compatibilité avec les modèles précédents.
+Cette version améliorée intègre un Robot HAT et une configuration de servomoteurs mis à jour, assurant la compatibilité avec les Raspberry Pi 3/4/5 et Zero 2W. Les améliorations permettent d'élargir les possibilités créatives sur Raspberry Pi 5 tout en conservant la compatibilité avec les modèles précédents.
 
 Principales différences techniques :
 
 * Évolution matérielle : la V2 repense les pilotes de servomoteurs et les circuits du HAT pour répondre aux exigences de tension GPIO du RPi5
 * Couverture des modèles : la version Standard prend en charge les RPi 3B+/4B/Zero 2W ; la V2 ajoute la compatibilité avec le RPi5
-* Gestion de l’alimentation : la V2 optimise la distribution d’énergie pour répondre aux besoins en courant plus élevés du RPi5
+* Gestion de l'alimentation : la V2 optimise la distribution d'énergie pour répondre aux besoins en courant plus élevés du RPi5
 
 
 **Sommaire**

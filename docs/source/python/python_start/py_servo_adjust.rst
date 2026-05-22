@@ -17,6 +17,12 @@
 Réglage des Servomoteurs (Important)
 ===========================================
 
+
+.. warning::
+
+    Si votre PiDog est un modèle V2, veuillez ignorer cette section, car les angles des servomoteurs sont déjà réglés lors du montage.
+
+
 La plage d'angle du servomoteur est de -90 à 90°, mais l'angle défini en usine est aléatoire : il peut être de 0°, de 45° ou autre. Si nous l’assemblons avec cet angle par défaut, cela peut entraîner un comportement chaotique lorsque le robot exécute le code, voire pire, bloquer le servomoteur et provoquer sa surchauffe.
 
 Nous devons donc régler tous les angles des servomoteurs à 0° avant de les installer, afin que l’angle de chaque servo soit au centre, quelle que soit la direction de rotation.
@@ -36,9 +42,6 @@ Nous devons donc régler tous les angles des servomoteurs à 0° avant de les in
    
        cd ~/pidog/examples
        sudo python3 servo_zeroing.py
-   
-   .. note::
-       Si une erreur se produit, essayez de réactiver le port I2C du Raspberry Pi, consultez : :ref:`i2c_spi_config`.
 
 #. Ensuite, branchez le câble du servomoteur sur le port P11 comme suit. Vous verrez le bras du servomoteur se déplacer vers une position (il s'agit de la position 0°, qui est aléatoire et peut ne pas être verticale ou parallèle).
 
