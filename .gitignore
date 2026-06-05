@@ -1,2 +1,10 @@
+.vscode
 build*
+build/
+bk/
+photo
+test/photo*
+test/scene/*
+backups/*
+**secret*
 .claude/
