@@ -92,11 +92,23 @@ Q7: Do I need to calibrate the servos?
 
 Yes — **servo calibration is required for both Standard and V2 versions** to ensure stable movement and prevent damage.
 
-**V2 Version**  
+**V2 Version**
 
-Press the **zeroing button** on the Robot HAT to automatically set all servos to 0°. This simplifies the zeroing process without running a script.
+The Robot HAT on the V2 version has a **zeroing button**. Press it to automatically set all servos to 0° — no script needed.
 
-**Standard Version** 
+If your PiDog V2's legs are in the wrong position after assembly (for example, servos appear at strange angles or the robot cannot stand properly), you can use the zero button to fix this:
+
+#. Power on the PiDog.
+#. Press the **zero button** on the Robot HAT — all servos will forcibly return to 0°.
+#. Reassemble the legs in the correct orientation following the assembly instructions.
+
+For a step-by-step demonstration, watch the video below:
+
+.. raw:: html
+
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/zmN_mGxTKuU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+**Standard Version**
 
 Run the zeroing script **before installation**:
 
