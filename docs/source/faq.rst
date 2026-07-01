@@ -236,7 +236,28 @@ Q15: Why is the LED board not lighting up or blinking incorrectly?
 
 ----
 
-Q16: How does PiDog get power?
+Q16: Why are the 6-DOF IMU and 11-channel RGB board not working?
+-----------------------------------------------------------------
+
+If both the 6-DOF IMU and the 11-channel RGB LED board are not responding, the issue is likely with the shared I2C connection:
+
+#. Try connecting the 6-DOF IMU to a different port and test again.
+#. Connect the 6-DOF IMU directly to the Robot HAT's I2C port, then run the test:
+
+   .. code-block:: bash
+
+       cd ~/pidog/test && sudo python3 imu_test.py
+
+#. If the IMU works when connected directly, the problem is with the 11-channel RGB board's pass-through port.
+#. To confirm, connect the 11-channel RGB board directly to the I2C port and test:
+
+   .. code-block:: bash
+
+       cd ~/pidog/test && sudo python3 rgb_strip_test.py
+
+----
+
+Q17: How does PiDog get power?
 ------------------------------------------
 
 * Use a 5V 3A Type-C power adapter.  
