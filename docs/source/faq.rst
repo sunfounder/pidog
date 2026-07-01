@@ -108,16 +108,20 @@ For a step-by-step demonstration, watch the video below:
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/zmN_mGxTKuU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**Standard Version**
+**V1 Version**
 
-Run the zeroing script **before installation**:
+The V1 version uses a script to zero the servos. Run the following command — it will set all servos to 0°:
 
 .. code-block:: bash
 
    cd ~/pidog/examples
    sudo python3 servo_zeroing.py
 
-After installation (both versions), manually verify and fine-tune servo angles to align each limb with the calibration ruler to avoid instability, blocking, or mechanical stress and ensure smooth walking and accurate posture control.
+This should be done **before installation** to ensure each servo starts from the correct zero position. If your PiDog V1's legs are in the wrong position after assembly, re-run this script to reset all servos to 0°, then reassemble the legs correctly.
+
+
+
+After installation , manually verify and fine-tune servo angles to align each limb with the calibration ruler to avoid instability, blocking, or mechanical stress and ensure smooth walking and accurate posture control.
 
 ----
 
