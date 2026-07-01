@@ -29,7 +29,6 @@ WITH_IMAGE = True
 
 # Set models and languages
 LLM_MODEL = "gpt-4o-mini"
-TTS_MODEL = "en_US-ryan-low"
 STT_LANGUAGE = "en-us"
 
 # Enable wake word
