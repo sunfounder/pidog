@@ -37,18 +37,25 @@ If there's no sound:
 
 Run multiple times if needed.
 
-If you see the following error when running ``pip3 install``:
+----
 
-.. code-block:: text
+Q3: Why do I get a "piper-tts" error during installation?
+----------------------------------------------------------
 
-    ERROR: Could not find a version that satisfies the requirement piper-tts==1.3.0
-    ERROR: No matching distribution found for piper-tts==1.3.0
+.. important::
 
-This means you are using a **32-bit** Raspberry Pi OS. The ``piper-tts`` package only provides pre-built wheels for 64-bit systems. Reinstall your Raspberry Pi OS using the **64-bit** version and the installation will succeed.
+   If you see this error during ``pip3 install``:
+
+   .. code-block:: text
+
+       ERROR: Could not find a version that satisfies the requirement piper-tts==1.3.0
+       ERROR: No matching distribution found for piper-tts==1.3.0
+
+   It means you are using a **32-bit** Raspberry Pi OS. The ``piper-tts`` package only provides pre-built wheels for **64-bit** systems. Reinstall the OS using the **64-bit** version of Raspberry Pi OS and the installation will succeed.
 
 ----
 
-Q3: How do I run the first demo?
+Q4: How do I run the first demo?
 -------------------------------------
 
 .. code-block:: bash
@@ -60,7 +67,7 @@ PiDog will wake up, sit down, and wag its tail.
 
 ----
 
-Q4: What built-in actions and sounds are available?
+Q5: What built-in actions and sounds are available?
 ------------------------------------------------------
 
 * Actions: ``stand``, ``sit``, ``wag_tail``, ``trot``, etc.  
@@ -76,7 +83,7 @@ Enter numbers to trigger actions.
 
 ----
 
-Q5: How does PiDog use sensors?
+Q6: How does PiDog use sensors?
 -------------------------------------
 
 * **Ultrasonic**: Obstacle avoidance and patrol.  
@@ -85,7 +92,7 @@ Q5: How does PiDog use sensors?
 
 ----
 
-Q6: What AI features does PiDog support?
+Q7: What AI features does PiDog support?
 ------------------------------------------------------
 
 PiDog integrates with **TTS**, **STT**, and **LLM**:
@@ -96,7 +103,7 @@ PiDog integrates with **TTS**, **STT**, and **LLM**:
 
 ----
 
-Q7: Do I need to calibrate the servos?
+Q8: Do I need to calibrate the servos?
 ---------------------------------------------
 
 Yes — **servo calibration is required for both V1 and V2 versions** to ensure stable movement and prevent damage.
@@ -131,7 +138,7 @@ This should be done **before installation** to ensure each servo starts from the
 
 ----
 
-Q8: Why is my PiDog walking unstably?
+Q9: Why is my PiDog walking unstably?
 -----------------------------------------------
 
 * Confirm all servos were installed at 0°.  
@@ -141,7 +148,7 @@ Q8: Why is my PiDog walking unstably?
 
 ----
 
-Q9: Why is my camera not working?
+Q10: Why is my camera not working?
 --------------------------------------
 
 * Ensure the camera cable is **firmly inserted** into the CSI interface and the black locking tab is secured.  
@@ -151,7 +158,7 @@ Q9: Why is my camera not working?
 
 ----
 
-Q10: Why isn’t the speaker working?
+Q11: Why isn’t the speaker working?
 --------------------------------------
 
 * Make sure the Robot HAT speaker is enabled. If you haven’t run any PiDog example code yet, enable it first:
@@ -174,7 +181,7 @@ Q10: Why isn’t the speaker working?
 
 ----
 
-Q11: Why isn’t the microphone working?
+Q12: Why isn’t the microphone working?
 --------------------------------------
 
 * Check whether the system recognizes the microphone with:
@@ -194,7 +201,7 @@ Q11: Why isn’t the microphone working?
 
 ----
 
-Q12: Why isn’t the sound direction sensor working?
+Q13: Why isn’t the sound direction sensor working?
 -------------------------------------------------------
 
 * Ensure the sound direction sensor is connected to the correct SPI interface.  
@@ -204,7 +211,7 @@ Q12: Why isn’t the sound direction sensor working?
 
 ----
 
-Q13: Why doesn't the touch sensor respond?
+Q14: Why doesn't the touch sensor respond?
 ----------------------------------------------
 
 * Ensure all touch sensor cables are firmly connected.  
@@ -214,7 +221,7 @@ Q13: Why doesn't the touch sensor respond?
 
 ----
 
-Q14: Why is the LED board not lighting up or blinking incorrectly?
+Q15: Why is the LED board not lighting up or blinking incorrectly?
 ---------------------------------------------------------------------
 
 * Verify the LED board is powered by **3.3V** and connected to the I2C port.  
@@ -229,7 +236,7 @@ Q14: Why is the LED board not lighting up or blinking incorrectly?
 
 ----
 
-Q15: How does PiDog get power?
+Q16: How does PiDog get power?
 ------------------------------------------
 
 * Use a 5V 3A Type-C power adapter.  
