@@ -150,7 +150,15 @@ F9: Warum funktioniert meine Kamera nicht?
 F10: Warum funktioniert der Lautsprecher nicht?
 -----------------------------------------------
 
-* Überprüfe, ob die Lautstärke nicht stummgeschaltet ist und der I2S-Audiotreiber installiert wurde.  
+* Stelle sicher, dass der Robot HAT-Lautsprecher aktiviert ist. Wenn du noch keinen PiDog-Beispielcode ausgeführt hast, aktiviere ihn zuerst:
+
+  .. code-block:: bash
+
+     robot_hat enable_speaker
+
+  Dies muss nur einmal pro Systemstart durchgeführt werden. Das Ausführen eines beliebigen PiDog-Beispiels (das ``Pidog()`` initialisiert) erledigt dies automatisch.
+
+* Überprüfe, ob die Lautstärke nicht stummgeschaltet ist und der I2S-Audiotreiber installiert wurde.
 * Wenn kein Ton zu hören ist, konfiguriere I2S neu:
 
 .. code-block:: bash

@@ -57,6 +57,16 @@ Bevor du die Spracherkennung verwendest, solltest du sicherstellen, dass dein US
 
 #. Spiele die Aufnahme ab, um sie zu überprüfen:
 
+   .. important::
+
+      Der Robot HAT-Lautsprecher muss aktiviert werden, bevor Audio abgespielt werden kann. Wenn du noch keinen PiDog-Beispielcode ausgeführt hast, aktiviere ihn zuerst:
+
+      .. code-block:: bash
+
+         robot_hat enable_speaker
+
+      Dies muss nur einmal pro Systemstart durchgeführt werden. Das Ausführen eines beliebigen PiDog-Beispiels (das ``Pidog()`` initialisiert) erledigt dies automatisch.
+
    .. code-block:: bash
 
       aplay test.wav

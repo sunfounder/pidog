@@ -120,7 +120,15 @@ Fehlerbehebung
 
 * **Kein Ton bei Espeak oder Pico2Wave**
 
-  * Überprüfe, ob Lautsprecher/Kopfhörer angeschlossen und nicht stummgeschaltet sind.  
+  * Stelle sicher, dass der Robot HAT-Lautsprecher aktiviert ist. Wenn du noch keinen PiDog-Beispielcode ausgeführt hast, aktiviere ihn:
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    Dies muss nur einmal pro Systemstart durchgeführt werden.
+
+  * Überprüfe, ob Lautsprecher/Kopfhörer angeschlossen und nicht stummgeschaltet sind.
   * Führe einen kurzen Test im Terminal aus:
 
     .. code-block:: bash

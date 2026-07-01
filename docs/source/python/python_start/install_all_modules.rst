@@ -90,3 +90,11 @@ Alle Module installieren (Wichtig)
 
    .. note::
         Wenn nach dem Neustart kein Ton zu hören ist, musst du das Skript ``i2samp.sh`` möglicherweise mehrmals ausführen.
+
+        Wenn du außerdem versuchst, Audio direkt abzuspielen (z. B. mit ``aplay``), ohne vorher ein PiDog-Beispiel auszuführen, musst du den Lautsprecher manuell aktivieren:
+
+        .. code-block:: bash
+
+           robot_hat enable_speaker
+
+        Dies muss nur einmal pro Systemstart durchgeführt werden. Das Ausführen eines beliebigen PiDog-Beispiels (das ``Pidog()`` initialisiert) erledigt dies automatisch.

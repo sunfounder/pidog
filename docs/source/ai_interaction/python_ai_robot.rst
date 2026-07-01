@@ -222,9 +222,17 @@ Fehlerbehebung
   * Passe das Aktivierungswort an deine Aussprache an.
 
 * **Kein Ton aus dem Lautsprecher**
- 
-  * Überprüfe die TTS-Modellkonfiguration.  
-  * Teste Piper oder Espeak manuell.  
+
+  * Stelle sicher, dass der Robot HAT-Lautsprecher aktiviert ist. Wenn du noch keinen PiDog-Beispielcode ausgeführt hast, aktiviere ihn:
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    Dies muss nur einmal pro Systemstart durchgeführt werden.
+
+  * Überprüfe die TTS-Modellkonfiguration.
+  * Teste Piper oder Espeak manuell.
   * Überprüfe Lautsprecheranschluss und Lautstärke.
 
 * **API-Key-Fehler oder Zeitüberschreitung** 
