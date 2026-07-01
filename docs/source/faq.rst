@@ -148,7 +148,19 @@ Q9: Why is my PiDog walking unstably?
 
 ----
 
-Q10: Why is my camera not working?
+Q10: Servo zeroing works, but calibration example doesn't move any servo?
+--------------------------------------------------------------------------
+
+If the servo zeroing button works (servos return to 0°) but running the calibration example has no effect on any servo:
+
+* The servo zeroing is handled **directly by the Robot HAT** and does not require the Raspberry Pi.
+* Controlling servos from code, however, requires communication between the Raspberry Pi and the Robot HAT via the GPIO pins.
+* This issue is often caused by poor soldering on the **Raspberry Pi Zero 2W GPIO header pins** or the **Robot HAT female header pins**.
+* Take clear photos of both the Pi's GPIO pins and the Robot HAT's female header, then contact SunFounder support at service@sunfounder.com for assistance.
+
+----
+
+Q11: Why is my camera not working?
 --------------------------------------
 
 * Ensure the camera cable is **firmly inserted** into the CSI interface and the black locking tab is secured.  
@@ -158,7 +170,7 @@ Q10: Why is my camera not working?
 
 ----
 
-Q11: Why isn’t the speaker working?
+Q12: Why isn’t the speaker working?
 --------------------------------------
 
 * Make sure the Robot HAT speaker is enabled. If you haven’t run any PiDog example code yet, enable it first:
@@ -181,7 +193,7 @@ Q11: Why isn’t the speaker working?
 
 ----
 
-Q12: Why isn’t the microphone working?
+Q13: Why isn’t the microphone working?
 --------------------------------------
 
 * Check whether the system recognizes the microphone with:
@@ -201,7 +213,7 @@ Q12: Why isn’t the microphone working?
 
 ----
 
-Q13: Why isn’t the sound direction sensor working?
+Q14: Why isn’t the sound direction sensor working?
 -------------------------------------------------------
 
 * Ensure the sound direction sensor is connected to the correct SPI interface.  
@@ -211,7 +223,7 @@ Q13: Why isn’t the sound direction sensor working?
 
 ----
 
-Q14: Why doesn't the touch sensor respond?
+Q15: Why doesn't the touch sensor respond?
 ----------------------------------------------
 
 * Ensure all touch sensor cables are firmly connected.  
@@ -221,11 +233,31 @@ Q14: Why doesn't the touch sensor respond?
 
 ----
 
-Q15: Why is the LED board not lighting up or blinking incorrectly?
+Q16: Why is the ultrasonic sensor not working?
+-----------------------------------------------
+
+#. Run the ultrasonic test to check the reading:
+
+   .. code-block:: bash
+
+       cd ~/pidog/test && sudo python3 ultrasonic_test.py
+
+   If the reading shows **-1**, the sensor is not functioning correctly.
+
+#. Verify the wiring:
+
+   * **White wire** → GPIO **17**
+   * **Yellow wire** → GPIO **4**
+
+#. If the wiring is correct and the reading is still -1, contact SunFounder support at service@sunfounder.com for further assistance.
+
+----
+
+Q17: Why is the LED board not lighting up or blinking incorrectly?
 ---------------------------------------------------------------------
 
-* Verify the LED board is powered by **3.3V** and connected to the I2C port.  
-* Make sure **I2C is enabled** on the Raspberry Pi.  
+* Verify the LED board is powered by **3.3V** and connected to the I2C port.
+* Make sure **I2C is enabled** on the Raspberry Pi.
 * Run the following command to check if the board is recognized:
 
 .. code-block:: bash
@@ -236,7 +268,7 @@ Q15: Why is the LED board not lighting up or blinking incorrectly?
 
 ----
 
-Q16: Why are the 6-DOF IMU and 11-channel RGB board not working?
+Q18: Why are the 6-DOF IMU and 11-channel RGB board not working?
 -----------------------------------------------------------------
 
 If both the 6-DOF IMU and the 11-channel RGB LED board are not responding, the issue is likely with the shared I2C connection:
@@ -270,7 +302,7 @@ If both the 6-DOF IMU and the 11-channel RGB LED board are not responding, the i
 
 ----
 
-Q17: How does PiDog get power?
+Q19: How does PiDog get power?
 ------------------------------------------
 
 * Use a 5V 3A Type-C power adapter.  
