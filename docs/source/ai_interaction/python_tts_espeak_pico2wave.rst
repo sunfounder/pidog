@@ -120,7 +120,15 @@ Risoluzione dei problemi
 
 * **Nessun suono con Espeak o Pico2Wave**
 
-  * Controlla che gli altoparlanti o le cuffie siano collegati e che il volume non sia disattivato.  
+  * Assicurati che l’altoparlante del Robot HAT sia attivato. Se non hai ancora eseguito alcun codice di esempio PiDog, attivalo:
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    È sufficiente farlo una volta per ogni avvio.
+
+  * Controlla che gli altoparlanti o le cuffie siano collegati e che il volume non sia disattivato.
   * Esegui un test rapido nel terminale:
 
     .. code-block:: bash

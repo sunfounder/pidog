@@ -148,7 +148,15 @@ Q9: Perché la fotocamera non funziona?
 Q10: Perché l’altoparlante non funziona?
 -----------------------------------------
 
-* Assicurati che il volume non sia disattivato e che il driver audio I2S sia installato.  
+* Assicurati che l’altoparlante del Robot HAT sia attivato. Se non hai ancora eseguito alcun codice di esempio PiDog, attivalo prima:
+
+  .. code-block:: bash
+
+     robot_hat enable_speaker
+
+  È sufficiente farlo una volta per ogni avvio. Eseguire un qualsiasi esempio PiDog (che inizializza ``Pidog()``) lo fa automaticamente.
+
+* Assicurati che il volume non sia disattivato e che il driver audio I2S sia installato.
 * Se non si sente alcun suono, riconfigura I2S con:
 
 .. code-block:: bash

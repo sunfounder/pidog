@@ -221,9 +221,17 @@ Risoluzione dei Problemi
   * Regola la parola di attivazione per adattarla alla tua pronuncia.
 
 * **Nessun suono dall’altoparlante**
- 
-  * Verifica la configurazione del modello TTS.  
-  * Prova Piper o Espeak manualmente.  
+
+  * Assicurati che l’altoparlante del Robot HAT sia attivato. Se non hai ancora eseguito alcun codice di esempio PiDog, attivalo:
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    È sufficiente farlo una volta per ogni avvio.
+
+  * Verifica la configurazione del modello TTS.
+  * Prova Piper o Espeak manualmente.
   * Controlla la connessione e il volume dell’altoparlante.
 
 * **Errore nella chiave API o timeout** 
