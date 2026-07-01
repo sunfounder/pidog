@@ -223,6 +223,14 @@ Dépannage
 
 * **Aucun son du haut-parleur**
 
+  * Assurez-vous que le haut-parleur du Robot HAT est activé. Si vous n'avez pas encore exécuté de code d'exemple PiDog, activez-le :
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    Cela ne doit être fait qu'une fois par démarrage.
+
   * Vérifiez la configuration du modèle TTS.
   * Testez Piper ou Espeak manuellement.
   * Vérifiez la connexion du haut-parleur et le volume.

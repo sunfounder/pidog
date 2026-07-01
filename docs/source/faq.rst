@@ -132,6 +132,14 @@ Q9 : Pourquoi ma caméra ne fonctionne-t-elle pas ?
 Q10 : Pourquoi le haut-parleur ne fonctionne-t-il pas ?
 -------------------------------------------------------
 
+* Assurez-vous que le haut-parleur du Robot HAT est activé. Si vous n'avez pas encore exécuté de code d'exemple PiDog, activez-le d'abord :
+
+  .. code-block:: bash
+
+     robot_hat enable_speaker
+
+  Cela ne doit être fait qu'une fois par démarrage. L'exécution de n'importe quel exemple PiDog (qui initialise ``Pidog()``) le fait automatiquement.
+
 * Assurez-vous que le volume n'est pas coupé et que le pilote audio I2S est installé.
 * S'il n'y a pas de son, reconfigurez I2S avec les commandes suivantes :
 

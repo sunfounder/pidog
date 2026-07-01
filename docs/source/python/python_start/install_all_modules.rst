@@ -89,3 +89,11 @@ Installer tous les modules (Important)
 
    .. note::
        Si le son ne fonctionne pas après le redémarrage, vous devrez peut-être exécuter le script ``i2samp.sh`` plusieurs fois.
+
+       De plus, si vous essayez de lire du contenu audio directement (par ex., avec ``aplay``) sans avoir exécuté au préalable un exemple PiDog, vous devez activer le haut-parleur manuellement :
+
+       .. code-block:: bash
+
+          robot_hat enable_speaker
+
+       Cela ne doit être fait qu'une fois par démarrage. L'exécution de n'importe quel exemple PiDog (qui initialise ``Pidog()``) le fait automatiquement.

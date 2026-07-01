@@ -57,6 +57,16 @@ Avant d'utiliser la reconnaissance vocale, assurez-vous que votre microphone USB
 
 #. Écoutez-le pour confirmer l'enregistrement :
 
+   .. important::
+
+      Le haut-parleur du Robot HAT doit être activé avant de lire du contenu audio. Si vous n'avez pas encore exécuté de code d'exemple PiDog, activez-le d'abord :
+
+      .. code-block:: bash
+
+         robot_hat enable_speaker
+
+      Cela ne doit être fait qu'une fois par démarrage. L'exécution de n'importe quel exemple PiDog (qui initialise ``Pidog()``) le fait automatiquement.
+
    .. code-block:: bash
 
       aplay test.wav
