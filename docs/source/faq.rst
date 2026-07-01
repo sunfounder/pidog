@@ -241,6 +241,19 @@ Q16: Why are the 6-DOF IMU and 11-channel RGB board not working?
 
 If both the 6-DOF IMU and the 11-channel RGB LED board are not responding, the issue is likely with the shared I2C connection:
 
+#. First, check whether the devices are detected on the I2C bus:
+
+   .. code-block:: bash
+
+       sudo i2cdetect -y 1
+
+   The expected addresses are:
+
+   * **0x36** — 6-DOF IMU
+   * **0x74** — 11-channel RGB LED board
+
+   If one or both addresses are missing, the corresponding device is not properly connected.
+
 #. Try connecting the 6-DOF IMU to a different port and test again.
 #. Connect the 6-DOF IMU directly to the Robot HAT's I2C port, then run the test:
 
