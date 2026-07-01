@@ -193,6 +193,14 @@ Solución de Problemas
 
        tts.set_model("en_US-amy-low")
 
+  * Asegúrate de que el altavoz del Robot HAT esté activado. Si aún no has ejecutado ningún código de ejemplo de PiDog, actívalo:
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    Esto solo necesita hacerse una vez por arranque.
+
   * Verifica la salida de audio y volumen en tu Raspberry Pi (``alsamixer``) y que los altavoces estén conectados y con energía.
 
 * **Errores ALSA / de dispositivo de sonido (por ejemplo, “Audio device busy” o “No such file or directory”)**

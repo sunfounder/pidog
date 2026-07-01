@@ -147,7 +147,15 @@ P9: ¿Por qué no funciona mi cámara?
 P10: ¿Por qué no funciona el altavoz?
 --------------------------------------
 
-* Asegúrate de que el volumen no esté silenciado y de que el controlador de audio I2S esté instalado.  
+* Asegúrate de que el altavoz del Robot HAT esté activado. Si aún no has ejecutado ningún código de ejemplo de PiDog, actívalo primero:
+
+  .. code-block:: bash
+
+     robot_hat enable_speaker
+
+  Esto solo necesita hacerse una vez por arranque. Ejecutar cualquier ejemplo de PiDog (que inicializa ``Pidog()``) lo hace automáticamente.
+
+* Asegúrate de que el volumen no esté silenciado y de que el controlador de audio I2S esté instalado.
 * Si no hay sonido, vuelve a configurar I2S con:
 
 .. code-block:: bash

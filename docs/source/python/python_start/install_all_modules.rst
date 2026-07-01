@@ -88,3 +88,11 @@ Instalar Todos los Módulos (Importante)
    
    .. note::
        Si no hay sonido después de reiniciar, puede que necesites ejecutar el script ``i2samp.sh`` varias veces.
+
+       Además, si intentas reproducir audio directamente (por ejemplo, con ``aplay``) sin ejecutar antes un ejemplo de PiDog, debes activar el altavoz manualmente:
+
+       .. code-block:: bash
+
+          robot_hat enable_speaker
+
+       Esto solo necesita hacerse una vez por arranque. Ejecutar cualquier ejemplo de PiDog (que inicializa ``Pidog()``) lo hace automáticamente.

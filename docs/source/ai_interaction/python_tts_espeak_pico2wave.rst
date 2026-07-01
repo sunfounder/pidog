@@ -120,7 +120,15 @@ Solución de Problemas
 
 * **No hay sonido al usar Espeak o Pico2Wave**
 
-  * Verifica que tus altavoces o auriculares estén conectados y que el volumen no esté silenciado.  
+  * Asegúrate de que el altavoz del Robot HAT esté activado. Si aún no has ejecutado ningún código de ejemplo de PiDog, actívalo:
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    Esto solo necesita hacerse una vez por arranque.
+
+  * Verifica que tus altavoces o auriculares estén conectados y que el volumen no esté silenciado.
   * Realiza una prueba rápida en la terminal:
 
     .. code-block:: bash
