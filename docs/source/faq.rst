@@ -37,6 +37,15 @@ If there's no sound:
 
 Run multiple times if needed.
 
+If you see the following error when running ``pip3 install``:
+
+.. code-block:: text
+
+    ERROR: Could not find a version that satisfies the requirement piper-tts==1.3.0
+    ERROR: No matching distribution found for piper-tts==1.3.0
+
+This means you are using a **32-bit** Raspberry Pi OS. The ``piper-tts`` package only provides pre-built wheels for 64-bit systems. Reinstall your Raspberry Pi OS using the **64-bit** version and the installation will succeed.
+
 ----
 
 Q3: How do I run the first demo?
@@ -90,7 +99,7 @@ PiDog integrates with **TTS**, **STT**, and **LLM**:
 Q7: Do I need to calibrate the servos?
 ---------------------------------------------
 
-Yes — **servo calibration is required for both Standard and V2 versions** to ensure stable movement and prevent damage.
+Yes — **servo calibration is required for both V1 and V2 versions** to ensure stable movement and prevent damage.
 
 **V2 Version**
 
@@ -119,9 +128,6 @@ The V1 version uses a script to zero the servos. Run the following command — i
 
 This should be done **before installation** to ensure each servo starts from the correct zero position. If your PiDog V1's legs are in the wrong position after assembly, re-run this script to reset all servos to 0°, then reassemble the legs correctly.
 
-
-
-After installation , manually verify and fine-tune servo angles to align each limb with the calibration ruler to avoid instability, blocking, or mechanical stress and ensure smooth walking and accurate posture control.
 
 ----
 
