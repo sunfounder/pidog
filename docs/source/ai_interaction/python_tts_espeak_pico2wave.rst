@@ -120,7 +120,15 @@ Troubleshooting
 
 * **No sound when running Espeak or Pico2Wave**
 
-  * Check that your speakers/headphones are connected and volume is not muted.  
+  * Make sure the Robot HAT speaker is enabled. If you haven't run any PiDog example code yet, enable it:
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    This only needs to be done once per boot.
+
+  * Check that your speakers/headphones are connected and volume is not muted.
   * Run a quick test in terminal:
 
     .. code-block:: bash

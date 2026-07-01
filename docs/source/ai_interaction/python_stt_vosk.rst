@@ -57,6 +57,16 @@ Before using speech recognition, make sure your USB microphone works correctly.
 
 #. Play it back to confirm the recording:
 
+   .. important::
+
+      The Robot HAT speaker must be enabled before playing audio. If you haven't run any PiDog example code yet, enable it first:
+
+      .. code-block:: bash
+
+         robot_hat enable_speaker
+
+      This only needs to be done once per boot. Running any PiDog example (which initializes ``Pidog()``) does this automatically.
+
    .. code-block:: bash
 
       aplay test.wav

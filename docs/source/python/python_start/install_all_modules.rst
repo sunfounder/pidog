@@ -89,3 +89,11 @@ Install All the Modules(Important)
    
    .. note::
        If there is no sound after restarting, you may need to run the ``i2samp.sh`` script multiple times.
+
+       Additionally, if you try to play audio directly (e.g., with ``aplay``) without running a PiDog example first, you must enable the speaker manually:
+
+       .. code-block:: bash
+
+          robot_hat enable_speaker
+
+       This only needs to be done once per boot. Running any PiDog example (which initializes ``Pidog()``) does this automatically.

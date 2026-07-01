@@ -190,6 +190,14 @@ Troubleshooting
 
        tts.set_model("en_US-amy-low")
 
+  * Make sure the Robot HAT speaker is enabled. If you haven't run any PiDog example code yet, enable it:
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    This only needs to be done once per boot.
+
   * Check the audio output device/volume on your Pi (``alsamixer``), and that speakers are connected and powered.
 
 * **ALSA / sound device errors (e.g., “Audio device busy” or “No such file or directory”)**

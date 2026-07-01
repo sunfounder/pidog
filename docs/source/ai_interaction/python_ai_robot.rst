@@ -222,9 +222,17 @@ Troubleshooting
   * Adjust wake word to match your pronunciation.
 
 * **No sound from the speaker**
- 
-  * Verify TTS model setup.  
-  * Test Piper or Espeak manually.  
+
+  * Make sure the Robot HAT speaker is enabled. If you haven't run any PiDog example code yet, enable it:
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    This only needs to be done once per boot.
+
+  * Verify TTS model setup.
+  * Test Piper or Espeak manually.
   * Check speaker connection and volume.
 
 * **API Key error or timeout** 

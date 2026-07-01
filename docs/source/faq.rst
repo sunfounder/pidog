@@ -132,7 +132,15 @@ Q9: Why is my camera not working?
 Q10: Why isn’t the speaker working?
 --------------------------------------
 
-* Ensure the volume is not muted and the I2S audio driver is installed.  
+* Make sure the Robot HAT speaker is enabled. If you haven’t run any PiDog example code yet, enable it first:
+
+  .. code-block:: bash
+
+     robot_hat enable_speaker
+
+  This only needs to be done once per boot. Running any PiDog example (which initializes ``Pidog()``) does this automatically.
+
+* Ensure the volume is not muted and the I2S audio driver is installed.
 * If there’s no sound, reconfigure I2S with the following:
 
 .. code-block:: bash
