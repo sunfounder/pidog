@@ -192,6 +192,14 @@ OpenAI TTS をテストする
 
        tts.set_model("en_US-amy-low")
 
+  * Robot HATのスピーカーが有効化されていることを確認してください。まだPiDogのサンプルコードを実行していない場合は、有効化してください：
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    これは起動ごとに1回だけ実行すれば十分です。
+
   * Pi のオーディオ出力デバイスと音量（ ``alsamixer``）を確認し、スピーカーが接続・電源オンになっていることを確認してください。
 
 * **ALSA / サウンドデバイスのエラー（例: 「Audio device busy」 または 「No such file or directory」）**

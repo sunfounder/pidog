@@ -59,6 +59,16 @@ Vosk は、軽量な音声認識（STT）エンジンで、多くの言語をサ
 
 #. 再生して録音を確認：
 
+   .. important::
+
+      Robot HATのスピーカーは、音声を再生する前に有効化する必要があります。まだPiDogのサンプルコードを実行していない場合は、先に有効化してください：
+
+      .. code-block:: bash
+
+         robot_hat enable_speaker
+
+      これは起動ごとに1回だけ実行すれば十分です。PiDogのサンプルコード（``Pidog()`` を初期化するもの）を実行すると、自動的に有効化されます。
+
    .. code-block:: bash
 
       aplay test.wav
