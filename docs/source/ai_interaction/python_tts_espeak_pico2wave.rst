@@ -120,6 +120,14 @@ Pico2Wave 能产生比 Espeak 更自然、更像人声的语音。
 
 * **运行 Espeak 或 Pico2Wave 时没有声音**
 
+  * 确保 Robot HAT 扬声器已激活。如果您还没有运行过任何 PiDog 示例代码，请先激活它：
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    每次开机只需执行一次。
+
   * 检查扬声器/耳机是否连接好，音量是否未静音。
   * 在终端中快速测试：
 

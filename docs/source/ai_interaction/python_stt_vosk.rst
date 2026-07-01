@@ -57,6 +57,16 @@ Vosk 是一个轻量级的语音转文字（STT）引擎，支持多种语言，
 
 #. 播放以确认录音效果：
 
+   .. important::
+
+      Robot HAT 扬声器在播放音频之前必须被激活。如果您还没有运行过任何 PiDog 示例代码，请先激活它：
+
+      .. code-block:: bash
+
+         robot_hat enable_speaker
+
+      每次开机只需执行一次。运行任何 PiDog 示例（会初始化 ``Pidog()``）都会自动完成此操作。
+
    .. code-block:: bash
 
       aplay test.wav

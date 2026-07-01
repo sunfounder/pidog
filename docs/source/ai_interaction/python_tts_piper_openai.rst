@@ -190,6 +190,14 @@
 
        tts.set_model("en_US-amy-low")
 
+  * 确保 Robot HAT 扬声器已激活。如果您还没有运行过任何 PiDog 示例代码，请先激活它：
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    每次开机只需执行一次。
+
   * 检查 Pi 上的音频输出设备/音量（``alsamixer``），并确保扬声器已连接且通电。
 
 * **ALSA / 音频设备错误（例如 "Audio device busy" 或 "No such file or directory"）**

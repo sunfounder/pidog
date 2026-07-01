@@ -223,6 +223,14 @@
 
 * **扬声器没有声音**
 
+  * 确保 Robot HAT 扬声器已激活。如果您还没有运行过任何 PiDog 示例代码，请先激活它：
+
+    .. code-block:: bash
+
+       robot_hat enable_speaker
+
+    每次开机只需执行一次。
+
   * 验证 TTS 模型设置。
   * 手动测试 Piper 或 Espeak。
   * 检查扬声器连接和音量。

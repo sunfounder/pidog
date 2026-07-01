@@ -89,3 +89,11 @@
 
    .. note::
        如果重启后没有声音，你可能需要多次运行 ``i2samp.sh`` 脚本。
+
+       此外，如果您在未事先运行 PiDog 示例的情况下直接播放音频（例如使用 ``aplay``），则需要手动激活扬声器：
+
+       .. code-block:: bash
+
+          robot_hat enable_speaker
+
+       每次开机只需执行一次。运行任何 PiDog 示例（会初始化 ``Pidog()``）都会自动完成此操作。
