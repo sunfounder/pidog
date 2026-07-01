@@ -151,12 +151,25 @@ Q9: Why is my PiDog walking unstably?
 Q10: Servo zeroing works, but calibration example doesn't move any servo?
 --------------------------------------------------------------------------
 
-If the servo zeroing button works (servos return to 0°) but running the calibration example has no effect on any servo:
+If pressing the zeroing button moves all servos to 0° normally, but the calibration script cannot control any servo, the problem is likely a hardware connection issue between the Raspberry Pi and the Robot HAT.
 
-* The servo zeroing is handled **directly by the Robot HAT** and does not require the Raspberry Pi.
-* Controlling servos from code, however, requires communication between the Raspberry Pi and the Robot HAT via the GPIO pins.
-* This issue is often caused by poor soldering on the **Raspberry Pi Zero 2W GPIO header pins** or the **Robot HAT female header pins**.
-* Take clear photos of both the Pi's GPIO pins and the Robot HAT's female header, then contact SunFounder support at service@sunfounder.com for assistance.
+.. note::
+
+   The zeroing button is only available on **PiDog V2** (which uses Robot HAT V5). PiDog V1 does not have this feature and must use the ``servo_zeroing.py`` script instead.
+
+**Why this happens**
+
+* Servo zeroing is handled **directly by the Robot HAT** — it works independently without the Raspberry Pi.
+* Running calibration or any servo control from code requires the Raspberry Pi to communicate with the Robot HAT through the **GPIO header pins**.
+
+**How to diagnose**
+
+This is often caused by poor soldering on either side of the GPIO connection:
+
+* The **Raspberry Pi's 40-pin GPIO header** (especially on Zero 2W, where the header must be soldered on by the user).
+* The **Robot HAT's female header pins**.
+
+Take clear, well-lit photos of both sets of pins and send them to SunFounder support at service@sunfounder.com. The team will help identify whether resoldering is needed.
 
 ----
 
