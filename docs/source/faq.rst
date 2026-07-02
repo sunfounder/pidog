@@ -1,6 +1,6 @@
 .. note::
 
-    Hola, ¡bienvenido a la comunidad de entusiastas de SunFounder Raspberry Pi, Arduino y ESP32 en Facebook!  
+    Hola, ¡bienvenido a la comunidad de entusiastas de SunFounder Raspberry Pi, Arduino y ESP32 en Facebook!
     Profundiza en el mundo de Raspberry Pi, Arduino y ESP32 junto a otros entusiastas.
 
     **¿Por qué unirse?**
@@ -16,16 +16,18 @@
 FAQ
 ==========
 
-P1: ¿Qué versiones de PiDog están disponibles?
+Q1: ¿Qué versiones de PiDog están disponibles?
 ------------------------------------------------------
 
-PiDog está disponible en versiones **Estándar** y **V2**:
+PiDog está disponible en versiones **V1** y **V2**:
 
-* **Versión Estándar**: Compatible con Raspberry Pi 3B+/4B/Zero 2W, **no** compatible con Raspberry Pi 5.  
-* **Versión V2**: Compatible con Raspberry Pi 3/4/5 y Zero 2W. Mejora el HAT del robot y los circuitos del controlador de servos, y proporciona mejor soporte de energía para la Pi 5.  
+* **Versión V1**: Compatible con Raspberry Pi 3B+/4B/Zero 2W, **no** compatible con Raspberry Pi 5.
+* **Versión V2**: Compatible con Raspberry Pi 3/4/5 y Zero 2W. Mejora el HAT del robot y los circuitos del controlador de servos, y proporciona mejor soporte de energía para la Pi 5.
 * **Alimentación**: V2 cuenta con una mejor gestión de energía para aplicaciones de mayor consumo.
 
-P2: ¿Cómo instalo los módulos necesarios?
+----
+
+Q2: ¿Cómo instalo los módulos necesarios?
 --------------------------------------------------
 
 .. code-block:: bash
@@ -54,7 +56,23 @@ Ejecuta varias veces si es necesario.
 
 ----
 
-P3: ¿Cómo ejecuto la primera demostración?
+Q3: Why do I get a "piper-tts" error during installation?
+----------------------------------------------------------
+
+.. important::
+
+   If you see this error during ``pip3 install``:
+
+   .. code-block:: text
+
+       ERROR: Could not find a version that satisfies the requirement piper-tts==1.3.0
+       ERROR: No matching distribution found for piper-tts==1.3.0
+
+   It means you are using a **32-bit** Raspberry Pi OS. The ``piper-tts`` package only provides pre-built wheels for **64-bit** systems. Reinstall the OS using the **64-bit** version of Raspberry Pi OS and the installation will succeed.
+
+----
+
+Q4: ¿Cómo ejecuto la primera demostración?
 -------------------------------------------------------------------
 
 .. code-block:: bash
@@ -66,10 +84,10 @@ PiDog se despertará, se sentará y moverá la cola.
 
 ----
 
-P4: ¿Qué acciones y sonidos integrados están disponibles?
+Q5: ¿Qué acciones y sonidos integrados están disponibles?
 ------------------------------------------------------------
 
-* Acciones: ``stand``, ``sit``, ``wag_tail``, ``trot``, etc.  
+* Acciones: ``stand``, ``sit``, ``wag_tail``, ``trot``, etc.
 * Sonidos: ``bark``, ``howling``, ``pant``, etc.
 
 Ejecuta:
@@ -82,69 +100,107 @@ Introduce números para activar las acciones.
 
 ----
 
-P5: ¿Cómo utiliza PiDog los sensores?
+Q6: ¿Cómo utiliza PiDog los sensores?
 -------------------------------------
 
-* **Ultrasonido**: evita obstáculos y patrulla.  
-* **Táctil**: toque frontal = alerta; toque trasero = disfrute.  
+* **Ultrasonido**: evita obstáculos y patrulla.
+* **Táctil**: toque frontal = alerta; toque trasero = disfrute.
 * **Dirección del sonido**: responde a la dirección del sonido.
 
 ----
 
-P6: ¿Qué funciones de IA admite PiDog?
+Q7: ¿Qué funciones de IA admite PiDog?
 ------------------------------------------------------
 
 PiDog se integra con **TTS**, **STT** y **LLM**:
 
-* **TTS**: Espeak, Pico2Wave, Piper, OpenAI.  
-* **STT**: Vosk (sin conexión).  
+* **TTS**: Espeak, Pico2Wave, Piper, OpenAI.
+* **STT**: Vosk (sin conexión).
 * **LLM**: Ollama (local), OpenAI (en línea).
 
 ----
 
-P7: ¿Es necesario calibrar los servos?
+Q8: ¿Es necesario calibrar los servos?
 ---------------------------------------------
 
-Sí — **la calibración de los servos es obligatoria tanto para la versión Estándar como para la V2** para garantizar un movimiento estable y evitar daños.
+Sí — **la calibración de los servos es obligatoria tanto para la versión V1 como para la V2** para garantizar un movimiento estable y evitar daños.
 
-**Versión V2**  
+**Versión V2**
 
-Presiona el **botón de cero** en el Robot HAT para establecer automáticamente todos los servos en 0°. Esto simplifica el proceso sin necesidad de ejecutar un script.
+The Robot HAT on the V2 version has a **zeroing button**. Press it to automatically set all servos to 0° — no script needed.
 
-**Versión Estándar** 
+If your PiDog V2's legs are in the wrong position after assembly (for example, servos appear at strange angles or the robot cannot stand properly), you can use the zero button to fix this:
 
-Ejecuta el script de calibración **antes de la instalación**:
+#. Power on the PiDog.
+#. Press the **zero button** on the Robot HAT — all servos will forcibly return to 0°.
+#. Reassemble the legs in the correct orientation following the assembly instructions.
+
+For a step-by-step demonstration, watch the video below:
+
+.. raw:: html
+
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/zmN_mGxTKuU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+**Versión V1**
+
+The V1 version uses a script to zero the servos. Run the following command — it will set all servos to 0°:
 
 .. code-block:: bash
 
    cd ~/pidog/examples
    sudo python3 servo_zeroing.py
 
-Después de la instalación (en ambas versiones), verifica y ajusta manualmente los ángulos de los servos para alinear cada extremidad con la regla de calibración. Esto evita inestabilidad, bloqueos o estrés mecánico, y garantiza un movimiento suave y un control preciso de la postura.
+This should be done **before installation** to ensure each servo starts from the correct zero position. If your PiDog V1's legs are in the wrong position after assembly, re-run this script to reset all servos to 0°, then reassemble the legs correctly.
+
 
 ----
 
-P8: ¿Por qué mi PiDog camina de forma inestable?
+Q9: ¿Por qué mi PiDog camina de forma inestable?
 ---------------------------------------------------
 
-* Confirma que todos los servos estén instalados en 0°.  
-* Asegúrate de que los ángulos de los servos coincidan con la regla de calibración (60°/90°).  
-* Verifica que la batería esté completamente cargada.  
+* Confirma que todos los servos estén instalados en 0°.
+* Asegúrate de que los ángulos de los servos coincidan con la regla de calibración (60°/90°).
+* Verifica que la batería esté completamente cargada.
 * Aprieta todos los tornillos de los servos.
 
 ----
 
-P9: ¿Por qué no funciona mi cámara?
+Q10: Servo zeroing works, but calibration example doesn't move any servo?
+--------------------------------------------------------------------------
+
+If pressing the zeroing button moves all servos to 0° normally, but the calibration script cannot control any servo, the problem is likely a hardware connection issue between the Raspberry Pi and the Robot HAT.
+
+.. note::
+
+   The zeroing button is only available on **PiDog V2** (which uses Robot HAT V5). PiDog V1 does not have this feature and must use the ``servo_zeroing.py`` script instead.
+
+**Why this happens**
+
+* Servo zeroing is handled **directly by the Robot HAT** — it works independently without the Raspberry Pi.
+* Running calibration or any servo control from code requires the Raspberry Pi to communicate with the Robot HAT through the **GPIO header pins**.
+
+**How to diagnose**
+
+This is often caused by poor soldering on either side of the GPIO connection:
+
+* The **Raspberry Pi's 40-pin GPIO header** (especially on Zero 2W, where the header must be soldered on by the user).
+* The **Robot HAT's female header pins**.
+
+Take clear, well-lit photos of both sets of pins and send them to SunFounder support at service@sunfounder.com. The team will help identify whether resoldering is needed.
+
+----
+
+Q11: ¿Por qué no funciona mi cámara?
 --------------------------------------
 
-* Asegúrate de que el cable de la cámara esté **firmemente insertado** en la interfaz CSI y que la pestaña negra esté bien asegurada.  
-* **Apaga** la Raspberry Pi antes de conectar o desconectar la cámara para evitar daños.  
-* Prueba la cámara con ``libcamera-hello`` o ``raspistill`` para verificar que haya salida de imagen.  
+* Asegúrate de que el cable de la cámara esté **firmemente insertado** en la interfaz CSI y que la pestaña negra esté bien asegurada.
+* **Apaga** la Raspberry Pi antes de conectar o desconectar la cámara para evitar daños.
+* Prueba la cámara con ``libcamera-hello`` o ``raspistill`` para verificar que haya salida de imagen.
 * Vuelve a insertar el cable si está flojo o mal instalado.
 
 ----
 
-P10: ¿Por qué no funciona el altavoz?
+Q12: ¿Por qué no funciona el altavoz?
 --------------------------------------
 
 * Asegúrate de que el altavoz del Robot HAT esté activado. Si aún no has ejecutado ningún código de ejemplo de PiDog, actívalo primero:
@@ -167,7 +223,7 @@ P10: ¿Por qué no funciona el altavoz?
 
 ----
 
-P11: ¿Por qué no funciona el micrófono?
+Q13: ¿Por qué no funciona el micrófono?
 -------------------------------------------
 
 * Comprueba si el sistema reconoce el micrófono con:
@@ -182,36 +238,56 @@ P11: ¿Por qué no funciona el micrófono?
 
     arecord -D plughw:1,0 -f cd test.wav
 
-* Si no se graba audio, selecciona el dispositivo de entrada correcto en la configuración de audio o usa ``alsamixer`` para ajustar el volumen de entrada.  
+* Si no se graba audio, selecciona el dispositivo de entrada correcto en la configuración de audio o usa ``alsamixer`` para ajustar el volumen de entrada.
 * Asegúrate de que ningún otro proceso esté ocupando el dispositivo de entrada de audio.
 
 ----
 
-P12: ¿Por qué no funciona el sensor de dirección del sonido?
+Q14: ¿Por qué no funciona el sensor de dirección del sonido?
 ---------------------------------------------------------------------
 
-* Asegúrate de que el sensor esté conectado a la interfaz SPI correcta.  
-* Verifica que todos los cables estén bien conectados y no invertidos.  
-* Asegúrate de que la fuente de alimentación sea estable y que el sensor no esté obstruido.  
+* Asegúrate de que el sensor esté conectado a la interfaz SPI correcta.
+* Verifica que todos los cables estén bien conectados y no invertidos.
+* Asegúrate de que la fuente de alimentación sea estable y que el sensor no esté obstruido.
 * Reinicia el dispositivo y vuelve a ejecutar el script de ejemplo del sensor.
 
 ----
 
-P13: ¿Por qué no responde el sensor táctil?
+Q15: ¿Por qué no responde el sensor táctil?
 ----------------------------------------------
 
-* Asegúrate de que todos los cables del sensor táctil estén firmemente conectados.  
-* Recuerda: una señal **LOW** significa que el sensor está siendo tocado.  
-* Prueba el pin GPIO con ``gpio readall`` o código en Python para confirmar la detección de señal.  
+* Asegúrate de que todos los cables del sensor táctil estén firmemente conectados.
+* Recuerda: una señal **LOW** significa que el sensor está siendo tocado.
+* Prueba el pin GPIO con ``gpio readall`` o código en Python para confirmar la detección de señal.
 * Verifica nuevamente el cableado y la orientación.
 
 ----
 
-P14: ¿Por qué la placa LED no enciende o parpadea incorrectamente?
+Q16: Why is the ultrasonic sensor not working?
+-----------------------------------------------
+
+#. Run the ultrasonic test to check the reading:
+
+   .. code-block:: bash
+
+       cd ~/pidog/test && sudo python3 ultrasonic_test.py
+
+   If the reading shows **-1**, the sensor is not functioning correctly.
+
+#. Verify the wiring:
+
+   * **White wire** → GPIO **17**
+   * **Yellow wire** → GPIO **4**
+
+#. If the wiring is correct and the reading is still -1, contact SunFounder support at service@sunfounder.com for further assistance.
+
+----
+
+Q17: ¿Por qué la placa LED no enciende o parpadea incorrectamente?
 ---------------------------------------------------------------------
 
-* Verifica que la placa LED esté alimentada con **3.3V** y conectada al puerto I2C.  
-* Asegúrate de que **I2C esté habilitado** en la Raspberry Pi.  
+* Verifica que la placa LED esté alimentada con **3.3V** y conectada al puerto I2C.
+* Asegúrate de que **I2C esté habilitado** en la Raspberry Pi.
 * Ejecuta el siguiente comando para comprobar si la placa es reconocida:
 
 .. code-block:: bash
@@ -222,10 +298,46 @@ P14: ¿Por qué la placa LED no enciende o parpadea incorrectamente?
 
 ----
 
-P15: ¿Cómo se alimenta PiDog?
+Q18: Why are the 6-DOF IMU and 11-channel RGB board not working?
+-----------------------------------------------------------------
+
+If both the 6-DOF IMU and the 11-channel RGB LED board are not responding, the issue is likely with the shared I2C connection:
+
+#. First, check whether the devices are detected on the I2C bus:
+
+   .. code-block:: bash
+
+       sudo i2cdetect -y 1
+
+   The expected addresses are:
+
+   * **0x36** — 6-DOF IMU
+   * **0x74** — 11-channel RGB LED board
+
+   If one or both addresses are missing, the corresponding device is not properly connected.
+
+#. Try connecting the 6-DOF IMU to a different port and test again.
+#. Connect the 6-DOF IMU directly to the Robot HAT's I2C port, then run the test:
+
+   .. code-block:: bash
+
+       cd ~/pidog/test && sudo python3 imu_test.py
+
+#. If the IMU works when connected directly, the problem is with the 11-channel RGB board's pass-through port.
+#. To confirm, connect the 11-channel RGB board directly to the I2C port and test:
+
+   .. code-block:: bash
+
+       cd ~/pidog/test && sudo python3 rgb_strip_test.py
+
+----
+
+Q19: ¿Cómo se alimenta PiDog?
 ------------------------------------------
 
-* Usa un adaptador de corriente Type-C de 5V 3A.  
-* Luz roja = cargando, apagada = completamente cargada.  
-* Puedes alimentarlo mientras se carga.  
+* Usa un adaptador de corriente Type-C de 5V 3A.
+* Luz roja = cargando, apagada = completamente cargada.
+* Puedes alimentarlo mientras se carga.
 * Si el indicador no se enciende, cárgalo primero.
+
+----
