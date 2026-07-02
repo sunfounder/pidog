@@ -4,6 +4,25 @@ from secret import DOUBAO_API_KEY as API_KEY
 from pidog.dual_touch import TouchStyle
 from voice_active_dog import VoiceActiveDog
 
+# ── TTS engines ──────────────────────────────────────────────────────────
+# Pick one. The VoiceAssistant accepts any TTS instance via the `tts=` parameter.
+
+# Default: Piper — local neural TTS, offline, fast
+from pidog.tts import Piper
+tts = Piper(model="zh_CN-huayan-x_low")
+
+# EdgeTTS — free cloud TTS, 100+ voices, no API key
+# from pidog.tts import EdgeTTS
+# tts = EdgeTTS(voice="zh-CN-XiaoxiaoNeural")
+
+# Espeak — compact offline TTS, robotic, fastest
+# from pidog.tts import Espeak
+# tts = Espeak()
+
+# Pico2Wave — compact offline TTS
+# from pidog.tts import Pico2Wave
+# tts = Pico2Wave()
+
 llm = LLM(
     api_key=API_KEY,
     model="doubao-seed-1-6-250615",
@@ -28,7 +47,6 @@ HATE_TOUCH_STYLES = [TouchStyle.REAR_TO_FRONT]
 WITH_IMAGE = True
 
 # 设置模型和语言
-TTS_MODEL = "zh_CN-huayan-x_low"
 STT_LANGUAGE = "cn"
 
 # 是否开启键盘输入
@@ -93,7 +111,7 @@ vad = VoiceActiveDog(
     hate_touch_styles=HATE_TOUCH_STYLES,
     with_image=WITH_IMAGE,
     stt_language=STT_LANGUAGE,
-    tts_model=TTS_MODEL,
+    tts=tts,
     keyboard_enable=KEYBOARD_ENABLE,
     wake_enable=WAKE_ENABLE,
     wake_word=WAKE_WORD,

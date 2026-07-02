@@ -4,6 +4,25 @@ from secret import OPENAI_API_KEY as API_KEY
 from pidog.dual_touch import TouchStyle
 from voice_active_dog import VoiceActiveDog
 
+# ── TTS engines ──────────────────────────────────────────────────────────
+# Pick one. The VoiceAssistant accepts any TTS instance via the `tts=` parameter.
+
+# Default: Piper — local neural TTS, offline, fast
+from pidog.tts import Piper
+tts = Piper(model="en_US-ryan-low")
+
+# EdgeTTS — free cloud TTS, 100+ voices, no API key
+# from pidog.tts import EdgeTTS
+# tts = EdgeTTS(voice="en-US-AriaNeural")
+
+# Espeak — compact offline TTS, robotic, fastest
+# from pidog.tts import Espeak
+# tts = Espeak()
+
+# Pico2Wave — compact offline TTS
+# from pidog.tts import Pico2Wave
+# tts = Pico2Wave()
+
 llm = LLM(
     api_key=API_KEY,
     model="gpt-4o-mini",
@@ -28,7 +47,6 @@ HATE_TOUCH_STYLES = [TouchStyle.REAR_TO_FRONT]
 WITH_IMAGE = True
 
 # Set models and languages
-TTS_MODEL = "en_US-ryan-low"
 STT_LANGUAGE = "en-us"
 
 # Enable keyboard input
@@ -96,7 +114,7 @@ vad = VoiceActiveDog(
     hate_touch_styles=HATE_TOUCH_STYLES,
     with_image=WITH_IMAGE,
     stt_language=STT_LANGUAGE,
-    tts_model=TTS_MODEL,
+    tts=tts,
     keyboard_enable=KEYBOARD_ENABLE,
     wake_enable=WAKE_ENABLE,
     wake_word=WAKE_WORD,
