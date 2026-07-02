@@ -29,4 +29,3 @@ In this chapter you will find a description of each module's function, technical
     cpn_dual_touch
     cpn_rgb_board
     ../_shared/component/cpn_ultrasonic_module
-    ../_shared/component/cpn_battery_3pin
