@@ -174,7 +174,7 @@ Take clear, well-lit photos of both sets of pins and send them to SunFounder sup
 ----
 
 Q11 : Pourquoi ma caméra ne fonctionne-t-elle pas ?
---------------------------------------------------
+-------------------------------------------------------
 
 * Assurez-vous que le câble de la caméra est **fermement inséré** dans l'interface CSI et que la languette de verrouillage noire est bien sécurisée.
 * **Éteignez** le Raspberry Pi avant de brancher ou débrancher la caméra pour éviter tout dommage.
