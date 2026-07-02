@@ -12,47 +12,58 @@
 
     👉 准备好和我们一起探索和创造了吗？点击 [|link_sf_facebook|] 立即加入！
 
-组装视频
+Assemble Videos
 ==============================================
 
-在组装 PiDog 之前，请先确认所有零部件和组件均已齐全。如有任何缺失或损坏的组件，请立即通过 service@sunfounder.com 联系 SunFounder，以便尽快解决问题。
+Before assembling the PiDog, please first verify that all parts and components have been included. If there are any missing or damaged components, please contact SunFounder immediately at service@sunfounder.com to resolve the issue as soon as possible.
 
 .. Please follow the steps on the following PDF for assembly instructions:
 
 .. * :Download:`Component List and Assembly Instructions <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
 
-**在 PiDog 上安装 Raspberry Pi Zero 2W**
 
-如果您的板子是 Raspberry Pi Zero 2W，以下是将其安装到 PiDog 上的步骤。
+
+**PiDog V2 Assembly Tutorial (Raspberry Pi 4/5)**
+
+This video will walk you through the complete assembly process of the PiDog **V2** version, which is compatible with Raspberry Pi 4 and Raspberry Pi 5.
 
 .. note::
 
-    视频中的组装步骤可能与您手中的纸质说明略有不同。请优先遵循纸质说明书。如有任何步骤不清楚，您可以参考视频进行进一步确认。
+    The assembly steps in the video may differ slightly from the printed instructions you have. Please prioritize following the printed instructions. If any steps are unclear, you can refer to the video for further clarification.
+
+In this tutorial, you will learn:
+
+* **Preparation**: We'll introduce you to all the tools and parts needed, ensuring you're fully equipped before starting the assembly.
+
+* **Assembly Steps**: We'll demonstrate each assembly step in a systematic manner.
+
+* **Tips and Considerations**: Throughout the process, we'll share essential tips and tricks to help you avoid common mistakes and ensure your robot operates smoothly.
+
+* **Zeroing a Servo**: Before fixing each servo, it needs to be zeroed first. The steps for zeroing are to first install the Raspberry Pi OS, then install the required modules, and then run a script (set the angle of all PWM pins to 0). After that, plug in the servo wire to zero the servo.
+
 
 .. raw:: html
 
-    <iframe width="700" height="500" src="https://www.youtube.com/embed/Zfv-8O_Sq9s?si=ZT_6cy9uvupJ0Y_d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-之后，您可以继续按照下方视频从 **2:28** 开始的操作说明进行组装。
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/nF2B75uMxYI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
-**组装教程视频（Raspberry Pi 4/3/1 Model）**
+**PiDog V1 Assembly Tutorial (Raspberry Pi 4/3/1)**
 
-本视频将引导您完成从零开始组装机器人的整个过程。
+This video will walk you through the process of assembling your **V1** robot from scratch.
 
 .. note::
 
-    视频中的组装步骤可能与您手中的纸质说明略有不同。请优先遵循纸质说明书。如有任何步骤不清楚，您可以参考视频进行进一步确认。
+    The assembly steps in the video may differ slightly from the printed instructions you have. Please prioritize following the printed instructions. If any steps are unclear, you can refer to the video for further clarification.
 
-在本教程中，您将了解到：
+In this tutorial, you will learn:
 
-* **准备工作**：我们将向您介绍所需的所有工具和零件，确保您在开始组装前已准备就绪。
+* **Preparation**: We'll introduce you to all the tools and parts needed, ensuring you're fully equipped before starting the assembly.
 
-* **组装步骤**：我们将系统地演示每个组装步骤。
+* **Assembly Steps**: We'll demonstrate each assembly step in a systematic manner.
 
-* **提示与注意事项**：在整个过程中，我们将分享重要的技巧和小贴士，帮助您避免常见错误，确保机器人正常运行。
+* **Tips and Considerations**: Throughout the process, we'll share essential tips and tricks to help you avoid common mistakes and ensure your robot operates smoothly.
 
-* **舵机归零**：在固定每个舵机之前，需要先进行归零操作。归零的步骤是：先安装 Raspberry Pi OS，然后安装所需模块，接着运行脚本（将所有 PWM 引脚的角度设置为 0）。之后，插入舵机线即可完成舵机归零。
+* **Zeroing a Servo**: Before fixing each servo, it needs to be zeroed first. The steps for zeroing are to first install the Raspberry Pi OS, then install the required modules, and then run a script (set the angle of all PWM pins to 0). After that, plug in the servo wire to zero the servo.
 
 
 PiDog 的组装过程相当长，因此我们将其分为两个视频。第一个视频介绍 PiDog 的身体和四条腿的组装。
@@ -67,3 +78,17 @@ PiDog 的组装过程相当长，因此我们将其分为两个视频。第一�
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=AX3WbFDdah-NfETq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+**Mount Raspberry Pi Zero 2W on PiDog**
+
+If your mainboard is a Raspberry Pi Zero 2W, here are the steps to install it on the PiDog.
+
+.. note::
+
+    The assembly steps in the video may differ slightly from the printed instructions you have. Please prioritize following the printed instructions. If any steps are unclear, you can refer to the video for further clarification.
+
+.. raw:: html
+
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/Zfv-8O_Sq9s?si=ZT_6cy9uvupJ0Y_d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+Afterward, you can continue following the instructions in the video below from **2:28** onwards to assemble it.
