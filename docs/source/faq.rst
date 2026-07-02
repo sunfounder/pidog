@@ -18,10 +18,10 @@ FAQ
 Q1: PiDog にはどのバージョンがありますか？
 ------------------------------------------------------
 
-PiDog には **Standard** バージョンと **V2** バージョンがあります：
+PiDog には **V1** バージョンと **V2** バージョンがあります：
 
-* **Standard バージョン**：Raspberry Pi 3B+/4B/Zero 2W に対応。Raspberry Pi 5 には **非対応**。  
-* **V2 バージョン**：Raspberry Pi 3/4/5 および Zero 2W に対応。Robot HAT とサーボドライバー回路が改良され、Pi 5 への電力供給も強化されています。  
+* **V1 バージョン**：Raspberry Pi 3B+/4B/Zero 2W に対応。Raspberry Pi 5 には **非対応**。
+* **V2 バージョン**：Raspberry Pi 3/4/5 および Zero 2W に対応。Robot HAT とサーボドライバー回路が改良され、Pi 5 への電力供給も強化されています。
 * **電源供給**：V2 は消費電力の大きいアプリケーション向けに電源管理が強化されています。
 
 Q2: 必要なモジュールはどのようにインストールしますか？
@@ -53,7 +53,23 @@ Q2: 必要なモジュールはどのようにインストールしますか？
 
 ----
 
-Q3: 最初のデモはどのように実行しますか？
+Q3: Why do I get a "piper-tts" error during installation?
+----------------------------------------------------------
+
+.. important::
+
+   If you see this error during ``pip3 install``:
+
+   .. code-block:: text
+
+       ERROR: Could not find a version that satisfies the requirement piper-tts==1.3.0
+       ERROR: No matching distribution found for piper-tts==1.3.0
+
+   It means you are using a **32-bit** Raspberry Pi OS. The ``piper-tts`` package only provides pre-built wheels for **64-bit** systems. Reinstall the OS using the **64-bit** version of Raspberry Pi OS and the installation will succeed.
+
+----
+
+Q4: 最初のデモはどのように実行しますか？
 ------------------------------------------------
 
 .. code-block:: bash
@@ -65,10 +81,10 @@ PiDog が起動し、座ってしっぽを振ります。
 
 ----
 
-Q4: どのような組み込みアクションやサウンドがありますか？
+Q5: どのような組み込みアクションやサウンドがありますか？
 ------------------------------------------------------------------
 
-* アクション： ``stand``、 ``sit``、 ``wag_tail``、 ``trot`` など  
+* アクション： ``stand``、 ``sit``、 ``wag_tail``、 ``trot`` など
 * サウンド： ``bark``、 ``howling``、 ``pant`` など
 
 実行コマンド：
@@ -81,69 +97,107 @@ Q4: どのような組み込みアクションやサウンドがありますか�
 
 ----
 
-Q5: PiDog はセンサーをどのように使いますか？
+Q6: PiDog はセンサーをどのように使いますか？
 -------------------------------------------------
 
-* **超音波センサー**：障害物回避と巡回  
-* **タッチセンサー**：前側のタッチ＝警戒、後ろのタッチ＝喜び  
+* **超音波センサー**：障害物回避と巡回
+* **タッチセンサー**：前側のタッチ＝警戒、後ろのタッチ＝喜び
 * **音源方向**：音の方向に反応します
 
 ----
 
-Q6: PiDog はどのような AI 機能をサポートしていますか？
+Q7: PiDog はどのような AI 機能をサポートしていますか？
 ------------------------------------------------------
 
 PiDog は **TTS**、**STT**、および **LLM** と統合されています：
 
-* **TTS**：Espeak、Pico2Wave、Piper、OpenAI  
-* **STT**：Vosk（オフライン）  
+* **TTS**：Espeak、Pico2Wave、Piper、OpenAI
+* **STT**：Vosk（オフライン）
 * **LLM**：Ollama（ローカル）、OpenAI（オンライン）
 
 ----
 
-Q7: サーボのキャリブレーションは必要ですか？
+Q8: サーボのキャリブレーションは必要ですか？
 ---------------------------------------------
 
-はい。**Standard バージョンと V2 バージョンの両方でキャリブレーションが必要** です。これにより安定した動作を実現し、破損を防ぎます。
+はい。**V1 バージョンと V2 バージョンの両方でキャリブレーションが必要** です。これにより安定した動作を実現し、破損を防ぎます。
 
 **V2 バージョン**
 
-Robot HAT 上の **ゼロリセットボタン** を押すと、すべてのサーボが自動的に 0° に設定されます。スクリプトを実行せずにゼロ調整が可能です。
+The Robot HAT on the V2 version has a **zeroing button**. Press it to automatically set all servos to 0° — no script needed.
 
-**Standard バージョン**
+If your PiDog V2's legs are in the wrong position after assembly (for example, servos appear at strange angles or the robot cannot stand properly), you can use the zero button to fix this:
 
-組み立て前にゼロ調整スクリプトを実行します：
+#. Power on the PiDog.
+#. Press the **zero button** on the Robot HAT — all servos will forcibly return to 0°.
+#. Reassemble the legs in the correct orientation following the assembly instructions.
+
+For a step-by-step demonstration, watch the video below:
+
+.. raw:: html
+
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/zmN_mGxTKuU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+**V1 バージョン**
+
+The V1 version uses a script to zero the servos. Run the following command — it will set all servos to 0°:
 
 .. code-block:: bash
 
    cd ~/pidog/examples
    sudo python3 servo_zeroing.py
 
-組み立て後（両バージョン共通）、サーボ角度を手動で確認・微調整し、キャリブレーション定規に合わせて各脚を揃えます。これにより、動作の不安定化、引っかかり、機械的ストレスを防ぎ、スムーズな歩行と正確な姿勢制御を実現します。
+This should be done **before installation** to ensure each servo starts from the correct zero position. If your PiDog V1's legs are in the wrong position after assembly, re-run this script to reset all servos to 0°, then reassemble the legs correctly.
+
 
 ----
 
-Q8: なぜ PiDog の歩行が不安定なのですか？
+Q9: なぜ PiDog の歩行が不安定なのですか？
 -----------------------------------------------
 
-* すべてのサーボが 0° の状態で取り付けられていることを確認してください。  
-* サーボ角度がキャリブレーション定規（60°／90°）と一致しているか確認してください。  
-* バッテリーが十分に充電されていることを確認してください。  
+* すべてのサーボが 0° の状態で取り付けられていることを確認してください。
+* サーボ角度がキャリブレーション定規（60°／90°）と一致しているか確認してください。
+* バッテリーが十分に充電されていることを確認してください。
 * サーボのネジをしっかりと締めてください。
 
 ----
 
-Q9: カメラが動作しないのはなぜですか？
+Q10: Servo zeroing works, but calibration example doesn't move any servo?
+--------------------------------------------------------------------------
+
+If pressing the zeroing button moves all servos to 0° normally, but the calibration script cannot control any servo, the problem is likely a hardware connection issue between the Raspberry Pi and the Robot HAT.
+
+.. note::
+
+   The zeroing button is only available on **PiDog V2** (which uses Robot HAT V5). PiDog V1 does not have this feature and must use the ``servo_zeroing.py`` script instead.
+
+**Why this happens**
+
+* Servo zeroing is handled **directly by the Robot HAT** — it works independently without the Raspberry Pi.
+* Running calibration or any servo control from code requires the Raspberry Pi to communicate with the Robot HAT through the **GPIO header pins**.
+
+**How to diagnose**
+
+This is often caused by poor soldering on either side of the GPIO connection:
+
+* The **Raspberry Pi's 40-pin GPIO header** (especially on Zero 2W, where the header must be soldered on by the user).
+* The **Robot HAT's female header pins**.
+
+Take clear, well-lit photos of both sets of pins and send them to SunFounder support at service@sunfounder.com. The team will help identify whether resoldering is needed.
+
+----
+
+Q11: カメラが動作しないのはなぜですか？
 --------------------------------------
 
-* カメラケーブルが **CSI インターフェースにしっかりと差し込まれ**、黒いロックタブが固定されていることを確認してください。  
-* カメラの抜き差しは、Raspberry Pi の電源を **オフにしてから** 行ってください（破損防止）。  
-* ``libcamera-hello`` または ``raspistill`` を使用してカメラが画像を出力するかテストしてください。  
+* カメラケーブルが **CSI インターフェースにしっかりと差し込まれ**、黒いロックタブが固定されていることを確認してください。
+* カメラの抜き差しは、Raspberry Pi の電源を **オフにしてから** 行ってください（破損防止）。
+* ``libcamera-hello`` または ``raspistill`` を使用してカメラが画像を出力するかテストしてください。
 * ケーブルが緩んでいたり正しく接続されていない場合は、再度差し込み直してください。
 
 ----
 
-Q10: スピーカーが動作しないのはなぜですか？
+Q12: スピーカーが動作しないのはなぜですか？
 -----------------------------------------------------
 
 * Robot HATのスピーカーが有効化されていることを確認してください。まだPiDogのサンプルコードを実行していない場合は、先に有効化してください：
@@ -166,7 +220,7 @@ Q10: スピーカーが動作しないのはなぜですか？
 
 ----
 
-Q11: マイクが動作しないのはなぜですか？
+Q13: マイクが動作しないのはなぜですか？
 --------------------------------------------------
 
 * 以下のコマンドでシステムがマイクを認識しているか確認します：
@@ -181,36 +235,56 @@ Q11: マイクが動作しないのはなぜですか？
 
     arecord -D plughw:1,0 -f cd test.wav
 
-* 音声が録音されない場合は、正しい入力デバイスが選択されているか確認し、 ``alsamixer`` で入力音量を調整してください。  
+* 音声が録音されない場合は、正しい入力デバイスが選択されているか確認し、 ``alsamixer`` で入力音量を調整してください。
 * 他のプロセスがオーディオ入力デバイスを使用していないか確認してください。
 
 ----
 
-Q12: 音源方向センサーが動作しないのはなぜですか？
+Q14: 音源方向センサーが動作しないのはなぜですか？
 -------------------------------------------------------
 
-* 音源方向センサーが正しい SPI インターフェースに接続されていることを確認してください。  
-* すべてのケーブルがしっかりと接続され、逆向きになっていないか確認してください。  
-* 電源供給が安定していること、センサーが遮られていないことを確認してください。  
+* 音源方向センサーが正しい SPI インターフェースに接続されていることを確認してください。
+* すべてのケーブルがしっかりと接続され、逆向きになっていないか確認してください。
+* 電源供給が安定していること、センサーが遮られていないことを確認してください。
 * デバイスを再起動し、センサーのサンプルスクリプトを再実行してください。
 
 ----
 
-Q13: タッチセンサーが反応しないのはなぜですか？
+Q15: タッチセンサーが反応しないのはなぜですか？
 ----------------------------------------------------------
 
-* タッチセンサーのケーブルがしっかりと接続されていることを確認してください。  
-* **LOW 信号** はセンサーが触られている状態を意味します。  
-* ``gpio readall`` または Python コードで GPIO ピンの信号をテストしてください。  
+* タッチセンサーのケーブルがしっかりと接続されていることを確認してください。
+* **LOW 信号** はセンサーが触られている状態を意味します。
+* ``gpio readall`` または Python コードで GPIO ピンの信号をテストしてください。
 * 配線と接続方向を再確認してください。
 
 ----
 
-Q14: LED ボードが点灯しない、または点滅が不正なのはなぜですか？
+Q16: Why is the ultrasonic sensor not working?
+-----------------------------------------------
+
+#. Run the ultrasonic test to check the reading:
+
+   .. code-block:: bash
+
+       cd ~/pidog/test && sudo python3 ultrasonic_test.py
+
+   If the reading shows **-1**, the sensor is not functioning correctly.
+
+#. Verify the wiring:
+
+   * **White wire** → GPIO **17**
+   * **Yellow wire** → GPIO **4**
+
+#. If the wiring is correct and the reading is still -1, contact SunFounder support at service@sunfounder.com for further assistance.
+
+----
+
+Q17: LED ボードが点灯しない、または点滅が不正なのはなぜですか？
 ---------------------------------------------------------------------
 
-* LED ボードが **3.3V** で給電され、I2C ポートに接続されていることを確認してください。  
-* Raspberry Pi で **I2C が有効** になっていることを確認してください。  
+* LED ボードが **3.3V** で給電され、I2C ポートに接続されていることを確認してください。
+* Raspberry Pi で **I2C が有効** になっていることを確認してください。
 * 次のコマンドでボードが認識されているか確認します：
 
 .. code-block:: bash
@@ -221,12 +295,46 @@ Q14: LED ボードが点灯しない、または点滅が不正なのはなぜ�
 
 ----
 
-Q15: PiDog はどのように電源を供給しますか？
+Q18: Why are the 6-DOF IMU and 11-channel RGB board not working?
+-----------------------------------------------------------------
+
+If both the 6-DOF IMU and the 11-channel RGB LED board are not responding, the issue is likely with the shared I2C connection:
+
+#. First, check whether the devices are detected on the I2C bus:
+
+   .. code-block:: bash
+
+       sudo i2cdetect -y 1
+
+   The expected addresses are:
+
+   * **0x36** — 6-DOF IMU
+   * **0x74** — 11-channel RGB LED board
+
+   If one or both addresses are missing, the corresponding device is not properly connected.
+
+#. Try connecting the 6-DOF IMU to a different port and test again.
+#. Connect the 6-DOF IMU directly to the Robot HAT's I2C port, then run the test:
+
+   .. code-block:: bash
+
+       cd ~/pidog/test && sudo python3 imu_test.py
+
+#. If the IMU works when connected directly, the problem is with the 11-channel RGB board's pass-through port.
+#. To confirm, connect the 11-channel RGB board directly to the I2C port and test:
+
+   .. code-block:: bash
+
+       cd ~/pidog/test && sudo python3 rgb_strip_test.py
+
+----
+
+Q19: PiDog はどのように電源を供給しますか？
 -----------------------------------------------------
 
-* 5V 3A の Type-C 電源アダプタを使用します。  
-* 赤いランプ＝充電中、消灯＝充電完了です。  
-* 充電しながら動作させることができます。  
+* 5V 3A の Type-C 電源アダプタを使用します。
+* 赤いランプ＝充電中、消灯＝充電完了です。
+* 充電しながら動作させることができます。
 * インジケータが点灯しない場合は、まず充電してください。
 
 ----
