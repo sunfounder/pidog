@@ -12,49 +12,58 @@
 
     👉 Sind Sie bereit, mit uns zu erkunden und zu erschaffen? Klicken Sie auf [|link_sf_facebook|] und treten Sie heute bei!
 
-
-Videos zusammenstellen
+Assemble Videos
 ==============================================
 
-Bevor Sie den PiDog zusammenbauen, überprüfen Sie bitte zunächst, ob alle Teile und Komponenten enthalten sind. Wenn Teile fehlen oder beschädigt sind, wenden Sie sich bitte umgehend an SunFounder unter service@sunfounder.com, um das Problem so schnell wie möglich zu lösen.
+Before assembling the PiDog, please first verify that all parts and components have been included. If there are any missing or damaged components, please contact SunFounder immediately at service@sunfounder.com to resolve the issue as soon as possible.
 
-.. Bitte folgen Sie den Schritten in der folgenden PDF-Datei für die Montageanleitung:
+.. Please follow the steps on the following PDF for assembly instructions:
 
-.. * :Download:`Komponentenliste und Montageanleitung <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
+.. * :Download:`Component List and Assembly Instructions <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
 
-**Befestigen Sie Raspberry Pi Zero 2 W an PiDog**
 
-Wenn Ihr Hauptplatinencomputer ein Raspberry Pi Zero 2 W ist, sind hier die Schritte zur Installation auf dem PiDog.
+
+**PiDog V2 Assembly Tutorial (Raspberry Pi 4/5)**
+
+This video will walk you through the complete assembly process of the PiDog **V2** version, which is compatible with Raspberry Pi 4 and Raspberry Pi 5.
 
 .. note::
 
-    Die Montageschritte im Video können geringfügig von den gedruckten Anweisungen abweichen, die Sie haben. Bitte folgen Sie vorrangig den gedruckten Anweisungen. Sollten einige Schritte unklar sein, können Sie sich zur weiteren Klärung das Video ansehen.
+    The assembly steps in the video may differ slightly from the printed instructions you have. Please prioritize following the printed instructions. If any steps are unclear, you can refer to the video for further clarification.
+
+In this tutorial, you will learn:
+
+* **Preparation**: We'll introduce you to all the tools and parts needed, ensuring you're fully equipped before starting the assembly.
+
+* **Assembly Steps**: We'll demonstrate each assembly step in a systematic manner.
+
+* **Tips and Considerations**: Throughout the process, we'll share essential tips and tricks to help you avoid common mistakes and ensure your robot operates smoothly.
+
+* **Zeroing a Servo**: Before fixing each servo, it needs to be zeroed first. The steps for zeroing are to first install the Raspberry Pi OS, then install the required modules, and then run a script (set the angle of all PWM pins to 0). After that, plug in the servo wire to zero the servo.
+
 
 .. raw:: html
 
-    <iframe width="700" height="500" src="https://www.youtube.com/embed/Zfv-8O_Sq9s?si=ZT_6cy9uvupJ0Y_d" title="YouTube Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-Danach können Sie den Anweisungen im Video unten ab **2:28** folgen, um ihn zusammenzubauen.
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/nF2B75uMxYI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
-**Montageanleitungsvideo (Raspberry Pi 4/3/1 Modell)**
+**PiDog V1 Assembly Tutorial (Raspberry Pi 4/3/1)**
 
-In diesem Video wird der Prozess der Montage Ihres Roboters von Grund auf erklärt.
+This video will walk you through the process of assembling your **V1** robot from scratch.
 
 .. note::
-    
-    Die Montageschritte im Video können geringfügig von den gedruckten Anweisungen abweichen, die Sie haben. Bitte folgen Sie vorrangig den gedruckten Anweisungen. Sollten einige Schritte unklar sein, können Sie sich zur weiteren Klärung das Video ansehen.
 
+    The assembly steps in the video may differ slightly from the printed instructions you have. Please prioritize following the printed instructions. If any steps are unclear, you can refer to the video for further clarification.
 
-In diesem Tutorial erfahren Sie:
+In this tutorial, you will learn:
 
-* **Vorbereitung**: Wir stellen Ihnen alle benötigten Werkzeuge und Teile vor, um sicherzustellen, dass Sie vollständig ausgestattet sind, bevor Sie mit der Montage beginnen.
+* **Preparation**: We'll introduce you to all the tools and parts needed, ensuring you're fully equipped before starting the assembly.
 
-* **Montageschritte**: Wir demonstrieren jeden Montageschritt systematisch.
+* **Assembly Steps**: We'll demonstrate each assembly step in a systematic manner.
 
-* **Tipps und Überlegungen**: Während des gesamten Prozesses teilen wir wesentliche Tipps und Tricks, um Ihnen zu helfen, häufige Fehler zu vermeiden und sicherzustellen, dass Ihr Roboter reibungslos funktioniert.
+* **Tips and Considerations**: Throughout the process, we'll share essential tips and tricks to help you avoid common mistakes and ensure your robot operates smoothly.
 
-* **Nullsetzen eines Servos**: Bevor jeder Servo fixiert wird, muss er zuerst genullt werden. Die Schritte zum Nullsetzen sind, zuerst das Raspberry Pi OS zu installieren, dann die erforderlichen Module zu installieren und dann ein Skript auszuführen (den Winkel aller PWM-Pins auf 0 setzen). Anschließend das Servokabel anschließen, um das Servo zu nullen.
+* **Zeroing a Servo**: Before fixing each servo, it needs to be zeroed first. The steps for zeroing are to first install the Raspberry Pi OS, then install the required modules, and then run a script (set the angle of all PWM pins to 0). After that, plug in the servo wire to zero the servo.
 
 
 Der Montageprozess für den PiDog ist recht lang, daher haben wir ihn in zwei Videos aufgeteilt. Das erste Video behandelt den Zusammenbau von Pidogs Körper und vier Beinen.
@@ -69,3 +78,16 @@ Das zweite Video behandelt den Zusammenbau des Kopfes und die Kalibrierung.
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=AX3WbFDdah-NfETq" title="YouTube Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
+**Mount Raspberry Pi Zero 2W on PiDog**
+
+If your mainboard is a Raspberry Pi Zero 2W, here are the steps to install it on the PiDog.
+
+.. note::
+
+    The assembly steps in the video may differ slightly from the printed instructions you have. Please prioritize following the printed instructions. If any steps are unclear, you can refer to the video for further clarification.
+
+.. raw:: html
+
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/Zfv-8O_Sq9s?si=ZT_6cy9uvupJ0Y_d" title="YouTube Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+Afterward, you can continue following the instructions in the video below from **2:28** onwards to assemble it.
