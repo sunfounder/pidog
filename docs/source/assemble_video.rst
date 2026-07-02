@@ -21,24 +21,11 @@ Before assembling the PiDog, please first verify that all parts and components h
 
 .. * :Download:`Component List and Assembly Instructions <https://github.com/sunfounder/sf-pdf/raw/master/assembly_file/z0111v12-a0000966-pidog.pdf>`.
 
-**Mount Raspberry Pi Zero 2W on PiDog**
-
-If your mainboard is a Raspberry Pi Zero 2W, here are the steps to install it on the PiDog. 
-
-.. note::
-
-    The assembly steps in the video may differ slightly from the printed instructions you have. Please prioritize following the printed instructions. If any steps are unclear, you can refer to the video for further clarification.
-
-.. raw:: html
-
-    <iframe width="700" height="500" src="https://www.youtube.com/embed/Zfv-8O_Sq9s?si=ZT_6cy9uvupJ0Y_d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-Afterward, you can continue following the instructions in the video below from **2:28** onwards to assemble it.
 
 
-**Assembly Tutorial Video(Raspberry Pi 4/3/1 Model)**
+**PiDog V2 Assembly Tutorial (Raspberry Pi 4/5)**
 
-This video will walk you through the process of assembling your robot from scratch.
+This video will walk you through the complete assembly process of the PiDog **V2** version, which is compatible with Raspberry Pi 4 and Raspberry Pi 5.
 
 .. note::
 
@@ -55,7 +42,31 @@ In this tutorial, you will learn:
 * **Zeroing a Servo**: Before fixing each servo, it needs to be zeroed first. The steps for zeroing are to first install the Raspberry Pi OS, then install the required modules, and then run a script (set the angle of all PWM pins to 0). After that, plug in the servo wire to zero the servo.
 
 
-The assembly process for Pidog is quite long, so we have divided it into two videos. The first video covers assembling Pidog's body and four legs.
+.. raw:: html
+
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/nF2B75uMxYI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+**PiDog V1 Assembly Tutorial (Raspberry Pi 4/3/1)**
+
+This video will walk you through the process of assembling your **V1** robot from scratch.
+
+.. note::
+
+    The assembly steps in the video may differ slightly from the printed instructions you have. Please prioritize following the printed instructions. If any steps are unclear, you can refer to the video for further clarification.
+
+In this tutorial, you will learn:
+
+* **Preparation**: We'll introduce you to all the tools and parts needed, ensuring you're fully equipped before starting the assembly.
+
+* **Assembly Steps**: We'll demonstrate each assembly step in a systematic manner.
+
+* **Tips and Considerations**: Throughout the process, we'll share essential tips and tricks to help you avoid common mistakes and ensure your robot operates smoothly.
+
+* **Zeroing a Servo**: Before fixing each servo, it needs to be zeroed first. The steps for zeroing are to first install the Raspberry Pi OS, then install the required modules, and then run a script (set the angle of all PWM pins to 0). After that, plug in the servo wire to zero the servo.
+
+
+The assembly process for Pidog V1 is quite long, so we have divided it into two videos. The first video covers assembling Pidog's body and four legs.
 
 
 .. raw:: html
@@ -67,3 +78,17 @@ The second video covers assembling the head and calibration.
 .. raw:: html
 
     <iframe width="700" height="500" src="https://www.youtube.com/embed/witCWeoHTdk?si=AX3WbFDdah-NfETq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+**Mount Raspberry Pi Zero 2W on PiDog**
+
+If your mainboard is a Raspberry Pi Zero 2W, here are the steps to install it on the PiDog. 
+
+.. note::
+
+    The assembly steps in the video may differ slightly from the printed instructions you have. Please prioritize following the printed instructions. If any steps are unclear, you can refer to the video for further clarification.
+
+.. raw:: html
+
+    <iframe width="700" height="500" src="https://www.youtube.com/embed/Zfv-8O_Sq9s?si=ZT_6cy9uvupJ0Y_d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+Afterward, you can continue following the instructions in the video below from **2:28** onwards to assemble it.

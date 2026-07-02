@@ -219,7 +219,7 @@ Code
     - Sound direction sensor and 6-axis gyroscope
     - Entirely made of aluminum alloy
     - A pair of acrylic shoes
-    - Powered by a 7.4V 18650 battery pack with 2000mAh capacity
+    - Powered by a 7.4V Power Pack with 2000mAh capacity
 
     ## Actions You Can Perform:
     ["forward", "backward", "lie", "stand", "sit", "bark", "bark harder", "pant", "howling", "wag tail", "stretch", "push up", "scratch", "handshake", "high five", "lick hand", "shake head", "relax neck", "nod", "think", "recall", "head down", "fluster", "surprise"]
