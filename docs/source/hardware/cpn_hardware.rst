@@ -23,10 +23,9 @@ In questa sezione troverai una descrizione delle funzioni di ciascun modulo, dei
     :maxdepth: 1
 
     cpn_robot_hat
-    cpn_camera
+    ../_shared/component/cpn_camera_module
     cpn_sound_direction
     cpn_6dof_imu
     cpn_dual_touch
     cpn_rgb_board
-    cpn_ultrasonic
-    cpn_battery
+    ../_shared/component/cpn_ultrasonic_module
