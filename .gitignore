@@ -5,3 +5,6 @@ test/photo*
 test/scene/*
 backups/*
 **secret*
+build/*
+examples/*
+pidog.egg-info/*
