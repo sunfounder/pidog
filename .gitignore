@@ -8,3 +8,5 @@ backups/*
 build/*
 examples/*
 pidog.egg-info/*
+*/__pycache__/*
+*.egg-info/*
