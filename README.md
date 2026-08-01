@@ -129,3 +129,7 @@ python3-pyaudio (apt) — for robot_hat.music
 python3-opencv (apt) — for vilib, matches existing libopencv410 system libs
 flask (pip, in-venv) — for vilib's web streaming server
 Verified: import pidog, robot_hat, vilib now resolves to __init__.py, __init__.py, __init__.py respectively.
+
+# Python environment on raspberry PI
+
+In a terminal type 'source .venv/bin/activate' otherwise you will receive a 'no permission' error message.
