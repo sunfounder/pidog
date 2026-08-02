@@ -6,7 +6,6 @@ test/scene/*
 backups/*
 **secret*
 build/*
-examples/*
 pidog.egg-info/*
 */__pycache__/*
 *.egg-info/*
