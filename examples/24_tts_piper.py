@@ -1,3 +1,5 @@
+### the model files are downloaded to folder /home/pds/.piper_models
+
 from pidog.tts import Piper
 
 tts = Piper()
