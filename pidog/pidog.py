@@ -11,6 +11,7 @@ from .sh3001 import Sh3001
 from .rgb_strip import RGBStrip
 from .sound_direction import SoundDirection
 from .dual_touch import DualTouch
+from .action_flow import Operations
 import warnings
 warnings.filterwarnings("ignore") # ignore warnings for pygame # not work
 
@@ -920,7 +921,7 @@ class Pidog():
         self.servo_move(translate_list, speed)
 
     # do action
-    def do_action(self, action_name, step_count=1, speed=50, pitch_comp=0):
+    def do_action(self, action_name: Operations, step_count=1, speed=50, pitch_comp=0):
         try:
             actions, part = self.actions_dict[action_name]
             if part == 'legs':
