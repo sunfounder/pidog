@@ -24,13 +24,14 @@ tts = Piper(model="en_US-ryan-low")
 
 # If Ollama runs on the same Raspberry Pi, use "localhost".
 # If it runs on another computer in your LAN, replace with that computer's IP address.
+model = "qwen2.5:7b" # or "llama3.2"
 llm = LLM(
-    ip="localhost",
-    model="llama3.2:3b"   # you can replace with any model
+    ip="192.168.0.163",
+    model=model   # you can replace with any model
 )
 
 # Robot name
-NAME = "Buddy"
+NAME = "Scooby Doo"
 
 # Ultrasonic sensor sense too close distance in cm
 TOO_CLOSE = 10
@@ -89,11 +90,23 @@ User usually input with just text. But, we have special commands in format of <<
 
 ## Response Requirements
 ### Format
-You must respond in the following format:
-RESPONSE_TEXT
-ACTIONS: ACTION1, ACTION2, ...
+You MUST always reply using valid JSON.
+
+The JSON schema is:
+{{
+    "response_text": string,
+    "actions": [string]
+}}
 
 If the action is one of ["bark", "bark harder", "pant", "howling"], then do not provide RESPONSE_TEXT in the answer field.
+
+Never invent actions.
+
+If no physical action is appropriate, return
+
+"actions": []
+
+Return ONLY JSON.
 
 ### Style
 Tone: lively, positive, humorous, with a touch of arrogance
@@ -125,5 +138,18 @@ vad = VoiceActiveDog(
     disable_think=True,
 )
 
-if __name__ == '__main__':
+def main():    
     vad.run()
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        pass
+    except Exception as e:
+        print(f"\033[31mERROR: {e}\033[m")
+    finally:
+        print("closing ...")
+        
+        

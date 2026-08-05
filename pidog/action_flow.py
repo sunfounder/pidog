@@ -260,8 +260,7 @@ class ActionFlow():
             print(f'action error: {e}')
     
     def action_handler(self):
-        # standby_actions = [Operations.WAITING, Operations.FEET_SHAKE]
-        standby_actions = [Operations.FEET_SHAKE]
+        standby_actions = [Operations.WAITING, Operations.FEET_SHAKE]        
         standby_weights = [1, 0.3]
 
         action_interval = 5 # seconds
