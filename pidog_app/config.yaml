@@ -1,0 +1,33 @@
+# Pidog application configuration.
+# Override any value with the corresponding uppercase environment variable,
+# e.g. PIDOG_LLM_IP overrides llm.ip (dots -> underscores, prefix PIDOG_).
+
+dog:
+  name: "Scooby Doo"
+
+llm:
+  # Ollama runs on the laptop; expose it on the LAN in Ollama settings.
+  ip: "192.168.0.163"
+  port: 11434
+  # Must support tool/function calling: llama3.1, qwen2.5, mistral-nemo, ...
+  model: "qwen2.5:7b"
+  max_messages: 20
+
+io:
+  # "text" | "voice"
+  mode: "text"
+  voice:
+    stt_language: "en-us"
+    tts_model: "en_US-ryan-low"   # Piper model
+    wake_enable: true
+    wake_word: ["hey scooby"]
+    answer_on_wake: "Hi there"
+
+sensors:
+  too_close_cm: 10
+  like_touch_styles: ["front_to_rear"]
+  hate_touch_styles: ["rear_to_front"]
+
+vision:
+  camera_vflip: false
+  camera_hflip: false
