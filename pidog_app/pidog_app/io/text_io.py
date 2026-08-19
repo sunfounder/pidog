@@ -18,6 +18,7 @@ class TextIO(IO):
     def start(self) -> None:
         if self.welcome:
             print(self.welcome)
+        log.info("text io started")
 
     def listen(self) -> str:
         try:
@@ -27,6 +28,7 @@ class TextIO(IO):
 
     def speak(self, text: str) -> None:
         print(text)
+        log.info("reply: %s", text)
 
     def stop(self) -> None:
-        pass
+        log.info("text io stopped")

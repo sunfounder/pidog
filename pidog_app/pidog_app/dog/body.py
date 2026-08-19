@@ -25,12 +25,14 @@ class Body:
     # ── lifecycle ────────────────────────────────────────────────────────
     def start(self) -> None:
         """Start the action-flow thread and sit up."""
+        log.info("body starting")
         self.action_flow.start()
         self.dog.rgb_strip.close()
         self.change_posture(Posetures.SIT)
 
     def stop(self) -> None:
         """Stop actuators and release hardware cleanly."""
+        log.info("body stopping")
         try:
             self.action_flow.stop()
         finally:

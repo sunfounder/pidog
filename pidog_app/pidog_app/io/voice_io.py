@@ -44,6 +44,7 @@ class VoiceIO(IO):
 
     # ── lifecycle ────────────────────────────────────────────────────────
     def start(self) -> None:
+        log.info("voice io starting")
         if self.welcome:
             self.tts.say(self.welcome)
         if self.keyboard_enable:
@@ -55,6 +56,7 @@ class VoiceIO(IO):
 
     def stop(self) -> None:
         self._running = False
+        log.info("voice io stopping")
         try:
             self.stt.close()
         except Exception:
@@ -64,7 +66,9 @@ class VoiceIO(IO):
     def listen(self) -> str:
         # Drain any keyboard input first.
         if self._keyboard_text:
-            return self._keyboard_text.pop(0)
+            text = self._keyboard_text.pop(0)
+            log.info("keyboard input: %s", text)
+            return text
 
         while self._running:
             text = self.stt.listen().strip().lower()
@@ -81,6 +85,7 @@ class VoiceIO(IO):
                 self.speak(self.answer_on_wake)
                 continue
             if text:
+                log.info("heard: %s", text)
                 return text
         return "quit"
 
@@ -88,6 +93,7 @@ class VoiceIO(IO):
         if text:
             print(text)
             self.tts.say(text)
+            log.info("reply: %s", text)
 
     # ── keyboard fallback ────────────────────────────────────────────────
     def _keyboard_loop(self) -> None:

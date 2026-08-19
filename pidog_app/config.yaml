@@ -7,7 +7,7 @@ dog:
 
 llm:
   # Ollama runs on the laptop; expose it on the LAN in Ollama settings.
-  ip: "192.168.0.163"
+  ip: "192.168.0.136"
   port: 11434
   # Must support tool/function calling: llama3.1, qwen2.5, mistral-nemo, ...
   model: "qwen2.5:7b"
@@ -24,10 +24,14 @@ io:
     answer_on_wake: "Hi there"
 
 sensors:
-  too_close_cm: 10
+  too_close_cm: 15
   like_touch_styles: ["front_to_rear"]
   hate_touch_styles: ["rear_to_front"]
 
 vision:
   camera_vflip: false
   camera_hflip: false
+
+logging:
+  level: INFO
+  filename: app.log

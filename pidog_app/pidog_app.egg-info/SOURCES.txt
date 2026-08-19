@@ -1,8 +1,10 @@
+README.md
 pyproject.toml
 pidog_app/__init__.py
 pidog_app/__main__.py
 pidog_app/app.py
 pidog_app/config.py
+pidog_app/test_hardware.py
 pidog_app.egg-info/PKG-INFO
 pidog_app.egg-info/SOURCES.txt
 pidog_app.egg-info/dependency_links.txt

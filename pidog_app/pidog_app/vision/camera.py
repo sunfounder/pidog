@@ -47,6 +47,7 @@ class Camera:
             return
         _get_vilib().camera_close()
         self._started = False
+        log.info("camera closed")
 
     # ── capture ──────────────────────────────────────────────────────────
     def capture(self, name: str, path: str | Path = "photos") -> Path:
@@ -104,9 +105,9 @@ class Camera:
     def detected_faces(self) -> int:
         """Number of faces currently detected in the frame."""
         # Vilib exposes detector state via its `face_detect_*` attributes.
-        return getattr(Vilib, "face_detect_count", 0)
+        return getattr(_get_vilib(), "face_detect_count", 0)
 
     def detected_color(self) -> Optional[dict]:
         """Color detector result if any: ``{'color':..., 'x':..., 'y':...}``."""
-        info = getattr(Vilib, "color_detect_info", None)
+        info = getattr(_get_vilib(), "color_detect_info", None)
         return dict(info) if info else None

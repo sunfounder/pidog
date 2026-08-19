@@ -2,11 +2,35 @@
 
 This module builds the object graph (config -> dog -> senses -> camera ->
 features -> registry -> brain -> io) and runs the conversation loop.
+
+Run as a module (preferred):
+
+    python -m pidog_app
+
+It also works when launched directly by file path (e.g. from an IDE
+debugger) thanks to the bootstrap below.
 """
 from __future__ import annotations
 
 import logging
 import sys
+
+# ── bootstrap: allow running this file directly (e.g. from a debugger) ──
+# Relative imports (`from .config import ...`) only work when Python knows
+# this file belongs to the `pidog_app` package. That's true for
+# `python -m pidog_app` but NOT when an IDE runs the file by path. In that
+# case `__package__` is empty, so we re-launch via runpy as a module.
+if __package__ in (None, ""):
+    import os
+    import runpy
+
+    # Add the parent of the `pidog_app/` package dir to sys.path so the
+    # package is importable, then re-run as a module.
+    _pkg_parent = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if _pkg_parent not in sys.path:
+        sys.path.insert(0, _pkg_parent)
+    runpy.run_module("pidog_app", run_name="__main__")
+    raise SystemExit(0)
 
 from .config import Config, load_config
 from .dog import Body, Senses
@@ -22,6 +46,12 @@ from .brain import Brain
 from .io import TextIO, VoiceIO
 
 log = logging.getLogger(__name__)
+
+# Name of the parent logger that all ``pidog_app.*`` child loggers propagate
+# to. ``main()`` attaches a single ``FileHandler`` here so every subsystem's
+# records land in the same log file, while each module keeps its own child
+# logger name (e.g. ``pidog_app.brain.brain``) for fine-grained filtering.
+ROOT_LOGGER_NAME = "pidog_app"
 
 
 # ── dependency injection ──────────────────────────────────────────────────
@@ -120,6 +150,11 @@ class App:
     # ── main loop ────────────────────────────────────────────────────────
     def run(self) -> None:
         self.start()
+        voice = VoiceIO(            
+            stt_language="en-us",
+            tts_model="en_US-ryan-low",
+            keyboard_enable=True)
+        voice.speak("Hi there, I'm Scooby Doo. Ask me and I will do whatever you want. Type quit to stop playing.")
         try:
             while True:
                 user_text = self.io.listen()
@@ -135,13 +170,52 @@ class App:
             self.stop()
 
 
+def _level_to_int(value) -> int:
+    """Accept either a numeric level (e.g. ``20``) or a name (e.g. ``"INFO"``)."""
+    if isinstance(value, int):
+        return value
+    # ``getLevelName`` maps "INFO" -> 20 (and "WARN" -> 30, etc.).
+    level = logging.getLevelName(str(value).upper())
+    if isinstance(level, int):
+        return level
+    # Unknown level name -> fall back to INFO.
+    return logging.INFO
+
+
+def _configure_logging(cfg: Config) -> None:
+    """Attach a single ``FileHandler`` to the parent ``pidog_app`` logger.
+
+    Every subsystem uses a child logger (``pidog_app.brain.brain``,
+    ``pidog_app.dog.body``, ...) created via ``logging.getLogger(__name__)``.
+    Child loggers propagate their records up to this parent, so all output
+    lands in the configured log file while preserving the per-module name in
+    each record.
+
+    Reads ``logging.filename`` and ``logging.level`` from ``cfg`` (with
+    sensible defaults) so logging can be tuned from ``config.yaml``.
+    """
+    filename = cfg.get("logging.filename", "app.log")
+    level = _level_to_int(cfg.get("logging.level", logging.INFO))
+
+    root = logging.getLogger(ROOT_LOGGER_NAME)
+    root.setLevel(level)
+    # Avoid stacking duplicate handlers if main() is re-entered (e.g. tests).
+    if not any(isinstance(h, logging.FileHandler) and
+               getattr(h, "_pidog_app", False) for h in root.handlers):
+        handler = logging.FileHandler(filename)
+        handler.setLevel(level)
+        handler.setFormatter(logging.Formatter(
+            "%(asctime)s %(levelname)s %(name)s: %(message)s"
+        ))
+        handler._pidog_app = True  # marker so we don't add it twice
+        root.addHandler(handler)
+
+
 def main() -> int:
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
-    )
     config_path = sys.argv[1] if len(sys.argv) > 1 else None
-    app = build_app(config_path)
+    cfg = load_config(config_path)
+    _configure_logging(cfg)
+    app = App(cfg)
     app.run()
     return 0
 

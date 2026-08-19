@@ -13,7 +13,7 @@ from pathlib import Path
 
 from robot_hat import get_battery_voltage
 
-LOG_PATH = Path(__file__).resolve().parent.parent / "battery_log.txt"
+LOG_PATH = Path(__file__).resolve().parent.parent / "battery.log"
 INTERVAL_SEC = 300  # 5 minutes
 
 
