@@ -227,3 +227,34 @@ That's it — the brain picks it up automatically on the next run.
   matches how modern LLM frameworks work.
 - **IO abstraction** lets you develop with text and ship with voice
   without touching the brain or features.
+
+
+## Start on boot
+
+### Useful commands to manage the service
+
+systemctl --user start pidog-app — start now
+systemctl --user stop pidog-app — stop
+systemctl --user status pidog-app — check status
+journalctl --user -u pidog-app -f — live logs
+systemctl --user disable pidog-app — disable autostart
+
+### Location of the service file
+
+/home/pds/.config/systemd/user/pidog-app.service
+
+### Content of service file
+
+[Unit]
+Description=Pidog AI robot dog application
+After=graphical-session.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pds
+ExecStart=/home/pds/.venv/bin/python -m pidog_app /home/pds/pidog/pidog_app/config.yaml
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
