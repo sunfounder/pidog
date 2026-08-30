@@ -1,0 +1,1 @@
+from robot_hat.voice_assistant import VoiceAssistant
