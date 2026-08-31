@@ -21,7 +21,7 @@ io:
     tts_model: "en_US-ryan-low"   # Piper model
     wake_enable: true
     wake_word: ["hey scooby"]
-    answer_on_wake: "Hi there"
+    answer_on_wake: "Hi there buddy"
 
 sensors:
   too_close_cm: 15

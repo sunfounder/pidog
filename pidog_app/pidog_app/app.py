@@ -149,12 +149,11 @@ class App:
 
     # ── main loop ────────────────────────────────────────────────────────
     def run(self) -> None:
-        self.start()
-        voice = VoiceIO(            
-            stt_language="en-us",
-            tts_model="en_US-ryan-low",
-            keyboard_enable=True)
-        voice.speak("Hi there, I'm Scooby Doo. Ask me and I will do whatever you want. Type quit to stop playing.")
+        self.start()        
+        self.voice.speak("Hi there, I'm Scooby Doo. How can I help you today my human friend.")
+        time.sleep(1)
+        self.voice.speak("Type quit to stop playing.")
+        self.body.light(mode="breath", color="yellow", speed=1)
         try:
             while True:
                 user_text = self.io.listen()
