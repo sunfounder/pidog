@@ -38,6 +38,9 @@ class Body:
         finally:
             self.dog.close()
 
+    def read_energy_level(self) -> float:
+        return self.dog.read_battery_voltage()
+
     # ── posture ──────────────────────────────────────────────────────────
     def change_posture(self, posture: Posetures) -> None:
         self.action_flow.change_poseture(posture)
@@ -64,9 +67,9 @@ class Body:
         self.action_flow.set_status(status)
 
     # ── chest light strip ────────────────────────────────────────────────
-    def light(self, mode: str, color: str, speed: int = 1) -> None:
+    def light(self, mode: str, color: str, speed: int = 1, brightness: float = 1.0) -> None:
         """Set the chest RGB strip mode (e.g. 'breath', 'listen', 'close')."""
-        self.dog.rgb_strip.set_mode(mode, color, speed)
+        self.dog.rgb_strip.set_mode(mode, color, speed, brightness)
 
     def light_off(self) -> None:
         self.dog.rgb_strip.close()

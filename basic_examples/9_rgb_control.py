@@ -26,24 +26,56 @@ import time
 
 my_dog = Pidog()
 
-while True:
-    # style="breath", color="pink"
-    my_dog.rgb_strip.set_mode(style="breath", color='pink')
-    time.sleep(3)
+# while True:
+#     # style="breath", color="pink"
+#     my_dog.rgb_strip.set_mode(style="breath", color='pink')
+#     time.sleep(3)
 
-    # style:"listen", color=[0, 255, 255]
-    my_dog.rgb_strip.set_mode(style="listen", color=[0, 255, 255])
-    time.sleep(3)
+#     # style:"listen", color=[0, 255, 255]
+#     my_dog.rgb_strip.set_mode(style="listen", color=[0, 255, 255])
+#     time.sleep(3)
 
-    # style:"boom", color="#a10a0a"
-    my_dog.rgb_strip.set_mode(style="boom", color="#a10a0a")
-    time.sleep(3)
+#     # style:"boom", color="#a10a0a"
+#     my_dog.rgb_strip.set_mode(style="boom", color="#a10a0a")
+#     time.sleep(3)
 
-    # style:"boom", color="#a10a0a", brightness=0.5, bps=2.5
-    my_dog.rgb_strip.set_mode(style="boom", color="#a10a0a", bps=2.5, brightness=0.5)
-    time.sleep(3)
+#     # style:"boom", color="#a10a0a", brightness=0.5, bps=2.5
+#     my_dog.rgb_strip.set_mode(style="boom", color="#a10a0a", bps=2.5, brightness=0.5)
+#     time.sleep(3)
 
-    # close
-    my_dog.rgb_strip.close()
-    time.sleep(2)
+#     # close
+#     my_dog.rgb_strip.close()
+#     time.sleep(2)
 
+
+
+# STYLES = ["monochromatic",
+#     "breath",
+#     "boom",
+#     "bark",
+#     "speak",
+#     "listen"]
+
+# for style in STYLES:
+#     my_dog.rgb_strip.set_mode(style=style, color="white")
+#     time.sleep(3)
+#     my_dog.rgb_strip.close()
+#     time.sleep(1)
+
+
+my_dog.rgb_strip.set_mode(style="monochromatic", color="white")
+bps = 2
+brightness = 1.0
+for i in range(5):    
+    my_dog.rgb_strip.set_mode(style="monochromatic", color="white", bps=bps, brightness=brightness)
+    print(f"bps: {bps}, brightness: {brightness}")
+    time.sleep(0.5)
+    bps /= 2
+    brightness -= 0.2
+bps *= 2
+brightness += 0.2
+my_dog.rgb_strip.set_mode(style="monochromatic", color="red", bps=bps, brightness=brightness)
+print(f"bps: {bps}, brightness: {brightness}")
+time.sleep(0.5)
+my_dog.rgb_strip.close()
+my_dog.close()

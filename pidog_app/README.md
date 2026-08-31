@@ -233,11 +233,11 @@ That's it — the brain picks it up automatically on the next run.
 
 ### Useful commands to manage the service
 
-systemctl --user start pidog-app — start now
-systemctl --user stop pidog-app — stop
-systemctl --user status pidog-app — check status
-journalctl --user -u pidog-app -f — live logs
-systemctl --user disable pidog-app — disable autostart
+systemctl --user start pidog-app —> start now
+systemctl --user stop pidog-app —> stop
+systemctl --user status pidog-app —> check status
+journalctl --user -u pidog-app -f —> live logs
+systemctl --user disable pidog-app —> disable autostart
 
 ### Location of the service file
 
@@ -258,3 +258,26 @@ RestartSec=10
 
 [Install]
 WantedBy=default.target
+
+
+## Connect to the PiDog
+
+To connect to the PiDog, you can use the following command to connect to the host:
+
+```bash
+ssh user@<pi_dog_ip_address> or ssh user@<hostname>.local
+
+ssh pds@192.168.0.197 or ssh pds@nova.local
+```
+
+If you started your application via a service and you want to connect and be able to type input you:
+- install tmux on the Pi first
+- update the pidog-app.service file to use Type=forking and launch the app inside a detached tmux session named pidog.
+- the app now has a real TTY, so input() works normally
+
+To connect to the app after connecting to the host:
+
+```bash
+tmux attach -t pidog
+```
+

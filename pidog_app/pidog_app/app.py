@@ -11,9 +11,11 @@ It also works when launched directly by file path (e.g. from an IDE
 debugger) thanks to the bootstrap below.
 """
 from __future__ import annotations
+from datetime import datetime
 
 import logging
 import sys
+import time
 
 # ── bootstrap: allow running this file directly (e.g. from a debugger) ──
 # Relative imports (`from .config import ...`) only work when Python knows
@@ -103,6 +105,10 @@ class App:
             vflip=cfg.get("vision.camera_vflip", False),
             hflip=cfg.get("vision.camera_hflip", False),
         )
+        self.voice = VoiceIO(            
+            stt_language="en-us",
+            tts_model="en_US-ryan-low",
+            keyboard_enable=True)
         self.registry = FeatureRegistry(
             build_features(self.body, self.senses, self.camera)
         )
@@ -150,19 +156,14 @@ class App:
     # ── main loop ────────────────────────────────────────────────────────
     def run(self) -> None:
         self.start()        
-        self.voice.speak("Hi there, I'm Scooby Doo. How can I help you today my human friend.")
-        time.sleep(1.5)
+        self.voice.speak("Hi there, I'm Scooby Doo. How can I help you today my human buddy.")
+        time.sleep(1)
         self.voice.speak("Type quit to stop playing.")
         self.body.light(mode="breath", color="yellow", speed=1)
-        sleep_delay = self.cfg.get("sleep_delay", 30)
-        awake_time = datetime.now()
         try:
             while True:
                 user_text = self.io.listen()
                 if not user_text:
-                    if (datetime.now() - awake_time).seconds > sleep_delay:
-                        self.body.lie()
-                        self.body.light(mode="off")
                     continue
                 if user_text.strip().lower() in {"quit", "exit"}:
                     break
@@ -171,8 +172,9 @@ class App:
         except KeyboardInterrupt:
             pass
         finally:
-            self.stop()
-
+            _quit_dog_gracefully(self)
+            _log_energy_level(self, "Stop")
+            self.stop()            
 
 def _level_to_int(value) -> int:
     """Accept either a numeric level (e.g. ``20``) or a name (e.g. ``"INFO"``)."""
@@ -184,7 +186,6 @@ def _level_to_int(value) -> int:
         return level
     # Unknown level name -> fall back to INFO.
     return logging.INFO
-
 
 def _configure_logging(cfg: Config) -> None:
     """Attach a single ``FileHandler`` to the parent ``pidog_app`` logger.
@@ -214,12 +215,32 @@ def _configure_logging(cfg: Config) -> None:
         handler._pidog_app = True  # marker so we don't add it twice
         root.addHandler(handler)
 
+def _quit_dog_gracefully(self) -> None:    
+    bps = 2
+    brightness = 1.0
+    for i in range(5):    
+        self.body.light(mode="monochromatic", color="white", speed=bps, brightness=brightness)
+        time.sleep(0.5)
+        bps /= 2
+        brightness -= 0.2
+    bps *= 2
+    brightness += 0.2
+    self.body.light(mode="monochromatic", color="red", speed=bps, brightness=brightness)
+    time.sleep(0.5)
+    self.body.light_off()
+
+def _log_energy_level(self, message: str):
+    """Read the battery voltage once and append ``timestamp,voltage`` to the log file."""
+    log_message = f"{message} - Battery Voltage: {self.body.read_energy_level():.2f}V"
+    log.info(log_message)   
+    print(log_message)
 
 def main() -> int:
     config_path = sys.argv[1] if len(sys.argv) > 1 else None
     cfg = load_config(config_path)
     _configure_logging(cfg)
     app = App(cfg)
+    _log_energy_level(app, "Start")
     app.run()
     return 0
 

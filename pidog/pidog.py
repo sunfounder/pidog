@@ -12,6 +12,7 @@ from .rgb_strip import RGBStrip
 from .sound_direction import SoundDirection
 from .dual_touch import DualTouch
 from .action_flow import Operations
+from robot_hat.device import get_battery_voltage
 import warnings
 warnings.filterwarnings("ignore") # ignore warnings for pygame # not work
 
@@ -267,6 +268,21 @@ class Pidog():
 
     def read_distance(self):
         return round(self.distance.value, 2)
+
+    def read_battery_voltage(self) -> float:
+        """Read the battery pack voltage in volts.
+        
+        Shutdown at 7.35V is normal – The battery protection circuit is working correctly and cutting off power to prevent over‑discharge.
+        3 hours runtime is reasonable – For a PiDog with active servos, this is expected.
+        Full charge is reached at 8.2V with a healthy battery.         
+
+        Needs charger to wake up – After a low‑voltage shutdown, the protection circuit requires a brief charge input to reset before the system can power on again. 
+        This is normal behaviour.
+        
+        Returns:
+            float: Battery voltage in volts.
+        """                
+        return get_battery_voltage()
 
     # action related: legs,head,tail,imu,rgb_strip
     def close_all_thread(self):
@@ -967,6 +983,3 @@ class Pidog():
 
     def is_all_done(self):
         return self.is_legs_done() and self.is_head_done() and self.is_tail_done()
-
-    def get_battery_voltage(self):
-        return round( utils.get_battery_voltage(), 2)

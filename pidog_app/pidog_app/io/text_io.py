@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import logging
 import sys
+import time
 
 from .base import IO
 
@@ -23,8 +24,14 @@ class TextIO(IO):
     def listen(self) -> str:
         try:
             return input(self.prompt_label())
-        except (EOFError, KeyboardInterrupt):
+        except KeyboardInterrupt:
             return "quit"
+        except EOFError:
+            # stdin is closed (e.g. running as a systemd service). Don't
+            # exit — sleep and return empty so the main loop keeps running
+            # until an explicit "quit"/"exit" command arrives.
+            time.sleep(1)
+            return ""
 
     def speak(self, text: str) -> None:
         print(text)
