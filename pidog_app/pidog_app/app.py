@@ -15,6 +15,7 @@ from datetime import datetime
 
 import logging
 import sys
+import threading
 import time
 
 # ── bootstrap: allow running this file directly (e.g. from a debugger) ──
@@ -106,8 +107,8 @@ class App:
             hflip=cfg.get("vision.camera_hflip", False),
         )
         self.voice = VoiceIO(            
-            stt_language="en-us",
-            tts_model="en_US-ryan-low",
+            stt_language=cfg.get("io.voice.stt_language", "en-us"),
+            tts_model=cfg.get("io.voice.tts_model", "en_US-ryan-low"),
             keyboard_enable=True)
         self.registry = FeatureRegistry(
             build_features(self.body, self.senses, self.camera)
@@ -155,26 +156,81 @@ class App:
 
     # ── main loop ────────────────────────────────────────────────────────
     def run(self) -> None:
-        self.start()        
+        self.start()
         self.voice.speak("Hi there, I'm Scooby Doo. How can I help you today my human buddy.")
         time.sleep(1)
         self.voice.speak("Type quit to stop playing.")
         self.body.light(mode="breath", color="yellow", speed=1)
+        sleep_delay = self.cfg.get("dog.sleep_delay", 30)
+        self._awake_time = datetime.now()
+        self._sleeping = False
+        self._sleep_lock = threading.Lock()
+        print(f"Sleep delay: {sleep_delay}, awake time: {self._awake_time}")
+
+        # Background watcher: ``self.io.listen()`` blocks until input arrives,
+        # so the elapsed-time check below would never run while the dog is
+        # idle. This thread polls the elapsed time and puts the dog into its
+        # lying-down "sleep" posture once ``sleep_delay`` seconds have passed
+        # since the last activity.
+        self._running = True
+        watcher = threading.Thread(
+            target=self._sleep_watcher,
+            args=(sleep_delay,),
+            daemon=True,
+        )
+        watcher.start()
+
         try:
             while True:
                 user_text = self.io.listen()
+                print(user_text)
                 if not user_text:
                     continue
                 if user_text.strip().lower() in {"quit", "exit"}:
                     break
+                # Real input → wake the dog and reset the idle timer.
+                with self._sleep_lock:
+                    self._awake_time = datetime.now()
+                    self._sleeping = False
                 reply = self.brain.handle(user_text)
                 self.io.speak(reply)
         except KeyboardInterrupt:
             pass
         finally:
+            self._running = False
+            watcher.join(timeout=1)
             _quit_dog_gracefully(self)
             _log_energy_level(self, "Stop")
-            self.stop()            
+            self.stop()
+
+    def _sleep_watcher(self, sleep_delay: int) -> None:
+        """Background loop that triggers the sleep posture after idle.
+
+        Polls every second. When ``sleep_delay`` seconds have elapsed since
+        ``self._awake_time`` and the dog isn't already sleeping, calls
+        ``body.lie()`` and turns the chest light off. Any subsequent real
+        user input resets ``_awake_time`` and clears ``_sleeping`` from the
+        main loop.
+        """
+        while self._running:
+            time.sleep(1)
+            if not self._running:
+                break
+            with self._sleep_lock:
+                if self._sleeping:
+                    continue
+                elapsed = (datetime.now() - self._awake_time).seconds
+                if elapsed > sleep_delay:
+                    log.info("idle for %ss (> %ss); going to sleep",
+                             elapsed, sleep_delay)
+                    print(f"Idle for {elapsed}s (> {sleep_delay}s); going to sleep")
+                    self._sleeping = True
+                    do_sleep = True
+                else:
+                    do_sleep = False
+            if do_sleep:
+                self.body.lie()
+                self.body.light(mode="monochromatic", color="pink")
 
 def _level_to_int(value) -> int:
     """Accept either a numeric level (e.g. ``20``) or a name (e.g. ``"INFO"``)."""
