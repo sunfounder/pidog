@@ -151,13 +151,18 @@ class App:
     def run(self) -> None:
         self.start()        
         self.voice.speak("Hi there, I'm Scooby Doo. How can I help you today my human friend.")
-        time.sleep(1)
+        time.sleep(1.5)
         self.voice.speak("Type quit to stop playing.")
         self.body.light(mode="breath", color="yellow", speed=1)
+        sleep_delay = self.cfg.get("sleep_delay", 30)
+        awake_time = datetime.now()
         try:
             while True:
                 user_text = self.io.listen()
                 if not user_text:
+                    if (datetime.now() - awake_time).seconds > sleep_delay:
+                        self.body.lie()
+                        self.body.light(mode="off")
                     continue
                 if user_text.strip().lower() in {"quit", "exit"}:
                     break

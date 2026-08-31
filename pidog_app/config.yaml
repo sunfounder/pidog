@@ -4,6 +4,7 @@
 
 dog:
   name: "Scooby Doo"
+  sleep_delay: 10 # seconds
 
 llm:
   # Ollama runs on the laptop; expose it on the LAN in Ollama settings.
