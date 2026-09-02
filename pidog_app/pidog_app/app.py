@@ -247,7 +247,7 @@ class App:
                     continue
                 elapsed = (datetime.now() - self._awake_time).seconds
                 if elapsed > sleep_delay:
-                    self.voice.speak("I'm tired, I'm going to sleep now. Pet my head to wake me up.")
+                    self.voice.speak("I'm tired, I'm going to sleep now. Pet my head to wake me up.")                    
                     message = f"idle for {elapsed}s (> {sleep_delay}s); going to sleep"
                     log.info(message)
                     print(message)
@@ -256,8 +256,10 @@ class App:
                 else:
                     do_sleep = False
             if do_sleep:
+                # TODO: add the sleep actions as a set_mode() method on the Body class
                 self.body.lie()
-                self.body.light(mode="breath", color="pink", speed=0.33, brightness=0.5)
+                self.body.light(mode="breath", color="pink", speed=0.33, brightness=0.25)
+                self.voice.play_sound(self.cfg.get("io.sounds_path", "") + "snoring.mp3", repeat=5, song_length_in_seconds=3, volume=80)
 
     def _wake_watcher(self) -> None:
         """Background loop that wakes the dog on a liked head touch.

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import logging
 import threading
+import time
 
 from pidog.stt import STT
 from pidog.tts import Piper
@@ -98,9 +99,11 @@ class VoiceIO(IO):
             self.tts.say(text)
             log.info("reply: %s", text)
 
-    def play_sound(self, filename: str, volume: int = 50) -> None:
-        if filename:
-            self.body.speak(filename, volume)
+    def play_sound(self, filename: str, repeat: int = 1, song_length_in_seconds: int = 1, volume: int = 50) -> None:
+        if filename:        
+            for _ in range(repeat):
+                self.body.dog.speak(filename, volume)
+                time.sleep(song_length_in_seconds)
 
     # ── keyboard fallback ────────────────────────────────────────────────
     def _keyboard_loop(self) -> None:

@@ -23,6 +23,7 @@ io:
     wake_enable: true
     wake_word: ["hey scooby"]
     answer_on_wake: "Hi there buddy"
+  sounds_path: "/home/pds/pidog/sounds/"
 
 sensors:
   too_close_cm: 15
