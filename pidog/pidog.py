@@ -169,6 +169,7 @@ class Pidog():
         try:
             debug(f"config_file: {config_file}")
             debug("robot_hat init ... ", end='', flush=True)
+            # ! TODO: revisit the order in which the legs are initialised
             self.legs = Robot(pin_list=leg_pins, name='legs', init_angles=leg_init_angles, init_order=[
                             0, 2, 4, 6, 1, 3, 5, 7], db=config_file)
             self.head = Robot(pin_list=head_pins, name='head',

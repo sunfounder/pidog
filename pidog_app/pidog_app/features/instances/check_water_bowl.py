@@ -51,7 +51,7 @@ class CheckWaterBowl(Feature):
 
     def run(self, bowl_color: str = "blue", **kwargs) -> FeatureResult:
         log.info("check_water_bowl: bowl_color=%s", bowl_color)
-        self.body.set_status(ActionStatus.ACTIONS)
+        self.body.set_status(ActionStatus.THINK)
         self.camera.start()
 
         # Look down at the bowl. Head pitch is negative (downward).

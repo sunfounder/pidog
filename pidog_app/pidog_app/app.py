@@ -15,6 +15,7 @@ from datetime import datetime
 
 import logging
 import sys
+import threading
 import time
 
 # ── bootstrap: allow running this file directly (e.g. from a debugger) ──
@@ -46,6 +47,7 @@ from .features.instances import (
 )
 from .brain import Brain
 from .io import TextIO, VoiceIO
+from pidog.dual_touch import TouchStyle
 
 log = logging.getLogger(__name__)
 
@@ -106,9 +108,10 @@ class App:
             hflip=cfg.get("vision.camera_hflip", False),
         )
         self.voice = VoiceIO(            
-            stt_language="en-us",
-            tts_model="en_US-ryan-low",
-            keyboard_enable=True)
+            stt_language=cfg.get("io.voice.stt_language", "en-us"),
+            tts_model=cfg.get("io.voice.tts_model", "en_US-ryan-low"),
+            keyboard_enable=True,
+            body=self.body)
         self.registry = FeatureRegistry(
             build_features(self.body, self.senses, self.camera)
         )
@@ -155,26 +158,149 @@ class App:
 
     # ── main loop ────────────────────────────────────────────────────────
     def run(self) -> None:
-        self.start()        
+        self.start()
         self.voice.speak("Hi there, I'm Scooby Doo. How can I help you today my human buddy.")
         time.sleep(1)
         self.voice.speak("Type quit to stop playing.")
         self.body.light(mode="breath", color="yellow", speed=1)
+        sleep_delay = self.cfg.get("dog.sleep_delay", 30)
+        self._awake_time = datetime.now()
+        self._sleeping = False
+        self._sleep_lock = threading.Lock()
+        print(f"Sleep delay: {sleep_delay}, awake time: {self._awake_time}")
+
+        # Background watcher: ``self.io.listen()`` blocks until input arrives,
+        # so the elapsed-time check below would never run while the dog is
+        # idle. This thread polls the elapsed time and puts the dog into its
+        # lying-down "sleep" posture once ``sleep_delay`` seconds have passed
+        # since the last activity.
+        self._running = True
+        sleep_watcher = threading.Thread(
+            target=self._sleep_watcher,
+            args=(sleep_delay,),
+            daemon=True,
+        )
+        sleep_watcher.start()
+
+        # Wake watcher: polls the head touch sensors while the dog is
+        # sleeping. When a ``like_touch_style`` is detected (e.g. petting
+        # from front to rear), it wakes the dog (stand + breath-yellow
+        # light). Text/voice input while sleeping does NOT wake the dog —
+        # only physical petting does.
+        like_styles_cfg = self.cfg.get("sensors.like_touch_styles", ["RS"])
+        self._like_touch_styles = [
+            TouchStyle(s) for s in like_styles_cfg
+        ]
+        self._wake_complete = threading.Event()
+        wake_watcher = threading.Thread(
+            target=self._wake_watcher,
+            daemon=True,
+        )
+        wake_watcher.start()
+
         try:
             while True:
                 user_text = self.io.listen()
+                print(user_text)
                 if not user_text:
                     continue
                 if user_text.strip().lower() in {"quit", "exit"}:
                     break
+                # If the dog is sleeping, don't process the input — ask
+                # the user to pet the dog's head to wake it up.
+                with self._sleep_lock:
+                    is_sleeping = self._sleeping
+                if is_sleeping:
+                    self.voice.speak("I'm sleeping. Pet my head to wake me up.")
+                    continue
+                # Real input while awake → reset the idle timer.
+                with self._sleep_lock:
+                    self._awake_time = datetime.now()
                 reply = self.brain.handle(user_text)
                 self.io.speak(reply)
         except KeyboardInterrupt:
             pass
         finally:
+            self._running = False
+            self._wake_complete.set()  # unblock any wait on wake_complete
+            sleep_watcher.join(timeout=1)
+            wake_watcher.join(timeout=1)
             _quit_dog_gracefully(self)
             _log_energy_level(self, "Stop")
-            self.stop()            
+            self.stop()
+
+    def _sleep_watcher(self, sleep_delay: int) -> None:
+        """Background loop that triggers the sleep posture after idle.
+
+        Polls every second. When ``sleep_delay`` seconds have elapsed since
+        ``self._awake_time`` and the dog isn't already sleeping, calls
+        ``body.lie()`` and turns the chest light off. Any subsequent real
+        user input resets ``_awake_time`` and clears ``_sleeping`` from the
+        main loop.
+        """
+        while self._running:
+            time.sleep(1)
+            if not self._running:
+                break
+            with self._sleep_lock:
+                if self._sleeping:
+                    continue
+                elapsed = (datetime.now() - self._awake_time).seconds
+                if elapsed > sleep_delay:
+                    self.voice.speak("I'm tired, I'm going to sleep now. Pet my head to wake me up.")                    
+                    message = f"idle for {elapsed}s (> {sleep_delay}s); going to sleep"
+                    log.info(message)
+                    print(message)
+                    self._sleeping = True
+                    do_sleep = True
+                else:
+                    do_sleep = False
+            if do_sleep:
+                # TODO: add the sleep actions as a set_mode() method on the Body class
+                self.body.lie()
+                self.body.light(mode="breath", color="pink", speed=0.33, brightness=0.25)
+                self.voice.play_sound(self.cfg.get("io.sounds_path", "") + "snoring.mp3", repeat=5, song_length_in_seconds=3, volume=80)
+
+    def _wake_watcher(self) -> None:
+        """Background loop that wakes the dog on a liked head touch.
+
+        Polls ``self.senses.touch()`` every 0.1s while the dog is sleeping.
+        When the touch style matches one of ``self._like_touch_styles``
+        (e.g. ``TouchStyle.FRONT_TO_REAR`` — petting from front to rear),
+        the watcher:
+        1. Brings the dog to a standing position (``body.stand()``).
+        2. Sets the chest light to breath-yellow.
+        3. Clears ``_sleeping`` and resets the idle timer.
+
+        ``body.stand()`` blocks until the physical motion finishes. The
+        main loop checks ``_sleeping`` before processing text input, so
+        there is no race on the action flow — text input arriving while
+        sleeping is rejected with a "pet me" message rather than issuing
+        body commands.
+        """
+        while self._running:
+            time.sleep(0.1)
+            if not self._running:
+                break
+            with self._sleep_lock:
+                if not self._sleeping:
+                    continue
+
+            touch = self.senses.touch()
+            if touch in self._like_touch_styles:
+                style_name = TouchStyle(touch).name if touch else touch
+                message = f"waking up on {style_name} touch: standing and setting light to breath yellow"
+                log.info(message)
+                print(message)
+
+                self.body.stand()
+                self.body.light(mode="breath", color="yellow", speed=1)
+
+                with self._sleep_lock:
+                    self._sleeping = False
+                    self._awake_time = datetime.now()
+
+                self._wake_complete.set()
 
 def _level_to_int(value) -> int:
     """Accept either a numeric level (e.g. ``20``) or a name (e.g. ``"INFO"``)."""
@@ -217,16 +343,12 @@ def _configure_logging(cfg: Config) -> None:
 
 def _quit_dog_gracefully(self) -> None:    
     bps = 2
-    brightness = 1.0
+    brightness = 0.8
     for i in range(5):    
         self.body.light(mode="monochromatic", color="white", speed=bps, brightness=brightness)
         time.sleep(0.5)
         bps /= 2
-        brightness -= 0.2
-    bps *= 2
-    brightness += 0.2
-    self.body.light(mode="monochromatic", color="red", speed=bps, brightness=brightness)
-    time.sleep(0.5)
+        brightness /= 2
     self.body.light_off()
 
 def _log_energy_level(self, message: str):

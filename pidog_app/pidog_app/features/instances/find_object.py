@@ -48,7 +48,7 @@ class FindObject(Feature):
 
     def run(self, target: str = "red", **kwargs) -> FeatureResult:
         log.info("find_object: target=%s", target)
-        self.body.set_status(ActionStatus.ACTIONS)
+        self.body.set_status(ActionStatus.THINK)
         self.camera.start()
 
         target = target.lower().strip()

@@ -28,7 +28,7 @@ class RecognizePerson(Feature):
 
     def run(self, **kwargs) -> FeatureResult:
         log.info("recognize_person")
-        self.body.set_status(ActionStatus.ACTIONS)
+        self.body.set_status(ActionStatus.THINK)
         self.camera.start()
         self.camera.face_detect(on=True)
         try:

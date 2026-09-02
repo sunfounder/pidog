@@ -30,13 +30,15 @@ class TextIO(IO):
             # stdin is closed (e.g. running as a systemd service). Don't
             # exit — sleep and return empty so the main loop keeps running
             # until an explicit "quit"/"exit" command arrives.
-            log.debug("stdin EOF; waiting for input")
             time.sleep(1)
             return ""
 
     def speak(self, text: str) -> None:
         print(text)
         log.info("reply: %s", text)
+
+    def play_sound(self, filename: str, repeat: int = 1, song_length_in_seconds: int = 1, volume: int = 50) -> None:
+        pass
 
     def stop(self) -> None:
         log.info("text io stopped")

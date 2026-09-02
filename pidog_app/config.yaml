@@ -4,6 +4,7 @@
 
 dog:
   name: "Scooby Doo"
+  sleep_delay: 10 # seconds
 
 llm:
   # Ollama runs on the laptop; expose it on the LAN in Ollama settings.
@@ -21,12 +22,13 @@ io:
     tts_model: "en_US-ryan-low"   # Piper model
     wake_enable: true
     wake_word: ["hey scooby"]
-    answer_on_wake: "Hi there human friend"
+    answer_on_wake: "Hi there buddy"
+  sounds_path: "/home/pds/pidog/sounds/"
 
 sensors:
   too_close_cm: 15
-  like_touch_styles: ["front_to_rear"]
-  hate_touch_styles: ["rear_to_front"]
+  like_touch_styles: ["RS"] # Front to rear slide
+  hate_touch_styles: ["LS"] # Rear to front slide
 
 vision:
   camera_vflip: false

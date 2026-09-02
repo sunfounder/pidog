@@ -16,6 +16,10 @@ class IO(ABC):
         """Output the dog's reply (print, TTS, ...)."""
 
     @abstractmethod
+    def play_sound(self, filename: str, repeat: int, song_length_in_seconds: int, volume: int) -> None:
+        """Play a sound file."""
+
+    @abstractmethod
     def start(self) -> None:
         """Perform any startup (welcome message, mic warm-up, ...)."""
 

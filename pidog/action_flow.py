@@ -260,7 +260,7 @@ class ActionFlow():
             print(f'action error: {e}')
     
     def action_handler(self):
-        standby_actions = [Operations.WAITING, Operations.FEET_SHAKE]        
+        standby_actions = [Operations.WAITING, Operations.FEET_SHAKE]
         standby_weights = [1, 0.3]
 
         action_interval = 5 # seconds
@@ -276,7 +276,13 @@ class ActionFlow():
             elif self.thread_action_state == ActionStatus.THINK:
                 pass
             elif self.thread_action_state == ActionStatus.ACTIONS:
-                _action = self.action_queue.get()
+                try:
+                    _action = self.action_queue.get(timeout=0.1)
+                except queue.Empty:
+                    # State may have been changed by another thread (e.g.
+                    # set_status(STANDBY)) while we were waiting. Loop back
+                    # to re-check thread_running and thread_action_state.
+                    continue
                 try:
                     self.run(_action)
                 except Exception as e:
@@ -311,5 +317,11 @@ class ActionFlow():
 
     def stop(self):
         self.thread_running = False
+        # Put a sentinel in the queue to unblock any pending get() call,
+        # then set state to STANDBY so the loop exits cleanly.
+        self.thread_action_state = ActionStatus.STANDBY
+        self.action_queue.put(None)
         if self.thread != None:
-            self.thread.join()
+            self.thread.join(timeout=3)
+            if self.thread.is_alive():
+                print('action_handler thread did not stop within 3s')
