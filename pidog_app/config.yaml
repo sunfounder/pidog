@@ -26,8 +26,8 @@ io:
 
 sensors:
   too_close_cm: 15
-  like_touch_styles: ["front_to_rear"]
-  hate_touch_styles: ["rear_to_front"]
+  like_touch_styles: ["RS"] # Front to rear slide
+  hate_touch_styles: ["LS"] # Rear to front slide
 
 vision:
   camera_vflip: false

@@ -47,6 +47,7 @@ from .features.instances import (
 )
 from .brain import Brain
 from .io import TextIO, VoiceIO
+from pidog.dual_touch import TouchStyle
 
 log = logging.getLogger(__name__)
 
@@ -109,7 +110,8 @@ class App:
         self.voice = VoiceIO(            
             stt_language=cfg.get("io.voice.stt_language", "en-us"),
             tts_model=cfg.get("io.voice.tts_model", "en_US-ryan-low"),
-            keyboard_enable=True)
+            keyboard_enable=True,
+            body=self.body)
         self.registry = FeatureRegistry(
             build_features(self.body, self.senses, self.camera)
         )
@@ -180,12 +182,15 @@ class App:
         )
         sleep_watcher.start()
 
-        # Wake watcher: when the dog is asleep and real input arrives, the
-        # main loop signals ``_wake_requested``. This thread performs the
-        # physical wake-up (stand + breath-yellow light) and signals
-        # ``_wake_complete`` so the main loop knows it can safely proceed
-        # to ``brain.handle()`` without racing on the action flow.
-        self._wake_requested = threading.Event()
+        # Wake watcher: polls the head touch sensors while the dog is
+        # sleeping. When a ``like_touch_style`` is detected (e.g. petting
+        # from front to rear), it wakes the dog (stand + breath-yellow
+        # light). Text/voice input while sleeping does NOT wake the dog —
+        # only physical petting does.
+        like_styles_cfg = self.cfg.get("sensors.like_touch_styles", ["RS"])
+        self._like_touch_styles = [
+            TouchStyle(s) for s in like_styles_cfg
+        ]
         self._wake_complete = threading.Event()
         wake_watcher = threading.Thread(
             target=self._wake_watcher,
@@ -201,25 +206,23 @@ class App:
                     continue
                 if user_text.strip().lower() in {"quit", "exit"}:
                     break
-                # Real input → reset idle timer and wake the dog if it
-                # was sleeping. ``body.stand()`` blocks until the motion
-                # finishes, so we wait for the wake thread to complete
-                # before calling ``brain.handle()`` to avoid conflicting
-                # leg commands.
+                # If the dog is sleeping, don't process the input — ask
+                # the user to pet the dog's head to wake it up.
                 with self._sleep_lock:
-                    was_sleeping = self._sleeping
+                    is_sleeping = self._sleeping
+                if is_sleeping:
+                    self.voice.speak("I'm sleeping. Pet my head to wake me up.")
+                    continue
+                # Real input while awake → reset the idle timer.
+                with self._sleep_lock:
                     self._awake_time = datetime.now()
-                if was_sleeping:
-                    self._wake_complete.clear()
-                    self._wake_requested.set()
-                    self._wake_complete.wait(timeout=10)
                 reply = self.brain.handle(user_text)
                 self.io.speak(reply)
         except KeyboardInterrupt:
             pass
         finally:
             self._running = False
-            self._wake_requested.set()  # unblock the wake watcher so it can exit
+            self._wake_complete.set()  # unblock any wait on wake_complete
             sleep_watcher.join(timeout=1)
             wake_watcher.join(timeout=1)
             _quit_dog_gracefully(self)
@@ -244,6 +247,7 @@ class App:
                     continue
                 elapsed = (datetime.now() - self._awake_time).seconds
                 if elapsed > sleep_delay:
+                    self.voice.speak("I'm tired, I'm going to sleep now. Pet my head to wake me up.")
                     message = f"idle for {elapsed}s (> {sleep_delay}s); going to sleep"
                     log.info(message)
                     print(message)
@@ -256,45 +260,45 @@ class App:
                 self.body.light(mode="breath", color="pink", speed=0.33, brightness=0.5)
 
     def _wake_watcher(self) -> None:
-        """Background loop that wakes the dog when signaled by the main loop.
+        """Background loop that wakes the dog on a liked head touch.
 
-        Waits on ``self._wake_requested`` (set by the main loop when real
-        user input arrives while the dog is sleeping). On wake-up:
+        Polls ``self.senses.touch()`` every 0.1s while the dog is sleeping.
+        When the touch style matches one of ``self._like_touch_styles``
+        (e.g. ``TouchStyle.FRONT_TO_REAR`` — petting from front to rear),
+        the watcher:
         1. Brings the dog to a standing position (``body.stand()``).
         2. Sets the chest light to breath-yellow.
         3. Clears ``_sleeping`` and resets the idle timer.
-        4. Signals ``_wake_complete`` so the main loop can proceed to
-           ``brain.handle()`` without racing on the action flow.
 
-        ``body.stand()`` blocks until the physical motion finishes, which
-        is why the main loop waits on ``_wake_complete`` before issuing any
-        further body commands.
+        ``body.stand()`` blocks until the physical motion finishes. The
+        main loop checks ``_sleeping`` before processing text input, so
+        there is no race on the action flow — text input arriving while
+        sleeping is rejected with a "pet me" message rather than issuing
+        body commands.
         """
         while self._running:
-            if not self._wake_requested.wait(timeout=1):
-                continue
+            time.sleep(0.1)
             if not self._running:
                 break
-            self._wake_requested.clear()
-
             with self._sleep_lock:
                 if not self._sleeping:
-                    # Spurious wake — dog is already awake.
-                    self._wake_complete.set()
                     continue
 
-            message = "waking up: standing and setting light to breath yellow"
-            log.info(message)
-            print(message)
+            touch = self.senses.touch()
+            if touch in self._like_touch_styles:
+                style_name = TouchStyle(touch).name if touch else touch
+                message = f"waking up on {style_name} touch: standing and setting light to breath yellow"
+                log.info(message)
+                print(message)
 
-            self.body.stand()
-            self.body.light(mode="breath", color="yellow", speed=1)
+                self.body.stand()
+                self.body.light(mode="breath", color="yellow", speed=1)
 
-            with self._sleep_lock:
-                self._sleeping = False
-                self._awake_time = datetime.now()
+                with self._sleep_lock:
+                    self._sleeping = False
+                    self._awake_time = datetime.now()
 
-            self._wake_complete.set()
+                self._wake_complete.set()
 
 def _level_to_int(value) -> int:
     """Accept either a numeric level (e.g. ``20``) or a name (e.g. ``"INFO"``)."""

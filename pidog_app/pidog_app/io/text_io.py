@@ -37,5 +37,8 @@ class TextIO(IO):
         print(text)
         log.info("reply: %s", text)
 
+    def play_sound(self, filename:str, volume: int = 50) -> None:
+        pass
+
     def stop(self) -> None:
         log.info("text io stopped")

@@ -12,6 +12,7 @@ import threading
 
 from pidog.stt import STT
 from pidog.tts import Piper
+from pidog_app.dog import Body
 
 from .base import IO
 
@@ -29,11 +30,13 @@ class VoiceIO(IO):
         stt_language: str = "en-us",
         tts_model: str = "en_US-ryan-low",
         keyboard_enable: bool = True,
+        body: Body = None,
     ):
         self.welcome = welcome
         self.wake_word = [w.lower() for w in (wake_word or [])]
         self.answer_on_wake = answer_on_wake
         self.keyboard_enable = keyboard_enable
+        self.body = body
 
         self.stt = STT(language=stt_language)
         self.tts = Piper(model=tts_model)
@@ -94,6 +97,10 @@ class VoiceIO(IO):
             print(text)
             self.tts.say(text)
             log.info("reply: %s", text)
+
+    def play_sound(self, filename: str, volume: int = 50) -> None:
+        if filename:
+            self.body.speak(filename, volume)
 
     # ── keyboard fallback ────────────────────────────────────────────────
     def _keyboard_loop(self) -> None:
