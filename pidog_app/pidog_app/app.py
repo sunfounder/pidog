@@ -173,12 +173,25 @@ class App:
         # lying-down "sleep" posture once ``sleep_delay`` seconds have passed
         # since the last activity.
         self._running = True
-        watcher = threading.Thread(
+        sleep_watcher = threading.Thread(
             target=self._sleep_watcher,
             args=(sleep_delay,),
             daemon=True,
         )
-        watcher.start()
+        sleep_watcher.start()
+
+        # Wake watcher: when the dog is asleep and real input arrives, the
+        # main loop signals ``_wake_requested``. This thread performs the
+        # physical wake-up (stand + breath-yellow light) and signals
+        # ``_wake_complete`` so the main loop knows it can safely proceed
+        # to ``brain.handle()`` without racing on the action flow.
+        self._wake_requested = threading.Event()
+        self._wake_complete = threading.Event()
+        wake_watcher = threading.Thread(
+            target=self._wake_watcher,
+            daemon=True,
+        )
+        wake_watcher.start()
 
         try:
             while True:
@@ -188,17 +201,27 @@ class App:
                     continue
                 if user_text.strip().lower() in {"quit", "exit"}:
                     break
-                # Real input → wake the dog and reset the idle timer.
+                # Real input → reset idle timer and wake the dog if it
+                # was sleeping. ``body.stand()`` blocks until the motion
+                # finishes, so we wait for the wake thread to complete
+                # before calling ``brain.handle()`` to avoid conflicting
+                # leg commands.
                 with self._sleep_lock:
+                    was_sleeping = self._sleeping
                     self._awake_time = datetime.now()
-                    self._sleeping = False
+                if was_sleeping:
+                    self._wake_complete.clear()
+                    self._wake_requested.set()
+                    self._wake_complete.wait(timeout=10)
                 reply = self.brain.handle(user_text)
                 self.io.speak(reply)
         except KeyboardInterrupt:
             pass
         finally:
             self._running = False
-            watcher.join(timeout=1)
+            self._wake_requested.set()  # unblock the wake watcher so it can exit
+            sleep_watcher.join(timeout=1)
+            wake_watcher.join(timeout=1)
             _quit_dog_gracefully(self)
             _log_energy_level(self, "Stop")
             self.stop()
@@ -221,16 +244,57 @@ class App:
                     continue
                 elapsed = (datetime.now() - self._awake_time).seconds
                 if elapsed > sleep_delay:
-                    log.info("idle for %ss (> %ss); going to sleep",
-                             elapsed, sleep_delay)
-                    print(f"Idle for {elapsed}s (> {sleep_delay}s); going to sleep")
+                    message = f"idle for {elapsed}s (> {sleep_delay}s); going to sleep"
+                    log.info(message)
+                    print(message)
                     self._sleeping = True
                     do_sleep = True
                 else:
                     do_sleep = False
             if do_sleep:
                 self.body.lie()
-                self.body.light(mode="monochromatic", color="pink")
+                self.body.light(mode="breath", color="pink", speed=0.33, brightness=0.5)
+
+    def _wake_watcher(self) -> None:
+        """Background loop that wakes the dog when signaled by the main loop.
+
+        Waits on ``self._wake_requested`` (set by the main loop when real
+        user input arrives while the dog is sleeping). On wake-up:
+        1. Brings the dog to a standing position (``body.stand()``).
+        2. Sets the chest light to breath-yellow.
+        3. Clears ``_sleeping`` and resets the idle timer.
+        4. Signals ``_wake_complete`` so the main loop can proceed to
+           ``brain.handle()`` without racing on the action flow.
+
+        ``body.stand()`` blocks until the physical motion finishes, which
+        is why the main loop waits on ``_wake_complete`` before issuing any
+        further body commands.
+        """
+        while self._running:
+            if not self._wake_requested.wait(timeout=1):
+                continue
+            if not self._running:
+                break
+            self._wake_requested.clear()
+
+            with self._sleep_lock:
+                if not self._sleeping:
+                    # Spurious wake — dog is already awake.
+                    self._wake_complete.set()
+                    continue
+
+            message = "waking up: standing and setting light to breath yellow"
+            log.info(message)
+            print(message)
+
+            self.body.stand()
+            self.body.light(mode="breath", color="yellow", speed=1)
+
+            with self._sleep_lock:
+                self._sleeping = False
+                self._awake_time = datetime.now()
+
+            self._wake_complete.set()
 
 def _level_to_int(value) -> int:
     """Accept either a numeric level (e.g. ``20``) or a name (e.g. ``"INFO"``)."""
@@ -273,16 +337,12 @@ def _configure_logging(cfg: Config) -> None:
 
 def _quit_dog_gracefully(self) -> None:    
     bps = 2
-    brightness = 1.0
+    brightness = 0.8
     for i in range(5):    
         self.body.light(mode="monochromatic", color="white", speed=bps, brightness=brightness)
         time.sleep(0.5)
         bps /= 2
-        brightness -= 0.2
-    bps *= 2
-    brightness += 0.2
-    self.body.light(mode="monochromatic", color="red", speed=bps, brightness=brightness)
-    time.sleep(0.5)
+        brightness /= 2
     self.body.light_off()
 
 def _log_energy_level(self, message: str):

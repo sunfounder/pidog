@@ -37,6 +37,7 @@ class Body:
             self.action_flow.stop()
         finally:
             self.dog.close()
+        log.info("body stopped")
 
     def read_energy_level(self) -> float:
         return self.dog.read_battery_voltage()

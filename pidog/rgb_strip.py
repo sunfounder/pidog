@@ -102,9 +102,9 @@ class RGBStrip():
         """
         self.light_num = nums
 
-        self.style = 'breath',
-        self.color = 'white',
-        self.brightness = 1,
+        self.style = 'breath'
+        self.color = 'white'
+        self.brightness = 1.0
         self.delay = 0.1
         self.frames = []
         self.current_frame = 0
@@ -386,7 +386,7 @@ class RGBStrip():
         except:
             raise ValueError('\033[0;31m%s\033[0m'%("Invalid color value."))
 
-    def set_mode(self, style='breath', color='white', bps=1, brightness=1):
+    def set_mode(self, style='breath', color='white', bps=1, brightness: float=1):
         """
         Set the display mode of the rgb strip
 
