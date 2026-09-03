@@ -6,6 +6,11 @@ your laptop to decide, turn by turn, whether to **answer a question** or
 **perform a feature** (wake from stasis, find an object, recognize a
 person, check the water bowl, ...).
 
+The dog also has a **sleep/wake mode**: after a configurable idle period
+it lies down, dims its chest light, and plays a looping snoring sound.
+Petting its head (a front-to-rear touch) wakes it back up and stops the
+snoring.
+
 The three SunFounder libraries — `pidog/`, `robot-hat/`, `vilib/` — are
 treated as **untouched dependencies**. All application code lives in
 `pidog_app/` and talks to the hardware through thin facades, so the
@@ -46,8 +51,8 @@ libraries can be updated from upstream without breaking the app.
 | **Vision facade** | `vision/` | `Camera` wrapping `Vilib` (capture + face/color/QR/traffic/object/hand/pose detection) |
 | **Features** | `features/` | `Feature` base class, `FeatureRegistry`, and one module per capability in `features/instances/` |
 | **Brain** | `brain/` | `Brain` runs the LLM tool-calling loop; `prompt.py` builds the system prompt |
-| **IO** | `io/` | `IO` interface with `TextIO` (REPL) and `VoiceIO` (Vosk STT + Piper TTS + wake word) |
-| **App** | `app.py` | Builds the object graph and runs the conversation loop |
+| **IO** | `io/` | `IO` interface with `TextIO` (REPL) and `VoiceIO` (Vosk STT + Piper TTS + wake word + sound playback) |
+| **App** | `app.py` | Builds the object graph, runs the conversation loop, and manages sleep/wake via background watcher threads |
 
 ### The decision flow (chat vs. feature)
 
@@ -102,11 +107,12 @@ pidog_app/
     │   ├── __init__.py
     │   ├── brain.py             # LLM tool-calling loop
     │   └── prompt.py            # system prompt builder
-    └── io/
-        ├── __init__.py
-        ├── base.py              # IO interface
-        ├── text_io.py           # REPL
-        └── voice_io.py          # Vosk + Piper + wake word
+    ├── io/
+    │   ├── __init__.py
+    │   ├── base.py              # IO interface (listen, speak, play_sound, stop_sound)
+    │   ├── text_io.py           # REPL
+    │   └── voice_io.py          # Vosk + Piper + wake word + sound playback
+    └── test_hardware.py         # hardware smoke test
 ```
 
 ---
@@ -133,13 +139,38 @@ pip install -e .
 Edit `config.yaml`:
 
 ```yaml
+dog:
+  name: "Scooby Doo"
+  sleep_delay: 10              # seconds idle before going to sleep
+
 llm:
-  ip: "192.168.0.163"        # your laptop's LAN IP
+  ip: "192.168.0.136"          # your laptop's LAN IP
   port: 11434
-  model: "qwen2.5:7b"        # must support tool calling
+  model: "qwen2.5:7b"          # must support tool calling
+  max_messages: 20             # conversation history window
 
 io:
-  mode: "text"               # "text" or "voice"
+  mode: "text"                 # "text" or "voice"
+  voice:
+    stt_language: "en-us"
+    tts_model: "en_US-ryan-low" # Piper model
+    wake_enable: true
+    wake_word: ["hey scooby"]
+    answer_on_wake: "Hi there buddy"
+  sounds_path: "/home/pds/pidog/sounds/"  # sound files for play_sound
+
+sensors:
+  too_close_cm: 15
+  like_touch_styles: ["RS"]    # front-to-rear slide (wakes the dog)
+  hate_touch_styles: ["LS"]    # rear-to-front slide
+
+vision:
+  camera_vflip: false
+  camera_hflip: false
+
+logging:
+  level: INFO
+  filename: app.log
 ```
 
 Any value can be overridden with an env var using the prefix `PIDOG_`
@@ -169,6 +200,28 @@ In text mode you'll get a `>>> ` prompt. Type `quit` to exit. Try:
 - *"do you see anyone?"* → triggers `recognize_person`
 - *"is my water bowl empty?"* → triggers `check_water_bowl`
 - *"what's 7 times 8?"* → plain chat reply (no tool)
+
+---
+
+## Sleep & wake mode
+
+The dog automatically goes to sleep after `dog.sleep_delay` seconds of
+inactivity (no text/voice input). Two background watcher threads manage
+this:
+
+- **Sleep watcher** (`_sleep_watcher`): polls every second. When the
+  idle timer exceeds `sleep_delay`, it pauses the action-flow standby
+  loop (`ActionStatus.THINK`), lies the dog down, dims the chest light
+  to breath-pink at 25% brightness, and plays a looping snoring sound.
+- **Wake watcher** (`_wake_watcher`): polls the head touch sensor every
+  0.1s while the dog is sleeping. When a `like_touch_styles` touch is
+  detected (e.g. front-to-rear petting), it stops the snoring sound,
+  sets the chest light to listen-yellow, resumes the action-flow standby
+  loop (`ActionStatus.STANDBY`), and clears the sleeping state.
+
+Text or voice input while sleeping does **not** wake the dog — only
+physical petting does. The main loop rejects text input with a "pet my
+head to wake me up" message while `_sleeping` is true.
 
 ---
 
@@ -233,10 +286,10 @@ That's it — the brain picks it up automatically on the next run.
 
 ### Useful commands to manage the service
 
-systemctl --user start pidog-app —> start now
-systemctl --user stop pidog-app —> stop
-systemctl --user status pidog-app —> check status
-journalctl --user -u pidog-app -f —> live logs
+systemctl --user start pidog-app —> start now  
+systemctl --user stop pidog-app —> stop  
+systemctl --user status pidog-app —> check status  
+journalctl --user -u pidog-app -f —> live logs  
 systemctl --user disable pidog-app —> disable autostart
 
 ### Location of the service file
@@ -246,14 +299,14 @@ systemctl --user disable pidog-app —> disable autostart
 ### Content of service file
 
 [Unit]
-Description=Pidog AI robot dog application
+Description=Pidog AI robot dog application  
 After=graphical-session.target
 
 [Service]
-Type=simple
-WorkingDirectory=/home/pds
-ExecStart=/home/pds/.venv/bin/python -m pidog_app /home/pds/pidog/pidog_app/config.yaml
-Restart=on-failure
+Type=simple  
+WorkingDirectory=/home/pds  
+ExecStart=/home/pds/.venv/bin/python -m pidog_app /home/pds/pidog/pidog_app/config.yaml  
+Restart=on-failure  
 RestartSec=10
 
 [Install]
