@@ -28,7 +28,7 @@ class Body:
         log.info("body starting")
         self.action_flow.start()
         self.dog.rgb_strip.close()
-        self.change_posture(Posetures.SIT)
+        self.sit()
 
     def stop(self) -> None:
         """Stop actuators and release hardware cleanly."""

@@ -45,6 +45,7 @@ class VoiceIO(IO):
         self._keyboard_thread = None
         self._keyboard_text: list[str] = []
         self._running = False
+        self._sound_stop = threading.Event()
 
     # ── lifecycle ────────────────────────────────────────────────────────
     def start(self) -> None:
@@ -100,10 +101,17 @@ class VoiceIO(IO):
             log.info("reply: %s", text)
 
     def play_sound(self, filename: str, repeat: int = 1, song_length_in_seconds: int = 1, volume: int = 50) -> None:
-        if filename:        
-            for _ in range(repeat):
+        if filename:
+            self._sound_stop.clear()
+            for i in range(repeat):
+                if self._sound_stop.is_set():
+                    break
                 self.body.dog.speak(filename, volume)
-                time.sleep(song_length_in_seconds)
+                if i < repeat - 1:
+                    self._sound_stop.wait(song_length_in_seconds)
+
+    def stop_sound(self) -> None:
+        self._sound_stop.set()
 
     # ── keyboard fallback ────────────────────────────────────────────────
     def _keyboard_loop(self) -> None:
