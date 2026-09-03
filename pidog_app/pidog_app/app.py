@@ -48,6 +48,7 @@ from .features.instances import (
 from .brain import Brain
 from .io import TextIO, VoiceIO
 from pidog.dual_touch import TouchStyle
+from pidog.action_flow import ActionStatus
 
 log = logging.getLogger(__name__)
 
@@ -257,6 +258,7 @@ class App:
                     do_sleep = False
             if do_sleep:
                 # TODO: add the sleep actions as a set_mode() method on the Body class
+                self.body.set_status(ActionStatus.THINK)
                 self.body.lie()
                 self.body.light(mode="breath", color="pink", speed=0.33, brightness=0.25)
                 self.voice.play_sound(self.cfg.get("io.sounds_path", "") + "snoring.mp3", repeat=5, song_length_in_seconds=3, volume=80)
@@ -269,7 +271,7 @@ class App:
         (e.g. ``TouchStyle.FRONT_TO_REAR`` — petting from front to rear),
         the watcher:
         1. Brings the dog to a standing position (``body.stand()``).
-        2. Sets the chest light to breath-yellow.
+        2. Sets the chest light to listen-yellow.
         3. Clears ``_sleeping`` and resets the idle timer.
 
         ``body.stand()`` blocks until the physical motion finishes. The
@@ -289,16 +291,17 @@ class App:
             touch = self.senses.touch()
             if touch in self._like_touch_styles:
                 style_name = TouchStyle(touch).name if touch else touch
-                message = f"waking up on {style_name} touch: standing and setting light to breath yellow"
+                message = f"waking up on {style_name} touch"
                 log.info(message)
                 print(message)
 
-                self.body.stand()
-                self.body.light(mode="breath", color="yellow", speed=1)
+                self.voice.stop_sound()
+                self.body.light(mode="listen", color="yellow", speed=1)
+                self.body.set_status(ActionStatus.STANDBY)
 
                 with self._sleep_lock:
                     self._sleeping = False
-                    self._awake_time = datetime.now()
+                    self._awake_time = datetime.now()                    
 
                 self._wake_complete.set()
 

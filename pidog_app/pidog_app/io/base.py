@@ -20,6 +20,10 @@ class IO(ABC):
         """Play a sound file."""
 
     @abstractmethod
+    def stop_sound(self) -> None:
+        """Interrupt any currently looping sound playback."""
+
+    @abstractmethod
     def start(self) -> None:
         """Perform any startup (welcome message, mic warm-up, ...)."""
 

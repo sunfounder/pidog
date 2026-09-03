@@ -40,5 +40,8 @@ class TextIO(IO):
     def play_sound(self, filename: str, repeat: int = 1, song_length_in_seconds: int = 1, volume: int = 50) -> None:
         pass
 
+    def stop_sound(self) -> None:
+        pass
+
     def stop(self) -> None:
         log.info("text io stopped")
