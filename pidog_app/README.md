@@ -1,3 +1,5 @@
+
+
 # pidog_app — AI-driven feature architecture for the Pidog robot dog
 
 This project is the application layer that turns the SunFounder Pidog
@@ -333,4 +335,8 @@ To connect to the app after connecting to the host:
 ```bash
 tmux attach -t pidog
 ```
+
+## Connect to the image output from the PiDog's camera
+
+http://192.168.0.197:9000/mjpg
 

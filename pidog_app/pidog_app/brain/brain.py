@@ -92,6 +92,7 @@ class Brain:
             kwargs["tools"] = tools
         response = self.llm.chat(**kwargs)
         data = response.json()
+        print(data)
         if "error" in data:
             raise RuntimeError(f"LLM error: {data['error'].get('message', data['error'])}")
         return data["choices"][0]["message"]

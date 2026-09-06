@@ -111,3 +111,6 @@ class Camera:
         """Color detector result if any: ``{'color':..., 'x':..., 'y':...}``."""
         info = getattr(_get_vilib(), "color_detect_info", None)
         return dict(info) if info else None
+
+    def display(self, local=False, web=True):
+        _get_vilib().display(local=local, web=web)
