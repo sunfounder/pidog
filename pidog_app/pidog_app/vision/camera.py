@@ -107,6 +107,13 @@ class Camera:
         # Vilib exposes detector state via its `face_detect_*` attributes.
         return getattr(_get_vilib(), "face_detect_count", 0)
 
+    def detect_face(self) -> tuple[int, int, int]:
+        """Face detection result if any: ``(x, y, w)``."""
+        ex = _get_vilib().detect_obj_parameter['human_x'] - 320
+        ey = _get_vilib().detect_obj_parameter['human_y'] - 240
+        people = _get_vilib().detect_obj_parameter['human_n']
+        return ex, ey, people
+
     def detected_color(self) -> Optional[dict]:
         """Color detector result if any: ``{'color':..., 'x':..., 'y':...}``."""
         info = getattr(_get_vilib(), "color_detect_info", None)

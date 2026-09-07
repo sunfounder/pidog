@@ -58,11 +58,27 @@ class SoundDirection():
             pass
 
         # Pull busy line HIGH to start direction detection
-        lgpio.gpio_claim_output(self._chip, self.busy_pin, 1)
+        # Retry once in case the GPIO is still being released
+        for attempt in range(2):
+            try:
+                lgpio.gpio_claim_output(self._chip, self.busy_pin, 1)
+                break
+            except lgpio.error:
+                if attempt == 0:
+                    sleep(0.05)
+                    try:
+                        lgpio.gpio_free(self._chip, self.busy_pin)
+                    except:
+                        pass
+                else:
+                    raise
         sleep(0.01)
 
         # Switch to input mode to monitor when 064B pulls it LOW
-        lgpio.gpio_free(self._chip, self.busy_pin)
+        try:
+            lgpio.gpio_free(self._chip, self.busy_pin)
+        except:
+            pass
         lgpio.gpio_claim_input(self._chip, self.busy_pin)
 
     def read(self):

@@ -346,10 +346,10 @@ def _configure_logging(cfg: Config) -> None:
 
 def _quit_dog_gracefully(self) -> None:    
     bps = 2
-    brightness = 0.8
-    for i in range(5):    
+    brightness = 1.0
+    for i in range(10):    
         self.body.light(mode="monochromatic", color="white", speed=bps, brightness=brightness)
-        time.sleep(0.5)
+        time.sleep(0.1)
         bps /= 2
         brightness /= 2
     self.body.light_off()

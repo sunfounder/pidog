@@ -70,22 +70,44 @@ class RecognizePerson(Feature):
         pitch = 0
         flag = False
         direction = 0
+        scan_yaw = 0
+        scan_yaw_dir = 1
+        scan_pitch = 0
+        scan_pitch_dir = 1
 
         self.body.sit()
         self.body.head_move([[yaw, 0, pitch]], roll_comp=0, pitch_comp=-40, immediately=True, speed=40)
         self.body.wait_all_done()
         time.sleep(0.5)
         # Cleanup sound detection by servos moving
-        if self.senses.is_sound_detected():    
-            direction = self.senses.sound_direction()
+        try:
+            if self.senses.is_sound_detected():    
+                direction = self.senses.sound_direction()
+        except Exception as e:
+            log.warning("sound_direction failed: %s", e)
 
+        is_sound_detected_failed_logged = False
+        is_sound_direction_failed_logged = False
         while True:
             if flag == False:
-                self.body.rgb_strip.set_mode('breath', 'pink', bps=1)
-            # If heard somthing, turn to face it
-            if self.senses.is_sound_detected():
+                self.body.light(mode='breath', color='pink', speed=1)
+            # If heard something, turn to face
+            try:
+                heard = self.senses.is_sound_detected()
+            except Exception as e:
+                heard = False                
+                if not is_sound_detected_failed_logged:
+                    log.warning("is_sound_detected failed: %s", e)
+                    is_sound_detected_failed_logged = True  
+            if heard:
                 flag = False
-                direction = self.senses.sound_direction()
+                try:
+                    direction = self.senses.sound_direction()
+                except Exception as e:
+                    direction = -1
+                    if not is_sound_direction_failed_logged:
+                        log.warning("sound_direction failed: %s", e)
+                        is_sound_direction_failed_logged = True
                 pitch = 0
                 if direction > 0 and direction < 160:
                     yaw = -direction
@@ -99,32 +121,60 @@ class RecognizePerson(Feature):
                 self.body.wait_head_done()
                 time.sleep(0.05)
 
-            ex = Vilib.detect_obj_parameter['human_x'] - 320
-            ey = Vilib.detect_obj_parameter['human_y'] - 240
-            people = Vilib.detect_obj_parameter['human_n']
+            
+            ex, ey, people = self.camera.detect_face()
 
             # If see someone, bark at him/her
             if people > 0 and flag == False:
                 flag = True
                 self.body.do_action('wag_tail', step_count=2, speed=100)
                 #bark(self.body, [yaw, 0, 0], pitch_comp=-40, volume=80)
-                if self.senses.is_sound_detected():
-                    direction = self.sensens.sound_direction()
+                
+                try:
+                    if self.senses.is_sound_detected():
+                        direction = self.senses.sound_direction()
+                except Exception as e:
+                    direction = -1
+                    if not is_sound_direction_failed_logged:
+                        log.warning("sound_direction failed: %s", e)
+                        is_sound_direction_failed_logged = True
 
-            if ex > 15 and yaw > -80:
-                yaw -= 0.5 * int(ex/30.0+0.5)
+            if people > 0:
+                # Track face: adjust yaw and pitch toward detected face
+                if ex > 15 and yaw > -80:
+                    yaw -= 0.5 * int(ex/30.0+0.5)
 
-            elif ex < -15 and yaw < 80:
-                yaw += 0.5 * int(-ex/30.0+0.5)
+                elif ex < -15 and yaw < 80:
+                    yaw += 0.5 * int(-ex/30.0+0.5)
 
-            if ey > 25:
-                pitch -= 1*int(ey/50+0.5)
-                if pitch < - 30:
-                    pitch = -30
-            elif ey < -25:
-                pitch += 1*int(-ey/50+0.5)
-                if pitch > 30:
-                    pitch = 30
+                if ey > 25:
+                    pitch -= 1*int(ey/50+0.5)
+                    if pitch < - 30:
+                        pitch = -30
+                elif ey < -25:
+                    pitch += 1*int(-ey/50+0.5)
+                    if pitch > 30:
+                        pitch = 30
+            else:
+                # No face found: scan left-right with a small up-down oscillation
+                scan_yaw += scan_yaw_dir * 2
+                if scan_yaw > 60:
+                    scan_yaw = 60
+                    scan_yaw_dir = -1
+                elif scan_yaw < -60:
+                    scan_yaw = -60
+                    scan_yaw_dir = 1
+
+                scan_pitch += scan_pitch_dir * 1.5
+                if scan_pitch > 20:
+                    scan_pitch = 20
+                    scan_pitch_dir = -1
+                elif scan_pitch < -20:
+                    scan_pitch = -20
+                    scan_pitch_dir = 1
+
+                yaw = scan_yaw
+                pitch = scan_pitch
 
             print('direction: %s |number: %s | ex, ey: %s, %s | yrp: %s, %s, %s '
                 % (direction, people, ex, ey, round(yaw, 2), round(roll, 2), round(pitch, 2)),

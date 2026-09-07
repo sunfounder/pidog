@@ -60,7 +60,7 @@ class Body:
         """Queue one or more named actions (e.g. ``body.do("bark", "nod")``)."""
         self.action_flow.add_action(*actions)
 
-    def do_action_flow(self, action_name: Operations, step_count=1, speed=50, pitch_comp=0):
+    def do_action(self, action_name: Operations, step_count=1, speed=50, pitch_comp=0):
         self.dog.do_action(action_name, step_count, speed, pitch_comp)
 
     def wait_done(self) -> None:
