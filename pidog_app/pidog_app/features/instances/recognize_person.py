@@ -8,6 +8,8 @@ face-classification model in :mod:`pidog_app.vision`.)
 from __future__ import annotations
 
 import logging
+import select
+import sys
 import time
 
 from pidog.action_flow import ActionStatus
@@ -34,10 +36,7 @@ class RecognizePerson(Feature):
         self.camera.display(local=False, web=True)
         self.camera.face_detect(on=True)
         try:
-            #found = self._scan_for_face()
-            self._track_face()
-            found = True
-
+            found = self._track_face()
         finally:
             self.camera.face_detect(on=False)
             self.body.set_status(ActionStatus.STANDBY)
@@ -65,6 +64,7 @@ class RecognizePerson(Feature):
         return False
 
     def _track_face(self) -> bool:
+        """Track a face until the user types 'stop tracking'. Returns True if a face was seen."""
         yaw = 0
         roll = 0
         pitch = 0
@@ -91,6 +91,12 @@ class RecognizePerson(Feature):
         is_sound_detected_failed_logged = False
         is_sound_direction_failed_logged = False
         while True:
+            # Check for keyboard input to stop tracking
+            if select.select([sys.stdin], [], [], 0)[0]:
+                cmd = sys.stdin.readline().strip().lower()
+                if cmd in ("stop tracking", "enough", "enough tracking"):
+                    log.info("tracking stopped by user: %s", cmd)
+                    break
             if flag == False:
                 self.body.light(mode='breath', color='pink', speed=1)
             # If heard something, turn to face
@@ -180,16 +186,12 @@ class RecognizePerson(Feature):
                 yaw = scan_yaw
                 pitch = scan_pitch
 
-            print('direction: %s |number: %s | ex, ey: %s, %s | yrp: %s, %s, %s '
-                % (direction, people, ex, ey, round(yaw, 2), round(roll, 2), round(pitch, 2)),
-                end='\r',
-                flush=True,
-                )
             if yaw != prev_yaw or pitch != prev_pitch:
                 self.body.head_move([[yaw, 0, pitch]], pitch_comp=-40, immediately=True, speed=80)
                 prev_yaw = yaw
                 prev_pitch = pitch
             time.sleep(0.05)
+        return flag
 
     def stop_tracing():
         self.camera.face_detect(on=False)
