@@ -74,6 +74,8 @@ class RecognizePerson(Feature):
         scan_yaw_dir = 1
         scan_pitch = 0
         scan_pitch_dir = 1
+        prev_yaw = None
+        prev_pitch = None
 
         self.body.sit()
         self.body.head_move([[yaw, 0, pitch]], roll_comp=0, pitch_comp=-40, immediately=True, speed=40)
@@ -141,17 +143,19 @@ class RecognizePerson(Feature):
 
             if people > 0:
                 # Track face: adjust yaw and pitch toward detected face
-                if ex > 15 and yaw > -80:
+                # Use a generous deadzone so the head stays still once the
+                # face is roughly centered, instead of constant micro-adjustments.
+                if ex > 40 and yaw > -80:
                     yaw -= 0.5 * int(ex/30.0+0.5)
 
-                elif ex < -15 and yaw < 80:
+                elif ex < -40 and yaw < 80:
                     yaw += 0.5 * int(-ex/30.0+0.5)
 
-                if ey > 25:
+                if ey > 40:
                     pitch -= 1*int(ey/50+0.5)
                     if pitch < - 30:
                         pitch = -30
-                elif ey < -25:
+                elif ey < -40:
                     pitch += 1*int(-ey/50+0.5)
                     if pitch > 30:
                         pitch = 30
@@ -181,7 +185,10 @@ class RecognizePerson(Feature):
                 end='\r',
                 flush=True,
                 )
-            self.body.head_move([[yaw, 0, pitch]], pitch_comp=-40, immediately=True, speed=80)
+            if yaw != prev_yaw or pitch != prev_pitch:
+                self.body.head_move([[yaw, 0, pitch]], pitch_comp=-40, immediately=True, speed=80)
+                prev_yaw = yaw
+                prev_pitch = pitch
             time.sleep(0.05)
 
     def stop_tracing():
