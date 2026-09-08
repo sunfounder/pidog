@@ -55,7 +55,7 @@ class ActionDict(dict):
             [-60, 60, 60, -60, 45, -45, -45, 45],
         ], 'legs'
 
-    # forward
+    # 向前 forward
     @property
     def forward(self):
         data = []
@@ -65,7 +65,7 @@ class ActionDict(dict):
             data.append(Pidog.legs_angle_calculation(coord))
         return data, 'legs'
 
-    # backward
+    # 落后 backward
     @property
     def backward(self):
         data = []
@@ -75,7 +75,7 @@ class ActionDict(dict):
             data.append(Pidog.legs_angle_calculation(coord))
         return data, 'legs'
 
-    # turn_left
+    # 左转 turn_left
     @property
     def turn_left(self):
         data = []
@@ -85,7 +85,7 @@ class ActionDict(dict):
             data.append(Pidog.legs_angle_calculation(coord))
         return data, 'legs'
 
-    # turn_right
+    # 右转 turn_right
     @property
     def turn_right(self):
         data = []

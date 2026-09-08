@@ -5,3 +5,8 @@ test/photo*
 test/scene/*
 backups/*
 **secret*
+build/*
+pidog.egg-info/*
+**/__pycache__/*
+*.egg-info/*
+

@@ -11,6 +11,8 @@ from .sh3001 import Sh3001
 from .rgb_strip import RGBStrip
 from .sound_direction import SoundDirection
 from .dual_touch import DualTouch
+from .action_flow import Operations
+from robot_hat.device import get_battery_voltage
 import warnings
 warnings.filterwarnings("ignore") # ignore warnings for pygame # not work
 
@@ -167,6 +169,7 @@ class Pidog():
         try:
             debug(f"config_file: {config_file}")
             debug("robot_hat init ... ", end='', flush=True)
+            # ! TODO: revisit the order in which the legs are initialised
             self.legs = Robot(pin_list=leg_pins, name='legs', init_angles=leg_init_angles, init_order=[
                             0, 2, 4, 6, 1, 3, 5, 7], db=config_file)
             self.head = Robot(pin_list=head_pins, name='head',
@@ -265,6 +268,21 @@ class Pidog():
 
     def read_distance(self):
         return round(self.distance.value, 2)
+
+    def read_battery_voltage(self) -> float:
+        """Read the battery pack voltage in volts.
+        
+        Shutdown at 7.35V is normal – The battery protection circuit is working correctly and cutting off power to prevent over‑discharge.
+        3 hours runtime is reasonable – For a PiDog with active servos, this is expected.
+        Full charge is reached at 8.2V with a healthy battery.         
+
+        Needs charger to wake up – After a low‑voltage shutdown, the protection circuit requires a brief charge input to reset before the system can power on again. 
+        This is normal behaviour.
+        
+        Returns:
+            float: Battery voltage in volts.
+        """                
+        return get_battery_voltage()
 
     # action related: legs,head,tail,imu,rgb_strip
     def close_all_thread(self):
@@ -920,7 +938,7 @@ class Pidog():
         self.servo_move(translate_list, speed)
 
     # do action
-    def do_action(self, action_name, step_count=1, speed=50, pitch_comp=0):
+    def do_action(self, action_name: Operations, step_count=1, speed=50, pitch_comp=0):
         try:
             actions, part = self.actions_dict[action_name]
             if part == 'legs':
@@ -965,6 +983,3 @@ class Pidog():
 
     def is_all_done(self):
         return self.is_legs_done() and self.is_head_done() and self.is_tail_done()
-
-    def get_battery_voltage(self):
-        return round( utils.get_battery_voltage(), 2)

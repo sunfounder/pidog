@@ -129,17 +129,27 @@ class VoiceActiveDog(VoiceAssistant):
     def on_heard(self, text):
         self.action_flow.set_status(ActionStatus.THINK)
 
-    def parse_response(self, text):
-        result = text.strip().split('ACTIONS: ')
+    # def parse_response(self, text):
+    #     result = text.strip().split('ACTIONS: ')
 
-        response_text = result[0].strip()
-        if len(result) > 1:
-            actions = result[1].strip()
-            if len(actions) > 0:
-                actions = actions.split(', ')
-            else:
-                actions = ['stop']
-        else:
+    #     response_text = result[0].strip()
+    #     if len(result) > 1:
+    #         actions = result[1].strip()
+    #         if len(actions) > 0:
+    #             actions = actions.split(', ')
+    #         else:
+    #             actions = ['stop']
+    #     else:
+    #         actions = ['stop']
+    #     self.action_flow.add_action(*actions)
+        
+    #     return response_text
+
+    def parse_response(self, response_json):        
+        data = json.loads(response_json)
+        response_text = data.get('response_text', '')
+        actions = data.get('actions', [])
+        if len(actions) == 0:
             actions = ['stop']
         self.action_flow.add_action(*actions)
         

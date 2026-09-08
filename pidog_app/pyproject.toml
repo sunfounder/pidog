@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pidog_app"
+version = "0.1.0"
+description = "AI-driven feature architecture for the SunFounder Pidog robot dog"
+requires-python = ">=3.11"
+dependencies = [
+    "pyyaml>=6.0",
+    "requests>=2.31",
+    # The following are installed locally (editable) from the SunFounder repos:
+    #   pidog, robot-hat, vilib, sunfounder-voice-assistant
+    # They are not on PyPI; do not list them here.
+]
+
+[tool.setuptools.packages.find]
+include = ["pidog_app*"]

@@ -95,3 +95,41 @@ E-mail:
 ## Credit
 
 Most sound effect are from [Zapsplat.com](https://www.zapsplat.com)
+
+
+# Installation with one or more forked projects
+
+git clone the repositories from there original git location or from a fork.  
+Do not 'sudo python3 install.py' on any of them.
+
+After cloning, perform:
+Setup: System Python is externally-managed (PEP 668), so I created a venv with system-site-package inheritance (needed for hardware libs like RPi.GPIO, spidev, picamera2):
+
+```
+>_ bash
+
+python3 -m venv --system-site-packages /home/pds/.venv
+```
+
+Editable installs — links directly to your source folders, so edits take effect immediately without reinstalling:
+
+
+
+
+bash
+```
+>_ bash
+
+/home/pds/.venv/bin/pip install -e /home/pds/robot-hat -e /home/pds/pidog -e /home/pds/vilib
+```
+
+Missing dependencies resolved:
+
+python3-pyaudio (apt) — for robot_hat.music
+python3-opencv (apt) — for vilib, matches existing libopencv410 system libs
+flask (pip, in-venv) — for vilib's web streaming server
+Verified: import pidog, robot_hat, vilib now resolves to __init__.py, __init__.py, __init__.py respectively.
+
+# Python environment on raspberry PI
+
+In a terminal type 'source .venv/bin/activate' otherwise you will receive a 'no permission' error message.

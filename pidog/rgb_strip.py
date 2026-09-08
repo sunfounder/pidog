@@ -102,9 +102,9 @@ class RGBStrip():
         """
         self.light_num = nums
 
-        self.style = 'breath',
-        self.color = 'white',
-        self.brightness = 1,
+        self.style = 'breath'
+        self.color = 'white'
+        self.brightness = 1.0
         self.delay = 0.1
         self.frames = []
         self.current_frame = 0
@@ -216,7 +216,7 @@ class RGBStrip():
         """
         monochromatic style
         """
-        color = [i*self.brightness for i in color]
+        color = [max(0, int(i*self.brightness)) for i in color]
         return color
 
     def Normal_distribution_calculate(self, u, sig, A, x, offset):
@@ -386,7 +386,7 @@ class RGBStrip():
         except:
             raise ValueError('\033[0;31m%s\033[0m'%("Invalid color value."))
 
-    def set_mode(self, style='breath', color='white', bps=1, brightness=1):
+    def set_mode(self, style='breath', color='white', bps=1, brightness: float=1):
         """
         Set the display mode of the rgb strip
 
@@ -443,7 +443,7 @@ class RGBStrip():
             if self.is_changed:
                 self.is_changed = False
                 self.frames.clear()
-                self.max_frames = int(1/self.bps/self.MIN_DELAY)
+                self.max_frames = max(1, int(1/self.bps/self.MIN_DELAY))
                 for frame_index in range(self.max_frames):
                     frame = [] # 11*[r, g ,b]
                     for light_index in range(self.light_num):
