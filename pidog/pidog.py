@@ -447,33 +447,36 @@ class Pidog():
 
     def _imu_thread(self):
         # imu calibrate
-        _ax = 0
-        _ay = 0
-        _az = 0
-        _gx = 0
-        _gy = 0
-        _gz = 0
-        time = 10
-        for _ in range(time):
-            data = self.imu._sh3001_getimudata()
-            if data == False:
-                break
+        # use the saved calibration if there is one (see set_imu_offsets),
+        # otherwise auto-calibrate, which assumes the dog is still and level
+        if not self.load_imu_offsets():
+            _ax = 0
+            _ay = 0
+            _az = 0
+            _gx = 0
+            _gy = 0
+            _gz = 0
+            time = 10
+            for _ in range(time):
+                data = self.imu._sh3001_getimudata()
+                if data == False:
+                    break
 
-            self.accData, self.gyroData = data
-            _ax += self.accData[0]
-            _ay += self.accData[1]
-            _az += self.accData[2]
-            _gx += self.gyroData[0]
-            _gy += self.gyroData[1]
-            _gz += self.gyroData[2]
-            sleep(0.1)
+                self.accData, self.gyroData = data
+                _ax += self.accData[0]
+                _ay += self.accData[1]
+                _az += self.accData[2]
+                _gx += self.gyroData[0]
+                _gy += self.gyroData[1]
+                _gz += self.gyroData[2]
+                sleep(0.1)
 
-        self.imu_acc_offset[0] = round(-16384 - _ax/time, 0)
-        self.imu_acc_offset[1] = round(0 - _ay/time, 0)
-        self.imu_acc_offset[2] = round(0 - _az/time, 0)
-        self.imu_gyro_offset[0] = round(0 - _gx/time, 0)
-        self.imu_gyro_offset[1] = round(0 - _gy/time, 0)
-        self.imu_gyro_offset[2] = round(0 - _gz/time, 0)
+            self.imu_acc_offset[0] = round(-16384 - _ax/time, 0)
+            self.imu_acc_offset[1] = round(0 - _ay/time, 0)
+            self.imu_acc_offset[2] = round(0 - _az/time, 0)
+            self.imu_gyro_offset[0] = round(0 - _gx/time, 0)
+            self.imu_gyro_offset[1] = round(0 - _gy/time, 0)
+            self.imu_gyro_offset[2] = round(0 - _gz/time, 0)
 
         while not self.exit_flag:
             try:
@@ -698,6 +701,65 @@ class Pidog():
         self.tail.set_offset(cali_list)
         self.tail.reset()
         self.tail_current_angles = [0]
+
+    def set_imu_offsets(self, acc_offset=None, gyro_offset=None):
+        '''Set the IMU calibration offsets and save them to the config file.
+
+        The Pidog auto-calibrates the IMU at startup, which assumes the dog is
+        still and level. Call this to apply a calibration you made yourself;
+        it is saved and loaded at the next startup instead of auto-calibrating.
+
+        :param acc_offset: [x, y, z], added to the raw accelerometer data
+        :param gyro_offset: [x, y, z], added to the raw gyroscope data
+        '''
+        if acc_offset is not None:
+            self.imu_acc_offset = [float(i) for i in acc_offset]
+        if gyro_offset is not None:
+            self.imu_gyro_offset = [float(i) for i in gyro_offset]
+        self.save_imu_offsets()
+
+    def save_imu_offsets(self):
+        '''Save the current IMU offsets to the config file.'''
+        self.imu.db.set('imu_acc_offset', str(list(self.imu_acc_offset)))
+        self.imu.db.set('imu_gyro_offset', str(list(self.imu_gyro_offset)))
+        debug("imu offsets saved: acc=%s gyro=%s" %
+              (self.imu_acc_offset, self.imu_gyro_offset))
+
+    def load_imu_offsets(self):
+        '''Load the IMU offsets from the config file.
+
+        :return: True if a saved calibration was loaded, False otherwise (in
+            that case the IMU is auto-calibrated at startup)
+        :rtype: bool
+        '''
+        try:
+            acc = self.imu.db.get('imu_acc_offset')
+            gyro = self.imu.db.get('imu_gyro_offset')
+            if not acc or not gyro:
+                return False
+            acc_offset = [float(i) for i in acc.strip('[]').split(',')]
+            gyro_offset = [float(i) for i in gyro.strip('[]').split(',')]
+            if len(acc_offset) != 3 or len(gyro_offset) != 3:
+                return False
+            # sanity check, ignore a corrupted calibration
+            if any(abs(v) > 65536 for v in acc_offset + gyro_offset):
+                return False
+        except (TypeError, ValueError):
+            return False
+        self.imu_acc_offset = acc_offset
+        self.imu_gyro_offset = gyro_offset
+        debug("imu offsets loaded: acc=%s gyro=%s" %
+              (self.imu_acc_offset, self.imu_gyro_offset))
+        return True
+
+    def reset_imu_offsets(self):
+        '''Drop the saved IMU calibration, so the IMU is auto-calibrated again
+        at the next startup (the dog must then be still and level).'''
+        self.imu.db.set('imu_acc_offset', '')
+        self.imu.db.set('imu_gyro_offset', '')
+        self.imu_acc_offset = [0, 0, 0]
+        self.imu_gyro_offset = [0, 0, 0]
+        debug("imu offsets reset")
 
     # calculate angles and coords
 
