@@ -56,13 +56,32 @@ class Body:
         self.change_posture(Posetures.LIE)
 
     # ── actions ──────────────────────────────────────────────────────────
-    def do(self, *actions: str | Operations) -> None:
+    def do_action_flow(self, *actions: str | Operations) -> None:
         """Queue one or more named actions (e.g. ``body.do("bark", "nod")``)."""
         self.action_flow.add_action(*actions)
+
+    def do_action(self, action_name: Operations, step_count=1, speed=50, pitch_comp=0):
+        self.dog.do_action(action_name, step_count, speed, pitch_comp)
 
     def wait_done(self) -> None:
         """Block until all queued actions finish."""
         self.action_flow.wait_actions_done()
+
+    def wait_head_done(self) -> None:
+        """Wait until the head movement is finished"""
+        self.dog.wait_head_done()
+
+    def wait_legs_done(self):
+        """Wait until the legs movement is finished"""
+        self.dog.wait.legs_done()        
+
+    def wait_tail_done(self):
+        """Wait until the tail movement is finished"""
+        self.dog.wait.tail_done()
+
+    def wait_all_done(self) -> None:
+        """Wait until all body movements are finished"""
+        self.dog.wait_all_done()
 
     def set_status(self, status: ActionStatus) -> None:
         self.action_flow.set_status(status)
@@ -76,10 +95,10 @@ class Body:
         self.dog.rgb_strip.close()
 
     # ── head ─────────────────────────────────────────────────────────────
-    def head_move(self, yrp_list: Iterable[list], immediately: bool = False,
-                  speed: int = 80) -> None:
+    def head_move(self, yrp_list: Iterable[list], roll_comp: int = 0, pitch_comp: int = 0, 
+                    immediately: bool = False, speed: int = 80) -> None:
         """Move head to [yaw, roll, pitch] points."""
-        self.dog.head_move(list(yrp_list), immediately=immediately, speed=speed)
+        self.dog.head_move(list(yrp_list), roll_comp=roll_comp, pitch_comp=pitch_comp, immediately=immediately, speed=speed)
 
     # ── convenience ──────────────────────────────────────────────────────
     @property

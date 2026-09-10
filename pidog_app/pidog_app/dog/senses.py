@@ -60,6 +60,10 @@ class Senses:
         return float(self.dog.pitch), float(self.dog.roll)
 
     # ── sound direction ──────────────────────────────────────────────────
+    def is_sound_detected(self) -> bool:
+        """True when sound direction is detected (busy line pulled LOW by 064B)."""
+        return self.dog.ears.isdetected()
+    
     def sound_direction(self) -> int:
         """Direction of the last detected sound (angle index, -1 = none)."""
-        return self.dog.sound_direction.read()
+        return self.dog.ears.read()

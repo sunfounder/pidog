@@ -4,11 +4,11 @@
 
 dog:
   name: "Scooby Doo"
-  sleep_delay: 10 # seconds
+  sleep_delay: 120 # seconds
 
 llm:
   # Ollama runs on the laptop; expose it on the LAN in Ollama settings.
-  ip: "192.168.0.136"
+  ip: "192.168.0.163"
   port: 11434
   # Must support tool/function calling: llama3.1, qwen2.5, mistral-nemo, ...
   model: "qwen2.5:7b"
