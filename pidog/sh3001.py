@@ -10,6 +10,12 @@ from robot_hat import I2C, fileDB
 # 8g: 1G = 4096
 # 16g:  1G = 2048
 
+# Nominal sensitivity from the SH3001 datasheet, used as the default when no
+# calibration is stored.  get_calibrated_data() returns physical units
+# (accelerometer in g, gyroscope in deg/s) based on these values.
+ACC_LSB_PER_G = 16384.0     # +-2g range (configured by sh3001_init)
+GYRO_LSB_PER_DPS = 16.4     # +-2000 dps range (configured by sh3001_init)
+
 
 # region: General function
 def bytes_toint(msb, lsb):
@@ -402,9 +408,35 @@ class Sh3001(I2C):
         self.gyro_offset = [0, 0, 0]
         self.data_vector = [0, 0, 0]
 
+        # calibration for get_calibrated_data(): each axis is corrected with
+        #     value = (raw - bias) / scale
+        # so "scale" is the real sensitivity of the axis in LSB per g
+        # (per deg/s for the gyroscope).  Without a stored calibration the
+        # datasheet nominal values are used.
+        self.acc_bias = self.get_from_config('calibrate_bias_list',
+                                             default_value=str(
+                                                 self.new_list(0)))
+        self.acc_scale = self.get_from_config('calibrate_scale_list',
+                                              default_value=str(
+                                                  self.new_list(ACC_LSB_PER_G)))
+        self.gyro_bias = self.get_from_config('calibrate_gyro_bias_list',
+                                              default_value=str(
+                                                  self.new_list(0)))
+        self.gyro_scale = self.get_from_config('calibrate_gyro_scale_list',
+                                               default_value=str(
+                                                   self.new_list(
+                                                       GYRO_LSB_PER_DPS)))
+
     def get_from_config(self, name, default_value=None):
         value = self.db.get(name, default_value)
-        value = [float(i.strip()) for i in value.strip("[]").split(",")]
+        try:
+            value = [float(i.strip()) for i in value.strip("[]").split(",")]
+        except (AttributeError, ValueError):
+            # missing or empty/invalid entry, fall back to the default
+            value = [
+                float(i.strip())
+                for i in str(default_value).strip("[]").split(",")
+            ]
         return list(value)
 
     def new_list(self, value):
@@ -632,6 +664,73 @@ class Sh3001(I2C):
         self.db.set('calibrate_offset_list', str(offset_list))
         self.db.set('calibrate_max_list', str(self.acc_max))
         self.db.set('calibrate_min_list', str(self.acc_min))
+
+    # region: calibrated output
+    def get_calibrated_data(self):
+        '''Read the IMU and return the calibrated data in physical units.
+
+        Each axis is corrected with:  value = (raw - bias) / scale
+        where 'scale' is the per-axis sensitivity in LSB per g (accelerometer)
+        or LSB per deg/s (gyroscope).  Without a stored calibration the
+        datasheet nominal sensitivity is used (16384 LSB/g at +-2g,
+        16.4 LSB/deg/s at +-2000 dps).
+
+        :return: (accData, gyroData); accData in g, gyroData in deg/s, or
+            False when the IMU read failed
+        :rtype: tuple(list[float], list[float]) | bool
+        '''
+        data = self._sh3001_getimudata()
+        if data is False:
+            return False
+        accRaw, gyroRaw = data
+        accData = [
+            (accRaw[i] - self.acc_bias[i]) / self.acc_scale[i]
+            for i in range(3)
+        ]
+        gyroData = [
+            (gyroRaw[i] - self.gyro_bias[i]) / self.gyro_scale[i]
+            for i in range(3)
+        ]
+        return accData, gyroData
+
+    def set_acc_calibration(self, bias=None, scale=None):
+        '''Set (and save) the accelerometer calibration.
+
+        :param bias: [x, y, z] zero-g offset in LSB, subtracted from the raw data
+        :param scale: [x, y, z] sensitivity in LSB per g (16384 = +-2g nominal)
+        '''
+        if bias is not None:
+            self.acc_bias = [float(i) for i in bias]
+        if scale is not None:
+            self.acc_scale = [float(i) for i in scale]
+        self.db.set('calibrate_bias_list', str(list(self.acc_bias)))
+        self.db.set('calibrate_scale_list', str(list(self.acc_scale)))
+
+    def set_gyro_calibration(self, bias=None, scale=None):
+        '''Set (and save) the gyroscope calibration.
+
+        :param bias: [x, y, z] zero-rate offset in LSB, subtracted from the raw data
+        :param scale: [x, y, z] sensitivity in LSB per deg/s (16.4 = +-2000 dps nominal)
+        '''
+        if bias is not None:
+            self.gyro_bias = [float(i) for i in bias]
+        if scale is not None:
+            self.gyro_scale = [float(i) for i in scale]
+        self.db.set('calibrate_gyro_bias_list', str(list(self.gyro_bias)))
+        self.db.set('calibrate_gyro_scale_list', str(list(self.gyro_scale)))
+
+    def reset_calibration(self):
+        '''Drop the stored calibration, back to the datasheet nominal values.'''
+        self.db.set('calibrate_bias_list', '')
+        self.db.set('calibrate_scale_list', '')
+        self.db.set('calibrate_gyro_bias_list', '')
+        self.db.set('calibrate_gyro_scale_list', '')
+        self.acc_bias = self.new_list(0)
+        self.acc_scale = self.new_list(ACC_LSB_PER_G)
+        self.gyro_bias = self.new_list(0)
+        self.gyro_scale = self.new_list(GYRO_LSB_PER_DPS)
+
+    # endregion: calibrated output
 
     def acc_calibrate_cmd(self):
         try:
