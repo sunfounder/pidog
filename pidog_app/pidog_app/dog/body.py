@@ -57,7 +57,7 @@ class Body:
 
     # ── actions ──────────────────────────────────────────────────────────
     def do_action_flow(self, *actions: str | Operations) -> None:
-        """Queue one or more named actions (e.g. ``body.do("bark", "nod")``)."""
+        """Queue one or more named actions (e.g. ``body.do_action_flow("bark", "nod")``)."""
         self.action_flow.add_action(*actions)
 
     def do_action(self, action_name: Operations, step_count=1, speed=50, pitch_comp=0):
@@ -73,11 +73,11 @@ class Body:
 
     def wait_legs_done(self):
         """Wait until the legs movement is finished"""
-        self.dog.wait.legs_done()        
+        self.dog.wait_legs_done()        
 
     def wait_tail_done(self):
         """Wait until the tail movement is finished"""
-        self.dog.wait.tail_done()
+        self.dog.wait_tail_done()
 
     def wait_all_done(self) -> None:
         """Wait until all body movements are finished"""

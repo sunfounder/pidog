@@ -41,6 +41,15 @@ class Brain:
         self._setup_done = True
         log.info("brain ready; features: %s", self.registry.names())
 
+    def reset(self) -> None:
+        """Drop the conversation and re-apply the system prompt.
+
+        Called after a failure so a half-finished exchange (a dangling
+        user message or unanswered tool calls) can't poison the next turn.
+        """
+        self.llm.messages.clear()
+        self.setup()
+
     # ── main entry ───────────────────────────────────────────────────────
     def handle(self, user_text: str) -> str:
         """Process one user turn and return the dog's reply text.
@@ -90,7 +99,11 @@ class Brain:
         kwargs: dict[str, Any] = {"stream": False}
         if tools:
             kwargs["tools"] = tools
-        response = self.llm.chat(**kwargs)
+        try:
+            response = self.llm.chat(**kwargs)
+        except Exception as e:
+            log.exception(f"LLM chat failed: {e}")
+            raise RuntimeError(f"LLM error: {e}")
         data = response.json()
         print(data)
         if "error" in data:

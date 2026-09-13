@@ -217,7 +217,13 @@ class App:
                 # Real input while awake → reset the idle timer.
                 with self._sleep_lock:
                     self._awake_time = datetime.now()
-                reply = self.brain.handle(user_text)
+                try:
+                    reply = self.brain.handle(user_text)
+                except Exception:
+                    log.exception("brain.handle failed; resetting dog to startup state")
+                    self.io.speak("Sorry, my brain glitched. Give me a second to reset.")
+                    self._reset_to_startup()
+                    continue
                 self.io.speak(reply)
         except KeyboardInterrupt:
             pass
@@ -304,6 +310,23 @@ class App:
                     self._awake_time = datetime.now()                    
 
                 self._wake_complete.set()
+
+    def _reset_to_startup(self) -> None:
+        """Restore the dog to its post-startup state after a brain error.
+
+        Mirrors what ``start()``/``run()`` establish at boot: awake, sit
+        posture, breath-yellow chest light, idle timer reset, and a fresh
+        brain conversation (system prompt only). Any looping sound (e.g.
+        snoring) is stopped.
+        """
+        with self._sleep_lock:
+            self._sleeping = False
+            self._awake_time = datetime.now()
+        self.voice.stop_sound()
+        self.body.set_status(ActionStatus.STANDBY)
+        self.body.sit()
+        self.body.light(mode="breath", color="yellow", speed=1)
+        self.brain.reset()
 
 def _level_to_int(value) -> int:
     """Accept either a numeric level (e.g. ``20``) or a name (e.g. ``"INFO"``)."""
