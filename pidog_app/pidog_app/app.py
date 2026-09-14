@@ -60,16 +60,16 @@ ROOT_LOGGER_NAME = "pidog_app"
 
 
 # ── dependency injection ──────────────────────────────────────────────────
-def build_features(body: Body, senses: Senses, camera: Camera) -> list:
+def build_features(body: Body, senses: Senses, camera: Camera, cfg: Config) -> list:
     """Instantiate every feature with the shared facades.
 
     Add new features here — that's the only place to register them.
     """
     return [
-        WakeFromStasis(body, senses, camera),
-        FindObject(body, senses, camera),
-        RecognizePerson(body, senses, camera),
-        CheckWaterBowl(body, senses, camera),
+        WakeFromStasis(body, senses, camera, cfg),
+        FindObject(body, senses, camera, cfg),
+        RecognizePerson(body, senses, camera, cfg),
+        CheckWaterBowl(body, senses, camera, cfg),
     ]
 
 
@@ -114,7 +114,7 @@ class App:
             keyboard_enable=True,
             body=self.body)
         self.registry = FeatureRegistry(
-            build_features(self.body, self.senses, self.camera)
+            build_features(self.body, self.senses, self.camera, cfg)
         )
 
         # LLM: use the OpenAI-compatible /v1/chat/completions endpoint so we

@@ -37,14 +37,15 @@ class Feature(ABC):
     name: str = ""
     description: str = ""
 
-    def __init__(self, body=None, senses=None, camera=None):
-        # ``body``/``senses``/``camera`` are normally injected by the app.
-        # They default to None so features can be instantiated in tests
-        # without hardware, and so simple features that don't need them
-        # can omit the arguments.
+    def __init__(self, body=None, senses=None, camera=None, cfg=None):
+        # ``body``/``senses``/``camera``/``cfg`` are normally injected by
+        # the app. They default to None so features can be instantiated in
+        # tests without hardware, and so simple features that don't need
+        # them can omit the arguments.
         self.body = body
         self.senses = senses
         self.camera = camera
+        self.cfg = cfg
 
     @abstractmethod
     def run(self, **kwargs: Any) -> FeatureResult:

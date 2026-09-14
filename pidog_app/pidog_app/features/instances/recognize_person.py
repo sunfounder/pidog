@@ -44,8 +44,10 @@ class RecognizePerson(Feature):
         self.camera.start()
         self.camera.display(local=False, web=True)
         self.camera.face_detect(on=True)
-        try:
-            found = self._track_face()
+        try:            
+            face_track_time = self.cfg.get("vision.face_track_timeout", 30.0)
+            face_track_seen_hold = self.cfg.get("vision.face_track_seen_hold", 10.0)
+            found = self._track_face(timeout = face_track_time, seen_hold = face_track_seen_hold)
         finally:
             self.camera.face_detect(on=False)
             self.body.set_status(ActionStatus.STANDBY)
@@ -87,6 +89,9 @@ class RecognizePerson(Feature):
         FeatureResult — previously this loop ran forever and hung the
         LLM tool call.
         """
+        
+        log.info(f"track face started with timeout={timeout}s, seen_hold={seen_hold}s")
+
         yaw = 0
         pitch = 0
         seen = False          # a face was detected at least once -> return value
@@ -103,8 +108,7 @@ class RecognizePerson(Feature):
 
         start = time.time()
         stdin_ok = _stdin_pollable()
-
-        self.body.sit()
+        
         self.body.head_move([[yaw, 0, pitch]], roll_comp=0, pitch_comp=-40, immediately=True, speed=40)
         self.body.wait_all_done()
         time.sleep(0.5)
@@ -131,11 +135,11 @@ class RecognizePerson(Feature):
                         if cmd == "":
                             stdin_ok = False   # EOF — stop polling
                         elif cmd in ("stop tracking", "enough", "enough tracking"):
-                            log.info("tracking stopped by user: %s", cmd)
+                            log.info("face tracking stopped by user: %s", cmd)
                             break
             # Hard bound: always return so run() produces a FeatureResult.
             if time.time() - start >= timeout:
-                log.info("tracking timed out after %.0fs", timeout)
+                log.info("face tracking timed out after %.0fs", timeout)
                 break
             # Face already greeted — hold briefly then finish.
             if seen_at is not None and time.time() - seen_at >= seen_hold:

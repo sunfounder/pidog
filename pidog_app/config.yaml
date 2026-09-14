@@ -33,6 +33,8 @@ sensors:
 vision:
   camera_vflip: false
   camera_hflip: false
+  face_track_timeout: 30.0
+  face_track_seen_hold: 10.0
 
 logging:
   level: INFO
