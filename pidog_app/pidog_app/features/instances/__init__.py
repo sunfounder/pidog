@@ -8,10 +8,12 @@ from .wake_from_stasis import WakeFromStasis
 from .find_object import FindObject
 from .recognize_person import RecognizePerson
 from .check_water_bowl import CheckWaterBowl
+from .perform_actions import PerformActions
 
 __all__ = [
     "WakeFromStasis",
     "FindObject",
     "RecognizePerson",
     "CheckWaterBowl",
+    "PerformActions",
 ]
