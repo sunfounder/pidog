@@ -18,10 +18,7 @@
 Vosk 是一个轻量级的语音转文字（STT）引擎，支持多种语言，可在 Raspberry Pi 上完全**离线**\ 运行。
 您只需联网一次下载语言模型。之后，所有功能无需网络连接即可使用。
 
-在本课中，我们将：
-
-* 检查 Raspberry Pi 上的麦克风。
-* 安装并使用所选语言模型测试 Vosk。
+本节课中，我们将安装 Vosk，并用您所选语言的模型进行测试。
 
 准备工作
 ----------------
@@ -30,62 +27,9 @@ Vosk 是一个轻量级的语音转文字（STT）引擎，支持多种语言，
 
 * :ref:`install_all_modules` — 安装 ``robot-hat``、``vilib``、``pidog`` 模块，然后运行脚本 ``i2samp.sh``。
 
-1. 检查您的麦克风
---------------------------
-
-在使用语音识别之前，请确保您的 USB 麦克风正常工作。
-
-#. 列出可用的录音设备：
-
-   .. code-block:: bash
-
-      arecord -l
-
-   查找类似 ``card 1: ... device 0`` 的行。
-
-#. 录制一段短样本（将 ``1,0`` 替换为您找到的编号）：
-
-   .. code-block:: bash
-
-      arecord -D plughw:1,0 -f S16_LE -r 16000 -d 3 test.wav
-
-   * 示例：如果您的设备是 ``card 2, device 0``，请使用：
-
-   .. code-block:: bash
-
-      arecord -D plughw:2,0 -f S16_LE -r 16000 -d 3 test.wav
-
-#. 播放以确认录音效果：
-
-   .. important::
-
-      Robot HAT 扬声器在播放音频之前必须被激活。如果您还没有运行过任何 PiDog 示例代码，请先激活它：
-
-      .. code-block:: bash
-
-         robot_hat enable_speaker
-
-      每次开机只需执行一次。运行任何 PiDog 示例（会初始化 ``Pidog()``）都会自动完成此操作。
-
-   .. code-block:: bash
-
-      aplay test.wav
-
-#. 如有需要，调节麦克风音量：
-
-   .. code-block:: bash
-
-      alsamixer
-
-   * 按 **F6** 选择您的 USB 麦克风。
-   * 找到 **Mic** 或 **Capture** 通道。
-   * 确保没有静音（**[MM]** 表示静音，按 ``M`` 取消静音 → 应显示 **[OO]**）。
-   * 使用 ↑ / ↓ 方向键改变录音音量。
-
-
 .. _test_vosk:
 
-2. 测试 Vosk
+1. 测试 Vosk
 --------------------------
 
 **尝试步骤如下**：
@@ -159,28 +103,27 @@ Vosk 是一个轻量级的语音转文字（STT）引擎，支持多种语言，
 故障排除
 -----------------
 
-* **运行 `arecord` 时提示没有此类文件或目录**
+* **麦克风录不到声音，或运行 arecord 时提示 “No such file or directory”**
 
-  您可能使用了错误的声卡/设备编号。
-  运行：
+  可能是声卡/设备编号错误，或者输入被静音。先列出录音设备：
 
   .. code-block:: bash
 
      arecord -l
 
-  并将 ``1,0`` 替换为您的 USB 麦克风显示的编号。
+  找到您的 USB 麦克风并记下其编号，然后录一段测试音频，把 ``1,0`` 替换为实际编号：
 
-* **录制的文件没有声音**
+  .. code-block:: bash
 
-  打开混音器检查麦克风音量：
+     arecord -D plughw:1,0 -f S16_LE -r 16000 -d 3 test.wav
+
+  如果录音仍然没有声音，请打开混音器：
 
   .. code-block:: bash
 
      alsamixer
 
-  * 按 **F6** 选择您的 USB 麦克风。
-  * 确保 **Mic/Capture** 没有静音（**[OO]** 而非 **[MM]**）。
-  * 使用 ↑ 键提高音量。
+  按 **F6** 选择您的 USB 麦克风，取消 **Mic** / **Capture** 的静音，确认状态为 **[OO]** 而不是 **[MM]**，并用 ↑ / ↓ 调整音量。
 
 * **Vosk 无法识别语音**
 
