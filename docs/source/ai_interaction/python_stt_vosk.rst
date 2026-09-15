@@ -18,74 +18,18 @@
 Vosk is a lightweight speech-to-text (STT) engine that supports many languages and runs fully **offline** on Raspberry Pi.  
 You only need internet access once to download a language model. After that, everything works without a network connection.  
 
-In this lesson, we will:  
-
-* Check the microphone on Raspberry Pi.  
-* Install and test Vosk with a chosen language model.  
+In this lesson, we will install Vosk and test it with a language model of your choice.
 
 Before You Start
 ----------------
 
-Make sure you‘ve completed:
+Make sure you've completed:
 
 * :ref:`install_all_modules` — Install ``robot-hat``, ``vilib``, ``pidog`` modules, then run the script ``i2samp.sh``.
 
-1. Check Your Microphone
---------------------------
-
-Before using speech recognition, make sure your USB microphone works correctly.
-
-#. List available recording devices:
-
-   .. code-block:: bash
-
-      arecord -l
-
-   Look for a line like ``card 1: ... device 0``.  
-
-#. Record a short sample (replace ``1,0`` with the numbers you found):
-
-   .. code-block:: bash
-
-      arecord -D plughw:1,0 -f S16_LE -r 16000 -d 3 test.wav
-
-   * Example: if your device is ``card 2, device 0``, use:
-
-   .. code-block:: bash
-
-      arecord -D plughw:2,0 -f S16_LE -r 16000 -d 3 test.wav
-
-#. Play it back to confirm the recording:
-
-   .. important::
-
-      The Robot HAT speaker must be enabled before playing audio. If you haven't run any PiDog example code yet, enable it first:
-
-      .. code-block:: bash
-
-         robot_hat enable_speaker
-
-      This only needs to be done once per boot. Running any PiDog example (which initializes ``Pidog()``) does this automatically.
-
-   .. code-block:: bash
-
-      aplay test.wav
-
-#. Adjust microphone volume if needed:
-
-   .. code-block:: bash
-
-      alsamixer
-
-   * Press **F6** to select your USB microphone.  
-   * Find the **Mic** or **Capture** channel.  
-   * Make sure it is not muted (**[MM]** means mute, press ``M`` to unmute → should show **[OO]**).  
-   * Use ↑ / ↓ arrow keys to change the recording volume.
-
-
 .. _test_vosk:
 
-2. Test Vosk
+1. Test Vosk
 --------------------------
 
 **Steps to try it out**:
@@ -159,28 +103,27 @@ You can also stream speech continuously to see partial results as you speak:
 Troubleshooting
 -----------------
 
-* **No such file or directory (when running `arecord`)**
+* **The microphone records nothing, or arecord fails with "No such file or directory"**
 
-  You may have used the wrong card/device number.  
-  Run:
+  The card/device number is probably wrong, or the input is muted. First list the recording devices:
 
   .. code-block:: bash
 
      arecord -l
 
-  and replace ``1,0`` with the numbers shown for your USB microphone.
+  Look for your USB microphone and note its numbers, then record a test sample, replacing ``1,0`` with the numbers you found:
 
-* **Recorded file has no sound**
+  .. code-block:: bash
 
-  Open the mixer and check the microphone volume:
+     arecord -D plughw:1,0 -f S16_LE -r 16000 -d 3 test.wav
+
+  If the recording is still silent, open the mixer:
 
   .. code-block:: bash
 
      alsamixer
 
-  * Press **F6** to select your USB mic.  
-  * Make sure **Mic/Capture** is not muted (**[OO]** instead of **[MM]**).  
-  * Increase the level with ↑.
+  Press **F6** to select your USB microphone, unmute **Mic** / **Capture** (**[OO]** instead of **[MM]**), and raise the level with ↑ / ↓.
 
 * **Vosk does not recognize speech**
 
