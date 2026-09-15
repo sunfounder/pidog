@@ -18,10 +18,7 @@
 Vosk ist eine leichtgewichtige Speech-to-Text (STT) Engine, die viele Sprachen unterstützt und vollständig **offline** auf dem Raspberry Pi läuft.  
 Du benötigst nur einmalig Internetzugang, um ein Sprachmodell herunterzuladen. Danach funktioniert alles **ohne Netzwerkverbindung**.
 
-In dieser Lektion werden wir:
-
-* Das Mikrofon auf dem Raspberry Pi überprüfen.  
-* Vosk mit einem ausgewählten Sprachmodell installieren und testen.
+In dieser Lektion installieren wir Vosk und testen es mit einem Sprachmodell deiner Wahl.
 
 Bevor du beginnst
 -----------------
@@ -30,62 +27,9 @@ Stelle sicher, dass du Folgendes abgeschlossen hast:
 
 * :ref:`install_all_modules` — Installiere die Module ``robot-hat``, ``vilib``, ``pidog`` und führe dann das Skript ``i2samp.sh`` aus.
 
-1. Mikrofon überprüfen
-----------------------
-
-Bevor du die Spracherkennung verwendest, solltest du sicherstellen, dass dein USB-Mikrofon korrekt funktioniert.
-
-#. Liste die verfügbaren Aufnahmegeräte auf:
-
-   .. code-block:: bash
-
-      arecord -l
-
-   Achte auf eine Zeile wie ``card 1: ... device 0``.
-
-#. Nimm eine kurze Probe auf (ersetze ``1,0`` durch die gefundenen Zahlen):
-
-   .. code-block:: bash
-
-      arecord -D plughw:1,0 -f S16_LE -r 16000 -d 3 test.wav
-
-   * Beispiel: Wenn dein Gerät ``card 2, device 0`` ist, verwende:
-
-   .. code-block:: bash
-
-      arecord -D plughw:2,0 -f S16_LE -r 16000 -d 3 test.wav
-
-#. Spiele die Aufnahme ab, um sie zu überprüfen:
-
-   .. important::
-
-      Der Robot HAT-Lautsprecher muss aktiviert werden, bevor Audio abgespielt werden kann. Wenn du noch keinen PiDog-Beispielcode ausgeführt hast, aktiviere ihn zuerst:
-
-      .. code-block:: bash
-
-         robot_hat enable_speaker
-
-      Dies muss nur einmal pro Systemstart durchgeführt werden. Das Ausführen eines beliebigen PiDog-Beispiels (das ``Pidog()`` initialisiert) erledigt dies automatisch.
-
-   .. code-block:: bash
-
-      aplay test.wav
-
-#. Passe bei Bedarf die Mikrofonlautstärke an:
-
-   .. code-block:: bash
-
-      alsamixer
-
-   * Drücke **F6**, um dein USB-Mikrofon auszuwählen.  
-   * Suche den **Mic**- oder **Capture**-Kanal.  
-   * Stelle sicher, dass das Mikrofon nicht stummgeschaltet ist (**[MM]** bedeutet stumm; drücke ``M``, um es zu aktivieren → es sollte **[OO]** anzeigen).  
-   * Verwende die Pfeiltasten ↑ / ↓, um die Aufnahme-Lautstärke zu ändern.
-
-
 .. _test_vosk:
 
-2. Vosk testen
+1. Vosk testen
 --------------------------
 
 **Schritte zum Ausprobieren**:
@@ -159,28 +103,27 @@ Du kannst die Sprache auch kontinuierlich streamen, um Teilergebnisse während d
 Fehlerbehebung
 -----------------
 
-* **No such file or directory (beim Ausführen von `arecord`)**
+* **Das Mikrofon nimmt nichts auf, oder arecord meldet „No such file or directory“**
 
-  Möglicherweise hast du die falsche Karten-/Gerätenummer verwendet.  
-  Führe aus:
+  Wahrscheinlich ist die Karten-/Gerätenummer falsch oder der Eingang ist stummgeschaltet. Liste zuerst die Aufnahmegeräte auf:
 
   .. code-block:: bash
 
      arecord -l
 
-  und ersetze ``1,0`` durch die Nummern, die für dein USB-Mikrofon angezeigt werden.
+  Suche dein USB-Mikrofon und notiere die Nummern, dann nimm eine Testaufnahme auf und ersetze ``1,0`` durch die gefundenen Nummern:
 
-* **Aufgenommene Datei hat keinen Ton**
+  .. code-block:: bash
 
-  Öffne den Mixer und überprüfe die Mikrofonlautstärke:
+     arecord -D plughw:1,0 -f S16_LE -r 16000 -d 3 test.wav
+
+  Wenn die Aufnahme weiterhin stumm bleibt, öffne den Mixer:
 
   .. code-block:: bash
 
      alsamixer
 
-  * Drücke **F6**, um dein USB-Mikrofon auszuwählen.  
-  * Stelle sicher, dass **Mic/Capture** nicht stummgeschaltet ist (**[OO]** statt **[MM]**).  
-  * Erhöhe die Lautstärke mit ↑.
+  Drücke **F6**, um dein USB-Mikrofon auszuwählen, hebe die Stummschaltung von **Mic** / **Capture** auf (**[OO]** statt **[MM]**) und erhöhe die Lautstärke mit ↑ / ↓.
 
 * **Vosk erkennt keine Sprache**
 
