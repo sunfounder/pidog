@@ -3,7 +3,7 @@
 .. start_using_pidog
 
 21. Utilizzare OpenClaw per controllare PiDog
-========================================
+=================================================
 
 
 **Che cos'è OpenClaw?**
@@ -249,7 +249,7 @@ Prova altri effetti luminosi:
 ----------------------------------------------------------------
 
 Utilizzare PiDog Skill in OpenClaw
-------------------------------
+--------------------------------------
 
 Una volta verificato che PiDog Skill funziona dalla riga di comando, puoi iniziare a usarlo all'interno di OpenClaw.
 
