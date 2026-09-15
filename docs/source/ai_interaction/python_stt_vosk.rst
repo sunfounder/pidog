@@ -19,10 +19,7 @@ Vosk è un motore di riconoscimento vocale (STT) leggero che supporta molte ling
 Hai bisogno di una connessione internet solo la prima volta per scaricare un modello linguistico.  
 Dopodiché tutto funziona senza rete.
 
-In questa lezione imparerai a:  
-
-* Controllare il microfono su Raspberry Pi.  
-* Installare e testare Vosk con un modello linguistico scelto.  
+In questa lezione installeremo Vosk e lo proveremo con un modello linguistico a tua scelta.
 
 Prima di iniziare
 --------------------
@@ -31,61 +28,9 @@ Assicurati di aver completato:
 
 * :ref:`install_all_modules` — Installa i moduli ``robot-hat``, ``vilib``, ``pidog``, poi esegui lo script ``i2samp.sh``.
 
-1. Controlla il Microfono
---------------------------
-
-Prima di usare il riconoscimento vocale, assicurati che il tuo microfono USB funzioni correttamente.
-
-#. Elenca i dispositivi di registrazione disponibili:
-
-   .. code-block:: bash
-
-      arecord -l
-
-   Cerca una riga simile a ``card 1: ... device 0``.
-
-#. Registra un breve campione (sostituisci ``1,0`` con i numeri trovati):
-
-   .. code-block:: bash
-
-      arecord -D plughw:1,0 -f S16_LE -r 16000 -d 3 test.wav
-
-   * Esempio: se il tuo dispositivo è ``card 2, device 0`` usa:
-
-   .. code-block:: bash
-
-      arecord -D plughw:2,0 -f S16_LE -r 16000 -d 3 test.wav
-
-#. Riproduci per confermare la registrazione:
-
-   .. important::
-
-      L'altoparlante del Robot HAT deve essere attivato prima di riprodurre audio. Se non hai ancora eseguito alcun codice di esempio PiDog, attivalo prima:
-
-      .. code-block:: bash
-
-         robot_hat enable_speaker
-
-      È sufficiente farlo una volta per ogni avvio. Eseguire un qualsiasi esempio PiDog (che inizializza ``Pidog()``) lo fa automaticamente.
-
-   .. code-block:: bash
-
-      aplay test.wav
-
-#. Regola il volume del microfono se necessario:
-
-   .. code-block:: bash
-
-      alsamixer
-
-   * Premi **F6** per selezionare il microfono USB.  
-   * Trova il canale **Mic** o **Capture**.  
-   * Assicurati che non sia disattivato (**[MM]** significa muto — premi ``M`` per riattivare → deve mostrare **[OO]**).  
-   * Usa le frecce ↑ / ↓ per regolare il volume di registrazione.
-
 .. _test_vosk:
 
-2. Test Vosk
+1. Test Vosk
 --------------------------
 
 **Passaggi per provarlo**:
@@ -159,28 +104,27 @@ Puoi anche trasmettere la voce in tempo reale per vedere i risultati parziali me
 Risoluzione dei problemi
 -----------------------------
 
-* **Nessun file o directory (quando si esegue `arecord`)**
+* **Il microfono non registra nulla, oppure arecord restituisce “No such file or directory”**
 
-  Potresti aver usato il numero di scheda/dispositivo sbagliato.  
-  Esegui:
+  Probabilmente il numero di scheda/dispositivo è sbagliato, oppure l'ingresso è disattivato. Elenca prima i dispositivi di registrazione:
 
   .. code-block:: bash
 
      arecord -l
 
-  e sostituisci ``1,0`` con i numeri mostrati per il tuo microfono USB.
+  Individua il tuo microfono USB e annota i numeri, poi registra un breve campione sostituendo ``1,0`` con i numeri trovati:
 
-* **Il file registrato non ha audio**
+  .. code-block:: bash
 
-  Apri il mixer e controlla il volume del microfono:
+     arecord -D plughw:1,0 -f S16_LE -r 16000 -d 3 test.wav
+
+  Se la registrazione è ancora silenziosa, apri il mixer:
 
   .. code-block:: bash
 
      alsamixer
 
-  * Premi **F6** per selezionare il microfono USB.  
-  * Assicurati che **Mic/Capture** non sia disattivato (**[OO]** invece di **[MM]**).  
-  * Aumenta il livello con la freccia ↑.
+  Premi **F6** per selezionare il microfono USB, disattiva il mute di **Mic** / **Capture** (**[OO]** invece di **[MM]**) e aumenta il livello con ↑ / ↓.
 
 * **Vosk non riconosce la voce**
 
