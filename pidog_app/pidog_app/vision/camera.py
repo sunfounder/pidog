@@ -8,6 +8,7 @@ image classification).
 from __future__ import annotations
 
 import logging
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Optional
 
@@ -66,6 +67,15 @@ class Camera:
 
     def color_detect_off(self) -> None:
         _get_vilib().close_color_detection()
+
+    @contextmanager
+    def color_detection(self, color: str):
+        """Run the color detector inside a with-block; always off after."""
+        self.color_detect(color)
+        try:
+            yield
+        finally:
+            self.color_detect_off()
 
     def qrcode_detect(self, on: bool = True) -> None:
         _get_vilib().qrcode_detect_switch(on)

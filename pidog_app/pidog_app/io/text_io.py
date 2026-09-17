@@ -34,8 +34,7 @@ class TextIO(IO):
             return ""
 
     def speak(self, text: str) -> None:
-        print(text)
-        log.info("reply: %s", text)
+        self.report_reply(text)
 
     def play_sound(self, filename: str, repeat: int = 1, song_length_in_seconds: int = 1, volume: int = 50) -> None:
         pass

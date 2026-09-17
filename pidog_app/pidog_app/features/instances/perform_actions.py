@@ -41,21 +41,18 @@ class PerformActions(Feature):
         "trick, or when the conversation calls for a gesture."
     )
 
-    def build_schema(self) -> dict:
-        schema = super().build_schema()
-        schema["function"]["parameters"] = {
-            "type": "object",
-            "properties": {
-                "actions": {
-                    "type": "array",
-                    "description": "Action names to perform, in order.",
-                    "items": {"type": "string", "enum": ACTION_NAMES},
-                    "minItems": 1,
-                },
+    parameters = {
+        "type": "object",
+        "properties": {
+            "actions": {
+                "type": "array",
+                "description": "Action names to perform, in order.",
+                "items": {"type": "string", "enum": ACTION_NAMES},
+                "minItems": 1,
             },
-            "required": ["actions"],
-        }
-        return schema
+        },
+        "required": ["actions"],
+    }
 
     def run(self, actions=None, **kwargs) -> FeatureResult:
         log.info("perform_actions: %s", actions)
@@ -66,10 +63,7 @@ class PerformActions(Feature):
             )
 
         done, unknown = [], []
-        # THINK suppresses the standby loop's random fidget actions so
-        # they can't fight the servos mid-sequence.
-        self.body.set_status(ActionStatus.THINK)
-        try:
+        with self.body.thinking():
             for raw in actions:
                 name = str(raw).strip().lower().replace(" ", "_")
                 if name not in ACTION_NAMES:
@@ -77,8 +71,6 @@ class PerformActions(Feature):
                     continue
                 self._perform(name)
                 done.append(name)
-        finally:
-            self.body.set_status(ActionStatus.STANDBY)
 
         if unknown:
             log.warning("unknown actions requested: %s", unknown)
@@ -92,8 +84,7 @@ class PerformActions(Feature):
         if op_value in _OPERATION_VALUES:
             # e.g. "wag tail", "turn left" — ActionFlow adds posture
             # transitions and before/after hooks.
-            self.body.do_action_flow(op_value)
-            self.body.wait_done()
+            self.body.do_and_wait(op_value)
             # wait_done() returns once the queue drains back to STANDBY;
             # re-assert THINK so standby fidgets don't slip between
             # actions in a multi-action sequence.

@@ -1,7 +1,10 @@
 """IO interface definition."""
 from __future__ import annotations
 
+import logging
 from abc import ABC, abstractmethod
+
+log = logging.getLogger(__name__)
 
 
 class IO(ABC):
@@ -34,3 +37,9 @@ class IO(ABC):
     def prompt_label(self) -> str:
         """Label shown before the input prompt in text mode (optional)."""
         return ">>> "
+
+    @staticmethod
+    def report_reply(text: str) -> None:
+        """Echo the reply to the console and the log."""
+        print(text)
+        log.info("reply: %s", text)

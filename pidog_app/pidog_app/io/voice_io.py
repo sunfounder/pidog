@@ -96,9 +96,8 @@ class VoiceIO(IO):
 
     def speak(self, text: str) -> None:
         if text:
-            print(text)
+            self.report_reply(text)
             self.tts.say(text)
-            log.info("reply: %s", text)
 
     def play_sound(self, filename: str, repeat: int = 1, song_length_in_seconds: int = 1, volume: int = 50) -> None:
         if filename:

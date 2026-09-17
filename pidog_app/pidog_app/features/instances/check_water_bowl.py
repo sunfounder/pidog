@@ -11,8 +11,6 @@ from __future__ import annotations
 import logging
 import time
 
-from pidog.action_flow import ActionStatus
-
 from ..base import Feature, FeatureResult
 
 log = logging.getLogger(__name__)
@@ -26,45 +24,34 @@ class CheckWaterBowl(Feature):
         "'has water'. Use this when the user asks 'is my water bowl empty' "
         "or 'do I need to refill the water'."
     )
-
-    def build_schema(self) -> dict:
-        return {
-            "type": "function",
-            "function": {
-                "name": self.name,
-                "description": self.description,
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "bowl_color": {
-                            "type": "string",
-                            "description": (
-                                "Dominant color of the bowl itself, used to "
-                                "locate it (e.g. 'blue'). Defaults to 'blue'."
-                            ),
-                        },
-                    },
-                    "required": [],
-                },
+    parameters = {
+        "type": "object",
+        "properties": {
+            "bowl_color": {
+                "type": "string",
+                "description": (
+                    "Dominant color of the bowl itself, used to "
+                    "locate it (e.g. 'blue'). Defaults to 'blue'."
+                ),
             },
-        }
+        },
+        "required": [],
+    }
 
     def run(self, bowl_color: str = "blue", **kwargs) -> FeatureResult:
         log.info("check_water_bowl: bowl_color=%s", bowl_color)
-        self.body.set_status(ActionStatus.THINK)
-        self.camera.start()
+        with self.body.thinking():
+            self.camera.start()
 
-        # Look down at the bowl. Head pitch is negative (downward).
-        self.body.head_move([[0, 0, -40]], immediately=True, speed=70)
-        time.sleep(1.0)
+            # Look down at the bowl. Head pitch is negative (downward).
+            self.body.head_move([[0, 0, -40]], immediately=True, speed=70)
+            time.sleep(1.0)
 
-        self.camera.color_detect(bowl_color.lower())
-        time.sleep(1.0)
-        bowl_seen = self.camera.detected_color() is not None
-        self.camera.color_detect_off()
+            with self.camera.color_detection(bowl_color.lower()):
+                time.sleep(1.0)
+                bowl_seen = self.camera.detected_color() is not None
 
-        self.body.head_move([[0, 0, 0]], immediately=True, speed=70)
-        self.body.set_status(ActionStatus.STANDBY)
+            self.body.head_move([[0, 0, 0]], immediately=True, speed=70)
 
         if not bowl_seen:
             return FeatureResult(

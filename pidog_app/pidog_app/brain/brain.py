@@ -74,26 +74,23 @@ class Brain:
 
             # Record the assistant message *with* its tool_calls so the
             # model sees the call history on the next round.
-            self.llm.messages.append({
-                "role": "assistant",
-                "content": content,
-                "tool_calls": tool_calls,
-            })
+            self._append("assistant", content=content, tool_calls=tool_calls)
 
             # Dispatch every tool call (usually just one) and feed results back.
             for call in tool_calls:
-                result_text = self._dispatch(call)
-                self.llm.messages.append({
-                    "role": "tool",
-                    "tool_call_id": call.get("id", ""),
-                    "content": result_text,
-                })
+                self._append("tool",
+                             tool_call_id=call.get("id", ""),
+                             content=self._dispatch(call))
             # Loop again so the model can compose a reply from the tool results.
 
         # Exhausted rounds: return whatever we have.
         return "I tried but couldn't finish that in time."
 
     # ── internals ────────────────────────────────────────────────────────
+    def _append(self, role: str, **fields) -> None:
+        """Append a raw message dict to the conversation history."""
+        self.llm.messages.append({"role": role, **fields})
+
     def _chat_raw(self, tools: Optional[list] = None) -> dict:
         """Call llm.chat() and return the raw assistant ``message`` dict."""
         kwargs: dict[str, Any] = {"stream": False}
